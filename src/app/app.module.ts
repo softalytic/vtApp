@@ -13,9 +13,8 @@ import { EditWorkflowPage } from "../pages/edit-workflow/edit-workflow";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { ScreenOrientation } from "@ionic-native/screen-orientation";
 import { EditWorkflow1Page } from "../pages/edit-workflow1/edit-workflow1";
-
-import { Camera } from "@ionic-native/camera";
 import { EditWorkflow2Page } from "../pages/edit-workflow2/edit-workflow2";
+import { Camera } from "@ionic-native/camera";
 
 
 @NgModule({
@@ -48,8 +47,8 @@ import { EditWorkflow2Page } from "../pages/edit-workflow2/edit-workflow2";
   ],
   providers: [
     StatusBar,
-    Camera,
     SplashScreen,
+    Camera,
     BarcodeScanner,
     IonicStorageModule,
     ScreenOrientation,

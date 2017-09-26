@@ -166,7 +166,7 @@
 
                                     <ion-input *ngIf="option.type != 'date'" formControlName={{option.model}} type={{option.type}} [ngStyle]="{'width.em':option.size}" class="gridborder"></ion-input>
 
-                                    <button *ngIf="option.scan" item-end ion-button class="barcodeButton" type="button" (click)="checkBeforeScan()">
+                                    <button *ngIf="option.scan" item-end ion-button class="barcodeButton" type="button" (click)="checkBeforeScan()"> 
                     扫一扫
                   </button>
                                 </ion-row>
@@ -359,16 +359,11 @@
                     </ion-row>
 
                     <ion-row justify-content-end>
-                        <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="submit" ion-button>
-                            <ion-icon ios="ios-checkbox-outline" md="md-checkbox-outline">
-                                &nbsp; 批次完成
-                            </ion-icon>
-                        </button>
+                        <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="submit" ion-button>批次完成</button>
                         <button ion-button type="button" (click)="takePhoto()">
                             <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
                             &nbsp; 拍照
                         </button>
-
                     </ion-row>
 
                 </ion-col>
@@ -376,7 +371,7 @@
                 <ion-col>
                     <ion-row *ngFor="let image of images">
                         <img src="{{image}}" class="img">
-                        <ion-img src="{{image}}"></ion-img>
+                        <!-- <ion-img src="{{image}}"></ion-img> -->
                     </ion-row>
                 </ion-col>
 

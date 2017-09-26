@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ScreenOrientation } from "@ionic-native/screen-orientation";
 import { WorkflowPage } from "../pages/workflow/workflow";
-import { EditWorkflow2Page } from "../pages/edit-workflow2/edit-workflow2";
+
 
 
 
@@ -12,8 +12,7 @@ import { EditWorkflow2Page } from "../pages/edit-workflow2/edit-workflow2";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  // rootPage:any = WorkflowPage;
-  rootPage:any = EditWorkflow2Page;
+  rootPage:any = WorkflowPage;
 
   constructor(platform: Platform,
               statusBar: StatusBar,

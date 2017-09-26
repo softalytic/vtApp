@@ -25536,7 +25536,12 @@ ion-item {
   text-align: right !important;
 }
 
-page-edit-workflow .inputHeader {
+page-edit-workflow2 .dim {
+  background-color: #8c8c8c;
+  display: none;
+}
+
+page-edit-workflow2 .header {
   margin-top: 10px !important;
   margin-left: 1em !important;
   margin-bottom: 5px;
@@ -25547,11 +25552,18 @@ page-edit-workflow .inputHeader {
   align-items: left;
 }
 
-page-edit-workflow ion-datetime {
+page-edit-workflow2 .prodLabel {
+  margin-right: 5px !important;
+  max-width: 45px !important;
+  min-width: 45px !important;
+  text-align: right !important;
+}
+
+page-edit-workflow2 ion-datetime {
   padding: 8px !important;
 }
 
-page-edit-workflow .ageingSubPart {
+page-edit-workflow2 .ageingSubPart {
   border-top: solid;
   border-top-width: 1px;
   border-color: #8e9093;
@@ -25559,26 +25571,26 @@ page-edit-workflow .ageingSubPart {
   padding-top: 1em;
 }
 
-page-edit-workflow .bread {
+page-edit-workflow2 .bread {
   height: 5em;
 }
 
-page-edit-workflow .note {
+page-edit-workflow2 .note {
   padding-left: 1em !important;
   padding-right: 1em !important;
   padding-bottom: 1em !important;
 }
 
-page-edit-workflow .staff {
+page-edit-workflow2 .staff {
   margin-right: 0px !important;
 }
 
-page-edit-workflow .staff p {
+page-edit-workflow2 .staff p {
   margin-left: 0px !important;
   max-width: 5em !important;
 }
 
-page-edit-workflow .headbar p {
+page-edit-workflow2 .headbar p {
   width: 60px !important;
   margin-left: 20px !important;
   -webkit-box-align: left;
@@ -25588,12 +25600,12 @@ page-edit-workflow .headbar p {
   text-align: left;
 }
 
-page-edit-workflow .highlight {
+page-edit-workflow2 .highlight {
   background-color: orange;
   color: #ffffff;
 }
 
-page-edit-workflow .sec ion-row p {
+page-edit-workflow2 .sec ion-row p {
   width: 60px !important;
   margin-left: 25px !important;
   -webkit-box-align: left;
@@ -25603,24 +25615,24 @@ page-edit-workflow .sec ion-row p {
   text-align: left;
 }
 
-page-edit-workflow ion-grid {
+page-edit-workflow2 ion-grid {
   font-size: 10px !important;
 }
 
-page-edit-workflow ion-grid h4 {
+page-edit-workflow2 ion-grid h4 {
   font-size: 14px !important;
 }
 
-page-edit-workflow ion-grid ion-item {
+page-edit-workflow2 ion-grid ion-item {
   font-size: 10px !important;
 }
 
-page-edit-workflow .barcodeButton {
+page-edit-workflow2 .barcodeButton {
   font-size: 10px !important;
   max-width: 60px;
 }
 
-page-edit-workflow p {
+page-edit-workflow2 p {
   margin-top: 0;
   margin-bottom: 0;
   margin-right: 5px;
@@ -25628,15 +25640,15 @@ page-edit-workflow p {
   width: auto;
 }
 
-page-edit-workflow ion-buttons button {
+page-edit-workflow2 ion-buttons button {
   font-size: 10px !important;
 }
 
-page-edit-workflow .grid {
+page-edit-workflow2 .grid {
   padding: 3px;
 }
 
-page-edit-workflow .col {
+page-edit-workflow2 .col {
   padding: 3px;
 }
 
@@ -25696,13 +25708,6 @@ ion-item {
 .picker-wrapper {
   -webkit-transform: translateY(-100%) !important;
   transform: translateY(-100%) !important;
-}
-
-.inputLabel {
-  font-size: 10px !important;
-  margin-right: 2px !important;
-  min-width: 60px !important;
-  text-align: right !important;
 }
 
 page-workflow ion-content {

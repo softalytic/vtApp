@@ -1,16 +1,25 @@
-page-edit-workflow {
+page-edit-workflow2 {
 
-  //.col {
-  //  padding: 0px !important;
-  //}
+  .dim {
+    background-color: #8c8c8c;
+    display: none;
+  }
 
-  .inputHeader {
+  .header {
     margin-top: 10px !important;
     margin-left: 1em !important;
     margin-bottom: 5px;
     font-size: 14px;
     //position: relative;
     align-items: left;
+  }
+
+
+  .prodLabel {
+    margin-right: 5px !important;
+    max-width: 45px !important;
+    min-width: 45px !important;
+    text-align: right !important;
   }
 
 
@@ -175,9 +184,3 @@ ion-item {
 }
 
 
-.inputLabel {
-  font-size: 10px !important;
-  margin-right: 2px !important;
-  min-width: 60px !important;
-  text-align: right !important;
-}

@@ -90,8 +90,7 @@ export class WorkflowPage implements OnInit {
 
     this.wfInputs = [
       {title: "流程卡号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 30},
-      /*
-      {title: "机台号", method: 'input', type: 'text', model: 'wfOptMachineId', scan: true, size: 30},
+      /*{title: "机台号", method: 'input', type: 'text', model: 'wfOptMachineId', scan: true, size: 30},
       {title: "工序", method: 'select', model: 'wfProcess', size: 30, options:[
         {label: '钉卷', value: 0},
         {label: '含浸', value: 1},
@@ -139,22 +138,14 @@ export class WorkflowPage implements OnInit {
     let form = this.wfInputForm;
 
     // Form submission to pass the form value onto next stage
-    console.log(form.value.wfForm);
-    //this.storage.set('name', 'Captain America');
-
     /*
+    console.log(form.value.wfForm);
+    this.storage.set('name', 'Captain America');
+
     this.storage.get('name').then((name) => {
       console.log('Me: Hey, ' + name + '! Good Day sir!');
-      console.log(name);
-      try {
-        console.log("empty");
-      } catch (name) {
-        console.log("not empty");
-      }
     });
     */
-    console.log(form);
-    this.navCtrl.push(EditWorkflowPage, form);
     /*
     switch (form.value.wfForm) {
       case 1:
@@ -185,10 +176,10 @@ export class WorkflowPage implements OnInit {
     
     //storage.set('123', '123');
 
-    /*
+
     if(form.controls["wfFormId"].value == ''){
       alert('請輸入流程卡号');
-    } else if( form.value.wfForm != 1 && form.value.wfForm != 2 && form.value.wfForm != 3 ) {
+    } /* else if( form.value.wfForm != 1 && form.value.wfForm != 2 && form.value.wfForm != 3 ) {
       console.log('裸品流程卡');
       form.controls['wfProcess'].setValue(1);
       form.controls['wfProcessName'].setValue('钉卷');
@@ -235,14 +226,33 @@ export class WorkflowPage implements OnInit {
           break;
 
           default: 
-          //alert('流程卡 Order Id error');
-          this.navCtrl.push(EditWorkflowPage, form);
+          alert('流程卡 Order Id error');
           break;
 
       }
-    } else if(form.value.wfForm == 1) {
+    } */ else if(form.value.wfForm == 1) {
       console.log('裸品流程卡');
       form.value.wfFormName = '裸品流程卡';
+      //var dataDumpJsonX;
+      this.storage.get(form.value.wfFormId).then((dataDumpJsonXTmp) => {
+        var wfObjTmp = JSON.parse(dataDumpJsonXTmp);
+        alert(wfObjTmp["wfOrderId"] + ' ' + dataDumpJsonXTmp);
+
+        form.value.wfOrderId = 'VTO00001';
+        form.value.wfOrderRMId = '';
+        form.value.wfOrderSeries = '';
+        form.value.wfOrderSpec = '';
+        form.value.wfOrderDim = '';
+        form.value.wfOrderBOMNote = '';
+        form.value.wfOrderNote = '';
+        form.value.wfOrderTotalQty = '1000';
+        form.value.wfOrderTotalGoodQty = '100';
+        this.navCtrl.push(EditWorkflowPage, form);
+      });
+
+      
+
+      /*
       switch (form.value.wfFormId) {
         case '123':
           form.value.wfOrderId = 'A12300000';
@@ -287,9 +297,12 @@ export class WorkflowPage implements OnInit {
           alert('流程卡 Order Id error');
           break;
       }
+      */
+      this.navCtrl.push(EditWorkflowPage, form);
     } else if(form.value.wfForm == 2) {
       console.log('成品流程卡');
       form.value.wfFormName = '成品流程卡';
+      /*
       switch (form.value.wfFormId) {
         case '123':
           form.value.wfOrderId = 'A12300000';
@@ -333,11 +346,12 @@ export class WorkflowPage implements OnInit {
         default: 
           alert('流程卡 Order Id error');
           break;
-
-      }
+        
+      } */
     } else if(form.value.wfForm == 3) {
       console.log('电容器流程卡');
       form.value.wfFormName = '电容器流程卡';
+      /*
       switch (form.value.wfFormId) {
         case '123':
           form.value.wfOrderId = 'A12300000';
@@ -380,11 +394,11 @@ export class WorkflowPage implements OnInit {
           alert('流程卡 Order Id error');
           break;
 
-      } 
+      } */
     } else {
       alert('請輸入流程卡');
     }
-    */
+
   }
 
   scanBarcode(model: string){
@@ -684,6 +698,11 @@ export class WorkflowPage implements OnInit {
 
               this.setFormValue(formKey, formBodies[formKey]);
 
+              if(form.value.wfFormId == formBodies[formKey]) {
+                //alert(formBodies[formKey] + ' ' +JSON.stringify(formBodies)); 
+                this.storage.set(formBodies[formKey],  JSON.stringify(formBodies)); 
+              }
+                  
               //  form.value.
             }
             catch(err) {
@@ -691,25 +710,6 @@ export class WorkflowPage implements OnInit {
             }
 
           }
-          /*
-          this.storage.get('123').then(dataTmp=> { 
-            if(dataTmp) { alert("exists"); } 
-            else { alert("nothing"); }
-          }
-          */
-          //this.storage.set('name', 'Captain America');
-          //this.storage.set(key, bodies[key]);
-          //alert(formBodies['wfFormId']);
-          
-          this.storage.get(formBodies['wfFormId']).then((dataTmp) => {
-            if(dataTmp) { 
-              //alert("exists"); 
-            } 
-            else { 
-              //alert("nothing"); empty 
-              this.storage.set(formBodies['wfFormId'], formBodies);
-            }
-          });
 
           break;
 

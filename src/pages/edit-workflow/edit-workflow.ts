@@ -7,7 +7,6 @@ import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { Camera, CameraOptions } from "@ionic-native/camera";
 
 
-
 @Component({
   selector: 'page-edit-workflow',
   templateUrl: 'edit-workflow.html',
@@ -25,7 +24,6 @@ export class EditWorkflowPage implements OnInit{
 
   images = [];
 
-
   wfInputForm: FormGroup;
 
   pushPage: any;
@@ -37,7 +35,7 @@ export class EditWorkflowPage implements OnInit{
   tzoffset: number = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
   appDate: String = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,-1);
 
-  constructor(public storage: Storage,
+  constructor(private storage: Storage,
               private formBuilder: FormBuilder,
               private barcodeScanner: BarcodeScanner,
               private alertCtrl: AlertController,
@@ -173,19 +171,14 @@ export class EditWorkflowPage implements OnInit{
     ];
   }
 
-  ionViewDidLoad() {  
+  ionViewDidLoad() {
     console.log('ionViewDidLoad EditWorkflowPage');
     console.log(this.wfNavParams);
     console.log(this.appDate);
-    alert(JSON.stringify(this.wfNavParams));
   }
 
   ngOnInit() {
-    let form = this.wfInputForm;
-    this.wfNavParams.wfFormName = '裸品流程卡';
-    //this.wfNavParams.wfProcessName = '裸品流程卡';
     this.formInit();
-
     // alert(this.wfRMDetails[1].modelName)
   }
 
@@ -295,15 +288,10 @@ export class EditWorkflowPage implements OnInit{
   }
 
   private formInit() {
-    
-    let form = this.wfInputForm;
-
     this.wfInputForm = this.formBuilder.group({
-
       wfProcess: new FormControl(this.wfNavParams.wfProcess),
       wfProcessName: new FormControl(this.wfNavParams.wfProcessName),
-      
-      
+
       // Order Inputs detail
       wfOrderFormId: [this.wfNavParams.wfFormId],
       WfOrderId: [this.wfNavParams.wfOrderId],
@@ -347,10 +335,9 @@ export class EditWorkflowPage implements OnInit{
       wfRMCoverSerial: ['1670722-053842'],
       wfRMWindingTime: [''],
       wfRMWindingDeg: [''],
-      
 
       // Operational Input
-      wfOptMachineId: '',
+      wfOptMachineId: [this.wfNavParams.wfMachineId],
       wfOptInputDate: [this.appDate],
       wfOptStartTime: ['00:00'],
       wfOptFinishTime: ['00:00'],
@@ -398,24 +385,6 @@ export class EditWorkflowPage implements OnInit{
       wfQCInputNote: [''],
 
     });
-    
-    /*
-    this.storage.forEach( (value, key, index) => {
-      this.wfInputForm[key] = value;
-      alert(key + ' ' + value + ' ');
-    });
-    */
-    var storageDataTmp;
-
-    this.storage.get(this.wfNavParams.wfFormId).then(dataTmp=> { 
-      if(dataTmp) { 
-        //alert("exists"); 
-        storageDataTmp = dataTmp;
-      } 
-      else {
-        alert("data issue");
-      }
-    });
 
   }
 
@@ -448,6 +417,7 @@ export class EditWorkflowPage implements OnInit{
     
     }
   }
+
 
   presentPrompt() {
     let alert = this.alertCtrl.create({
@@ -511,5 +481,7 @@ export class EditWorkflowPage implements OnInit{
     });
 
   }
+
+
 
 }

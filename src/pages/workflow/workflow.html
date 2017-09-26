@@ -1,0 +1,88 @@
+<ion-header>
+    <ion-navbar>
+        <div style="align-items: center; display: inline;">
+            <img src="./assets/img/vt_icon.png" class="icon">
+            <ion-title>工序流程卡纪录系统</ion-title>
+        </div>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <form [formGroup]="wfInputForm" (ngSubmit)="onAddWf()">
+
+        <!-- First section for the input field -->
+        <div>
+            <ion-grid>
+                <ion-row wrap justify-content-left align-items-center>
+                    <!-- Main loop of the Form Module -->
+                    <ion-col *ngFor="let wfInput of wfInputs">
+                        <!-- Non Buttons input fields of wfForms -->
+                        <ion-row align-items-center>
+                            <div class="label">{{wfInput.title}}</div>
+
+                            <!-- Form Normal Input Module-->
+                            <ion-input *ngIf="wfInput.method === 'input'" [ngStyle]="{'width.em':wfInput.size}" type={{wfInput.type}} formControlName={{wfInput.model}} no-padding class="gridborder"></ion-input>
+
+                            <button *ngIf="wfInput.scan" (click)="scanBarcode(wfInput.model)" item-end ion-button class="barcodeButton" type="button">
+                                <!--<ion-icon name="barcode"></ion-icon>-->
+                                扫一扫
+                            </button>
+
+                            <!-- Form Selector Module -->
+                            <ion-select *ngIf="wfInput.method === 'select'" [ngStyle]="{'width.em':wfInput.size}" interface="popover" style="height: 34px !important;" (ionChange)="setWfStage($event)" formControlName={{wfInput.model}} class="gridborder" okText="确定" cancelText="取消">
+                                <ion-option *ngFor="let key of wfMachineData" value={{key}}>
+                                    {{wfMachineProcess[0][key]}}
+                                </ion-option>
+                            </ion-select>
+
+                            <!-- Buttons input fields of wfForms -->
+                            <div *ngIf="wfInput.method === 'buttons'" [ngStyle]="{'width.em':wfInput.size}">
+                                <ion-buttons>
+                                    <!-- Button for Form submission -->
+                                    <button *ngFor="let option of wfInput.options" [ngClass]="{'buttonsSelected': wfInputForm.value.wfForm == option.value }" (click)="setFormValue(wfInput.model,option.value)" item-right ion-button outline type="button" round>
+                                        <ion-icon name="clipboard"></ion-icon>
+                                        &nbsp; {{option.label}}
+                                    </button>
+                                </ion-buttons>
+
+                                <button style="width: 25%; margin: 0 auto;" ion-button type="submit" block>
+                                    确定
+                                </button>
+                            </div>
+
+                            <div *ngIf="wfInput.method === 'break'" [ngStyle]="{'width.em':wfInput.size}"></div>
+
+                        </ion-row>
+
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+
+        <div>
+
+        </div>
+
+        <!-- Display the workflow process with img -->
+        <div>
+            <ion-grid style="padding-left: 50px; padding-right: 50px;">
+                <ion-row wrap class="card-background-page">
+                    <ion-col *ngFor="let wfProcess of wfProcesses" col-3>
+                        <div (click)="setWfProcess(wfProcess.process, wfProcess.title)" class="imgButton">
+                            <img src="{{'./assets/img/f1p' + wfProcess.process + '.jpeg'}}">
+                            <div class="card-title">
+                                {{wfProcess.title}}
+                            </div>
+                        </div>
+                        <!-- For original design -->
+                        <!--<div [navPush]="pushPage" [navParams]=wfProcess>-->
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+
+        <!-- manual ageing will have an action sheet to prompt the sub process -->
+        <!-- 規格 Need attention highlight -->
+        <!-- 料號 = 產品編號 -->
+
+    </form>
+</ion-content>

@@ -1,0 +1,420 @@
+import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import { NavController, NavParams, AlertController, Events } from 'ionic-angular';
+import { NgForm, FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
+import { BarcodeScanner } from "@ionic-native/barcode-scanner";
+import { Camera, CameraOptions } from "@ionic-native/camera";
+
+@Component({
+  selector: 'page-edit-workflow',
+  templateUrl: 'edit-workflow2.html',
+})
+export class EditWorkflow2Page implements OnInit{
+
+  form = NgForm;
+  wfOrderDetails = [];
+  wfRMDetails = [];
+  wfAgeingDetails = [];
+  wfAutoAgeingDetails = [];
+  wfAutoAgeingSubDetails = [];
+  wfOpsInputs = [];
+  wfPplInputs = [];
+
+  images = [];
+
+  wfNavProcess = 1;
+
+  wfInputForm: FormGroup;
+
+  pushPage: any;
+  wfNavParams: any;
+
+  wfPass: boolean;
+
+  // For calculating the time value
+  tzoffset: number = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+  appDate: String = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,-1);
+
+  constructor(public storage: Storage,
+              private formBuilder: FormBuilder,
+              private barcodeScanner: BarcodeScanner,
+              private alertCtrl: AlertController,
+              private camera: Camera,
+              private navParams: NavParams) {
+    /*
+     // this.pushPage = EditWorkflow1Page;
+     */
+    // this.wfNavParams = this.navParams.data.value;
+
+    // Assume all are ion-input except the one specificed as textarea
+    this.wfOrderDetails = [
+
+      {method: "input", model: "WfOrderId", title: "工单号", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 10, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderSpec", title: "规格", type: "text", size: 8, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderDim", title: "尺寸", type: "text", size: 8, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderTotalQty", title: "数量", type: "number", size: 8, highlight: false, process: {1: true, 2: true, 3: true}},
+
+      {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderFormId", title: "流程卡号", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 15, highlight: false, process: {1: true, 2: true, 3: true}},
+
+      {method: "input", model: "wfOrderFormNote", title: "BOM备注", type: "textarea", size: 23, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 23, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderBOMNote", title: "流程卡备注", type: "textarea", size: 23, highlight: false, process: {1: true, 2: true, 3: true}},
+
+      {method: "input", model: "wfOrderBOMNote", title: "异常记录", type: "textarea", size: 23, highlight: false, process: {1: false, 2: false, 3: true}},
+
+      // {title: "客户代码:", method: "input", model: "wfClientId", type: "text", scan: false, size: 15},
+      // {title: "销售订单号:", method: "input", model: "wfSalesOrderId", type: "text", scan: false, size: 15},
+      // {title: "台机号:", method: "input", model: "wfOptMachineId", type: "text", scan: false, size: 9},
+
+      // {model: "wfOrderQty", title: "总量(批次)", type: "text", highlight: false},
+
+      // {method: "break", size: 10},
+
+      // {method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 5, highlight: false},
+
+    ];
+
+    this.wfRMDetails = [
+      {modelName: "wfRMUpBeltName", title: "上带:", type: "text", modelSerial: 'wfRMUpBeltSerial', highlight: false},
+      {modelName: "wfRMDownBeltName", title: "下带:", type: "text", modelSerial: 'wfRMDownBeltSerial', highlight: false},
+      {modelName: "wfRMBaseName", title: "底座:", type: "text", modelSerial: 'wfRMBaseSerial', highlight: false},
+      {modelName: "wfRMCircleName", title: "纸圆卡:", type: "text", modelSerial: 'wfRMCricleSerial', highlight: false},
+      {modelName: "wfRMPrintName", title: "油墨:", type: "text", modelSerial: 'wfRMPrintSerial', highlight: false},
+    ];
+
+    this.wfOpsInputs = [
+
+      // {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 25, highlight: false},
+      // {method: "input", model: "wfOrderFormId", title: "流程卡号", type: "text", size: 25, highlight: false},
+      // {method: "input", model: "wfOrderBOMNote", title: "流程卡备注", type: "text", size: 100, highlight: false},
+      // {title: "批次号", method: "input", model: "wfOrderBatchId", type: "text", scan: false, size: 13},
+      // {title: "流程卡号", method: "input", model: "wfOrderFormId", type: "text", scan: false, size: 13},
+      // {method: "break", size: 20},
+      // {title: "流程卡备注", method: "input", model: "wfOrderBOMNote", type: "textarea", scan: false, size: 40},
+      // {method: "break", size: 20},
+
+      {title: "CAP: μF", method: "input", model: "wfSpecCap", type: "text", scan: false, size: 9, process: {1: true, 2: true, 3: true}},
+      {title: "DF: %", method: "input", model: "wfSpecDF", type: "text", scan: false, size: 9, process: {1: true, 2: true, 3: true}},
+      {title: "LC: μA", method: "input", model: "wfSpecLC", type: "text", scan: false, size: 9, process: {1: true, 2: true, 3: true}},
+      {title: "Z/ESR(Ω):", method: "input", model: "wfSpecZESR", type: "text", scan: false, size: 9, process: {1: true, 2: true, 3: true}},
+      {title: "备注:", method: "input", model: "wfSpecNote", type: "textarea", scan: false, size: 22, process: {1: true, 2: true, 3: true}},
+      // {method: "break", title: ""},
+
+      // {title: "客户代码:", method: "input", model: "wfClientId", type: "text", scan: false, size: 15},
+      // {title: "销售订单号:", method: "input", model: "wfSalesOrderId", type: "text", scan: false, size: 15},
+      // {title: "台机号:", method: "input", model: "wfOptMachineId", type: "text", scan: false, size: 9},
+
+
+      {method: 'inputs', options: [
+        {title: "日期", model: "wfOptInputDate", type: "date", scan: false, size: 8, process: {1: true, 2: true, 3: true}},
+        // {title: "开始", model: "wfOptStartTime", type: "time", scan: false, size: 8},
+        // {title: "完成", model: "wfOptFinishTime", type: "time", scan: false, size: 8}
+      ], process: {1: true, 2: true, 3: true}},
+
+
+      {method: "inputs", options: [
+        // {title: "日期", model: "wfOptInputDate", type: "date", scan: false, size: 8},
+        {title: "不良数", model: "wfOptBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8, process: {1: true, 2: true, 3: false}},
+        {title: "良品数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8, process: {1: true, 2: true, 3: false}},
+        {title: "抽查数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8, process: {1: false, 2: true, 3: false}}
+      ], process: {1: true, 2: true, 3: true}},
+
+      // {title: "备注:", method: "input", model: "wfSpecNote", type: "textarea", scan: false, size: 20},
+    ];
+
+    this.wfPplInputs = [
+      {title: "作业員", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: 1, size: 20, process: {1: true, 2: true, 3: false}},
+      // {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, size: 5},
+      {title: "技術員", method: "input", model: "wfStaffTechId", type: "text", icon: 'construct', scan: 2, size: 20, process: {1: true, 2: true, 3: false}},
+      // {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: 3, size: 20},
+      {method: "break", size: 15, process: {1: true, 2: true, 3: false}},
+      {title: "电性", method: "buttons", model: "wfElecPass", process: {1: false, 2: false, 3: true} ,buttons: [
+        {label: "通过", value: 1,},
+        {label: "失败", value: 2}
+      ]},
+      {method: "break", size: 15, process: {1: false, 2: false, 3: true}},
+      {title: "外观", method: "buttons", model: "wfLookPass", process: {1: false, 2: false, 3: true},buttons: [
+        {label: "通过", value: 1},
+        {label: "失败", value: 2}
+      ]},
+      {method: "break", size: 15, process: {1: false, 2: false, 3: true}},
+      // {title: "品检备注", method: "textarea", model: "wfQCInputNote", type: "text", icon: 'chatbubbles', scan: false, size: 30},
+      {title: "品检員", method: "input", model: "wfQCSignOff", type: "text", process: {1: false, 2: false, 3: true}, scan: 4, size: 20},
+    ];
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad EditWorkflowPage2');
+    console.log(this.wfNavParams);
+    console.log(this.appDate);
+    // alert(JSON.stringify(this.wfNavParams));
+  }
+
+  ngOnInit() {
+    let form = this.wfInputForm;
+    // this.wfNavParams.wfFormName = '裸品流程卡';
+    //this.wfNavParams.wfProcessName = '裸品流程卡';
+    this.formInit();
+
+    // alert(this.wfRMDetails[1].modelName)
+  }
+
+  checkBeforeScan(form: NgForm) {
+    if(form.value.wfOptBadQty === '') {
+      alert("input good items is missing!");
+      return false;
+    } else if(form.value.wfOptGoodQty === '')
+    { alert("input good items is missing!");
+      return false; }
+  }
+
+  scanBarcode(model: string){
+    console.log("scanning Barcode");
+    /*
+     // console.log(form.value);
+     //
+     // form.controls['wfProcess'].setValue(1);
+     // form.controls['wfProcessName'].setValue('钉卷');
+     // form.controls["wfForm"].setValue(1);
+     //
+     // console.log(form.value);
+     */
+
+    let form = this.wfInputForm;
+
+    this.barcodeScanner.scan().then((barcodeData) => {
+      // Success! Barcode data is here
+      // Limiter to assume the Barcode is default used in this orderID
+
+
+      form.controls[model].setValue(barcodeData.text);
+
+      if ( barcodeData.format && barcodeData.format != "QR_CODE" && model == "wfSignOff" ) {
+
+        switch (barcodeData.text) {
+          case 'QC0001':
+            form.controls['wfSignOff'].setValue(barcodeData.text);
+            this.promptAlert();
+            break;
+
+          case 'QC0002':
+            form.controls['wfSignOff'].setValue(barcodeData.text);
+            this.promptAlert();
+            break;
+
+          case 'QC0003':
+            form.controls['wfSignOff'].setValue(barcodeData.text);
+            this.promptAlert();
+            break;
+
+          default:
+            alert('嚫，请确定你所扫描的条码是正确的');
+        }
+
+      } else {
+        alert('嚫，请确定你所扫描的条码是正确的');
+      }
+    }, (err) => {
+      // An error occurred
+      alert(err);
+    });
+  }
+
+  inputWf(){
+    console.log('inputWf activated')
+  }
+
+  setWfPass(){
+    console.log('checked');
+    /*
+     // this.wfPass = result;
+     */
+  }
+
+  onSubmit(){
+    console.log(this.wfInputForm);
+  }
+
+  updateForm(model: string, value: any) {
+
+    let form = this.wfInputForm;
+
+    console.log(form);
+    form.controls[model].setValue(value);
+    console.log(form.controls[model].value);
+
+  }
+
+
+  promptAlert(){
+    let alertCtl = this.alertCtrl.create();
+
+    alertCtl.setTitle("确定完成和上传");
+
+    alertCtl.addButton('取消');
+
+    alertCtl.addButton({
+      text: '確定',
+      handler: (data: any) => {
+        // Once selected the subprocess, update the form and then submit the form to next process stage
+        alert("上传成功");
+      }
+    });
+
+    alertCtl.present();
+  }
+
+  private formInit() {
+
+    let form = this.wfInputForm;
+
+    this.wfInputForm = this.formBuilder.group({
+
+      wfProcess: [''],
+      wfProcessName: [''],
+
+      // Order Inputs detail
+      wfOrderFormId: [''],
+      WfOrderId: [''],
+      wfOrderBatchId: [''],
+      wfOrderBatchQty: [''],
+
+      wfOrderFormNote: [''],
+      wfOrderBOMNote: [''],
+      wfOrderNote: [''],
+      wfOrderTotalQty: [''],
+      wfOrderTotalGoodQty: [''],
+      wfOrderRMId: [''],
+      wfOrderSeries: [''],
+      wfOrderSpec: [''],
+      // wfOrderQty: [''],
+      wfOrderDim: [''],
+
+      wfSpecCap: [''],
+      wfSpecDF: [''],
+      wfSpecLC: [''],
+      wfSpecZESR: [''],
+      wfSpecNote: [''],
+
+      // Raw Material Inputs
+      wfRMUpBeltName: [''],
+      wfRMUpBeltSerial: [''],
+      wfRMDownBeltName: [''],
+      wfRMDownBeltSerial: [''],
+      wfRMBaseName: [''],
+      wfRMBaseSerial: [''],
+      wfRMCircleName: [''],
+      wfRMCricleSerial: [''],
+      wfRMPrintName: [''],
+      wfRMPrintSerial: [''],
+
+      // Operational Input
+      wfOptMachineId: '',
+      wfOptInputDate: [this.appDate],
+      wfOptStartTime: ['00:00'],
+      wfOptFinishTime: ['00:00'],
+      wfOptBadQty: [''],
+      wfOptGoodQty: [''],
+
+      wfClientId: [''],
+      wfSalesOrderId: [''],
+
+      //Staff Input section
+      wfStaffOptId: [''],
+      wfStaffOptShift: [''],
+      wfStaffTechId: [''],
+      wfElecPass: [''],
+      wfLookPass: [''],
+      wfQCSignOff: [''],
+      // wfQCInputNote: [''],
+
+    });
+
+    /*
+     this.storage.forEach( (value, key, index) => {
+     this.wfInputForm[key] = value;
+     alert(key + ' ' + value + ' ');
+     });
+     */
+    var storageDataTmp;
+
+    // this.storage.get(this.wfNavParams.wfFormId).then(dataTmp=> {
+    //   if(dataTmp) {
+    //     //alert("exists");
+    //     storageDataTmp = dataTmp;
+    //   }
+    //   else {
+    //     alert("data issue");
+    //   }
+    // });
+
+  }
+
+  keyPress(keycode: number) {
+    if (keycode == 13) {
+      alert('next');
+    }
+  }
+
+  showWfOpsInputsAlert(wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
+    if(wfOptBadQtyValue == '' || wfOptGoodQtyValue == '') {
+      let alert = this.alertCtrl.create({
+        title: 'Please Check!',
+        subTitle: 'Please fill out the following: 日期，开始，完成，良品数，不良数 ',
+        buttons: ['OK']
+      });
+      alert.present();
+
+    }
+  }
+
+  showWfQCPassAlert(wfQCPassValue: any) {
+    if(!(wfQCPassValue == 2 || wfQCPassValue == 1)) {
+      let alert = this.alertCtrl.create({
+        title: 'Please Check!',
+        subTitle: 'Please select 终检!',
+        buttons: ['OK']
+      });
+      alert.present();
+
+    }
+  }
+
+  takePhoto() {
+    // alert("taking photos");
+
+    const options: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      saveToPhotoAlbum: true
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64:
+
+      let imgUrl = 'data:image/jpeg;base64,' + imageData;
+
+      this.images.push(imgUrl);
+
+      this.storage.set('images', this.images);
+
+      // console.log(this.images);
+
+
+    }, (err) => {
+      // Handle error
+    });
+
+  }
+
+}

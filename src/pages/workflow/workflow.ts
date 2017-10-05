@@ -233,10 +233,11 @@ export class WorkflowPage implements OnInit {
     } */ else if(form.value.wfForm == 1) {
       console.log('裸品流程卡');
       form.value.wfFormName = '裸品流程卡';
-      //var dataDumpJsonX;
+      
       this.storage.get(form.value.wfFormId).then((dataDumpJsonXTmp) => {
         var wfObjTmp = JSON.parse(dataDumpJsonXTmp);
-        alert(wfObjTmp["wfOrderId"] + ' ' + dataDumpJsonXTmp);
+        
+        //alert(wfObjTmp["wfOrderId"] + ' ' + dataDumpJsonXTmp);
 
         form.value.wfOrderId = 'VTO00001';
         form.value.wfOrderRMId = '';
@@ -247,6 +248,8 @@ export class WorkflowPage implements OnInit {
         form.value.wfOrderNote = '';
         form.value.wfOrderTotalQty = '1000';
         form.value.wfOrderTotalGoodQty = '100';
+        form.value.wfOrderBatchQty = '1000';
+        form.value.wfOrderBatchId = 'VTB01000';
         this.navCtrl.push(EditWorkflowPage, form);
       });
 
@@ -298,7 +301,7 @@ export class WorkflowPage implements OnInit {
           break;
       }
       */
-      this.navCtrl.push(EditWorkflowPage, form);
+      //this.navCtrl.push(EditWorkflowPage, form); 
     } else if(form.value.wfForm == 2) {
       console.log('成品流程卡');
       form.value.wfFormName = '成品流程卡';

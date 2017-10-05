@@ -84,7 +84,7 @@ export class EditWorkflowPage implements OnInit{
       {modelName: "wfRMShellName", title: "铝壳", type: "text", modelSerial: 'wfRMShellSerial', highlight: false},
       {modelName: "wfRMCoverName", title: "套管", type: "text", modelSerial: 'wfRMCoverSerial', highlight: false},
     ];
-
+    
     this.wfOpsInputs = [
       {title: "流程卡号", method: "input", model: "wfOrderFormId", type: "text", icon: 'ios-copy-outline', scan: false, size: 9},
       {title: "机台", method: "input", model: "wfOptMachineId", type: "text", icon: 'cog', scan: false, size: 6},
@@ -157,17 +157,17 @@ export class EditWorkflowPage implements OnInit{
     ];
 
     this.wfPplInputs = [
-      {title: "作业員", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: 1, size: 20},
-      {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, size: 5},
-      {title: "技術員", method: "input", model: "wfStaffTechId", type: "text", icon: 'construct', scan: 2, size: 20},
-      {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: 3, size: 20},
+      {title: "作业員", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: false, wfPplI: 1, size: 22},
+      {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 9},
+      {title: "技術員", method: "input", model: "wfStaffTechId", type: "text", icon: 'construct', scan: false, wfPplI: 3, size: 22},
+      {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: false, wfPplI: 4, size: 22},
+      {title: "品检員", method: "input", model: "wfQCSignOff", type: "text", icon: 'search', scan: 5, wfPplI: 5, size: 22},
       {method: "break", size: 15},
       {title: "终检", method: "buttons", model: "wfQCPass", icon: "md-checkmark-circle-outline",buttons: [
         {label: "通过", value: 1, icon: 'checkmark'},
         {label: "失败", value: 2, icon: 'close'}
       ]},
       {title: "品检备注", method: "textarea", model: "wfQCInputNote", type: "text", icon: 'chatbubbles', scan: false, size: 30},
-      {title: "品检員", method: "input", model: "wfQCSignOff", type: "text", icon: 'search', scan: 4, size: 20},
     ];
   }
 
@@ -184,10 +184,10 @@ export class EditWorkflowPage implements OnInit{
 
   checkBeforeScan(form: NgForm) {
     if(form.value.wfOptBadQty === '') {
-    alert("input good items is missing!");  
+    alert("请輸入良品数!");  
     return false;
     } else if(form.value.wfOptGoodQty === '') 
-    { alert("input good items is missing!"); 
+    { alert("请輸入良品数!"); 
     return false; } 
   }
  
@@ -295,8 +295,8 @@ export class EditWorkflowPage implements OnInit{
       // Order Inputs detail
       wfOrderFormId: [this.wfNavParams.wfFormId],
       WfOrderId: [this.wfNavParams.wfOrderId],
-      wfOrderBatchId: [this.wfNavParams.wfBatchId],
-      wfOrderBatchQty: [this.wfNavParams.wfBatchQty],
+      wfOrderBatchId: [this.wfNavParams.wfOrderBatchId],
+      wfOrderBatchQty: [this.wfNavParams.wfOrderBatchQty],
 
       wfOrderBOMNote: [this.wfNavParams.wfOrderBOMNote],
       wfOrderNote: [this.wfNavParams.wfOrderNote],
@@ -394,15 +394,56 @@ export class EditWorkflowPage implements OnInit{
     }
   }
 
+  updateTextChg() {
+    this.wfInputForm.patchValue({ wfStaffOptShift: ['A'],
+    wfStaffTechId: ['A123X01'], wfQCSignOff: ['品检員A'], });
+  }
+
+  updateTotalGoodQty(wfOptGoodQtyValue: any) {
+    var goodQtyTmp = this.wfNavParams.wfOrderTotalGoodQty + wfOptGoodQtyValue;
+    this.wfInputForm.patchValue({ wfOrderTotalGoodQty: goodQtyTmp, });
+  }
+
   showWfOpsInputsAlert(wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
     if(wfOptBadQtyValue == '' || wfOptGoodQtyValue == '') {
       let alert = this.alertCtrl.create({
-        title: 'Please Check!',
-        subTitle: 'Please fill out the following: 日期，开始，完成，良品数，不良数 ',
-        buttons: ['OK']
+        title: '',
+        subTitle: '请确定内容: 日期，开始，完成，良品数，不良数 ',
+        buttons: ['確定']
       });
       alert.present();
     
+    }
+  }
+
+  showWfOpsFinalInputsAlert(wfOrderTotalQty: any, wfOrderTotalGoodQty: any, wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
+
+    if(wfOrderTotalQty > wfOptGoodQtyValue) {
+      let alert = this.alertCtrl.create({
+        title: '',
+        subTitle: '预设总量 (' + wfOptGoodQtyValue + ') 小於 批次量 ('  + wfOrderTotalQty + ')!',
+        buttons: ['確定']
+      });
+      alert.present();
+    } else { 
+      let alert = this.alertCtrl.create({
+        title: '',
+        subTitle: '确定完成和上传',
+        buttons: [{
+          text: '取消',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: '確定',
+          handler: () => {
+            console.log('Buy clicked');
+          }
+        }]
+      });
+      alert.present();
     }
   }
 

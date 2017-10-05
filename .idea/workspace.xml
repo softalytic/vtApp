@@ -2,23 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4cec853-1425-4d8c-84e2-faa32da6519f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/typescript-compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/edit-workflow/edit-workflow.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/edit-workflow/edit-workflow.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/edit-workflow/edit-workflow.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/home/home.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/home/home.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/home/home.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/workflows/workflows.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/workflows/workflows.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/workflows/workflows.ts" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/app.component.ts" afterPath="$PROJECT_DIR$/src/app/app.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/app.module.ts" afterPath="$PROJECT_DIR$/src/app/app.module.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" afterPath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" afterPath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.html" afterPath="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts" afterPath="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.scss" afterPath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/workflow/workflow.ts" afterPath="$PROJECT_DIR$/src/pages/workflow/workflow.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/main.css" afterPath="$PROJECT_DIR$/www/build/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/main.js" afterPath="$PROJECT_DIR$/www/build/main.js" />
@@ -70,7 +55,7 @@
             <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="11">
-                  <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+                  <caret line="20" column="22" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
                   <folding>
                     <element signature="e#0#58#0" expanded="true" />
                   </folding>
@@ -82,7 +67,7 @@
             <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="240">
-                  <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+                  <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
                   <folding>
                     <element signature="n#style#0;n#ion-header#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#div#0;n#ion-navbar#0;n#ion-header#0;n#!!top" expanded="true" />
@@ -128,21 +113,41 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="workflow.ts" pinned="false" current-in-tab="true">
+          <file leaf-file-name="workflow.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="149">
-                  <caret line="199" column="10" lean-forward="true" selection-start-line="199" selection-start-column="10" selection-end-line="199" selection-end-column="10" />
+                <state relative-caret-position="225">
+                  <caret line="21" column="24" lean-forward="false" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
                   <folding>
                     <element signature="e#0#50#0" expanded="true" />
                     <element signature="e#367#436#0" expanded="true" />
-                    <element signature="e#1308#1570#0" expanded="false" />
-                    <element signature="e#1694#2286#0" expanded="false" />
-                    <element signature="e#2309#2894#0" expanded="false" />
-                    <element signature="e#2917#4504#0" expanded="false" />
-                    <element signature="e#4707#4915#0" expanded="false" />
-                    <element signature="e#4920#5535#0" expanded="false" />
+                    <element signature="e#1236#1498#0" expanded="false" />
+                    <element signature="e#1525#2117#0" expanded="false" />
+                    <element signature="e#2140#2725#0" expanded="false" />
+                    <element signature="e#2748#4335#0" expanded="false" />
+                    <element signature="e#4499#4707#0" expanded="false" />
+                    <element signature="e#4712#5327#0" expanded="false" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="edit-workflow1.scss" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.scss">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2730">
+                  <caret line="182" column="1" lean-forward="false" selection-start-line="182" selection-start-column="1" selection-end-line="182" selection-end-column="1" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="edit-workflow2.scss" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.scss">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2790">
+                  <caret line="186" column="0" lean-forward="true" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -170,6 +175,7 @@
       <find>this.wfNavParams.</find>
       <find>wfNavParams.</find>
       <find>wfNavParams</find>
+      <find>pushPage</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -186,6 +192,8 @@
         <option value="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" />
         <option value="$PROJECT_DIR$/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/src/pages/workflow/workflow.ts" />
+        <option value="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.scss" />
+        <option value="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.scss" />
       </list>
     </option>
   </component>
@@ -427,19 +435,19 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1507190801402</updated>
-      <workItem from="1507190803433" duration="4215000" />
+      <workItem from="1507190803433" duration="4697000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4215000" />
+    <option name="totallyTimeSpent" value="4697000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1952079" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1952079" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -553,7 +561,7 @@
     <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#ion-header#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#ion-navbar#0;n#ion-header#0;n#!!top" expanded="true" />
@@ -597,7 +605,7 @@
     <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11">
-          <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+          <caret line="20" column="22" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
           <folding>
             <element signature="e#0#58#0" expanded="true" />
           </folding>
@@ -606,18 +614,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="199" column="10" lean-forward="true" selection-start-line="199" selection-start-column="10" selection-end-line="199" selection-end-column="10" />
+        <state relative-caret-position="225">
+          <caret line="21" column="24" lean-forward="false" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#367#436#0" expanded="true" />
-            <element signature="e#1308#1570#0" expanded="false" />
-            <element signature="e#1694#2286#0" expanded="false" />
-            <element signature="e#2309#2894#0" expanded="false" />
-            <element signature="e#2917#4504#0" expanded="false" />
-            <element signature="e#4707#4915#0" expanded="false" />
-            <element signature="e#4920#5535#0" expanded="false" />
+            <element signature="e#1236#1498#0" expanded="false" />
+            <element signature="e#1525#2117#0" expanded="false" />
+            <element signature="e#2140#2725#0" expanded="false" />
+            <element signature="e#2748#4335#0" expanded="false" />
+            <element signature="e#4499#4707#0" expanded="false" />
+            <element signature="e#4712#5327#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2730">
+          <caret line="182" column="1" lean-forward="false" selection-start-line="182" selection-start-column="1" selection-end-line="182" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2790">
+          <caret line="186" column="0" lean-forward="true" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -38,13 +38,584 @@ webpackEmptyAsyncContext.id = 151;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WorkflowPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__edit_workflow1_edit_workflow1__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__edit_workflow2_edit_workflow2__ = __webpack_require__(197);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+// import { EditWorkflowPage } from "../edit-workflow/edit-workflow";
+
+
+var WorkflowPage = (function () {
+    function WorkflowPage(storage, formBuilder, navCtrl, alertCtrl, barcodeScanner) {
+        this.storage = storage;
+        this.formBuilder = formBuilder;
+        this.navCtrl = navCtrl;
+        this.alertCtrl = alertCtrl;
+        this.barcodeScanner = barcodeScanner;
+        // Other variables to be named
+        this.staffIdBarcode = null;
+        this.orderIdBarcode = null;
+        this.wfForms = [];
+        this.wfProcesses = [];
+        this.wfMachineProcess = [];
+        this.wfStages = [];
+        this.wfInputs = [];
+        this.wfMachineData = [];
+        this.testRadioOpen = false;
+        storage.ready().then(function () { });
+        this.wfForms = [1, 2];
+        this.wfMachineProcess = [{
+                "1": '钉卷',
+                "2": '含浸',
+                "3": '组立',
+                "4": '清洗',
+                "5a0": '手工老化',
+                "5a1": '手工老化 - 串排',
+                "5a2": '手工老化 - 測試分选',
+                "5a3": '手工老化 - 外观',
+                "5b0": '自動老化',
+                "5b1": '自動老化 - 測試分选',
+                "5b2": '自動老化 - 外观'
+            }];
+        this.wfProcesses = [
+            { title: '钉卷', process: 1, show: true },
+            { title: '含浸', process: 2, show: true },
+            { title: '组立', process: 3, show: true },
+            { title: '清洗', process: 4, show: true },
+            { title: '手工老化', process: '5a0', show: true },
+            // {title: '手工老化 - 串排', process: '5a1', show: false},
+            // {title: '手工老化 - 測試分选', process: '5a2', show: false},
+            // {title: '手工老化 - 外观', process: '5a3', show: false},
+            { title: '自動老化', process: '5b0', show: true },
+        ];
+        this.wfStages = [
+            { title: '钉卷', process: '1', show: true },
+            { title: '含浸', process: '2', show: true },
+            { title: '组立', process: '3', show: true },
+            { title: '清洗', process: '4', show: true },
+            { title: '手工老化', process: '5a0', show: true },
+            { title: '手工老化 - 串排', process: '5a1', show: false },
+            { title: '手工老化 - 測試分选', process: '5a2', show: false },
+            { title: '手工老化 - 外观', process: '5a3', show: false },
+            { title: '自動老化', process: '5b0', show: true },
+            { title: '自動老化 - 測試分选', process: '5b1', show: false },
+            { title: '自動老化 - 外观', process: '5b2', show: false }
+        ];
+        this.wfInputs = [
+            { title: "流程卡号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 30 },
+            /*{title: "机台号", method: 'input', type: 'text', model: 'wfOptMachineId', scan: true, size: 30},
+            {title: "工序", method: 'select', model: 'wfProcess', size: 30, options:[
+              {label: '钉卷', value: 0},
+              {label: '含浸', value: 1},
+              {label: '组立', value: 2},
+              {label: '清洗', value: 3},
+              // {label: '手工老化', value: '5a'},
+              {label: '手工老化', value: 4},
+              // {label: '手工老化', value: {name: "test", value: "5a0"}},
+              {label: '手工老化 - 串排', value: 5},
+              {label: '手工老化 - 測試分选', value: 6},
+              {label: '手工老化 - 外观', value: 7},
+              {label: '自動老化', value: 8},
+              {label: '自動老化 - 測試分选', value: 9},
+              {label: '自動老化 - 外观', value: 10}
+            ]},
+            */
+            // {method: "break", size: 20},
+            { title: "工单号", method: 'input', type: 'text', model: 'WfOrderId', scan: false, size: 20 },
+            { title: "总量(预设)", method: 'input', type: 'number', model: 'wfOrderTotalQty', scan: false, size: 10 },
+            // Prompt Screen alert to pick the workflow batch id
+            { title: "批次号", method: 'input', type: 'text', model: 'wfOrderBatchId', scan: false, size: 20 },
+            { title: "总量(批次)", method: 'input', type: 'number', model: 'wfOrderBatchQty', scan: false, size: 10 },
+            { method: "break", size: 20 },
+            // Expand as buttons
+            { title: "流程卡", method: 'buttons', options: [
+                    { value: 1, label: '裸品' },
+                    { value: 2, label: '成品' },
+                    { value: 3, label: '电容器' }
+                ], model: 'wfForm', scan: false, size: 100 }
+        ];
+    }
+    WorkflowPage.prototype.ngOnInit = function () {
+        this.formInit();
+    };
+    ;
+    WorkflowPage.prototype.onAddWf = function () {
+        var _this = this;
+        var form = this.wfInputForm;
+        // Form submission to pass the form value onto next stage
+        /*
+        console.log(form.value.wfForm);
+        this.storage.set('name', 'Captain America');
+    
+        this.storage.get('name').then((name) => {
+          console.log('Me: Hey, ' + name + '! Good Day sir!');
+        });
+        */
+        /*
+        switch (form.value.wfForm) {
+          case 1:
+            console.log('裸品流程卡');
+            this.navCtrl.push(EditWorkflowPage, form);
+            break;
+    
+          case 2:
+            console.log('成品流程卡');
+            this.navCtrl.push(EditWorkflow1Page, form);
+            break;
+    
+          case 3:
+            console.log('电容器流程卡');
+            this.navCtrl.push(EditWorkflow2Page, form);
+            break;
+    
+          default:
+            console.log('請輸入流程卡号');
+            if(form.controls["wfFormId"].value == ''){
+              alert('請輸入流程卡号');
+            } else if(form.controls["wfMachineId"].value == '') {
+              alert('請輸入流机台号');
+            }
+            
+        } */
+        //storage.set('123', '123');
+        if (form.controls["wfFormId"].value == '') {
+            alert('請輸入流程卡号');
+        }
+        else if (form.value.wfForm == 1) {
+            console.log('裸品流程卡');
+            form.value.wfFormName = '裸品流程卡';
+            this.storage.get(form.value.wfFormId).then(function (dataDumpJsonXTmp) {
+                var wfObjTmp = JSON.parse(dataDumpJsonXTmp);
+                //alert(wfObjTmp["wfOrderId"] + ' ' + dataDumpJsonXTmp);
+                /*
+                form.value.wfOrderId = 'VTO00001';
+                form.value.wfOrderRMId = '';
+                form.value.wfOrderSeries = '';
+                form.value.wfOrderSpec = '';
+                form.value.wfOrderDim = '';
+                form.value.wfOrderBOMNote = '';
+                form.value.wfOrderNote = '';
+                form.value.wfOrderTotalQty = '1000';
+                form.value.wfOrderTotalGoodQty = '100';
+                form.value.wfOrderBatchQty = '1000';
+                form.value.wfOrderBatchId = 'VTB01000';
+                */
+                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__edit_workflow1_edit_workflow1__["a" /* EditWorkflow1Page */], form);
+            });
+        }
+        else if (form.value.wfForm == 2) {
+            console.log('成品流程卡');
+            form.value.wfFormName = '成品流程卡';
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__edit_workflow2_edit_workflow2__["a" /* EditWorkflow2Page */], form);
+        }
+        else if (form.value.wfForm == 3) {
+            console.log('电容器流程卡');
+            form.value.wfFormName = '电容器流程卡';
+        }
+        else {
+            alert('請輸入流程卡');
+        }
+    };
+    WorkflowPage.prototype.scanBarcode = function (model) {
+        var _this = this;
+        var form = this.wfInputForm;
+        console.log("scanning Barcode");
+        // console.log(form.value);
+        //
+        // form.controls['wfProcess'].setValue(1);
+        // form.controls['wfProcessName'].setValue('钉卷');
+        // form.controls["wfForm"].setValue(1);
+        //
+        // console.log(form.value);
+        this.barcodeScanner.scan().then(function (barcodeData) {
+            // Success! Barcode data is here
+            // Limiter to assume the Barcode is default used in this orderID
+            if (barcodeData.format && barcodeData.format != "QR_CODE") {
+                console.log("this is barcode");
+                var data_1 = barcodeData.text;
+                form.controls[model].setValue(data_1);
+                switch (model) {
+                    case 'wfMachineId':
+                        console.log("this barcode is for wfMachineID");
+                        // clean up prior wfMachineData record
+                        // Housing keeping to erase the prior data in the form
+                        _this.wfMachineData = [];
+                        form.controls['wfProcess'].setValue("");
+                        form.controls['wfProcessName'].setValue("");
+                        // end of house keeping
+                        // look up the wfProcess from wfMachineId
+                        _this.storage.get('machineData').then(function (values) {
+                            console.log("This is the data from storage");
+                            console.log(values[data_1]);
+                            var _data = values[data_1];
+                            if (_data.length > 1) {
+                                _this.wfMachineData.push.apply(_this.wfMachineData, values[data_1]);
+                                console.log("This is the data from wfMachineData Array");
+                                console.log(_this.wfMachineData);
+                                alert("嚫，该机器有多种工序! 请选择工序 :D");
+                            }
+                            else {
+                                _this.wfMachineData.push(values[data_1]);
+                                // form.controls['wfProcess'].setValue(this.wfMachineData);
+                                console.log("This is the data from wfProcess Form");
+                                _this.setWfStage(values[data_1]);
+                            }
+                        });
+                        break;
+                }
+                /*switch (barcodeData.text) {
+                  case 'VTM00001':
+                    form.controls['wfProcess'].setValue(1);
+                    form.controls['wfProcessName'].setValue('钉卷');
+                    form.controls["wfForm"].setValue(1);
+                    break;
+        
+                  case 'VTM00002':
+                    form.controls['wfProcess'].setValue(2);
+                    form.controls['wfProcessName'].setValue('组立');
+                    form.controls["wfForm"].setValue(1);
+                    break;
+        
+                  case 'VTM00003':
+                    form.controls['wfProcess'].setValue(3);
+                    form.controls['wfProcessName'].setValue('含浸');
+                    form.controls["wfForm"].setValue(1);
+                    break;
+        
+                  case 'VTM00003':
+                    form.controls['wfProcess'].setValue(4);
+                    form.controls['wfProcessName'].setValue('清洗');
+                    form.controls["wfForm"].setValue(1);
+                    break;
+        
+                  default:
+                    alert('嚫，请确定你所扫描的条码是正确的');
+                };*/
+            }
+            else if (barcodeData.format == "QR_CODE") {
+                // alert('嚫，请确定你所扫描的条码是正确的');
+                // Try if it is QR code
+                console.log("This is QR Code");
+                _this.qrCodePopulate(barcodeData.text);
+            }
+            else {
+                alert('嚫，请确定你所扫描的条码是正确的');
+            }
+        }, function (err) {
+            // An error occurred
+            alert(err);
+        });
+    };
+    /*scanQRcode(form: NgForm){
+     console.log("scanning QRcode");
+     this.barcodeScanner.scan().then((barcodeData) => {
+     // Success! Barcode data is here
+     // Limiter to assume the QR is default used in this staffID
+     if (barcodeData.format == "QR_CODE") {
+     this.qrCodePopulate(barcodeData.text, form);
+     } else {
+     alert('嚫，你扫描的是否QR条码');
+     }
+     }, (err) => {
+     // An error occurred
+     alert(err)
+     });
+     }*/
+    WorkflowPage.prototype.setFormValue = function (model, value) {
+        var form = this.wfInputForm;
+        form.controls[model].setValue(value);
+    };
+    WorkflowPage.prototype.setWfProcess = function (process, title, storage) {
+        var _this = this;
+        var form = this.wfInputForm;
+        console.log(form.value);
+        // Update the value of the Form on the Process steps and Process Name on the form
+        form.controls['wfProcess'].setValue(process);
+        form.controls['wfProcessName'].setValue(title);
+        // Create additional alerts to let the user to choose the right subprocesses from the Ageing process
+        if (typeof process === 'string') {
+            var alert_1 = this.alertCtrl.create();
+            alert_1.setTitle('请选择老化工序');
+            if (process == '5a') {
+                // This subprocess is unique to Manual Ageing
+                alert_1.addInput({
+                    type: 'radio',
+                    label: '串排',
+                    value: '串排',
+                });
+                var processTitle = '手工老化';
+            }
+            else {
+                var processTitle = '自动老化';
+            }
+            alert_1.addInput({
+                type: 'radio',
+                label: processTitle,
+                value: processTitle
+            });
+            alert_1.addInput({
+                type: 'radio',
+                label: '測試分选',
+                value: '測試分选'
+            });
+            alert_1.addInput({
+                type: 'radio',
+                label: '外观',
+                value: '外观'
+            });
+            alert_1.addButton('取消');
+            alert_1.addButton({
+                text: '確定',
+                handler: function (data) {
+                    // Once selected the subprocess, update the form and then submit the form to next process stage
+                    form.controls['wfProcessName'].setValue(data);
+                    _this.onAddWf();
+                }
+            });
+            alert_1.present();
+        }
+        else {
+            // Simply submit the form and send over to next process
+            this.onAddWf();
+        }
+        // console.log('After');
+        // console.log(form.value);
+    };
+    WorkflowPage.prototype.setWfStage = function (process) {
+        var form = this.wfInputForm;
+        // console.log( form.value );
+        // console.log(this.wfProcesses[process].title);
+        console.log("This is the process from the ion-select");
+        console.log(process);
+        // This is temp fix for the array value to process value
+        // *TO BE FIXED*
+        var _wfStage = this.wfStages[process - 1];
+        // there is a bug to load this method when the view is first init,
+        // So i have added a try here to cancel the error msg
+        try {
+            // console.log( _wfStage.title );
+            form.controls['wfProcess'].setValue(_wfStage.process);
+            form.controls['wfProcessName'].setValue(_wfStage.title);
+            console.log("This is the form value");
+            console.log(JSON.stringify(form.value));
+        }
+        catch (err) { }
+        // console.log(_wfProcess.title);
+        // console.log(_wfProcess.process);
+        // Update the value of the Form on the Process steps and Process Name on the form
+        // form.controls['wfProcess'].setValue(_wfProcess.process);
+        // form.controls['wfProcessName'].setValue(_wfProcess.title);
+    };
+    WorkflowPage.prototype.presentAlertFuck = function () {
+        var alert = this.alertCtrl.create({
+            title: 'Low battery',
+            subTitle: '10% of battery remaining',
+            buttons: ['Dismiss']
+        });
+        alert.present();
+    };
+    WorkflowPage.prototype.presentConfirm = function () {
+        var alert = this.alertCtrl.create({
+            title: 'Confirm purchase',
+            message: 'Do you want to buy this book?',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('Cancel clicked');
+                    }
+                },
+                {
+                    text: 'Buy',
+                    handler: function () {
+                        console.log('Buy clicked');
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    WorkflowPage.prototype.qrCodePopulate = function (barcodeData) {
+        // This function takes the barcode data and then process the JSON object
+        // Assume each barcode data is a JSON object and it has a headers and bodies component
+        // Loop through the headers
+        // for each header,
+        //    check if the length is > 0, which is a sub JSON array object for data table
+        //    else loop through the keys inside that header JSON object
+        var data = JSON.parse(barcodeData);
+        var headers = data.headers;
+        var bodies = data.bodies;
+        var form = this.wfInputForm;
+        var _loop_1 = function (key) {
+            // console.log(key + " : " + headers[key])
+            switch (headers[key]) {
+                case "ngForm":
+                    // console.log(key + " is a form")
+                    var formBodies = bodies[key];
+                    for (var formKey in formBodies) {
+                        console.log("populate form model " + formKey);
+                        console.log("populating model " + formKey + " " + formBodies[formKey]);
+                        try {
+                            // Dynamically set form value from the scanned code data
+                            // try and catch here is to protect if some of the fields are missing or failed,
+                            // then it will skip onto the next key
+                            // backup code for assigning the value into form
+                            // ngForm.controls[formKey].setValue(form[formKey]);
+                            // This line no longer works
+                            // eval('form.value.' + formKey + " = " + formBodies[formKey]);
+                            this_1.setFormValue(formKey, formBodies[formKey]);
+                            if (form.value.wfFormId == formBodies[formKey]) {
+                                //alert(formBodies[formKey] + ' ' +JSON.stringify(formBodies)); 
+                                this_1.storage.set(formBodies[formKey], JSON.stringify(formBodies));
+                            }
+                            //  form.value.
+                        }
+                        catch (err) {
+                            console.log(err.message);
+                        }
+                    }
+                    break;
+                case "ngStorage":
+                    console.log(key + " is a storage");
+                    this_1.storage.set(key, bodies[key]);
+                    console.log(bodies[key]);
+                    // Testing the storage has been set
+                    this_1.storage.get(key).then(function (values) {
+                        for (var valKey in values) {
+                            console.log(values[valKey]);
+                        }
+                        console.log(key);
+                        console.log(JSON.stringify(values));
+                    });
+                    break;
+                case "ngInput":
+                    console.log(key + " is for input");
+                    console.log(bodies[key]);
+                    var inputBodies = bodies[key];
+                    for (var inputKey in inputBodies) {
+                        console.log("populate form model" + inputKey);
+                        try {
+                            // Dynamically set form value from the scanned code data
+                            // try and catch here is to protect if some of the fields are missing or failed,
+                            // then it will skip onto the next key
+                            // backup code for assigning the value into form
+                            // ngForm.controls[formKey].setValue(form[formKey]);
+                            // This line no longer works
+                            // eval('this.' + inputKey + " = " + inputBodies[inputKey]);
+                            this_1.setFormValue(inputKey, inputBodies[inputKey]);
+                            //  form.value.
+                        }
+                        catch (err) {
+                            console.log(err.message);
+                        }
+                    }
+                    break;
+                default:
+                    console.log(key + " is error");
+            }
+        };
+        var this_1 = this;
+        for (var key in headers) {
+            _loop_1(key);
+        }
+    };
+    WorkflowPage.prototype.formInit = function () {
+        this.wfInputForm = this.formBuilder.group({
+            wfProcess: [''],
+            wfProcessName: [''],
+            wfForm: [''],
+            wfFormId: [''],
+            // Order Inputs detail
+            wfOrderFormId: [''],
+            WfOrderId: [''],
+            wfOrderBatchId: [''],
+            wfOrderBatchQty: [''],
+            wfOrderBOMNote: [''],
+            wfOrderNote: [''],
+            wfOrderTotalQty: [''],
+            wfOrderTotalGoodQty: [''],
+            wfOrderRMId: [''],
+            wfOrderSeries: [''],
+            wfOrderSpec: [''],
+            // wfOrderQty: [''],
+            wfOrderDim: [''],
+            wfOptMachineId: [''],
+            // Raw Material Inputs
+            wfRMFoilPosName: ['100LG04B-33VF-48UF 5.5mm'],
+            wfRMFoilPosSerial: ['17074049'],
+            wfRMFoilPosLName: ['184'],
+            wfRMFoilPosLSerial: [''],
+            wfRMFoilNegName: ['F-545M-450UF-5.5MM'],
+            wfRMFoilNegSerial: ['0619A04A06'],
+            wfRMFoilNegLName: ['184'],
+            wfRMFoilNegLSerial: [''],
+            wfRMPaperName: ['SM250-50 6.5mm'],
+            wfRMPaperSerial: ['17032519A1-B47'],
+            wfRMGlueName: [''],
+            wfRMGlueSerial: ['17.7.22'],
+            wfRMSolName: ['KVP-1B'],
+            wfRMSolSerial: ['富凱2017.7119'],
+            wfRMPinPosName: ['15080(+)'],
+            wfRMPinPosSerial: ['1706241163'],
+            wfRMPinNegName: ['15080(-)'],
+            wfRMPinNegSerial: ['1707201194'],
+            wfRMPlasticName: ['9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)'],
+            wfRMPlasticSerial: ['17704310121'],
+            wfRMShellName: [''],
+            wfRMShellSerial: [''],
+            wfRMCoverName: ['10x10.6 3004材质(防爆)'],
+            wfRMCoverSerial: ['1670722-053842'],
+            wfRMWindingTime: [''],
+            wfRMWindingDeg: [''],
+        });
+    };
+    return WorkflowPage;
+}());
+WorkflowPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        selector: 'page-workflow',template:/*ion-inline-start:"/Users/thomasq/Sites/vtApp/src/pages/workflow/workflow.html"*/'<ion-header>\n    <ion-navbar>\n        <div style="align-items: center; display: inline;">\n            <img src="./assets/img/vt_icon.png" class="icon">\n            <ion-title>工序流程卡纪录系统</ion-title>\n        </div>\n    </ion-navbar>\n</ion-header>\n<ion-content padding>\n    <form [formGroup]="wfInputForm" (ngSubmit)="onAddWf()">\n\n        <!-- First section for the input field -->\n        <div>\n            <ion-grid>\n                <ion-row wrap justify-content-left align-items-center>\n                    <!-- Main loop of the Form Module -->\n                    <ion-col *ngFor="let wfInput of wfInputs">\n                        <!-- Non Buttons input fields of wfForms -->\n                        <ion-row align-items-center>\n                            <div class="label">{{wfInput.title}}</div>\n\n                            <!-- Form Normal Input Module-->\n                            <ion-input *ngIf="wfInput.method === \'input\'"\n                                       [ngStyle]="{\'width.em\':wfInput.size}"\n                                       type={{wfInput.type}}\n                                       formControlName={{wfInput.model}}\n                                       no-padding\n                                       class="gridborder"\n                                       required></ion-input>\n\n                            <button *ngIf="wfInput.scan"\n                                    (click)="scanBarcode(wfInput.model)"\n                                    item-end\n                                    ion-button\n                                    class="barcodeButton"\n                                    type="button">\n                                <!--<ion-icon name="barcode"></ion-icon>-->\n                                扫一扫\n                            </button>\n\n                            <!-- Form Selector Module -->\n                            <ion-select *ngIf="wfInput.method === \'select\'"\n                                        [ngStyle]="{\'width.em\':wfInput.size}"\n                                        interface="popover" style="height: 34px !important;"\n                                        (ionChange)="setWfStage($event)"\n                                        formControlName={{wfInput.model}}\n                                        class="gridborder"\n                                        okText="确定"\n                                        cancelText="取消">\n                                <ion-option *ngFor="let key of wfMachineData"\n                                            value={{key}}>\n                                    {{wfMachineProcess[0][key]}}\n                                </ion-option>\n                            </ion-select>\n\n                            <!-- Buttons input fields of wfForms -->\n                            <div *ngIf="wfInput.method === \'buttons\'"\n                                 [ngStyle]="{\'width.em\':wfInput.size}">\n                                <ion-buttons>\n                                <!-- Button for Form submission -->\n                                    <button *ngFor="let option of wfInput.options"\n                                            [ngClass]="{\'buttonsSelected\': wfInputForm.value.wfForm == option.value }"\n                                            (click)="setFormValue(wfInput.model,option.value)"\n                                            item-right\n                                            ion-button\n                                            outline\n                                            type="button"\n                                            round>\n                                        <ion-icon name="clipboard"></ion-icon>\n                                        &nbsp; {{option.label}}\n                                    </button>\n                                </ion-buttons>\n\n                                <button style="width: 25%; margin: 0 auto;"\n                                        ion-button\n                                        type="submit"\n                                        block>\n                                    确定\n                                </button>\n                            </div>\n\n                            <div *ngIf="wfInput.method === \'break\'" [ngStyle]="{\'width.em\':wfInput.size}"></div>\n\n                        </ion-row>\n\n                    </ion-col>\n                </ion-row>\n            </ion-grid>\n        </div>\n\n        <div>\n\n\n        </div>\n\n        <!-- Display the workflow process with img -->\n        <div>\n            <ion-grid style="padding-left: 50px; padding-right: 50px;">\n                <ion-row wrap class="card-background-page">\n                    <ion-col *ngFor="let wfProcess of wfProcesses" col-3>\n                        <div (click)="setWfProcess(wfProcess.process, wfProcess.title)" class="imgButton">\n                            <img src="{{\'./assets/img/f1p\' + wfProcess.process + \'.jpeg\'}}">\n                            <div class="card-title">\n                                {{wfProcess.title}}\n                            </div>\n                        </div>\n                        <!-- For original design -->\n                        <!--<div [navPush]="pushPage" [navParams]=wfProcess>-->\n                    </ion-col>\n                </ion-row>\n            </ion-grid>\n        </div>\n\n        <!-- manual ageing will have an action sheet to prompt the sub process -->\n        <!-- 規格 Need attention highlight -->\n        <!-- 料號 = 產品編號 -->\n\n    </form>\n</ion-content>'/*ion-inline-end:"/Users/thomasq/Sites/vtApp/src/pages/workflow/workflow.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */],
+        __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */],
+        __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */]])
+], WorkflowPage);
+
+//# sourceMappingURL=workflow.js.map
+
+/***/ }),
+
+/***/ 196:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditWorkflow1Page; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__ = __webpack_require__(102);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -505,741 +1076,17 @@ EditWorkflow1Page = __decorate([
 
 /***/ }),
 
-/***/ 196:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WorkflowPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__edit_workflow1_edit_workflow1__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__edit_workflow2_edit_workflow2__ = __webpack_require__(272);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-// import { EditWorkflowPage } from "../edit-workflow/edit-workflow";
-
-
-var WorkflowPage = (function () {
-    function WorkflowPage(storage, 
-        // private nativeStorage: NativeStorage,
-        formBuilder, navCtrl, alertCtrl, barcodeScanner) {
-        this.storage = storage;
-        this.formBuilder = formBuilder;
-        this.navCtrl = navCtrl;
-        this.alertCtrl = alertCtrl;
-        this.barcodeScanner = barcodeScanner;
-        // Other variables to be named
-        this.staffIdBarcode = null;
-        this.orderIdBarcode = null;
-        this.wfForms = [];
-        this.wfProcesses = [];
-        this.wfMachineProcess = [];
-        this.wfStages = [];
-        this.wfInputs = [];
-        this.wfMachineData = [];
-        this.testRadioOpen = false;
-        storage.ready().then(function () { });
-        this.wfForms = [1, 2];
-        this.wfMachineProcess = [{
-                "1": '钉卷',
-                "2": '含浸',
-                "3": '组立',
-                "4": '清洗',
-                "5a0": '手工老化',
-                "5a1": '手工老化 - 串排',
-                "5a2": '手工老化 - 測試分选',
-                "5a3": '手工老化 - 外观',
-                "5b0": '自動老化',
-                "5b1": '自動老化 - 測試分选',
-                "5b2": '自動老化 - 外观'
-            }];
-        // this.wfMachineData = this.wfProcesses[0];
-        //
-        // console.log(this.wfMachineData);
-        this.wfProcesses = [
-            { title: '钉卷', process: 1, show: true },
-            { title: '含浸', process: 2, show: true },
-            { title: '组立', process: 3, show: true },
-            { title: '清洗', process: 4, show: true },
-            { title: '手工老化', process: '5a0', show: true },
-            // {title: '手工老化 - 串排', process: '5a1', show: false},
-            // {title: '手工老化 - 測試分选', process: '5a2', show: false},
-            // {title: '手工老化 - 外观', process: '5a3', show: false},
-            { title: '自動老化', process: '5b0', show: true },
-        ];
-        this.wfStages = [
-            { title: '钉卷', process: '1', show: true },
-            { title: '含浸', process: '2', show: true },
-            { title: '组立', process: '3', show: true },
-            { title: '清洗', process: '4', show: true },
-            { title: '手工老化', process: '5a0', show: true },
-            { title: '手工老化 - 串排', process: '5a1', show: false },
-            { title: '手工老化 - 測試分选', process: '5a2', show: false },
-            { title: '手工老化 - 外观', process: '5a3', show: false },
-            { title: '自動老化', process: '5b0', show: true },
-            { title: '自動老化 - 測試分选', process: '5b1', show: false },
-            { title: '自動老化 - 外观', process: '5b2', show: false }
-        ];
-        this.wfInputs = [
-            { title: "流程卡号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 30 },
-            /*{title: "机台号", method: 'input', type: 'text', model: 'wfOptMachineId', scan: true, size: 30},
-            {title: "工序", method: 'select', model: 'wfProcess', size: 30, options:[
-              {label: '钉卷', value: 0},
-              {label: '含浸', value: 1},
-              {label: '组立', value: 2},
-              {label: '清洗', value: 3},
-              // {label: '手工老化', value: '5a'},
-              {label: '手工老化', value: 4},
-              // {label: '手工老化', value: {name: "test", value: "5a0"}},
-              {label: '手工老化 - 串排', value: 5},
-              {label: '手工老化 - 測試分选', value: 6},
-              {label: '手工老化 - 外观', value: 7},
-              {label: '自動老化', value: 8},
-              {label: '自動老化 - 測試分选', value: 9},
-              {label: '自動老化 - 外观', value: 10}
-            ]},
-            */
-            // {method: "break", size: 20},
-            { title: "工单号", method: 'input', type: 'text', model: 'WfOrderId', scan: false, size: 20 },
-            { title: "总量(预设)", method: 'input', type: 'number', model: 'wfOrderTotalQty', scan: false, size: 10 },
-            // Prompt Screen alert to pick the workflow batch id
-            { title: "批次号", method: 'input', type: 'text', model: 'wfOrderBatchId', scan: false, size: 20 },
-            { title: "总量(批次)", method: 'input', type: 'number', model: 'wfOrderBatchQty', scan: false, size: 10 },
-            { method: "break", size: 20 },
-            // Expand as buttons
-            { title: "流程卡", method: 'buttons', options: [
-                    { value: 1, label: '裸品' },
-                    { value: 2, label: '成品' },
-                    { value: 3, label: '电容器' }
-                ], model: 'wfForm', scan: false, size: 100 }
-        ];
-        this.pushPage = __WEBPACK_IMPORTED_MODULE_5__edit_workflow1_edit_workflow1__["a" /* EditWorkflow1Page */];
-    }
-    WorkflowPage.prototype.ngOnInit = function () {
-        this.formInit();
-    };
-    ;
-    WorkflowPage.prototype.onAddWf = function () {
-        var _this = this;
-        var form = this.wfInputForm;
-        // Form submission to pass the form value onto next stage
-        /*
-        console.log(form.value.wfForm);
-        this.storage.set('name', 'Captain America');
-    
-        this.storage.get('name').then((name) => {
-          console.log('Me: Hey, ' + name + '! Good Day sir!');
-        });
-        */
-        /*
-        switch (form.value.wfForm) {
-          case 1:
-            console.log('裸品流程卡');
-            this.navCtrl.push(EditWorkflowPage, form);
-            break;
-    
-          case 2:
-            console.log('成品流程卡');
-            this.navCtrl.push(EditWorkflow1Page, form);
-            break;
-    
-          case 3:
-            console.log('电容器流程卡');
-            this.navCtrl.push(EditWorkflow2Page, form);
-            break;
-    
-          default:
-            console.log('請輸入流程卡号');
-            if(form.controls["wfFormId"].value == ''){
-              alert('請輸入流程卡号');
-            } else if(form.controls["wfMachineId"].value == '') {
-              alert('請輸入流机台号');
-            }
-            
-        } */
-        //storage.set('123', '123');
-        if (form.controls["wfFormId"].value == '') {
-            alert('請輸入流程卡号');
-        }
-        else if (form.value.wfForm == 1) {
-            console.log('裸品流程卡');
-            form.value.wfFormName = '裸品流程卡';
-            this.storage.get(form.value.wfFormId).then(function (dataDumpJsonXTmp) {
-                var wfObjTmp = JSON.parse(dataDumpJsonXTmp);
-                //alert(wfObjTmp["wfOrderId"] + ' ' + dataDumpJsonXTmp);
-                /*
-                form.value.wfOrderId = 'VTO00001';
-                form.value.wfOrderRMId = '';
-                form.value.wfOrderSeries = '';
-                form.value.wfOrderSpec = '';
-                form.value.wfOrderDim = '';
-                form.value.wfOrderBOMNote = '';
-                form.value.wfOrderNote = '';
-                form.value.wfOrderTotalQty = '1000';
-                form.value.wfOrderTotalGoodQty = '100';
-                form.value.wfOrderBatchQty = '1000';
-                form.value.wfOrderBatchId = 'VTB01000';
-                */
-                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__edit_workflow1_edit_workflow1__["a" /* EditWorkflow1Page */], form);
-            });
-        }
-        else if (form.value.wfForm == 2) {
-            console.log('成品流程卡');
-            form.value.wfFormName = '成品流程卡';
-            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__edit_workflow2_edit_workflow2__["a" /* EditWorkflow2Page */], form);
-        }
-        else if (form.value.wfForm == 3) {
-            console.log('电容器流程卡');
-            form.value.wfFormName = '电容器流程卡';
-        }
-        else {
-            alert('請輸入流程卡');
-        }
-    };
-    WorkflowPage.prototype.scanBarcode = function (model) {
-        var _this = this;
-        var form = this.wfInputForm;
-        console.log("scanning Barcode");
-        // console.log(form.value);
-        //
-        // form.controls['wfProcess'].setValue(1);
-        // form.controls['wfProcessName'].setValue('钉卷');
-        // form.controls["wfForm"].setValue(1);
-        //
-        // console.log(form.value);
-        this.barcodeScanner.scan().then(function (barcodeData) {
-            // Success! Barcode data is here
-            // Limiter to assume the Barcode is default used in this orderID
-            if (barcodeData.format && barcodeData.format != "QR_CODE") {
-                console.log("this is barcode");
-                var data_1 = barcodeData.text;
-                form.controls[model].setValue(data_1);
-                switch (model) {
-                    case 'wfMachineId':
-                        console.log("this barcode is for wfMachineID");
-                        // clean up prior wfMachineData record
-                        // Housing keeping to erase the prior data in the form
-                        _this.wfMachineData = [];
-                        form.controls['wfProcess'].setValue("");
-                        form.controls['wfProcessName'].setValue("");
-                        // end of house keeping
-                        // look up the wfProcess from wfMachineId
-                        _this.storage.get('machineData').then(function (values) {
-                            console.log("This is the data from storage");
-                            console.log(values[data_1]);
-                            var _data = values[data_1];
-                            if (_data.length > 1) {
-                                _this.wfMachineData.push.apply(_this.wfMachineData, values[data_1]);
-                                console.log("This is the data from wfMachineData Array");
-                                console.log(_this.wfMachineData);
-                                alert("嚫，该机器有多种工序! 请选择工序 :D");
-                            }
-                            else {
-                                _this.wfMachineData.push(values[data_1]);
-                                // form.controls['wfProcess'].setValue(this.wfMachineData);
-                                console.log("This is the data from wfProcess Form");
-                                _this.setWfStage(values[data_1]);
-                            }
-                        });
-                        break;
-                }
-                /*switch (barcodeData.text) {
-                  case 'VTM00001':
-                    form.controls['wfProcess'].setValue(1);
-                    form.controls['wfProcessName'].setValue('钉卷');
-                    form.controls["wfForm"].setValue(1);
-                    break;
-        
-                  case 'VTM00002':
-                    form.controls['wfProcess'].setValue(2);
-                    form.controls['wfProcessName'].setValue('组立');
-                    form.controls["wfForm"].setValue(1);
-                    break;
-        
-                  case 'VTM00003':
-                    form.controls['wfProcess'].setValue(3);
-                    form.controls['wfProcessName'].setValue('含浸');
-                    form.controls["wfForm"].setValue(1);
-                    break;
-        
-                  case 'VTM00003':
-                    form.controls['wfProcess'].setValue(4);
-                    form.controls['wfProcessName'].setValue('清洗');
-                    form.controls["wfForm"].setValue(1);
-                    break;
-        
-                  default:
-                    alert('嚫，请确定你所扫描的条码是正确的');
-                };*/
-            }
-            else if (barcodeData.format == "QR_CODE") {
-                // alert('嚫，请确定你所扫描的条码是正确的');
-                // Try if it is QR code
-                console.log("This is QR Code");
-                _this.qrCodePopulate(barcodeData.text);
-            }
-            else {
-                alert('嚫，请确定你所扫描的条码是正确的');
-            }
-        }, function (err) {
-            // An error occurred
-            alert(err);
-        });
-    };
-    /*scanQRcode(form: NgForm){
-     console.log("scanning QRcode");
-     this.barcodeScanner.scan().then((barcodeData) => {
-     // Success! Barcode data is here
-     // Limiter to assume the QR is default used in this staffID
-     if (barcodeData.format == "QR_CODE") {
-     this.qrCodePopulate(barcodeData.text, form);
-     } else {
-     alert('嚫，你扫描的是否QR条码');
-     }
-     }, (err) => {
-     // An error occurred
-     alert(err)
-     });
-     }*/
-    WorkflowPage.prototype.setFormValue = function (model, value) {
-        var form = this.wfInputForm;
-        form.controls[model].setValue(value);
-    };
-    WorkflowPage.prototype.setWfProcess = function (process, title, storage) {
-        var _this = this;
-        var form = this.wfInputForm;
-        console.log(form.value);
-        // Update the value of the Form on the Process steps and Process Name on the form
-        form.controls['wfProcess'].setValue(process);
-        form.controls['wfProcessName'].setValue(title);
-        // Create additional alerts to let the user to choose the right subprocesses from the Ageing process
-        if (typeof process === 'string') {
-            var alert = this.alertCtrl.create();
-            alert.setTitle('请选择老化工序');
-            if (process == '5a') {
-                // This subprocess is unique to Manual Ageing
-                alert.addInput({
-                    type: 'radio',
-                    label: '串排',
-                    value: '串排',
-                });
-                var processTitle = '手工老化';
-            }
-            else {
-                var processTitle = '自动老化';
-            }
-            alert.addInput({
-                type: 'radio',
-                label: processTitle,
-                value: processTitle
-            });
-            alert.addInput({
-                type: 'radio',
-                label: '測試分选',
-                value: '測試分选'
-            });
-            alert.addInput({
-                type: 'radio',
-                label: '外观',
-                value: '外观'
-            });
-            alert.addButton('取消');
-            alert.addButton({
-                text: '確定',
-                handler: function (data) {
-                    // Once selected the subprocess, update the form and then submit the form to next process stage
-                    form.controls['wfProcessName'].setValue(data);
-                    _this.onAddWf();
-                }
-            });
-            alert.present();
-        }
-        else {
-            // Simply submit the form and send over to next process
-            this.onAddWf();
-        }
-        // console.log('After');
-        // console.log(form.value);
-    };
-    WorkflowPage.prototype.setWfStage = function (process) {
-        var form = this.wfInputForm;
-        // console.log( form.value );
-        // console.log(this.wfProcesses[process].title);
-        console.log("This is the process from the ion-select");
-        console.log(process);
-        // This is temp fix for the array value to process value
-        // *TO BE FIXED*
-        var _wfStage = this.wfStages[process - 1];
-        // there is a bug to load this method when the view is first init,
-        // So i have added a try here to cancel the error msg
-        try {
-            // console.log( _wfStage.title );
-            form.controls['wfProcess'].setValue(_wfStage.process);
-            form.controls['wfProcessName'].setValue(_wfStage.title);
-            console.log("This is the form value");
-            console.log(JSON.stringify(form.value));
-        }
-        catch (err) { }
-        // console.log(_wfProcess.title);
-        // console.log(_wfProcess.process);
-        // Update the value of the Form on the Process steps and Process Name on the form
-        // form.controls['wfProcess'].setValue(_wfProcess.process);
-        // form.controls['wfProcessName'].setValue(_wfProcess.title);
-    };
-    WorkflowPage.prototype.presentAlertFuck = function () {
-        var alert = this.alertCtrl.create({
-            title: 'Low battery',
-            subTitle: '10% of battery remaining',
-            buttons: ['Dismiss']
-        });
-        alert.present();
-    };
-    WorkflowPage.prototype.presentConfirm = function () {
-        var alert = this.alertCtrl.create({
-            title: 'Confirm purchase',
-            message: 'Do you want to buy this book?',
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: function () {
-                        console.log('Cancel clicked');
-                    }
-                },
-                {
-                    text: 'Buy',
-                    handler: function () {
-                        console.log('Buy clicked');
-                    }
-                }
-            ]
-        });
-        alert.present();
-    };
-    WorkflowPage.prototype.qrCodePopulate = function (barcodeData) {
-        // This function takes the barcode data and then process the JSON object
-        // Assume each barcode data is a JSON object and it has a headers and bodies component
-        // Loop through the headers
-        // for each header,
-        //    check if the length is > 0, which is a sub JSON array object for data table
-        //    else loop through the keys inside that header JSON object
-        var data = JSON.parse(barcodeData);
-        var headers = data.headers;
-        var bodies = data.bodies;
-        var form = this.wfInputForm;
-        var _loop_1 = function (key) {
-            // console.log(key + " : " + headers[key])
-            switch (headers[key]) {
-                case "ngForm":
-                    // console.log(key + " is a form")
-                    var formBodies = bodies[key];
-                    for (var formKey in formBodies) {
-                        console.log("populate form model " + formKey);
-                        console.log("populating model " + formKey + " " + formBodies[formKey]);
-                        try {
-                            // Dynamically set form value from the scanned code data
-                            // try and catch here is to protect if some of the fields are missing or failed,
-                            // then it will skip onto the next key
-                            // backup code for assigning the value into form
-                            // ngForm.controls[formKey].setValue(form[formKey]);
-                            // This line no longer works
-                            // eval('form.value.' + formKey + " = " + formBodies[formKey]);
-                            this_1.setFormValue(formKey, formBodies[formKey]);
-                            if (form.value.wfFormId == formBodies[formKey]) {
-                                //alert(formBodies[formKey] + ' ' +JSON.stringify(formBodies)); 
-                                this_1.storage.set(formBodies[formKey], JSON.stringify(formBodies));
-                            }
-                            //  form.value.
-                        }
-                        catch (err) {
-                            console.log(err.message);
-                        }
-                    }
-                    break;
-                case "ngStorage":
-                    console.log(key + " is a storage");
-                    this_1.storage.set(key, bodies[key]);
-                    console.log(bodies[key]);
-                    // Testing the storage has been set
-                    this_1.storage.get(key).then(function (values) {
-                        for (var valKey in values) {
-                            console.log(values[valKey]);
-                        }
-                        console.log(key);
-                        console.log(JSON.stringify(values));
-                    });
-                    break;
-                case "ngInput":
-                    console.log(key + " is for input");
-                    console.log(bodies[key]);
-                    var inputBodies = bodies[key];
-                    for (var inputKey in inputBodies) {
-                        console.log("populate form model" + inputKey);
-                        try {
-                            // Dynamically set form value from the scanned code data
-                            // try and catch here is to protect if some of the fields are missing or failed,
-                            // then it will skip onto the next key
-                            // backup code for assigning the value into form
-                            // ngForm.controls[formKey].setValue(form[formKey]);
-                            // This line no longer works
-                            // eval('this.' + inputKey + " = " + inputBodies[inputKey]);
-                            this_1.setFormValue(inputKey, inputBodies[inputKey]);
-                            //  form.value.
-                        }
-                        catch (err) {
-                            console.log(err.message);
-                        }
-                    }
-                    break;
-                default:
-                    console.log(key + " is error");
-            }
-        };
-        var this_1 = this;
-        for (var key in headers) {
-            _loop_1(key);
-        }
-    };
-    WorkflowPage.prototype.formInit = function () {
-        this.wfInputForm = this.formBuilder.group({
-            wfProcess: [''],
-            wfProcessName: [''],
-            wfForm: [''],
-            wfFormId: [''],
-            // Order Inputs detail
-            wfOrderFormId: [''],
-            WfOrderId: [''],
-            wfOrderBatchId: [''],
-            wfOrderBatchQty: [''],
-            wfOrderBOMNote: [''],
-            wfOrderNote: [''],
-            wfOrderTotalQty: [''],
-            wfOrderTotalGoodQty: [''],
-            wfOrderRMId: [''],
-            wfOrderSeries: [''],
-            wfOrderSpec: [''],
-            // wfOrderQty: [''],
-            wfOrderDim: [''],
-            wfOptMachineId: [''],
-            // Raw Material Inputs
-            wfRMFoilPosName: ['100LG04B-33VF-48UF 5.5mm'],
-            wfRMFoilPosSerial: ['17074049'],
-            wfRMFoilPosLName: ['184'],
-            wfRMFoilPosLSerial: [''],
-            wfRMFoilNegName: ['F-545M-450UF-5.5MM'],
-            wfRMFoilNegSerial: ['0619A04A06'],
-            wfRMFoilNegLName: ['184'],
-            wfRMFoilNegLSerial: [''],
-            wfRMPaperName: ['SM250-50 6.5mm'],
-            wfRMPaperSerial: ['17032519A1-B47'],
-            wfRMGlueName: [''],
-            wfRMGlueSerial: ['17.7.22'],
-            wfRMSolName: ['KVP-1B'],
-            wfRMSolSerial: ['富凱2017.7119'],
-            wfRMPinPosName: ['15080(+)'],
-            wfRMPinPosSerial: ['1706241163'],
-            wfRMPinNegName: ['15080(-)'],
-            wfRMPinNegSerial: ['1707201194'],
-            wfRMPlasticName: ['9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)'],
-            wfRMPlasticSerial: ['17704310121'],
-            wfRMShellName: [''],
-            wfRMShellSerial: [''],
-            wfRMCoverName: ['10x10.6 3004材质(防爆)'],
-            wfRMCoverSerial: ['1670722-053842'],
-            wfRMWindingTime: [''],
-            wfRMWindingDeg: [''],
-        });
-    };
-    return WorkflowPage;
-}());
-WorkflowPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-workflow',template:/*ion-inline-start:"/Users/thomasq/Sites/vtApp/src/pages/workflow/workflow.html"*/'<ion-header>\n    <ion-navbar>\n        <div style="align-items: center; display: inline;">\n            <img src="./assets/img/vt_icon.png" class="icon">\n            <ion-title>工序流程卡纪录系统</ion-title>\n        </div>\n    </ion-navbar>\n</ion-header>\n<ion-content padding>\n    <form [formGroup]="wfInputForm" (ngSubmit)="onAddWf()">\n\n        <!-- First section for the input field -->\n        <div>\n            <ion-grid>\n                <ion-row wrap justify-content-left align-items-center>\n                    <!-- Main loop of the Form Module -->\n                    <ion-col *ngFor="let wfInput of wfInputs">\n                        <!-- Non Buttons input fields of wfForms -->\n                        <ion-row align-items-center>\n                            <div class="label">{{wfInput.title}}</div>\n\n                            <!-- Form Normal Input Module-->\n                            <ion-input *ngIf="wfInput.method === \'input\'"\n                                       [ngStyle]="{\'width.em\':wfInput.size}"\n                                       type={{wfInput.type}}\n                                       formControlName={{wfInput.model}}\n                                       no-padding\n                                       class="gridborder"\n                                       required></ion-input>\n\n                            <button *ngIf="wfInput.scan"\n                                    (click)="scanBarcode(wfInput.model)"\n                                    item-end\n                                    ion-button\n                                    class="barcodeButton"\n                                    type="button">\n                                <!--<ion-icon name="barcode"></ion-icon>-->\n                                扫一扫\n                            </button>\n\n                            <!-- Form Selector Module -->\n                            <ion-select *ngIf="wfInput.method === \'select\'"\n                                        [ngStyle]="{\'width.em\':wfInput.size}"\n                                        interface="popover" style="height: 34px !important;"\n                                        (ionChange)="setWfStage($event)"\n                                        formControlName={{wfInput.model}}\n                                        class="gridborder"\n                                        okText="确定"\n                                        cancelText="取消">\n                                <ion-option *ngFor="let key of wfMachineData"\n                                            value={{key}}>\n                                    {{wfMachineProcess[0][key]}}\n                                </ion-option>\n                            </ion-select>\n\n                            <!-- Buttons input fields of wfForms -->\n                            <div *ngIf="wfInput.method === \'buttons\'"\n                                 [ngStyle]="{\'width.em\':wfInput.size}">\n                                <ion-buttons>\n                                <!-- Button for Form submission -->\n                                    <button *ngFor="let option of wfInput.options"\n                                            [ngClass]="{\'buttonsSelected\': wfInputForm.value.wfForm == option.value }"\n                                            (click)="setFormValue(wfInput.model,option.value)"\n                                            item-right\n                                            ion-button\n                                            outline\n                                            type="button"\n                                            round>\n                                        <ion-icon name="clipboard"></ion-icon>\n                                        &nbsp; {{option.label}}\n                                    </button>\n                                </ion-buttons>\n\n                                <button style="width: 25%; margin: 0 auto;"\n                                        ion-button\n                                        type="submit"\n                                        block>\n                                    确定\n                                </button>\n                            </div>\n\n                            <div *ngIf="wfInput.method === \'break\'" [ngStyle]="{\'width.em\':wfInput.size}"></div>\n\n                        </ion-row>\n\n                    </ion-col>\n                </ion-row>\n            </ion-grid>\n        </div>\n\n        <div>\n\n\n        </div>\n\n        <!-- Display the workflow process with img -->\n        <div>\n            <ion-grid style="padding-left: 50px; padding-right: 50px;">\n                <ion-row wrap class="card-background-page">\n                    <ion-col *ngFor="let wfProcess of wfProcesses" col-3>\n                        <div (click)="setWfProcess(wfProcess.process, wfProcess.title)" class="imgButton">\n                            <img src="{{\'./assets/img/f1p\' + wfProcess.process + \'.jpeg\'}}">\n                            <div class="card-title">\n                                {{wfProcess.title}}\n                            </div>\n                        </div>\n                        <!-- For original design -->\n                        <!--<div [navPush]="pushPage" [navParams]=wfProcess>-->\n                    </ion-col>\n                </ion-row>\n            </ion-grid>\n        </div>\n\n        <!-- manual ageing will have an action sheet to prompt the sub process -->\n        <!-- 規格 Need attention highlight -->\n        <!-- 料號 = 產品編號 -->\n\n    </form>\n</ion-content>'/*ion-inline-end:"/Users/thomasq/Sites/vtApp/src/pages/workflow/workflow.html"*/,
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */]) === "function" && _e || Object])
-], WorkflowPage);
-
-var _a, _b, _c, _d, _e;
-//# sourceMappingURL=workflow.js.map
-
-/***/ }),
-
-/***/ 198:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(217);
-
-
-Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
-//# sourceMappingURL=main.js.map
-
-/***/ }),
-
-/***/ 217:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(193);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_workflow_workflow__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_barcode_scanner__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_screen_orientation__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_edit_workflow1_edit_workflow1__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_edit_workflow2_edit_workflow2__ = __webpack_require__(272);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera__ = __webpack_require__(52);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-var AppModule = (function () {
-    function AppModule() {
-    }
-    return AppModule;
-}());
-AppModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModule */])({
-        declarations: [
-            __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_7__pages_workflow_workflow__["a" /* WorkflowPage */],
-            __WEBPACK_IMPORTED_MODULE_10__pages_edit_workflow1_edit_workflow1__["a" /* EditWorkflow1Page */],
-            __WEBPACK_IMPORTED_MODULE_11__pages_edit_workflow2_edit_workflow2__["a" /* EditWorkflow2Page */]
-        ],
-        imports: [
-            __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */]),
-            __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["a" /* IonicStorageModule */].forRoot({
-                name: '__mydbtest',
-                driverOrder: ['indexeddb', 'sqlite', 'websql']
-            })
-        ],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
-        entryComponents: [
-            __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_7__pages_workflow_workflow__["a" /* WorkflowPage */],
-            __WEBPACK_IMPORTED_MODULE_10__pages_edit_workflow1_edit_workflow1__["a" /* EditWorkflow1Page */],
-            __WEBPACK_IMPORTED_MODULE_11__pages_edit_workflow2_edit_workflow2__["a" /* EditWorkflow2Page */]
-        ],
-        providers: [
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__["a" /* StatusBar */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
-            __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_8__ionic_native_barcode_scanner__["a" /* BarcodeScanner */],
-            __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["a" /* IonicStorageModule */],
-            __WEBPACK_IMPORTED_MODULE_9__ionic_native_screen_orientation__["a" /* ScreenOrientation */],
-            { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] }
-        ]
-    })
-], AppModule);
-
-//# sourceMappingURL=app.module.js.map
-
-/***/ }),
-
-/***/ 269:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(193);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_screen_orientation__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_workflow_workflow__ = __webpack_require__(196);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var MyApp = (function () {
-    // rootPage:any = EditWorkflow1Page;
-    function MyApp(platform, statusBar, screenOrientation, splashScreen) {
-        this.screenOrientation = screenOrientation;
-        this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_workflow_workflow__["a" /* WorkflowPage */];
-        platform.ready().then(function () {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
-            statusBar.styleDefault();
-            splashScreen.hide();
-        });
-        // Uncomment below command for screenOrientation lock
-        // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
-    }
-    return MyApp;
-}());
-MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/thomasq/Sites/vtApp/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/thomasq/Sites/vtApp/src/app/app.html"*/
-    }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */],
-        __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */],
-        __WEBPACK_IMPORTED_MODULE_4__ionic_native_screen_orientation__["a" /* ScreenOrientation */],
-        __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
-], MyApp);
-
-//# sourceMappingURL=app.component.js.map
-
-/***/ }),
-
-/***/ 272:
+/***/ 197:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditWorkflow2Page; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__ = __webpack_require__(102);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1582,6 +1429,156 @@ EditWorkflow2Page = __decorate([
 ], EditWorkflow2Page);
 
 //# sourceMappingURL=edit-workflow2.js.map
+
+/***/ }),
+
+/***/ 198:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(217);
+
+
+Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
+//# sourceMappingURL=main.js.map
+
+/***/ }),
+
+/***/ 217:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_workflow_workflow__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_barcode_scanner__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_screen_orientation__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_edit_workflow1_edit_workflow1__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_edit_workflow2_edit_workflow2__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera__ = __webpack_require__(102);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+var AppModule = (function () {
+    function AppModule() {
+    }
+    return AppModule;
+}());
+AppModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModule */])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */],
+            __WEBPACK_IMPORTED_MODULE_7__pages_workflow_workflow__["a" /* WorkflowPage */],
+            __WEBPACK_IMPORTED_MODULE_10__pages_edit_workflow1_edit_workflow1__["a" /* EditWorkflow1Page */],
+            __WEBPACK_IMPORTED_MODULE_11__pages_edit_workflow2_edit_workflow2__["a" /* EditWorkflow2Page */]
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */]),
+            __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["a" /* IonicStorageModule */].forRoot({
+                name: '__mydbtest',
+                driverOrder: ['indexeddb', 'sqlite', 'websql']
+            })
+        ],
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
+        entryComponents: [
+            __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */],
+            __WEBPACK_IMPORTED_MODULE_7__pages_workflow_workflow__["a" /* WorkflowPage */],
+            __WEBPACK_IMPORTED_MODULE_10__pages_edit_workflow1_edit_workflow1__["a" /* EditWorkflow1Page */],
+            __WEBPACK_IMPORTED_MODULE_11__pages_edit_workflow2_edit_workflow2__["a" /* EditWorkflow2Page */]
+        ],
+        providers: [
+            __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__["a" /* StatusBar */],
+            __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
+            __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_native_barcode_scanner__["a" /* BarcodeScanner */],
+            __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["a" /* IonicStorageModule */],
+            __WEBPACK_IMPORTED_MODULE_9__ionic_native_screen_orientation__["a" /* ScreenOrientation */],
+            { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] }
+        ]
+    })
+], AppModule);
+
+//# sourceMappingURL=app.module.js.map
+
+/***/ }),
+
+/***/ 269:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_screen_orientation__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_workflow_workflow__ = __webpack_require__(195);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var MyApp = (function () {
+    // rootPage:any = EditWorkflow1Page;
+    function MyApp(platform, statusBar, screenOrientation, splashScreen) {
+        this.screenOrientation = screenOrientation;
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_workflow_workflow__["a" /* WorkflowPage */];
+        platform.ready().then(function () {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            statusBar.styleDefault();
+            splashScreen.hide();
+        });
+        // Uncomment below command for screenOrientation lock
+        // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    }
+    return MyApp;
+}());
+MyApp = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/thomasq/Sites/vtApp/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/thomasq/Sites/vtApp/src/app/app.html"*/
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */],
+        __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */],
+        __WEBPACK_IMPORTED_MODULE_4__ionic_native_screen_orientation__["a" /* ScreenOrientation */],
+        __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+], MyApp);
+
+//# sourceMappingURL=app.component.js.map
 
 /***/ })
 

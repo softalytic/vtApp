@@ -27,12 +27,10 @@ export class WorkflowPage implements OnInit {
   wfStages = [];
   wfInputs = [];
   wfMachineData = [];
-  pushPage: any;
 
   testRadioOpen = false;
 
   constructor(public storage: Storage,
-              // private nativeStorage: NativeStorage,
               private formBuilder: FormBuilder,
               private navCtrl: NavController,
               private alertCtrl: AlertController,
@@ -55,10 +53,6 @@ export class WorkflowPage implements OnInit {
       "5b1" : '自動老化 - 測試分选',
       "5b2" : '自動老化 - 外观'
     }];
-
-    // this.wfMachineData = this.wfProcesses[0];
-    //
-    // console.log(this.wfMachineData);
 
     this.wfProcesses = [
       {title: '钉卷', process: 1, show: true},
@@ -126,7 +120,6 @@ export class WorkflowPage implements OnInit {
       ], model: 'wfForm', scan: false, size: 100}
     ];
 
-    this.pushPage = EditWorkflow1Page;
   }
 
   ngOnInit() {

@@ -1,6 +1,10 @@
 page-edit-workflow {
 
-  .header {
+  //.col {
+  //  padding: 0px !important;
+  //}
+
+  .inputHeader {
     margin-top: 10px !important;
     margin-left: 1em !important;
     margin-bottom: 5px;
@@ -171,8 +175,9 @@ ion-item {
 }
 
 
-.label {
-  margin-right: 5px !important;
-  min-width: 45px !important;
+.inputLabel {
+  font-size: 10px !important;
+  margin-right: 2px !important;
+  min-width: 60px !important;
   text-align: right !important;
 }

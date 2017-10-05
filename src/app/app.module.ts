@@ -6,10 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { WorkflowPage } from "../pages/workflow/workflow";
-import { WorkflowsPage } from "../pages/workflows/workflows";
-import { EditWorkflowPage } from "../pages/edit-workflow/edit-workflow";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { ScreenOrientation } from "@ionic-native/screen-orientation";
 import { EditWorkflow1Page } from "../pages/edit-workflow1/edit-workflow1";
@@ -20,10 +17,7 @@ import { Camera } from "@ionic-native/camera";
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     WorkflowPage,
-    WorkflowsPage,
-    EditWorkflowPage,
     EditWorkflow1Page,
     EditWorkflow2Page
   ],
@@ -38,10 +32,7 @@ import { Camera } from "@ionic-native/camera";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     WorkflowPage,
-    WorkflowsPage,
-    EditWorkflowPage,
     EditWorkflow1Page,
     EditWorkflow2Page
   ],

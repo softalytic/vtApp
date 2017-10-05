@@ -3,9 +3,9 @@ import { Storage } from '@ionic/storage';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { NgForm, FormGroup, FormBuilder } from "@angular/forms";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
-import { EditWorkflowPage } from "../edit-workflow/edit-workflow";
-// import { EditWorkflow1Page } from "../edit-workflow1/edit-workflow1";
-// import { EditWorkflow2Page } from "../edit-workflow2/edit-workflow2";
+// import { EditWorkflowPage } from "../edit-workflow/edit-workflow";
+import { EditWorkflow1Page } from "../edit-workflow1/edit-workflow1";
+import { EditWorkflow2Page } from "../edit-workflow2/edit-workflow2";
 
 @Component({
   selector: 'page-workflow',
@@ -126,7 +126,7 @@ export class WorkflowPage implements OnInit {
       ], model: 'wfForm', scan: false, size: 100}
     ];
 
-    this.pushPage = EditWorkflowPage;
+    this.pushPage = EditWorkflow1Page;
   }
 
   ngOnInit() {
@@ -172,73 +172,20 @@ export class WorkflowPage implements OnInit {
         }
         
     } */
-    
-    
-    //storage.set('123', '123');
 
+    //storage.set('123', '123');
 
     if(form.controls["wfFormId"].value == ''){
       alert('請輸入流程卡号');
-    } /* else if( form.value.wfForm != 1 && form.value.wfForm != 2 && form.value.wfForm != 3 ) {
-      console.log('裸品流程卡');
-      form.controls['wfProcess'].setValue(1);
-      form.controls['wfProcessName'].setValue('钉卷');
-      form.controls["wfForm"].setValue(1);
-      form.value.wfFormName = '裸品流程卡';
-      switch (form.value.wfFormId) {
-        case '123':
-          form.value.wfOrderId = 'A12300000';
-          form.value.wfORMId = 'A1';
-          form.value.wfOSeries = 'A2';
-          form.value.wfOSpec = 'A3';
-          form.value.wfODim = '23';
-          form.value.wfOBOMNote = '12 XXX';
-          form.value.wfONote = 'ABC XXX';
-          form.value.wfOTotalQty = '3000';
-          form.value.wfOTotalGoodQty = '2000';
-          this.navCtrl.push(EditWorkflowPage, form);
-          break;
-  
-        case '456':
-          form.value.wfOrderId = 'A45600000';
-          form.value.wfORMId = 'A5';
-          form.value.wfOSeries = 'A6';
-          form.value.wfOSpec = 'A4';
-          form.value.wfODim = '56';
-          form.value.wfOBOMNote = '45 XYZ';
-          form.value.wfONote = 'DBA ABC';
-          form.value.wfOTotalQty = '6000';
-          form.value.wfOTotalGoodQty = '5000';
-          this.navCtrl.push(EditWorkflowPage, form);
-          break;
-  
-        case '789':
-          form.value.wfOrderId = 'A78900000';
-          form.value.wfORMId = 'A7';
-          form.value.wfOSeries = 'A9';
-          form.value.wfOSpec = 'A8';
-          form.value.wfODim = '79';
-          form.value.wfOBOMNote = '69 IJK';
-          form.value.wfONote = 'EFG XYZ';
-          form.value.wfOTotalQty = '7000';
-          form.value.wfOTotalGoodQty = '8000';
-          this.navCtrl.push(EditWorkflowPage, form);
-          break;
-
-          default: 
-          alert('流程卡 Order Id error');
-          break;
-
-      }
-    } */ else if(form.value.wfForm == 1) {
+    } else if(form.value.wfForm == 1) {
       console.log('裸品流程卡');
       form.value.wfFormName = '裸品流程卡';
       
       this.storage.get(form.value.wfFormId).then((dataDumpJsonXTmp) => {
-        var wfObjTmp = JSON.parse(dataDumpJsonXTmp);
+        let wfObjTmp = JSON.parse(dataDumpJsonXTmp);
         
         //alert(wfObjTmp["wfOrderId"] + ' ' + dataDumpJsonXTmp);
-
+        /*
         form.value.wfOrderId = 'VTO00001';
         form.value.wfOrderRMId = '';
         form.value.wfOrderSeries = '';
@@ -250,158 +197,23 @@ export class WorkflowPage implements OnInit {
         form.value.wfOrderTotalGoodQty = '100';
         form.value.wfOrderBatchQty = '1000';
         form.value.wfOrderBatchId = 'VTB01000';
-        this.navCtrl.push(EditWorkflowPage, form);
+        */
+
+        this.navCtrl.push(EditWorkflow1Page, form);
       });
 
-      
-
-      /*
-      switch (form.value.wfFormId) {
-        case '123':
-          form.value.wfOrderId = 'A12300000';
-          form.value.wfORMId = 'A1';
-          form.value.wfOSeries = 'A2';
-          form.value.wfOSpec = 'A3';
-          form.value.wfODim = '23';
-          form.value.wfOBOMNote = '12 XXX';
-          form.value.wfONote = 'ABC XXX';
-          form.value.wfOTotalQty = '3000';
-          form.value.wfOTotalGoodQty = '2000';
-          this.navCtrl.push(EditWorkflowPage, form);
-          break;
-  
-        case '456':
-          form.value.wfOrderId = 'A45600000';
-          form.value.wfORMId = 'A5';
-          form.value.wfOSeries = 'A6';
-          form.value.wfOSpec = 'A4';
-          form.value.wfODim = '56';
-          form.value.wfOBOMNote = '45 XYZ';
-          form.value.wfONote = 'DBA ABC';
-          form.value.wfOTotalQty = '6000';
-          form.value.wfOTotalGoodQty = '5000';
-          this.navCtrl.push(EditWorkflowPage, form);
-          break;
-  
-        case '789':
-          form.value.wfOrderId = 'A78900000';
-          form.value.wfORMId = 'A7';
-          form.value.wfOSeries = 'A9';
-          form.value.wfOSpec = 'A8';
-          form.value.wfODim = '79';
-          form.value.wfOBOMNote = '69 IJK';
-          form.value.wfONote = 'EFG XYZ';
-          form.value.wfOTotalQty = '7000';
-          form.value.wfOTotalGoodQty = '8000';
-          this.navCtrl.push(EditWorkflowPage, form);
-          break;
-
-          default: 
-          alert('流程卡 Order Id error');
-          break;
-      }
-      */
-      //this.navCtrl.push(EditWorkflowPage, form); 
     } else if(form.value.wfForm == 2) {
       console.log('成品流程卡');
       form.value.wfFormName = '成品流程卡';
-      /*
-      switch (form.value.wfFormId) {
-        case '123':
-          form.value.wfOrderId = 'A12300000';
-          form.value.wfORMId = 'A1';
-          form.value.wfOSeries = 'A2';
-          form.value.wfOSpec = 'A3';
-          form.value.wfODim = '23';
-          form.value.wfOBOMNote = '12 XXX';
-          form.value.wfONote = 'ABC XXX';
-          form.value.wfOTotalQty = '3000';
-          form.value.wfOTotalGoodQty = '2000';
-          this.navCtrl.push(EditWorkflowPage, form);
-          break;
-  
-        case '456':
-          form.value.wfOrderId = 'A45600000';
-          form.value.wfORMId = 'A5';
-          form.value.wfOSeries = 'A6';
-          form.value.wfOSpec = 'A4';
-          form.value.wfODim = '56';
-          form.value.wfOBOMNote = '45 XYZ';
-          form.value.wfONote = 'DBA ABC';
-          form.value.wfOTotalQty = '6000';
-          form.value.wfOTotalGoodQty = '5000';
-          this.navCtrl.push(EditWorkflowPage, form);
-          break;
-  
-        case '789':
-          form.value.wfOrderId = 'A78900000';
-          form.value.wfORMId = 'A7';
-          form.value.wfOSeries = 'A9';
-          form.value.wfOSpec = 'A8';
-          form.value.wfODim = '79';
-          form.value.wfOBOMNote = '69 IJK';
-          form.value.wfONote = 'EFG XYZ';
-          form.value.wfOTotalQty = '7000';
-          form.value.wfOTotalGoodQty = '8000';
-          this.navCtrl.push(EditWorkflowPage, form);
-          break;
+      this.navCtrl.push(EditWorkflow2Page, form);
 
-        default: 
-          alert('流程卡 Order Id error');
-          break;
-        
-      } */
     } else if(form.value.wfForm == 3) {
       console.log('电容器流程卡');
       form.value.wfFormName = '电容器流程卡';
-      /*
-      switch (form.value.wfFormId) {
-        case '123':
-          form.value.wfOrderId = 'A12300000';
-          form.value.wfORMId = 'A1';
-          form.value.wfOSeries = 'A2';
-          form.value.wfOSpec = 'A3';
-          form.value.wfODim = '23';
-          form.value.wfOBOMNote = '12 XXX';
-          form.value.wfONote = 'ABC XXX';
-          form.value.wfOTotalQty = '3000';
-          form.value.wfOTotalGoodQty = '2000';
-          this.navCtrl.push(EditWorkflowPage, form);
-  
-        case '456':
-          form.value.wfOrderId = 'A45600000';
-          form.value.wfORMId = 'A5';
-          form.value.wfOSeries = 'A6';
-          form.value.wfOSpec = 'A4';
-          form.value.wfODim = '56';
-          form.value.wfOBOMNote = '45 XYZ';
-          form.value.wfONote = 'DBA ABC';
-          form.value.wfOTotalQty = '6000';
-          form.value.wfOTotalGoodQty = '5000';
-          this.navCtrl.push(EditWorkflowPage, form);
-  
-        case '789':
-          form.value.wfOrderId = 'A78900000';
-          form.value.wfORMId = 'A7';
-          form.value.wfOSeries = 'A9';
-          form.value.wfOSpec = 'A8';
-          form.value.wfODim = '79';
-          form.value.wfOBOMNote = '69 IJK';
-          form.value.wfONote = 'EFG XYZ';
-          form.value.wfOTotalQty = '7000';
-          form.value.wfOTotalGoodQty = '8000';
-          this.navCtrl.push(EditWorkflowPage, form);
-          break;
 
-        default: 
-          alert('流程卡 Order Id error');
-          break;
-
-      } */
     } else {
       alert('請輸入流程卡');
     }
-
   }
 
   scanBarcode(model: string){

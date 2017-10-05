@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e4cec853-1425-4d8c-84e2-faa32da6519f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/typescript-compiler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/edit-workflow/edit-workflow.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/edit-workflow/edit-workflow.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/edit-workflow/edit-workflow.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/home/home.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/home/home.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/home/home.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/workflows/workflows.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/workflows/workflows.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/workflows/workflows.ts" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/app.component.ts" afterPath="$PROJECT_DIR$/src/app/app.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/app.module.ts" afterPath="$PROJECT_DIR$/src/app/app.module.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" afterPath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" afterPath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.html" afterPath="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts" afterPath="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/workflow/workflow.ts" afterPath="$PROJECT_DIR$/src/pages/workflow/workflow.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/main.css" afterPath="$PROJECT_DIR$/www/build/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/main.js" afterPath="$PROJECT_DIR$/www/build/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/main.js.map" afterPath="$PROJECT_DIR$/www/build/main.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/vendor.js" afterPath="$PROJECT_DIR$/www/build/vendor.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/vendor.js.map" afterPath="$PROJECT_DIR$/www/build/vendor.js.map" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.46159267">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="edit-workflow2.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="225">
+                  <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+                  <folding>
+                    <element signature="e#0#50#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="app.component.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/app/app.component.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="90">
+                  <caret line="6" column="26" lean-forward="false" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="app.module.ts" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="11">
+                  <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+                  <folding>
+                    <element signature="e#0#58#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="edit-workflow1.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="240">
+                  <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+                  <folding>
+                    <element signature="n#style#0;n#ion-header#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#ion-navbar#0;n#ion-header#0;n#!!top" expanded="true" />
+                    <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#ion-col#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#ion-row#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+                    <element signature="n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#style#0;n#button#0;n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+                    <element signature="n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+                    <element signature="n#div#0;n#ion-row#1;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#div#1;n#ion-row#1;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#button#0;n#ion-row#1;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#ion-col#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#ion-row#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#style#0;n#ion-textarea#0;n#ion-row#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+                    <element signature="n#ion-col#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#ion-row#0;n#ion-col#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+                    <element signature="n#div#0;n#ion-row#1;n#ion-col#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#div#1;n#ion-row#1;n#ion-col#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#button#0;n#ion-row#1;n#ion-col#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#ion-col#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#2;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+                    <element signature="n#ion-row#0;n#ion-col#2;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#style#0;n#ion-textarea#0;n#ion-col#2;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+                    <element signature="n#ion-textarea#0;n#ion-col#2;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#ion-col#0;n#ion-row#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+                    <element signature="n#style#0;n#ion-textarea#0;n#ion-col#1;n#ion-row#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="workflow.ts" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="149">
+                  <caret line="199" column="10" lean-forward="true" selection-start-line="199" selection-start-column="10" selection-end-line="199" selection-end-column="10" />
+                  <folding>
+                    <element signature="e#0#50#0" expanded="true" />
+                    <element signature="e#367#436#0" expanded="true" />
+                    <element signature="e#1308#1570#0" expanded="false" />
+                    <element signature="e#1694#2286#0" expanded="false" />
+                    <element signature="e#2309#2894#0" expanded="false" />
+                    <element signature="e#2917#4504#0" expanded="false" />
+                    <element signature="e#4707#4915#0" expanded="false" />
+                    <element signature="e#4920#5535#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="edit-workflow1.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="169">
+                  <caret line="45" column="20" lean-forward="false" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="20" />
+                  <folding>
+                    <element signature="e#0#50#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>EditWorkflowPage</find>
+      <find>EditWork</find>
+      <find>this.wfNavParams.</find>
+      <find>wfNavParams.</find>
+      <find>wfNavParams</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/pages/edit-workflow/edit-workflow.ts" />
+        <option value="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.html" />
+        <option value="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts" />
+        <option value="$PROJECT_DIR$/src/app/app.component.ts" />
+        <option value="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" />
+        <option value="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" />
+        <option value="$PROJECT_DIR$/src/app/app.module.ts" />
+        <option value="$PROJECT_DIR$/src/pages/workflow/workflow.ts" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
+    <package-json value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vtApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vtApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vtApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vtApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vtApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vtApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="theme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vtApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vtApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vtApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vtApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="edit-workflow2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vtApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vtApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="edit-workflow1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vtApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vtApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v8.1.3/bin/node" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="FullScreen" value="true" />
+    <property name="js.eslint.eslintPackage" value="" />
+    <property name="js-jscs-nodeInterpreter" value="$USER_HOME$/.nvm/versions/node/v8.1.3/bin/node" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e4cec853-1425-4d8c-84e2-faa32da6519f" name="Default" comment="" />
+      <created>1507190801402</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1507190801402</updated>
+      <workItem from="1507190803433" duration="4215000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="4215000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1952079" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32048193" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="2" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1185">
+          <caret line="373" column="14" lean-forward="false" selection-start-line="373" selection-start-column="14" selection-end-line="373" selection-end-column="14" />
+          <folding>
+            <element signature="n#style#0;n#ion-header#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#ion-navbar#0;n#ion-header#0;n#!!top" expanded="false" />
+            <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-row#1;n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-col#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-row#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#button#0;n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ion-textarea#0;n#ion-row#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#button#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#button#1;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#button#2;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-row#2;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="e#19650#19656#0" expanded="false" />
+            <element signature="e#19926#19932#0" expanded="false" />
+            <element signature="n#ion-col#2;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow/edit-workflow.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow/edit-workflow.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="26" lean-forward="false" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="45" column="20" lean-forward="false" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#ion-header#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#ion-navbar#0;n#ion-header#0;n#!!top" expanded="true" />
+            <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-col#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-row#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#button#0;n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#div#0;n#ion-row#1;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#ion-row#1;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#button#0;n#ion-row#1;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-col#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-row#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ion-textarea#0;n#ion-row#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#ion-col#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-row#0;n#ion-col#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#div#0;n#ion-row#1;n#ion-col#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#ion-row#1;n#ion-col#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#button#0;n#ion-row#1;n#ion-col#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-col#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#ion-row#0;n#ion-col#2;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ion-textarea#0;n#ion-col#2;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#ion-textarea#0;n#ion-col#2;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-col#0;n#ion-row#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ion-textarea#0;n#ion-col#1;n#ion-row#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11">
+          <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="199" column="10" lean-forward="true" selection-start-line="199" selection-start-column="10" selection-end-line="199" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#367#436#0" expanded="true" />
+            <element signature="e#1308#1570#0" expanded="false" />
+            <element signature="e#1694#2286#0" expanded="false" />
+            <element signature="e#2309#2894#0" expanded="false" />
+            <element signature="e#2917#4504#0" expanded="false" />
+            <element signature="e#4707#4915#0" expanded="false" />
+            <element signature="e#4920#5535#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

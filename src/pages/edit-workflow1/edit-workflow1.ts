@@ -323,6 +323,7 @@ export class EditWorkflow1Page implements OnInit{
     this.wfInputForm = this.formBuilder.group({
       wfProcess: [''],
       wfProcessName: [''],
+      wfFormName: [''],
 
       // Order Inputs detail
       wfOrderFormId: [''],

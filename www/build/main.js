@@ -432,11 +432,12 @@ var WorkflowPage = (function () {
                         }
                         catch (err) {
                             console.log(err.message);
-                            eval('form.value.' + formKey + " = '" + formBodies[formKey] + "'");
+                            eval('form.value.' + formKey + '= "' + formBodies[formKey] + '"; ');
                             eval('console.log("Retrying force input " + form.value.' + formKey + ')');
+                            eval('console.log(form.value.' + formKey + ');');
                         }
                     }
-                    console.log(JSON.stringify(form.value));
+                    console.log("barcode loaded in form:" + JSON.stringify(form.value));
                     break;
                 case "ngStorage":
                     console.log(key + " is a storage");
@@ -493,9 +494,7 @@ var WorkflowPage = (function () {
             WfOrderId: [''],
             wfOrderBatchId: [''],
             wfOrderBatchQty: [''],
-            // wfOrderBOMNote: [''],
-            // wfOrderNote: [''],
-            wfOrderTotalQty: [''],
+            wfOrderTotalQty: ['']
         });
     };
     return WorkflowPage;
@@ -687,7 +686,7 @@ var EditWorkflow1Page = (function () {
             //   console.log(key + " : " +storageData[key]);
             // };
             for (var key in form.value) {
-                console.log("Loading " + key);
+                console.log("Loading " + key + " Storage:" + storageData[key]);
                 try {
                     form.controls[key].setValue(storageData[key]);
                 }

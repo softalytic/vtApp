@@ -437,14 +437,15 @@ export class WorkflowPage implements OnInit {
             }
             catch(err) {
               console.log(err.message);
-              eval('form.value.' + formKey + " = '" + formBodies[formKey] + "'");
+              eval('form.value.' + formKey + '= "' + formBodies[formKey] + '"; ');
 
               eval('console.log("Retrying force input " + form.value.'+ formKey + ')');
+              eval('console.log(form.value.' + formKey + ');');
             }
 
           }
 
-          console.log( JSON.stringify(form.value));
+          console.log("barcode loaded in form:" + JSON.stringify(form.value));
 
           break;
 
@@ -516,45 +517,7 @@ export class WorkflowPage implements OnInit {
       WfOrderId: [''],
       wfOrderBatchId: [''],
       wfOrderBatchQty: [''],
-
-      // wfOrderBOMNote: [''],
-      // wfOrderNote: [''],
-      wfOrderTotalQty: [''],
-      // wfOrderTotalGoodQty: [''],
-      // wfOrderRMId: [''],
-      // wfOrderSeries: [''],
-      // wfOrderSpec: [''],
-      // wfOrderDim: [''],
-      //
-      // wfOptMachineId: [''],
-
-      // Raw Material Inputs
-      // wfRMFoilPosName: ['100LG04B-33VF-48UF 5.5mm'],
-      // wfRMFoilPosSerial: ['17074049'],
-      // wfRMFoilPosLName: ['184'],
-      // wfRMFoilPosLSerial: [''],
-      // wfRMFoilNegName: ['F-545M-450UF-5.5MM'],
-      // wfRMFoilNegSerial: ['0619A04A06'],
-      // wfRMFoilNegLName: ['184'],
-      // wfRMFoilNegLSerial: [''],
-      // wfRMPaperName: ['SM250-50 6.5mm'],
-      // wfRMPaperSerial: ['17032519A1-B47'],
-      // wfRMGlueName: [''],
-      // wfRMGlueSerial: ['17.7.22'],
-      // wfRMSolName: ['KVP-1B'],
-      // wfRMSolSerial: ['富凱2017.7119'],
-      // wfRMPinPosName: ['15080(+)'],
-      // wfRMPinPosSerial: ['1706241163'],
-      // wfRMPinNegName: ['15080(-)'],
-      // wfRMPinNegSerial: ['1707201194'],
-      // wfRMPlasticName: ['9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)'],
-      // wfRMPlasticSerial: ['17704310121'],
-      // wfRMShellName: [''],
-      // wfRMShellSerial: [''],
-      // wfRMCoverName: ['10x10.6 3004材质(防爆)'],
-      // wfRMCoverSerial: ['1670722-053842'],
-      // wfRMWindingTime: [''],
-      // wfRMWindingDeg: [''],
+      wfOrderTotalQty: ['']
 
     });
 

@@ -198,7 +198,7 @@ export class EditWorkflow1Page implements OnInit{
       // };
 
       for (let key in form.value) {
-        console.log("Loading " + key);
+        console.log("Loading " + key + " Storage:" + storageData[key]);
         try {
           form.controls[key].setValue(storageData[key]);
         } catch (err) {

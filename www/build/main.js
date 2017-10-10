@@ -435,6 +435,7 @@ var WorkflowPage = (function () {
                             eval('form.value.' + formKey + '= "' + formBodies[formKey] + '"; ');
                             eval('console.log("Retrying force input " + form.value.' + formKey + ')');
                             eval('console.log(form.value.' + formKey + ');');
+                            console.log("barcode loaded in form:" + JSON.stringify(form.value));
                         }
                     }
                     console.log("barcode loaded in form:" + JSON.stringify(form.value));

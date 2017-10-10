@@ -441,6 +441,7 @@ export class WorkflowPage implements OnInit {
 
               eval('console.log("Retrying force input " + form.value.'+ formKey + ')');
               eval('console.log(form.value.' + formKey + ');');
+              console.log("barcode loaded in form:" + JSON.stringify(form.value));
             }
 
           }

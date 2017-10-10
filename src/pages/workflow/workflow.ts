@@ -109,6 +109,7 @@ export class WorkflowPage implements OnInit {
 
   ngOnInit() {
     this.formInit();
+    this.storage.clear();
   };
 
   onAddWf(){
@@ -121,10 +122,6 @@ export class WorkflowPage implements OnInit {
 
     console.log("Checking the wfFormId.value");
     console.log(form.value.wfFormId);
-
-    let storageData = '';
-
-    this.storage.clear();
 
     // this.storage.get(form.value.wfFormId).then((dataDumpJsonXTmp) => {
     //   if (dataDumpJsonXTmp == null) {

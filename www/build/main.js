@@ -141,6 +141,7 @@ var WorkflowPage = (function () {
     }
     WorkflowPage.prototype.ngOnInit = function () {
         this.formInit();
+        this.storage.clear();
     };
     ;
     WorkflowPage.prototype.onAddWf = function () {
@@ -149,8 +150,6 @@ var WorkflowPage = (function () {
         // Form submission to pass the form value onto next stage
         console.log("Checking the wfFormId.value");
         console.log(form.value.wfFormId);
-        var storageData = '';
-        this.storage.clear();
         // this.storage.get(form.value.wfFormId).then((dataDumpJsonXTmp) => {
         //   if (dataDumpJsonXTmp == null) {
         //     console.log("there is no record for this wfFormId " + form.value.wfFormId);

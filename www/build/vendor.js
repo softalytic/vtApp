@@ -20221,13 +20221,13 @@ var /** @type {?} */ ANIMATION_TRANSITION_END_FALLBACK_PADDING_MS = 400;
 /* unused harmony export AbstractFormGroupDirective */
 /* unused harmony export CheckboxControlValueAccessor */
 /* unused harmony export ControlContainer */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return NG_VALUE_ACCESSOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return NG_VALUE_ACCESSOR; });
 /* unused harmony export COMPOSITION_BUFFER_MODE */
 /* unused harmony export DefaultValueAccessor */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return NgControl; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return NgControl; });
 /* unused harmony export NgControlStatus */
 /* unused harmony export NgControlStatusGroup */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return NgForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return NgForm; });
 /* unused harmony export NgModel */
 /* unused harmony export NgModelGroup */
 /* unused harmony export RadioControlValueAccessor */
@@ -20248,14 +20248,14 @@ var /** @type {?} */ ANIMATION_TRANSITION_END_FALLBACK_PADDING_MS = 400;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormBuilder; });
 /* unused harmony export AbstractControl */
 /* unused harmony export FormArray */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return FormControl; });
+/* unused harmony export FormControl */
 /* unused harmony export FormGroup */
 /* unused harmony export NG_ASYNC_VALIDATORS */
 /* unused harmony export NG_VALIDATORS */
 /* unused harmony export Validators */
 /* unused harmony export VERSION */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return FormsModule; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return ReactiveFormsModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return FormsModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return ReactiveFormsModule; });
 /* unused harmony export ɵba */
 /* unused harmony export ɵz */
 /* unused harmony export ɵx */
@@ -52195,7 +52195,7 @@ RadioGroup.decorators = [
                 host: {
                     'role': 'radiogroup'
                 },
-                providers: [{ provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* NG_VALUE_ACCESSOR */], useExisting: RadioGroup, multi: true }],
+                providers: [{ provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* NG_VALUE_ACCESSOR */], useExisting: RadioGroup, multi: true }],
             },] },
 ];
 /**
@@ -58823,7 +58823,7 @@ Checkbox.decorators = [
                 host: {
                     '[class.checkbox-disabled]': '_disabled'
                 },
-                providers: [{ provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* NG_VALUE_ACCESSOR */], useExisting: Checkbox, multi: true }],
+                providers: [{ provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* NG_VALUE_ACCESSOR */], useExisting: Checkbox, multi: true }],
                 encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* ViewEncapsulation */].None,
             },] },
 ];
@@ -60360,7 +60360,7 @@ DateTime.decorators = [
                 host: {
                     '[class.datetime-disabled]': '_disabled'
                 },
-                providers: [{ provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* NG_VALUE_ACCESSOR */], useExisting: DateTime, multi: true }],
+                providers: [{ provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* NG_VALUE_ACCESSOR */], useExisting: DateTime, multi: true }],
                 encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* ViewEncapsulation */].None,
             },] },
 ];
@@ -63006,7 +63006,7 @@ TextInput.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Renderer */], },
     { type: __WEBPACK_IMPORTED_MODULE_6__content_content__["a" /* Content */], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Optional */] },] },
     { type: __WEBPACK_IMPORTED_MODULE_12__item_item__["a" /* Item */], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Optional */] },] },
-    { type: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* NgControl */], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Optional */] },] },
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* NgControl */], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Optional */] },] },
     { type: __WEBPACK_IMPORTED_MODULE_8__platform_dom_controller__["a" /* DomController */], },
 ]; };
 TextInput.propDecorators = {
@@ -67411,7 +67411,7 @@ Range.decorators = [
                     '[class.range-pressed]': '_pressed',
                     '[class.range-has-pin]': '_pin'
                 },
-                providers: [{ provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* NG_VALUE_ACCESSOR */], useExisting: Range, multi: true }],
+                providers: [{ provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* NG_VALUE_ACCESSOR */], useExisting: Range, multi: true }],
                 encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* ViewEncapsulation */].None,
             },] },
 ];
@@ -68349,7 +68349,7 @@ Searchbar.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_6__platform_platform__["a" /* Platform */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Renderer */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* NgControl */], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Optional */] },] },
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* NgControl */], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Optional */] },] },
 ]; };
 Searchbar.propDecorators = {
     'cancelButtonText': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
@@ -68578,7 +68578,7 @@ Segment.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__config_config__["a" /* Config */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Renderer */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* NgControl */], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Optional */] },] },
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* NgControl */], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Optional */] },] },
 ]; };
 Segment.propDecorators = {
     '_buttons': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* ContentChildren */], args: [__WEBPACK_IMPORTED_MODULE_4__segment_button__["a" /* SegmentButton */],] },],
@@ -69123,7 +69123,7 @@ Select.decorators = [
                 host: {
                     '[class.select-disabled]': '_disabled'
                 },
-                providers: [{ provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* NG_VALUE_ACCESSOR */], useExisting: Select, multi: true }],
+                providers: [{ provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* NG_VALUE_ACCESSOR */], useExisting: Select, multi: true }],
                 encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* ViewEncapsulation */].None,
             },] },
 ];
@@ -71762,7 +71762,7 @@ Toggle.decorators = [
                     '[class.toggle-checked]': '_value',
                     '[class.toggle-activated]': '_activated',
                 },
-                providers: [{ provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* NG_VALUE_ACCESSOR */], useExisting: Toggle, multi: true }],
+                providers: [{ provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* NG_VALUE_ACCESSOR */], useExisting: Toggle, multi: true }],
                 encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* ViewEncapsulation */].None,
             },] },
 ];
@@ -112030,13 +112030,13 @@ IonicModule.decorators = [
                 ],
                 imports: [
                     __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
-                    __WEBPACK_IMPORTED_MODULE_3__angular_forms__["c" /* FormsModule */],
-                    __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* ReactiveFormsModule */],
+                    __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormsModule */],
+                    __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* ReactiveFormsModule */],
                 ],
                 exports: [
                     __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
-                    __WEBPACK_IMPORTED_MODULE_3__angular_forms__["c" /* FormsModule */],
-                    __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* ReactiveFormsModule */],
+                    __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormsModule */],
+                    __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* ReactiveFormsModule */],
                     __WEBPACK_IMPORTED_MODULE_23__components_action_sheet_action_sheet_component__["a" /* ActionSheetCmp */],
                     __WEBPACK_IMPORTED_MODULE_25__components_alert_alert_component__["a" /* AlertCmp */],
                     __WEBPACK_IMPORTED_MODULE_27__components_app_click_block__["a" /* ClickBlock */],

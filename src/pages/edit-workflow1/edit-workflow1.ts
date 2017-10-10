@@ -40,21 +40,23 @@ export class EditWorkflow1Page implements OnInit{
               private alertCtrl: AlertController,
               private camera: Camera,
               private navParams: NavParams) {
+
     /*
-     // this.pushPage = EditWorkflow1Page;
+     this.pushPage = EditWorkflow1Page;
      */
-    this.wfNavParams = this.navParams.data.value;
+
+    this.wfNavParams = this.navParams.data;
 
     // Assume all are ion-input except the one specificed as textarea
     this.wfOrderDetails = [
       /*
-       // {model: "wfFormId", title: "流程卡号", type: "text", highlight: false},
+       {model: "wfFormId", title: "流程卡号", type: "text", highlight: false},
        */
       {method: "input", model: "WfOrderId", title: "工单号", type: "text", size: 20, highlight: false},
 
       /*
-       // {model: "wfOrderBatchId", title: "批次号", type: "text", highlight: false},
-       // {model: "wfOrderQty", title: "总量(批次)", type: "text", highlight: false},
+       {model: "wfOrderBatchId", title: "批次号", type: "text", highlight: false},
+       {model: "wfOrderQty", title: "总量(批次)", type: "text", highlight: false},
        */
 
       {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 20, highlight: false},
@@ -177,7 +179,37 @@ export class EditWorkflow1Page implements OnInit{
   }
 
   ngOnInit() {
+    console.log("Initialise the page");
+
     this.formInit();
+
+    let form = this.wfInputForm;
+
+    let storageData: any;
+
+    console.log("loading from storage");
+    this.storage.get(this.wfNavParams).then((dataDumpJsonXTmp) => {
+      console.log("this is storage");
+      console.log("storage:" + dataDumpJsonXTmp);
+      storageData = dataDumpJsonXTmp;
+
+      // for (let key in storageData) {
+      //   console.log(key + " : " +storageData[key]);
+      // };
+
+      for (let key in form.value) {
+        console.log("Loading " + key);
+        try {
+          form.controls[key].setValue(storageData[key]);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+    });
+
+
+
     // alert(this.wfRMDetails[1].modelName)
   }
 
@@ -192,14 +224,15 @@ export class EditWorkflow1Page implements OnInit{
 
   scanBarcode(model: string){
     console.log("scanning Barcode");
+
     /*
-     // console.log(form.value);
-     //
-     // form.controls['wfProcess'].setValue(1);
-     // form.controls['wfProcessName'].setValue('钉卷');
-     // form.controls["wfForm"].setValue(1);
-     //
-     // console.log(form.value);
+     console.log(form.value);
+
+     form.controls['wfProcess'].setValue(1);
+     form.controls['wfProcessName'].setValue('钉卷');
+     form.controls["wfForm"].setValue(1);
+
+     console.log(form.value);
      */
 
     let form = this.wfInputForm;
@@ -288,55 +321,55 @@ export class EditWorkflow1Page implements OnInit{
 
   private formInit() {
     this.wfInputForm = this.formBuilder.group({
-      wfProcess: new FormControl(this.wfNavParams.wfProcess),
-      wfProcessName: new FormControl(this.wfNavParams.wfProcessName),
+      wfProcess: [''],
+      wfProcessName: [''],
 
       // Order Inputs detail
-      wfOrderFormId: [this.wfNavParams.wfFormId],
-      WfOrderId: [this.wfNavParams.wfOrderId],
-      wfOrderBatchId: [this.wfNavParams.wfOrderBatchId],
-      wfOrderBatchQty: [this.wfNavParams.wfOrderBatchQty],
+      wfOrderFormId: [''],
+      WfOrderId: [''],
+      wfOrderBatchId: [''],
+      wfOrderBatchQty: [''],
 
-      wfOrderBOMNote: [this.wfNavParams.wfOrderBOMNote],
-      wfOrderNote: [this.wfNavParams.wfOrderNote],
-      wfOrderTotalQty: [this.wfNavParams.wfOrderTotalQty],
-      wfOrderTotalGoodQty: [this.wfNavParams.wfOrderTotalGoodQty],
-      wfOrderRMId: [this.wfNavParams.wfOrderRMId],
-      wfOrderSeries: [this.wfNavParams.wfOrderSeries],
-      wfOrderSpec: [this.wfNavParams.wfOrderSpec],
+      wfOrderBOMNote: [''],
+      wfOrderNote: [''],
+      wfOrderTotalQty: [''],
+      wfOrderTotalGoodQty: [''],
+      wfOrderRMId: [''],
+      wfOrderSeries: [''],
+      wfOrderSpec: [''],
       // wfOrderQty: [''],
-      wfOrderDim: [this.wfNavParams.wfOrderDim],
+      wfOrderDim: [''],
 
       // Raw Material Inputs
-      wfRMFoilPosName: ['100LG04B-33VF-48UF 5.5mm'],
-      wfRMFoilPosSerial: ['17074049'],
-      wfRMFoilPosLName: ['184'],
+      wfRMFoilPosName: [''],
+      wfRMFoilPosSerial: [''],
+      wfRMFoilPosLName: [''],
       wfRMFoilPosLSerial: [''],
-      wfRMFoilNegName: ['F-545M-450UF-5.5MM'],
-      wfRMFoilNegSerial: ['0619A04A06'],
-      wfRMFoilNegLName: ['184'],
+      wfRMFoilNegName: [''],
+      wfRMFoilNegSerial: [''],
+      wfRMFoilNegLName: [''],
       wfRMFoilNegLSerial: [''],
-      wfRMPaperName: ['SM250-50 6.5mm'],
-      wfRMPaperSerial: ['17032519A1-B47'],
+      wfRMPaperName: [''],
+      wfRMPaperSerial: [''],
       wfRMGlueName: [''],
-      wfRMGlueSerial: ['17.7.22'],
-      wfRMSolName: ['KVP-1B'],
-      wfRMSolSerial: ['富凱2017.7119'],
-      wfRMPinPosName: ['15080(+)'],
-      wfRMPinPosSerial: ['1706241163'],
-      wfRMPinNegName: ['15080(-)'],
-      wfRMPinNegSerial: ['1707201194'],
-      wfRMPlasticName: ['9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)'],
-      wfRMPlasticSerial: ['17704310121'],
+      wfRMGlueSerial: [''],
+      wfRMSolName: [''],
+      wfRMSolSerial: [''],
+      wfRMPinPosName: [''],
+      wfRMPinPosSerial: [''],
+      wfRMPinNegName: [''],
+      wfRMPinNegSerial: [''],
+      wfRMPlasticName: [''],
+      wfRMPlasticSerial: [''],
       wfRMShellName: [''],
       wfRMShellSerial: [''],
-      wfRMCoverName: ['10x10.6 3004材质(防爆)'],
-      wfRMCoverSerial: ['1670722-053842'],
+      wfRMCoverName: [''],
+      wfRMCoverSerial: [''],
       wfRMWindingTime: [''],
       wfRMWindingDeg: [''],
 
       // Operational Input
-      wfOptMachineId: [this.wfNavParams.wfMachineId],
+      wfOptMachineId: [''],
       wfOptInputDate: [this.appDate],
       wfOptStartTime: ['00:00'],
       wfOptFinishTime: ['00:00'],

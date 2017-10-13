@@ -30,6 +30,14 @@ export class EditWorkflow1Page implements OnInit{
 
   wfPass: boolean;
 
+  //testing storage for qc part
+  wfStaffTechIdTmp: any;
+  wfStaffOptShiftTmp: any;
+  wfQCSignOffTmp: any;
+  wfOrderTotalGoodQtyTmp: any;
+
+  codeDataSet: any;
+
   // For calculating the time value
   tzoffset: number = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
   appDate: String = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,-1);
@@ -45,13 +53,15 @@ export class EditWorkflow1Page implements OnInit{
      this.pushPage = EditWorkflow1Page;
      */
 
+    storage.ready().then(() => { });
+
     this.wfNavParams = this.navParams.data;
 
     // Assume all are ion-input except the one specificed as textarea
     this.wfOrderDetails = [
-      /*
-       {model: "wfFormId", title: "流程卡号", type: "text", highlight: false},
-       */
+  
+      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 20, highlight: false},
+       
       {method: "input", model: "WfOrderId", title: "工单号", type: "text", size: 20, highlight: false},
 
       /*
@@ -158,17 +168,25 @@ export class EditWorkflow1Page implements OnInit{
     ];
 
     this.wfPplInputs = [
-      {title: "作业員", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: false, wfPplI: 1, size: 22},
-      {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 9},
-      {title: "技術員", method: "input", model: "wfStaffTechId", type: "text", icon: 'construct', scan: false, wfPplI: 3, size: 22},
-      {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: false, wfPplI: 4, size: 22},
-      {title: "品检員", method: "input", model: "wfQCSignOff", type: "text", icon: 'search', scan: 5, wfPplI: 5, size: 22},
-      {method: "break", size: 15},
+      {title: "作业員", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: false, wfPplI: 1, size: 7},
+      {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 3},
+      {title: "技術員", method: "input", model: "wfStaffTechId", type: "text", icon: 'construct', scan: false, wfPplI: 3, size: 7},
+      {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: false, wfPplI: 4, size: 7},
+      {title: "完威", method: "buttons", model: "wfStageStatus", icon: "md-checkmark-circle-outline",buttons: [
+        {label: "是", value: 1, icon: 'checkmark'}
+      ]},      
+      {title: "分單", method: "buttons", model: "wfFormSplit", icon: "md-checkmark-circle-outline",buttons: [
+        {label: "是", value: 1, icon: 'checkmark'}
+      ]},
+      
+
       {title: "终检", method: "buttons", model: "wfQCPass", icon: "md-checkmark-circle-outline",buttons: [
         {label: "通过", value: 1, icon: 'checkmark'},
         {label: "失败", value: 2, icon: 'close'}
       ]},
-      {title: "品检备注", method: "textarea", model: "wfQCInputNote", type: "text", icon: 'chatbubbles', scan: false, size: 30},
+
+      {title: "品检員", method: "input", model: "wfQCSignOff", type: "text", icon: 'search', scan: 5, wfPplI: 5, size: 11},
+      {title: "品检备注", method: "textarea", model: "wfQCInputNote", type: "text", icon: 'chatbubbles', scan: false, size: 27},
     ];
   }
 
@@ -196,11 +214,38 @@ export class EditWorkflow1Page implements OnInit{
       // for (let key in storageData) {
       //   console.log(key + " : " +storageData[key]);
       // };
-
+      
+      //alert(storageData['wfForm']);
+      /*
+      if(storageData['wfForm'] == 1)
+      {
+        form.controls['wfFormName'].setValue('裸品流程卡');
+      }
+      */
       for (let key in form.value) {
         console.log("Loading " + key + " Storage:" + storageData[key]);
         try {
-          form.controls[key].setValue(storageData[key]);
+          
+
+          if(key == 'wfStaffTechId') {
+            this.wfStaffTechIdTmp = storageData[key];
+            //alert('staff 1:' + StaffArr.wfStaffTechIda);
+            form.controls[key].setValue('');
+            console.log('storage test 1: ' + this.wfStaffTechIdTmp);
+          } else if(key == 'wfStaffOptShift') {
+            this.wfStaffOptShiftTmp = storageData[key];
+            form.controls[key].setValue('');
+            //alert('staff 2:' + this.wfStaffOptShiftTmp);
+            console.log('storage test 1: ' + this.wfStaffOptShiftTmp);
+          } else if(key == 'wfQCSignOff') {
+            this.wfQCSignOffTmp = storageData[key];
+            form.controls[key].setValue('');
+            //alert('staff 3:' + this.wfQCSignOffTmp);
+            console.log('storage test 1: ' + this.wfQCSignOffTmp);
+          } else {
+            form.controls[key].setValue(storageData[key]);
+          }
+          
         } catch (err) {
           console.log(err);
         }
@@ -287,6 +332,10 @@ export class EditWorkflow1Page implements OnInit{
   }
 
   onSubmit(){
+    let form = this.wfInputForm;
+    
+    let storageData: any;
+    alert(" < " + form.value + " > !");
     console.log(this.wfInputForm);
   }
 
@@ -299,7 +348,6 @@ export class EditWorkflow1Page implements OnInit{
     console.log(form.controls[model].value);
 
   }
-
 
   promptAlert(){
     let alertCtl = this.alertCtrl.create();
@@ -326,6 +374,7 @@ export class EditWorkflow1Page implements OnInit{
       wfFormName: [''],
 
       // Order Inputs detail
+      wfFormId: [''],
       wfOrderFormId: [''],
       WfOrderId: [''],
       wfOrderBatchId: [''],
@@ -413,7 +462,10 @@ export class EditWorkflow1Page implements OnInit{
       wfStaffOptShift: [''],
       wfStaffTechId: [''],
       wfStaffXrayId: [''],
+      wfStageStatus: [''], 
+      wfFormSplit: [''], 
       wfQCPass: [''],
+      wfQCPassCode: [''],
       wfQCSignOff: [''],
       wfQCInputNote: [''],
 
@@ -428,8 +480,10 @@ export class EditWorkflow1Page implements OnInit{
   }
 
   updateTextChg() {
-    this.wfInputForm.patchValue({ wfStaffOptShift: ['A'],
-      wfStaffTechId: ['A123X01'], wfQCSignOff: ['品检員A'], });
+    this.wfOrderTotalGoodQtyTmp = parseFloat(this.wfInputForm.value.wfOrderTotalGoodQty)  + parseFloat(this.wfInputForm.value.wfOptGoodQty);
+    this.wfInputForm.patchValue({ wfStaffOptShift: this.wfStaffOptShiftTmp, wfOrderTotalGoodQty: this.wfOrderTotalGoodQtyTmp,
+      wfStaffTechId: this.wfStaffTechIdTmp, wfQCSignOff: this.wfQCSignOffTmp, });
+    //alert(StaffArr.wfStaffTechId + ' staff 2: ' + StaffArr.wfStaffOptShift  + ' staff 3: ' + StaffArr.wfQCSignOff );
   }
 
   updateTotalGoodQty(wfOptGoodQtyValue: any) {
@@ -459,6 +513,7 @@ export class EditWorkflow1Page implements OnInit{
       });
       alert.present();
     } else {
+      let form = this.wfInputForm;
       let alert = this.alertCtrl.create({
         title: '',
         subTitle: '确定完成和上传',
@@ -473,6 +528,70 @@ export class EditWorkflow1Page implements OnInit{
             text: '確定',
             handler: () => {
               console.log('Buy clicked');
+              console.log(form.value);
+
+              let dataXYZ = {"wfProcess": form.value.wfProcess,
+              "wfProcessName": form.value.wfProcessName,
+              "wfForm": form.value.wfForm,
+              "wfFormId": form.value.wfFormId,
+              "wfOrderFormId": form.value.wfOrderFormId,
+              "WfOrderId": form.value.WfOrderId,
+              "wfOrderBatchId": form.value.wfOrderBatchId,
+              "wfOrderBatchQty": form.value.wfOrderBatchQty,
+              "wfOrderTotalQty": form.value.wfOrderTotalQty,
+              "wfOrderTotalGoodQty": form.value.wfOrderTotalGoodQty,
+              "wfOrderRMId": form.value.wfOrderRMId,
+              "wfOrderSeries": form.value.wfOrderSeries,
+              "wfOrderSpec": form.value.wfOrderSpec,
+              "wfOrderDim": form.value.wfOrderDim,
+              "wfRMFoilPosName": form.value.wfRMFoilPosName,
+              "wfRMFoilPosSerial": form.value.wfRMFoilPosSerial,
+              "wfRMFoilPosLName": form.value.wfRMFoilPosLName,
+              "wfRMFoilNegName": form.value.wfRMFoilNegName,
+              "wfRMFoilNegSerial": form.value.wfRMFoilNegSerial,
+              "wfRMFoilNegLName": form.value.wfRMFoilNegLName,
+              "wfRMPaperName": form.value.wfRMPaperName,
+              "wfRMPaperSerial": form.value.wfRMPaperSerial,
+              "wfRMGlueName": "",
+              "wfRMGlueSerial": form.value.wfRMGlueSerial,
+              "wfRMSolName": form.value.wfRMSolName,
+              "wfRMSolSerial": form.value.wfRMSolSerial,
+              "wfRMPinPosName": form.value.wfRMPinPosName,
+              "wfRMPinPosSerial": form.value.wfRMPinPosSerial,
+              "wfRMPinNegName": form.value.wfRMPinNegName,
+              "wfRMPinNegSerial": form.value.wfRMPinNegSerial,
+              "wfRMPlasticName": form.value.wfRMPlasticName,
+              "wfRMPlasticSerial": form.value.wfRMPlasticSerial,
+              "wfRMCoverName": form.value.wfRMCoverName,
+              "wfRMCoverSerial": form.value.wfRMCoverSerial,
+              "wfStaffTechId": form.value.wfStaffTechId,
+              "wfStaffOptShift": form.value.wfStaffOptShift,
+              "wfQCSignOff": form.value.wfQCSignOff};
+          
+              if(form.value.wfProcess == 3) {
+                dataXYZ.wfProcess = 4
+                dataXYZ.wfProcessName = '组立'; 
+                this.storage.set(form.value.wfFormId, dataXYZ);
+              } else if(form.value.wfProcess == 4) {
+                dataXYZ.wfProcess = 5
+                dataXYZ.wfProcessName = '含浸'; 
+                this.storage.set(form.value.wfFormId, dataXYZ);
+              } else if(form.value.wfProcess == 5) {
+                dataXYZ.wfProcess = 6
+                dataXYZ.wfProcessName = '清洗'; 
+                this.storage.set(form.value.wfFormId, dataXYZ);
+              }     
+
+               
+              this.storage.get(form.value.wfFormId).then((resultStorageItemX) => {
+                if(resultStorageItemX){ let alert = this.alertCtrl.create({
+                  title: 'Please Check!',
+                  subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
+                  buttons: ['OK']
+                });
+                alert.present(); }
+              });
+              
             }
           }]
       });
@@ -556,4 +675,130 @@ export class EditWorkflow1Page implements OnInit{
 
   }
 
+  /*
+  dataCodePopulate(codeData: string) {
+    
+        // This function takes the barcode data and then process the JSON object
+        // Assume each barcode data is a JSON object and it has a headers and bodies component
+        // Loop through the headers
+        // for each header,
+        //    check if the length is > 0, which is a sub JSON array object for data table
+        //    else loop through the keys inside that header JSON object
+    
+        console.log("running CodePop");
+        console.log(codeData);
+    
+        let data = JSON.parse(codeData);
+        let headers = data.headers;
+        let bodies = data.bodies;
+        let form = this.wfInputForm;
+    
+        console.log(data);
+    
+        for (let key in headers) {
+          // console.log(key + " : " + headers[key])
+          switch(headers[key]) {
+            case "ngForm":
+              // console.log(key + " is a form")
+    
+              let formBodies = bodies[key];
+              for (let formKey in formBodies) {
+                console.log("populate form model " + formKey);
+                console.log("populating model " + formKey + " " + formBodies[formKey]);
+    
+                try {
+                  // Dynamically set form value from the scanned code data
+                  // try and catch here is to protect if some of the fields are missing or failed,
+                  // then it will skip onto the next key
+    
+                  // backup code for assigning the value into form
+                  // ngForm.controls[formKey].setValue(form[formKey]);
+    
+                  // This line no longer works
+                  // eval('form.value.' + formKey + " = " + formBodies[formKey]);
+    
+                  // eval('form.value.' + formKey + " = '" + formBodies[formKey] + "'");
+    
+                  // This use form control for the value setting
+                  this.setFormValue(formKey, formBodies[formKey]);
+    
+                  // No idea what it is far
+                  // if(form.value.wfFormId == formBodies[formKey]) {
+                  //   //alert(formBodies[formKey] + ' ' +JSON.stringify(formBodies));
+                  //   this.storage.set(formBodies[formKey],  JSON.stringify(formBodies));
+                  // }
+                      
+                  //  form.value.
+                }
+                catch(err) {
+                  console.log(err.message);
+                  eval('form.value.' + formKey + '= "' + formBodies[formKey] + '"; ');
+    
+                  eval('console.log("Retrying force input " + form.value.'+ formKey + ')');
+                  eval('console.log(form.value.' + formKey + ');');
+                  console.log("barcode loaded in form:" + JSON.stringify(form.value));
+                }
+    
+              }
+    
+              console.log("barcode loaded in form:" + JSON.stringify(form.value));
+    
+              break;
+    
+            case "ngStorage":
+              console.log(key + " is a storage");
+    
+              this.storage.set(key, bodies[key]);
+    
+              console.log(bodies[key]);
+    
+              // Testing the storage has been set
+              this.storage.get(key).then((values) => {
+                for (let valKey in values) {
+                  console.log(values[valKey]);
+                }
+                console.log(key);
+                console.log(JSON.stringify(values));
+              });
+    
+              break;
+    
+            case "ngInput":
+              console.log(key + " is for input");
+    
+              console.log(bodies[key]);
+    
+              let inputBodies = bodies[key];
+              for (let inputKey in inputBodies) {
+                console.log("populate form model" + inputKey);
+    
+                try {
+                  // Dynamically set form value from the scanned code data
+                  // try and catch here is to protect if some of the fields are missing or failed,
+                  // then it will skip onto the next key
+    
+                  // backup code for assigning the value into form
+                  // ngForm.controls[formKey].setValue(form[formKey]);
+    
+                  // This line no longer works
+                  eval('this.' + inputKey + " = " + inputBodies[inputKey]);
+    
+                  // this.setFormValue(inputKey, inputBodies[inputKey]);
+    
+                  //  form.value.
+                }
+                catch(err) {
+                  console.log(err.message);
+                }
+    
+              }
+    
+              break;
+    
+            default:
+              console.log(key + " is error");
+          }
+        }
+      }
+      */
 }

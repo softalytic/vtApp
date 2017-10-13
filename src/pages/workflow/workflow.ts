@@ -40,51 +40,14 @@ export class WorkflowPage implements OnInit {
 
     this.wfForms = [1,2];
 
-    /*
-    this.wfMachineProcess = [{
-      "1" : '钉卷',
-      "2" : '含浸',
-      "3" : '组立',
-      "4" : '清洗',
-      "5a0" :  '手工老化',
-      "5a1" : '手工老化 - 串排',
-      "5a2" : '手工老化 - 測試分选',
-      "5a3" : '手工老化 - 外观',
-      "5b0" : '自動老化',
-      "5b1" : '自動老化 - 測試分选',
-      "5b2" : '自動老化 - 外观'
-    }];
-    */
-
     this.wfProcesses = [
       {title: '钉卷', process: 1, show: true},
       {title: '含浸', process: 2, show: true},
       {title: '组立', process: 3, show: true},
       {title: '清洗', process: 4, show: true},
       {title: '手工老化', process: '5a0', show: true},
-      // {title: '手工老化 - 串排', process: '5a1', show: false},
-      // {title: '手工老化 - 測試分选', process: '5a2', show: false},
-      // {title: '手工老化 - 外观', process: '5a3', show: false},
       {title: '自動老化', process: '5b0', show: true},
-      // {title: '自動老化 - 測試分选', process: '5b1', show: false},
-      // {title: '自動老化 - 外观', process: '5b2', show: false}
     ];
-
-    /*
-    this.wfStages = [
-      {title: '钉卷', process: '1', show: true},
-      {title: '含浸', process: '2', show: true},
-      {title: '组立', process: '3', show: true},
-      {title: '清洗', process: '4', show: true},
-      {title: '手工老化', process: '5a0', show: true},
-      {title: '手工老化 - 串排', process: '5a1', show: false},
-      {title: '手工老化 - 測試分选', process: '5a2', show: false},
-      {title: '手工老化 - 外观', process: '5a3', show: false},
-      {title: '自動老化', process: '5b0', show: true},
-      {title: '自動老化 - 測試分选', process: '5b1', show: false},
-      {title: '自動老化 - 外观', process: '5b2', show: false}
-    ];
-    */
 
     this.wfInputs = [
       {title: "流程卡号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 30},
@@ -109,32 +72,89 @@ export class WorkflowPage implements OnInit {
 
   ngOnInit() {
     this.formInit();
+    /*
+    this.storage.get('VT00001').then((resultStorageItemX) => {
+      if(resultStorageItemX){ alert(JSON.stringify(resultStorageItemX)); }
+    });
+    */
     this.storage.clear();
   };
 
-  onAddWf(){
-
+  onAddWf(model: string){
+    
     console.log("onAddWF is triggered!");
 
     let form = this.wfInputForm;
+    let storageItemX = this.storage.get(form.value.wfFormId);
+    //alert(JSON.stringify(storageItemX) + ' ' + form.value.wfFormId);
 
+    this.storage.get(form.value.wfFormId).then((resultStorageItemX) => {
+      if(resultStorageItemX){
+        let dataXTmp = { "headers":
+        { "erpData": "ngForm"},
+       "bodies":
+        { "erpData": resultStorageItemX}};
+
+        let dataX = JSON.stringify(dataXTmp);
+        this.qrCodePopulate(dataX);
+        alert('have items: ' + JSON.stringify(resultStorageItemX));
+      } else {
+        let data = JSON.stringify({ "headers":
+        { "erpData": "ngForm"},
+       "bodies":
+        { "erpData":
+           {"wfProcess": "3",
+            "wfProcessName": "釘卷",
+            "wfForm": "1",
+            "wfFormId": "VT00001",
+            "wfOrderFormId": "VTOF00001",
+            "WfOrderId": "VTO00001",
+            "wfOrderBatchId": "VTOB0001",
+            "wfOrderBatchQty": "100",
+            "wfOrderTotalQty": "1000",
+            "wfOrderTotalGoodQty": "100",
+            "wfOrderRMId": "VT原材料",
+            "wfOrderSeries": "VT系列",
+            "wfOrderSpec": "VT規格",
+            "wfOrderDim": "VT尺寸",
+            "wfRMFoilPosName": "100LG04B-33VF-48UF 5.5mm",
+            "wfRMFoilPosSerial": "17074049",
+            "wfRMFoilPosLName": "184",
+            "wfRMFoilNegName": "F-545M-450UF-5.5MM",
+            "wfRMFoilNegSerial": "0619A04A06",
+            "wfRMFoilNegLName": "184",
+            "wfRMPaperName": "SM250-50 6.5mm",
+            "wfRMPaperSerial": "17032519A1-B47",
+            "wfRMGlueName": "",
+            "wfRMGlueSerial": "17.7.22",
+            "wfRMSolName": "KVP-1B",
+            "wfRMSolSerial": "富凱2017.7119",
+            "wfRMPinPosName": "15080(+)",
+            "wfRMPinPosSerial": "1706241163",
+            "wfRMPinNegName": "15080(-)",
+            "wfRMPinNegSerial": "1707201194",
+            "wfRMPlasticName": "9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",
+            "wfRMPlasticSerial": "17704310121",
+            "wfRMCoverName": "10x10.6 3004材质(防爆)",
+            "wfRMCoverSerial": "1670722-053842",
+            "wfStaffTechId": "技術員A",
+            "wfStaffOptShift": "A",
+            "wfQCSignOff": "品检員X"}
+        }
+    });
+    this.qrCodePopulate(data);
+    alert('no items!' + JSON.stringify(form.value));
+    this.storage.set(form.value.wfFormId, form.value);
+      }
+    });
+
+    
     // Form submission to pass the form value onto next stage
 
     console.log("Checking the wfFormId.value");
     console.log(form.value.wfFormId);
 
-    // this.storage.get(form.value.wfFormId).then((dataDumpJsonXTmp) => {
-    //   if (dataDumpJsonXTmp == null) {
-    //     console.log("there is no record for this wfFormId " + form.value.wfFormId);
-    //
-    //   } else {
-    //     console.log("there is a record for this wfFormId " + form.value.wfFormId);
-    //     this.storage.clear();
-    //     // this.storage.set(form.value.wfFormId, form.value);
-    //   }
-    // });
-
-    this.storage.set(form.value.wfFormId, form.value);
+    //this.storage.set(form.value.wfFormId, form.value);
     console.log("storage load:" + JSON.stringify(this.storage.get(form.value.wfFormId)));
 
     if(form.controls["wfFormId"].value == ''){
@@ -178,7 +198,6 @@ export class WorkflowPage implements OnInit {
         let data = barcodeData.text;
 
         form.controls[model].setValue(data);
-
         /*
 
         switch (model) {
@@ -222,6 +241,7 @@ export class WorkflowPage implements OnInit {
         // alert('嚫，请确定你所扫描的条码是正确的');
         // Try if it is QR code
         console.log(barcodeData.text);
+        //alert(barcodeData.text);
         console.log("This is QR Code");
         this.qrCodePopulate(barcodeData.text);
 

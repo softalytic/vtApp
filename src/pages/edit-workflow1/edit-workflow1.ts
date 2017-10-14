@@ -49,10 +49,6 @@ export class EditWorkflow1Page implements OnInit{
               private camera: Camera,
               private navParams: NavParams) {
 
-    /*
-     this.pushPage = EditWorkflow1Page;
-     */
-
     storage.ready().then(() => { });
 
     this.wfNavParams = this.navParams.data;
@@ -197,7 +193,7 @@ export class EditWorkflow1Page implements OnInit{
   }
 
   ngOnInit() {
-    console.log("Initialise the page");
+    console.log("Initialise the page 裸品流程卡");
 
     this.formInit();
 
@@ -262,9 +258,10 @@ export class EditWorkflow1Page implements OnInit{
     if(form.value.wfOptBadQty === '') {
       alert("请输入良品数!");
       return false;
-    } else if(form.value.wfOptGoodQty === '')
-    { alert("请输入良品数!");
-      return false; }
+    } else if(form.value.wfOptGoodQty === '') {
+      alert("请输入良品数!");
+      return false;
+    }
   }
 
   scanBarcode(model: string){
@@ -333,9 +330,9 @@ export class EditWorkflow1Page implements OnInit{
 
   onSubmit(){
     let form = this.wfInputForm;
-    
     let storageData: any;
     alert(" < " + form.value + " > !");
+
     console.log(this.wfInputForm);
   }
 
@@ -387,7 +384,6 @@ export class EditWorkflow1Page implements OnInit{
       wfOrderRMId: [''],
       wfOrderSeries: [''],
       wfOrderSpec: [''],
-      // wfOrderQty: [''],
       wfOrderDim: [''],
 
       // Raw Material Inputs

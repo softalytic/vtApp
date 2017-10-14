@@ -77,6 +77,8 @@ export class WorkflowPage implements OnInit {
       if(resultStorageItemX){ alert(JSON.stringify(resultStorageItemX)); }
     });
     */
+
+    // This this for dev env
     this.storage.clear();
   };
 
@@ -198,44 +200,6 @@ export class WorkflowPage implements OnInit {
         let data = barcodeData.text;
 
         form.controls[model].setValue(data);
-        /*
-
-        switch (model) {
-          case 'wfMachineId':
-            console.log("this barcode is for wfMachineID");
-            // clean up prior wfMachineData record
-            // Housing keeping to erase the prior data in the form
-            this.wfMachineData = [];
-            form.controls[ 'wfProcess' ].setValue("");
-            form.controls[ 'wfProcessName' ].setValue("");
-            // end of house keeping
-
-            // look up the wfProcess from wfMachineId
-
-            this.storage.get('machineData').then((values) => {
-              console.log("This is the data from storage");
-              console.log(values[data]);
-
-              let _data = values[data];
-
-              if (_data.length > 1) {
-                this.wfMachineData.push.apply(this.wfMachineData, values[data]);
-                console.log("This is the data from wfMachineData Array");
-                console.log(this.wfMachineData);
-                alert("嚫，该机器有多种工序! 请选择工序 :D")
-              } else {
-                this.wfMachineData.push(values[data]);
-                // form.controls['wfProcess'].setValue(this.wfMachineData);
-                console.log("This is the data from wfProcess Form");
-                this.setWfStage(values[data]);
-              }
-
-            });
-
-            break;
-        }
-
-        */
 
       } else if (barcodeData.format == "QR_CODE") {
         // alert('嚫，请确定你所扫描的条码是正确的');
@@ -254,7 +218,6 @@ export class WorkflowPage implements OnInit {
       alert(err);
     });
   }
-
 
   setFormValue(model: string, value: any){
 

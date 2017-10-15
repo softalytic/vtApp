@@ -113,15 +113,18 @@ var WorkflowPage = (function () {
           if(resultStorageItemX){ alert(JSON.stringify(resultStorageItemX)); }
         });
         */
+        // This this for dev env
         this.storage.clear();
     };
     ;
-    WorkflowPage.prototype.onAddWf = function (model) {
+    WorkflowPage.prototype.onAddWf = function () {
         var _this = this;
         console.log("onAddWF is triggered!");
         var form = this.wfInputForm;
-        var storageItemX = this.storage.get(form.value.wfFormId);
-        //alert(JSON.stringify(storageItemX) + ' ' + form.value.wfFormId);
+        // let storageItemX = this.storage.get(form.value.wfFormId);
+        // alert(JSON.stringify(storageItemX) + ' ' + form.value.wfFormId);
+        // Testing code for storage for demonstration purpose
+        // Check if there is any result from the storage
         this.storage.get(form.value.wfFormId).then(function (resultStorageItemX) {
             if (resultStorageItemX) {
                 var dataXTmp = { "headers": { "erpData": "ngForm" },
@@ -131,7 +134,9 @@ var WorkflowPage = (function () {
                 alert('have items: ' + JSON.stringify(resultStorageItemX));
             }
             else {
-                var data = JSON.stringify({ "headers": { "erpData": "ngForm" },
+                // Prepopulate the data into form if not given
+                var data = JSON.stringify({
+                    "headers": { "erpData": "ngForm" },
                     "bodies": { "erpData": { "wfProcess": "3",
                             "wfProcessName": "釘卷",
                             "wfForm": "1",
@@ -215,44 +220,6 @@ var WorkflowPage = (function () {
                 console.log("this is barcode");
                 var data = barcodeData.text;
                 form.controls[model].setValue(data);
-                /*
-        
-                switch (model) {
-                  case 'wfMachineId':
-                    console.log("this barcode is for wfMachineID");
-                    // clean up prior wfMachineData record
-                    // Housing keeping to erase the prior data in the form
-                    this.wfMachineData = [];
-                    form.controls[ 'wfProcess' ].setValue("");
-                    form.controls[ 'wfProcessName' ].setValue("");
-                    // end of house keeping
-        
-                    // look up the wfProcess from wfMachineId
-        
-                    this.storage.get('machineData').then((values) => {
-                      console.log("This is the data from storage");
-                      console.log(values[data]);
-        
-                      let _data = values[data];
-        
-                      if (_data.length > 1) {
-                        this.wfMachineData.push.apply(this.wfMachineData, values[data]);
-                        console.log("This is the data from wfMachineData Array");
-                        console.log(this.wfMachineData);
-                        alert("嚫，该机器有多种工序! 请选择工序 :D")
-                      } else {
-                        this.wfMachineData.push(values[data]);
-                        // form.controls['wfProcess'].setValue(this.wfMachineData);
-                        console.log("This is the data from wfProcess Form");
-                        this.setWfStage(values[data]);
-                      }
-        
-                    });
-        
-                    break;
-                }
-        
-                */
             }
             else if (barcodeData.format == "QR_CODE") {
                 // alert('嚫，请确定你所扫描的条码是正确的');
@@ -523,13 +490,10 @@ WorkflowPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-workflow',template:/*ion-inline-start:"/Users/thomasq/Sites/vtApp/src/pages/workflow/workflow.html"*/'<ion-header>\n    <ion-navbar>\n        <div style="align-items: center; display: inline;">\n            <img src="./assets/img/vt_icon.png" class="icon">\n            <ion-title>工序流程卡纪录系统</ion-title>\n        </div>\n    </ion-navbar>\n</ion-header>\n<ion-content padding>\n    <form [formGroup]="wfInputForm" (ngSubmit)="onAddWf()">\n\n        <!-- First section for the input field -->\n        <div>\n            <ion-grid>\n                <ion-row wrap justify-content-left align-items-center>\n                    <!-- Main loop of the Form Module -->\n                    <ion-col *ngFor="let wfInput of wfInputs">\n                        <!-- Non Buttons input fields of wfForms -->\n                        <ion-row align-items-center>\n                            <div class="label">{{wfInput.title}}</div>\n\n                            <!-- Form Normal Input Module-->\n                            <ion-input *ngIf="wfInput.method === \'input\'"\n                                       [ngStyle]="{\'width.em\':wfInput.size}"\n                                       type={{wfInput.type}}\n                                       formControlName={{wfInput.model}}\n                                       no-padding\n                                       class="gridborder"\n                                       required></ion-input>\n\n                            <button *ngIf="wfInput.scan"\n                                    (click)="scanBarcode(wfInput.model)"\n                                    item-end\n                                    ion-button\n                                    class="barcodeButton"\n                                    type="button">\n                                <!--<ion-icon name="barcode"></ion-icon>-->\n                                扫一扫\n                            </button>\n\n                            <!-- Form Selector Module -->\n                            <ion-select *ngIf="wfInput.method === \'select\'"\n                                        [ngStyle]="{\'width.em\':wfInput.size}"\n                                        interface="popover" style="height: 34px !important;"\n                                        (ionChange)="setWfStage($event)"\n                                        formControlName={{wfInput.model}}\n                                        class="gridborder"\n                                        okText="确定"\n                                        cancelText="取消">\n                                <ion-option *ngFor="let key of wfMachineData"\n                                            value={{key}}>\n                                    {{wfMachineProcess[0][key]}}\n                                </ion-option>\n                            </ion-select>\n\n                            <!-- Buttons input fields of wfForms -->\n                            <div *ngIf="wfInput.method === \'buttons\'"\n                                 [ngStyle]="{\'width.em\':wfInput.size}">\n                                <ion-buttons>\n                                <!-- Button for Form submission -->\n                                    <button *ngFor="let option of wfInput.options"\n                                            [ngClass]="{\'buttonsSelected\': wfInputForm.value.wfForm == option.value }"\n                                            (click)="setFormValue(wfInput.model,option.value)"\n                                            item-right\n                                            ion-button\n                                            outline\n                                            type="button"\n                                            round>\n                                        <ion-icon name="clipboard"></ion-icon>\n                                        &nbsp; {{option.label}}\n                                    </button>\n                                </ion-buttons>\n\n                                <button style="width: 25%; margin: 0 auto;"\n                                        ion-button\n                                        type="submit"\n                                        block>\n                                    确定\n                                </button>\n                            </div>\n\n                            <div *ngIf="wfInput.method === \'break\'" [ngStyle]="{\'width.em\':wfInput.size}"></div>\n\n                        </ion-row>\n\n                    </ion-col>\n                </ion-row>\n            </ion-grid>\n        </div>\n\n        <div>\n\n\n        </div>\n\n        <!-- Display the workflow process with img -->\n        <div>\n            <ion-grid style="padding-left: 50px; padding-right: 50px;">\n                <ion-row wrap class="card-background-page">\n                    <ion-col *ngFor="let wfProcess of wfProcesses" col-3>\n                        <div (click)="setWfProcess(wfProcess.process, wfProcess.title)" class="imgButton">\n                            <img src="{{\'./assets/img/f1p\' + wfProcess.process + \'.jpeg\'}}">\n                            <div class="card-title">\n                                {{wfProcess.title}}\n                            </div>\n                        </div>\n                        <!-- For original design -->\n                        <!--<div [navPush]="pushPage" [navParams]=wfProcess>-->\n                    </ion-col>\n                </ion-row>\n            </ion-grid>\n        </div>\n\n        <!-- manual ageing will have an action sheet to prompt the sub process -->\n        <!-- 規格 Need attention highlight -->\n        <!-- 料號 = 產品編號 -->\n\n    </form>\n</ion-content>'/*ion-inline-end:"/Users/thomasq/Sites/vtApp/src/pages/workflow/workflow.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */],
-        __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */],
-        __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */]) === "function" && _e || Object])
 ], WorkflowPage);
 
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=workflow.js.map
 
 /***/ }),
@@ -562,9 +526,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var EditWorkflow1Page = (function () {
     function EditWorkflow1Page(storage, formBuilder, barcodeScanner, alertCtrl, camera, navParams) {
-        /*
-         this.pushPage = EditWorkflow1Page;
-         */
         this.storage = storage;
         this.formBuilder = formBuilder;
         this.barcodeScanner = barcodeScanner;
@@ -701,7 +662,7 @@ var EditWorkflow1Page = (function () {
     };
     EditWorkflow1Page.prototype.ngOnInit = function () {
         var _this = this;
-        console.log("Initialise the page");
+        console.log("Initialise the page 裸品流程卡");
         this.formInit();
         var form = this.wfInputForm;
         var storageData;
@@ -857,7 +818,6 @@ var EditWorkflow1Page = (function () {
             wfOrderRMId: [''],
             wfOrderSeries: [''],
             wfOrderSpec: [''],
-            // wfOrderQty: [''],
             wfOrderDim: [''],
             // Raw Material Inputs
             wfRMFoilPosName: [''],
@@ -1161,10 +1121,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var EditWorkflow2Page = (function () {
     function EditWorkflow2Page(storage, formBuilder, barcodeScanner, alertCtrl, camera, navParams) {
-        /*
-         // this.pushPage = EditWorkflow1Page;
-         */
-        // this.wfNavParams = this.navParams.data.value;
         this.storage = storage;
         this.formBuilder = formBuilder;
         this.barcodeScanner = barcodeScanner;
@@ -1174,16 +1130,23 @@ var EditWorkflow2Page = (function () {
         this.form = __WEBPACK_IMPORTED_MODULE_3__angular_forms__["e" /* NgForm */];
         this.wfOrderDetails = [];
         this.wfRMDetails = [];
-        this.wfAgeingDetails = [];
-        this.wfAutoAgeingDetails = [];
-        this.wfAutoAgeingSubDetails = [];
+        // wfAgeingDetails = [];
+        // wfAutoAgeingDetails = [];
+        // wfAutoAgeingSubDetails = [];
         this.wfOpsInputs = [];
         this.wfPplInputs = [];
         this.images = [];
         this.wfNavProcess = 3;
+        this.wfForm2Process = {
+            1: "打印/测试上带",
+            2: "贴片外观",
+            3: "终检"
+        };
         // For calculating the time value
         this.tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
         this.appDate = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0, -1);
+        storage.ready().then(function () { });
+        this.wfNavParams = this.navParams.data.value;
         // Assume all are ion-input except the one specificed as textarea
         this.wfOrderDetails = [
             { method: "input", model: "WfOrderId", title: "工单号", type: "text", size: 20, highlight: false, process: { 1: true, 2: true, 3: true } },
@@ -1197,10 +1160,10 @@ var EditWorkflow2Page = (function () {
             { method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 20, highlight: false, process: { 1: true, 2: true, 3: true } },
             { method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 20, highlight: false, process: { 1: true, 2: true, 3: true } },
             { method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 15, highlight: false, process: { 1: true, 2: true, 3: true } },
-            { method: "input", model: "wfOrderFormNote", title: "BOM备注", type: "textarea", size: 23, highlight: false, process: { 1: true, 2: true, 3: true } },
+            { method: "input", model: "wfOrderFormNote", title: "流程卡备注", type: "textarea", size: 23, highlight: false, process: { 1: true, 2: true, 3: true } },
             { method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 23, highlight: false, process: { 1: true, 2: true, 3: true } },
-            { method: "input", model: "wfOrderBOMNote", title: "流程卡备注", type: "textarea", size: 23, highlight: false, process: { 1: true, 2: true, 3: true } },
-            { method: "input", model: "wfOrderBOMNote", title: "异常记录", type: "textarea", size: 23, highlight: false, process: { 1: false, 2: false, 3: true } },
+            { method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 23, highlight: false, process: { 1: true, 2: true, 3: true } },
+            { method: "input", model: "wfOrderSupNote", title: "异常记录", type: "textarea", size: 23, highlight: false, process: { 1: false, 2: false, 3: true } },
         ];
         this.wfRMDetails = [
             { modelName: "wfRMUpBeltName", title: "上带:", type: "text", modelSerial: 'wfRMUpBeltSerial', highlight: false },
@@ -1264,19 +1227,65 @@ var EditWorkflow2Page = (function () {
         // alert(JSON.stringify(this.wfNavParams));
     };
     EditWorkflow2Page.prototype.ngOnInit = function () {
-        var form = this.wfInputForm;
-        // this.wfNavParams.wfFormName = '裸品流程卡';
-        //this.wfNavParams.wfProcessName = '裸品流程卡';
+        var _this = this;
+        console.log("Initialise the page 成品流程卡");
         this.formInit();
+        var form = this.wfInputForm;
         // alert(this.wfRMDetails[1].modelName)
+        var storageData;
+        console.log("loading from storage");
+        this.storage.get(this.wfNavParams).then(function (dataDumpJsonXTmp) {
+            console.log("this is storage");
+            console.log("storage:" + dataDumpJsonXTmp);
+            storageData = dataDumpJsonXTmp;
+            // for (let key in storageData) {
+            //   console.log(key + " : " +storageData[key]);
+            // };
+            //alert(storageData['wfForm']);
+            /*
+             if(storageData['wfForm'] == 1)
+             {
+             form.controls['wfFormName'].setValue('裸品流程卡');
+             }
+             */
+            for (var key in form.value) {
+                console.log("Loading " + key + " Storage:" + storageData[key]);
+                try {
+                    if (key == 'wfStaffTechId') {
+                        _this.wfStaffTechIdTmp = storageData[key];
+                        //alert('staff 1:' + StaffArr.wfStaffTechIda);
+                        form.controls[key].setValue('');
+                        console.log('storage test 1: ' + _this.wfStaffTechIdTmp);
+                    }
+                    else if (key == 'wfStaffOptShift') {
+                        _this.wfStaffOptShiftTmp = storageData[key];
+                        form.controls[key].setValue('');
+                        //alert('staff 2:' + this.wfStaffOptShiftTmp);
+                        console.log('storage test 1: ' + _this.wfStaffOptShiftTmp);
+                    }
+                    else if (key == 'wfQCSignOff') {
+                        _this.wfQCSignOffTmp = storageData[key];
+                        form.controls[key].setValue('');
+                        //alert('staff 3:' + this.wfQCSignOffTmp);
+                        console.log('storage test 1: ' + _this.wfQCSignOffTmp);
+                    }
+                    else {
+                        form.controls[key].setValue(storageData[key]);
+                    }
+                }
+                catch (err) {
+                    console.log(err);
+                }
+            }
+        });
     };
     EditWorkflow2Page.prototype.checkBeforeScan = function (form) {
         if (form.value.wfOptBadQty === '') {
-            alert("input good items is missing!");
+            alert("请输入良品数!");
             return false;
         }
         else if (form.value.wfOptGoodQty === '') {
-            alert("input good items is missing!");
+            alert("请输入不良品数!");
             return false;
         }
     };
@@ -1284,14 +1293,14 @@ var EditWorkflow2Page = (function () {
         var _this = this;
         console.log("scanning Barcode");
         /*
-         // console.log(form.value);
-         //
-         // form.controls['wfProcess'].setValue(1);
-         // form.controls['wfProcessName'].setValue('钉卷');
-         // form.controls["wfForm"].setValue(1);
-         //
-         // console.log(form.value);
-         */
+        console.log(form.value);
+   
+        form.controls['wfProcess'].setValue(1);
+        form.controls['wfProcessName'].setValue('钉卷');
+        form.controls["wfForm"].setValue(1);
+   
+        console.log(form.value);
+        */
         var form = this.wfInputForm;
         this.barcodeScanner.scan().then(function (barcodeData) {
             // Success! Barcode data is here
@@ -1333,6 +1342,9 @@ var EditWorkflow2Page = (function () {
          */
     };
     EditWorkflow2Page.prototype.onSubmit = function () {
+        var form = this.wfInputForm;
+        var storageData;
+        alert(" < " + form.value + " > !");
         console.log(this.wfInputForm);
     };
     EditWorkflow2Page.prototype.updateForm = function (model, value) {
@@ -1355,7 +1367,6 @@ var EditWorkflow2Page = (function () {
         alertCtl.present();
     };
     EditWorkflow2Page.prototype.formInit = function () {
-        var form = this.wfInputForm;
         this.wfInputForm = this.formBuilder.group({
             wfProcess: [''],
             wfProcessName: [''],
@@ -1367,18 +1378,15 @@ var EditWorkflow2Page = (function () {
             wfOrderFormNote: [''],
             wfOrderBOMNote: [''],
             wfOrderNote: [''],
+            wfOrderSupNote: [''],
             wfOrderTotalQty: [''],
             wfOrderTotalGoodQty: [''],
             wfOrderRMId: [''],
             wfOrderSeries: [''],
             wfOrderSpec: [''],
-            // wfOrderQty: [''],
             wfOrderDim: [''],
-            wfSpecCap: [''],
-            wfSpecDF: [''],
-            wfSpecLC: [''],
-            wfSpecZESR: [''],
-            wfSpecNote: [''],
+            wfClientId: [''],
+            wfSalesOrderId: [''],
             // Raw Material Inputs
             wfRMUpBeltName: [''],
             wfRMUpBeltSerial: [''],
@@ -1391,14 +1399,17 @@ var EditWorkflow2Page = (function () {
             wfRMPrintName: [''],
             wfRMPrintSerial: [''],
             // Operational Input
+            wfSpecCap: [''],
+            wfSpecDF: [''],
+            wfSpecLC: [''],
+            wfSpecZESR: [''],
+            wfSpecNote: [''],
             wfOptMachineId: '',
             wfOptInputDate: [this.appDate],
             wfOptStartTime: ['00:00'],
             wfOptFinishTime: ['00:00'],
             wfOptBadQty: [''],
             wfOptGoodQty: [''],
-            wfClientId: [''],
-            wfSalesOrderId: [''],
             //Staff Input section
             wfStaffOptId: [''],
             wfStaffOptShift: [''],
@@ -1407,22 +1418,6 @@ var EditWorkflow2Page = (function () {
             wfLookPass: [''],
             wfQCSignOff: [''],
         });
-        /*
-         this.storage.forEach( (value, key, index) => {
-         this.wfInputForm[key] = value;
-         alert(key + ' ' + value + ' ');
-         });
-         */
-        var storageDataTmp;
-        // this.storage.get(this.wfNavParams.wfFormId).then(dataTmp=> {
-        //   if(dataTmp) {
-        //     //alert("exists");
-        //     storageDataTmp = dataTmp;
-        //   }
-        //   else {
-        //     alert("data issue");
-        //   }
-        // });
     };
     EditWorkflow2Page.prototype.keyPress = function (keycode) {
         if (keycode == 13) {

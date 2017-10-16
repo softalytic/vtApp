@@ -97,13 +97,13 @@ export class WorkflowPage implements OnInit {
 
         let dataX = JSON.stringify(dataXTmp);
         this.qrCodePopulate(dataX);
-        alert('have items: ' + JSON.stringify(resultStorageItemX));
+        //alert('have items: ' + JSON.stringify(resultStorageItemX));
       } else {
         let data = JSON.stringify({ "headers":
         { "erpData": "ngForm"},
        "bodies":
         { "erpData":
-           {"wfProcess": "3",
+           {"wfProcess": "1",
             "wfProcessName": "釘卷",
             "wfForm": "1",
             "wfFormId": "VT00001",
@@ -136,19 +136,30 @@ export class WorkflowPage implements OnInit {
             "wfRMPlasticName": "9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",
             "wfRMPlasticSerial": "17704310121",
             "wfRMCoverName": "10x10.6 3004材质(防爆)",
-            "wfRMCoverSerial": "1670722-053842",
-            "wfStaffTechId": "技術員A",
-            "wfStaffOptShift": "A",
-            "wfQCSignOff": "品检員X"}
+            "wfRMCoverSerial": "1670722-053842"
+            }
         }
     });
     this.qrCodePopulate(data);
-    alert('no items!' + JSON.stringify(form.value));
+    //alert('no items!' + JSON.stringify(form.value));
     this.storage.set(form.value.wfFormId, form.value);
       }
     });
 
-    
+    let datawfProcess = JSON.stringify({
+      "1" : {"wfFormName": "裸品流程卡","wfFormID": "1", "Process":{"1": "釘卷", "2": "含浸","3":"组立","4":"清洗"}},
+      "2" : {"wfFormName": "成品流程卡","wfFormID": "2", "Process":{"1": "釘卷", "2": "含浸","3":"组立","4":"清洗"}}
+    });
+
+    this.storage.set('wfProcess', datawfProcess);
+
+    let dataMachine = JSON.stringify({
+      "AA01" : {"staffID": "0001","staffName": "用户01", "techID": "0001","techName": "用户01", "xrayID": "","xrayName": "", "shift": "A"},
+      "AB001" : {"staffID": "0001","staffName": "用户01", "techID": "0001","techName": "用户01", "xrayID": "","xrayName": "", "shift": "A"}
+    });
+
+    this.storage.set('wfMachine', dataMachine);
+
     // Form submission to pass the form value onto next stage
 
     console.log("Checking the wfFormId.value");

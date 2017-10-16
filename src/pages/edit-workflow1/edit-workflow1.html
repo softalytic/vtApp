@@ -88,8 +88,9 @@
                                     <!--<ion-icon name="{{wfInput.icon}}"></ion-icon>-->
                                     {{wfInput.title}}
                                 </div>
+                                <ion-input *ngIf="wfInput.wfOpslI == 1" (change)="updateTextChg();" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
 
-                                <ion-input type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+                                <ion-input *ngIf="wfInput.wfOpslI != 1" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
 
                                 <button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
                   扫一扫
@@ -339,8 +340,9 @@
                                 </div>
                                 <ion-textarea formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="textarea gridborder"></ion-textarea>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="button" ion-button (click)="
-                            showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">保存</button>
+                                <button ion-button type="button" (click)="takePhoto()">
+                                        <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+                                        &nbsp; 拍照 </button>
                             </ion-row>
 
                             <!-- Select Buttons -->
@@ -367,9 +369,7 @@
                         </ion-col>
                         <ion-row>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <button ion-button type="button" (click)="takePhoto()">
-                <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
-                &nbsp; 拍照 </button>
+                            <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="button" ion-button (click)="showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">完成工序</button>
                         </ion-row>
                     </ion-row>
 

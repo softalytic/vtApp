@@ -98,7 +98,7 @@ export class EditWorkflow1Page implements OnInit{
 
     this.wfOpsInputs = [
       {title: "流程卡号", method: "input", model: "wfOrderFormId", type: "text", icon: 'ios-copy-outline', scan: false, size: 9},
-      {title: "机台", method: "input", model: "wfOptMachineId", type: "text", icon: 'cog', scan: false, size: 6},
+      {title: "机台", method: "input", model: "wfOptMachineId", type: "text", icon: 'cog', wfOpslI: 1, scan: true, size: 6},
       {title: "批次号", method: "input", model: "wfOrderBatchId", type: "text", icon: 'ios-basket-outline', scan: false, size: 11},
       {title: "批次量", method: "input", model: "wfOrderBatchQty", type: "text", icon: 'ios-basket-outline', scan: false, size: 5},
       {method: "break", title: ""},
@@ -119,7 +119,11 @@ export class EditWorkflow1Page implements OnInit{
       {method: "inputs", options: [
         {title: "不良数", model: "wfOptBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8},
         {title: "良品数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8}
-      ]}
+      ]},
+      {title: "分單 - ", method: "buttons", model: "wfFormSplit", icon: "md-buffer",buttons: [
+        {label: "不分單", value: 1, icon: 'md-clipboard'},
+        {label: "分單", value: 2, icon: 'md-copy'}
+      ]},
     ];
 
     this.wfAgeingDetails = [
@@ -147,7 +151,6 @@ export class EditWorkflow1Page implements OnInit{
     ];
 
     this.wfAutoAgeingDetails = [
-
       {title: "开路电压", method: "input", size: 8, model: "wfAutoAgeOpenVolt", type: "number"},
 
       {title: "高容", method: "input", size: 8, model: "wfAutoAgeHighCapacity", type: "number"},
@@ -171,14 +174,7 @@ export class EditWorkflow1Page implements OnInit{
       {title: "作业員", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: false, wfPplI: 1, size: 7},
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 3},
       {title: "技術員", method: "input", model: "wfStaffTechId", type: "text", icon: 'construct', scan: false, wfPplI: 3, size: 7},
-      {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: false, wfPplI: 4, size: 7},
-      {title: "完威", method: "buttons", model: "wfStageStatus", icon: "md-checkmark-circle-outline",buttons: [
-        {label: "是", value: 1, icon: 'checkmark'}
-      ]},      
-      {title: "分單", method: "buttons", model: "wfFormSplit", icon: "md-checkmark-circle-outline",buttons: [
-        {label: "是", value: 1, icon: 'checkmark'}
-      ]},
-      
+      {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: false, wfPplI: 4, size: 7},     
 
       {title: "终检", method: "buttons", model: "wfQCPass", icon: "md-checkmark-circle-outline",buttons: [
         {label: "通过", value: 1, icon: 'checkmark'},
@@ -335,7 +331,8 @@ export class EditWorkflow1Page implements OnInit{
     let form = this.wfInputForm;
     
     let storageData: any;
-    alert(" < " + form.value + " > !");
+    //alert(" < " + form.value + " > !");
+
     console.log(this.wfInputForm);
   }
 
@@ -389,6 +386,7 @@ export class EditWorkflow1Page implements OnInit{
       wfOrderSpec: [''],
       // wfOrderQty: [''],
       wfOrderDim: [''],
+      wfFormSplit: [''],
 
       // Raw Material Inputs
       wfRMFoilPosName: [''],
@@ -463,7 +461,6 @@ export class EditWorkflow1Page implements OnInit{
       wfStaffTechId: [''],
       wfStaffXrayId: [''],
       wfStageStatus: [''], 
-      wfFormSplit: [''], 
       wfQCPass: [''],
       wfQCPassCode: [''],
       wfQCSignOff: [''],
@@ -480,9 +477,32 @@ export class EditWorkflow1Page implements OnInit{
   }
 
   updateTextChg() {
+    if(this.wfInputForm.value.wfOptMachineId) {
+      let machineId = this.wfInputForm.value.wfOptMachineId;
+      this.storage.get('wfMachine').then((dataMachineXTmp) => {
+        if(dataMachineXTmp) {
+          
+          //alert(dataMachineXTmp);
+          dataMachineXTmp = JSON.parse(dataMachineXTmp);
+          //alert(dataMachineXTmp[machineId]['staffName']);
+          this.wfInputForm.patchValue({ wfStaffOptShift: dataMachineXTmp[machineId]['shift'], wfStaffOptId: dataMachineXTmp[machineId]['staffName'], 
+          wfOrderTotalGoodQty: this.wfOrderTotalGoodQtyTmp, wfStaffTechId: dataMachineXTmp[machineId]['techName'], wfStaffXrayId: dataMachineXTmp[machineId]['xrayName'],});
+          
+        } else {
+          let alert = this.alertCtrl.create({
+            title: '!',
+            subTitle: '不確定内容! ',
+            buttons: ['確定']
+          });
+          alert.present();
+        }
+        
+      });
+    }
+    
+
     this.wfOrderTotalGoodQtyTmp = parseFloat(this.wfInputForm.value.wfOrderTotalGoodQty)  + parseFloat(this.wfInputForm.value.wfOptGoodQty);
-    this.wfInputForm.patchValue({ wfStaffOptShift: this.wfStaffOptShiftTmp, wfOrderTotalGoodQty: this.wfOrderTotalGoodQtyTmp,
-      wfStaffTechId: this.wfStaffTechIdTmp, wfQCSignOff: this.wfQCSignOffTmp, });
+    
     //alert(StaffArr.wfStaffTechId + ' staff 2: ' + StaffArr.wfStaffOptShift  + ' staff 3: ' + StaffArr.wfQCSignOff );
   }
 
@@ -504,7 +524,6 @@ export class EditWorkflow1Page implements OnInit{
   }
 
   showWfOpsFinalInputsAlert(wfOrderTotalQty: any, wfOrderTotalGoodQty: any, wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
-
     if(wfOrderTotalQty > wfOptGoodQtyValue) {
       let alert = this.alertCtrl.create({
         title: '',
@@ -512,11 +531,11 @@ export class EditWorkflow1Page implements OnInit{
         buttons: ['確定']
       });
       alert.present();
-    } else {
+    } else if(wfOrderTotalQty < wfOptGoodQtyValue) {
       let form = this.wfInputForm;
       let alert = this.alertCtrl.create({
         title: '',
-        subTitle: '确定完成和上传',
+        subTitle: '确定完成和上传' + ' Order Total: ' + wfOrderTotalQty + ' Good Total: ' + wfOrderTotalGoodQty + ' Bad:' + wfOptBadQtyValue + ' opt good: ' + wfOptGoodQtyValue,
         buttons: [{
           text: '取消',
           role: 'cancel',
@@ -567,22 +586,35 @@ export class EditWorkflow1Page implements OnInit{
               "wfStaffTechId": form.value.wfStaffTechId,
               "wfStaffOptShift": form.value.wfStaffOptShift,
               "wfQCSignOff": form.value.wfQCSignOff};
-          
-              if(form.value.wfProcess == 3) {
-                dataXYZ.wfProcess = 4
+
+              /*
+              this.storage.get('wfProcess').then((dataProcessXTmp) => {
+                dataXYZ.wfProcess = form.value.wfProcess;
+                //dataXYZ.wfProcess++;
+                //dataXYZ.wfProcessName = dataProcessXTmp[dataXYZ.wfProcess]["Process"][form.value.wfFormId];
+                
+                let alertX = this.alertCtrl.create({
+                  title: 'Please Check!',
+                  subTitle: dataProcessXTmp[dataXYZ.wfProcess]["Process"][form.value.wfFormId],
+                  buttons: ['OK']
+                });
+                alertX.present();
+              });
+              */
+              if(form.value.wfProcess == 1) {
+                dataXYZ.wfProcess = 2
                 dataXYZ.wfProcessName = '组立'; 
+                this.storage.set(form.value.wfFormId, dataXYZ);
+              } else if(form.value.wfProcess == 3) {
+                dataXYZ.wfProcess = 4
+                dataXYZ.wfProcessName = '含浸'; 
                 this.storage.set(form.value.wfFormId, dataXYZ);
               } else if(form.value.wfProcess == 4) {
                 dataXYZ.wfProcess = 5
-                dataXYZ.wfProcessName = '含浸'; 
-                this.storage.set(form.value.wfFormId, dataXYZ);
-              } else if(form.value.wfProcess == 5) {
-                dataXYZ.wfProcess = 6
                 dataXYZ.wfProcessName = '清洗'; 
                 this.storage.set(form.value.wfFormId, dataXYZ);
               }     
-
-               
+              //watch data 
               this.storage.get(form.value.wfFormId).then((resultStorageItemX) => {
                 if(resultStorageItemX){ let alert = this.alertCtrl.create({
                   title: 'Please Check!',
@@ -592,11 +624,21 @@ export class EditWorkflow1Page implements OnInit{
                 alert.present(); }
               });
               
+              //this.onSubmit();
+              
             }
           }]
       });
       alert.present();
-    }
+    } else {
+      let alert = this.alertCtrl.create({
+        title: '',
+        subTitle: '请确定内容: 日期，开始，完成，良品数，不良数 ',
+        buttons: ['確定']
+      });
+      alert.present();
+
+    } 
   }
 
   showWfQCPassAlert(wfQCPassValue: any) {
@@ -675,130 +717,4 @@ export class EditWorkflow1Page implements OnInit{
 
   }
 
-  /*
-  dataCodePopulate(codeData: string) {
-    
-        // This function takes the barcode data and then process the JSON object
-        // Assume each barcode data is a JSON object and it has a headers and bodies component
-        // Loop through the headers
-        // for each header,
-        //    check if the length is > 0, which is a sub JSON array object for data table
-        //    else loop through the keys inside that header JSON object
-    
-        console.log("running CodePop");
-        console.log(codeData);
-    
-        let data = JSON.parse(codeData);
-        let headers = data.headers;
-        let bodies = data.bodies;
-        let form = this.wfInputForm;
-    
-        console.log(data);
-    
-        for (let key in headers) {
-          // console.log(key + " : " + headers[key])
-          switch(headers[key]) {
-            case "ngForm":
-              // console.log(key + " is a form")
-    
-              let formBodies = bodies[key];
-              for (let formKey in formBodies) {
-                console.log("populate form model " + formKey);
-                console.log("populating model " + formKey + " " + formBodies[formKey]);
-    
-                try {
-                  // Dynamically set form value from the scanned code data
-                  // try and catch here is to protect if some of the fields are missing or failed,
-                  // then it will skip onto the next key
-    
-                  // backup code for assigning the value into form
-                  // ngForm.controls[formKey].setValue(form[formKey]);
-    
-                  // This line no longer works
-                  // eval('form.value.' + formKey + " = " + formBodies[formKey]);
-    
-                  // eval('form.value.' + formKey + " = '" + formBodies[formKey] + "'");
-    
-                  // This use form control for the value setting
-                  this.setFormValue(formKey, formBodies[formKey]);
-    
-                  // No idea what it is far
-                  // if(form.value.wfFormId == formBodies[formKey]) {
-                  //   //alert(formBodies[formKey] + ' ' +JSON.stringify(formBodies));
-                  //   this.storage.set(formBodies[formKey],  JSON.stringify(formBodies));
-                  // }
-                      
-                  //  form.value.
-                }
-                catch(err) {
-                  console.log(err.message);
-                  eval('form.value.' + formKey + '= "' + formBodies[formKey] + '"; ');
-    
-                  eval('console.log("Retrying force input " + form.value.'+ formKey + ')');
-                  eval('console.log(form.value.' + formKey + ');');
-                  console.log("barcode loaded in form:" + JSON.stringify(form.value));
-                }
-    
-              }
-    
-              console.log("barcode loaded in form:" + JSON.stringify(form.value));
-    
-              break;
-    
-            case "ngStorage":
-              console.log(key + " is a storage");
-    
-              this.storage.set(key, bodies[key]);
-    
-              console.log(bodies[key]);
-    
-              // Testing the storage has been set
-              this.storage.get(key).then((values) => {
-                for (let valKey in values) {
-                  console.log(values[valKey]);
-                }
-                console.log(key);
-                console.log(JSON.stringify(values));
-              });
-    
-              break;
-    
-            case "ngInput":
-              console.log(key + " is for input");
-    
-              console.log(bodies[key]);
-    
-              let inputBodies = bodies[key];
-              for (let inputKey in inputBodies) {
-                console.log("populate form model" + inputKey);
-    
-                try {
-                  // Dynamically set form value from the scanned code data
-                  // try and catch here is to protect if some of the fields are missing or failed,
-                  // then it will skip onto the next key
-    
-                  // backup code for assigning the value into form
-                  // ngForm.controls[formKey].setValue(form[formKey]);
-    
-                  // This line no longer works
-                  eval('this.' + inputKey + " = " + inputBodies[inputKey]);
-    
-                  // this.setFormValue(inputKey, inputBodies[inputKey]);
-    
-                  //  form.value.
-                }
-                catch(err) {
-                  console.log(err.message);
-                }
-    
-              }
-    
-              break;
-    
-            default:
-              console.log(key + " is error");
-          }
-        }
-      }
-      */
 }

@@ -136,61 +136,70 @@ export class WorkflowPage implements OnInit {
 
         let dataX = JSON.stringify(dataXTmp);
         this.qrCodePopulate(dataX);
-        alert('have items: ' + JSON.stringify(resultStorageItemX));
 
+        //alert('have items: ' + JSON.stringify(resultStorageItemX));
       } else {
-
-        // Prepopulate the data into form if not given
-        let data = JSON.stringify({
-          "headers": { "erpData": "ngForm"},
-          "bodies":
-            { "erpData":
-              {"wfProcess": "3",
-                "wfProcessName": "釘卷",
-                "wfForm": "1",
-                "wfFormId": "VT00001",
-                "wfOrderFormId": "VTOF00001",
-                "WfOrderId": "VTO00001",
-                "wfOrderBatchId": "VTOB0001",
-                "wfOrderBatchQty": "100",
-                "wfOrderTotalQty": "1000",
-                "wfOrderTotalGoodQty": "100",
-                "wfOrderRMId": "VT原材料",
-                "wfOrderSeries": "VT系列",
-                "wfOrderSpec": "VT規格",
-                "wfOrderDim": "VT尺寸",
-                "wfRMFoilPosName": "100LG04B-33VF-48UF 5.5mm",
-                "wfRMFoilPosSerial": "17074049",
-                "wfRMFoilPosLName": "184",
-                "wfRMFoilNegName": "F-545M-450UF-5.5MM",
-                "wfRMFoilNegSerial": "0619A04A06",
-                "wfRMFoilNegLName": "184",
-                "wfRMPaperName": "SM250-50 6.5mm",
-                "wfRMPaperSerial": "17032519A1-B47",
-                "wfRMGlueName": "",
-                "wfRMGlueSerial": "17.7.22",
-                "wfRMSolName": "KVP-1B",
-                "wfRMSolSerial": "富凱2017.7119",
-                "wfRMPinPosName": "15080(+)",
-                "wfRMPinPosSerial": "1706241163",
-                "wfRMPinNegName": "15080(-)",
-                "wfRMPinNegSerial": "1707201194",
-                "wfRMPlasticName": "9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",
-                "wfRMPlasticSerial": "17704310121",
-                "wfRMCoverName": "10x10.6 3004材质(防爆)",
-                "wfRMCoverSerial": "1670722-053842",
-                "wfStaffTechId": "技術員A",
-                "wfStaffOptShift": "A",
-                "wfQCSignOff": "品检員X"}
+        let data = JSON.stringify({ "headers":
+        { "erpData": "ngForm"},
+       "bodies":
+        { "erpData":
+           {"wfProcess": "1",
+            "wfProcessName": "釘卷",
+            "wfForm": "1",
+            "wfFormId": "VT00001",
+            "wfOrderFormId": "VTOF00001",
+            "WfOrderId": "VTO00001",
+            "wfOrderBatchId": "VTOB0001",
+            "wfOrderBatchQty": "100",
+            "wfOrderTotalQty": "1000",
+            "wfOrderTotalGoodQty": "100",
+            "wfOrderRMId": "VT原材料",
+            "wfOrderSeries": "VT系列",
+            "wfOrderSpec": "VT規格",
+            "wfOrderDim": "VT尺寸",
+            "wfRMFoilPosName": "100LG04B-33VF-48UF 5.5mm",
+            "wfRMFoilPosSerial": "17074049",
+            "wfRMFoilPosLName": "184",
+            "wfRMFoilNegName": "F-545M-450UF-5.5MM",
+            "wfRMFoilNegSerial": "0619A04A06",
+            "wfRMFoilNegLName": "184",
+            "wfRMPaperName": "SM250-50 6.5mm",
+            "wfRMPaperSerial": "17032519A1-B47",
+            "wfRMGlueName": "",
+            "wfRMGlueSerial": "17.7.22",
+            "wfRMSolName": "KVP-1B",
+            "wfRMSolSerial": "富凱2017.7119",
+            "wfRMPinPosName": "15080(+)",
+            "wfRMPinPosSerial": "1706241163",
+            "wfRMPinNegName": "15080(-)",
+            "wfRMPinNegSerial": "1707201194",
+            "wfRMPlasticName": "9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",
+            "wfRMPlasticSerial": "17704310121",
+            "wfRMCoverName": "10x10.6 3004材质(防爆)",
+            "wfRMCoverSerial": "1670722-053842"
             }
-        });
-        this.qrCodePopulate(data);
-        alert('no items!' + JSON.stringify(form.value));
-        this.storage.set(form.value.wfFormId, form.value);
+        }
+    });
+    this.qrCodePopulate(data);
+    //alert('no items!' + JSON.stringify(form.value));
+    this.storage.set(form.value.wfFormId, form.value);
       }
     });
 
-    
+    let datawfProcess = JSON.stringify({
+      "1" : {"wfFormName": "裸品流程卡","wfFormID": "1", "Process":{"1": "釘卷", "2": "含浸","3":"组立","4":"清洗"}},
+      "2" : {"wfFormName": "成品流程卡","wfFormID": "2", "Process":{"1": "釘卷", "2": "含浸","3":"组立","4":"清洗"}}
+    });
+
+    this.storage.set('wfProcess', datawfProcess);
+
+    let dataMachine = JSON.stringify({
+      "AA01" : {"staffID": "0001","staffName": "用户01", "techID": "0001","techName": "用户01", "xrayID": "","xrayName": "", "shift": "A"},
+      "AB001" : {"staffID": "0001","staffName": "用户01", "techID": "0001","techName": "用户01", "xrayID": "","xrayName": "", "shift": "A"}
+    });
+
+    this.storage.set('wfMachine', dataMachine);
+
     // Form submission to pass the form value onto next stage
     console.log("Checking the wfFormId.value");
     console.log(form.value.wfFormId);

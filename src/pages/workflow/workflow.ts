@@ -3,9 +3,12 @@ import { Storage } from '@ionic/storage';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { NgForm, FormGroup, FormBuilder } from "@angular/forms";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
+import { WorkflowService } from "../../services/workflow";
+
 // import { EditWorkflowPage } from "../edit-workflow/edit-workflow";
 import { EditWorkflow1Page } from "../edit-workflow1/edit-workflow1";
 import { EditWorkflow2Page } from "../edit-workflow2/edit-workflow2";
+
 
 @Component({
   selector: 'page-workflow',
@@ -31,6 +34,7 @@ export class WorkflowPage implements OnInit {
   testRadioOpen = false;
 
   constructor(public storage: Storage,
+              private wfSvc: WorkflowService,
               private formBuilder: FormBuilder,
               private navCtrl: NavController,
               private alertCtrl: AlertController,
@@ -78,6 +82,19 @@ export class WorkflowPage implements OnInit {
     });
     */
 
+    // Testing code for Server connection
+    /*
+    this.wfSvc.query({wfFormId: "VT00001"})
+      .subscribe((data)=> {
+          console.log("success");
+          console.log(data[0]);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    */
+
     // This this for dev env
     this.storage.clear();
   };
@@ -87,6 +104,16 @@ export class WorkflowPage implements OnInit {
     console.log("onAddWF is triggered!");
 
     let form = this.wfInputForm;
+
+    // this.wfSvc.upload(form)
+    //   .subscribe((data)=> {
+    //       console.log("success");
+    //       console.log(data[0]);
+    //     },
+    //     error => {
+    //       console.log(error);
+    //     }
+    //   );
 
     // let storageItemX = this.storage.get(form.value.wfFormId);
     // alert(JSON.stringify(storageItemX) + ' ' + form.value.wfFormId);

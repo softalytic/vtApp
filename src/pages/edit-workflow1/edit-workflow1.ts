@@ -4,6 +4,7 @@ import { NavController, NavParams, AlertController, Events } from 'ionic-angular
 import { NgForm, FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { Camera, CameraOptions } from "@ionic-native/camera";
+import { WorkflowService } from "../../services/workflow";
 
 
 @Component({
@@ -47,7 +48,9 @@ export class EditWorkflow1Page implements OnInit{
               private barcodeScanner: BarcodeScanner,
               private alertCtrl: AlertController,
               private camera: Camera,
-              private navParams: NavParams) {
+              private navParams: NavParams,
+              private wfSvc: WorkflowService,
+              private navCtrl: NavController) {
 
     storage.ready().then(() => { });
 
@@ -109,8 +112,8 @@ export class EditWorkflow1Page implements OnInit{
       ]},
       {method: 'inputs', options: [
         {title: "日期", model: "wfOptInputDate", type: "date", icon: "calender", scan: false, size: 8},
-        {title: "开始", model: "wfOptStartTime", type: "text", icon: "time", scan: false, size: 8},
-        {title: "完成", model: "wfOptFinishTime", type: "text", icon: "md-alarm", scan: false, size: 8}
+        {title: "开始", model: "wfOptStartTime", type: "time", icon: "time", scan: false, size: 8},
+        {title: "完成", model: "wfOptFinishTime", type: "time", icon: "md-alarm", scan: false, size: 8}
       ]},
       {method: "inputs", options: [
         {title: "不良数", model: "wfOptBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8},
@@ -168,13 +171,12 @@ export class EditWorkflow1Page implements OnInit{
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 3},
       {title: "技術員", method: "input", model: "wfStaffTechId", type: "text", icon: 'construct', scan: false, wfPplI: 3, size: 7},
       {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: false, wfPplI: 4, size: 7},
-      {title: "完威", method: "buttons", model: "wfStageStatus", icon: "md-checkmark-circle-outline",buttons: [
+      {title: "完成", method: "buttons", model: "wfStageStatus", icon: "md-checkmark-circle-outline",buttons: [
         {label: "是", value: 1, icon: 'checkmark'}
       ]},      
       {title: "分單", method: "buttons", model: "wfFormSplit", icon: "md-checkmark-circle-outline",buttons: [
         {label: "是", value: 1, icon: 'checkmark'}
       ]},
-      
 
       {title: "终检", method: "buttons", model: "wfQCPass", icon: "md-checkmark-circle-outline",buttons: [
         {label: "通过", value: 1, icon: 'checkmark'},
@@ -334,6 +336,8 @@ export class EditWorkflow1Page implements OnInit{
     alert(" < " + form.value + " > !");
 
     console.log(this.wfInputForm);
+
+
   }
 
   updateForm(model: string, value: any) {
@@ -526,6 +530,17 @@ export class EditWorkflow1Page implements OnInit{
               console.log('Buy clicked');
               console.log(form.value);
 
+              // Upload to Server
+              this.wfSvc.upload(form.value)
+                .subscribe((data)=> {
+                    console.log("success");
+                    console.log(data[0]);
+                  },
+                  error => {
+                    console.log(error);
+                  }
+                );
+
               let dataXYZ = {"wfProcess": form.value.wfProcess,
               "wfProcessName": form.value.wfProcessName,
               "wfForm": form.value.wfForm,
@@ -565,29 +580,39 @@ export class EditWorkflow1Page implements OnInit{
               "wfQCSignOff": form.value.wfQCSignOff};
           
               if(form.value.wfProcess == 3) {
-                dataXYZ.wfProcess = 4
+                dataXYZ.wfProcess = 4;
                 dataXYZ.wfProcessName = '组立'; 
                 this.storage.set(form.value.wfFormId, dataXYZ);
               } else if(form.value.wfProcess == 4) {
-                dataXYZ.wfProcess = 5
+                dataXYZ.wfProcess = 5;
                 dataXYZ.wfProcessName = '含浸'; 
                 this.storage.set(form.value.wfFormId, dataXYZ);
               } else if(form.value.wfProcess == 5) {
-                dataXYZ.wfProcess = 6
+                dataXYZ.wfProcess = 6;
                 dataXYZ.wfProcessName = '清洗'; 
                 this.storage.set(form.value.wfFormId, dataXYZ);
-              }     
+              }
 
-               
               this.storage.get(form.value.wfFormId).then((resultStorageItemX) => {
-                if(resultStorageItemX){ let alert = this.alertCtrl.create({
-                  title: 'Please Check!',
-                  subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
-                  buttons: ['OK']
-                });
-                alert.present(); }
+                if(resultStorageItemX){
+                  let alert = this.alertCtrl.create({
+                    title: 'Please Check!',
+                    // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
+                    // comment above for faster process
+                    subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId,
+                    buttons: [{text: '確定',
+                      handler: () => {
+                        // Return back to main page
+                        this.navCtrl.pop();
+                      }
+                    }]
+                  });
+
+                  alert.present(); }
               });
-              
+
+
+
             }
           }]
       });

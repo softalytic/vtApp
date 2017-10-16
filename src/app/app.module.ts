@@ -12,7 +12,10 @@ import { ScreenOrientation } from "@ionic-native/screen-orientation";
 import { EditWorkflow1Page } from "../pages/edit-workflow1/edit-workflow1";
 import { EditWorkflow2Page } from "../pages/edit-workflow2/edit-workflow2";
 import { Camera } from "@ionic-native/camera";
-
+import { WorkflowService } from "../services/workflow";
+// import { HTTP } from "@ionic-native/http";
+import { HttpModule } from "@angular/http";
+import { QrCodeService } from "../services/qrCode";
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import { Camera } from "@ionic-native/camera";
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
       name: '__mydbtest',
@@ -37,13 +41,15 @@ import { Camera } from "@ionic-native/camera";
     EditWorkflow2Page
   ],
   providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     StatusBar,
     SplashScreen,
     Camera,
     BarcodeScanner,
     IonicStorageModule,
     ScreenOrientation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    WorkflowService,
+    QrCodeService
   ]
 })
 export class AppModule {}

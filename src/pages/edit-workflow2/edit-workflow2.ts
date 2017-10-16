@@ -14,9 +14,9 @@ export class EditWorkflow2Page implements OnInit{
   form = NgForm;
   wfOrderDetails = [];
   wfRMDetails = [];
-  wfAgeingDetails = [];
-  wfAutoAgeingDetails = [];
-  wfAutoAgeingSubDetails = [];
+  // wfAgeingDetails = [];
+  // wfAutoAgeingDetails = [];
+  // wfAutoAgeingSubDetails = [];
   wfOpsInputs = [];
   wfPplInputs = [];
 
@@ -24,12 +24,24 @@ export class EditWorkflow2Page implements OnInit{
 
   wfNavProcess = 3;
 
+  wfForm2Process = {
+    1:"打印/测试上带",
+    2:"贴片外观",
+    3:"终检"
+  };
+
   wfInputForm: FormGroup;
 
   pushPage: any;
   wfNavParams: any;
 
   wfPass: boolean;
+
+  //testing storage for qc part
+  wfStaffTechIdTmp: any;
+  wfStaffOptShiftTmp: any;
+  wfQCSignOffTmp: any;
+  wfOrderTotalGoodQtyTmp: any;
 
   // For calculating the time value
   tzoffset: number = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
@@ -41,10 +53,10 @@ export class EditWorkflow2Page implements OnInit{
               private alertCtrl: AlertController,
               private camera: Camera,
               private navParams: NavParams) {
-    /*
-     // this.pushPage = EditWorkflow1Page;
-     */
-    // this.wfNavParams = this.navParams.data.value;
+
+    storage.ready().then(() => { });
+
+    this.wfNavParams = this.navParams.data.value;
 
     // Assume all are ion-input except the one specificed as textarea
     this.wfOrderDetails = [
@@ -62,11 +74,10 @@ export class EditWorkflow2Page implements OnInit{
       {method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
       {method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 15, highlight: false, process: {1: true, 2: true, 3: true}},
 
-      {method: "input", model: "wfOrderFormNote", title: "BOM备注", type: "textarea", size: 23, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderFormNote", title: "流程卡备注", type: "textarea", size: 23, highlight: false, process: {1: true, 2: true, 3: true}},
       {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 23, highlight: false, process: {1: true, 2: true, 3: true}},
-      {method: "input", model: "wfOrderBOMNote", title: "流程卡备注", type: "textarea", size: 23, highlight: false, process: {1: true, 2: true, 3: true}},
-
-      {method: "input", model: "wfOrderBOMNote", title: "异常记录", type: "textarea", size: 23, highlight: false, process: {1: false, 2: false, 3: true}},
+      {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 23, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderSupNote", title: "异常记录", type: "textarea", size: 23, highlight: false, process: {1: false, 2: false, 3: true}},
 
       // {title: "客户代码:", method: "input", model: "wfClientId", type: "text", scan: false, size: 15},
       // {title: "销售订单号:", method: "input", model: "wfSalesOrderId", type: "text", scan: false, size: 15},
@@ -157,33 +168,84 @@ export class EditWorkflow2Page implements OnInit{
   }
 
   ngOnInit() {
-    let form = this.wfInputForm;
-    // this.wfNavParams.wfFormName = '裸品流程卡';
-    //this.wfNavParams.wfProcessName = '裸品流程卡';
+    console.log("Initialise the page 成品流程卡");
+
     this.formInit();
 
+    let form = this.wfInputForm;
+
     // alert(this.wfRMDetails[1].modelName)
+
+    let storageData: any;
+
+    console.log("loading from storage");
+    this.storage.get(this.wfNavParams).then((dataDumpJsonXTmp) => {
+      console.log("this is storage");
+      console.log("storage:" + dataDumpJsonXTmp);
+      storageData = dataDumpJsonXTmp;
+
+      // for (let key in storageData) {
+      //   console.log(key + " : " +storageData[key]);
+      // };
+
+      //alert(storageData['wfForm']);
+      /*
+       if(storageData['wfForm'] == 1)
+       {
+       form.controls['wfFormName'].setValue('裸品流程卡');
+       }
+       */
+      for (let key in form.value) {
+        console.log("Loading " + key + " Storage:" + storageData[key]);
+        try {
+          if(key == 'wfStaffTechId') {
+            this.wfStaffTechIdTmp = storageData[key];
+            //alert('staff 1:' + StaffArr.wfStaffTechIda);
+            form.controls[key].setValue('');
+            console.log('storage test 1: ' + this.wfStaffTechIdTmp);
+          } else if(key == 'wfStaffOptShift') {
+            this.wfStaffOptShiftTmp = storageData[key];
+            form.controls[key].setValue('');
+            //alert('staff 2:' + this.wfStaffOptShiftTmp);
+            console.log('storage test 1: ' + this.wfStaffOptShiftTmp);
+          } else if(key == 'wfQCSignOff') {
+            this.wfQCSignOffTmp = storageData[key];
+            form.controls[key].setValue('');
+            //alert('staff 3:' + this.wfQCSignOffTmp);
+            console.log('storage test 1: ' + this.wfQCSignOffTmp);
+          } else {
+            form.controls[key].setValue(storageData[key]);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+    });
+
   }
 
   checkBeforeScan(form: NgForm) {
     if(form.value.wfOptBadQty === '') {
-      alert("input good items is missing!");
+      alert("请输入良品数!");
       return false;
-    } else if(form.value.wfOptGoodQty === '')
-    { alert("input good items is missing!");
-      return false; }
+    } else if(form.value.wfOptGoodQty === '') {
+      alert("请输入不良品数!");
+      return false;
+    }
   }
 
   scanBarcode(model: string){
     console.log("scanning Barcode");
-    /*
-     // console.log(form.value);
-     //
-     // form.controls['wfProcess'].setValue(1);
-     // form.controls['wfProcessName'].setValue('钉卷');
-     // form.controls["wfForm"].setValue(1);
-     //
-     // console.log(form.value);
+
+     /*
+     console.log(form.value);
+
+     form.controls['wfProcess'].setValue(1);
+     form.controls['wfProcessName'].setValue('钉卷');
+     form.controls["wfForm"].setValue(1);
+
+     console.log(form.value);
      */
 
     let form = this.wfInputForm;
@@ -238,6 +300,10 @@ export class EditWorkflow2Page implements OnInit{
   }
 
   onSubmit(){
+    let form = this.wfInputForm;
+    let storageData: any;
+    alert(" < " + form.value + " > !");
+
     console.log(this.wfInputForm);
   }
 
@@ -272,8 +338,6 @@ export class EditWorkflow2Page implements OnInit{
 
   private formInit() {
 
-    let form = this.wfInputForm;
-
     this.wfInputForm = this.formBuilder.group({
 
       wfProcess: [''],
@@ -288,19 +352,15 @@ export class EditWorkflow2Page implements OnInit{
       wfOrderFormNote: [''],
       wfOrderBOMNote: [''],
       wfOrderNote: [''],
+      wfOrderSupNote: [''],
       wfOrderTotalQty: [''],
       wfOrderTotalGoodQty: [''],
       wfOrderRMId: [''],
       wfOrderSeries: [''],
       wfOrderSpec: [''],
-      // wfOrderQty: [''],
       wfOrderDim: [''],
-
-      wfSpecCap: [''],
-      wfSpecDF: [''],
-      wfSpecLC: [''],
-      wfSpecZESR: [''],
-      wfSpecNote: [''],
+      wfClientId: [''],
+      wfSalesOrderId: [''],
 
       // Raw Material Inputs
       wfRMUpBeltName: [''],
@@ -315,6 +375,12 @@ export class EditWorkflow2Page implements OnInit{
       wfRMPrintSerial: [''],
 
       // Operational Input
+      wfSpecCap: [''],
+      wfSpecDF: [''],
+      wfSpecLC: [''],
+      wfSpecZESR: [''],
+      wfSpecNote: [''],
+
       wfOptMachineId: '',
       wfOptInputDate: [this.appDate],
       wfOptStartTime: ['00:00'],
@@ -322,8 +388,7 @@ export class EditWorkflow2Page implements OnInit{
       wfOptBadQty: [''],
       wfOptGoodQty: [''],
 
-      wfClientId: [''],
-      wfSalesOrderId: [''],
+
 
       //Staff Input section
       wfStaffOptId: [''],
@@ -335,24 +400,6 @@ export class EditWorkflow2Page implements OnInit{
       // wfQCInputNote: [''],
 
     });
-
-    /*
-     this.storage.forEach( (value, key, index) => {
-     this.wfInputForm[key] = value;
-     alert(key + ' ' + value + ' ');
-     });
-     */
-    var storageDataTmp;
-
-    // this.storage.get(this.wfNavParams.wfFormId).then(dataTmp=> {
-    //   if(dataTmp) {
-    //     //alert("exists");
-    //     storageDataTmp = dataTmp;
-    //   }
-    //   else {
-    //     alert("data issue");
-    //   }
-    // });
 
   }
 

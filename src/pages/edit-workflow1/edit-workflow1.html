@@ -93,8 +93,8 @@
                                 <ion-input *ngIf="wfInput.wfOpslI != 1" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
 
                                 <button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
-                  扫一扫
-                </button>
+                                    扫一扫
+                                </button>
                             </ion-row>
 
                             <ion-row *ngIf="wfInput.method == 'buttons'" justify-content-left align-items-center>
@@ -127,11 +127,15 @@
                                         <ion-datetime formControlName={{option.model}} displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY"></ion-datetime>
                                     </div>
 
-                                    <ion-input *ngIf="option.type != 'date'" formControlName={{option.model}} type={{option.type}} [ngStyle]="{'width.em':option.size}" class="gridborder"></ion-input>
+                                    <div *ngIf="option.type == 'time'" [ngStyle]="{'width.em':option.size}" class="gridborder">
+                                        <ion-datetime formControlName={{option.model}} displayFormat="HH:mm" pickerFormat="HH:mm"></ion-datetime>
+                                    </div>
+
+                                    <ion-input *ngIf="option.type != 'date' && option.type != 'time'" formControlName={{option.model}} type={{option.type}} [ngStyle]="{'width.em':option.size}" class="gridborder"></ion-input>
 
                                     <button *ngIf="option.scan" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(option.model)">
-                    扫一扫
-                  </button>
+                                        扫一扫
+                                    </button>
                                 </ion-row>
 
                             </ion-col>
@@ -165,11 +169,15 @@
                                         <ion-datetime formControlName={{option.model}} displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY"></ion-datetime>
                                     </div>
 
-                                    <ion-input *ngIf="option.type != 'date'" formControlName={{option.model}} type={{option.type}} [ngStyle]="{'width.em':option.size}" class="gridborder"></ion-input>
+                                    <div *ngIf="option.type == 'time'" [ngStyle]="{'width.em':option.size}" class="gridborder">
+                                        <ion-datetime formControlName={{option.model}} displayFormat="HH:mm" pickerFormat="HH:mm"></ion-datetime>
+                                    </div>
+
+                                    <ion-input *ngIf="option.type != 'date' && option.type != 'time'" formControlName={{option.model}} type={{option.type}} [ngStyle]="{'width.em':option.size}" class="gridborder"></ion-input>
 
                                     <button *ngIf="option.scan" item-end ion-button class="barcodeButton" type="button" (click)="checkBeforeScan()">
-                    扫一扫
-                  </button>
+                                        扫一扫
+                                    </button>
                                 </ion-row>
 
                             </ion-col>
@@ -319,18 +327,19 @@
                                     <ion-input style="display: inline-block;" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" *ngIf="wfInput.wfPplI == 5" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}}
                                         [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
                                     <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" *ngIf="wfInput.scan == 5" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
-                                      簽署 </button>
+                                      簽署
+                                    </button>
                                 </div>
                                 <!--
-                <div on-mouseover="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">
-                    <button [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" *ngIf="wfInput.scan == 3" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
-                    扫一扫
-                </button>
-                </div>
-                <div on-mouseover="showWfQCPassAlert(wfInputForm.value.wfQCPass)">
+                                <div on-mouseover="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">
+                                    <button [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" *ngIf="wfInput.scan == 3" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
+                                    扫一扫
+                                </button>
+                                </div>
+                                <div on-mouseover="showWfQCPassAlert(wfInputForm.value.wfQCPass)">
 
-                </div>
-                -->
+                                </div>
+                                -->
                             </ion-row>
 
 
@@ -340,9 +349,18 @@
                                 </div>
                                 <ion-textarea formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="textarea gridborder"></ion-textarea>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
+<<<<<<< HEAD
                                 <button ion-button type="button" (click)="takePhoto()">
                                         <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
                                         &nbsp; 拍照 </button>
+=======
+                                <button (click)="showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)"
+                                        [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)"
+                                        type="button"
+                                        ion-button>
+                                    保存
+                                </button>
+>>>>>>> b46b0187a4f59e15baeea59707841dc3361f7425
                             </ion-row>
 
                             <!-- Select Buttons -->
@@ -353,12 +371,11 @@
 
                                 <ion-input formControlName={{wfInput.model}} hidden></ion-input>
 
-
                                 <ion-buttons>
                                     <button ion-button round outline type="button" style="width: auto;" *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model,button.value)" [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}">
-                    <ion-icon name="{{button.icon}}"></ion-icon>
-                    &nbsp; {{button.label}}
-                  </button>
+                                    <ion-icon name="{{button.icon}}"></ion-icon>
+                                    &nbsp; {{button.label}}
+                                  </button>
                                 </ion-buttons>
                             </ion-row>
 
@@ -369,7 +386,14 @@
                         </ion-col>
                         <ion-row>
                             &nbsp;&nbsp;&nbsp;&nbsp;
+<<<<<<< HEAD
                             <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="button" ion-button (click)="showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">完成工序</button>
+=======
+                            <button ion-button type="button" (click)="takePhoto()">
+                                <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+                                &nbsp; 拍照
+                            </button>
+>>>>>>> b46b0187a4f59e15baeea59707841dc3361f7425
                         </ion-row>
                     </ion-row>
 

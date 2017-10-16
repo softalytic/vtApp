@@ -206,7 +206,7 @@ export class EditWorkflow1Page implements OnInit{
     console.log("loading from storage");
     this.storage.get(this.wfNavParams).then((dataDumpJsonXTmp) => {
       console.log("this is storage");
-      console.log("storage:" + dataDumpJsonXTmp);
+      console.log("storage:" + JSON.stringify(dataDumpJsonXTmp));
       storageData = dataDumpJsonXTmp;
 
       // for (let key in storageData) {
@@ -221,25 +221,23 @@ export class EditWorkflow1Page implements OnInit{
       }
       */
       for (let key in form.value) {
-        console.log("Loading " + key + " Storage:" + storageData[key]);
+        // console.log("Loading " + key + " Storage:" + storageData[key]);
         try {
-          
-
           if(key == 'wfStaffTechId') {
             this.wfStaffTechIdTmp = storageData[key];
             //alert('staff 1:' + StaffArr.wfStaffTechIda);
             form.controls[key].setValue('');
-            console.log('storage test 1: ' + this.wfStaffTechIdTmp);
+            // console.log('storage test 1: ' + this.wfStaffTechIdTmp);
           } else if(key == 'wfStaffOptShift') {
             this.wfStaffOptShiftTmp = storageData[key];
             form.controls[key].setValue('');
             //alert('staff 2:' + this.wfStaffOptShiftTmp);
-            console.log('storage test 1: ' + this.wfStaffOptShiftTmp);
+            // console.log('storage test 1: ' + this.wfStaffOptShiftTmp);
           } else if(key == 'wfQCSignOff') {
             this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue('');
             //alert('staff 3:' + this.wfQCSignOffTmp);
-            console.log('storage test 1: ' + this.wfQCSignOffTmp);
+            // console.log('storage test 1: ' + this.wfQCSignOffTmp);
           } else {
             form.controls[key].setValue(storageData[key]);
           }
@@ -531,7 +529,7 @@ export class EditWorkflow1Page implements OnInit{
               console.log(form.value);
 
               // Upload to Server
-              this.wfSvc.upload(form.value)
+              this.wfSvc.upload(form.value,1)
                 .subscribe((data)=> {
                     console.log("success");
                     console.log(data[0]);

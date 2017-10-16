@@ -14,21 +14,14 @@ export class EditWorkflow2Page implements OnInit{
   form = NgForm;
   wfOrderDetails = [];
   wfRMDetails = [];
-  // wfAgeingDetails = [];
-  // wfAutoAgeingDetails = [];
-  // wfAutoAgeingSubDetails = [];
   wfOpsInputs = [];
   wfPplInputs = [];
 
   images = [];
 
-  wfNavProcess = 3;
+  // wfNavProcess = 3;
 
-  wfForm2Process = {
-    1:"打印/测试上带",
-    2:"贴片外观",
-    3:"终检"
-  };
+
 
   wfInputForm: FormGroup;
 

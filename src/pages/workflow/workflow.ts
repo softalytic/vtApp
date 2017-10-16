@@ -17,6 +17,7 @@ import { EditWorkflow2Page } from "../edit-workflow2/edit-workflow2";
 
 export class WorkflowPage implements OnInit {
 
+  /* Variable Definition */
   // Form body
   wfInputForm: FormGroup;
 
@@ -24,12 +25,20 @@ export class WorkflowPage implements OnInit {
   staffIdBarcode = null;
   orderIdBarcode = null;
 
-  wfForms = [];
+  wfForms = [1,2];
   wfProcesses = [];
   wfMachineProcess = [];
   wfStages = [];
   wfInputs = [];
   wfMachineData = [];
+
+  wfForm1Process = {};
+
+  wfForm2Process = {
+    1:"打印/测试上带",
+    2:"贴片外观",
+    3:"终检"
+  };
 
   testRadioOpen = false;
 
@@ -41,8 +50,6 @@ export class WorkflowPage implements OnInit {
               private barcodeScanner: BarcodeScanner){
 
     storage.ready().then(() => { });
-
-    this.wfForms = [1,2];
 
     this.wfProcesses = [
       {title: '钉卷', process: 1, show: true},
@@ -97,6 +104,8 @@ export class WorkflowPage implements OnInit {
 
     // This this for dev env
     this.storage.clear();
+    console.log("Number of records in storage");
+    console.log(this.storage.length());
   };
 
   onAddWf(){
@@ -183,7 +192,6 @@ export class WorkflowPage implements OnInit {
 
     
     // Form submission to pass the form value onto next stage
-
     console.log("Checking the wfFormId.value");
     console.log(form.value.wfFormId);
 
@@ -419,8 +427,8 @@ export class WorkflowPage implements OnInit {
 
           let formBodies = bodies[key];
           for (let formKey in formBodies) {
-            console.log("populate form model " + formKey);
-            console.log("populating model " + formKey + " " + formBodies[formKey]);
+            // console.log("populate form model " + formKey);
+            // console.log("populating model " + formKey + " " + formBodies[formKey]);
 
             try {
               // Dynamically set form value from the scanned code data
@@ -449,10 +457,9 @@ export class WorkflowPage implements OnInit {
             catch(err) {
               console.log(err.message);
               eval('form.value.' + formKey + '= "' + formBodies[formKey] + '"; ');
-
-              eval('console.log("Retrying force input " + form.value.'+ formKey + ')');
-              eval('console.log(form.value.' + formKey + ');');
-              console.log("barcode loaded in form:" + JSON.stringify(form.value));
+              // eval('console.log("Retrying force input " + form.value.'+ formKey + ')');
+              // eval('console.log(form.value.' + formKey + ');');
+              // console.log("barcode loaded in form:" + JSON.stringify(form.value));
             }
 
           }

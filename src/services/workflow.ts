@@ -12,12 +12,12 @@ export class WorkflowService {
 
   constructor(private http: Http){}
 
-  upload(wfInputForm: any){
+  upload(wfInputForm: any, wfForm: number){
     console.log("Begin to upload onto server");
     console.log("Printing packet to server");
     console.log(wfInputForm);
 
-    let queryUrl = this.baseUrl + "form1/submit/";
+    let queryUrl = this.baseUrl + "form" + wfForm +"/submit/";
     console.log(queryUrl);
 
     return this.http.post(queryUrl, wfInputForm, this.httpOptions)
@@ -28,12 +28,12 @@ export class WorkflowService {
       });
   }
 
-  query(wfInputForm: any){
+  query(wfInputForm: any, wfForm: number){
     console.log("Begin to load data from server");
     console.log("Printing request to server");
     console.log(wfInputForm);
 
-    let queryUrl = this.baseUrl + "form1/query/";
+    let queryUrl = this.baseUrl + "form" + wfForm +"/query/";
     console.log(queryUrl);
 
     return this.http.post(queryUrl, wfInputForm, this.httpOptions)

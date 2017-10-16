@@ -488,9 +488,9 @@ export class EditWorkflow1Page implements OnInit{
           
         } else {
           let alert = this.alertCtrl.create({
-            title: '!',
-            subTitle: '不確定内容! ',
-            buttons: ['確定']
+            title: '',
+            subTitle: '机台号不存在，请重新输入。',
+            buttons: ['返回']
           });
           alert.present();
         }
@@ -532,19 +532,28 @@ export class EditWorkflow1Page implements OnInit{
     } else if(wfOrderTotalQty < wfOptGoodQtyValue) {
       let form = this.wfInputForm;
       let alert = this.alertCtrl.create({
+        /*
         title: '',
+        
         subTitle: '确定完成和上传' + ' Order Total: ' + wfOrderTotalQty + ' Good Total: ' + wfOrderTotalGoodQty + ' Bad:' + wfOptBadQtyValue + ' opt good: ' + wfOptGoodQtyValue,
+        */
         buttons: [{
           text: '取消',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
+        },{
+          text: '上存',
+          role: 'cancel',
+          handler: () => {
+            console.log('save clicked');
+          }
         },
           {
-            text: '確定',
+            text: '上存 + 完成工序',
             handler: () => {
-              console.log('Buy clicked');
+              console.log('submit and save clicked');
               console.log(form.value);
 
               // Upload to Server

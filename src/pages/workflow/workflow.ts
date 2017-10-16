@@ -106,6 +106,20 @@ export class WorkflowPage implements OnInit {
     this.storage.clear();
     console.log("Number of records in storage");
     console.log(this.storage.length());
+
+    // Pre define storage
+    let datawfProcess = JSON.stringify({
+      "1":{"wfFormName": "裸品流程卡","wfFormID": "1", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗"}},
+      "2":{"wfFormName": "成品流程卡","wfFormID": "2", "Process":{"1":"打印/测试上带","2":"贴片外观","3":"终检"}}
+    });
+    this.storage.set('wfProcess', datawfProcess);
+
+    let dataMachine = JSON.stringify({
+      "AA01" : {"staffID": "0001","staffName": "用户01", "techID": "0001","techName": "用户01", "xrayID": "","xrayName": "", "shift": "A"},
+      "AB001" : {"staffID": "0001","staffName": "用户01", "techID": "0001","techName": "用户01", "xrayID": "","xrayName": "", "shift": "A"}
+    });
+    this.storage.set('wfMachine', dataMachine);
+
   };
 
   onAddWf(){
@@ -139,6 +153,8 @@ export class WorkflowPage implements OnInit {
 
         //alert('have items: ' + JSON.stringify(resultStorageItemX));
       } else {
+
+        // Predefined data for testing purpose
         let data = JSON.stringify({ "headers":
         { "erpData": "ngForm"},
        "bodies":
@@ -180,25 +196,11 @@ export class WorkflowPage implements OnInit {
             }
         }
     });
-    this.qrCodePopulate(data);
-    //alert('no items!' + JSON.stringify(form.value));
-    this.storage.set(form.value.wfFormId, form.value);
+        this.qrCodePopulate(data);
+        //alert('no items!' + JSON.stringify(form.value));
+        this.storage.set(form.value.wfFormId, form.value);
       }
     });
-
-    let datawfProcess = JSON.stringify({
-      "1" : {"wfFormName": "裸品流程卡","wfFormID": "1", "Process":{"1": "釘卷", "2": "含浸","3":"组立","4":"清洗"}},
-      "2" : {"wfFormName": "成品流程卡","wfFormID": "2", "Process":{"1": "釘卷", "2": "含浸","3":"组立","4":"清洗"}}
-    });
-
-    this.storage.set('wfProcess', datawfProcess);
-
-    let dataMachine = JSON.stringify({
-      "AA01" : {"staffID": "0001","staffName": "用户01", "techID": "0001","techName": "用户01", "xrayID": "","xrayName": "", "shift": "A"},
-      "AB001" : {"staffID": "0001","staffName": "用户01", "techID": "0001","techName": "用户01", "xrayID": "","xrayName": "", "shift": "A"}
-    });
-
-    this.storage.set('wfMachine', dataMachine);
 
     // Form submission to pass the form value onto next stage
     console.log("Checking the wfFormId.value");
@@ -210,21 +212,20 @@ export class WorkflowPage implements OnInit {
     if(form.controls["wfFormId"].value == ''){
       alert('請輸入流程卡号');
     } else if(form.value.wfForm == 1) {
-      // console.log('裸品流程卡');
-      form.value.wfFormName = '裸品流程卡';
-
       console.log("Will enter 裸品流程卡 edit page now");
-      console.log(form.value.wfFormId);
-
+      console.log("流程卡" + form.value.wfFormId);
+      form.value.wfFormName = '裸品流程卡';
       this.navCtrl.push(EditWorkflow1Page, form.value.wfFormId);
 
     } else if(form.value.wfForm == 2) {
-      console.log('成品流程卡');
+      console.log("Will enter 成品流程卡 edit page now");
+      console.log("流程卡" + form.value.wfFormId);
       form.value.wfFormName = '成品流程卡';
-      this.navCtrl.push(EditWorkflow2Page, form);
+      this.navCtrl.push(EditWorkflow2Page, form.value.wfFormId);
 
     } else if(form.value.wfForm == 3) {
-      console.log('电容器流程卡');
+      console.log("Will enter 电容器流程卡 edit page now");
+      console.log("流程卡" + form.value.wfFormId);
       form.value.wfFormName = '电容器流程卡';
 
     } else {

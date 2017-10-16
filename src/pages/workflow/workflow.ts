@@ -127,8 +127,8 @@ export class WorkflowPage implements OnInit {
     console.log("onAddWF is triggered!");
 
     let form = this.wfInputForm;
-
-    // this.wfSvc.upload(form)
+    //
+    // this.wfSvc.query()
     //   .subscribe((data)=> {
     //       console.log("success");
     //       console.log(data[0]);
@@ -143,6 +143,7 @@ export class WorkflowPage implements OnInit {
 
     // Testing code for storage for demonstration purpose
     // Check if there is any result from the storage
+    // 3 degrees of checking, 1. Check Server, Check Local Storage, Else it is a new order
     this.storage.get(form.value.wfFormId).then((resultStorageItemX) => {
       if(resultStorageItemX){
         let dataXTmp = { "headers": { "erpData": "ngForm"},
@@ -199,6 +200,10 @@ export class WorkflowPage implements OnInit {
         this.qrCodePopulate(data);
         //alert('no items!' + JSON.stringify(form.value));
         this.storage.set(form.value.wfFormId, form.value);
+
+        // For production code, it should check with server to see if there is any record
+        // If no record then treat it as a new form
+
       }
     });
 
@@ -211,6 +216,7 @@ export class WorkflowPage implements OnInit {
 
     if(form.controls["wfFormId"].value == ''){
       alert('請輸入流程卡号');
+
     } else if(form.value.wfForm == 1) {
       console.log("Will enter 裸品流程卡 edit page now");
       console.log("流程卡" + form.value.wfFormId);

@@ -489,7 +489,7 @@ export class EditWorkflow1Page implements OnInit{
         } else {
           let alert = this.alertCtrl.create({
             title: '!',
-            subTitle: '不確定内容! ',
+            subTitle: '机台号不存在，请重新输入!',
             buttons: ['確定']
           });
           alert.present();

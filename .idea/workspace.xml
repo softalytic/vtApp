@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4cec853-1425-4d8c-84e2-faa32da6519f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" afterPath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/workflow/workflow.ts" afterPath="$PROJECT_DIR$/src/pages/workflow/workflow.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/main.js" afterPath="$PROJECT_DIR$/www/build/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/main.js.map" afterPath="$PROJECT_DIR$/www/build/main.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/vendor.js.map" afterPath="$PROJECT_DIR$/www/build/vendor.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/index.html" afterPath="$PROJECT_DIR$/www/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,14 +25,14 @@
           <file leaf-file-name="edit-workflow1.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="922">
-                  <caret line="523" column="123" lean-forward="false" selection-start-line="523" selection-start-column="123" selection-end-line="523" selection-end-column="123" />
+                <state relative-caret-position="434">
+                  <caret line="491" column="36" lean-forward="false" selection-start-line="491" selection-start-column="36" selection-end-line="491" selection-end-column="36" />
                   <folding>
                     <element signature="e#0#50#0" expanded="true" />
                     <element signature="e#1797#3086#0" expanded="false" />
                     <element signature="e#3112#4516#0" expanded="false" />
                     <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
-                    <element signature="e#19790#21900#0" expanded="false" />
+                    <element signature="e#19796#21906#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -45,8 +41,8 @@
           <file leaf-file-name="workflow.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/services/workflow.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="270">
-                  <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+                <state relative-caret-position="317">
+                  <caret line="27" column="9" lean-forward="true" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
                   <folding>
                     <element signature="e#89#106#0" expanded="true" />
                   </folding>
@@ -57,7 +53,7 @@
           <file leaf-file-name="edit-workflow2.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="193">
+                <state relative-caret-position="-3971">
                   <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#50#0" expanded="true" />
@@ -74,20 +70,20 @@
           <file leaf-file-name="workflow.ts" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="385">
-                  <caret line="232" column="5" lean-forward="true" selection-start-line="232" selection-start-column="5" selection-end-line="232" selection-end-column="5" />
+                <state relative-caret-position="87">
+                  <caret line="129" column="4" lean-forward="false" selection-start-line="129" selection-start-column="6" selection-end-line="138" selection-end-column="11" />
                   <folding>
                     <element signature="e#0#50#0" expanded="true" />
                     <element signature="e#427#496#0" expanded="true" />
                     <element signature="e#1746#2583#0" expanded="false" />
-                    <element signature="e#4946#6494#0" expanded="false" />
+                    <element signature="e#5038#6586#0" expanded="false" />
                     <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
                     <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
-                    <marker date="1508156392000" expanded="false" signature="7785:8637" ph="{...}" />
-                    <marker date="1508156392000" expanded="false" signature="8680:8762" ph="{...}" />
-                    <marker date="1508156392000" expanded="false" signature="8766:12194" ph="/*...*/" />
-                    <marker date="1508156392000" expanded="false" signature="10452:11516" ph="{...}" />
-                    <marker date="1508156392000" expanded="false" signature="11733:12190" ph="{...}" />
+                    <marker date="1508158124000" expanded="false" signature="8022:8874" ph="{...}" />
+                    <marker date="1508158124000" expanded="false" signature="8917:8999" ph="{...}" />
+                    <marker date="1508158124000" expanded="false" signature="9003:12431" ph="/*...*/" />
+                    <marker date="1508158124000" expanded="false" signature="10689:11753" ph="{...}" />
+                    <marker date="1508158124000" expanded="false" signature="11970:12427" ph="{...}" />
                   </folding>
                 </state>
               </provider>
@@ -444,12 +440,12 @@
       <workItem from="1507190803433" duration="12009000" />
       <workItem from="1507470896858" duration="5277000" />
       <workItem from="1507650301333" duration="14643000" />
-      <workItem from="1507946786652" duration="29714000" />
+      <workItem from="1507946786652" duration="30898000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61643000" />
+    <option name="totallyTimeSpent" value="62827000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -521,14 +517,14 @@
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
             <element signature="e#1746#2583#0" expanded="false" />
-            <element signature="e#4946#6494#0" expanded="false" />
+            <element signature="e#5038#6586#0" expanded="false" />
             <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
-            <marker date="1508156392000" expanded="false" signature="7785:8637" ph="{...}" />
-            <marker date="1508156392000" expanded="false" signature="8680:8762" ph="{...}" />
-            <marker date="1508156392000" expanded="false" signature="8766:12194" ph="/*...*/" />
-            <marker date="1508156392000" expanded="false" signature="10452:11516" ph="{...}" />
-            <marker date="1508156392000" expanded="false" signature="11733:12190" ph="{...}" />
+            <marker date="1508158124000" expanded="false" signature="8022:8874" ph="{...}" />
+            <marker date="1508158124000" expanded="false" signature="8917:8999" ph="{...}" />
+            <marker date="1508158124000" expanded="false" signature="9003:12431" ph="/*...*/" />
+            <marker date="1508158124000" expanded="false" signature="10689:11753" ph="{...}" />
+            <marker date="1508158124000" expanded="false" signature="11970:12427" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -568,7 +564,7 @@
             <element signature="e#1797#3086#0" expanded="false" />
             <element signature="e#3112#4516#0" expanded="false" />
             <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
-            <element signature="e#19790#21900#0" expanded="false" />
+            <element signature="e#19796#21906#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -649,14 +645,14 @@
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
             <element signature="e#1746#2583#0" expanded="false" />
-            <element signature="e#4946#6494#0" expanded="false" />
+            <element signature="e#5038#6586#0" expanded="false" />
             <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
-            <marker date="1508156392000" expanded="false" signature="7785:8637" ph="{...}" />
-            <marker date="1508156392000" expanded="false" signature="8680:8762" ph="{...}" />
-            <marker date="1508156392000" expanded="false" signature="8766:12194" ph="/*...*/" />
-            <marker date="1508156392000" expanded="false" signature="10452:11516" ph="{...}" />
-            <marker date="1508156392000" expanded="false" signature="11733:12190" ph="{...}" />
+            <marker date="1508158124000" expanded="false" signature="8022:8874" ph="{...}" />
+            <marker date="1508158124000" expanded="false" signature="8917:8999" ph="{...}" />
+            <marker date="1508158124000" expanded="false" signature="9003:12431" ph="/*...*/" />
+            <marker date="1508158124000" expanded="false" signature="10689:11753" ph="{...}" />
+            <marker date="1508158124000" expanded="false" signature="11970:12427" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -670,7 +666,7 @@
             <element signature="e#1797#3086#0" expanded="false" />
             <element signature="e#3112#4516#0" expanded="false" />
             <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
-            <element signature="e#19790#21900#0" expanded="false" />
+            <element signature="e#19796#21906#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -761,20 +757,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="922">
-          <caret line="523" column="123" lean-forward="false" selection-start-line="523" selection-start-column="123" selection-end-line="523" selection-end-column="123" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-            <element signature="e#1797#3086#0" expanded="false" />
-            <element signature="e#3112#4516#0" expanded="false" />
-            <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
-            <element signature="e#19790#21900#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="585">
@@ -828,19 +810,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/workflow.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="e#89#106#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
+        <state relative-caret-position="-3971">
           <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
@@ -853,22 +825,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/workflow.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="27" column="9" lean-forward="true" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+          <folding>
+            <element signature="e#89#106#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="491" column="36" lean-forward="false" selection-start-line="491" selection-start-column="36" selection-end-line="491" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#1797#3086#0" expanded="false" />
+            <element signature="e#3112#4516#0" expanded="false" />
+            <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="e#19796#21906#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="232" column="5" lean-forward="true" selection-start-line="232" selection-start-column="5" selection-end-line="232" selection-end-column="5" />
+        <state relative-caret-position="87">
+          <caret line="129" column="4" lean-forward="false" selection-start-line="129" selection-start-column="6" selection-end-line="138" selection-end-column="11" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
             <element signature="e#1746#2583#0" expanded="false" />
-            <element signature="e#4946#6494#0" expanded="false" />
+            <element signature="e#5038#6586#0" expanded="false" />
             <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
-            <marker date="1508156392000" expanded="false" signature="7785:8637" ph="{...}" />
-            <marker date="1508156392000" expanded="false" signature="8680:8762" ph="{...}" />
-            <marker date="1508156392000" expanded="false" signature="8766:12194" ph="/*...*/" />
-            <marker date="1508156392000" expanded="false" signature="10452:11516" ph="{...}" />
-            <marker date="1508156392000" expanded="false" signature="11733:12190" ph="{...}" />
+            <marker date="1508158124000" expanded="false" signature="8022:8874" ph="{...}" />
+            <marker date="1508158124000" expanded="false" signature="8917:8999" ph="{...}" />
+            <marker date="1508158124000" expanded="false" signature="9003:12431" ph="/*...*/" />
+            <marker date="1508158124000" expanded="false" signature="10689:11753" ph="{...}" />
+            <marker date="1508158124000" expanded="false" signature="11970:12427" ph="{...}" />
           </folding>
         </state>
       </provider>

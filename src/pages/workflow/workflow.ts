@@ -90,8 +90,6 @@ export class WorkflowPage implements OnInit {
       ], model: 'wfForm', scan: false, size: 100}
     ];
 
-
-
   }
 
   ngOnInit() {
@@ -125,141 +123,129 @@ export class WorkflowPage implements OnInit {
   };
 
   onAddWf(){
+
+    // Testing code for storage for demonstration purpose
+    // Check if there is any result from the storage
+    // 3 degrees of checking, 1. Check Server, Check Local Storage, Else it is a new order
     
     console.log("onAddWF is triggered!");
 
     let form = this.wfInputForm;
 
+    if (form.value.wfFormId === "") {
+      console.log("nothing in the form");
 
-    // let storageItemX = this.storage.get(form.value.wfFormId);
-    // alert(JSON.stringify(storageItemX) + ' ' + form.value.wfFormId);
+      // Predefined data for testing purpose
 
-    // Testing code for storage for demonstration purpose
-    // Check if there is any result from the storage
-    // 3 degrees of checking, 1. Check Server, Check Local Storage, Else it is a new order
-    this.storage.get(form.value.wfFormId).then((resultStorageItemX) => {
-      if(resultStorageItemX){
-
-        console.log("Result found:" + form.value.wfFormId);
-        let dataXTmp = { "headers": { "erpData": "ngForm"},
-          "bodies": { "erpData": resultStorageItemX}};
-
-        let dataX = JSON.stringify(dataXTmp);
-        this.qrCodePopulate(dataX);
-
-        //alert('have items: ' + JSON.stringify(resultStorageItemX));
-      } else {
-
-        // Predefined data for testing purpose
-
-        /*
-        // workflow 1
-        let data = JSON.stringify({ "headers":
+      // workflow 1
+      let data = JSON.stringify({ "headers":
         { "erpData": "ngForm"},
-       "bodies":
-        { "erpData":
-           {"wfProcess": "1",
-            "wfProcessName": "釘卷",
-            "wfForm": "1",
-            "wfFormId": "VT00001",
-            "wfOrderFormId": "VTOF00001",
-            "WfOrderId": "VTO00001",
-            "wfOrderBatchId": "VTOB0001",
-            "wfOrderBatchQty": "100",
-            "wfOrderTotalQty": "1000",
-            "wfOrderTotalGoodQty": "100",
-            "wfOrderRMId": "VT原材料",
-            "wfOrderSeries": "VT系列",
-            "wfOrderSpec": "VT規格",
-            "wfOrderDim": "VT尺寸",
-            "wfRMFoilPosName": "100LG04B-33VF-48UF 5.5mm",
-            "wfRMFoilPosSerial": "17074049",
-            "wfRMFoilPosLName": "184",
-            "wfRMFoilNegName": "F-545M-450UF-5.5MM",
-            "wfRMFoilNegSerial": "0619A04A06",
-            "wfRMFoilNegLName": "184",
-            "wfRMPaperName": "SM250-50 6.5mm",
-            "wfRMPaperSerial": "17032519A1-B47",
-            "wfRMGlueName": "",
-            "wfRMGlueSerial": "17.7.22",
-            "wfRMSolName": "KVP-1B",
-            "wfRMSolSerial": "富凱2017.7119",
-            "wfRMPinPosName": "15080(+)",
-            "wfRMPinPosSerial": "1706241163",
-            "wfRMPinNegName": "15080(-)",
-            "wfRMPinNegSerial": "1707201194",
-            "wfRMPlasticName": "9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",
-            "wfRMPlasticSerial": "17704310121",
-            "wfRMCoverName": "10x10.6 3004材质(防爆)",
-            "wfRMCoverSerial": "1670722-053842",
-            "wfProcessStatus": "0",
-            "wfFormStatus": "0"
+        "bodies":
+          { "erpData":
+            {"wfProcess": "1",
+              "wfProcessName": "釘卷",
+              "wfForm": "1",
+              "wfFormId": "VT00001",
+              "wfOrderFormId": "VTOF00001",
+              "WfOrderId": "VTO00001",
+              "wfOrderBatchId": "VTOB0001",
+              "wfOrderBatchQty": "100",
+              "wfOrderTotalQty": "1000",
+              "wfOrderTotalGoodQty": "100",
+              "wfOrderRMId": "VT原材料",
+              "wfOrderSeries": "VT系列",
+              "wfOrderSpec": "VT規格",
+              "wfOrderDim": "VT尺寸",
+              "wfRMFoilPosName": "100LG04B-33VF-48UF 5.5mm",
+              "wfRMFoilPosSerial": "17074049",
+              "wfRMFoilPosLName": "184",
+              "wfRMFoilNegName": "F-545M-450UF-5.5MM",
+              "wfRMFoilNegSerial": "0619A04A06",
+              "wfRMFoilNegLName": "184",
+              "wfRMPaperName": "SM250-50 6.5mm",
+              "wfRMPaperSerial": "17032519A1-B47",
+              "wfRMGlueName": "",
+              "wfRMGlueSerial": "17.7.22",
+              "wfRMSolName": "KVP-1B",
+              "wfRMSolSerial": "富凱2017.7119",
+              "wfRMPinPosName": "15080(+)",
+              "wfRMPinPosSerial": "1706241163",
+              "wfRMPinNegName": "15080(-)",
+              "wfRMPinNegSerial": "1707201194",
+              "wfRMPlasticName": "9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",
+              "wfRMPlasticSerial": "17704310121",
+              "wfRMCoverName": "10x10.6 3004材质(防爆)",
+              "wfRMCoverSerial": "1670722-053842",
+              "wfProcessStatus": "0",
+              "wfFormStatus": "0"
             }
+          }
+      });
+
+      /*
+      // workflow 2
+      let data = JSON.stringify({ "headers":
+        { "erpData": "ngForm"},
+        "bodies":
+          { "erpData":
+            {"wfForm":"2",
+              "wfProcess": "1",
+              "wfProcessName": "打印/测试上带",
+              "wfFormId": "VT0002",
+              "WfOrderId": "VTO0002",
+              "wfOrderBatchId": "VTB0002",
+              "wfOrderBatchQty": "100",
+              "wfOrderFormNote": "嚫，這是測試FORM",
+              "wfOrderBOMNote": "嚫，這是測試BOM",
+              "wfOrderNote": "嚫，這是測試Note",
+              "wfOrderTotalQty":"10000",
+              "wfOrderTotalGoodQty":"1000",
+              "wfOrderRMId":"VTRM0001",
+              "wfOrderSeries": "VTRM 10x10x20",
+              "wfOrderSpec": "20x20x10",
+              "wfOrderDim": "10cm",
+              "wfRMUpBeltName": "上帶RM001",
+              "wfRMDownBeltName": "下帶RM001",
+              "wfRMBaseName": "底座 001",
+              "wfRMCircleName": "圓卡 0001",
+              "wfRMPrintName": "Ink2001",
+              "wfOptMachineId": "AAA01",
+              "wfClientId": "SA0001",
+              "wfFormName":"成品流程卡",
+              "wfSalesOrderId": "VTSO001",
+              "wfProcessStatus": "0",
+              "wfFormStatus": "0"
+            }
+          }
+      });
+      */
+
+      this.qrCodePopulate(data);
+      this.storage.set(form.value.wfFormId, form.value);
+
+    } else {
+      this.wfSvc.query(form.value, form.value.wfForm).subscribe( serverData => {
+        if(serverData){
+          console.log("Response from server: " + JSON.stringify(serverData[0]));
+          this.populateDataToForm(form, serverData[0]);
+          this.workflowStateChange();
+
+        } else {
+          this.storage.get(form.value.wfFormId).then(storageData => {
+            if(storageData){
+              console.log("Result found:" + form.value.wfFormId);
+              this.populateDataToForm(form, storageData);
+              this.workflowStateChange();
+
+            } else {
+              alert("嚫，查木记录")
+
+            }
+          });
         }
-    });
-        */
+      });
+    }
 
-
-        // workflow 2
-        let data = JSON.stringify({ "headers":
-          { "erpData": "ngForm"},
-          "bodies":
-            { "erpData":
-              {"wfForm":"2",
-                "wfProcess": "1",
-                "wfProcessName": "打印/测试上带",
-                "wfFormId": "VT0002",
-                "WfOrderId": "VTO0002",
-                "wfOrderBatchId": "VTB0002",
-                "wfOrderBatchQty": "100",
-                "wfOrderFormNote": "嚫，這是測試FORM",
-                "wfOrderBOMNote": "嚫，這是測試BOM",
-                "wfOrderNote": "嚫，這是測試Note",
-                "wfOrderTotalQty":"10000",
-                "wfOrderTotalGoodQty":"1000",
-                "wfOrderRMId":"VTRM0001",
-                "wfOrderSeries": "VTRM 10x10x20",
-                "wfOrderSpec": "20x20x10",
-                "wfOrderDim": "10cm",
-                "wfRMUpBeltName": "上帶RM001",
-                "wfRMDownBeltName": "下帶RM001",
-                "wfRMBaseName": "底座 001",
-                "wfRMCircleName": "圓卡 0001",
-                "wfRMPrintName": "Ink2001",
-                "wfOptMachineId": "AAA01",
-                "wfClientId": "SA0001",
-                "wfFormName":"成品流程卡",
-                "wfSalesOrderId": "VTSO001",
-                "wfProcessStatus": "0",
-                "wfFormStatus": "0"
-              }
-            }
-        });
-
-        this.qrCodePopulate(data);
-        //alert('no items!' + JSON.stringify(form.value));
-        this.storage.set(form.value.wfFormId, form.value);
-
-        // For production code, if no record then treat it as a new form
-
-      }
-
-      console.log("Checking the wfFormId.value");
-      console.log(form.value.wfFormId);
-
-      //this.storage.set(form.value.wfFormId, form.value);
-      console.log("storage load:" + JSON.stringify(this.storage.get(form.value.wfFormId)));
-
-      if(form.controls["wfFormId"].value == ''){
-        alert('請輸入流程卡号');
-
-      } else {
-
-        this.workflowStateChange();
-
-      }
-
-    });
   }
 
   scanBarcode(model: string){
@@ -456,7 +442,7 @@ export class WorkflowPage implements OnInit {
     let bodies = data.bodies;
     let form = this.wfInputForm;
 
-    console.log(data);
+    // console.log(data);
 
     for (let key in headers) {
       // console.log(key + " : " + headers[key])
@@ -494,7 +480,7 @@ export class WorkflowPage implements OnInit {
               //  form.value.
             }
             catch(err) {
-              console.log(err.message);
+              // console.log(err.message);
               eval('form.value.' + formKey + '= "' + formBodies[formKey] + '"; ');
               // eval('console.log("Retrying force input " + form.value.'+ formKey + ')');
               // eval('console.log(form.value.' + formKey + ');');
@@ -504,7 +490,6 @@ export class WorkflowPage implements OnInit {
           }
 
           console.log("barcode loaded in form:" + JSON.stringify(form.value));
-
           break;
 
         case "ngStorage":
@@ -573,30 +558,48 @@ export class WorkflowPage implements OnInit {
     let wfPOldState: any;
     let wfPNewState: any;
 
-    this.storage.get("wfProcess").then(value => {
+    this.storage.get("wfProcess").then(storageData => {
 
-      let wfStorage = value;
-
+      let wfStorage = storageData;
       console.log(wfStorage);
-
       console.log("Loading the form from stateChange");
-      // console.log(form);
-      // console.log(form.value.wfProcessStatus);
-      // console.log(typeof(form.value.wfProcessStatus));
-      // console.log(form.value.wfFormStatus);
-      // console.log(typeof(form.value.wfFormStatus));
+
+      console.log('form.value.wfFormStatus' + form.value.wfFormStatus);
+      console.log('form.value.wfProcessStatus' + form.value.wfProcessStatus);
+
+      if (form.value.wfFormStatus === "" || form.value.wfFormStatus == null) {
+        form.value.wfFormStatus = '0';
+      }
+
+      if (form.value.wfProcessStatus === "" || form.value.wfProcessStatus == null) {
+        form.value.wfProcessStatus = "1";
+      }
 
       if (form.value.wfFormStatus == '0' && form.value.wfProcessStatus == '1') {
         // load the process from storage
         console.log("Loading wfProcess from storage");
         console.log("wfForm is: " + form.value.wfFormId);
-
-        console.log(wfStorage[form.value.wfForm].Process);
+        console.log("Printing wfProcess: " + JSON.stringify(wfStorage[form.value.wfForm].Process));
+        console.log("form.value.wfProcess " + form.value.wfProcess.toString() + " " + typeof(form.value.wfProcess.toString()));
 
         // load the next state of the change
-        wfPOldState = Object.keys(wfStorage[form.value.wfForm].Process).indexOf(form.value.wfProcess);
-        wfPNewState = Object.keys(wfStorage[form.value.wfForm].Process)[wfPOldState+1];
+        // Change all to String for safety
+        if (form.value.wfProcess.toString() == "" || form.value.wfProcess.toString() == null ) {
+          wfPNewState = "1";
+        } else {
+          wfPOldState = Object.keys(wfStorage[form.value.wfForm].Process).indexOf(form.value.wfProcess.toString());
+          wfPNewState = Object.keys(wfStorage[form.value.wfForm].Process)[wfPOldState+1];
 
+          // If there is no more process, then break the process
+          if (wfPNewState == null) {
+            return alert("嚫，此工單的所有工序己完成!");
+          }
+        }
+
+        console.log("wfPOldState: " + wfPOldState);
+        console.log("wfPNewState: " + wfPNewState);
+
+        // Assign new value into the form
         form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
         form.value.wfProcess = wfPNewState;
         form.value.wfProcessName = wfStorage[form.value.wfForm].Process[wfPNewState];
@@ -616,16 +619,19 @@ export class WorkflowPage implements OnInit {
       console.log("This is the form after the state change");
       console.log(form.value);
 
+      // The following part will trigger the next stage wfPage
       console.log("Will enter " + form.value.wfFormName + " edit page now");
       console.log("流程卡" + form.value.wfFormId);
 
-      switch (form.value.wfForm) {
+      switch (form.value.wfForm.toString()) {
         case '1':
           this.navCtrl.push(EditWorkflow1Page, form.value.wfFormId);
           break;
+
         case '2':
           this.navCtrl.push(EditWorkflow2Page, form.value.wfFormId);
           break;
+
         case '3':
           console.log("Form 3 is not ready");
           // this.navCtrl.push(EditWorkflow3Page);
@@ -638,6 +644,16 @@ export class WorkflowPage implements OnInit {
 
     });
 
+
+  }
+
+  populateDataToForm(form: any, data: any){
+
+    let qrCode = { "headers": { "erpData": "ngForm"},
+      "bodies": { "erpData": data}};
+
+    let _data = JSON.stringify(qrCode);
+    this.qrCodePopulate(_data);
 
   }
 
@@ -656,8 +672,6 @@ export class WorkflowPage implements OnInit {
       wfOrderTotalQty: ['']
 
     });
-
-
   }
 
 

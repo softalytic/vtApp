@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e4cec853-1425-4d8c-84e2-faa32da6519f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" afterPath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" afterPath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/workflow/workflow.ts" afterPath="$PROJECT_DIR$/src/pages/workflow/workflow.ts" />
     </list>
@@ -20,48 +21,34 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.8012685">
+    <splitter split-orientation="horizontal" split-proportion="0.55954325">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="edit-workflow1.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2805">
-                  <caret line="214" column="25" lean-forward="false" selection-start-line="214" selection-start-column="25" selection-end-line="214" selection-end-column="25" />
+                <state relative-caret-position="460">
+                  <caret line="378" column="0" lean-forward="false" selection-start-line="378" selection-start-column="0" selection-end-line="378" selection-end-column="0" />
                   <folding>
-                    <element signature="n#!!block;n#formInit#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <element signature="n#!!block;n#scanBarcode#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <element signature="n#!!block;n#inputWf#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <element signature="n#!!block;n#setWfPass#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <element signature="n#!!block;n#onSubmit#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <element signature="n#!!block;n#updateForm#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <element signature="n#!!block;n#promptAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <element signature="n#!!block;n#keyPress#0;n#EditWorkflow1Page#0" expanded="false" />
                     <element signature="n#!!block;n#updateTextChg#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <element signature="n#!!block;n#updateTotalGoodQty#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <element signature="n#!!block;n#showWfOpsInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
                     <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
                     <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow1Page#0" expanded="false" />
-                    <marker date="1508236691000" expanded="true" signature="7:26" ph="..." />
-                    <marker date="1508236691000" expanded="true" signature="19885:21140" ph="{...}" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="edit-workflow2.ts" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1416">
-                  <caret line="332" column="37" lean-forward="false" selection-start-line="332" selection-start-column="37" selection-end-line="332" selection-end-column="37" />
-                  <folding>
-                    <element signature="e#0#50#0" expanded="true" />
-                    <element signature="e#1649#4370#0" expanded="false" />
-                    <element signature="e#4396#4982#0" expanded="false" />
-                    <element signature="e#5008#7857#0" expanded="false" />
-                    <element signature="e#7883#9296#0" expanded="false" />
-                    <element signature="n#!!block;n#ionViewDidLoad#0;n#EditWorkflow2Page#0" expanded="false" />
-                    <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow2Page#0" expanded="false" />
-                    <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow2Page#0" expanded="false" />
-                    <element signature="n#!!block;n#scanBarcode#0;n#EditWorkflow2Page#0" expanded="false" />
-                    <element signature="e#11809#12020#0" expanded="false" />
-                    <element signature="e#13443#13799#0" expanded="false" />
-                    <element signature="n#!!block;n#promptAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-                    <element signature="n#!!block;n#keyPress#0;n#EditWorkflow2Page#0" expanded="false" />
-                    <element signature="n#!!block;n#showWfOpsInputsAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-                    <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-                    <element signature="n#!!block;n#takePhoto#0;n#EditWorkflow2Page#0" expanded="false" />
+                    <element signature="n#!!block;n#presentPrompt#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <element signature="n#!!block;n#takePhoto#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <element signature="n#!!block;n#formInit#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <marker date="1508253999000" expanded="true" signature="7:26" ph="..." />
+                    <marker date="1508253999000" expanded="true" signature="17177:18432" ph="{...}" />
                   </folding>
                 </state>
               </provider>
@@ -70,21 +57,27 @@
           <file leaf-file-name="workflow.ts" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="259">
-                  <caret line="234" column="15" lean-forward="true" selection-start-line="234" selection-start-column="15" selection-end-line="234" selection-end-column="15" />
+                <state relative-caret-position="-415">
+                  <caret line="596" column="9" lean-forward="true" selection-start-line="596" selection-start-column="9" selection-end-line="596" selection-end-column="9" />
                   <folding>
                     <element signature="e#0#50#0" expanded="true" />
                     <element signature="e#427#496#0" expanded="true" />
-                    <element signature="e#4377#4716#0" expanded="false" />
-                    <element signature="n#!!block;n#workflowStateChange#0;n#WorkflowPage#0" expanded="false" />
-                    <element signature="e#19689#19954#0" expanded="false" />
-                    <marker date="1508243940000" expanded="false" signature="4840:6457" ph="{...}" />
-                    <marker date="1508243940000" expanded="false" signature="8463:9315" ph="{...}" />
-                    <marker date="1508243940000" expanded="false" signature="9358:9440" ph="{...}" />
-                    <marker date="1508243940000" expanded="false" signature="9444:12872" ph="/*...*/" />
-                    <marker date="1508243940000" expanded="false" signature="11130:12194" ph="{...}" />
-                    <marker date="1508243940000" expanded="false" signature="12411:12868" ph="{...}" />
-                    <marker date="1508243940000" expanded="false" signature="12912:17018" ph="{...}" />
+                    <element signature="e#1962#2259#0" expanded="false" />
+                    <element signature="e#2282#3119#0" expanded="false" />
+                    <element signature="n#!!block;n#ngOnInit#0;n#WorkflowPage#0" expanded="false" />
+                    <element signature="e#4315#6010#0" expanded="false" />
+                    <element signature="e#6020#7291#0" expanded="false" />
+                    <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
+                    <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
+                    <element signature="e#9082#12510#0" expanded="false" />
+                    <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
+                    <element signature="e#15164#15618#0" expanded="false" />
+                    <element signature="e#15628#16583#0" expanded="false" />
+                    <element signature="n#!!block;n#populateDataToForm#0;n#WorkflowPage#0" expanded="false" />
+                    <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
+                    <element signature="e#20494#20759#0" expanded="false" />
+                    <marker date="1508256349000" expanded="false" signature="10768:11832" ph="{...}" />
+                    <marker date="1508256349000" expanded="false" signature="12049:12506" ph="{...}" />
                   </folding>
                 </state>
               </provider>
@@ -94,44 +87,15 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="edit-workflow2.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="266">
-                  <caret line="206" column="0" lean-forward="false" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#256#262#0" expanded="true" />
-                    <element signature="e#299#305#0" expanded="true" />
-                    <element signature="e#309#315#0" expanded="true" />
-                    <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <element signature="n#ion-col#0;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <element signature="n#ion-row#1;n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <element signature="n#ion-col#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <element signature="n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <element signature="n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <element signature="n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <element signature="n#button#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <element signature="n#button#1;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <element signature="n#button#2;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <element signature="n#div#2;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <element signature="n#ion-row#2;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <element signature="n#div#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <element signature="n#ion-col#2;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="edit-workflow1.html" pinned="false" current-in-tab="false">
+          <file leaf-file-name="edit-workflow1.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="5130">
-                  <caret line="387" column="0" lean-forward="false" selection-start-line="387" selection-start-column="0" selection-end-line="387" selection-end-column="0" />
+                <state relative-caret-position="75">
+                  <caret line="5" column="58" lean-forward="false" selection-start-line="5" selection-start-column="58" selection-end-line="5" selection-end-column="58" />
                   <folding>
                     <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
                     <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <marker date="1508224281000" expanded="true" signature="24083:24127" ph="..." />
+                    <marker date="1508255015000" expanded="true" signature="24068:24112" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -160,7 +124,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>this.wfNavParams.</find>
       <find>wfNavParams.</find>
       <find>pushPage</find>
       <find>setFormValue</find>
@@ -189,6 +152,7 @@
       <find>this.storage.get</find>
       <find>= this.storage.get</find>
       <find>wfStorage</find>
+      <find>subscribe</find>
       <find>wfForm</find>
     </findStrings>
     <replaceStrings>
@@ -208,11 +172,11 @@
         <option value="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.scss" />
         <option value="$PROJECT_DIR$/src/services/qrCode.ts" />
         <option value="$PROJECT_DIR$/src/app/app.module.ts" />
-        <option value="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" />
         <option value="$PROJECT_DIR$/src/services/workflow.ts" />
         <option value="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.html" />
         <option value="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts" />
         <option value="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" />
+        <option value="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" />
         <option value="$PROJECT_DIR$/src/pages/workflow/workflow.ts" />
       </list>
     </option>
@@ -275,6 +239,19 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="edit-workflow1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vtApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vtApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="workflow" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vtApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vtApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -380,12 +357,12 @@
       <workItem from="1507470896858" duration="5277000" />
       <workItem from="1507650301333" duration="14643000" />
       <workItem from="1507946786652" duration="37212000" />
-      <workItem from="1508224533924" duration="12627000" />
+      <workItem from="1508224533924" duration="21533000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81768000" />
+    <option name="totallyTimeSpent" value="90674000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -439,12 +416,25 @@
         <state relative-caret-position="9450">
           <caret line="636" column="14" lean-forward="false" selection-start-line="636" selection-start-column="14" selection-end-line="648" selection-end-column="16" />
           <folding>
-            <element signature="n#!!block;n#formInit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#scanBarcode#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#inputWf#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#setWfPass#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#onSubmit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#updateForm#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#promptAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#keyPress#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#updateTextChg#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#updateTotalGoodQty#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfOpsInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow1Page#0" expanded="false" />
-            <marker date="1508236691000" expanded="true" signature="7:26" ph="..." />
-            <marker date="1508236691000" expanded="true" signature="19885:21140" ph="{...}" />
+            <element signature="n#!!block;n#presentPrompt#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#takePhoto#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#formInit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <marker date="1508253999000" expanded="true" signature="7:26" ph="..." />
+            <marker date="1508253999000" expanded="true" signature="17177:18432" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -455,21 +445,18 @@
           <caret line="328" column="0" lean-forward="false" selection-start-line="309" selection-start-column="0" selection-end-line="328" selection-end-column="0" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
-            <element signature="e#1649#4370#0" expanded="false" />
-            <element signature="e#4396#4982#0" expanded="false" />
-            <element signature="e#5008#7857#0" expanded="false" />
-            <element signature="e#7883#9296#0" expanded="false" />
-            <element signature="n#!!block;n#ionViewDidLoad#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#scanBarcode#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="e#11809#12020#0" expanded="false" />
-            <element signature="e#13443#13799#0" expanded="false" />
-            <element signature="n#!!block;n#promptAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#keyPress#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#showWfOpsInputsAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#takePhoto#0;n#EditWorkflow2Page#0" expanded="false" />
+            <marker date="1508243974000" expanded="false" signature="7884:9297" ph="[...]" />
+            <marker date="1508243974000" expanded="false" signature="9323:9495" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="9510:11513" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="11547:11735" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="11765:13043" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="11810:12021" ph="/*...*/" />
+            <marker date="1508243974000" expanded="false" signature="13473:13800" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="14180:14539" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16067:16124" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16196:16469" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16511:16747" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16763:17462" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -508,16 +495,22 @@
           <folding>
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
-            <element signature="e#4377#4716#0" expanded="false" />
-            <element signature="n#!!block;n#workflowStateChange#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#19689#19954#0" expanded="false" />
-            <marker date="1508243940000" expanded="false" signature="4840:6457" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="8463:9315" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="9358:9440" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="9444:12872" ph="/*...*/" />
-            <marker date="1508243940000" expanded="false" signature="11130:12194" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="12411:12868" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="12912:17018" ph="{...}" />
+            <element signature="e#1962#2259#0" expanded="false" />
+            <element signature="e#2282#3119#0" expanded="false" />
+            <element signature="n#!!block;n#ngOnInit#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#4315#6010#0" expanded="false" />
+            <element signature="e#6020#7291#0" expanded="false" />
+            <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#9082#12510#0" expanded="false" />
+            <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#15164#15618#0" expanded="false" />
+            <element signature="e#15628#16583#0" expanded="false" />
+            <element signature="n#!!block;n#populateDataToForm#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#20494#20759#0" expanded="false" />
+            <marker date="1508256349000" expanded="false" signature="10768:11832" ph="{...}" />
+            <marker date="1508256349000" expanded="false" signature="12049:12506" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -531,20 +524,22 @@
             <element signature="e#299#305#0" expanded="true" />
             <element signature="e#309#315#0" expanded="true" />
             <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#0;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-row#1;n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#button#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#button#1;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#button#2;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-row#2;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#2;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="e#3831#3837#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="e#5857#5863#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ion-textarea#0;n#ion-row#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="e#9155#9161#0" expanded="true" />
+            <marker date="1508243974000" expanded="false" signature="12820:13770" ph="..." />
+            <marker date="1508243974000" expanded="false" signature="13256:13268" ph="..." />
+            <marker date="1508243974000" expanded="false" signature="13592:13598" ph=" " />
+            <marker date="1508243974000" expanded="false" signature="13984:14027" ph="..." />
+            <marker date="1508243974000" expanded="false" signature="14408:14414" ph=" " />
+            <marker date="1508243974000" expanded="false" signature="14684:14690" ph=" " />
+            <marker date="1508243974000" expanded="false" signature="14813:15048" ph="..." />
           </folding>
         </state>
       </provider>
@@ -556,7 +551,7 @@
           <folding>
             <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
             <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <marker date="1508224281000" expanded="true" signature="24083:24127" ph="..." />
+            <marker date="1508255015000" expanded="true" signature="24068:24112" ph="..." />
           </folding>
         </state>
       </provider>
@@ -575,21 +570,18 @@
           <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
-            <element signature="e#1649#4370#0" expanded="false" />
-            <element signature="e#4396#4982#0" expanded="false" />
-            <element signature="e#5008#7857#0" expanded="false" />
-            <element signature="e#7883#9296#0" expanded="false" />
-            <element signature="n#!!block;n#ionViewDidLoad#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#scanBarcode#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="e#11809#12020#0" expanded="false" />
-            <element signature="e#13443#13799#0" expanded="false" />
-            <element signature="n#!!block;n#promptAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#keyPress#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#showWfOpsInputsAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#takePhoto#0;n#EditWorkflow2Page#0" expanded="false" />
+            <marker date="1508243974000" expanded="false" signature="7884:9297" ph="[...]" />
+            <marker date="1508243974000" expanded="false" signature="9323:9495" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="9510:11513" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="11547:11735" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="11765:13043" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="11810:12021" ph="/*...*/" />
+            <marker date="1508243974000" expanded="false" signature="13473:13800" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="14180:14539" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16067:16124" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16196:16469" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16511:16747" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16763:17462" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -601,16 +593,22 @@
           <folding>
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
-            <element signature="e#4377#4716#0" expanded="false" />
-            <element signature="n#!!block;n#workflowStateChange#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#19689#19954#0" expanded="false" />
-            <marker date="1508243940000" expanded="false" signature="4840:6457" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="8463:9315" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="9358:9440" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="9444:12872" ph="/*...*/" />
-            <marker date="1508243940000" expanded="false" signature="11130:12194" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="12411:12868" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="12912:17018" ph="{...}" />
+            <element signature="e#1962#2259#0" expanded="false" />
+            <element signature="e#2282#3119#0" expanded="false" />
+            <element signature="n#!!block;n#ngOnInit#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#4315#6010#0" expanded="false" />
+            <element signature="e#6020#7291#0" expanded="false" />
+            <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#9082#12510#0" expanded="false" />
+            <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#15164#15618#0" expanded="false" />
+            <element signature="e#15628#16583#0" expanded="false" />
+            <element signature="n#!!block;n#populateDataToForm#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#20494#20759#0" expanded="false" />
+            <marker date="1508256349000" expanded="false" signature="10768:11832" ph="{...}" />
+            <marker date="1508256349000" expanded="false" signature="12049:12506" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -624,20 +622,22 @@
             <element signature="e#299#305#0" expanded="true" />
             <element signature="e#309#315#0" expanded="true" />
             <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#0;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-row#1;n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#button#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#button#1;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#button#2;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-row#2;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#2;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="e#3831#3837#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="e#5857#5863#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ion-textarea#0;n#ion-row#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="e#9155#9161#0" expanded="true" />
+            <marker date="1508243974000" expanded="false" signature="12820:13770" ph="..." />
+            <marker date="1508243974000" expanded="false" signature="13256:13268" ph="..." />
+            <marker date="1508243974000" expanded="false" signature="13592:13598" ph=" " />
+            <marker date="1508243974000" expanded="false" signature="13984:14027" ph="..." />
+            <marker date="1508243974000" expanded="false" signature="14408:14414" ph=" " />
+            <marker date="1508243974000" expanded="false" signature="14684:14690" ph=" " />
+            <marker date="1508243974000" expanded="false" signature="14813:15048" ph="..." />
           </folding>
         </state>
       </provider>
@@ -647,12 +647,25 @@
         <state relative-caret-position="330">
           <caret line="27" column="16" lean-forward="true" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
           <folding>
-            <element signature="n#!!block;n#formInit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#scanBarcode#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#inputWf#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#setWfPass#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#onSubmit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#updateForm#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#promptAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#keyPress#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#updateTextChg#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#updateTotalGoodQty#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfOpsInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow1Page#0" expanded="false" />
-            <marker date="1508236691000" expanded="true" signature="7:26" ph="..." />
-            <marker date="1508236691000" expanded="true" signature="19885:21140" ph="{...}" />
+            <element signature="n#!!block;n#presentPrompt#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#takePhoto#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#formInit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <marker date="1508253999000" expanded="true" signature="7:26" ph="..." />
+            <marker date="1508253999000" expanded="true" signature="17177:18432" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -664,7 +677,7 @@
           <folding>
             <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
             <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <marker date="1508224281000" expanded="true" signature="24083:24127" ph="..." />
+            <marker date="1508255015000" expanded="true" signature="24068:24112" ph="..." />
           </folding>
         </state>
       </provider>
@@ -683,21 +696,18 @@
           <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
-            <element signature="e#1649#4370#0" expanded="false" />
-            <element signature="e#4396#4982#0" expanded="false" />
-            <element signature="e#5008#7857#0" expanded="false" />
-            <element signature="e#7883#9296#0" expanded="false" />
-            <element signature="n#!!block;n#ionViewDidLoad#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#scanBarcode#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="e#11809#12020#0" expanded="false" />
-            <element signature="e#13443#13799#0" expanded="false" />
-            <element signature="n#!!block;n#promptAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#keyPress#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#showWfOpsInputsAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#takePhoto#0;n#EditWorkflow2Page#0" expanded="false" />
+            <marker date="1508243974000" expanded="false" signature="7884:9297" ph="[...]" />
+            <marker date="1508243974000" expanded="false" signature="9323:9495" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="9510:11513" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="11547:11735" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="11765:13043" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="11810:12021" ph="/*...*/" />
+            <marker date="1508243974000" expanded="false" signature="13473:13800" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="14180:14539" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16067:16124" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16196:16469" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16511:16747" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16763:17462" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -709,16 +719,22 @@
           <folding>
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
-            <element signature="e#4377#4716#0" expanded="false" />
-            <element signature="n#!!block;n#workflowStateChange#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#19689#19954#0" expanded="false" />
-            <marker date="1508243940000" expanded="false" signature="4840:6457" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="8463:9315" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="9358:9440" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="9444:12872" ph="/*...*/" />
-            <marker date="1508243940000" expanded="false" signature="11130:12194" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="12411:12868" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="12912:17018" ph="{...}" />
+            <element signature="e#1962#2259#0" expanded="false" />
+            <element signature="e#2282#3119#0" expanded="false" />
+            <element signature="n#!!block;n#ngOnInit#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#4315#6010#0" expanded="false" />
+            <element signature="e#6020#7291#0" expanded="false" />
+            <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#9082#12510#0" expanded="false" />
+            <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#15164#15618#0" expanded="false" />
+            <element signature="e#15628#16583#0" expanded="false" />
+            <element signature="n#!!block;n#populateDataToForm#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#20494#20759#0" expanded="false" />
+            <marker date="1508256349000" expanded="false" signature="10768:11832" ph="{...}" />
+            <marker date="1508256349000" expanded="false" signature="12049:12506" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -728,12 +744,25 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#formInit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#scanBarcode#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#inputWf#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#setWfPass#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#onSubmit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#updateForm#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#promptAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#keyPress#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#updateTextChg#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#updateTotalGoodQty#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfOpsInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow1Page#0" expanded="false" />
-            <marker date="1508236691000" expanded="true" signature="7:26" ph="..." />
-            <marker date="1508236691000" expanded="true" signature="19885:21140" ph="{...}" />
+            <element signature="n#!!block;n#presentPrompt#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#takePhoto#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#formInit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <marker date="1508253999000" expanded="true" signature="7:26" ph="..." />
+            <marker date="1508253999000" expanded="true" signature="17177:18432" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -744,21 +773,18 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
-            <element signature="e#1649#4370#0" expanded="false" />
-            <element signature="e#4396#4982#0" expanded="false" />
-            <element signature="e#5008#7857#0" expanded="false" />
-            <element signature="e#7883#9296#0" expanded="false" />
-            <element signature="n#!!block;n#ionViewDidLoad#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#scanBarcode#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="e#11809#12020#0" expanded="false" />
-            <element signature="e#13443#13799#0" expanded="false" />
-            <element signature="n#!!block;n#promptAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#keyPress#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#showWfOpsInputsAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#takePhoto#0;n#EditWorkflow2Page#0" expanded="false" />
+            <marker date="1508243974000" expanded="false" signature="7884:9297" ph="[...]" />
+            <marker date="1508243974000" expanded="false" signature="9323:9495" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="9510:11513" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="11547:11735" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="11765:13043" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="11810:12021" ph="/*...*/" />
+            <marker date="1508243974000" expanded="false" signature="13473:13800" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="14180:14539" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16067:16124" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16196:16469" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16511:16747" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16763:17462" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -797,28 +823,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5130">
-          <caret line="387" column="0" lean-forward="false" selection-start-line="387" selection-start-column="0" selection-end-line="387" selection-end-column="0" />
-          <folding>
-            <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <marker date="1508224281000" expanded="true" signature="24083:24127" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/build/main.js.map" />
     <entry file="file://$PROJECT_DIR$/www/build/main.js" />
-    <entry file="file://$PROJECT_DIR$/src/services/workflow.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="19" column="35" lean-forward="true" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/services/qrCode.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -840,88 +846,126 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="206" column="0" lean-forward="false" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
+        <state relative-caret-position="-84">
+          <caret line="84" column="36" lean-forward="false" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="36" />
           <folding>
             <element signature="e#256#262#0" expanded="true" />
             <element signature="e#299#305#0" expanded="true" />
             <element signature="e#309#315#0" expanded="true" />
             <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#0;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-row#1;n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#0;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#button#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#button#1;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#button#2;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-row#2;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#ion-col#0;n#ion-row#0;n#div#0;n#ion-row#1;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#2;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="e#3831#3837#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="e#5857#5863#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ion-textarea#0;n#ion-row#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
+            <element signature="e#9155#9161#0" expanded="true" />
+            <marker date="1508243974000" expanded="false" signature="12820:13770" ph="..." />
+            <marker date="1508243974000" expanded="false" signature="13256:13268" ph="..." />
+            <marker date="1508243974000" expanded="false" signature="13592:13598" ph=" " />
+            <marker date="1508243974000" expanded="false" signature="13984:14027" ph="..." />
+            <marker date="1508243974000" expanded="false" signature="14408:14414" ph=" " />
+            <marker date="1508243974000" expanded="false" signature="14684:14690" ph=" " />
+            <marker date="1508243974000" expanded="false" signature="14813:15048" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/workflow.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1416">
+        <state relative-caret-position="1528">
           <caret line="332" column="37" lean-forward="false" selection-start-line="332" selection-start-column="37" selection-end-line="332" selection-end-column="37" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
-            <element signature="e#1649#4370#0" expanded="false" />
-            <element signature="e#4396#4982#0" expanded="false" />
-            <element signature="e#5008#7857#0" expanded="false" />
-            <element signature="e#7883#9296#0" expanded="false" />
-            <element signature="n#!!block;n#ionViewDidLoad#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#scanBarcode#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="e#11809#12020#0" expanded="false" />
-            <element signature="e#13443#13799#0" expanded="false" />
-            <element signature="n#!!block;n#promptAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#keyPress#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#showWfOpsInputsAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#takePhoto#0;n#EditWorkflow2Page#0" expanded="false" />
+            <marker date="1508243974000" expanded="false" signature="7884:9297" ph="[...]" />
+            <marker date="1508243974000" expanded="false" signature="9323:9495" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="9510:11513" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="11547:11735" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="11765:13043" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="11810:12021" ph="/*...*/" />
+            <marker date="1508243974000" expanded="false" signature="13473:13800" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="14180:14539" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16067:16124" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16196:16469" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16511:16747" ph="{...}" />
+            <marker date="1508243974000" expanded="false" signature="16763:17462" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="58" lean-forward="false" selection-start-line="5" selection-start-column="58" selection-end-line="5" selection-end-column="58" />
+          <folding>
+            <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <marker date="1508255015000" expanded="true" signature="24068:24112" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2805">
-          <caret line="214" column="25" lean-forward="false" selection-start-line="214" selection-start-column="25" selection-end-line="214" selection-end-column="25" />
+        <state relative-caret-position="460">
+          <caret line="378" column="0" lean-forward="false" selection-start-line="378" selection-start-column="0" selection-end-line="378" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#formInit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#scanBarcode#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#inputWf#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#setWfPass#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#onSubmit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#updateForm#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#promptAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#keyPress#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#updateTextChg#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#updateTotalGoodQty#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfOpsInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow1Page#0" expanded="false" />
-            <marker date="1508236691000" expanded="true" signature="7:26" ph="..." />
-            <marker date="1508236691000" expanded="true" signature="19885:21140" ph="{...}" />
+            <element signature="n#!!block;n#presentPrompt#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#takePhoto#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#formInit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <marker date="1508253999000" expanded="true" signature="7:26" ph="..." />
+            <marker date="1508253999000" expanded="true" signature="17177:18432" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="234" column="15" lean-forward="true" selection-start-line="234" selection-start-column="15" selection-end-line="234" selection-end-column="15" />
+        <state relative-caret-position="-415">
+          <caret line="596" column="9" lean-forward="true" selection-start-line="596" selection-start-column="9" selection-end-line="596" selection-end-column="9" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
-            <element signature="e#4377#4716#0" expanded="false" />
-            <element signature="n#!!block;n#workflowStateChange#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#19689#19954#0" expanded="false" />
-            <marker date="1508243940000" expanded="false" signature="4840:6457" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="8463:9315" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="9358:9440" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="9444:12872" ph="/*...*/" />
-            <marker date="1508243940000" expanded="false" signature="11130:12194" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="12411:12868" ph="{...}" />
-            <marker date="1508243940000" expanded="false" signature="12912:17018" ph="{...}" />
+            <element signature="e#1962#2259#0" expanded="false" />
+            <element signature="e#2282#3119#0" expanded="false" />
+            <element signature="n#!!block;n#ngOnInit#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#4315#6010#0" expanded="false" />
+            <element signature="e#6020#7291#0" expanded="false" />
+            <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#9082#12510#0" expanded="false" />
+            <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#15164#15618#0" expanded="false" />
+            <element signature="e#15628#16583#0" expanded="false" />
+            <element signature="n#!!block;n#populateDataToForm#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#20494#20759#0" expanded="false" />
+            <marker date="1508256349000" expanded="false" signature="10768:11832" ph="{...}" />
+            <marker date="1508256349000" expanded="false" signature="12049:12506" ph="{...}" />
           </folding>
         </state>
       </provider>

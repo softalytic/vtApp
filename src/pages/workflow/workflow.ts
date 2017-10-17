@@ -135,17 +135,10 @@ export class WorkflowPage implements OnInit {
     if (form.value.wfFormId === "") {
       console.log("nothing in the form");
 
-<<<<<<< HEAD
-        // Predefined data for testing purpose
-/*
-        // workflow 1
-        let data = JSON.stringify({ "headers":
-=======
       // Predefined data for testing purpose
 
       // workflow 1
       let data = JSON.stringify({ "headers":
->>>>>>> 38b8d7f691c65d9a88a37a279ef998828c48ad4e
         { "erpData": "ngForm"},
         "bodies":
           { "erpData":
@@ -186,61 +179,6 @@ export class WorkflowPage implements OnInit {
               "wfProcessStatus": "0",
               "wfFormStatus": "0"
             }
-<<<<<<< HEAD
-        }
-    });
-*/
-        
-        // workflow 2
-        let data = JSON.stringify({ "headers":
-          { "erpData": "ngForm"},
-          "bodies":
-            { "erpData":
-              {"wfForm":"2",
-                "wfProcess": "1",
-                "wfProcessName": "打印/测试上带",
-                "wfFormId": "VT0002",
-                "WfOrderId": "VTO0002",
-                "wfOrderBatchId": "VTB0002",
-                "wfOrderBatchQty": "100",
-                "wfOrderFormNote": "嚫，這是測試FORM",
-                "wfOrderBOMNote": "嚫，這是測試BOM",
-                "wfOrderNote": "嚫，這是測試Note",
-                "wfOrderTotalQty":"10000",
-                "wfOrderTotalGoodQty":"1000",
-                "wfOrderRMId":"VTRM0001",
-                "wfOrderSeries": "VTRM 10x10x20",
-                "wfOrderSpec": "20x20x10",
-                "wfOrderDim": "10cm",
-                "wfRMUpBeltName": "上帶RM001",
-                "wfRMDownBeltName": "下帶RM001",
-                "wfRMBaseName": "底座 001",
-                "wfRMCircleName": "圓卡 0001",
-                "wfRMPrintName": "Ink2001",
-                "wfOptMachineId": "AAA01",
-                "wfClientId": "SA0001",
-                "wfFormName":"成品流程卡",
-                "wfSalesOrderId": "VTSO001"
-              }
-            }
-        });
-        
-
-        this.qrCodePopulate(data);
-        //alert('no items!' + JSON.stringify(form.value));
-        this.storage.set(form.value.wfFormId, form.value);
-
-        // For production code, if no record then treat it as a new form
-
-      }
-    });
-
-    this.storage.get("wfProcess").then((result) => {
-      wfStorage = JSON.parse(result);
-
-      console.log("Checking the wfFormId.value");
-      console.log(form.value.wfFormId);
-=======
           }
       });
 
@@ -252,7 +190,7 @@ export class WorkflowPage implements OnInit {
           { "erpData":
             {"wfForm":"2",
               "wfProcess": "1",
-              "wfProcessName": "打印/测试上带",
+              "wfProcessName": "打印",
               "wfFormId": "VT0002",
               "WfOrderId": "VTO0002",
               "wfOrderBatchId": "VTB0002",
@@ -281,7 +219,6 @@ export class WorkflowPage implements OnInit {
           }
       });
       */
->>>>>>> 38b8d7f691c65d9a88a37a279ef998828c48ad4e
 
       this.qrCodePopulate(data);
       this.storage.set(form.value.wfFormId, form.value);

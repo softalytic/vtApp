@@ -315,15 +315,20 @@ export class EditWorkflow2Page implements OnInit{
     switch(form.value.wfProcess) {
       case "1":
         form.value.wfProcess = "2";
-        form.value.wfProcessName = "贴片外观";
+        form.value.wfProcessName = "测试上带";
         break;
 
       case "2":
         form.value.wfProcess = "3";
-        form.value.wfProcessName = "终检";
+        form.value.wfProcessName = "贴片外观";
         break;
 
       case "3":
+        form.value.wfProcess = "4";
+        form.value.wfProcessName = "终检";
+        break;
+
+      case "5":
         alert("嚫,工序完成了!");
         break;
 

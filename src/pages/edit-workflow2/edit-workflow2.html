@@ -198,8 +198,8 @@
                                             <button *ngIf="wfInput.scan == 2" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
                                                 扫一扫
                                             </button>
-                                            <button *ngIf="wfInput.scan == 3" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
-                                                扫一扫
+                                            <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" *ngIf="wfInput.scan == 3" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
+                                                簽署
                                             </button>
                                         </div>
                                         <div on-mouseover="showWfQCPassAlert(wfInputForm.value.wfQCPass)">

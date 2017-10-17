@@ -36,16 +36,17 @@ export class WorkflowPage implements OnInit {
   wfMachineData = [];
   wfForm1Process = {};
   wfForm2Process = {
-    1:"打印/测试上带",
-    2:"贴片外观",
-    3:"终检"
+    1:"打印",
+    2:"测试上带",
+    3:"贴片外观",
+    4:"终检"
   };
 
   testRadioOpen = false;
 
   dataWfProcess = {
     "1":{"wfFormName": "裸品流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗"}},
-    "2":{"wfFormName": "成品流程卡", "Process":{"1":"打印/测试上带","2":"贴片外观","3":"终检"}}
+    "2":{"wfFormName": "成品流程卡", "Process":{"1":"打印","2":"测试上带","3":"贴片外观","4":"终检"}}
   };
 
   dataMachine = {
@@ -132,9 +133,182 @@ export class WorkflowPage implements OnInit {
 
     let form = this.wfInputForm;
 
+    let alerTest = this.alertCtrl.create({
+      title: 'Confirm purchase',
+      message: 'Do you want to buy this book?',
+      buttons: [
+        {
+          text: 'X',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Manual Form 1 Server Data',
+          handler: () => {
+            if (form.value.wfFormId === "") {
+              console.log("nothing in the form");
+        
+              
+              // Predefined data for testing purpose
+        
+              // workflow 1
+              let data = JSON.stringify({ "headers":
+                { "erpData": "ngForm"},
+                "bodies":
+                  { "erpData":
+                    {"wfProcess": "1",
+                      "wfProcessName": "釘卷",
+                      "wfForm": "1",
+                      "wfFormId": "VT00001",
+                      "wfOrderFormId": "VTOF00001",
+                      "WfOrderId": "VTO00001",
+                      "wfOrderBatchId": "VTOB0001",
+                      "wfOrderBatchQty": "100",
+                      "wfOrderTotalQty": "1000",
+                      "wfOrderTotalGoodQty": "100",
+                      "wfOrderRMId": "VT原材料",
+                      "wfOrderSeries": "VT系列",
+                      "wfOrderSpec": "VT規格",
+                      "wfOrderDim": "VT尺寸",
+                      "wfRMFoilPosName": "100LG04B-33VF-48UF 5.5mm",
+                      "wfRMFoilPosSerial": "17074049",
+                      "wfRMFoilPosLName": "184",
+                      "wfRMFoilNegName": "F-545M-450UF-5.5MM",
+                      "wfRMFoilNegSerial": "0619A04A06",
+                      "wfRMFoilNegLName": "184",
+                      "wfRMPaperName": "SM250-50 6.5mm",
+                      "wfRMPaperSerial": "17032519A1-B47",
+                      "wfRMGlueName": "",
+                      "wfRMGlueSerial": "17.7.22",
+                      "wfRMSolName": "KVP-1B",
+                      "wfRMSolSerial": "富凱2017.7119",
+                      "wfRMPinPosName": "15080(+)",
+                      "wfRMPinPosSerial": "1706241163",
+                      "wfRMPinNegName": "15080(-)",
+                      "wfRMPinNegSerial": "1707201194",
+                      "wfRMPlasticName": "9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",
+                      "wfRMPlasticSerial": "17704310121",
+                      "wfRMCoverName": "10x10.6 3004材质(防爆)",
+                      "wfRMCoverSerial": "1670722-053842",
+                      "wfProcessStatus": "0",
+                      "wfFormStatus": "0"
+                    }
+                  }
+              });
+        
+              this.qrCodePopulate(data);
+              this.storage.set(form.value.wfFormId, form.value);
+        
+            } else {
+              this.wfSvc.query(form.value, form.value.wfForm).subscribe( serverData => {
+                if(serverData){
+                  console.log("Response from server: " + JSON.stringify(serverData[0]));
+                  this.populateDataToForm(form, serverData[0]);
+                  this.workflowStateChange();
+        
+                } else {
+                  this.storage.get(form.value.wfFormId).then(storageData => {
+                    if(storageData){
+                      console.log("Result found:" + form.value.wfFormId);
+                      this.populateDataToForm(form, storageData);
+                      this.workflowStateChange();
+        
+                    } else {
+                      alert("嚫，查木记录")
+        
+                    }
+                  });
+                }
+              });
+            }
+            this.storage.get(form.value.wfFormId).then(storageData => {
+              if(storageData){
+                console.log("Result found:" + form.value.wfFormId);
+                this.populateDataToForm(form, storageData);
+                this.workflowStateChange();
+        
+              } else {
+                alert("嚫，查木记录")
+        
+              }
+            });
+            console.log('Buy clicked');
+          }
+        },
+        {
+          text: 'Manual Form 2',
+          handler: () => {
+            if (form.value.wfFormId === "") {
+              console.log("nothing in the form");
+              
+              // workflow 2
+              let data = JSON.stringify({ "headers":
+                { "erpData": "ngForm"},
+                "bodies":
+                  { "erpData":
+                    {"wfForm":"2",
+                      "wfProcess": "1",
+                      "wfProcessName": "打印",
+                      "wfFormId": "VT0002",
+                      "WfOrderId": "VTO0002",
+                      "wfOrderBatchId": "VTB0002",
+                      "wfOrderBatchQty": "100",
+                      "wfOrderFormNote": "嚫，這是測試FORM",
+                      "wfOrderBOMNote": "嚫，這是測試BOM",
+                      "wfOrderNote": "嚫，這是測試Note",
+                      "wfOrderTotalQty":"10000",
+                      "wfOrderTotalGoodQty":"1000",
+                      "wfOrderRMId":"VTRM0001",
+                      "wfOrderSeries": "VTRM 10x10x20",
+                      "wfOrderSpec": "20x20x10",
+                      "wfOrderDim": "10cm",
+                      "wfRMUpBeltName": "上帶RM001",
+                      "wfRMDownBeltName": "下帶RM001",
+                      "wfRMBaseName": "底座 001",
+                      "wfRMCircleName": "圓卡 0001",
+                      "wfRMPrintName": "Ink2001",
+                      "wfOptMachineId": "AAA01",
+                      "wfClientId": "SA0001",
+                      "wfFormName":"成品流程卡",
+                      "wfSalesOrderId": "VTSO001",
+                      "wfProcessStatus": "0",
+                      "wfFormStatus": "0"
+                    }
+                  }
+              });
+              
+        
+              this.qrCodePopulate(data);
+              this.storage.set(form.value.wfFormId, form.value);
+              
+        
+            }
+            this.storage.get(form.value.wfFormId).then(storageData => {
+              if(storageData){
+                console.log("Result found:" + form.value.wfFormId);
+                this.populateDataToForm(form, storageData);
+                this.workflowStateChange();
+        
+              } else {
+                alert("嚫，查木记录")
+        
+              }
+            });
+            console.log('Buy clicked');
+          }
+        }
+        
+      ]
+    });
+    alerTest.present();
+
+    /*
     if (form.value.wfFormId === "") {
       console.log("nothing in the form");
 
+      
       // Predefined data for testing purpose
 
       // workflow 1
@@ -182,7 +356,7 @@ export class WorkflowPage implements OnInit {
           }
       });
 
-      /*
+      
       // workflow 2
       let data = JSON.stringify({ "headers":
         { "erpData": "ngForm"},
@@ -218,12 +392,12 @@ export class WorkflowPage implements OnInit {
             }
           }
       });
-      */
+      
 
       this.qrCodePopulate(data);
       this.storage.set(form.value.wfFormId, form.value);
 
-    } else {
+    } /* else {
       this.wfSvc.query(form.value, form.value.wfForm).subscribe( serverData => {
         if(serverData){
           console.log("Response from server: " + JSON.stringify(serverData[0]));
@@ -245,7 +419,20 @@ export class WorkflowPage implements OnInit {
         }
       });
     }
+    
 
+    this.storage.get(form.value.wfFormId).then(storageData => {
+      if(storageData){
+        console.log("Result found:" + form.value.wfFormId);
+        this.populateDataToForm(form, storageData);
+        this.workflowStateChange();
+
+      } else {
+        alert("嚫，查木记录")
+
+      }
+    });
+    */
   }
 
   scanBarcode(model: string){

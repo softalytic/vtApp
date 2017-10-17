@@ -27,7 +27,7 @@ export class EditWorkflow1Page implements OnInit{
   wfInputForm: FormGroup;
 
   pushPage: any;
-  wfNavParams: any;
+  wfNavParams = this.navParams.data;
 
   wfPass: boolean;
 
@@ -54,7 +54,7 @@ export class EditWorkflow1Page implements OnInit{
 
     storage.ready().then(() => { });
 
-    this.wfNavParams = this.navParams.data;
+
 
     // Assume all are ion-input except the one specificed as textarea
     this.wfOrderDetails = [
@@ -611,15 +611,15 @@ export class EditWorkflow1Page implements OnInit{
               });
               */
               if(form.value.wfProcess == 1) {
-                dataXYZ.wfProcess = 2
+                dataXYZ.wfProcess = 2;
                 dataXYZ.wfProcessName = '组立'; 
                 this.storage.set(form.value.wfFormId, dataXYZ);
               } else if(form.value.wfProcess == 3) {
-                dataXYZ.wfProcess = 4
+                dataXYZ.wfProcess = 4;
                 dataXYZ.wfProcessName = '含浸'; 
                 this.storage.set(form.value.wfFormId, dataXYZ);
               } else if(form.value.wfProcess == 4) {
-                dataXYZ.wfProcess = 5
+                dataXYZ.wfProcess = 5;
                 dataXYZ.wfProcessName = '清洗'; 
                 this.storage.set(form.value.wfFormId, dataXYZ);
               }     

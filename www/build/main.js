@@ -203,13 +203,24 @@ var WorkflowPage = (function () {
         this.storage.clear();
         console.log("Number of records in storage");
         console.log(this.storage.length());
+        // Pre define storage
+        var datawfProcess = JSON.stringify({
+            "1": { "wfFormName": "裸品流程卡", "wfFormID": "1", "Process": { "1": "釘卷", "2": "含浸", "3": "组立", "4": "清洗" } },
+            "2": { "wfFormName": "成品流程卡", "wfFormID": "2", "Process": { "1": "打印/测试上带", "2": "贴片外观", "3": "终检" } }
+        });
+        this.storage.set('wfProcess', datawfProcess);
+        var dataMachine = JSON.stringify({
+            "AA01": { "staffID": "0001", "staffName": "用户01", "techID": "0001", "techName": "用户01", "xrayID": "", "xrayName": "", "shift": "A" },
+            "AB001": { "staffID": "0001", "staffName": "用户01", "techID": "0001", "techName": "用户01", "xrayID": "", "xrayName": "", "shift": "A" }
+        });
+        this.storage.set('wfMachine', dataMachine);
     };
     ;
     WorkflowPage.prototype.onAddWf = function () {
         var _this = this;
         console.log("onAddWF is triggered!");
         var form = this.wfInputForm;
-        // this.wfSvc.upload(form)
+        // this.wfSvc.query()
         //   .subscribe((data)=> {
         //       console.log("success");
         //       console.log(data[0]);
@@ -222,6 +233,7 @@ var WorkflowPage = (function () {
         // alert(JSON.stringify(storageItemX) + ' ' + form.value.wfFormId);
         // Testing code for storage for demonstration purpose
         // Check if there is any result from the storage
+        // 3 degrees of checking, 1. Check Server, Check Local Storage, Else it is a new order
         this.storage.get(form.value.wfFormId).then(function (resultStorageItemX) {
             if (resultStorageItemX) {
                 var dataXTmp = { "headers": { "erpData": "ngForm" },
@@ -231,59 +243,87 @@ var WorkflowPage = (function () {
                 //alert('have items: ' + JSON.stringify(resultStorageItemX));
             }
             else {
+                // Predefined data for testing purpose
+                /*
+                // workflow 1
+                let data = JSON.stringify({ "headers":
+                { "erpData": "ngForm"},
+               "bodies":
+                { "erpData":
+                   {"wfProcess": "1",
+                    "wfProcessName": "釘卷",
+                    "wfForm": "1",
+                    "wfFormId": "VT00001",
+                    "wfOrderFormId": "VTOF00001",
+                    "WfOrderId": "VTO00001",
+                    "wfOrderBatchId": "VTOB0001",
+                    "wfOrderBatchQty": "100",
+                    "wfOrderTotalQty": "1000",
+                    "wfOrderTotalGoodQty": "100",
+                    "wfOrderRMId": "VT原材料",
+                    "wfOrderSeries": "VT系列",
+                    "wfOrderSpec": "VT規格",
+                    "wfOrderDim": "VT尺寸",
+                    "wfRMFoilPosName": "100LG04B-33VF-48UF 5.5mm",
+                    "wfRMFoilPosSerial": "17074049",
+                    "wfRMFoilPosLName": "184",
+                    "wfRMFoilNegName": "F-545M-450UF-5.5MM",
+                    "wfRMFoilNegSerial": "0619A04A06",
+                    "wfRMFoilNegLName": "184",
+                    "wfRMPaperName": "SM250-50 6.5mm",
+                    "wfRMPaperSerial": "17032519A1-B47",
+                    "wfRMGlueName": "",
+                    "wfRMGlueSerial": "17.7.22",
+                    "wfRMSolName": "KVP-1B",
+                    "wfRMSolSerial": "富凱2017.7119",
+                    "wfRMPinPosName": "15080(+)",
+                    "wfRMPinPosSerial": "1706241163",
+                    "wfRMPinNegName": "15080(-)",
+                    "wfRMPinNegSerial": "1707201194",
+                    "wfRMPlasticName": "9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",
+                    "wfRMPlasticSerial": "17704310121",
+                    "wfRMCoverName": "10x10.6 3004材质(防爆)",
+                    "wfRMCoverSerial": "1670722-053842"
+                    }
+                }
+            });
+                */
+                // workflow 2
                 var data = JSON.stringify({ "headers": { "erpData": "ngForm" },
-                    "bodies": { "erpData": { "wfProcess": "1",
-                            "wfProcessName": "釘卷",
-                            "wfForm": "1",
-                            "wfFormId": "VT00001",
-                            "wfOrderFormId": "VTOF00001",
-                            "WfOrderId": "VTO00001",
-                            "wfOrderBatchId": "VTOB0001",
+                    "bodies": { "erpData": { "wfForm": "2",
+                            "wfProcess": "1",
+                            "wfProcessName": "打印/测试上带",
+                            "wfFormId": "VT0002",
+                            "WfOrderId": "VTO0002",
+                            "wfOrderBatchId": "VTB0002",
                             "wfOrderBatchQty": "100",
-                            "wfOrderTotalQty": "1000",
-                            "wfOrderTotalGoodQty": "100",
-                            "wfOrderRMId": "VT原材料",
-                            "wfOrderSeries": "VT系列",
-                            "wfOrderSpec": "VT規格",
-                            "wfOrderDim": "VT尺寸",
-                            "wfRMFoilPosName": "100LG04B-33VF-48UF 5.5mm",
-                            "wfRMFoilPosSerial": "17074049",
-                            "wfRMFoilPosLName": "184",
-                            "wfRMFoilNegName": "F-545M-450UF-5.5MM",
-                            "wfRMFoilNegSerial": "0619A04A06",
-                            "wfRMFoilNegLName": "184",
-                            "wfRMPaperName": "SM250-50 6.5mm",
-                            "wfRMPaperSerial": "17032519A1-B47",
-                            "wfRMGlueName": "",
-                            "wfRMGlueSerial": "17.7.22",
-                            "wfRMSolName": "KVP-1B",
-                            "wfRMSolSerial": "富凱2017.7119",
-                            "wfRMPinPosName": "15080(+)",
-                            "wfRMPinPosSerial": "1706241163",
-                            "wfRMPinNegName": "15080(-)",
-                            "wfRMPinNegSerial": "1707201194",
-                            "wfRMPlasticName": "9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",
-                            "wfRMPlasticSerial": "17704310121",
-                            "wfRMCoverName": "10x10.6 3004材质(防爆)",
-                            "wfRMCoverSerial": "1670722-053842"
+                            "wfOrderFormNote": "嚫，這是測試FORM",
+                            "wfOrderBOMNote": "嚫，這是測試BOM",
+                            "wfOrderNote": "嚫，這是測試Note",
+                            "wfOrderTotalQty": "10000",
+                            "wfOrderTotalGoodQty": "1000",
+                            "wfOrderRMId": "VTRM0001",
+                            "wfOrderSeries": "VTRM 10x10x20",
+                            "wfOrderSpec": "20x20x10",
+                            "wfOrderDim": "10cm",
+                            "wfRMUpBeltName": "上帶RM001",
+                            "wfRMDownBeltName": "下帶RM001",
+                            "wfRMBaseName": "底座 001",
+                            "wfRMCircleName": "圓卡 0001",
+                            "wfRMPrintName": "Ink2001",
+                            "wfOptMachineId": "AAA01",
+                            "wfClientId": "SA0001",
+                            "wfFormName": "成品流程卡",
+                            "wfSalesOrderId": "VTSO001"
                         }
                     }
                 });
                 _this.qrCodePopulate(data);
                 //alert('no items!' + JSON.stringify(form.value));
                 _this.storage.set(form.value.wfFormId, form.value);
+                // For production code, if no record then treat it as a new form
             }
         });
-        var datawfProcess = JSON.stringify({
-            "1": { "wfFormName": "裸品流程卡", "wfFormID": "1", "Process": { "1": "釘卷", "2": "含浸", "3": "组立", "4": "清洗" } },
-            "2": { "wfFormName": "成品流程卡", "wfFormID": "2", "Process": { "1": "釘卷", "2": "含浸", "3": "组立", "4": "清洗" } }
-        });
-        this.storage.set('wfProcess', datawfProcess);
-        var dataMachine = JSON.stringify({
-            "AA01": { "staffID": "0001", "staffName": "用户01", "techID": "0001", "techName": "用户01", "xrayID": "", "xrayName": "", "shift": "A" },
-            "AB001": { "staffID": "0001", "staffName": "用户01", "techID": "0001", "techName": "用户01", "xrayID": "", "xrayName": "", "shift": "A" }
-        });
-        this.storage.set('wfMachine', dataMachine);
         // Form submission to pass the form value onto next stage
         console.log("Checking the wfFormId.value");
         console.log(form.value.wfFormId);
@@ -293,19 +333,20 @@ var WorkflowPage = (function () {
             alert('請輸入流程卡号');
         }
         else if (form.value.wfForm == 1) {
-            // console.log('裸品流程卡');
-            form.value.wfFormName = '裸品流程卡';
             console.log("Will enter 裸品流程卡 edit page now");
-            console.log(form.value.wfFormId);
+            console.log("流程卡" + form.value.wfFormId);
+            form.value.wfFormName = '裸品流程卡';
             this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__edit_workflow1_edit_workflow1__["a" /* EditWorkflow1Page */], form.value.wfFormId);
         }
         else if (form.value.wfForm == 2) {
-            console.log('成品流程卡');
+            console.log("Will enter 成品流程卡 edit page now");
+            console.log("流程卡" + form.value.wfFormId);
             form.value.wfFormName = '成品流程卡';
-            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__edit_workflow2_edit_workflow2__["a" /* EditWorkflow2Page */], form);
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__edit_workflow2_edit_workflow2__["a" /* EditWorkflow2Page */], form.value.wfFormId);
         }
         else if (form.value.wfForm == 3) {
-            console.log('电容器流程卡');
+            console.log("Will enter 电容器流程卡 edit page now");
+            console.log("流程卡" + form.value.wfFormId);
             form.value.wfFormName = '电容器流程卡';
         }
         else {
@@ -593,14 +634,10 @@ WorkflowPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-workflow',template:/*ion-inline-start:"/Users/thomasq/Sites/vtApp/src/pages/workflow/workflow.html"*/'<ion-header>\n    <ion-navbar>\n        <div style="align-items: center; display: inline;">\n            <img src="./assets/img/vt_icon.png" class="icon">\n            <ion-title>工序流程卡纪录系统</ion-title>\n        </div>\n    </ion-navbar>\n</ion-header>\n<ion-content padding>\n    <form [formGroup]="wfInputForm" (ngSubmit)="onAddWf()">\n\n        <!-- First section for the input field -->\n        <div>\n            <ion-grid>\n                <ion-row wrap justify-content-left align-items-center>\n                    <!-- Main loop of the Form Module -->\n                    <ion-col *ngFor="let wfInput of wfInputs">\n                        <!-- Non Buttons input fields of wfForms -->\n                        <ion-row align-items-center>\n                            <div class="label">{{wfInput.title}}</div>\n\n                            <!-- Form Normal Input Module-->\n                            <ion-input *ngIf="wfInput.method === \'input\'"\n                                       [ngStyle]="{\'width.em\':wfInput.size}"\n                                       type={{wfInput.type}}\n                                       formControlName={{wfInput.model}}\n                                       no-padding\n                                       class="gridborder"\n                                       required></ion-input>\n\n                            <button *ngIf="wfInput.scan"\n                                    (click)="scanBarcode(wfInput.model)"\n                                    item-end\n                                    ion-button\n                                    class="barcodeButton"\n                                    type="button">\n                                <!--<ion-icon name="barcode"></ion-icon>-->\n                                扫一扫\n                            </button>\n\n                            <!-- Form Selector Module -->\n                            <ion-select *ngIf="wfInput.method === \'select\'"\n                                        [ngStyle]="{\'width.em\':wfInput.size}"\n                                        interface="popover" style="height: 34px !important;"\n                                        (ionChange)="setWfStage($event)"\n                                        formControlName={{wfInput.model}}\n                                        class="gridborder"\n                                        okText="确定"\n                                        cancelText="取消">\n                                <ion-option *ngFor="let key of wfMachineData"\n                                            value={{key}}>\n                                    {{wfMachineProcess[0][key]}}\n                                </ion-option>\n                            </ion-select>\n\n                            <!-- Buttons input fields of wfForms -->\n                            <div *ngIf="wfInput.method === \'buttons\'"\n                                 [ngStyle]="{\'width.em\':wfInput.size}">\n                                <ion-buttons>\n                                <!-- Button for Form submission -->\n                                    <button *ngFor="let option of wfInput.options"\n                                            [ngClass]="{\'buttonsSelected\': wfInputForm.value.wfForm == option.value }"\n                                            (click)="setFormValue(wfInput.model,option.value)"\n                                            item-right\n                                            ion-button\n                                            outline\n                                            type="button"\n                                            round>\n                                        <ion-icon name="clipboard"></ion-icon>\n                                        &nbsp; {{option.label}}\n                                    </button>\n                                </ion-buttons>\n\n                                <button style="width: 25%; margin: 0 auto;"\n                                        ion-button\n                                        type="submit"\n                                        block>\n                                    确定\n                                </button>\n                            </div>\n\n                            <div *ngIf="wfInput.method === \'break\'" [ngStyle]="{\'width.em\':wfInput.size}"></div>\n\n                        </ion-row>\n\n                    </ion-col>\n                </ion-row>\n            </ion-grid>\n        </div>\n\n        <div>\n\n\n        </div>\n\n        <!-- Display the workflow process with img -->\n        <div>\n            <ion-grid style="padding-left: 50px; padding-right: 50px;">\n                <ion-row wrap class="card-background-page">\n                    <ion-col *ngFor="let wfProcess of wfProcesses" col-3>\n                        <div (click)="setWfProcess(wfProcess.process, wfProcess.title)" class="imgButton">\n                            <img src="{{\'./assets/img/f1p\' + wfProcess.process + \'.jpeg\'}}">\n                            <div class="card-title">\n                                {{wfProcess.title}}\n                            </div>\n                        </div>\n                        <!-- For original design -->\n                        <!--<div [navPush]="pushPage" [navParams]=wfProcess>-->\n                    </ion-col>\n                </ion-row>\n            </ion-grid>\n        </div>\n\n        <!-- manual ageing will have an action sheet to prompt the sub process -->\n        <!-- 規格 Need attention highlight -->\n        <!-- 料號 = 產品編號 -->\n\n    </form>\n</ion-content>'/*ion-inline-end:"/Users/thomasq/Sites/vtApp/src/pages/workflow/workflow.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */],
-        __WEBPACK_IMPORTED_MODULE_5__services_workflow__["a" /* WorkflowService */],
-        __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */],
-        __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__services_workflow__["a" /* WorkflowService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_workflow__["a" /* WorkflowService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */]) === "function" && _f || Object])
 ], WorkflowPage);
 
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=workflow.js.map
 
 /***/ }),
@@ -652,11 +689,11 @@ var EditWorkflow1Page = (function () {
         this.wfOpsInputs = [];
         this.wfPplInputs = [];
         this.images = [];
+        this.wfNavParams = this.navParams.data;
         // For calculating the time value
         this.tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
         this.appDate = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0, -1);
         storage.ready().then(function () { });
-        this.wfNavParams = this.navParams.data;
         // Assume all are ion-input except the one specificed as textarea
         this.wfOrderDetails = [
             { method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 20, highlight: false },
@@ -1021,12 +1058,12 @@ var EditWorkflow1Page = (function () {
                         wfOrderTotalGoodQty: _this.wfOrderTotalGoodQtyTmp, wfStaffTechId: dataMachineXTmp[machineId_1]['techName'], wfStaffXrayId: dataMachineXTmp[machineId_1]['xrayName'], });
                 }
                 else {
-                    var alert_1 = _this.alertCtrl.create({
+                    var alert = _this.alertCtrl.create({
                         title: '!',
-                        subTitle: '不確定内容! ',
+                        subTitle: '机台号不存在，请重新输入!',
                         buttons: ['確定']
                     });
-                    alert_1.present();
+                    alert.present();
                 }
             });
         }
@@ -1039,27 +1076,27 @@ var EditWorkflow1Page = (function () {
     };
     EditWorkflow1Page.prototype.showWfOpsInputsAlert = function (wfOptBadQtyValue, wfOptGoodQtyValue) {
         if (wfOptBadQtyValue == '' || wfOptGoodQtyValue == '') {
-            var alert_2 = this.alertCtrl.create({
+            var alert = this.alertCtrl.create({
                 title: '',
                 subTitle: '请确定内容: 日期，开始，完成，良品数，不良数 ',
                 buttons: ['確定']
             });
-            alert_2.present();
+            alert.present();
         }
     };
     EditWorkflow1Page.prototype.showWfOpsFinalInputsAlert = function (wfOrderTotalQty, wfOrderTotalGoodQty, wfOptBadQtyValue, wfOptGoodQtyValue) {
         var _this = this;
         if (wfOrderTotalQty > wfOptGoodQtyValue) {
-            var alert_3 = this.alertCtrl.create({
+            var alert = this.alertCtrl.create({
                 title: '',
                 subTitle: '预设总量 (' + wfOptGoodQtyValue + ') 小於 批次量 (' + wfOrderTotalQty + ')!',
                 buttons: ['確定']
             });
-            alert_3.present();
+            alert.present();
         }
         else if (wfOrderTotalQty < wfOptGoodQtyValue) {
             var form_1 = this.wfInputForm;
-            var alert_4 = this.alertCtrl.create({
+            var alert = this.alertCtrl.create({
                 title: '',
                 subTitle: '确定完成和上传' + ' Order Total: ' + wfOrderTotalQty + ' Good Total: ' + wfOrderTotalGoodQty + ' Bad:' + wfOptBadQtyValue + ' opt good: ' + wfOptGoodQtyValue,
                 buttons: [{
@@ -1151,7 +1188,7 @@ var EditWorkflow1Page = (function () {
                             //watch data 
                             _this.storage.get(form_1.value.wfFormId).then(function (resultStorageItemX) {
                                 if (resultStorageItemX) {
-                                    var alert_5 = _this.alertCtrl.create({
+                                    var alert_1 = _this.alertCtrl.create({
                                         title: 'Please Check!',
                                         // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
                                         // comment above for faster process
@@ -1163,32 +1200,32 @@ var EditWorkflow1Page = (function () {
                                                 }
                                             }]
                                     });
-                                    alert_5.present();
+                                    alert_1.present();
                                 }
                             });
                             //this.onSubmit();
                         }
                     }]
             });
-            alert_4.present();
+            alert.present();
         }
         else {
-            var alert_6 = this.alertCtrl.create({
+            var alert = this.alertCtrl.create({
                 title: '',
                 subTitle: '请确定内容: 日期，开始，完成，良品数，不良数 ',
                 buttons: ['確定']
             });
-            alert_6.present();
+            alert.present();
         }
     };
     EditWorkflow1Page.prototype.showWfQCPassAlert = function (wfQCPassValue) {
         if (!(wfQCPassValue == 2 || wfQCPassValue == 1)) {
-            var alert_7 = this.alertCtrl.create({
+            var alert = this.alertCtrl.create({
                 title: 'Please Check!',
                 subTitle: 'Please select 终检!',
                 buttons: ['OK']
             });
-            alert_7.present();
+            alert.present();
         }
     };
     EditWorkflow1Page.prototype.presentPrompt = function () {
@@ -1248,16 +1285,10 @@ EditWorkflow1Page = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-edit-workflow1',template:/*ion-inline-start:"/Users/thomasq/Sites/vtApp/src/pages/edit-workflow1/edit-workflow1.html"*/'<ion-header style="margin-top: 0px !important;margin-left: 0px !important;">\n    <ion-navbar>\n        <div style="align-items: center; display: inline;">\n            <img src="./assets/img/vt_icon.png" class="icon">\n            <ion-title>\n                &nbsp; ( {{this.wfInputForm.value.wfFormName}}裸品流程卡 )&nbsp; 工序:&nbsp; {{this.wfInputForm.value.wfProcessName}}\n            </ion-title>\n        </div>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <form [formGroup]="wfInputForm" (ngSubmit)="onSubmit()">\n        <ion-grid>\n            <!-- header bar -->\n            <ion-row wrap class="main headbar">\n                <ion-col *ngFor="let wfOrderDetail of wfOrderDetails">\n                    <ion-row justify-content-center wrap>\n                        <ion-col *ngIf="wfOrderDetail.method === \'input\'" no-padding>\n                            <ion-row align-items-center>\n                                <div class="inputLabel" no-padding>\n                                    {{wfOrderDetail.title}}\n                                </div>\n                                <ion-input *ngIf="wfOrderDetail.type != \'textarea\'" class="gridborder" disabled type={{wfOrderDetail.type}} [ngStyle]="{\'width.em\':wfOrderDetail.size}" formControlName={{wfOrderDetail.model}}></ion-input>\n\n                                <ion-textarea *ngIf="wfOrderDetail.type === \'textarea\'" formControlName={{wfOrderDetail.model}} [ngStyle]="{\'width.em\':wfOrderDetail.size}" class="textarea gridborder"></ion-textarea>\n                            </ion-row>\n                        </ion-col>\n\n                        <ion-col *ngIf="wfOrderDetail.method === \'break\'" no-padding [ngStyle]="{\'width.em\':wfOrderDetail.size}"></ion-col>\n\n                    </ion-row>\n                </ion-col>\n            </ion-row>\n\n            <!-- Content Section -->\n            <ion-row>\n                <!-- Material Info and Serial # -->\n                <ion-col class="main" col-5 no-padding>\n                    <!-- Header -->\n                    <ion-row>\n                        <ion-col col-1></ion-col>\n                        <ion-col text-center col-7>\n                            <h4 class="inputHeader">材料</h4>\n                        </ion-col>\n                        <ion-col text-center>\n                            <h4 class="inputHeader">批号</h4>\n                        </ion-col>\n                    </ion-row>\n\n                    <!-- Body -->\n                    <ion-row *ngFor="let wfRMDetail of wfRMDetails" justify-content-center align-items-center>\n                        <ion-col wrap col-auto>\n                            <div class="inputLabel">\n                                {{wfRMDetail.title}}\n                            </div>\n                        </ion-col>\n                        <ion-col col-6>\n                            <ion-input class="gridborder" disabled value={{wfInputForm.controls[wfRMDetail.modelName].value}}></ion-input>\n                        </ion-col>\n                        <ion-col>\n                            <ion-input class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelSerial].value}}></ion-input>\n                        </ion-col>\n                    </ion-row>\n                </ion-col>\n\n                <!-- Production Record + Ageing + Staff input -->\n                <ion-col col-7>\n\n                    <!-- Production input field -->\n                    <ion-row class="sec" align-self-stretch justify-content-left>\n\n                        <!-- Input field header -->\n                        <ion-col col-12>\n                            <h4 class="inputHeader">\n                                <ion-icon name="clipboard"></ion-icon>\n                                &nbsp; 生產记录\n                            </h4>\n                        </ion-col>\n\n                        <!-- Input field form -->\n                        <ion-col *ngFor="let wfInput of wfOpsInputs" col-auto>\n\n                            <!-- Simple Input field -->\n                            <ion-row *ngIf="wfInput.method == \'input\'" align-items-center justify-content-center>\n\n                                <div style="margin-left: 5px;margin-right: 5px;">\n                                    <!--<ion-icon name="{{wfInput.icon}}"></ion-icon>-->\n                                    {{wfInput.title}}\n                                </div>\n                                <ion-input *ngIf="wfInput.wfOpslI == 1" (change)="updateTextChg();" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{\'width.em\':wfInput.size}" class="gridborder"></ion-input>\n\n                                <ion-input *ngIf="wfInput.wfOpslI != 1" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{\'width.em\':wfInput.size}" class="gridborder"></ion-input>\n\n                                <button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">\n                                    扫一扫\n                                </button>\n                            </ion-row>\n\n                            <ion-row *ngIf="wfInput.method == \'buttons\'" justify-content-left align-items-center>\n                                <div class="inputLabel">\n                                    {{wfInput.title}}\n                                </div>\n\n                                <ion-buttons>\n                                    <button ion-button round outline type="button" style="width: auto;" *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model, button.value)" [ngClass]="{\'buttonsSelected\': wfInputForm.controls[wfInput.model].value === button.value}">\n                    &nbsp; {{button.label}}\n                  </button>\n                                </ion-buttons>\n                            </ion-row>\n\n                            <ion-col *ngIf="wfInput.method == \'inputs\'">\n                                <ion-row *ngIf="wfInput.header" align-items-center justify-content-center>\n                                    <div style="width: 45px;"></div>\n                                    <div style="text-align: center;">\n                                        {{wfInput.header}}\n                                    </div>\n                                </ion-row>\n\n                                <ion-row *ngFor="let option of wfInput.options" align-items-center justify-content-center>\n\n                                    <div class="inputLabel">\n                                        {{option.title}}\n                                    </div>\n                                    <!-- datetime -->\n                                    <div *ngIf="option.type == \'date\'" [ngStyle]="{\'width.em\':option.size}" class="gridborder">\n                                        <ion-datetime formControlName={{option.model}} displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY"></ion-datetime>\n                                    </div>\n\n                                    <div *ngIf="option.type == \'time\'" [ngStyle]="{\'width.em\':option.size}" class="gridborder">\n                                        <ion-datetime formControlName={{option.model}} displayFormat="HH:mm" pickerFormat="HH:mm"></ion-datetime>\n                                    </div>\n\n                                    <ion-input *ngIf="option.type != \'date\' && option.type != \'time\'" formControlName={{option.model}} type={{option.type}} [ngStyle]="{\'width.em\':option.size}" class="gridborder"></ion-input>\n\n                                    <button *ngIf="option.scan" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(option.model)">\n                                        扫一扫\n                                    </button>\n                                </ion-row>\n\n                            </ion-col>\n\n                            <ion-col *ngIf="wfInput.method == \'breaks\'" col-3>\n                            </ion-col>\n\n                            <ion-row *ngIf="wfInput.method == \'textarea\'" align-items-center>\n                                <div class="inputLabel">\n                                    {{wfInput.title}}\n                                </div>\n                                <ion-textarea formControlName={{wfInput.model}} style="min-width: auto;" class="gridborder">\n                                </ion-textarea>\n                            </ion-row>\n\n                            <ion-col *ngIf="wfInput.method == \'inputs\' + wfNavParams.wfProcess">\n                                <ion-row *ngIf="wfInput.header" align-items-center justify-content-center>\n                                    <div style="width: 45px;"></div>\n                                    <div style="text-align: center;">\n                                        {{wfInput.header}}\n                                    </div>\n                                </ion-row>\n\n                                <ion-row *ngFor="let option of wfInput.options" align-items-center justify-content-center>\n\n                                    <div class="inputLabel">\n                                        {{option.title}}\n                                    </div>\n\n                                    <div *ngIf="option.type == \'date\'" [ngStyle]="{\'width.em\':option.size}" class="gridborder">\n                                        <ion-datetime formControlName={{option.model}} displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY"></ion-datetime>\n                                    </div>\n\n                                    <div *ngIf="option.type == \'time\'" [ngStyle]="{\'width.em\':option.size}" class="gridborder">\n                                        <ion-datetime formControlName={{option.model}} displayFormat="HH:mm" pickerFormat="HH:mm"></ion-datetime>\n                                    </div>\n\n                                    <ion-input *ngIf="option.type != \'date\' && option.type != \'time\'" formControlName={{option.model}} type={{option.type}} [ngStyle]="{\'width.em\':option.size}" class="gridborder"></ion-input>\n\n                                    <button *ngIf="option.scan" item-end ion-button class="barcodeButton" type="button" (click)="checkBeforeScan()">\n                                        扫一扫\n                                    </button>\n                                </ion-row>\n\n                            </ion-col>\n\n                        </ion-col>\n\n                    </ion-row>\n\n                    <!-- Ageing Input field -->\n                    <ion-row *ngIf=" wfNavParams.wfProcess== \'5a0\' || wfNavParams.wfProcess == \'5b0\'" class="sec" align-items-center justify-content-start>\n\n                        <!-- Ageing field Title -->\n                        <ion-col col-12>\n                            <div *ngIf="wfNavParams.wfProcess== \'5a0\'" class="inputHeader">\n                                <ion-icon name="md-hand"></ion-icon>\n                                &nbsp; 手工老化\n                            </div>\n                            <div *ngIf="wfNavParams.wfProcess== \'5b0\'" class="inputHeader">\n                                <ion-icon name="ios-color-wand-outline"></ion-icon>\n                                &nbsp; 自动老化\n                            </div>\n                        </ion-col>\n\n                        <!-- Auto老化 Input field form -->\n                        <ion-col col-auto>\n                            <ion-row>\n\n                                <!-- Ageing Header -->\n                                <ion-col col-12>\n                                    <ion-row>\n                                        <div style="width: 45px">\n                                            &nbsp; &nbsp;\n                                        </div>\n\n                                        <div style="width: 8em; text-align: center;">\n                                            &nbsp; 规格\n                                        </div>\n\n                                        <div style="width: 8em; text-align: center;">\n                                            &nbsp; 实际\n                                        </div>\n                                    </ion-row>\n                                </ion-col>\n\n                                <!-- Ageing Input -->\n                                <ion-col>\n                                    <ion-row *ngFor="let wfInput of wfAgeingDetails" align-items-center>\n\n                                        <!-- Simple Input field -->\n                                        <div class="inputLabel">\n                                            {{wfInput.title}}\n                                        </div>\n\n                                        <div *ngFor="let col of wfInput.cols">\n                                            <div *ngIf="col.auto === false" [ngStyle]="{\'width.em\':wfInput.size}">\n                                                <ion-input formControlName={{col.model}} type={{col.type}} class="gridborder"></ion-input>\n                                            </div>\n\n                                            <div *ngIf="col.auto === true && wfNavParams.wfProcess == \'5b0\'" [ngStyle]="{\'width.em\':wfInput.size}">\n                                                <ion-input formControlName={{col.model}} type={{col.type}} class="gridborder"></ion-input>\n                                            </div>\n                                        </div>\n                                    </ion-row>\n                                </ion-col>\n                                <ion-col *ngIf="wfNavParams.wfProcess== \'5a0\'" padding-horizontal>\n                                    <ion-row>\n                                        <div class="inputLabel">\n                                            特殊说明\n                                        </div>\n                                    </ion-row>\n                                    <ion-textarea name="wfAgeingNote" style="min-height: 20em; width: auto" class="gridborder">\n                                    </ion-textarea>\n                                </ion-col>\n\n                                <!-- Auto Ageing 2nd part -->\n                                <ion-row *ngIf="wfNavParams.wfProcess== \'5b0\'" class="ageingSubPart">\n\n                                    <ion-col col-6>\n                                        <ion-row wrap align-items-center>\n                                            <ion-col *ngFor="let wfInput of wfAutoAgeingDetails" no-padding col-6>\n\n                                                <ion-row align-items-center>\n                                                    <div class="inputLabel">\n                                                        {{wfInput.title}}\n                                                    </div>\n\n                                                    <div [ngStyle]="{\'width.em\':wfInput.size}">\n                                                        <ion-input formControlName={{wfInput.model}} type={{wfInput.type}} no-padding class="gridborder"></ion-input>\n                                                    </div>\n\n                                                </ion-row>\n                                            </ion-col>\n                                        </ion-row>\n                                    </ion-col>\n\n                                    <!-- Note -->\n                                    <ion-col padding-horizontal>\n                                        <ion-row>\n                                            <div class="inputLabel">\n                                                特殊说明\n                                            </div>\n                                        </ion-row>\n                                        <ion-textarea name="wfAgeingNote" style="min-height: 20em; width: auto" class="gridborder">\n                                        </ion-textarea>\n                                    </ion-col>\n\n                                </ion-row>\n\n\n                            </ion-row>\n                        </ion-col>\n\n                    </ion-row>\n\n                    <!-- Workflow People input field -->\n                    <ion-row class="sec staff" align-items-center justify-content-left>\n\n                        <!-- Input field header -->\n                        <ion-col text-left col-12>\n                            <h4 class="inputHeader">\n                                <ion-icon name="md-contacts"></ion-icon>\n                                &nbsp; 员工信息\n                            </h4>\n                        </ion-col>\n\n\n                        <!-- Input field form -->\n                        <ion-col *ngFor="let wfInput of wfPplInputs" col-auto align-items-left justify-content-center>\n\n                            <!-- Simple Input field -->\n                            <ion-row align-items-center justify-content-center *ngIf="wfInput.method == \'input\'">\n\n                                <div class="inputLabel">\n                                    {{wfInput.title}}\n                                </div>\n                                <div (click)="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">\n                                    <ion-input [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')" (change)="updateTextChg();" *ngIf="wfInput.wfPplI == 1" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}}\n                                        [ngStyle]="{\'width.em\':wfInput.size}" class="gridborder"></ion-input>\n                                    <ion-input [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')" *ngIf="wfInput.wfPplI == 2" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{\'width.em\':wfInput.size}"\n                                        class="gridborder"></ion-input>\n\n                                    <ion-input [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')" *ngIf="wfInput.wfPplI == 3" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{\'width.em\':wfInput.size}"\n                                        class="gridborder"></ion-input>\n\n                                    <ion-input *ngIf="wfInput.wfPplI == 4" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{\'width.em\':wfInput.size}" class="gridborder"></ion-input>\n\n                                    <ion-input style="display: inline-block;" [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')" *ngIf="wfInput.wfPplI == 5" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}}\n                                        [ngStyle]="{\'width.em\':wfInput.size}" class="gridborder"></ion-input>\n                                    <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" *ngIf="wfInput.scan == 5" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">\n                                      簽署\n                                    </button>\n                                </div>\n                                <!--\n                                <div on-mouseover="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">\n                                    <button [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')" *ngIf="wfInput.scan == 3" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">\n                                    扫一扫\n                                </button>\n                                </div>\n                                <div on-mouseover="showWfQCPassAlert(wfInputForm.value.wfQCPass)">\n\n                                </div>\n                                -->\n                            </ion-row>\n\n\n                            <ion-row *ngIf="wfInput.method == \'textarea\'" align-items-center>\n                                <div class="inputLabel">\n                                    备注\n                                </div>\n                                <ion-textarea formControlName={{wfInput.model}} [ngStyle]="{\'width.em\':wfInput.size}" class="textarea gridborder"></ion-textarea>\n                                &nbsp;&nbsp;&nbsp;&nbsp;\n\n                                <button ion-button type="button" (click)="takePhoto()">\n                                        <ion-icon ios="ios-camera" md="md-camera"></ion-icon>\n                                        &nbsp; 拍照 </button>\n\n                            </ion-row>\n\n                            <!-- Select Buttons -->\n                            <ion-row *ngIf="wfInput.method == \'buttons\'" align-items-center>\n                                <div class="inputLabel">\n                                    {{wfInput.title}}\n                                </div>\n\n                                <ion-input formControlName={{wfInput.model}} hidden></ion-input>\n\n                                <ion-buttons>\n                                    <button ion-button round outline type="button" style="width: auto;" *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model,button.value)" [ngClass]="{\'buttonsSelected\': wfInputForm.controls[wfInput.model].value === button.value}">\n                                    <ion-icon name="{{button.icon}}"></ion-icon>\n                                    &nbsp; {{button.label}}\n                                  </button>\n                                </ion-buttons>\n                            </ion-row>\n\n                            <!-- Break -->\n                            <div *ngIf="wfInput.method == \'break\'" [ngStyle]="{\'width.em\':wfInput.size}">\n                            </div>\n\n                        </ion-col>\n                        <ion-row>\n                            &nbsp;&nbsp;&nbsp;&nbsp;\n                            <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="button" ion-button (click)="showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">完成工序</button>\n\n                        </ion-row>\n                    </ion-row>\n\n                    <ion-row justify-content-end>\n\n                    </ion-row>\n\n                </ion-col>\n\n                <ion-col>\n                    <ion-row *ngFor="let image of images">\n                        <img src="{{image}}" class="img">\n                        <!-- <ion-img src="{{image}}"></ion-img> -->\n                    </ion-row>\n                </ion-col>\n\n            </ion-row>\n        </ion-grid>\n    </form>\n</ion-content>'/*ion-inline-end:"/Users/thomasq/Sites/vtApp/src/pages/edit-workflow1/edit-workflow1.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */],
-        __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
-        __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */],
-        __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__["a" /* Camera */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_6__services_workflow__["a" /* WorkflowService */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__["a" /* Camera */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavParams */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_6__services_workflow__["a" /* WorkflowService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_workflow__["a" /* WorkflowService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */]) === "function" && _h || Object])
 ], EditWorkflow1Page);
 
+var _a, _b, _c, _d, _e, _f, _g, _h;
 //# sourceMappingURL=edit-workflow1.js.map
 
 /***/ }),
@@ -1273,6 +1304,7 @@ EditWorkflow1Page = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_workflow__ = __webpack_require__(125);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1288,25 +1320,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var EditWorkflow2Page = (function () {
-    function EditWorkflow2Page(storage, formBuilder, barcodeScanner, alertCtrl, camera, navParams) {
+    function EditWorkflow2Page(storage, formBuilder, barcodeScanner, alertCtrl, camera, navParams, wfSvc, navCtrl) {
         this.storage = storage;
         this.formBuilder = formBuilder;
         this.barcodeScanner = barcodeScanner;
         this.alertCtrl = alertCtrl;
         this.camera = camera;
         this.navParams = navParams;
+        this.wfSvc = wfSvc;
+        this.navCtrl = navCtrl;
         this.form = __WEBPACK_IMPORTED_MODULE_3__angular_forms__["e" /* NgForm */];
         this.wfOrderDetails = [];
         this.wfRMDetails = [];
         this.wfOpsInputs = [];
         this.wfPplInputs = [];
         this.images = [];
+        this.wfNavParams = this.navParams.data;
         // For calculating the time value
         this.tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
         this.appDate = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0, -1);
-        storage.ready().then(function () { });
-        this.wfNavParams = this.navParams.data.value;
         // Assume all are ion-input except the one specificed as textarea
         this.wfOrderDetails = [
             { method: "input", model: "WfOrderId", title: "工单号", type: "text", size: 20, highlight: false, process: { 1: true, 2: true, 3: true } },
@@ -1316,7 +1350,7 @@ var EditWorkflow2Page = (function () {
             { method: "input", model: "wfOrderDim", title: "尺寸", type: "text", size: 8, highlight: false, process: { 1: true, 2: true, 3: true } },
             { method: "input", model: "wfOrderTotalQty", title: "数量", type: "number", size: 8, highlight: false, process: { 1: true, 2: true, 3: true } },
             { method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 20, highlight: false, process: { 1: true, 2: true, 3: true } },
-            { method: "input", model: "wfOrderFormId", title: "流程卡号", type: "text", size: 20, highlight: false, process: { 1: true, 2: true, 3: true } },
+            { method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 20, highlight: false, process: { 1: true, 2: true, 3: true } },
             { method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 20, highlight: false, process: { 1: true, 2: true, 3: true } },
             { method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 20, highlight: false, process: { 1: true, 2: true, 3: true } },
             { method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 15, highlight: false, process: { 1: true, 2: true, 3: true } },
@@ -1389,6 +1423,7 @@ var EditWorkflow2Page = (function () {
     EditWorkflow2Page.prototype.ngOnInit = function () {
         var _this = this;
         console.log("Initialise the page 成品流程卡");
+        console.log(this.navParams);
         this.formInit();
         var form = this.wfInputForm;
         // alert(this.wfRMDetails[1].modelName)
@@ -1396,7 +1431,7 @@ var EditWorkflow2Page = (function () {
         console.log("loading from storage");
         this.storage.get(this.wfNavParams).then(function (dataDumpJsonXTmp) {
             console.log("this is storage");
-            console.log("storage:" + dataDumpJsonXTmp);
+            console.log("storage:" + JSON.stringify(dataDumpJsonXTmp));
             storageData = dataDumpJsonXTmp;
             // for (let key in storageData) {
             //   console.log(key + " : " +storageData[key]);
@@ -1409,35 +1444,38 @@ var EditWorkflow2Page = (function () {
              }
              */
             for (var key in form.value) {
-                console.log("Loading " + key + " Storage:" + storageData[key]);
+                // console.log("Loading " + key + " Storage:" + storageData[key]);
                 try {
                     if (key == 'wfStaffTechId') {
                         _this.wfStaffTechIdTmp = storageData[key];
                         //alert('staff 1:' + StaffArr.wfStaffTechIda);
                         form.controls[key].setValue('');
-                        console.log('storage test 1: ' + _this.wfStaffTechIdTmp);
+                        // console.log('storage test 1: ' + this.wfStaffTechIdTmp);
                     }
                     else if (key == 'wfStaffOptShift') {
                         _this.wfStaffOptShiftTmp = storageData[key];
                         form.controls[key].setValue('');
                         //alert('staff 2:' + this.wfStaffOptShiftTmp);
-                        console.log('storage test 1: ' + _this.wfStaffOptShiftTmp);
+                        // console.log('storage test 1: ' + this.wfStaffOptShiftTmp);
                     }
                     else if (key == 'wfQCSignOff') {
                         _this.wfQCSignOffTmp = storageData[key];
                         form.controls[key].setValue('');
                         //alert('staff 3:' + this.wfQCSignOffTmp);
-                        console.log('storage test 1: ' + _this.wfQCSignOffTmp);
+                        // console.log('storage test 1: ' + this.wfQCSignOffTmp);
                     }
                     else {
                         form.controls[key].setValue(storageData[key]);
+                        console.log("Form value" + form.controls[key]);
                     }
                 }
                 catch (err) {
-                    console.log(err);
+                    // console.log(err);
                 }
             }
+            console.log(_this.wfInputForm.value);
         });
+        console.log(this.wfInputForm.value);
     };
     EditWorkflow2Page.prototype.checkBeforeScan = function (form) {
         if (form.value.wfOptBadQty === '') {
@@ -1504,8 +1542,29 @@ var EditWorkflow2Page = (function () {
     EditWorkflow2Page.prototype.onSubmit = function () {
         var form = this.wfInputForm;
         var storageData;
-        alert(" < " + form.value + " > !");
-        console.log(this.wfInputForm);
+        // alert(" < " + form.value + " > !");
+        console.log("Submitting the form now");
+        console.log(form.value);
+        this.wfSvc.upload(form.value, form.value.wfForm);
+        switch (form.value.wfProcess) {
+            case "1":
+                form.value.wfProcess = "2";
+                form.value.wfProcessName = "贴片外观";
+                break;
+            case "2":
+                form.value.wfProcess = "3";
+                form.value.wfProcessName = "终检";
+                break;
+            case "3":
+                alert("嚫,工序完成了!");
+                break;
+            default:
+                alert("有問題@_@!");
+        }
+        console.log("Saving to local storage");
+        this.storage.set(form.value.wfFormId, form.value);
+        console.log("Leaving this page");
+        this.navCtrl.pop();
     };
     EditWorkflow2Page.prototype.updateForm = function (model, value) {
         var form = this.wfInputForm;
@@ -1530,8 +1589,10 @@ var EditWorkflow2Page = (function () {
         this.wfInputForm = this.formBuilder.group({
             wfProcess: [''],
             wfProcessName: [''],
+            wfFormName: [''],
+            wfForm: [''],
             // Order Inputs detail
-            wfOrderFormId: [''],
+            wfFormId: [''],
             WfOrderId: [''],
             wfOrderBatchId: [''],
             wfOrderBatchQty: [''],
@@ -1586,22 +1647,22 @@ var EditWorkflow2Page = (function () {
     };
     EditWorkflow2Page.prototype.showWfOpsInputsAlert = function (wfOptBadQtyValue, wfOptGoodQtyValue) {
         if (wfOptBadQtyValue == '' || wfOptGoodQtyValue == '') {
-            var alert_1 = this.alertCtrl.create({
+            var alert = this.alertCtrl.create({
                 title: 'Please Check!',
                 subTitle: 'Please fill out the following: 日期，开始，完成，良品数，不良数 ',
                 buttons: ['OK']
             });
-            alert_1.present();
+            alert.present();
         }
     };
     EditWorkflow2Page.prototype.showWfQCPassAlert = function (wfQCPassValue) {
         if (!(wfQCPassValue == 2 || wfQCPassValue == 1)) {
-            var alert_2 = this.alertCtrl.create({
+            var alert = this.alertCtrl.create({
                 title: 'Please Check!',
                 subTitle: 'Please select 终检!',
                 buttons: ['OK']
             });
-            alert_2.present();
+            alert.present();
         }
     };
     EditWorkflow2Page.prototype.takePhoto = function () {
@@ -1630,16 +1691,12 @@ var EditWorkflow2Page = (function () {
 }());
 EditWorkflow2Page = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-edit-workflow2',template:/*ion-inline-start:"/Users/thomasq/Sites/vtApp/src/pages/edit-workflow2/edit-workflow2.html"*/'<ion-header style="margin-top: 0px !important;margin-left: 0px !important;">\n    <ion-navbar>\n        <div style="align-items: center; display: inline;">\n            <img src="./assets/img/vt_icon.png" class="icon">\n            <ion-title>\n                <!--&nbsp; ( {{wfNavParams.wfFormName}} )&nbsp; 工序:&nbsp; {{wfNavParams.wfProcessName}}-->\n            </ion-title>\n        </div>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <form [formGroup]="wfInputForm" (ngSubmit)="onSubmit()">\n        <ion-grid>\n            <!-- header bar -->\n            <ion-row wrap class="main headbar">\n                <ion-col *ngFor="let wfOrderDetail of wfOrderDetails">\n                    <ion-row justify-content-center wrap>\n                        <ion-col *ngIf="wfOrderDetail.method === \'input\' && wfOrderDetail.process[wfNavProcess]"\n                                 no-padding>\n\n                            <ion-row align-items-center>\n                                <div class="inputLabel" no-padding>\n                                    {{wfOrderDetail.title}}\n                                </div>\n                                <ion-input *ngIf="wfOrderDetail.type != \'textarea\'"\n                                           class="gridborder"\n                                           disabled\n                                           type={{wfOrderDetail.type}}\n                                           [ngStyle]="{\'width.em\':wfOrderDetail.size}"\n                                           formControlName={{wfOrderDetail.model}}></ion-input>\n\n                                <ion-textarea *ngIf="wfOrderDetail.type === \'textarea\'"\n                                              formControlName={{wfOrderDetail.model}}\n                                              [ngStyle]="{\'width.em\':wfOrderDetail.size}"\n                                              class="textarea gridborder"></ion-textarea>\n                            </ion-row>\n                        </ion-col>\n\n                        <!--<ion-col *ngIf="wfOrderDetail.method === \'input\' + wfNavProcess" no-padding>-->\n                        <!--<ion-row align-items-center>-->\n                        <!--<div class="inputLabel" no-padding>-->\n                        <!--{{wfOrderDetail.title}}-->\n                        <!--</div>-->\n                        <!--<ion-input *ngIf="wfOrderDetail.type != \'textarea\'" class="gridborder" disabled type={{wfOrderDetail.type}} [ngStyle]="{\'width.em\':wfOrderDetail.size}" formControlName={{wfOrderDetail.model}}></ion-input>-->\n\n                        <!--<ion-textarea *ngIf="wfOrderDetail.type === \'textarea\'"-->\n                        <!--formControlName={{wfOrderDetail.model}}-->\n                        <!--[ngStyle]="{\'width.em\':wfOrderDetail.size}"-->\n                        <!--class="textarea gridborder"></ion-textarea>-->\n                        <!--</ion-row>-->\n                        <!--</ion-col>-->\n\n                        <ion-col *ngIf="wfOrderDetail.method === \'break\'" no-padding [ngStyle]="{\'width.em\':wfOrderDetail.size}"></ion-col>\n\n                    </ion-row>\n                </ion-col>\n            </ion-row>\n\n            <!-- Content Section -->\n            <ion-row>\n                <!-- Material Info and Serial # -->\n                <ion-col class="main" col-5 no-padding>\n                    <!-- Header -->\n                    <ion-row>\n                        <ion-col col-1></ion-col>\n                        <ion-col text-center col-7>\n                            <h4 class="inputHeader">材料</h4>\n                        </ion-col>\n                        <ion-col text-center>\n                            <h4 class="inputHeader">批号</h4>\n                        </ion-col>\n                    </ion-row>\n\n                    <!-- Body -->\n                    <ion-row *ngFor="let wfRMDetail of wfRMDetails"\n                             justify-content-center\n                             align-items-center>\n                        <ion-col wrap col-auto>\n                            <div class="inputLabel">\n                                {{wfRMDetail.title}}\n                            </div>\n                        </ion-col>\n                        <ion-col col-6>\n                            <ion-input class="gridborder"\n                                       disabled\n                                       value={{wfInputForm.controls[wfRMDetail.modelName].value}}></ion-input>\n                        </ion-col>\n                        <ion-col>\n                            <ion-input class="gridborder"\n                                       value={{wfInputForm.controls[wfRMDetail.modelSerial].value}}></ion-input>\n                        </ion-col>\n                    </ion-row>\n                </ion-col>\n\n                <!-- Production Record + Ageing + Staff input -->\n                <ion-col col-7>\n\n                    <!-- Production input field -->\n                    <ion-row class="sec"\n                             align-self-stretch\n                             justify-content-left>\n\n                        <!-- Input field header -->\n                        <ion-col col-12>\n                            <h4 class="inputHeader">\n                                <ion-icon name="clipboard"></ion-icon>\n                                &nbsp; 参数要求\n                            </h4>\n                        </ion-col>\n\n                        <!-- Input field form -->\n                        <ion-col *ngFor="let wfInput of wfOpsInputs" col-auto>\n\n                            <!-- Simple Input field -->\n                            <ion-row *ngIf="wfInput.method == \'input\' && wfInput.process[wfNavProcess]"\n                                     align-items-center\n                                     justify-content-center>\n\n                                <div *ngIf="wfInput.process[wfNavProcess]"\n                                     style="margin-left: 5px;margin-right: 5px;">\n                                    {{wfInput.title}}\n                                </div>\n\n                                <ion-input\n                                        *ngIf="wfInput.type != \'textarea\'"\n                                        type={{wfInput.type}}\n                                        formControlName={{wfInput.model}}\n                                        [ngStyle]="{\'width.em\':wfInput.size}"\n                                        class="gridborder"></ion-input>\n\n                                <ion-textarea\n                                        *ngIf="wfInput.type === \'textarea\'"\n                                        formControlName={{wfInput.model}}\n                                        [ngStyle]="{\'width.em\':wfInput.size}"\n                                        class="textarea gridborder"></ion-textarea>\n\n                                <button *ngIf="wfInput.scan"\n                                        item-end\n                                        ion-button\n                                        class="barcodeButton"\n                                        type="button"\n                                        (click)="scanBarcode(wfInput.model)">\n                                    扫一扫\n                                </button>\n                            </ion-row>\n\n                            <ion-row *ngIf="wfInput.method == \'buttons\' && wfInput.process[wfNavProcess]"\n                                     justify-content-left\n                                     align-items-center>\n                                <div class="inputLabel">\n                                    {{wfInput.title}}\n                                </div>\n\n                                <ion-buttons>\n                                    <button *ngFor="let button of wfInput.buttons"\n                                            (click)="updateForm(wfInput.model, button.value)"\n                                            [ngClass]="{\'buttonsSelected\': wfInputForm.controls[wfInput.model].value === button.value}"\n                                            ion-button\n                                            round\n                                            outline\n                                            type="button"\n                                            style="width: auto;">\n                                        &nbsp; {{button.label}}\n                                    </button>\n                                </ion-buttons>\n                            </ion-row>\n\n                            <ion-col *ngIf="wfInput.method == \'inputs\' && wfInput.process[wfNavProcess]">\n                                <ion-row *ngIf="wfInput.header" align-items-center justify-content-center>\n                                    <div style="width: 45px;"></div>\n                                    <div style="text-align: center;">\n                                        {{wfInput.header}}\n                                    </div>                                                                                                                                                             2\n                                </ion-row>\n\n                                <ion-row *ngFor="let option of wfInput.options"\n                                         align-items-center\n                                         justify-content-center>\n\n                                    <div *ngIf="option.process[wfNavProcess]"\n                                         class="inputLabel">\n                                        {{option.title}}\n                                    </div>\n                                    <!-- datetime -->\n                                    <div *ngIf="option.type == \'date\' && option.process[wfNavProcess]"\n                                         [ngStyle]="{\'width.em\':option.size}"\n                                         class="gridborder">\n                                        <ion-datetime\n                                                formControlName={{option.model}}\n                                                displayFormat="DD/MM/YYYY"\n                                                pickerFormat="DD MM YYYY"></ion-datetime>\n                                    </div>\n\n                                    <ion-input\n                                            *ngIf="option.type != \'date\' && option.process[wfNavProcess]"\n                                            formControlName={{option.model}}\n                                            type={{option.type}}\n                                            [ngStyle]="{\'width.em\':option.size}"\n                                            class="gridborder"></ion-input>\n\n                                    <button\n                                            *ngIf="option.scan && option.process[wfNavProcess]"\n                                            item-end\n                                            ion-button\n                                            class="barcodeButton"\n                                            type="button"\n                                            (click)="scanBarcode(option.model)">\n                                        扫一扫\n                                    </button>\n                                </ion-row>\n\n                            </ion-col>\n\n\n                            <ion-col *ngIf="wfInput.method === \'break\' && option.process[wfNavProcess]"\n                                     no-padding>\n                                <div [ngStyle]="{\'width.em\':wfInput.size}"></div>\n                            </ion-col>\n\n\n                            <ion-row\n                                    *ngIf="wfInput.method == \'textarea\' && option.process[wfNavProcess]"\n                                    align-items-center>\n                                <div class="inputLabel">\n                                    {{wfInput.title}}\n                                </div>\n                                <ion-textarea\n                                        formControlName={{wfInput.model}}\n                                        style="min-width: auto;"\n                                        class="gridborder">\n                                </ion-textarea>\n                            </ion-row>\n\n                        </ion-col>\n\n                    </ion-row>\n\n                    <!-- Workflow People input field -->\n                    <ion-row class="sec staff" align-items-center justify-content-left>\n\n                        <!-- Input field header -->\n                        <ion-col text-left col-12>\n                            <h4 class="inputHeader">\n                                <ion-icon name="md-contacts"></ion-icon>\n                                &nbsp; 员工信息\n                            </h4>\n                        </ion-col>\n\n                        <!-- Input field form -->\n                        <div *ngFor="let wfInput of wfPplInputs">\n                            <ion-row>\n                                <ion-col *ngIf="wfInput.process[wfNavProcess]"\n                                         col-auto align-items-left justify-content-center>\n\n                                    <!-- Simple Input field -->\n                                    <ion-row *ngIf="wfInput.method == \'input\' && wfInput.process[wfNavProcess]"\n                                             align-items-center\n                                             justify-content-center >\n\n                                        <div class="inputLabel">\n                                            {{wfInput.title}}\n                                        </div>\n\n                                        <ion-input\n                                                formControlName={{wfInput.model}}\n                                                type={{wfInput.type}}\n                                                value={{wfInputForm.controls[wfInput.model].value}}\n                                                [ngStyle]="{\'width.em\':wfInput.size}"\n                                                class="gridborder"></ion-input>\n                                        <div on-mouseover="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">\n                                            <button *ngIf="wfInput.scan == 1"\n                                                    [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')"\n                                                    item-end\n                                                    ion-button\n                                                    class="barcodeButton"\n                                                    type="button"\n                                                    (click)="scanBarcode(wfInput.model)">\n                                                扫一扫\n                                            </button>\n                                            <button *ngIf="wfInput.scan == 2"\n                                                    [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')"\n                                                    item-end\n                                                    ion-button\n                                                    class="barcodeButton"\n                                                    type="button"\n                                                    (click)="scanBarcode(wfInput.model)">\n                                                扫一扫\n                                            </button>\n                                            <button *ngIf="wfInput.scan == 3"\n                                                    [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')"\n                                                    item-end\n                                                    ion-button\n                                                    class="barcodeButton"\n                                                    type="button"\n                                                    (click)="scanBarcode(wfInput.model)">\n                                                扫一扫\n                                            </button>\n                                        </div>\n                                        <div on-mouseover="showWfQCPassAlert(wfInputForm.value.wfQCPass)">\n                                            <button *ngIf="wfInput.scan == 4 && wfInput.process[wfNavProcess]"\n                                                    [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)"\n                                                    item-end\n                                                    ion-button\n                                                    class="barcodeButton"\n                                                    type="button"\n                                                    (click)="scanBarcode(wfInput.model)">\n                                                扫一扫\n                                            </button>\n                                        </div>\n                                    </ion-row>\n\n\n                                    <ion-row *ngIf="wfInput.method == \'textarea\' && wfInput.process[wfNavProcess]" align-items-center>\n                                        <div class="inputLabel">\n                                            备注\n                                        </div>\n                                        <ion-textarea formControlName={{wfInput.model}} [ngStyle]="{\'width.em\':wfInput.size}" class="textarea gridborder"></ion-textarea>\n                                    </ion-row>\n\n                                    <!-- Select Buttons -->\n                                    <ion-row *ngIf="wfInput.method == \'buttons\' && wfInput.process[wfNavProcess]" align-items-center>\n                                        <div class="inputLabel">\n                                            {{wfInput.title}}\n                                        </div>\n\n                                        <ion-input formControlName={{wfInput.model}} hidden></ion-input>\n\n\n                                        <ion-buttons>\n                                            <button ion-button round outline type="button" style="width: auto;" *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model,button.value)" [ngClass]="{\'buttonsSelected\': wfInputForm.controls[wfInput.model].value === button.value}">\n                                                <ion-icon name="{{button.icon}}"></ion-icon>\n                                                &nbsp; {{button.label}}\n                                            </button>\n                                        </ion-buttons>\n                                    </ion-row>\n\n                                    <!-- Break -->\n                                    <div *ngIf="wfInput.method == \'break\' && wfInput.process[wfNavProcess]" [ngStyle]="{\'width.em\':wfInput.size}">\n                                    </div>\n\n                                </ion-col>\n                            </ion-row>\n                        </div>\n\n\n                    </ion-row>\n\n                    <ion-row justify-content-end>\n                        <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="submit" ion-button>\n                            <ion-icon ios="ios-checkbox-outline" md="md-checkbox-outline">\n                                &nbsp; 批次完成\n                            </ion-icon>\n                        </button>\n                        <button ion-button type="button" (click)="takePhoto()">\n                            <ion-icon ios="ios-camera" md="md-camera"></ion-icon>\n                            &nbsp; 拍照\n                        </button>\n\n                    </ion-row>\n\n                </ion-col>\n\n                <ion-col>\n                    <ion-row *ngFor="let image of images">\n                        <img src="{{image}}" class="img">\n                        <ion-img src="{{image}}"></ion-img>\n                    </ion-row>\n                </ion-col>\n\n            </ion-row>\n        </ion-grid>\n    </form>\n</ion-content>'/*ion-inline-end:"/Users/thomasq/Sites/vtApp/src/pages/edit-workflow2/edit-workflow2.html"*/,
+        selector: 'page-edit-workflow2',template:/*ion-inline-start:"/Users/thomasq/Sites/vtApp/src/pages/edit-workflow2/edit-workflow2.html"*/'<ion-header style="margin-top: 0px !important;margin-left: 0px !important;">\n    <ion-navbar>\n        <div style="align-items: center; display: inline;">\n            <img src="./assets/img/vt_icon.png" class="icon">\n            <ion-title>\n                &nbsp; ( {{wfInputForm.value.wfFormName}} )&nbsp; 工序:&nbsp; {{wfInputForm.value.wfProcessName}}\n            </ion-title>\n        </div>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <form [formGroup]="wfInputForm" (ngSubmit)="onSubmit()">\n        <ion-grid>\n            <!-- header bar -->\n            <ion-row wrap class="main headbar">\n                <ion-col *ngFor="let wfOrderDetail of wfOrderDetails">\n                    <ion-row justify-content-center wrap>\n                        <ion-col *ngIf="wfOrderDetail.method === \'input\' && wfOrderDetail.process[wfInputForm.value.wfProcess]"\n                                 no-padding>\n\n                            <ion-row align-items-center>\n                                <div class="inputLabel" no-padding>\n                                    {{wfOrderDetail.title}}\n                                </div>\n                                <ion-input *ngIf="wfOrderDetail.type != \'textarea\'"\n                                           class="gridborder"\n                                           disabled\n                                           type={{wfOrderDetail.type}}\n                                           [ngStyle]="{\'width.em\':wfOrderDetail.size}"\n                                           formControlName={{wfOrderDetail.model}}></ion-input>\n\n                                <ion-textarea *ngIf="wfOrderDetail.type === \'textarea\'"\n                                              formControlName={{wfOrderDetail.model}}\n                                              [ngStyle]="{\'width.em\':wfOrderDetail.size}"\n                                              class="textarea gridborder"></ion-textarea>\n                            </ion-row>\n                        </ion-col>\n\n                        <ion-col *ngIf="wfOrderDetail.method === \'break\'" no-padding [ngStyle]="{\'width.em\':wfOrderDetail.size}"></ion-col>\n\n                    </ion-row>\n                </ion-col>\n            </ion-row>\n\n            <!-- Content Section -->\n            <ion-row>\n                <!-- Material Info and Serial # -->\n                <ion-col class="main" col-5 no-padding>\n                    <!-- Header -->\n                    <ion-row>\n                        <ion-col col-1></ion-col>\n                        <ion-col text-center col-7>\n                            <h4 class="inputHeader">材料</h4>\n                        </ion-col>\n                        <ion-col text-center>\n                            <h4 class="inputHeader">批号</h4>\n                        </ion-col>\n                    </ion-row>\n\n                    <!-- Body -->\n                    <ion-row *ngFor="let wfRMDetail of wfRMDetails"\n                             justify-content-center\n                             align-items-center>\n                        <ion-col wrap col-auto>\n                            <div class="inputLabel">\n                                {{wfRMDetail.title}}\n                            </div>\n                        </ion-col>\n                        <ion-col col-6>\n                            <ion-input class="gridborder"\n                                       disabled\n                                       value={{wfInputForm.controls[wfRMDetail.modelName].value}}></ion-input>\n                        </ion-col>\n                        <ion-col>\n                            <ion-input class="gridborder"\n                                       value={{wfInputForm.controls[wfRMDetail.modelSerial].value}}></ion-input>\n                        </ion-col>\n                    </ion-row>\n                </ion-col>\n\n                <!-- Production Record + Ageing + Staff input -->\n                <ion-col col-7>\n\n                    <!-- Production input field -->\n                    <ion-row class="sec"\n                             align-self-stretch\n                             justify-content-left>\n\n                        <!-- Input field header -->\n                        <ion-col col-12>\n                            <h4 class="inputHeader">\n                                <ion-icon name="clipboard"></ion-icon>\n                                &nbsp; 参数要求\n                            </h4>\n                        </ion-col>\n\n                        <!-- Input field form -->\n                        <ion-col *ngFor="let wfInput of wfOpsInputs" col-auto>\n\n                            <!-- Simple Input field -->\n                            <ion-row *ngIf="wfInput.method == \'input\' && wfInput.process[wfInputForm.value.wfProcess]"\n                                     align-items-center\n                                     justify-content-center>\n\n                                <div *ngIf="wfInput.process[wfInputForm.value.wfProcess]"\n                                     style="margin-left: 5px;margin-right: 5px;">\n                                    {{wfInput.title}}\n                                </div>\n\n                                <ion-input\n                                        *ngIf="wfInput.type != \'textarea\'"\n                                        type={{wfInput.type}}\n                                        formControlName={{wfInput.model}}\n                                        [ngStyle]="{\'width.em\':wfInput.size}"\n                                        class="gridborder"></ion-input>\n\n                                <ion-textarea\n                                        *ngIf="wfInput.type === \'textarea\'"\n                                        formControlName={{wfInput.model}}\n                                        [ngStyle]="{\'width.em\':wfInput.size}"\n                                        class="textarea gridborder"></ion-textarea>\n\n                                <button *ngIf="wfInput.scan"\n                                        item-end\n                                        ion-button\n                                        class="barcodeButton"\n                                        type="button"\n                                        (click)="scanBarcode(wfInput.model)">\n                                    扫一扫\n                                </button>\n                            </ion-row>\n\n                            <ion-row *ngIf="wfInput.method == \'buttons\' && wfInput.process[wfInputForm.value.wfProcess]"\n                                     justify-content-left\n                                     align-items-center>\n                                <div class="inputLabel">\n                                    {{wfInput.title}}\n                                </div>\n\n                                <ion-buttons>\n                                    <button *ngFor="let button of wfInput.buttons"\n                                            (click)="updateForm(wfInput.model, button.value)"\n                                            [ngClass]="{\'buttonsSelected\': wfInputForm.controls[wfInput.model].value === button.value}"\n                                            ion-button\n                                            round\n                                            outline\n                                            type="button"\n                                            style="width: auto;">\n                                        &nbsp; {{button.label}}\n                                    </button>\n                                </ion-buttons>\n                            </ion-row>\n\n                            <ion-col *ngIf="wfInput.method == \'inputs\' && wfInput.process[wfInputForm.value.wfProcess]">\n                                <ion-row *ngIf="wfInput.header" align-items-center justify-content-center>\n                                    <div style="width: 45px;"></div>\n                                    <div style="text-align: center;">\n                                        {{wfInput.header}}\n                                    </div>                                                                                                                                                             2\n                                </ion-row>\n\n                                <ion-row *ngFor="let option of wfInput.options"\n                                         align-items-center\n                                         justify-content-center>\n\n                                    <div *ngIf="option.process[wfInputForm.value.wfProcess]"\n                                         class="inputLabel">\n                                        {{option.title}}\n                                    </div>\n                                    <!-- datetime -->\n                                    <div *ngIf="option.type == \'date\' && option.process[wfInputForm.value.wfProcess]"\n                                         [ngStyle]="{\'width.em\':option.size}"\n                                         class="gridborder">\n                                        <ion-datetime\n                                                formControlName={{option.model}}\n                                                displayFormat="DD/MM/YYYY"\n                                                pickerFormat="DD MM YYYY"></ion-datetime>\n                                    </div>\n\n                                    <ion-input\n                                            *ngIf="option.type != \'date\' && option.process[wfInputForm.value.wfProcess]"\n                                            formControlName={{option.model}}\n                                            type={{option.type}}\n                                            [ngStyle]="{\'width.em\':option.size}"\n                                            class="gridborder"></ion-input>\n\n                                    <button\n                                            *ngIf="option.scan && option.process[wfInputForm.value.wfProcess]"\n                                            item-end\n                                            ion-button\n                                            class="barcodeButton"\n                                            type="button"\n                                            (click)="scanBarcode(option.model)">\n                                        扫一扫\n                                    </button>\n                                </ion-row>\n\n                            </ion-col>\n\n\n                            <ion-col *ngIf="wfInput.method === \'break\' && option.process[wfInputForm.value.wfProcess]"\n                                     no-padding>\n                                <div [ngStyle]="{\'width.em\':wfInput.size}"></div>\n                            </ion-col>\n\n\n                            <ion-row\n                                    *ngIf="wfInput.method == \'textarea\' && option.process[wfInputForm.value.wfProcess]"\n                                    align-items-center>\n                                <div class="inputLabel">\n                                    {{wfInput.title}}\n                                </div>\n                                <ion-textarea\n                                        formControlName={{wfInput.model}}\n                                        style="min-width: auto;"\n                                        class="gridborder">\n                                </ion-textarea>\n                            </ion-row>\n\n                        </ion-col>\n\n                    </ion-row>\n\n                    <!-- Workflow People input field -->\n                    <ion-row class="sec staff" align-items-center justify-content-left>\n\n                        <!-- Input field header -->\n                        <ion-col text-left col-12>\n                            <h4 class="inputHeader">\n                                <ion-icon name="md-contacts"></ion-icon>\n                                &nbsp; 员工信息\n                            </h4>\n                        </ion-col>\n\n                        <!-- Input field form -->\n                        <div *ngFor="let wfInput of wfPplInputs">\n                            <ion-row>\n                                <ion-col *ngIf="wfInput.process[wfInputForm.value.wfProcess]"\n                                         col-auto align-items-left justify-content-center>\n\n                                    <!-- Simple Input field -->\n                                    <ion-row *ngIf="wfInput.method == \'input\' && wfInput.process[wfInputForm.value.wfProcess]"\n                                             align-items-center\n                                             justify-content-center >\n\n                                        <div class="inputLabel">\n                                            {{wfInput.title}}\n                                        </div>\n\n                                        <ion-input\n                                                formControlName={{wfInput.model}}\n                                                type={{wfInput.type}}\n                                                value={{wfInputForm.controls[wfInput.model].value}}\n                                                [ngStyle]="{\'width.em\':wfInput.size}"\n                                                class="gridborder"></ion-input>\n                                        <div on-mouseover="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">\n                                            <button *ngIf="wfInput.scan == 1"\n                                                    [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')"\n                                                    item-end\n                                                    ion-button\n                                                    class="barcodeButton"\n                                                    type="button"\n                                                    (click)="scanBarcode(wfInput.model)">\n                                                扫一扫\n                                            </button>\n                                            <button *ngIf="wfInput.scan == 2"\n                                                    [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')"\n                                                    item-end\n                                                    ion-button\n                                                    class="barcodeButton"\n                                                    type="button"\n                                                    (click)="scanBarcode(wfInput.model)">\n                                                扫一扫\n                                            </button>\n                                            <button *ngIf="wfInput.scan == 3"\n                                                    [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')"\n                                                    item-end\n                                                    ion-button\n                                                    class="barcodeButton"\n                                                    type="button"\n                                                    (click)="scanBarcode(wfInput.model)">\n                                                扫一扫\n                                            </button>\n                                        </div>\n                                        <div on-mouseover="showWfQCPassAlert(wfInputForm.value.wfQCPass)">\n                                            <button *ngIf="wfInput.scan == 4 && wfInput.process[wfInputForm.value.wfProcess]"\n                                                    [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)"\n                                                    item-end\n                                                    ion-button\n                                                    class="barcodeButton"\n                                                    type="button"\n                                                    (click)="scanBarcode(wfInput.model)">\n                                                扫一扫\n                                            </button>\n                                        </div>\n                                    </ion-row>\n\n\n                                    <ion-row *ngIf="wfInput.method == \'textarea\' && wfInput.process[wfInputForm.value.wfProcess]" align-items-center>\n                                        <div class="inputLabel">\n                                            备注\n                                        </div>\n                                        <ion-textarea formControlName={{wfInput.model}} [ngStyle]="{\'width.em\':wfInput.size}" class="textarea gridborder"></ion-textarea>\n                                    </ion-row>\n\n                                    <!-- Select Buttons -->\n                                    <ion-row *ngIf="wfInput.method == \'buttons\' && wfInput.process[wfInputForm.value.wfProcess]" align-items-center>\n                                        <div class="inputLabel">\n                                            {{wfInput.title}}\n                                        </div>\n\n                                        <ion-input formControlName={{wfInput.model}} hidden></ion-input>\n\n\n                                        <ion-buttons>\n                                            <button ion-button round outline type="button" style="width: auto;" *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model,button.value)" [ngClass]="{\'buttonsSelected\': wfInputForm.controls[wfInput.model].value === button.value}">\n                                                <ion-icon name="{{button.icon}}"></ion-icon>\n                                                &nbsp; {{button.label}}\n                                            </button>\n                                        </ion-buttons>\n                                    </ion-row>\n\n                                    <!-- Break -->\n                                    <div *ngIf="wfInput.method == \'break\' && wfInput.process[wfInputForm.value.wfProcess]" [ngStyle]="{\'width.em\':wfInput.size}">\n                                    </div>\n\n                                </ion-col>\n                            </ion-row>\n                        </div>\n\n\n                    </ion-row>\n\n                    <ion-row justify-content-end>\n                        <button type="submit" ion-button>\n                            <ion-icon ios="ios-checkbox-outline" md="md-checkbox-outline">\n                                &nbsp; 批次完成\n                            </ion-icon>\n                        </button>\n                        <button ion-button type="button" (click)="takePhoto()">\n                            <ion-icon ios="ios-camera" md="md-camera"></ion-icon>\n                            &nbsp; 拍照\n                        </button>\n\n                    </ion-row>\n\n                </ion-col>\n\n                <ion-col>\n                    <ion-row *ngFor="let image of images">\n                        <img src="{{image}}" class="img">\n                        <ion-img src="{{image}}"></ion-img>\n                    </ion-row>\n                </ion-col>\n\n            </ion-row>\n        </ion-grid>\n    </form>\n</ion-content>'/*ion-inline-end:"/Users/thomasq/Sites/vtApp/src/pages/edit-workflow2/edit-workflow2.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */],
-        __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
-        __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */],
-        __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__["a" /* Camera */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavParams */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__["a" /* Camera */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavParams */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_6__services_workflow__["a" /* WorkflowService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_workflow__["a" /* WorkflowService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */]) === "function" && _h || Object])
 ], EditWorkflow2Page);
 
+var _a, _b, _c, _d, _e, _f, _g, _h;
 //# sourceMappingURL=edit-workflow2.js.map
 
 /***/ }),

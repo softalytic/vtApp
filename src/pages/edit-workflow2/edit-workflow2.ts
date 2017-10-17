@@ -4,6 +4,7 @@ import { NavController, NavParams, AlertController, Events } from 'ionic-angular
 import { NgForm, FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { Camera, CameraOptions } from "@ionic-native/camera";
+import { WorkflowService } from "../../services/workflow";
 
 @Component({
   selector: 'page-edit-workflow2',
@@ -21,12 +22,10 @@ export class EditWorkflow2Page implements OnInit{
 
   // wfNavProcess = 3;
 
-
-
   wfInputForm: FormGroup;
 
   pushPage: any;
-  wfNavParams: any;
+  wfNavParams = this.navParams.data;
 
   wfPass: boolean;
 
@@ -45,15 +44,12 @@ export class EditWorkflow2Page implements OnInit{
               private barcodeScanner: BarcodeScanner,
               private alertCtrl: AlertController,
               private camera: Camera,
-              private navParams: NavParams) {
-
-    storage.ready().then(() => { });
-
-    this.wfNavParams = this.navParams.data.value;
+              private navParams: NavParams,
+              private wfSvc: WorkflowService,
+              private navCtrl: NavController) {
 
     // Assume all are ion-input except the one specificed as textarea
     this.wfOrderDetails = [
-
       {method: "input", model: "WfOrderId", title: "工单号", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
       {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
       {method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 10, highlight: false, process: {1: true, 2: true, 3: true}},
@@ -62,7 +58,7 @@ export class EditWorkflow2Page implements OnInit{
       {method: "input", model: "wfOrderTotalQty", title: "数量", type: "number", size: 8, highlight: false, process: {1: true, 2: true, 3: true}},
 
       {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
-      {method: "input", model: "wfOrderFormId", title: "流程卡号", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
       {method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
       {method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
       {method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 15, highlight: false, process: {1: true, 2: true, 3: true}},
@@ -163,6 +159,8 @@ export class EditWorkflow2Page implements OnInit{
   ngOnInit() {
     console.log("Initialise the page 成品流程卡");
 
+    console.log(this.navParams);
+
     this.formInit();
 
     let form = this.wfInputForm;
@@ -174,7 +172,7 @@ export class EditWorkflow2Page implements OnInit{
     console.log("loading from storage");
     this.storage.get(this.wfNavParams).then((dataDumpJsonXTmp) => {
       console.log("this is storage");
-      console.log("storage:" + dataDumpJsonXTmp);
+      console.log("storage:" + JSON.stringify(dataDumpJsonXTmp));
       storageData = dataDumpJsonXTmp;
 
       // for (let key in storageData) {
@@ -188,33 +186,40 @@ export class EditWorkflow2Page implements OnInit{
        form.controls['wfFormName'].setValue('裸品流程卡');
        }
        */
+
       for (let key in form.value) {
-        console.log("Loading " + key + " Storage:" + storageData[key]);
+        // console.log("Loading " + key + " Storage:" + storageData[key]);
         try {
           if(key == 'wfStaffTechId') {
             this.wfStaffTechIdTmp = storageData[key];
             //alert('staff 1:' + StaffArr.wfStaffTechIda);
             form.controls[key].setValue('');
-            console.log('storage test 1: ' + this.wfStaffTechIdTmp);
+            // console.log('storage test 1: ' + this.wfStaffTechIdTmp);
           } else if(key == 'wfStaffOptShift') {
             this.wfStaffOptShiftTmp = storageData[key];
             form.controls[key].setValue('');
             //alert('staff 2:' + this.wfStaffOptShiftTmp);
-            console.log('storage test 1: ' + this.wfStaffOptShiftTmp);
+            // console.log('storage test 1: ' + this.wfStaffOptShiftTmp);
           } else if(key == 'wfQCSignOff') {
             this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue('');
             //alert('staff 3:' + this.wfQCSignOffTmp);
-            console.log('storage test 1: ' + this.wfQCSignOffTmp);
+            // console.log('storage test 1: ' + this.wfQCSignOffTmp);
           } else {
             form.controls[key].setValue(storageData[key]);
+            console.log("Form value" + form.controls[key])
           }
         } catch (err) {
-          console.log(err);
+          // console.log(err);
         }
       }
 
+      console.log(this.wfInputForm.value);
+
     });
+
+    console.log(this.wfInputForm.value);
+
 
   }
 
@@ -295,9 +300,40 @@ export class EditWorkflow2Page implements OnInit{
   onSubmit(){
     let form = this.wfInputForm;
     let storageData: any;
-    alert(" < " + form.value + " > !");
+    // alert(" < " + form.value + " > !");
 
-    console.log(this.wfInputForm);
+    console.log("Submitting the form now");
+
+    console.log(form.value);
+
+    this.wfSvc.upload(form.value, form.value.wfForm);
+
+    switch(form.value.wfProcess) {
+      case "1":
+        form.value.wfProcess = "2";
+        form.value.wfProcessName = "贴片外观";
+        break;
+
+      case "2":
+        form.value.wfProcess = "3";
+        form.value.wfProcessName = "终检";
+        break;
+
+      case "3":
+        alert("嚫,工序完成了!");
+        break;
+
+      default:
+        alert("有問題@_@!");
+    }
+
+    console.log("Saving to local storage");
+    this.storage.set(form.value.wfFormId, form.value);
+
+    console.log("Leaving this page");
+    this.navCtrl.pop();
+
+
   }
 
   updateForm(model: string, value: any) {
@@ -335,9 +371,11 @@ export class EditWorkflow2Page implements OnInit{
 
       wfProcess: [''],
       wfProcessName: [''],
+      wfFormName: [''],
+      wfForm: [''],
 
       // Order Inputs detail
-      wfOrderFormId: [''],
+      wfFormId: [''],
       WfOrderId: [''],
       wfOrderBatchId: [''],
       wfOrderBatchQty: [''],
@@ -380,8 +418,6 @@ export class EditWorkflow2Page implements OnInit{
       wfOptFinishTime: ['00:00'],
       wfOptBadQty: [''],
       wfOptGoodQty: [''],
-
-
 
       //Staff Input section
       wfStaffOptId: [''],

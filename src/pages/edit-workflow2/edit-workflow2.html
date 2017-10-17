@@ -3,7 +3,7 @@
         <div style="align-items: center; display: inline;">
             <img src="./assets/img/vt_icon.png" class="icon">
             <ion-title>
-                <!--&nbsp; ( {{wfNavParams.wfFormName}} )&nbsp; 工序:&nbsp; {{wfNavParams.wfProcessName}}-->
+                &nbsp; ( {{wfInputForm.value.wfFormName}} )&nbsp; 工序:&nbsp; {{wfInputForm.value.wfProcessName}}
             </ion-title>
         </div>
     </ion-navbar>
@@ -16,7 +16,7 @@
             <ion-row wrap class="main headbar">
                 <ion-col *ngFor="let wfOrderDetail of wfOrderDetails">
                     <ion-row justify-content-center wrap>
-                        <ion-col *ngIf="wfOrderDetail.method === 'input' && wfOrderDetail.process[wfNavProcess]"
+                        <ion-col *ngIf="wfOrderDetail.method === 'input' && wfOrderDetail.process[wfInputForm.value.wfProcess]"
                                  no-padding>
 
                             <ion-row align-items-center>
@@ -36,20 +36,6 @@
                                               class="textarea gridborder"></ion-textarea>
                             </ion-row>
                         </ion-col>
-
-                        <!--<ion-col *ngIf="wfOrderDetail.method === 'input' + wfNavProcess" no-padding>-->
-                        <!--<ion-row align-items-center>-->
-                        <!--<div class="inputLabel" no-padding>-->
-                        <!--{{wfOrderDetail.title}}-->
-                        <!--</div>-->
-                        <!--<ion-input *ngIf="wfOrderDetail.type != 'textarea'" class="gridborder" disabled type={{wfOrderDetail.type}} [ngStyle]="{'width.em':wfOrderDetail.size}" formControlName={{wfOrderDetail.model}}></ion-input>-->
-
-                        <!--<ion-textarea *ngIf="wfOrderDetail.type === 'textarea'"-->
-                        <!--formControlName={{wfOrderDetail.model}}-->
-                        <!--[ngStyle]="{'width.em':wfOrderDetail.size}"-->
-                        <!--class="textarea gridborder"></ion-textarea>-->
-                        <!--</ion-row>-->
-                        <!--</ion-col>-->
 
                         <ion-col *ngIf="wfOrderDetail.method === 'break'" no-padding [ngStyle]="{'width.em':wfOrderDetail.size}"></ion-col>
 
@@ -113,11 +99,11 @@
                         <ion-col *ngFor="let wfInput of wfOpsInputs" col-auto>
 
                             <!-- Simple Input field -->
-                            <ion-row *ngIf="wfInput.method == 'input' && wfInput.process[wfNavProcess]"
+                            <ion-row *ngIf="wfInput.method == 'input' && wfInput.process[wfInputForm.value.wfProcess]"
                                      align-items-center
                                      justify-content-center>
 
-                                <div *ngIf="wfInput.process[wfNavProcess]"
+                                <div *ngIf="wfInput.process[wfInputForm.value.wfProcess]"
                                      style="margin-left: 5px;margin-right: 5px;">
                                     {{wfInput.title}}
                                 </div>
@@ -145,7 +131,7 @@
                                 </button>
                             </ion-row>
 
-                            <ion-row *ngIf="wfInput.method == 'buttons' && wfInput.process[wfNavProcess]"
+                            <ion-row *ngIf="wfInput.method == 'buttons' && wfInput.process[wfInputForm.value.wfProcess]"
                                      justify-content-left
                                      align-items-center>
                                 <div class="inputLabel">
@@ -166,7 +152,7 @@
                                 </ion-buttons>
                             </ion-row>
 
-                            <ion-col *ngIf="wfInput.method == 'inputs' && wfInput.process[wfNavProcess]">
+                            <ion-col *ngIf="wfInput.method == 'inputs' && wfInput.process[wfInputForm.value.wfProcess]">
                                 <ion-row *ngIf="wfInput.header" align-items-center justify-content-center>
                                     <div style="width: 45px;"></div>
                                     <div style="text-align: center;">
@@ -178,12 +164,12 @@
                                          align-items-center
                                          justify-content-center>
 
-                                    <div *ngIf="option.process[wfNavProcess]"
+                                    <div *ngIf="option.process[wfInputForm.value.wfProcess]"
                                          class="inputLabel">
                                         {{option.title}}
                                     </div>
                                     <!-- datetime -->
-                                    <div *ngIf="option.type == 'date' && option.process[wfNavProcess]"
+                                    <div *ngIf="option.type == 'date' && option.process[wfInputForm.value.wfProcess]"
                                          [ngStyle]="{'width.em':option.size}"
                                          class="gridborder">
                                         <ion-datetime
@@ -193,14 +179,14 @@
                                     </div>
 
                                     <ion-input
-                                            *ngIf="option.type != 'date' && option.process[wfNavProcess]"
+                                            *ngIf="option.type != 'date' && option.process[wfInputForm.value.wfProcess]"
                                             formControlName={{option.model}}
                                             type={{option.type}}
                                             [ngStyle]="{'width.em':option.size}"
                                             class="gridborder"></ion-input>
 
                                     <button
-                                            *ngIf="option.scan && option.process[wfNavProcess]"
+                                            *ngIf="option.scan && option.process[wfInputForm.value.wfProcess]"
                                             item-end
                                             ion-button
                                             class="barcodeButton"
@@ -213,14 +199,14 @@
                             </ion-col>
 
 
-                            <ion-col *ngIf="wfInput.method === 'break' && option.process[wfNavProcess]"
+                            <ion-col *ngIf="wfInput.method === 'break' && option.process[wfInputForm.value.wfProcess]"
                                      no-padding>
                                 <div [ngStyle]="{'width.em':wfInput.size}"></div>
                             </ion-col>
 
 
                             <ion-row
-                                    *ngIf="wfInput.method == 'textarea' && option.process[wfNavProcess]"
+                                    *ngIf="wfInput.method == 'textarea' && option.process[wfInputForm.value.wfProcess]"
                                     align-items-center>
                                 <div class="inputLabel">
                                     {{wfInput.title}}
@@ -250,11 +236,11 @@
                         <!-- Input field form -->
                         <div *ngFor="let wfInput of wfPplInputs">
                             <ion-row>
-                                <ion-col *ngIf="wfInput.process[wfNavProcess]"
+                                <ion-col *ngIf="wfInput.process[wfInputForm.value.wfProcess]"
                                          col-auto align-items-left justify-content-center>
 
                                     <!-- Simple Input field -->
-                                    <ion-row *ngIf="wfInput.method == 'input' && wfInput.process[wfNavProcess]"
+                                    <ion-row *ngIf="wfInput.method == 'input' && wfInput.process[wfInputForm.value.wfProcess]"
                                              align-items-center
                                              justify-content-center >
 
@@ -298,7 +284,7 @@
                                             </button>
                                         </div>
                                         <div on-mouseover="showWfQCPassAlert(wfInputForm.value.wfQCPass)">
-                                            <button *ngIf="wfInput.scan == 4 && wfInput.process[wfNavProcess]"
+                                            <button *ngIf="wfInput.scan == 4 && wfInput.process[wfInputForm.value.wfProcess]"
                                                     [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)"
                                                     item-end
                                                     ion-button
@@ -311,7 +297,7 @@
                                     </ion-row>
 
 
-                                    <ion-row *ngIf="wfInput.method == 'textarea' && wfInput.process[wfNavProcess]" align-items-center>
+                                    <ion-row *ngIf="wfInput.method == 'textarea' && wfInput.process[wfInputForm.value.wfProcess]" align-items-center>
                                         <div class="inputLabel">
                                             备注
                                         </div>
@@ -319,7 +305,7 @@
                                     </ion-row>
 
                                     <!-- Select Buttons -->
-                                    <ion-row *ngIf="wfInput.method == 'buttons' && wfInput.process[wfNavProcess]" align-items-center>
+                                    <ion-row *ngIf="wfInput.method == 'buttons' && wfInput.process[wfInputForm.value.wfProcess]" align-items-center>
                                         <div class="inputLabel">
                                             {{wfInput.title}}
                                         </div>
@@ -336,7 +322,7 @@
                                     </ion-row>
 
                                     <!-- Break -->
-                                    <div *ngIf="wfInput.method == 'break' && wfInput.process[wfNavProcess]" [ngStyle]="{'width.em':wfInput.size}">
+                                    <div *ngIf="wfInput.method == 'break' && wfInput.process[wfInputForm.value.wfProcess]" [ngStyle]="{'width.em':wfInput.size}">
                                     </div>
 
                                 </ion-col>
@@ -347,7 +333,7 @@
                     </ion-row>
 
                     <ion-row justify-content-end>
-                        <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="submit" ion-button>
+                        <button type="submit" ion-button>
                             <ion-icon ios="ios-checkbox-outline" md="md-checkbox-outline">
                                 &nbsp; 批次完成
                             </ion-icon>

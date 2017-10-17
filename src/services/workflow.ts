@@ -6,7 +6,7 @@ import { Headers, Http, RequestOptions, Response } from "@angular/http";
 
 @Injectable()
 export class WorkflowService {
-  private httpHeaders = new Headers({'Content-type':'application/json'});
+  private httpHeaders = new Headers({ 'Content-type':'application/json' });
   private httpOptions = new RequestOptions({ headers:this.httpHeaders });
   private baseUrl = "http://localhost:3000/workflow/";
 

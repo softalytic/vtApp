@@ -138,7 +138,7 @@ export class WorkflowPage implements OnInit {
       message: 'Do you want to buy this book?',
       buttons: [
         {
-          text: 'X',
+          text: 'cancel X',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');

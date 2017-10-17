@@ -15,7 +15,7 @@
             <!-- header bar -->
             <ion-row wrap class="main headbar">
                 <ion-col *ngFor="let wfOrderDetail of wfOrderDetails">
-                    <ion-row justify-content-center wrap>
+                    <ion-row justify-content-center wrap style="margin: auto; width: 839px; padding: 3px;">
                         <ion-col *ngIf="wfOrderDetail.method === 'input' && wfOrderDetail.process[wfInputForm.value.wfProcess]" no-padding>
                             <ion-row align-items-center>
                                 <div class="inputLabel" no-padding>

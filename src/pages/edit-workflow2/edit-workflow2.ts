@@ -63,10 +63,10 @@ export class EditWorkflow2Page implements OnInit{
       {method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 10, highlight: false, process: {1: true, 2: true, 3: true}},
       {method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 10, highlight: false, process: {1: true, 2: true, 3: true}},
 
-      {method: "input", model: "wfOrderFormNote", title: "流程卡备注", type: "textarea", size: 23, highlight: false, process: {1: true, 2: true, 3: true}},
-      {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 23, highlight: false, process: {1: true, 2: true, 3: true}},
-      {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 23, highlight: false, process: {1: true, 2: true, 3: true}},
-      {method: "input", model: "wfOrderSupNote", title: "异常记录", type: "textarea", size: 23, highlight: false, process: {1: false, 2: false, 3: true}},
+      {method: "input", model: "wfOrderFormNote", title: "流程卡备注", type: "textarea", size: 27, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 27, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 27, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderSupNote", title: "异常记录", type: "textarea", size: 27, highlight: false, process: {1: false, 2: false, 3: true}},
 
       // {title: "客户代码:", method: "input", model: "wfClientId", type: "text", scan: false, size: 15},
       // {title: "销售订单号:", method: "input", model: "wfSalesOrderId", type: "text", scan: false, size: 15},

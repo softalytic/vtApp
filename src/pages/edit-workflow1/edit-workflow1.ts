@@ -212,7 +212,6 @@ export class EditWorkflow1Page implements OnInit{
     this.formInit();
 
     let form = this.wfInputForm;
-
     let storageData: any;
 
     console.log("loading from storage");

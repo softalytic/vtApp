@@ -193,7 +193,9 @@ export class WorkflowPage implements OnInit {
             "wfRMPlasticName": "9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",
             "wfRMPlasticSerial": "17704310121",
             "wfRMCoverName": "10x10.6 3004材质(防爆)",
-            "wfRMCoverSerial": "1670722-053842"
+            "wfRMCoverSerial": "1670722-053842",
+            "wfProcessStatus": "0",
+            "wfFormStatus": "0"
             }
         }
     });

@@ -70,27 +70,36 @@
                     <!-- Production input field -->
                     <ion-row class="sec" align-self-stretch justify-content-left>
 
-                        <!-- Input field header -->
-                        <ion-col col-12>
-                            <h4 class="inputHeader">
-                                <ion-icon name="clipboard"></ion-icon>
-                                &nbsp; 生產记录
-                            </h4>
-                        </ion-col>
-
                         <!-- Input field form -->
                         <ion-col *ngFor="let wfInput of wfOpsInputs" col-auto>
 
                             <!-- Simple Input field -->
                             <ion-row *ngIf="wfInput.method == 'input'" align-items-center justify-content-center>
+                                <div *ngIf="wfInput.wfOpslI == 2" style="height: 42px; width: 100vw;
+                                position: relative;">
+                                    <h4 class="inputHeader" style="display: inline-block; margin: 0;">
+                                        <ion-icon name="clipboard"></ion-icon>
+                                        &nbsp; 生產记录
+                                    </h4>
 
-                                <div style="margin-left: 5px;margin-right: 5px;">
+                                    <div style="position: absolute;right: 10px; top: 0;">
+                                        <div style="margin-left: 5px;margin-right: 5px; display:inline-block;">
+                                            <!--<ion-icon name="{{wfInput.icon}}"></ion-icon>-->
+                                            {{wfInput.title}}
+                                        </div>
+                                        <ion-input (change)="updateTextChg();" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder" style="display:inline-block;"></ion-input>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="wfInput.wfOpslI != 2" style="margin-left: 5px;margin-right: 5px;">
                                     <!--<ion-icon name="{{wfInput.icon}}"></ion-icon>-->
                                     {{wfInput.title}}
                                 </div>
+
+
                                 <ion-input *ngIf="wfInput.wfOpslI == 1" (change)="updateTextChg();" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
 
-                                <ion-input *ngIf="wfInput.wfOpslI != 1" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+                                <ion-input *ngIf="wfInput.wfOpslI != 1 && wfInput.wfOpslI != 2" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
 
                                 <button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
                                     扫一扫
@@ -119,16 +128,17 @@
 
                                 <ion-row *ngFor="let option of wfInput.options" align-items-center justify-content-center>
 
-                                    <div class="inputLabel">
+                                    <div *ngIf="option.type != 'date' && option.type != 'time'" class="inputLabel">
                                         {{option.title}}
                                     </div>
                                     <!-- datetime -->
-                                    <div *ngIf="option.type == 'date'" [ngStyle]="{'width.em':option.size}" class="gridborder">
-                                        <ion-datetime formControlName={{option.model}} displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY"></ion-datetime>
+                                    <div *ngIf="option.type == 'date'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
+                                        <ion-icon *ngIf="option.type == 'date'" name="md-calendar" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                        <ion-datetime formControlName={{option.model}} #picker pickerFormat="DD/MM/YYYY" [min]="datePickerMin" style="display: inline-block; padding: 13px 0;"></ion-datetime>
                                     </div>
-
-                                    <div *ngIf="option.type == 'time'" [ngStyle]="{'width.em':option.size}" class="gridborder">
-                                        <ion-datetime formControlName={{option.model}} displayFormat="HH:mm" pickerFormat="HH:mm"></ion-datetime>
+                                    <div *ngIf="option.type == 'time'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
+                                        <ion-icon *ngIf="option.type == 'time'" name="md-clock" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                        <ion-datetime formControlName={{option.model}} #picker displayFormat="HH:mm" pickerFormat="HH:mm" style="display: inline-block; padding: 13px 0;"></ion-datetime>
                                     </div>
 
                                     <ion-input *ngIf="option.type != 'date' && option.type != 'time'" formControlName={{option.model}} type={{option.type}} [ngStyle]="{'width.em':option.size}" class="gridborder"></ion-input>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, NavParams, AlertController, Events } from 'ionic-angular';
 import { NgForm, FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
@@ -38,6 +38,9 @@ export class EditWorkflow1Page implements OnInit{
   wfOrderTotalGoodQtyTmp: any;
 
   codeDataSet: any;
+
+  dataInicial: String;
+  maxDate: string;
 
   // For calculating the time value
   tzoffset: number = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
@@ -96,6 +99,7 @@ export class EditWorkflow1Page implements OnInit{
     ];
 
     this.wfOpsInputs = [
+      {title: "分單", method: "input", model: "wfFormSplit", type: "text", icon: 'ios-copy-outline', scan: false, size: 2, wfOpslI: 2},
       {title: "流程卡号", method: "input", model: "wfOrderFormId", type: "text", icon: 'ios-copy-outline', scan: false, size: 9},
       {title: "机台", method: "input", model: "wfOptMachineId", type: "text", icon: 'cog', wfOpslI: 1, scan: true, size: 6},
       {title: "批次号", method: "input", model: "wfOrderBatchId", type: "text", icon: 'ios-basket-outline', scan: false, size: 11},
@@ -119,10 +123,7 @@ export class EditWorkflow1Page implements OnInit{
         {title: "不良数", model: "wfOptBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8},
         {title: "良品数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8}
       ]},
-      {title: "分單 - ", method: "buttons", model: "wfFormSplit", icon: "md-buffer",buttons: [
-        {label: "不分單", value: 1, icon: 'md-clipboard'},
-        {label: "分單", value: 2, icon: 'md-copy'}
-      ]},
+      
     ];
 
     this.wfAgeingDetails = [
@@ -184,6 +185,20 @@ export class EditWorkflow1Page implements OnInit{
       {title: "品检备注", method: "textarea", model: "wfQCInputNote", type: "text", icon: 'chatbubbles', scan: false, size: 27},
     ];
   }
+
+  @ViewChild('datePicker') datePicker;
+
+  open() {
+    if (!this.dataInicial) {
+        this.dataInicial = new Date().toJSON().split('T')[0];
+        setTimeout(() => {
+            this.datePicker.open();
+        }, 50)
+    } else {
+        this.datePicker.open();
+    }
+
+}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditWorkflowPage');

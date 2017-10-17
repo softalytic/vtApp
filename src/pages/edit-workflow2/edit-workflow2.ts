@@ -50,18 +50,18 @@ export class EditWorkflow2Page implements OnInit{
 
     // Assume all are ion-input except the one specificed as textarea
     this.wfOrderDetails = [
+      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
       {method: "input", model: "WfOrderId", title: "工单号", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
-      {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderTotalQty", title: "批次量", type: "number", size: 8, highlight: false, process: {1: true, 2: true, 3: true}},
+
+      {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 10, highlight: false, process: {1: true, 2: true, 3: true}},
       {method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 10, highlight: false, process: {1: true, 2: true, 3: true}},
       {method: "input", model: "wfOrderSpec", title: "规格", type: "text", size: 8, highlight: false, process: {1: true, 2: true, 3: true}},
-      {method: "input", model: "wfOrderDim", title: "尺寸", type: "text", size: 8, highlight: false, process: {1: true, 2: true, 3: true}},
-      {method: "input", model: "wfOrderTotalQty", title: "数量", type: "number", size: 8, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderDim", title: "尺寸", type: "text", size: 4, highlight: false, process: {1: true, 2: true, 3: true}},
 
-      {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
-      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
-      {method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
-      {method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 20, highlight: false, process: {1: true, 2: true, 3: true}},
-      {method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 15, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 10, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 10, highlight: false, process: {1: true, 2: true, 3: true}},
 
       {method: "input", model: "wfOrderFormNote", title: "流程卡备注", type: "textarea", size: 23, highlight: false, process: {1: true, 2: true, 3: true}},
       {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 23, highlight: false, process: {1: true, 2: true, 3: true}},
@@ -98,7 +98,7 @@ export class EditWorkflow2Page implements OnInit{
       // {method: "break", size: 20},
       // {title: "流程卡备注", method: "input", model: "wfOrderBOMNote", type: "textarea", scan: false, size: 40},
       // {method: "break", size: 20},
-
+      {method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 15, highlight: false, process: {1: true, 2: true, 3: true}},
       {title: "CAP: μF", method: "input", model: "wfSpecCap", type: "text", scan: false, size: 9, process: {1: true, 2: true, 3: true}},
       {title: "DF: %", method: "input", model: "wfSpecDF", type: "text", scan: false, size: 9, process: {1: true, 2: true, 3: true}},
       {title: "LC: μA", method: "input", model: "wfSpecLC", type: "text", scan: false, size: 9, process: {1: true, 2: true, 3: true}},

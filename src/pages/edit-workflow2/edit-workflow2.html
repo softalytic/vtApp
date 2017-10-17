@@ -15,9 +15,22 @@
             <!-- header bar -->
             <ion-row wrap class="main headbar">
                 <ion-col *ngFor="let wfOrderDetail of wfOrderDetails">
-                    <ion-row justify-content-center wrap style="margin: auto; width: 839px; padding: 3px;">
+
+                    <ion-row *ngIf="wfOrderDetail.model == 'wfSpecCap'" justify-content-center wrap>
                         <ion-col *ngIf="wfOrderDetail.method === 'input' && wfOrderDetail.process[wfInputForm.value.wfProcess]" no-padding>
                             <ion-row align-items-center>
+                                <div class="inputLabel" no-padding>
+                                    参数要求
+                                </div>
+                            </ion-row>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row justify-content-center wrap>
+                        <ion-col *ngIf="wfOrderDetail.method === 'input' && wfOrderDetail.process[wfInputForm.value.wfProcess]" no-padding>
+
+                            <ion-row align-items-center>
+
                                 <div class="inputLabel" no-padding>
                                     {{wfOrderDetail.title}}
                                 </div>
@@ -44,7 +57,7 @@
                             <h4 class="inputHeader">材料</h4>
                         </ion-col>
                         <ion-col text-center>
-                            <h4 class="inputHeader">批号</h4>
+                            <h4 class="inputHeader">批号/备注</h4>
                         </ion-col>
                     </ion-row>
 
@@ -74,7 +87,7 @@
                         <ion-col col-12>
                             <h4 class="inputHeader">
                                 <ion-icon name="clipboard"></ion-icon>
-                                &nbsp; 参数要求
+                                &nbsp; 生產记錄
                             </h4>
                         </ion-col>
 
@@ -124,7 +137,7 @@
                                     </div>
                                     <!-- datetime -->
                                     <div *ngIf="option.type == 'date' && option.process[wfInputForm.value.wfProcess]" [ngStyle]="{'width.em':option.size}" class="gridborder">
-                                        <ion-datetime formControlName={{option.model}} displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY"></ion-datetime>
+                                        <ion-datetime formControlName={{option.model}} #picker displayFormat="DD/MM/YYYY" [min]="datePickerMin" pickerFormat="DD MM YYYY"></ion-datetime>
                                     </div>
 
                                     <ion-input *ngIf="option.type != 'date' && option.process[wfInputForm.value.wfProcess]" formControlName={{option.model}} type={{option.type}} [ngStyle]="{'width.em':option.size}" class="gridborder"></ion-input>

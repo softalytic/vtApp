@@ -149,7 +149,7 @@ export class WorkflowPage implements OnInit {
       } else {
 
         // Predefined data for testing purpose
-
+/*
         // workflow 1
         let data = JSON.stringify({ "headers":
         { "erpData": "ngForm"},
@@ -194,8 +194,8 @@ export class WorkflowPage implements OnInit {
             }
         }
     });
-
-        /*
+*/
+        
         // workflow 2
         let data = JSON.stringify({ "headers":
           { "erpData": "ngForm"},
@@ -229,7 +229,7 @@ export class WorkflowPage implements OnInit {
               }
             }
         });
-        */
+        
 
         this.qrCodePopulate(data);
         //alert('no items!' + JSON.stringify(form.value));

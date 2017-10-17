@@ -63,10 +63,16 @@ export class EditWorkflow2Page implements OnInit{
       {method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 10, highlight: false, process: {1: true, 2: true, 3: true}},
       {method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 10, highlight: false, process: {1: true, 2: true, 3: true}},
 
-      {method: "input", model: "wfOrderFormNote", title: "流程卡备注", type: "textarea", size: 27, highlight: false, process: {1: true, 2: true, 3: true}},
-      {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 27, highlight: false, process: {1: true, 2: true, 3: true}},
-      {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 27, highlight: false, process: {1: true, 2: true, 3: true}},
-      {method: "input", model: "wfOrderSupNote", title: "异常记录", type: "textarea", size: 27, highlight: false, process: {1: false, 2: false, 3: true}},
+      {method: "input", model: "wfOrderFormNote", title: "流程卡备注", type: "textarea", size: 24, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 24, highlight: false, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 24, highlight: false, process: {1: true, 2: true, 3: true}},
+
+      {title: "CAP: μF", method: "input", model: "wfSpecCap", type: "text", scan: false, size: 9, process: {1: true, 2: true, 3: true}},
+      {title: "DF: %", method: "input", model: "wfSpecDF", type: "text", scan: false, size: 9, process: {1: true, 2: true, 3: true}},
+      {title: "LC: μA", method: "input", model: "wfSpecLC", type: "text", scan: false, size: 9, process: {1: true, 2: true, 3: true}},
+      {title: "Z/ESR(Ω):", method: "input", model: "wfSpecZESR", type: "text", scan: false, size: 9, process: {1: true, 2: true, 3: true}},
+
+      {method: "input", model: "wfOrderSupNote", title: "异常记录", type: "textarea", size: 24, highlight: false, process: {1: false, 2: false, 3: true}},
 
       // {title: "客户代码:", method: "input", model: "wfClientId", type: "text", scan: false, size: 15},
       // {title: "销售订单号:", method: "input", model: "wfSalesOrderId", type: "text", scan: false, size: 15},
@@ -98,12 +104,8 @@ export class EditWorkflow2Page implements OnInit{
       // {method: "break", size: 20},
       // {title: "流程卡备注", method: "input", model: "wfOrderBOMNote", type: "textarea", scan: false, size: 40},
       // {method: "break", size: 20},
-      {method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 15, highlight: false, process: {1: true, 2: true, 3: true}},
-      {title: "CAP: μF", method: "input", model: "wfSpecCap", type: "text", scan: false, size: 9, process: {1: true, 2: true, 3: true}},
-      {title: "DF: %", method: "input", model: "wfSpecDF", type: "text", scan: false, size: 9, process: {1: true, 2: true, 3: true}},
-      {title: "LC: μA", method: "input", model: "wfSpecLC", type: "text", scan: false, size: 9, process: {1: true, 2: true, 3: true}},
-      {title: "Z/ESR(Ω):", method: "input", model: "wfSpecZESR", type: "text", scan: false, size: 9, process: {1: true, 2: true, 3: true}},
-      {title: "备注:", method: "input", model: "wfSpecNote", type: "textarea", scan: false, size: 22, process: {1: true, 2: true, 3: true}},
+      {method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 7, highlight: false, process: {1: true, 2: true, 3: true}},
+
       // {method: "break", title: ""},
 
       // {title: "客户代码:", method: "input", model: "wfClientId", type: "text", scan: false, size: 15},
@@ -112,7 +114,7 @@ export class EditWorkflow2Page implements OnInit{
 
 
       {method: 'inputs', options: [
-        {title: "日期", model: "wfOptInputDate", type: "date", scan: false, size: 8, process: {1: true, 2: true, 3: true}},
+         {title: "日期", model: "wfOptInputDate", type: "date", scan: false, size: 8, process: {1: true, 2: true, 3: true}},
         // {title: "开始", model: "wfOptStartTime", type: "time", scan: false, size: 8},
         // {title: "完成", model: "wfOptFinishTime", type: "time", scan: false, size: 8}
       ], process: {1: true, 2: true, 3: true}},
@@ -122,9 +124,10 @@ export class EditWorkflow2Page implements OnInit{
         // {title: "日期", model: "wfOptInputDate", type: "date", scan: false, size: 8},
         {title: "不良数", model: "wfOptBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8, process: {1: true, 2: true, 3: false}},
         {title: "良品数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8, process: {1: true, 2: true, 3: false}},
-        {title: "抽查数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8, process: {1: false, 2: true, 3: false}}
+        // {title: "抽查数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8, process: {1: false, 2: true, 3: false}}
       ], process: {1: true, 2: true, 3: true}},
 
+      {title: "备注:", method: "input", model: "wfSpecNote", type: "textarea", scan: false, size: 40, process: {1: true, 2: true, 3: true}},
       // {title: "备注:", method: "input", model: "wfSpecNote", type: "textarea", scan: false, size: 20},
     ];
 
@@ -133,6 +136,7 @@ export class EditWorkflow2Page implements OnInit{
       // {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, size: 5},
       {title: "技術員", method: "input", model: "wfStaffTechId", type: "text", icon: 'construct', scan: 2, size: 20, process: {1: true, 2: true, 3: false}},
       // {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: 3, size: 20},
+      {title: "品检員", method: "input", model: "wfQCSignOff", type: "text", icon: 'construct', scan: 2, size: 20, process: {1: true, 2: true, 3: false}},
       {method: "break", size: 15, process: {1: true, 2: true, 3: false}},
       {title: "电性", method: "buttons", model: "wfElecPass", process: {1: false, 2: false, 3: true} ,buttons: [
         {label: "通过", value: 1,},
@@ -145,7 +149,7 @@ export class EditWorkflow2Page implements OnInit{
       ]},
       {method: "break", size: 15, process: {1: false, 2: false, 3: true}},
       // {title: "品检备注", method: "textarea", model: "wfQCInputNote", type: "text", icon: 'chatbubbles', scan: false, size: 30},
-      {title: "品检員", method: "input", model: "wfQCSignOff", type: "text", process: {1: false, 2: false, 3: true}, scan: 4, size: 20},
+      //{title: "品检員", method: "input", model: "wfQCSignOff", type: "text", process: {1: false, 2: false, 3: true}, scan: 4, size: 20},
     ];
   }
 

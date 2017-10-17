@@ -212,7 +212,6 @@ export class EditWorkflow1Page implements OnInit{
     this.formInit();
 
     let form = this.wfInputForm;
-
     let storageData: any;
 
     console.log("loading from storage");
@@ -378,116 +377,6 @@ export class EditWorkflow1Page implements OnInit{
     alertCtl.present();
   }
 
-  private formInit() {
-    this.wfInputForm = this.formBuilder.group({
-      wfProcess: [''],
-      wfProcessName: [''],
-      wfFormName: [''],
-
-      // Order Inputs detail
-      wfFormId: [''],
-      wfOrderFormId: [''],
-      WfOrderId: [''],
-      wfOrderBatchId: [''],
-      wfOrderBatchQty: [''],
-
-      wfOrderBOMNote: [''],
-      wfOrderNote: [''],
-      wfOrderTotalQty: [''],
-      wfOrderTotalGoodQty: [''],
-      wfOrderRMId: [''],
-      wfOrderSeries: [''],
-      wfOrderSpec: [''],
-      wfOrderDim: [''],
-      wfFormSplit: [''],
-
-      // Raw Material Inputs
-      wfRMFoilPosName: [''],
-      wfRMFoilPosSerial: [''],
-      wfRMFoilPosLName: [''],
-      wfRMFoilPosLSerial: [''],
-      wfRMFoilNegName: [''],
-      wfRMFoilNegSerial: [''],
-      wfRMFoilNegLName: [''],
-      wfRMFoilNegLSerial: [''],
-      wfRMPaperName: [''],
-      wfRMPaperSerial: [''],
-      wfRMGlueName: [''],
-      wfRMGlueSerial: [''],
-      wfRMSolName: [''],
-      wfRMSolSerial: [''],
-      wfRMPinPosName: [''],
-      wfRMPinPosSerial: [''],
-      wfRMPinNegName: [''],
-      wfRMPinNegSerial: [''],
-      wfRMPlasticName: [''],
-      wfRMPlasticSerial: [''],
-      wfRMShellName: [''],
-      wfRMShellSerial: [''],
-      wfRMCoverName: [''],
-      wfRMCoverSerial: [''],
-      wfRMWindingTime: [''],
-      wfRMWindingDeg: [''],
-
-      // Operational Input
-      wfOptMachineId: [''],
-      wfOptInputDate: [this.appDate],
-      wfOptStartTime: ['00:00'],
-      wfOptFinishTime: ['00:00'],
-      wfOptBadQty: [''],
-      wfOptGoodQty: [''],
-
-      // Ageing Part1
-      wfAgeDegSet: [''],
-      wfAgeDegAct: [''],
-      wfAgeVoltSet: [''],
-      wfAgeVoltAct: [''],
-      wfAgeCurrentSet: [''],
-      wfAgeCurrentAct: [''],
-      wfAgeTimeSet: [''],
-      wfAgeTimeAct: [''],
-      wfAgeNote: [''],
-
-      // Additional volt for Ageing
-      wfAutoAgeVoltAct1: [''],
-      wfAutoAgeVoltAct2: [''],
-      wfAutoAgeVoltAct3: [''],
-      wfAutoAgeVoltAct4: [''],
-      wfAutoAgeVoltAct5: [''],
-      wfAutoAgeVoltAct6: [''],
-      wfAutoAgeVoltAct7: [''],
-
-      // Auto ageing part2
-      wfAutoAgeOpenVolt: [''],
-      wfAutoAgeShortVolt: [''],
-      wfAutoAgeOpen: [''],
-      wfAutoAgeShort: [''],
-      wfAutoAgeHighCapacity: [''],
-      wfAutoAgeLowCapacity: [''],
-      wfAutoAgeWear: [''],
-      wfAutoAgeVoltLeak: [''],
-      wfAutoAgeLook: [''],
-
-      //Staff Input section
-      wfStaffOptId: [''],
-      wfStaffOptShift: [''],
-      wfStaffTechId: [''],
-      wfStaffXrayId: [''],
-      wfStageStatus: [''], 
-      wfQCPass: [''],
-      wfQCPassCode: [''],
-      wfQCSignOff: [''],
-      wfQCInputNote: [''],
-
-      //  Appendix
-
-      wfFormStatus: [''],
-      wfProcessStatus: [''],
-
-    });
-
-  }
-
   keyPress(keycode: number) {
     if (keycode == 13) {
       alert('next');
@@ -634,7 +523,6 @@ export class EditWorkflow1Page implements OnInit{
     }
   }
 
-
   presentPrompt() {
     let alert = this.alertCtrl.create({
       title: '嚫，请轻描淡写照片内容',
@@ -694,6 +582,116 @@ export class EditWorkflow1Page implements OnInit{
 
     }, (err) => {
       // Handle error
+    });
+
+  }
+
+  private formInit() {
+    this.wfInputForm = this.formBuilder.group({
+      wfProcess: [''],
+      wfProcessName: [''],
+      wfFormName: [''],
+
+      // Order Inputs detail
+      wfFormId: [''],
+      wfOrderFormId: [''],
+      WfOrderId: [''],
+      wfOrderBatchId: [''],
+      wfOrderBatchQty: [''],
+
+      wfOrderBOMNote: [''],
+      wfOrderNote: [''],
+      wfOrderTotalQty: [''],
+      wfOrderTotalGoodQty: [''],
+      wfOrderRMId: [''],
+      wfOrderSeries: [''],
+      wfOrderSpec: [''],
+      wfOrderDim: [''],
+      wfFormSplit: [''],
+
+      // Raw Material Inputs
+      wfRMFoilPosName: [''],
+      wfRMFoilPosSerial: [''],
+      wfRMFoilPosLName: [''],
+      wfRMFoilPosLSerial: [''],
+      wfRMFoilNegName: [''],
+      wfRMFoilNegSerial: [''],
+      wfRMFoilNegLName: [''],
+      wfRMFoilNegLSerial: [''],
+      wfRMPaperName: [''],
+      wfRMPaperSerial: [''],
+      wfRMGlueName: [''],
+      wfRMGlueSerial: [''],
+      wfRMSolName: [''],
+      wfRMSolSerial: [''],
+      wfRMPinPosName: [''],
+      wfRMPinPosSerial: [''],
+      wfRMPinNegName: [''],
+      wfRMPinNegSerial: [''],
+      wfRMPlasticName: [''],
+      wfRMPlasticSerial: [''],
+      wfRMShellName: [''],
+      wfRMShellSerial: [''],
+      wfRMCoverName: [''],
+      wfRMCoverSerial: [''],
+      wfRMWindingTime: [''],
+      wfRMWindingDeg: [''],
+
+      // Operational Input
+      wfOptMachineId: [''],
+      wfOptInputDate: [this.appDate],
+      wfOptStartTime: ['00:00'],
+      wfOptFinishTime: ['00:00'],
+      wfOptBadQty: [''],
+      wfOptGoodQty: [''],
+
+      // Ageing Part1
+      wfAgeDegSet: [''],
+      wfAgeDegAct: [''],
+      wfAgeVoltSet: [''],
+      wfAgeVoltAct: [''],
+      wfAgeCurrentSet: [''],
+      wfAgeCurrentAct: [''],
+      wfAgeTimeSet: [''],
+      wfAgeTimeAct: [''],
+      wfAgeNote: [''],
+
+      // Additional volt for Ageing
+      wfAutoAgeVoltAct1: [''],
+      wfAutoAgeVoltAct2: [''],
+      wfAutoAgeVoltAct3: [''],
+      wfAutoAgeVoltAct4: [''],
+      wfAutoAgeVoltAct5: [''],
+      wfAutoAgeVoltAct6: [''],
+      wfAutoAgeVoltAct7: [''],
+
+      // Auto ageing part2
+      wfAutoAgeOpenVolt: [''],
+      wfAutoAgeShortVolt: [''],
+      wfAutoAgeOpen: [''],
+      wfAutoAgeShort: [''],
+      wfAutoAgeHighCapacity: [''],
+      wfAutoAgeLowCapacity: [''],
+      wfAutoAgeWear: [''],
+      wfAutoAgeVoltLeak: [''],
+      wfAutoAgeLook: [''],
+
+      //Staff Input section
+      wfStaffOptId: [''],
+      wfStaffOptShift: [''],
+      wfStaffTechId: [''],
+      wfStaffXrayId: [''],
+      wfStageStatus: [''],
+      wfQCPass: [''],
+      wfQCPassCode: [''],
+      wfQCSignOff: [''],
+      wfQCInputNote: [''],
+
+      //  Appendix
+
+      wfFormStatus: [''],
+      wfProcessStatus: [''],
+
     });
 
   }

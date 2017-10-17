@@ -52,10 +52,10 @@ export class WorkflowPage implements OnInit {
     storage.ready().then(() => { });
 
     this.wfProcesses = [
-      {title: '钉卷', process: 1, show: true},
-      {title: '含浸', process: 2, show: true},
-      {title: '组立', process: 3, show: true},
-      {title: '清洗', process: 4, show: true},
+      {title: '钉卷', process: "1", show: true},
+      {title: '含浸', process: "2", show: true},
+      {title: '组立', process: "3", show: true},
+      {title: '清洗', process: "4", show: true},
       {title: '手工老化', process: '5a0', show: true},
       {title: '自動老化', process: '5b0', show: true},
     ];
@@ -105,14 +105,14 @@ export class WorkflowPage implements OnInit {
     // This this for dev env
     this.storage.clear();
     console.log("Number of records in storage");
-    console.log(this.storage.length());
+    console.log("Storage Length is: " + this.storage.length());
 
     // Pre define storage
-    let datawfProcess = JSON.stringify({
-      "1":{"wfFormName": "裸品流程卡","wfFormID": "1", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗"}},
-      "2":{"wfFormName": "成品流程卡","wfFormID": "2", "Process":{"1":"打印/测试上带","2":"贴片外观","3":"终检"}}
+    let dataWfProcess = JSON.stringify({
+      "1":{"wfFormName": "裸品流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗"}},
+      "2":{"wfFormName": "成品流程卡", "Process":{"1":"打印/测试上带","2":"贴片外观","3":"终检"}}
     });
-    this.storage.set('wfProcess', datawfProcess);
+    this.storage.set('wfProcess', dataWfProcess);
 
     let dataMachine = JSON.stringify({
       "AA01" : {"staffID": "0001","staffName": "用户01", "techID": "0001","techName": "用户01", "xrayID": "","xrayName": "", "shift": "A"},
@@ -127,26 +127,7 @@ export class WorkflowPage implements OnInit {
     console.log("onAddWF is triggered!");
 
     let form = this.wfInputForm;
-
-    // switch(form.value.wfProcess) {
-    //   case "1":
-    //     form.value.wfProcess = "2";
-    //     form.value.wfProcessName = "贴片外观";
-    //     break;
-    //
-    //   case "2":
-    //     form.value.wfProcess = "3";
-    //     form.value.wfProcessName = "终检";
-    //     break;
-    //
-    //   case "3":
-    //     alert("嚫,工序完成了!");
-    //     break;
-    //
-    //   default:
-    //     alert("有問題@_@!");
-    // }
-
+    var wfStorage: any;
 
     // let storageItemX = this.storage.get(form.value.wfFormId);
     // alert(JSON.stringify(storageItemX) + ' ' + form.value.wfFormId);
@@ -156,6 +137,8 @@ export class WorkflowPage implements OnInit {
     // 3 degrees of checking, 1. Check Server, Check Local Storage, Else it is a new order
     this.storage.get(form.value.wfFormId).then((resultStorageItemX) => {
       if(resultStorageItemX){
+
+        console.log("Result found:" + form.value.wfFormId);
         let dataXTmp = { "headers": { "erpData": "ngForm"},
           "bodies": { "erpData": resultStorageItemX}};
 
@@ -167,7 +150,6 @@ export class WorkflowPage implements OnInit {
 
         // Predefined data for testing purpose
 
-        /*
         // workflow 1
         let data = JSON.stringify({ "headers":
         { "erpData": "ngForm"},
@@ -212,8 +194,8 @@ export class WorkflowPage implements OnInit {
             }
         }
     });
-        */
 
+        /*
         // workflow 2
         let data = JSON.stringify({ "headers":
           { "erpData": "ngForm"},
@@ -247,6 +229,7 @@ export class WorkflowPage implements OnInit {
               }
             }
         });
+        */
 
         this.qrCodePopulate(data);
         //alert('no items!' + JSON.stringify(form.value));
@@ -257,36 +240,52 @@ export class WorkflowPage implements OnInit {
       }
     });
 
+    this.storage.get("wfProcess").then((result) => {
+      wfStorage = JSON.parse(result);
+
+      console.log("Checking the wfFormId.value");
+      console.log(form.value.wfFormId);
+
+      //this.storage.set(form.value.wfFormId, form.value);
+      console.log("storage load:" + JSON.stringify(this.storage.get(form.value.wfFormId)));
+
+      if(form.controls["wfFormId"].value == ''){
+        alert('請輸入流程卡号');
+
+      } else {
+        console.log(wfStorage);
+        form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
+        console.log("Will enter " + form.value.wfFormName + " edit page now");
+        console.log("流程卡" + form.value.wfFormId);
+        this.workflowStateChange(form);
+
+        switch (form.value.wfForm) {
+          case '1':
+            this.navCtrl.push(EditWorkflow1Page, form.value.wfFormId);
+            break;
+          case '2':
+            this.navCtrl.push(EditWorkflow2Page, form.value.wfFormId);
+            break;
+          case '3':
+            console.log("Form 3 is not ready");
+            // this.navCtrl.push(EditWorkflow3Page);
+            break;
+
+          default:
+            console.log("Requesting form beyond 3");
+        }
+
+
+
+      }
+
+    });
+
     // Form submission to pass the form value onto next stage
-    console.log("Checking the wfFormId.value");
-    console.log(form.value.wfFormId);
 
-    //this.storage.set(form.value.wfFormId, form.value);
-    console.log("storage load:" + JSON.stringify(this.storage.get(form.value.wfFormId)));
 
-    if(form.controls["wfFormId"].value == ''){
-      alert('請輸入流程卡号');
 
-    } else if(form.value.wfForm == 1) {
-      console.log("Will enter 裸品流程卡 edit page now");
-      console.log("流程卡" + form.value.wfFormId);
-      form.value.wfFormName = '裸品流程卡';
-      this.navCtrl.push(EditWorkflow1Page, form.value.wfFormId);
 
-    } else if(form.value.wfForm == 2) {
-      console.log("Will enter 成品流程卡 edit page now");
-      console.log("流程卡" + form.value.wfFormId);
-      form.value.wfFormName = '成品流程卡';
-      this.navCtrl.push(EditWorkflow2Page, form.value.wfFormId);
-
-    } else if(form.value.wfForm == 3) {
-      console.log("Will enter 电容器流程卡 edit page now");
-      console.log("流程卡" + form.value.wfFormId);
-      form.value.wfFormName = '电容器流程卡';
-
-    } else {
-      alert('請輸入流程卡');
-    }
   }
 
   scanBarcode(model: string){
@@ -590,6 +589,53 @@ export class WorkflowPage implements OnInit {
     }
   }
 
+  workflowStateChange(form: any) {
+    // If the form is mark completed, then trigger the process
+    // Check the type of wfForm,
+    // Then increment the wfProcess if it is mark completed
+    console.log("In the func of workflowStateChange");
+
+    let wfStorage: any;
+    let wfPOldState: any;
+    let wfPNewState: any;
+
+    console.log("Loading the form from stateChange");
+    console.log(form);
+    console.log(form.value.wfProcessStatus);
+    console.log(typeof(form.value.wfProcessStatus));
+    console.log(form.value.wfFormStatus);
+    console.log(typeof(form.value.wfFormStatus));
+
+    if (form.value.wfFormStatus == '0' && form.value.wfProcessStatus == '1') {
+      // load the process from storage
+      this.storage.get("wfProcess").then((result) => {
+        if(result){
+          console.log("Loading wfProcess from storage");
+          wfStorage = result;
+          console.log(wfStorage);
+          console.log("wfForm is: " + form.value.wfFormId);
+
+          // load the next state of the change
+          wfPOldState = Object.keys(wfStorage[form.value.wfForm].Process).indexOf(form.value.wfProcess);
+          wfPNewState = Object.keys(wfStorage[form.value.wfForm].Process)[wfPOldState+1];
+
+          form.value.wfProcess = wfPNewState;
+          form.value.wfProcessName = wfStorage[form.value.wfForm].Process[wfPNewState];
+
+          console.log("New state is " + form.value.wfProcess + " " + form.value.wfProcessName);
+        }
+
+      });
+
+    } else if (form.value.wfProcessStatus == '0') {
+      console.log("Previous process has not completed and will resume now")
+
+    } else if (form.value.wfFormStatus == '1') {
+      console.log("This wfForm has been marked complete")
+
+    }
+  }
+
   private formInit() {
     this.wfInputForm = this.formBuilder.group({
       wfProcess: [''],
@@ -605,6 +651,7 @@ export class WorkflowPage implements OnInit {
       wfOrderTotalQty: ['']
 
     });
+
 
   }
 

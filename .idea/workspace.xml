@@ -2,65 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4cec853-1425-4d8c-84e2-faa32da6519f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/.gitkeep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/assets/fonts/ionicons.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/assets/fonts/ionicons.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/assets/icon/favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/assets/img/f1p1.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/assets/img/f1p2.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/assets/img/f1p3.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/assets/img/f1p4.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/assets/img/f1p5a0.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/assets/img/f1p5b0.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/assets/img/vt_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/build/main.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/build/main.css.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/build/main.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/build/main.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/build/polyfills.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/build/sw-toolbox.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/build/vendor.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/build/vendor.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/manifest.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/service-worker.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/bundles/debug/classes.jar" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/bundles/debug/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/bundles/release/classes.jar" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/bundles/release/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/CordovaBridge.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/CordovaBridge.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/CordovaPlugin.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/CordovaPlugin.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/CordovaResourceApi.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/CordovaResourceApi.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/Whitelist$URLPattern.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/Whitelist$URLPattern.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/CordovaBridge.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/CordovaBridge.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/CordovaPlugin.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/CordovaPlugin.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/CordovaResourceApi.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/CordovaResourceApi.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/Whitelist$URLPattern.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/Whitelist$URLPattern.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/outputs/aar/CordovaLib-debug.aar" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/outputs/aar/CordovaLib-debug.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/outputs/aar/CordovaLib-release.aar" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/outputs/aar/CordovaLib-release.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeDebugAssets/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeDebugShaders/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeDebugShaders/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeReleaseAssets/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeReleaseAssets/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeReleaseShaders/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeReleaseShaders/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageDebugResources/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageDebugResources/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageReleaseResources/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageReleaseResources/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/assets/www/build/main.css" afterPath="$PROJECT_DIR$/platforms/android/assets/www/build/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/assets/www/build/main.js" afterPath="$PROJECT_DIR$/platforms/android/assets/www/build/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/assets/www/build/vendor.js" afterPath="$PROJECT_DIR$/platforms/android/assets/www/build/vendor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/xml/config.xml" afterPath="$PROJECT_DIR$/platforms/android/res/xml/config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" afterPath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" afterPath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/workflow/workflow.ts" afterPath="$PROJECT_DIR$/src/pages/workflow/workflow.ts" />
     </list>
@@ -78,17 +19,20 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.45008758">
+    <splitter split-orientation="horizontal" split-proportion="0.60535586">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="edit-workflow1.ts" pinned="false" current-in-tab="false">
+          <file leaf-file-name="edit-workflow1.ts" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="9450">
-                  <caret line="636" column="14" lean-forward="false" selection-start-line="636" selection-start-column="14" selection-end-line="648" selection-end-column="16" />
+                <state relative-caret-position="274">
+                  <caret line="482" column="0" lean-forward="true" selection-start-line="482" selection-start-column="0" selection-end-line="482" selection-end-column="0" />
                   <folding>
-                    <marker date="1508224281000" expanded="true" signature="7:26" ph="..." />
-                    <marker date="1508224281000" expanded="true" signature="19807:24542" ph="{...}" />
+                    <element signature="n#!!block;n#updateTextChg#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+                    <marker date="1508232411000" expanded="true" signature="7:26" ph="..." />
+                    <marker date="1508232411000" expanded="true" signature="19886:21141" ph="{...}" />
                   </folding>
                 </state>
               </provider>
@@ -97,8 +41,8 @@
           <file leaf-file-name="edit-workflow2.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1365">
-                  <caret line="328" column="0" lean-forward="false" selection-start-line="309" selection-start-column="0" selection-end-line="328" selection-end-column="0" />
+                <state relative-caret-position="1416">
+                  <caret line="332" column="37" lean-forward="true" selection-start-line="332" selection-start-column="37" selection-end-line="332" selection-end-column="37" />
                   <folding>
                     <element signature="e#0#50#0" expanded="true" />
                     <element signature="e#1649#4370#0" expanded="false" />
@@ -122,54 +66,21 @@
             </entry>
           </file>
           <file leaf-file-name="workflow.ts" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/services/workflow.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="195">
-                  <caret line="14" column="31" lean-forward="false" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="workflow.ts" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="169">
-                  <caret line="158" column="27" lean-forward="false" selection-start-line="158" selection-start-column="27" selection-end-line="158" selection-end-column="27" />
+                <state relative-caret-position="104">
+                  <caret line="638" column="21" lean-forward="true" selection-start-line="638" selection-start-column="21" selection-end-line="638" selection-end-column="21" />
                   <folding>
                     <element signature="e#0#50#0" expanded="true" />
                     <element signature="e#427#496#0" expanded="true" />
-                    <element signature="e#1434#1723#0" expanded="false" />
-                    <element signature="e#1746#2583#0" expanded="false" />
+                    <element signature="e#1754#2591#0" expanded="false" />
                     <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
                     <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
-                    <element signature="e#10499#13927#0" expanded="false" />
+                    <element signature="e#10340#13768#0" expanded="false" />
                     <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
-                    <marker date="1508224281000" expanded="false" signature="12185:13249" ph="{...}" />
-                    <marker date="1508224281000" expanded="false" signature="13466:13923" ph="{...}" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="qrCode.ts" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/services/qrCode.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="63" lean-forward="false" selection-start-line="0" selection-start-column="63" selection-end-line="0" selection-end-column="63" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="app.module.ts" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="765">
-                  <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
-                  <folding>
-                    <element signature="e#0#58#0" expanded="true" />
-                    <element signature="e#892#935#0" expanded="true" />
+                    <marker date="1508232306000" expanded="false" signature="6604:7798" ph="{...}" />
+                    <marker date="1508232306000" expanded="false" signature="12026:13090" ph="{...}" />
+                    <marker date="1508232306000" expanded="false" signature="13307:13764" ph="{...}" />
                   </folding>
                 </state>
               </provider>
@@ -182,8 +93,8 @@
           <file leaf-file-name="edit-workflow2.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="342">
-                  <caret line="211" column="21" lean-forward="false" selection-start-line="211" selection-start-column="21" selection-end-line="211" selection-end-column="21" />
+                <state relative-caret-position="266">
+                  <caret line="206" column="0" lean-forward="true" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
                   <folding>
                     <element signature="e#256#262#0" expanded="true" />
                     <element signature="e#299#305#0" expanded="true" />
@@ -270,6 +181,9 @@
       <find>wfNara</find>
       <find>wfClientId</find>
       <find>&lt;&lt;&lt;&lt;&lt;&lt;</find>
+      <find>datawfProcess</find>
+      <find>wfForm</find>
+      <find>dataWfProcess</find>
     </findStrings>
     <replaceStrings>
       <replace>wfInputForm.value.wfProcess</replace>
@@ -290,9 +204,9 @@
         <option value="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" />
         <option value="$PROJECT_DIR$/src/services/workflow.ts" />
         <option value="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.html" />
-        <option value="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" />
         <option value="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts" />
         <option value="$PROJECT_DIR$/src/pages/workflow/workflow.ts" />
+        <option value="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" />
       </list>
     </option>
   </component>
@@ -336,6 +250,24 @@
             <path>
               <item name="vtApp" type="b2602c69:ProjectViewProjectNode" />
               <item name="vtApp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vtApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vtApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vtApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vtApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vtApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vtApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="edit-workflow1" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -441,25 +373,26 @@
       <workItem from="1507470896858" duration="5277000" />
       <workItem from="1507650301333" duration="14643000" />
       <workItem from="1507946786652" duration="37212000" />
-      <workItem from="1508224533924" duration="25000" />
+      <workItem from="1508224533924" duration="6624000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69166000" />
+    <option name="totallyTimeSpent" value="75765000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1952079" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13601127" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2962515" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2962515" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -499,8 +432,11 @@
         <state relative-caret-position="9450">
           <caret line="636" column="14" lean-forward="false" selection-start-line="636" selection-start-column="14" selection-end-line="648" selection-end-column="16" />
           <folding>
-            <marker date="1508224281000" expanded="true" signature="7:26" ph="..." />
-            <marker date="1508224281000" expanded="true" signature="19807:24542" ph="{...}" />
+            <element signature="n#!!block;n#updateTextChg#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <marker date="1508232411000" expanded="true" signature="7:26" ph="..." />
+            <marker date="1508232411000" expanded="true" signature="19886:21141" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -551,8 +487,8 @@
         <state relative-caret-position="765">
           <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
           <folding>
-            <element signature="e#0#58#0" expanded="true" />
-            <element signature="e#892#935#0" expanded="true" />
+            <element signature="e#0#58#0" expanded="false" />
+            <element signature="e#892#935#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -564,14 +500,14 @@
           <folding>
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
-            <element signature="e#1434#1723#0" expanded="false" />
-            <element signature="e#1746#2583#0" expanded="false" />
+            <element signature="e#1754#2591#0" expanded="false" />
             <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#10499#13927#0" expanded="false" />
+            <element signature="e#10340#13768#0" expanded="false" />
             <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
-            <marker date="1508224281000" expanded="false" signature="12185:13249" ph="{...}" />
-            <marker date="1508224281000" expanded="false" signature="13466:13923" ph="{...}" />
+            <marker date="1508232306000" expanded="false" signature="6604:7798" ph="{...}" />
+            <marker date="1508232306000" expanded="false" signature="12026:13090" ph="{...}" />
+            <marker date="1508232306000" expanded="false" signature="13307:13764" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -655,14 +591,14 @@
           <folding>
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
-            <element signature="e#1434#1723#0" expanded="false" />
-            <element signature="e#1746#2583#0" expanded="false" />
+            <element signature="e#1754#2591#0" expanded="false" />
             <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#10499#13927#0" expanded="false" />
+            <element signature="e#10340#13768#0" expanded="false" />
             <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
-            <marker date="1508224281000" expanded="false" signature="12185:13249" ph="{...}" />
-            <marker date="1508224281000" expanded="false" signature="13466:13923" ph="{...}" />
+            <marker date="1508232306000" expanded="false" signature="6604:7798" ph="{...}" />
+            <marker date="1508232306000" expanded="false" signature="12026:13090" ph="{...}" />
+            <marker date="1508232306000" expanded="false" signature="13307:13764" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -699,8 +635,11 @@
         <state relative-caret-position="330">
           <caret line="27" column="16" lean-forward="true" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
           <folding>
-            <marker date="1508224281000" expanded="true" signature="7:26" ph="..." />
-            <marker date="1508224281000" expanded="true" signature="19807:24542" ph="{...}" />
+            <element signature="n#!!block;n#updateTextChg#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <marker date="1508232411000" expanded="true" signature="7:26" ph="..." />
+            <marker date="1508232411000" expanded="true" signature="19886:21141" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -757,14 +696,14 @@
           <folding>
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
-            <element signature="e#1434#1723#0" expanded="false" />
-            <element signature="e#1746#2583#0" expanded="false" />
+            <element signature="e#1754#2591#0" expanded="false" />
             <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#10499#13927#0" expanded="false" />
+            <element signature="e#10340#13768#0" expanded="false" />
             <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
-            <marker date="1508224281000" expanded="false" signature="12185:13249" ph="{...}" />
-            <marker date="1508224281000" expanded="false" signature="13466:13923" ph="{...}" />
+            <marker date="1508232306000" expanded="false" signature="6604:7798" ph="{...}" />
+            <marker date="1508232306000" expanded="false" signature="12026:13090" ph="{...}" />
+            <marker date="1508232306000" expanded="false" signature="13307:13764" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -774,8 +713,11 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1508224281000" expanded="true" signature="7:26" ph="..." />
-            <marker date="1508224281000" expanded="true" signature="19807:24542" ph="{...}" />
+            <element signature="n#!!block;n#updateTextChg#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <marker date="1508232411000" expanded="true" signature="7:26" ph="..." />
+            <marker date="1508232411000" expanded="true" signature="19886:21141" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -851,14 +793,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
+    <entry file="file://$PROJECT_DIR$/www/build/main.js.map" />
+    <entry file="file://$PROJECT_DIR$/www/build/main.js" />
+    <entry file="file://$PROJECT_DIR$/src/services/workflow.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#58#0" expanded="true" />
-            <element signature="e#892#935#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="270">
+          <caret line="19" column="35" lean-forward="true" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -870,18 +811,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/workflow.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="14" column="31" lean-forward="false" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-          <folding />
+        <state relative-caret-position="465">
+          <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#58#0" expanded="false" />
+            <element signature="e#892#935#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="211" column="21" lean-forward="false" selection-start-line="211" selection-start-column="21" selection-end-line="211" selection-end-column="21" />
+        <state relative-caret-position="266">
+          <caret line="206" column="0" lean-forward="true" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
           <folding>
             <element signature="e#256#262#0" expanded="true" />
             <element signature="e#299#305#0" expanded="true" />
@@ -907,8 +851,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1365">
-          <caret line="328" column="0" lean-forward="false" selection-start-line="309" selection-start-column="0" selection-end-line="328" selection-end-column="0" />
+        <state relative-caret-position="1416">
+          <caret line="332" column="37" lean-forward="true" selection-start-line="332" selection-start-column="37" selection-end-line="332" selection-end-column="37" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#1649#4370#0" expanded="false" />
@@ -930,37 +874,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9450">
-          <caret line="636" column="14" lean-forward="false" selection-start-line="636" selection-start-column="14" selection-end-line="648" selection-end-column="16" />
-          <folding>
-            <marker date="1508224281000" expanded="true" signature="7:26" ph="..." />
-            <marker date="1508224281000" expanded="true" signature="19807:24542" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/build/main.js.map" />
     <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="158" column="27" lean-forward="false" selection-start-line="158" selection-start-column="27" selection-end-line="158" selection-end-column="27" />
+        <state relative-caret-position="104">
+          <caret line="638" column="21" lean-forward="true" selection-start-line="638" selection-start-column="21" selection-end-line="638" selection-end-column="21" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
-            <element signature="e#1434#1723#0" expanded="false" />
-            <element signature="e#1746#2583#0" expanded="false" />
+            <element signature="e#1754#2591#0" expanded="false" />
             <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#10499#13927#0" expanded="false" />
+            <element signature="e#10340#13768#0" expanded="false" />
             <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
-            <marker date="1508224281000" expanded="false" signature="12185:13249" ph="{...}" />
-            <marker date="1508224281000" expanded="false" signature="13466:13923" ph="{...}" />
+            <marker date="1508232306000" expanded="false" signature="6604:7798" ph="{...}" />
+            <marker date="1508232306000" expanded="false" signature="12026:13090" ph="{...}" />
+            <marker date="1508232306000" expanded="false" signature="13307:13764" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/build/main.js" />
+    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="482" column="0" lean-forward="true" selection-start-line="482" selection-start-column="0" selection-end-line="482" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!block;n#updateTextChg#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <marker date="1508232411000" expanded="true" signature="7:26" ph="..." />
+            <marker date="1508232411000" expanded="true" signature="19886:21141" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

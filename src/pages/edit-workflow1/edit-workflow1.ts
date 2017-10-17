@@ -255,7 +255,7 @@ export class EditWorkflow1Page implements OnInit{
           }
           
         } catch (err) {
-          console.log(err);
+          // console.log(err);
         }
       }
 
@@ -479,6 +479,11 @@ export class EditWorkflow1Page implements OnInit{
       wfQCSignOff: [''],
       wfQCInputNote: [''],
 
+      //  Appendix
+
+      wfFormStatus: [''],
+      wfProcessStatus: [''],
+
     });
 
   }
@@ -571,6 +576,7 @@ export class EditWorkflow1Page implements OnInit{
               console.log('submit and save clicked');
               console.log(form.value);
 
+
               // Upload to Server
               this.wfSvc.upload(form.value,1)
                 .subscribe((data)=> {
@@ -582,89 +588,24 @@ export class EditWorkflow1Page implements OnInit{
                   }
                 );
 
-              let dataXYZ = {"wfProcess": form.value.wfProcess,
-              "wfProcessName": form.value.wfProcessName,
-              "wfForm": form.value.wfForm,
-              "wfFormId": form.value.wfFormId,
-              "wfOrderFormId": form.value.wfOrderFormId,
-              "WfOrderId": form.value.WfOrderId,
-              "wfOrderBatchId": form.value.wfOrderBatchId,
-              "wfOrderBatchQty": form.value.wfOrderBatchQty,
-              "wfOrderTotalQty": form.value.wfOrderTotalQty,
-              "wfOrderTotalGoodQty": form.value.wfOrderTotalGoodQty,
-              "wfOrderRMId": form.value.wfOrderRMId,
-              "wfOrderSeries": form.value.wfOrderSeries,
-              "wfOrderSpec": form.value.wfOrderSpec,
-              "wfOrderDim": form.value.wfOrderDim,
-              "wfRMFoilPosName": form.value.wfRMFoilPosName,
-              "wfRMFoilPosSerial": form.value.wfRMFoilPosSerial,
-              "wfRMFoilPosLName": form.value.wfRMFoilPosLName,
-              "wfRMFoilNegName": form.value.wfRMFoilNegName,
-              "wfRMFoilNegSerial": form.value.wfRMFoilNegSerial,
-              "wfRMFoilNegLName": form.value.wfRMFoilNegLName,
-              "wfRMPaperName": form.value.wfRMPaperName,
-              "wfRMPaperSerial": form.value.wfRMPaperSerial,
-              "wfRMGlueName": "",
-              "wfRMGlueSerial": form.value.wfRMGlueSerial,
-              "wfRMSolName": form.value.wfRMSolName,
-              "wfRMSolSerial": form.value.wfRMSolSerial,
-              "wfRMPinPosName": form.value.wfRMPinPosName,
-              "wfRMPinPosSerial": form.value.wfRMPinPosSerial,
-              "wfRMPinNegName": form.value.wfRMPinNegName,
-              "wfRMPinNegSerial": form.value.wfRMPinNegSerial,
-              "wfRMPlasticName": form.value.wfRMPlasticName,
-              "wfRMPlasticSerial": form.value.wfRMPlasticSerial,
-              "wfRMCoverName": form.value.wfRMCoverName,
-              "wfRMCoverSerial": form.value.wfRMCoverSerial,
-              "wfStaffTechId": form.value.wfStaffTechId,
-              "wfStaffOptShift": form.value.wfStaffOptShift,
-              "wfQCSignOff": form.value.wfQCSignOff};
+              let alert = this.alertCtrl.create({
+                title: 'Please Check!',
+                // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
+                // comment above for faster process
+                subTitle: 'Please select 终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
+                buttons: [{text: '確定',
+                  handler: () => {
+                    form.value.wfProcessStatus = "1";
+                    this.storage.set(form.value.wfFormId, form.value);
 
-              /*
-              this.storage.get('wfProcess').then((dataProcessXTmp) => {
-                dataXYZ.wfProcess = form.value.wfProcess;
-                //dataXYZ.wfProcess++;
-                //dataXYZ.wfProcessName = dataProcessXTmp[dataXYZ.wfProcess]["Process"][form.value.wfFormId];
-                
-                let alertX = this.alertCtrl.create({
-                  title: 'Please Check!',
-                  subTitle: dataProcessXTmp[dataXYZ.wfProcess]["Process"][form.value.wfFormId],
-                  buttons: ['OK']
-                });
-                alertX.present();
+                    // Return back to main page
+                    this.navCtrl.pop();
+                  }
+                }]
               });
-              */
-              if(form.value.wfProcess == 1) {
-                dataXYZ.wfProcess = 2;
-                dataXYZ.wfProcessName = '组立'; 
-                this.storage.set(form.value.wfFormId, dataXYZ);
-              } else if(form.value.wfProcess == 3) {
-                dataXYZ.wfProcess = 4;
-                dataXYZ.wfProcessName = '含浸'; 
-                this.storage.set(form.value.wfFormId, dataXYZ);
-              } else if(form.value.wfProcess == 4) {
-                dataXYZ.wfProcess = 5;
-                dataXYZ.wfProcessName = '清洗'; 
-                this.storage.set(form.value.wfFormId, dataXYZ);
-              }     
-              //watch data 
-              this.storage.get(form.value.wfFormId).then((resultStorageItemX) => {
-                if(resultStorageItemX){
-                  let alert = this.alertCtrl.create({
-                    title: 'Please Check!',
-                    // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
-                    // comment above for faster process
-                    subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId,
-                    buttons: [{text: '確定',
-                      handler: () => {
-                        // Return back to main page
-                        this.navCtrl.pop();
-                      }
-                    }]
-                  });
 
-                  alert.present(); }
-              });
+              alert.present();
+
               //this.onSubmit();
             }
           }]

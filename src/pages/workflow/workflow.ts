@@ -74,7 +74,7 @@ export class WorkflowPage implements OnInit {
 
     this.wfInputs = [
       {title: "流程卡号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 30},
-      {title: "工单号", method: 'input', type: 'text', model: 'WfOrderId', scan: false, size: 20},
+      {title: "工单号", method: 'input', type: 'text', model: 'wfOrderId', scan: false, size: 20},
       //{title: "总量(预设)", method: 'input', type: 'number', model: 'wfOrderTotalQty', scan: false, size: 10},
 
       // Prompt Screen alert to pick the workflow batch id
@@ -133,7 +133,7 @@ export class WorkflowPage implements OnInit {
 
     let form = this.wfInputForm;
 
-    let alerTest = this.alertCtrl.create({
+    let alertTest = this.alertCtrl.create({
       title: '确认工单',
       message: '嚫，请选择工单',
       buttons: [
@@ -162,7 +162,7 @@ export class WorkflowPage implements OnInit {
                       "wfForm": "1",
                       "wfFormId": "VT00001",
                       "wfOrderFormId": "VTOF00001",
-                      "WfOrderId": "VTO00001",
+                      "wfOrderId": "VTO00001",
                       "wfOrderBatchId": "VTOB0001",
                       "wfOrderBatchQty": "100",
                       "wfOrderTotalQty": "1000",
@@ -224,17 +224,6 @@ export class WorkflowPage implements OnInit {
                 });
               });
             }
-            // this.storage.get(form.value.wfFormId).then(storageData => {
-            //   if(storageData){
-            //     console.log("Result found:" + form.value.wfFormId);
-            //     this.populateDataToForm(form, storageData);
-            //     this.workflowStateChange();
-            //
-            //   } else {
-            //     alert("嚫，查木记录")
-            //
-            //   }
-            // });
             console.log('Buy clicked');
           }
         },
@@ -253,7 +242,7 @@ export class WorkflowPage implements OnInit {
                       "wfProcess": "1",
                       "wfProcessName": "打印",
                       "wfFormId": "VT0002",
-                      "WfOrderId": "VTO0002",
+                      "wfOrderId": "VTO0002",
                       "wfOrderBatchId": "VTB0002",
                       "wfOrderBatchQty": "100",
                       "wfOrderFormNote": "嚫，這是測試FORM",
@@ -280,161 +269,40 @@ export class WorkflowPage implements OnInit {
                     }
                   }
               });
-              
+
               this.qrCodePopulate(data);
               this.storage.set(form.value.wfFormId, form.value);
-            }
-            this.storage.get(form.value.wfFormId).then(storageData => {
-              if(storageData){
-                console.log("Result found:" + form.value.wfFormId);
-                this.populateDataToForm(form, storageData);
+              this.workflowStateChange();
+
+            } else {
+              this.wfSvc.query(form.value, form.value.wfForm).subscribe( (serverData) => {
+                console.log("Response from server: " + JSON.stringify(serverData[0]));
+                this.populateDataToForm(form, serverData[0]);
                 this.workflowStateChange();
-        
-              } else {
-                alert("嚫，查木记录")
-        
-              }
-            });
+
+              },(err)=>{
+                alert("嚫,网路不给力");
+                console.log(err);
+                this.storage.get(form.value.wfFormId).then(storageData => {
+                  if(storageData){
+                    console.log("Result found:" + form.value.wfFormId);
+                    this.populateDataToForm(form, storageData);
+                    this.workflowStateChange();
+
+                  } else {
+                    alert("嚫，查木记录")
+
+                  }
+                });
+              });
+            }
             console.log('Buy clicked');
           }
         }
         
       ]
     });
-    alerTest.present();
-
-    /*
-    if (form.value.wfFormId === "") {
-      console.log("nothing in the form");
-
-      
-      // Predefined data for testing purpose
-
-      // workflow 1
-      let data = JSON.stringify({ "headers":
-        { "erpData": "ngForm"},
-        "bodies":
-          { "erpData":
-            {"wfProcess": "1",
-              "wfProcessName": "釘卷",
-              "wfForm": "1",
-              "wfFormId": "VT00001",
-              "wfOrderFormId": "VTOF00001",
-              "WfOrderId": "VTO00001",
-              "wfOrderBatchId": "VTOB0001",
-              "wfOrderBatchQty": "100",
-              "wfOrderTotalQty": "1000",
-              "wfOrderTotalGoodQty": "100",
-              "wfOrderRMId": "VT原材料",
-              "wfOrderSeries": "VT系列",
-              "wfOrderSpec": "VT規格",
-              "wfOrderDim": "VT尺寸",
-              "wfRMFoilPosName": "100LG04B-33VF-48UF 5.5mm",
-              "wfRMFoilPosSerial": "17074049",
-              "wfRMFoilPosLName": "184",
-              "wfRMFoilNegName": "F-545M-450UF-5.5MM",
-              "wfRMFoilNegSerial": "0619A04A06",
-              "wfRMFoilNegLName": "184",
-              "wfRMPaperName": "SM250-50 6.5mm",
-              "wfRMPaperSerial": "17032519A1-B47",
-              "wfRMGlueName": "",
-              "wfRMGlueSerial": "17.7.22",
-              "wfRMSolName": "KVP-1B",
-              "wfRMSolSerial": "富凱2017.7119",
-              "wfRMPinPosName": "15080(+)",
-              "wfRMPinPosSerial": "1706241163",
-              "wfRMPinNegName": "15080(-)",
-              "wfRMPinNegSerial": "1707201194",
-              "wfRMPlasticName": "9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",
-              "wfRMPlasticSerial": "17704310121",
-              "wfRMCoverName": "10x10.6 3004材质(防爆)",
-              "wfRMCoverSerial": "1670722-053842",
-              "wfProcessStatus": "0",
-              "wfFormStatus": "0"
-            }
-          }
-      });
-
-      
-      // workflow 2
-      let data = JSON.stringify({ "headers":
-        { "erpData": "ngForm"},
-        "bodies":
-          { "erpData":
-            {"wfForm":"2",
-              "wfProcess": "1",
-              "wfProcessName": "打印",
-              "wfFormId": "VT0002",
-              "WfOrderId": "VTO0002",
-              "wfOrderBatchId": "VTB0002",
-              "wfOrderBatchQty": "100",
-              "wfOrderFormNote": "嚫，這是測試FORM",
-              "wfOrderBOMNote": "嚫，這是測試BOM",
-              "wfOrderNote": "嚫，這是測試Note",
-              "wfOrderTotalQty":"10000",
-              "wfOrderTotalGoodQty":"1000",
-              "wfOrderRMId":"VTRM0001",
-              "wfOrderSeries": "VTRM 10x10x20",
-              "wfOrderSpec": "20x20x10",
-              "wfOrderDim": "10cm",
-              "wfRMUpBeltName": "上帶RM001",
-              "wfRMDownBeltName": "下帶RM001",
-              "wfRMBaseName": "底座 001",
-              "wfRMCircleName": "圓卡 0001",
-              "wfRMPrintName": "Ink2001",
-              "wfOptMachineId": "AAA01",
-              "wfClientId": "SA0001",
-              "wfFormName":"成品流程卡",
-              "wfSalesOrderId": "VTSO001",
-              "wfProcessStatus": "0",
-              "wfFormStatus": "0"
-            }
-          }
-      });
-      
-
-      this.qrCodePopulate(data);
-      this.storage.set(form.value.wfFormId, form.value);
-
-    } else {
-      // Below script are for Server communication
-      this.wfSvc.query(form.value, form.value.wfForm).subscribe( (serverData) => {
-        console.log("Response from server: " + JSON.stringify(serverData[0]));
-        this.populateDataToForm(form, serverData[0]);
-        this.workflowStateChange();
-
-      }, (err) => {
-        alert("嚫,网路不给力");
-        console.log(err);
-
-        this.storage.get(form.value.wfFormId).then(storageData => {
-          if(storageData){
-            console.log("Result found:" + form.value.wfFormId);
-            this.populateDataToForm(form, storageData);
-            this.workflowStateChange();
-
-          } else {
-            alert("嚫，查木记录")
-
-          }
-        });
-
-      });
-    }
-    
-
-    this.storage.get(form.value.wfFormId).then(storageData => {
-      if(storageData){
-        console.log("Result found:" + form.value.wfFormId);
-        this.populateDataToForm(form, storageData);
-        this.workflowStateChange();
-
-      } else {
-        alert("嚫，查木记录")
-
-      }
-    });
-    */
+    alertTest.present();
   }
 
   scanBarcode(model: string){
@@ -442,6 +310,7 @@ export class WorkflowPage implements OnInit {
     let form = this.wfInputForm;
 
     console.log("scanning Barcode");
+    console.log(model);
 
     this.barcodeScanner.scan().then((barcodeData) => {
       // Success! Barcode data is here
@@ -652,28 +521,19 @@ export class WorkflowPage implements OnInit {
               // backup code for assigning the value into form
               // ngForm.controls[formKey].setValue(form[formKey]);
 
-              // This line no longer works
-              // eval('form.value.' + formKey + " = " + formBodies[formKey]);
-
-              // eval('form.value.' + formKey + " = '" + formBodies[formKey] + "'");
-
               // This use form control for the value setting
+              console.log("formKey : " + formKey);
+              console.log("Form " + form[formKey]);
+
               this.setFormValue(formKey, formBodies[formKey]);
 
-              // No idea what it is far
-              // if(form.value.wfFormId == formBodies[formKey]) {
-              //   //alert(formBodies[formKey] + ' ' +JSON.stringify(formBodies));
-              //   this.storage.set(formBodies[formKey],  JSON.stringify(formBodies));
-              // }
-                  
-              //  form.value.
             }
             catch(err) {
-              // console.log(err.message);
+              console.log(err.message);
               eval('form.value.' + formKey + '= "' + formBodies[formKey] + '"; ');
-              // eval('console.log("Retrying force input " + form.value.'+ formKey + ')');
-              // eval('console.log(form.value.' + formKey + ');');
-              // console.log("barcode loaded in form:" + JSON.stringify(form.value));
+              eval('console.log("Retrying force input " + form.value.'+ formKey + ')');
+              eval('console.log(form.value.' + formKey + ');');
+              console.log("barcode loaded in form:" + JSON.stringify(form.value));
             }
 
           }
@@ -855,10 +715,7 @@ export class WorkflowPage implements OnInit {
       wfProcessName: [''],
       wfForm: [''],
       wfFormId: [''],
-
-      // Order Inputs detail
-      wfOrderFormId: [''],
-      WfOrderId: [''],
+      wfOrderId: [''],
       wfOrderBatchId: [''],
       wfOrderBatchQty: [''],
       wfOrderTotalQty: ['']

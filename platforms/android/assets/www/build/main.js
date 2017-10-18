@@ -1,1 +1,2068 @@
-webpackJsonp([0],{115:function(module,__webpack_exports__,__webpack_require__){"use strict";__webpack_require__.d(__webpack_exports__,"a",function(){return WorkflowPage});var __WEBPACK_IMPORTED_MODULE_0__angular_core__=__webpack_require__(1),__WEBPACK_IMPORTED_MODULE_1__ionic_storage__=__webpack_require__(69),__WEBPACK_IMPORTED_MODULE_2_ionic_angular__=__webpack_require__(54),__WEBPACK_IMPORTED_MODULE_3__angular_forms__=__webpack_require__(17),__WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__=__webpack_require__(40),__WEBPACK_IMPORTED_MODULE_5__services_workflow__=__webpack_require__(50),__WEBPACK_IMPORTED_MODULE_6__edit_workflow1_edit_workflow1__=__webpack_require__(122),__WEBPACK_IMPORTED_MODULE_7__edit_workflow2_edit_workflow2__=__webpack_require__(123),__decorate=this&&this.__decorate||function(l,n,t,u){var e,i=arguments.length,o=i<3?n:null===u?u=Object.getOwnPropertyDescriptor(n,t):u;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)o=Reflect.decorate(l,n,t,u);else for(var a=l.length-1;a>=0;a--)(e=l[a])&&(o=(i<3?e(o):i>3?e(n,t,o):e(n,t))||o);return i>3&&o&&Object.defineProperty(n,t,o),o},__metadata=this&&this.__metadata||function(l,n){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(l,n)},WorkflowPage=function(){function WorkflowPage(l,n,t,u,e,i){this.storage=l,this.wfSvc=n,this.formBuilder=t,this.navCtrl=u,this.alertCtrl=e,this.barcodeScanner=i,this.staffIdBarcode=null,this.orderIdBarcode=null,this.wfForms=[1,2],this.wfProcesses=[],this.wfMachineProcess=[],this.wfStages=[],this.wfInputs=[],this.wfMachineData=[],this.wfForm1Process={},this.wfForm2Process={1:"打印/测试上带",2:"贴片外观",3:"终检"},this.testRadioOpen=!1,l.ready().then(function(){}),this.wfProcesses=[{title:"钉卷",process:1,show:!0},{title:"含浸",process:2,show:!0},{title:"组立",process:3,show:!0},{title:"清洗",process:4,show:!0},{title:"手工老化",process:"5a0",show:!0},{title:"自動老化",process:"5b0",show:!0}],this.wfInputs=[{title:"流程卡号",method:"input",type:"text",model:"wfFormId",scan:!0,size:30},{title:"工单号",method:"input",type:"text",model:"WfOrderId",scan:!1,size:20},{title:"总量(预设)",method:"input",type:"number",model:"wfOrderTotalQty",scan:!1,size:10},{title:"批次号",method:"input",type:"text",model:"wfOrderBatchId",scan:!1,size:20},{title:"总量(批次)",method:"input",type:"number",model:"wfOrderBatchQty",scan:!1,size:10},{method:"break",size:20},{title:"流程卡",method:"buttons",options:[{value:1,label:"裸品"},{value:2,label:"成品"},{value:3,label:"电容器"}],model:"wfForm",scan:!1,size:100}]}return WorkflowPage.prototype.ngOnInit=function(){this.formInit(),this.storage.clear(),console.log("Number of records in storage"),console.log(this.storage.length());var l=JSON.stringify({1:{wfFormName:"裸品流程卡",wfFormID:"1",Process:{1:"釘卷",2:"含浸",3:"组立",4:"清洗"}},2:{wfFormName:"成品流程卡",wfFormID:"2",Process:{1:"打印/测试上带",2:"贴片外观",3:"终检"}}});this.storage.set("wfProcess",l);var n=JSON.stringify({AA01:{staffID:"0001",staffName:"用户01",techID:"0001",techName:"用户01",xrayID:"",xrayName:"",shift:"A"},AB001:{staffID:"0001",staffName:"用户01",techID:"0001",techName:"用户01",xrayID:"",xrayName:"",shift:"A"}});this.storage.set("wfMachine",n)},WorkflowPage.prototype.onAddWf=function(){var l=this;console.log("onAddWF is triggered!");var n=this.wfInputForm;this.storage.get(n.value.wfFormId).then(function(t){if(t){var u={headers:{erpData:"ngForm"},bodies:{erpData:t}},e=JSON.stringify(u);l.qrCodePopulate(e)}else{var i=JSON.stringify({headers:{erpData:"ngForm"},bodies:{erpData:{wfProcess:"1",wfProcessName:"釘卷",wfForm:"1",wfFormId:"VT00001",wfOrderFormId:"VTOF00001",WfOrderId:"VTO00001",wfOrderBatchId:"VTOB0001",wfOrderBatchQty:"100",wfOrderTotalQty:"1000",wfOrderTotalGoodQty:"100",wfOrderRMId:"VT原材料",wfOrderSeries:"VT系列",wfOrderSpec:"VT規格",wfOrderDim:"VT尺寸",wfRMFoilPosName:"100LG04B-33VF-48UF 5.5mm",wfRMFoilPosSerial:"17074049",wfRMFoilPosLName:"184",wfRMFoilNegName:"F-545M-450UF-5.5MM",wfRMFoilNegSerial:"0619A04A06",wfRMFoilNegLName:"184",wfRMPaperName:"SM250-50 6.5mm",wfRMPaperSerial:"17032519A1-B47",wfRMGlueName:"",wfRMGlueSerial:"17.7.22",wfRMSolName:"KVP-1B",wfRMSolSerial:"富凱2017.7119",wfRMPinPosName:"15080(+)",wfRMPinPosSerial:"1706241163",wfRMPinNegName:"15080(-)",wfRMPinNegSerial:"1707201194",wfRMPlasticName:"9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",wfRMPlasticSerial:"17704310121",wfRMCoverName:"10x10.6 3004材质(防爆)",wfRMCoverSerial:"1670722-053842"}}});l.qrCodePopulate(i),l.storage.set(n.value.wfFormId,n.value)}}),console.log("Checking the wfFormId.value"),console.log(n.value.wfFormId),console.log("storage load:"+JSON.stringify(this.storage.get(n.value.wfFormId))),""==n.controls.wfFormId.value?alert("請輸入流程卡号"):1==n.value.wfForm?(console.log("Will enter 裸品流程卡 edit page now"),console.log("流程卡"+n.value.wfFormId),n.value.wfFormName="裸品流程卡",this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__edit_workflow1_edit_workflow1__.a,n.value.wfFormId)):2==n.value.wfForm?(console.log("Will enter 成品流程卡 edit page now"),console.log("流程卡"+n.value.wfFormId),n.value.wfFormName="成品流程卡",this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__edit_workflow2_edit_workflow2__.a,n.value.wfFormId)):3==n.value.wfForm?(console.log("Will enter 电容器流程卡 edit page now"),console.log("流程卡"+n.value.wfFormId),n.value.wfFormName="电容器流程卡"):alert("請輸入流程卡")},WorkflowPage.prototype.scanBarcode=function(l){var n=this,t=this.wfInputForm;console.log("scanning Barcode"),this.barcodeScanner.scan().then(function(u){if(u.format&&"QR_CODE"!=u.format){console.log("this is barcode");var e=u.text;t.controls[l].setValue(e)}else"QR_CODE"==u.format?(console.log(u.text),console.log("This is QR Code"),n.qrCodePopulate(u.text)):alert("嚫，请确定你所扫描的条码是正确的")},function(l){alert(l)})},WorkflowPage.prototype.setFormValue=function(l,n){this.wfInputForm.controls[l].setValue(n)},WorkflowPage.prototype.qrCodePopulate=function(barcodeData){console.log("running qrCodePop"),console.log(barcodeData);var data=JSON.parse(barcodeData),headers=data.headers,bodies=data.bodies,form=this.wfInputForm;console.log(data);var _loop_1=function(key){switch(headers[key]){case"ngForm":var formBodies=bodies[key];for(var formKey in formBodies)try{this_1.setFormValue(formKey,formBodies[formKey])}catch(err){console.log(err.message),eval("form.value."+formKey+'= "'+formBodies[formKey]+'"; ')}console.log("barcode loaded in form:"+JSON.stringify(form.value));break;case"ngStorage":console.log(key+" is a storage"),this_1.storage.set(key,bodies[key]),console.log(bodies[key]),this_1.storage.get(key).then(function(l){for(var n in l)console.log(l[n]);console.log(key),console.log(JSON.stringify(l))});break;case"ngInput":console.log(key+" is for input"),console.log(bodies[key]);var inputBodies=bodies[key];for(var inputKey in inputBodies){console.log("populate form model"+inputKey);try{eval("this."+inputKey+" = "+inputBodies[inputKey])}catch(l){console.log(l.message)}}break;default:console.log(key+" is error")}},this_1=this;for(var key in headers)_loop_1(key)},WorkflowPage.prototype.formInit=function(){this.wfInputForm=this.formBuilder.group({wfProcess:[""],wfProcessName:[""],wfForm:[""],wfFormId:[""],wfOrderFormId:[""],WfOrderId:[""],wfOrderBatchId:[""],wfOrderBatchQty:[""],wfOrderTotalQty:[""]})},WorkflowPage}(),_a,_b,_c,_d,_e,_f},122:function(l,n,t){"use strict";t.d(n,"a",function(){return e});t(1),t(69),t(54);var u=t(17),e=(t(40),t(51),t(50),function(){function l(l,n,t,e,i,o,a,r){this.storage=l,this.formBuilder=n,this.barcodeScanner=t,this.alertCtrl=e,this.camera=i,this.navParams=o,this.wfSvc=a,this.navCtrl=r,this.form=u.m,this.wfOrderDetails=[],this.wfRMDetails=[],this.wfAgeingDetails=[],this.wfAutoAgeingDetails=[],this.wfAutoAgeingSubDetails=[],this.wfOpsInputs=[],this.wfPplInputs=[],this.images=[],this.tzoffset=6e4*(new Date).getTimezoneOffset(),this.appDate=new Date(Date.now()-this.tzoffset).toISOString().slice(0,-1),l.ready().then(function(){}),this.wfNavParams=this.navParams.data,this.wfOrderDetails=[{method:"input",model:"wfFormId",title:"流程卡号",type:"text",size:20,highlight:!1},{method:"input",model:"WfOrderId",title:"工单号",type:"text",size:20,highlight:!1},{method:"input",model:"wfOrderRMId",title:"料号",type:"text",size:20,highlight:!1},{method:"input",model:"wfOrderSeries",title:"系列",type:"text",size:10,highlight:!1},{method:"input",model:"wfOrderSpec",title:"规格",type:"text",size:8,highlight:!1},{method:"input",model:"wfOrderDim",title:"尺寸",type:"text",size:8,highlight:!1},{method:"input",model:"wfOrderBOMNote",title:"BOM备注",type:"textarea",size:30,highlight:!1},{method:"input",model:"wfOrderNote",title:"工单备注",type:"textarea",size:30,highlight:!1},{method:"input",model:"wfOrderTotalQty",title:"预设总量",type:"number",size:5,highlight:!1},{method:"input",model:"wfOrderTotalGoodQty",title:"良品數總和",type:"number",size:5,highlight:!1}],this.wfRMDetails=[{modelName:"wfRMFoilPosName",title:"正箔",type:"text",modelSerial:"wfRMFoilPosSerial",highlight:!1},{modelName:"wfRMFoilPosLName",title:"正箔 - L",type:"text",modelSerial:"wfRMFoilPosLSerial",highlight:!1},{modelName:"wfRMFoilNegName",title:"負箔",type:"text",modelSerial:"wfRMFoilNegSerial",highlight:!1},{modelName:"wfRMFoilNegLName",title:"負箔 - L",type:"text",modelSerial:"wfRMFoilNegLSerial",highlight:!1},{modelName:"wfRMPaperName",title:"电解纸",type:"text",modelSerial:"wfRMPaperSerial",highlight:!1},{modelName:"wfRMGlueName",title:"胶水/胶带",type:"text",modelSerial:"wfRMGlueSerial",highlight:!1},{modelName:"wfRMSolName",title:"电解液",type:"text",modelSerial:"wfRMSolSerial",highlight:!1},{modelName:"wfRMPinPosName",title:"正导针",type:"text",modelSerial:"wfRMPinPosSerial",highlight:!1},{modelName:"wfRMPinNegName",title:"负导针",type:"text",modelSerial:"wfRMPinNegSerial",highlight:!1},{modelName:"wfRMPlasticName",title:"胶粒",type:"textarea",modelSerial:"wfRMPlasticSerial",highlight:!1},{modelName:"wfRMShellName",title:"铝壳",type:"text",modelSerial:"wfRMShellSerial",highlight:!1},{modelName:"wfRMCoverName",title:"套管",type:"text",modelSerial:"wfRMCoverSerial",highlight:!1}],this.wfOpsInputs=[{title:"分單",method:"input",model:"wfFormSplit",type:"text",icon:"ios-copy-outline",scan:!1,size:2,wfOpslI:2},{title:"流程卡号",method:"input",model:"wfOrderFormId",type:"text",icon:"ios-copy-outline",scan:!1,size:9},{title:"机台",method:"input",model:"wfOptMachineId",type:"text",icon:"cog",wfOpslI:1,scan:!0,size:6},{title:"批次号",method:"input",model:"wfOrderBatchId",type:"text",icon:"ios-basket-outline",scan:!1,size:11},{title:"批次量",method:"input",model:"wfOrderBatchQty",type:"text",icon:"ios-basket-outline",scan:!1,size:5},{method:"break",title:""},{method:"inputs",options:[{title:"正箔 - L",model:"wfRMFoilPosLName",type:"number",icon:"ios-add-circle-outline",scan:!1,size:8},{title:"負箔 - L",model:"wfRMFoilNegLName",type:"number",icon:"md-remove-circle",scan:!1,size:8}]},{method:"inputs2",header:"素子烘烤",options:[{title:"时间 H",model:"wfRMWindingTime",type:"number",icon:"ios-add-circle-outline",scan:!1,size:8},{title:"温度 ℃",model:"wfRMWindingDeg",type:"number",icon:"md-remove-circle",scan:!1,size:8}]},{method:"inputs",options:[{title:"日期",model:"wfOptInputDate",type:"date",icon:"calender",scan:!1,size:8},{title:"开始",model:"wfOptStartTime",type:"time",icon:"time",scan:!1,size:8},{title:"完成",model:"wfOptFinishTime",type:"time",icon:"md-alarm",scan:!1,size:8}]},{method:"inputs",options:[{title:"不良数",model:"wfOptBadQty",type:"number",icon:"ios-sad",scan:!1,size:8},{title:"良品数",model:"wfOptGoodQty",type:"number",icon:"happy",scan:!1,size:8}]}],this.wfAgeingDetails=[{title:"电压 DC/V",icon:"md-flash",method:"table",size:7,cols:[{model:"wfAgeVoltSet",type:"number",auto:!1},{model:"wfAgeVoltAct",type:"number",auto:!1},{model:"wfAutoAgeVoltAct1",type:"number",auto:!0},{model:"wfAutoAgeVoltAct2",type:"number",auto:!0},{model:"wfAutoAgeVoltAct3",type:"number",auto:!0},{model:"wfAutoAgeVoltAct4",type:"number",auto:!0},{model:"wfAutoAgeVoltAct5",type:"number",auto:!0}]},{title:"时间 H",icon:"timer",method:"table",size:7,cols:[{model:"wfAgeTimeSet",type:"number",auto:!1},{model:"wfAgeTimeAct",type:"number",auto:!1}]},{title:"温度 ℃",icon:"ios-thermometer-outline",method:"table",size:7,cols:[{model:"wfAgeDegSet",type:"number",auto:!1},{model:"wfAgeDegAct",type:"number",auto:!1}]},{title:"电流 µA",icon:"md-pulse",method:"table",size:7,cols:[{model:"wfAgeCurrentSet",type:"number",auto:!1},{model:"wfAgeCurrentAct",type:"number",auto:!1}]}],this.wfAutoAgeingDetails=[{title:"开路电压",method:"input",size:8,model:"wfAutoAgeOpenVolt",type:"number"},{title:"高容",method:"input",size:8,model:"wfAutoAgeHighCapacity",type:"number"},{title:"短路电压",method:"input",size:8,model:"wfAutoAgeShortVolt",type:"number"},{title:"低容",method:"input",size:8,model:"wfAutoAgeLowCapacity",type:"number"},{title:"开路",method:"input",size:8,model:"wfAutoAgeOpen",type:"number"},{title:"损耗",method:"input",size:8,model:"wfAutoAgeWear",type:"number"},{title:"短路",method:"input",size:8,model:"wfAutoAgeShort",type:"number"},{title:"漏电",method:"input",size:8,model:"wfAutoAgeVoltLeak",type:"number"},{title:"外观",method:"input",size:8,model:"wfAutoAgeLook",type:"number"}],this.wfPplInputs=[{title:"作业員",method:"input",model:"wfStaffOptId",type:"text",icon:"person",scan:!1,wfPplI:1,size:7},{title:"班别",method:"input",model:"wfStaffOptShift",type:"text",icon:"briefcase",scan:!1,wfPplI:2,size:3},{title:"技術員",method:"input",model:"wfStaffTechId",type:"text",icon:"construct",scan:!1,wfPplI:3,size:7},{title:"X-RAY确认",method:"input",model:"wfStaffXrayId",type:"text",icon:"construct",scan:!1,wfPplI:4,size:7},{title:"终检",method:"buttons",model:"wfQCPass",icon:"md-checkmark-circle-outline",buttons:[{label:"通过",value:1,icon:"checkmark"},{label:"失败",value:2,icon:"close"}]},{title:"品检員",method:"input",model:"wfQCSignOff",type:"text",icon:"search",scan:5,wfPplI:5,size:11},{title:"品检备注",method:"textarea",model:"wfQCInputNote",type:"text",icon:"chatbubbles",scan:!1,size:27}]}return l.prototype.ionViewDidLoad=function(){console.log("ionViewDidLoad EditWorkflowPage"),console.log(this.wfNavParams),console.log(this.appDate)},l.prototype.ngOnInit=function(){var l=this;console.log("Initialise the page 裸品流程卡"),this.formInit();var n,t=this.wfInputForm;console.log("loading from storage"),this.storage.get(this.wfNavParams).then(function(u){console.log("this is storage"),console.log("storage:"+JSON.stringify(u)),n=u;for(var e in t.value)try{"wfStaffTechId"==e?(l.wfStaffTechIdTmp=n[e],t.controls[e].setValue("")):"wfStaffOptShift"==e?(l.wfStaffOptShiftTmp=n[e],t.controls[e].setValue("")):"wfQCSignOff"==e?(l.wfQCSignOffTmp=n[e],t.controls[e].setValue("")):t.controls[e].setValue(n[e])}catch(l){console.log(l)}})},l.prototype.checkBeforeScan=function(l){return""===l.value.wfOptBadQty?(alert("请输入良品数!"),!1):""===l.value.wfOptGoodQty?(alert("请输入良品数!"),!1):void 0},l.prototype.scanBarcode=function(l){var n=this;console.log("scanning Barcode");var t=this.wfInputForm;this.barcodeScanner.scan().then(function(u){if(t.controls[l].setValue(u.text),u.format&&"QR_CODE"!=u.format&&"wfSignOff"==l)switch(u.text){case"QC0001":case"QC0002":case"QC0003":t.controls.wfSignOff.setValue(u.text),n.promptAlert();break;default:alert("嚫，请确定你所扫描的条码是正确的")}else alert("嚫，请确定你所扫描的条码是正确的")},function(l){alert(l)})},l.prototype.inputWf=function(){console.log("inputWf activated")},l.prototype.setWfPass=function(){console.log("checked")},l.prototype.onSubmit=function(){console.log(this.wfInputForm)},l.prototype.updateForm=function(l,n){var t=this.wfInputForm;console.log(t),t.controls[l].setValue(n),console.log(t.controls[l].value)},l.prototype.promptAlert=function(){var l=this.alertCtrl.create();l.setTitle("确定完成和上传"),l.addButton("取消"),l.addButton({text:"確定",handler:function(l){alert("上传成功")}}),l.present()},l.prototype.formInit=function(){this.wfInputForm=this.formBuilder.group({wfProcess:[""],wfProcessName:[""],wfFormName:[""],wfFormId:[""],wfOrderFormId:[""],WfOrderId:[""],wfOrderBatchId:[""],wfOrderBatchQty:[""],wfOrderBOMNote:[""],wfOrderNote:[""],wfOrderTotalQty:[""],wfOrderTotalGoodQty:[""],wfOrderRMId:[""],wfOrderSeries:[""],wfOrderSpec:[""],wfOrderDim:[""],wfFormSplit:[""],wfRMFoilPosName:[""],wfRMFoilPosSerial:[""],wfRMFoilPosLName:[""],wfRMFoilPosLSerial:[""],wfRMFoilNegName:[""],wfRMFoilNegSerial:[""],wfRMFoilNegLName:[""],wfRMFoilNegLSerial:[""],wfRMPaperName:[""],wfRMPaperSerial:[""],wfRMGlueName:[""],wfRMGlueSerial:[""],wfRMSolName:[""],wfRMSolSerial:[""],wfRMPinPosName:[""],wfRMPinPosSerial:[""],wfRMPinNegName:[""],wfRMPinNegSerial:[""],wfRMPlasticName:[""],wfRMPlasticSerial:[""],wfRMShellName:[""],wfRMShellSerial:[""],wfRMCoverName:[""],wfRMCoverSerial:[""],wfRMWindingTime:[""],wfRMWindingDeg:[""],wfOptMachineId:[""],wfOptInputDate:[this.appDate],wfOptStartTime:["00:00"],wfOptFinishTime:["00:00"],wfOptBadQty:[""],wfOptGoodQty:[""],wfAgeDegSet:[""],wfAgeDegAct:[""],wfAgeVoltSet:[""],wfAgeVoltAct:[""],wfAgeCurrentSet:[""],wfAgeCurrentAct:[""],wfAgeTimeSet:[""],wfAgeTimeAct:[""],wfAgeNote:[""],wfAutoAgeVoltAct1:[""],wfAutoAgeVoltAct2:[""],wfAutoAgeVoltAct3:[""],wfAutoAgeVoltAct4:[""],wfAutoAgeVoltAct5:[""],wfAutoAgeVoltAct6:[""],wfAutoAgeVoltAct7:[""],wfAutoAgeOpenVolt:[""],wfAutoAgeShortVolt:[""],wfAutoAgeOpen:[""],wfAutoAgeShort:[""],wfAutoAgeHighCapacity:[""],wfAutoAgeLowCapacity:[""],wfAutoAgeWear:[""],wfAutoAgeVoltLeak:[""],wfAutoAgeLook:[""],wfStaffOptId:[""],wfStaffOptShift:[""],wfStaffTechId:[""],wfStaffXrayId:[""],wfStageStatus:[""],wfQCPass:[""],wfQCPassCode:[""],wfQCSignOff:[""],wfQCInputNote:[""]})},l.prototype.keyPress=function(l){13==l&&alert("next")},l.prototype.updateTextChg=function(){var l=this;if(this.wfInputForm.value.wfOptMachineId){var n=this.wfInputForm.value.wfOptMachineId;this.storage.get("wfMachine").then(function(t){t?(t=JSON.parse(t),l.wfInputForm.patchValue({wfStaffOptShift:t[n].shift,wfStaffOptId:t[n].staffName,wfOrderTotalGoodQty:l.wfOrderTotalGoodQtyTmp,wfStaffTechId:t[n].techName,wfStaffXrayId:t[n].xrayName})):l.alertCtrl.create({title:"",subTitle:"机台号不存在，请重新输入。",buttons:["返回"]}).present()})}this.wfOrderTotalGoodQtyTmp=parseFloat(this.wfInputForm.value.wfOrderTotalGoodQty)+parseFloat(this.wfInputForm.value.wfOptGoodQty)},l.prototype.updateTotalGoodQty=function(l){var n=this.wfNavParams.wfOrderTotalGoodQty+l;this.wfInputForm.patchValue({wfOrderTotalGoodQty:n})},l.prototype.showWfOpsInputsAlert=function(l,n){""!=l&&""!=n||this.alertCtrl.create({title:"",subTitle:"请确定内容: 日期，开始，完成，良品数，不良数 ",buttons:["確定"]}).present()},l.prototype.showWfOpsFinalInputsAlert=function(l,n,t,u){var e=this;if(l>u)(o=this.alertCtrl.create({title:"",subTitle:"预设总量 ("+u+") 小於 批次量 ("+l+")!",buttons:["確定"]})).present();else if(l<u){var i=this.wfInputForm;(o=this.alertCtrl.create({buttons:[{text:"取消",role:"cancel",handler:function(){console.log("Cancel clicked")}},{text:"上存",role:"cancel",handler:function(){console.log("save clicked")}},{text:"上存 + 完成工序",handler:function(){console.log("submit and save clicked"),console.log(i.value),e.wfSvc.upload(i.value,1).subscribe(function(l){console.log("success"),console.log(l[0])},function(l){console.log(l)});var l={wfProcess:i.value.wfProcess,wfProcessName:i.value.wfProcessName,wfForm:i.value.wfForm,wfFormId:i.value.wfFormId,wfOrderFormId:i.value.wfOrderFormId,WfOrderId:i.value.WfOrderId,wfOrderBatchId:i.value.wfOrderBatchId,wfOrderBatchQty:i.value.wfOrderBatchQty,wfOrderTotalQty:i.value.wfOrderTotalQty,wfOrderTotalGoodQty:i.value.wfOrderTotalGoodQty,wfOrderRMId:i.value.wfOrderRMId,wfOrderSeries:i.value.wfOrderSeries,wfOrderSpec:i.value.wfOrderSpec,wfOrderDim:i.value.wfOrderDim,wfRMFoilPosName:i.value.wfRMFoilPosName,wfRMFoilPosSerial:i.value.wfRMFoilPosSerial,wfRMFoilPosLName:i.value.wfRMFoilPosLName,wfRMFoilNegName:i.value.wfRMFoilNegName,wfRMFoilNegSerial:i.value.wfRMFoilNegSerial,wfRMFoilNegLName:i.value.wfRMFoilNegLName,wfRMPaperName:i.value.wfRMPaperName,wfRMPaperSerial:i.value.wfRMPaperSerial,wfRMGlueName:"",wfRMGlueSerial:i.value.wfRMGlueSerial,wfRMSolName:i.value.wfRMSolName,wfRMSolSerial:i.value.wfRMSolSerial,wfRMPinPosName:i.value.wfRMPinPosName,wfRMPinPosSerial:i.value.wfRMPinPosSerial,wfRMPinNegName:i.value.wfRMPinNegName,wfRMPinNegSerial:i.value.wfRMPinNegSerial,wfRMPlasticName:i.value.wfRMPlasticName,wfRMPlasticSerial:i.value.wfRMPlasticSerial,wfRMCoverName:i.value.wfRMCoverName,wfRMCoverSerial:i.value.wfRMCoverSerial,wfStaffTechId:i.value.wfStaffTechId,wfStaffOptShift:i.value.wfStaffOptShift,wfQCSignOff:i.value.wfQCSignOff};1==i.value.wfProcess?(l.wfProcess=2,l.wfProcessName="组立",e.storage.set(i.value.wfFormId,l)):3==i.value.wfProcess?(l.wfProcess=4,l.wfProcessName="含浸",e.storage.set(i.value.wfFormId,l)):4==i.value.wfProcess&&(l.wfProcess=5,l.wfProcessName="清洗",e.storage.set(i.value.wfFormId,l)),e.storage.get(i.value.wfFormId).then(function(n){n&&e.alertCtrl.create({title:"Please Check!",subTitle:"Please select 终检!"+l.wfProcess+" "+l.wfProcessName+" "+i.value.wfFormId,buttons:[{text:"確定",handler:function(){e.navCtrl.pop()}}]}).present()})}}]})).present()}else{var o=this.alertCtrl.create({title:"",subTitle:"请确定内容: 日期，开始，完成，良品数，不良数 ",buttons:["確定"]});o.present()}},l.prototype.showWfQCPassAlert=function(l){2!=l&&1!=l&&this.alertCtrl.create({title:"Please Check!",subTitle:"Please select 终检!",buttons:["OK"]}).present()},l.prototype.presentPrompt=function(){this.alertCtrl.create({title:"嚫，请轻描淡写照片内容",inputs:[{name:"imgDes",placeholder:"木有问题"}],buttons:[{text:"取消",role:"cancel",handler:function(l){console.log("User has clicked Cancel")}},{text:"确定",handler:function(l){console.log("User has saved the description")}}]}).present()},l.prototype.takePhoto=function(){var l=this;this.presentPrompt();var n={quality:50,destinationType:this.camera.DestinationType.DATA_URL,encodingType:this.camera.EncodingType.JPEG,mediaType:this.camera.MediaType.PICTURE,correctOrientation:!0,saveToPhotoAlbum:!0};this.camera.getPicture(n).then(function(n){var t="data:image/jpeg;base64,"+n;l.images.push(t),l.storage.set("images",l.images)},function(l){})},l}())},123:function(l,n,t){"use strict";t.d(n,"a",function(){return e});t(1),t(69),t(54);var u=t(17),e=(t(40),t(51),function(){function l(l,n,t,e,i,o){this.storage=l,this.formBuilder=n,this.barcodeScanner=t,this.alertCtrl=e,this.camera=i,this.navParams=o,this.form=u.m,this.wfOrderDetails=[],this.wfRMDetails=[],this.wfOpsInputs=[],this.wfPplInputs=[],this.images=[],this.tzoffset=6e4*(new Date).getTimezoneOffset(),this.appDate=new Date(Date.now()-this.tzoffset).toISOString().slice(0,-1),l.ready().then(function(){}),this.wfNavParams=this.navParams.data.value,this.wfOrderDetails=[{method:"input",model:"WfOrderId",title:"工单号",type:"text",size:20,highlight:!1,process:{1:!0,2:!0,3:!0}},{method:"input",model:"wfOrderRMId",title:"料号",type:"text",size:20,highlight:!1,process:{1:!0,2:!0,3:!0}},{method:"input",model:"wfOrderSeries",title:"系列",type:"text",size:10,highlight:!1,process:{1:!0,2:!0,3:!0}},{method:"input",model:"wfOrderSpec",title:"规格",type:"text",size:8,highlight:!1,process:{1:!0,2:!0,3:!0}},{method:"input",model:"wfOrderDim",title:"尺寸",type:"text",size:8,highlight:!1,process:{1:!0,2:!0,3:!0}},{method:"input",model:"wfOrderTotalQty",title:"数量",type:"number",size:8,highlight:!1,process:{1:!0,2:!0,3:!0}},{method:"input",model:"wfOrderBatchId",title:"批次号",type:"text",size:20,highlight:!1,process:{1:!0,2:!0,3:!0}},{method:"input",model:"wfOrderFormId",title:"流程卡号",type:"text",size:20,highlight:!1,process:{1:!0,2:!0,3:!0}},{method:"input",model:"wfClientId",title:"客户代码:",type:"text",size:20,highlight:!1,process:{1:!0,2:!0,3:!0}},{method:"input",model:"wfSalesOrderId",title:"销售订单号:",type:"text",size:20,highlight:!1,process:{1:!0,2:!0,3:!0}},{method:"input",model:"wfOptMachineId",title:"台机号:",type:"text",size:15,highlight:!1,process:{1:!0,2:!0,3:!0}},{method:"input",model:"wfOrderFormNote",title:"流程卡备注",type:"textarea",size:23,highlight:!1,process:{1:!0,2:!0,3:!0}},{method:"input",model:"wfOrderNote",title:"工单备注",type:"textarea",size:23,highlight:!1,process:{1:!0,2:!0,3:!0}},{method:"input",model:"wfOrderBOMNote",title:"BOM备注",type:"textarea",size:23,highlight:!1,process:{1:!0,2:!0,3:!0}},{method:"input",model:"wfOrderSupNote",title:"异常记录",type:"textarea",size:23,highlight:!1,process:{1:!1,2:!1,3:!0}}],this.wfRMDetails=[{modelName:"wfRMUpBeltName",title:"上带:",type:"text",modelSerial:"wfRMUpBeltSerial",highlight:!1},{modelName:"wfRMDownBeltName",title:"下带:",type:"text",modelSerial:"wfRMDownBeltSerial",highlight:!1},{modelName:"wfRMBaseName",title:"底座:",type:"text",modelSerial:"wfRMBaseSerial",highlight:!1},{modelName:"wfRMCircleName",title:"纸圆卡:",type:"text",modelSerial:"wfRMCricleSerial",highlight:!1},{modelName:"wfRMPrintName",title:"油墨:",type:"text",modelSerial:"wfRMPrintSerial",highlight:!1}],this.wfOpsInputs=[{title:"CAP: μF",method:"input",model:"wfSpecCap",type:"text",scan:!1,size:9,process:{1:!0,2:!0,3:!0}},{title:"DF: %",method:"input",model:"wfSpecDF",type:"text",scan:!1,size:9,process:{1:!0,2:!0,3:!0}},{title:"LC: μA",method:"input",model:"wfSpecLC",type:"text",scan:!1,size:9,process:{1:!0,2:!0,3:!0}},{title:"Z/ESR(Ω):",method:"input",model:"wfSpecZESR",type:"text",scan:!1,size:9,process:{1:!0,2:!0,3:!0}},{title:"备注:",method:"input",model:"wfSpecNote",type:"textarea",scan:!1,size:22,process:{1:!0,2:!0,3:!0}},{method:"inputs",options:[{title:"日期",model:"wfOptInputDate",type:"date",scan:!1,size:8,process:{1:!0,2:!0,3:!0}}],process:{1:!0,2:!0,3:!0}},{method:"inputs",options:[{title:"不良数",model:"wfOptBadQty",type:"number",icon:"ios-sad",scan:!1,size:8,process:{1:!0,2:!0,3:!1}},{title:"良品数",model:"wfOptGoodQty",type:"number",icon:"happy",scan:!1,size:8,process:{1:!0,2:!0,3:!1}},{title:"抽查数",model:"wfOptGoodQty",type:"number",icon:"happy",scan:!1,size:8,process:{1:!1,2:!0,3:!1}}],process:{1:!0,2:!0,3:!0}}],this.wfPplInputs=[{title:"作业員",method:"input",model:"wfStaffOptId",type:"text",icon:"person",scan:1,size:20,process:{1:!0,2:!0,3:!1}},{title:"技術員",method:"input",model:"wfStaffTechId",type:"text",icon:"construct",scan:2,size:20,process:{1:!0,2:!0,3:!1}},{method:"break",size:15,process:{1:!0,2:!0,3:!1}},{title:"电性",method:"buttons",model:"wfElecPass",process:{1:!1,2:!1,3:!0},buttons:[{label:"通过",value:1},{label:"失败",value:2}]},{method:"break",size:15,process:{1:!1,2:!1,3:!0}},{title:"外观",method:"buttons",model:"wfLookPass",process:{1:!1,2:!1,3:!0},buttons:[{label:"通过",value:1},{label:"失败",value:2}]},{method:"break",size:15,process:{1:!1,2:!1,3:!0}},{title:"品检員",method:"input",model:"wfQCSignOff",type:"text",process:{1:!1,2:!1,3:!0},scan:4,size:20}]}return l.prototype.ionViewDidLoad=function(){console.log("ionViewDidLoad EditWorkflowPage2"),console.log(this.wfNavParams),console.log(this.appDate)},l.prototype.ngOnInit=function(){var l=this;console.log("Initialise the page 成品流程卡"),this.formInit();var n,t=this.wfInputForm;console.log("loading from storage"),this.storage.get(this.wfNavParams).then(function(u){console.log("this is storage"),console.log("storage:"+u),n=u;for(var e in t.value){console.log("Loading "+e+" Storage:"+n[e]);try{"wfStaffTechId"==e?(l.wfStaffTechIdTmp=n[e],t.controls[e].setValue(""),console.log("storage test 1: "+l.wfStaffTechIdTmp)):"wfStaffOptShift"==e?(l.wfStaffOptShiftTmp=n[e],t.controls[e].setValue(""),console.log("storage test 1: "+l.wfStaffOptShiftTmp)):"wfQCSignOff"==e?(l.wfQCSignOffTmp=n[e],t.controls[e].setValue(""),console.log("storage test 1: "+l.wfQCSignOffTmp)):t.controls[e].setValue(n[e])}catch(l){console.log(l)}}})},l.prototype.checkBeforeScan=function(l){return""===l.value.wfOptBadQty?(alert("请输入良品数!"),!1):""===l.value.wfOptGoodQty?(alert("请输入不良品数!"),!1):void 0},l.prototype.scanBarcode=function(l){var n=this;console.log("scanning Barcode");var t=this.wfInputForm;this.barcodeScanner.scan().then(function(u){if(t.controls[l].setValue(u.text),u.format&&"QR_CODE"!=u.format&&"wfSignOff"==l)switch(u.text){case"QC0001":case"QC0002":case"QC0003":t.controls.wfSignOff.setValue(u.text),n.promptAlert();break;default:alert("嚫，请确定你所扫描的条码是正确的")}else alert("嚫，请确定你所扫描的条码是正确的")},function(l){alert(l)})},l.prototype.inputWf=function(){console.log("inputWf activated")},l.prototype.setWfPass=function(){console.log("checked")},l.prototype.onSubmit=function(){var l=this.wfInputForm;alert(" < "+l.value+" > !"),console.log(this.wfInputForm)},l.prototype.updateForm=function(l,n){var t=this.wfInputForm;console.log(t),t.controls[l].setValue(n),console.log(t.controls[l].value)},l.prototype.promptAlert=function(){var l=this.alertCtrl.create();l.setTitle("确定完成和上传"),l.addButton("取消"),l.addButton({text:"確定",handler:function(l){alert("上传成功")}}),l.present()},l.prototype.formInit=function(){this.wfInputForm=this.formBuilder.group({wfProcess:[""],wfProcessName:[""],wfOrderFormId:[""],WfOrderId:[""],wfOrderBatchId:[""],wfOrderBatchQty:[""],wfOrderFormNote:[""],wfOrderBOMNote:[""],wfOrderNote:[""],wfOrderSupNote:[""],wfOrderTotalQty:[""],wfOrderTotalGoodQty:[""],wfOrderRMId:[""],wfOrderSeries:[""],wfOrderSpec:[""],wfOrderDim:[""],wfClientId:[""],wfSalesOrderId:[""],wfRMUpBeltName:[""],wfRMUpBeltSerial:[""],wfRMDownBeltName:[""],wfRMDownBeltSerial:[""],wfRMBaseName:[""],wfRMBaseSerial:[""],wfRMCircleName:[""],wfRMCricleSerial:[""],wfRMPrintName:[""],wfRMPrintSerial:[""],wfSpecCap:[""],wfSpecDF:[""],wfSpecLC:[""],wfSpecZESR:[""],wfSpecNote:[""],wfOptMachineId:"",wfOptInputDate:[this.appDate],wfOptStartTime:["00:00"],wfOptFinishTime:["00:00"],wfOptBadQty:[""],wfOptGoodQty:[""],wfStaffOptId:[""],wfStaffOptShift:[""],wfStaffTechId:[""],wfElecPass:[""],wfLookPass:[""],wfQCSignOff:[""]})},l.prototype.keyPress=function(l){13==l&&alert("next")},l.prototype.showWfOpsInputsAlert=function(l,n){""!=l&&""!=n||this.alertCtrl.create({title:"Please Check!",subTitle:"Please fill out the following: 日期，开始，完成，良品数，不良数 ",buttons:["OK"]}).present()},l.prototype.showWfQCPassAlert=function(l){2!=l&&1!=l&&this.alertCtrl.create({title:"Please Check!",subTitle:"Please select 终检!",buttons:["OK"]}).present()},l.prototype.takePhoto=function(){var l=this,n={quality:50,destinationType:this.camera.DestinationType.DATA_URL,encodingType:this.camera.EncodingType.JPEG,mediaType:this.camera.MediaType.PICTURE,correctOrientation:!0,saveToPhotoAlbum:!0};this.camera.getPicture(n).then(function(n){var t="data:image/jpeg;base64,"+n;l.images.push(t),l.storage.set("images",l.images)},function(l){})},l}())},138:function(l,n){function t(l){return Promise.resolve().then(function(){throw new Error("Cannot find module '"+l+"'.")})}t.keys=function(){return[]},t.resolve=t,l.exports=t,t.id=138},152:function(l,n){function t(l){return Promise.resolve().then(function(){throw new Error("Cannot find module '"+l+"'.")})}t.keys=function(){return[]},t.resolve=t,l.exports=t,t.id=152},183:function(l,n,t){"use strict";function u(l){return nn._25(0,[(l()(),nn._5(0,null,null,2,"ion-nav",[],null,null,null,Qn.b,Qn.a)),nn._4(4374528,null,0,En.a,[[2,Vn.a],[2,Un.a],vn.a,Gn.a,Hn.a,nn.k,nn.z,nn.F,nn.j,Pn.f,Dn.a,[2,Wn.a],yn.a,nn.l],{root:[0,"root"]},null),nn._21(6144,null,Yn.a,null,[En.a]),(l()(),nn._24(null,["\n"]))],function(l,n){l(n,1,0,n.component.rootPage)},null)}function e(l){return nn._25(0,[(l()(),nn._5(0,null,null,8,"ion-input",[["class","gridborder"],["no-padding",""],["required",""]],[[1,"required",0],[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(16384,null,0,kn.p,[],{required:[0,"required"]},null),nn._21(1024,null,kn.h,function(l){return[l]},[kn.p]),nn._4(671744,null,0,kn.e,[[3,kn.b],[2,kn.h],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{type:[0,"type"]},null)],function(l,n){l(n,1,0,l(n,2,0,n.parent.context.$implicit.size));l(n,3,0,""),l(n,5,0,nn._9(1,"",n.parent.context.$implicit.model,"")),l(n,8,0,nn._9(1,"",n.parent.context.$implicit.type,""))},function(l,n){l(n,0,0,nn._18(n,3).required?"":null,nn._18(n,7).ngClassUntouched,nn._18(n,7).ngClassTouched,nn._18(n,7).ngClassPristine,nn._18(n,7).ngClassDirty,nn._18(n,7).ngClassValid,nn._18(n,7).ngClassInvalid,nn._18(n,7).ngClassPending)})}function i(l){return nn._25(0,[(l()(),nn._5(0,null,null,3,"button",[["class","barcodeButton"],["ion-button",""],["item-end",""],["type","button"]],null,[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.scanBarcode(l.parent.context.$implicit.model)&&u),u},tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(0,["\n                                "])),(l()(),nn._24(0,["\n                                扫一扫\n                            "]))],null,null)}function o(l){return nn._25(0,[(l()(),nn._5(0,null,null,2,"ion-option",[],null,null,null,null,null)),nn._4(16384,[[1,4]],0,et.a,[nn.k],{value:[0,"value"]},null),(l()(),nn._24(null,["\n                                    ","\n                                "]))],function(l,n){l(n,1,0,nn._9(1,"",n.context.$implicit,""))},function(l,n){l(n,2,0,n.component.wfMachineProcess[0][n.context.$implicit])})}function a(l){return nn._25(0,[(l()(),nn._5(0,null,null,12,"ion-select",[["cancelText","取消"],["class","gridborder"],["interface","popover"],["okText","确定"],["style","height: 34px !important;"]],[[2,"select-disabled",null],[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ionChange"],[null,"click"],[null,"keyup.space"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==nn._18(l,3)._click(t)&&u),"keyup.space"===n&&(u=!1!==nn._18(l,3)._keyup()&&u),"ionChange"===n&&(u=!1!==e.setWfStage(t)&&u),u},it.b,it.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(1228800,null,1,ot.a,[vn.a,On.a,Gn.a,nn.k,nn.F,[2,nt.a],Wn.a],{cancelText:[0,"cancelText"],okText:[1,"okText"],interface:[2,"interface"]},{ionChange:"ionChange"}),nn._22(603979776,1,{options:1}),nn._21(1024,null,kn.i,function(l){return[l]},[ot.a]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[2,kn.i]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._1(16777216,null,null,1,null,o)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                            "]))],function(l,n){var t=n.component;l(n,1,0,l(n,2,0,n.parent.context.$implicit.size));l(n,3,0,"取消","确定","popover"),l(n,6,0,nn._9(1,"",n.parent.context.$implicit.model,"")),l(n,11,0,t.wfMachineData)},function(l,n){l(n,0,0,nn._18(n,3)._disabled,nn._18(n,8).ngClassUntouched,nn._18(n,8).ngClassTouched,nn._18(n,8).ngClassPristine,nn._18(n,8).ngClassDirty,nn._18(n,8).ngClassValid,nn._18(n,8).ngClassInvalid,nn._18(n,8).ngClassPending)})}function r(l){return nn._25(0,[(l()(),nn._5(0,null,null,7,"button",[["ion-button",""],["item-right",""],["outline",""],["round",""],["type","button"]],null,[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.setFormValue(l.parent.parent.context.$implicit.model,l.context.$implicit.value)&&u),u},tt.b,tt.a)),nn._4(278528,null,0,hn.f,[nn.s,nn.t,nn.k,nn.F],{ngClass:[0,"ngClass"]},null),nn._20(["buttonsSelected"]),nn._4(1097728,[[2,4]],0,ut.a,[[8,""],Gn.a,nn.k,nn.F],{outline:[0,"outline"],round:[1,"round"]},null),(l()(),nn._24(0,["\n                                        "])),(l()(),nn._5(0,null,0,1,"ion-icon",[["name","clipboard"],["role","img"]],[[2,"hide",null]],null,null,null,null)),nn._4(147456,null,0,at.a,[Gn.a,nn.k,nn.F],{name:[0,"name"]},null),(l()(),nn._24(0,["\n                                          ","\n                                    "]))],function(l,n){l(n,1,0,l(n,2,0,n.component.wfInputForm.value.wfForm==n.context.$implicit.value));l(n,3,0,"","");l(n,6,0,"clipboard")},function(l,n){l(n,5,0,nn._18(n,6)._hidden),l(n,7,0,n.context.$implicit.label)})}function s(l){return nn._25(0,[(l()(),nn._5(0,null,null,16,"div",[],null,null,null,null,null)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,7,"ion-buttons",[],null,null,null,null,null)),nn._4(16384,null,1,rt.a,[Gn.a,nn.k,nn.F,[2,st.a],[2,_t.a]],null,null),nn._22(603979776,2,{_buttons:1}),(l()(),nn._24(null,["\n                                "])),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,r)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._5(0,null,null,2,"button",[["block",""],["ion-button",""],["style","width: 25%; margin: 0 auto;"],["type","submit"]],null,null,null,tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],{block:[0,"block"]},null),(l()(),nn._24(0,["\n                                    确定\n                                "])),(l()(),nn._24(null,["\n                            "]))],function(l,n){l(n,1,0,l(n,2,0,n.parent.context.$implicit.size)),l(n,10,0,n.parent.context.$implicit.options);l(n,14,0,"")},null)}function _(l){return nn._25(0,[(l()(),nn._5(0,null,null,2,"div",[],null,null,null,null,null)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"])],function(l,n){l(n,1,0,l(n,2,0,n.parent.context.$implicit.size))},null)}function c(l){return nn._25(0,[(l()(),nn._5(0,null,null,28,"ion-col",[["class","col"]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,23,"ion-row",[["align-items-center",""],["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,1,"div",[["class","label"]],null,null,null,null,null)),(l()(),nn._24(null,["",""])),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._24(null,["\n                            "])),(l()(),nn._1(16777216,null,null,1,null,e)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._1(16777216,null,null,1,null,i)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._24(null,["\n                            "])),(l()(),nn._1(16777216,null,null,1,null,a)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._24(null,["\n                            "])),(l()(),nn._1(16777216,null,null,1,null,s)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._1(16777216,null,null,1,null,_)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                        "])),(l()(),nn._24(null,["\n\n                    "]))],function(l,n){l(n,12,0,"input"===n.context.$implicit.method),l(n,15,0,n.context.$implicit.scan),l(n,19,0,"select"===n.context.$implicit.method),l(n,23,0,"buttons"===n.context.$implicit.method),l(n,26,0,"break"===n.context.$implicit.method)},function(l,n){l(n,8,0,n.context.$implicit.title)})}function p(l){return nn._25(0,[(l()(),nn._5(0,null,null,12,"ion-col",[["class","col"],["col-3",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,6,"div",[["class","imgButton"]],null,[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.setWfProcess(l.context.$implicit.process,l.context.$implicit.title)&&u),u},null,null)),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,0,"img",[],[[8,"src",4]],null,null,null,null)),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,1,"div",[["class","card-title"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                ","\n                            "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                    "]))],null,function(l,n){l(n,5,0,nn._9(1,"","./assets/img/f1p"+n.context.$implicit.process+".jpeg","")),l(n,8,0,n.context.$implicit.title)})}function d(l){return nn._25(0,[(l()(),nn._5(0,null,null,15,"ion-header",[],null,null,null,null,null)),nn._4(16384,null,0,dt.a,[Gn.a,nn.k,nn.F,[2,Vn.a]],null,null),(l()(),nn._24(null,["\n    "])),(l()(),nn._5(0,null,null,11,"ion-navbar",[["class","toolbar"]],[[8,"hidden",0],[2,"statusbar-padding",null]],null,null,ft.b,ft.a)),nn._4(49152,null,0,_t.a,[vn.a,[2,Vn.a],[2,Un.a],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(3,["\n        "])),(l()(),nn._5(0,null,3,7,"div",[["style","align-items: center; display: inline;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n            "])),(l()(),nn._5(0,null,null,0,"img",[["class","icon"],["src","./assets/img/vt_icon.png"]],null,null,null,null,null)),(l()(),nn._24(null,["\n            "])),(l()(),nn._5(0,null,null,2,"ion-title",[],null,null,null,gt.b,gt.a)),nn._4(49152,null,0,mt.a,[Gn.a,nn.k,nn.F,[2,st.a],[2,_t.a]],null,null),(l()(),nn._24(0,["工序流程卡纪录系统"])),(l()(),nn._24(null,["\n        "])),(l()(),nn._24(3,["\n    "])),(l()(),nn._24(null,["\n"])),(l()(),nn._24(null,["\n"])),(l()(),nn._5(0,null,null,46,"ion-content",[["padding",""]],[[2,"statusbar-padding",null],[2,"has-refresher",null]],null,null,ht.b,ht.a)),nn._4(4374528,null,0,lt.a,[Gn.a,Hn.a,yn.a,nn.k,nn.F,vn.a,$n.a,nn.z,[2,Vn.a],[2,Un.a]],null,null),(l()(),nn._24(1,["\n    "])),(l()(),nn._5(0,null,1,42,"form",[["novalidate",""]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngSubmit"],[null,"submit"],[null,"reset"]],function(l,n,t){var u=!0,e=l.component;return"submit"===n&&(u=!1!==nn._18(l,22).onSubmit(t)&&u),"reset"===n&&(u=!1!==nn._18(l,22).onReset()&&u),"ngSubmit"===n&&(u=!1!==e.onAddWf()&&u),u},null,null)),nn._4(16384,null,0,kn.r,[],null,null),nn._4(540672,null,0,kn.f,[[8,null],[8,null]],{form:[0,"form"]},{ngSubmit:"ngSubmit"}),nn._21(2048,null,kn.b,null,[kn.f]),nn._4(16384,null,0,kn.l,[kn.b],null,null),(l()(),nn._24(null,["\n\n        "])),(l()(),nn._24(null,["\n        "])),(l()(),nn._5(0,null,null,13,"div",[],null,null,null,null,null)),(l()(),nn._24(null,["\n            "])),(l()(),nn._5(0,null,null,10,"ion-grid",[["class","grid"]],null,null,null,null,null)),nn._4(16384,null,0,wt.a,[],null,null),(l()(),nn._24(null,["\n                "])),(l()(),nn._5(0,null,null,6,"ion-row",[["align-items-center",""],["class","row"],["justify-content-left",""],["wrap",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                    "])),(l()(),nn._24(null,["\n                    "])),(l()(),nn._1(16777216,null,null,1,null,c)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                "])),(l()(),nn._24(null,["\n            "])),(l()(),nn._24(null,["\n        "])),(l()(),nn._24(null,["\n\n        "])),(l()(),nn._5(0,null,null,1,"div",[],null,null,null,null,null)),(l()(),nn._24(null,["\n\n\n        "])),(l()(),nn._24(null,["\n\n        "])),(l()(),nn._24(null,["\n        "])),(l()(),nn._5(0,null,null,12,"div",[],null,null,null,null,null)),(l()(),nn._24(null,["\n            "])),(l()(),nn._5(0,null,null,9,"ion-grid",[["class","grid"],["style","padding-left: 50px; padding-right: 50px;"]],null,null,null,null,null)),nn._4(16384,null,0,wt.a,[],null,null),(l()(),nn._24(null,["\n                "])),(l()(),nn._5(0,null,null,5,"ion-row",[["class","card-background-page row"],["wrap",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                    "])),(l()(),nn._1(16777216,null,null,1,null,p)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                "])),(l()(),nn._24(null,["\n            "])),(l()(),nn._24(null,["\n        "])),(l()(),nn._24(null,["\n\n        "])),(l()(),nn._24(null,["\n        "])),(l()(),nn._24(null,["\n        "])),(l()(),nn._24(null,["\n\n    "])),(l()(),nn._24(1,["\n"]))],function(l,n){var t=n.component;l(n,22,0,t.wfInputForm),l(n,37,0,t.wfInputs),l(n,55,0,t.wfProcesses)},function(l,n){l(n,3,0,nn._18(n,4)._hidden,nn._18(n,4)._sbPadding),l(n,17,0,nn._18(n,18).statusbarPadding,nn._18(n,18)._hasRefresher),l(n,20,0,nn._18(n,24).ngClassUntouched,nn._18(n,24).ngClassTouched,nn._18(n,24).ngClassPristine,nn._18(n,24).ngClassDirty,nn._18(n,24).ngClassValid,nn._18(n,24).ngClassInvalid,nn._18(n,24).ngClassPending)})}function f(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-input",[["class","gridborder"],["disabled",""]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"],isDisabled:[1,"isDisabled"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{disabled:[0,"disabled"],type:[1,"type"]},null)],function(l,n){l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size));l(n,3,0,nn._9(1,"",n.parent.parent.context.$implicit.model,""),"");l(n,6,0,"",nn._9(1,"",n.parent.parent.context.$implicit.type,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function g(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-textarea",[["class","textarea gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],null,null)],function(l,n){l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size)),l(n,3,0,nn._9(1,"",n.parent.parent.context.$implicit.model,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function m(l){return nn._25(0,[(l()(),nn._5(0,null,null,15,"ion-col",[["class","col"],["no-padding",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,11,"ion-row",[["align-items-center",""],["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"],["no-padding",""]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                    ","\n                                "])),(l()(),nn._24(null,["\n                                "])),(l()(),nn._1(16777216,null,null,1,null,f)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._1(16777216,null,null,1,null,g)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._24(null,["\n                        "]))],function(l,n){l(n,10,0,"textarea"!=n.parent.context.$implicit.type),l(n,13,0,"textarea"===n.parent.context.$implicit.type)},function(l,n){l(n,7,0,n.parent.context.$implicit.title)})}function h(l){return nn._25(0,[(l()(),nn._5(0,null,null,3,"ion-col",[["class","col"],["no-padding",""]],null,null,null,null,null)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(16384,null,0,ct.a,[],null,null)],function(l,n){l(n,1,0,l(n,2,0,n.parent.context.$implicit.size))},null)}function w(l){return nn._25(0,[(l()(),nn._5(0,null,null,12,"ion-col",[["class","col"]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                    "])),(l()(),nn._5(0,null,null,8,"ion-row",[["class","row"],["justify-content-center",""],["wrap",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._1(16777216,null,null,1,null,m)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                        "])),(l()(),nn._1(16777216,null,null,1,null,h)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                    "])),(l()(),nn._24(null,["\n                "]))],function(l,n){l(n,7,0,"input"===n.context.$implicit.method),l(n,10,0,"break"===n.context.$implicit.method)},null)}function y(l){return nn._25(0,[(l()(),nn._5(0,null,null,23,"ion-row",[["align-items-center",""],["class","row"],["justify-content-center",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,5,"ion-col",[["class","col"],["col-auto",""],["wrap",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                ","\n                            "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,5,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,1,"ion-input",[["class","gridborder"],["disabled",""]],null,null,null,Jn.b,Jn.a)),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{value:[0,"value"],disabled:[1,"disabled"]},null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,5,"ion-col",[["class","col"]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,1,"ion-input",[["class","gridborder"]],null,null,null,Jn.b,Jn.a)),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{value:[0,"value"]},null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                    "]))],function(l,n){var t=n.component;l(n,14,0,nn._9(1,"",t.wfInputForm.controls[n.context.$implicit.modelName].value,""),""),l(n,21,0,nn._9(1,"",t.wfInputForm.controls[n.context.$implicit.modelSerial].value,""))},function(l,n){l(n,7,0,n.context.$implicit.title)})}function b(l){return nn._25(0,[(l()(),nn._5(0,null,null,22,"div",[["style","height: 42px; width: 100vw;\n                                position: relative;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._5(0,null,null,4,"h4",[["class","inputHeader"],["style","display: inline-block; margin: 0;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,1,"ion-icon",[["name","clipboard"],["role","img"]],[[2,"hide",null]],null,null,null,null)),nn._4(147456,null,0,at.a,[Gn.a,nn.k,nn.F],{name:[0,"name"]},null),(l()(),nn._24(null,["\n                                          生產记录\n                                    "])),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._5(0,null,null,13,"div",[["style","position: absolute;right: 10px; top: 0;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,2,"div",[["style","margin-left: 5px;margin-right: 5px; display:inline-block;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                            "])),(l()(),nn._24(null,["\n                                            ","\n                                        "])),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,6,"ion-input",[["class","gridborder"],["style","display:inline-block;"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"change"]],function(l,n,t){var u=!0,e=l.component;return"change"===n&&(u=!1!==e.updateTextChg()&&u),u},Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{type:[0,"type"]},null),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._24(null,["\n                                "]))],function(l,n){l(n,5,0,"clipboard"),l(n,15,0,l(n,16,0,n.parent.parent.context.$implicit.size)),l(n,17,0,nn._9(1,"",n.parent.parent.context.$implicit.model,"")),l(n,20,0,nn._9(1,"",n.parent.parent.context.$implicit.type,""))},function(l,n){l(n,4,0,nn._18(n,5)._hidden),l(n,12,0,n.parent.parent.context.$implicit.title),l(n,14,0,nn._18(n,19).ngClassUntouched,nn._18(n,19).ngClassTouched,nn._18(n,19).ngClassPristine,nn._18(n,19).ngClassDirty,nn._18(n,19).ngClassValid,nn._18(n,19).ngClassInvalid,nn._18(n,19).ngClassPending)})}function v(l){return nn._25(0,[(l()(),nn._5(0,null,null,2,"div",[["style","margin-left: 5px;margin-right: 5px;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._24(null,["\n                                    ","\n                                "]))],null,function(l,n){l(n,2,0,n.parent.parent.context.$implicit.title)})}function P(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-input",[["class","gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"change"]],function(l,n,t){var u=!0,e=l.component;return"change"===n&&(u=!1!==e.updateTextChg()&&u),u},Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{type:[0,"type"]},null)],function(l,n){l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size)),l(n,3,0,nn._9(1,"",n.parent.parent.context.$implicit.model,"")),l(n,6,0,nn._9(1,"",n.parent.parent.context.$implicit.type,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function I(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-input",[["class","gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{type:[0,"type"]},null)],function(l,n){l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size)),l(n,3,0,nn._9(1,"",n.parent.parent.context.$implicit.model,"")),l(n,6,0,nn._9(1,"",n.parent.parent.context.$implicit.type,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function k(l){return nn._25(0,[(l()(),nn._5(0,null,null,2,"button",[["class","barcodeButton"],["ion-button",""],["item-end",""],["type","button"]],null,[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.scanBarcode(l.parent.parent.context.$implicit.model)&&u),u},tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(0,["\n                                    扫一扫\n                                "]))],null,null)}function C(l){return nn._25(0,[(l()(),nn._5(0,null,null,17,"ion-row",[["align-items-center",""],["class","row"],["justify-content-center",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._1(16777216,null,null,1,null,b)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._1(16777216,null,null,1,null,v)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n\n                                "])),(l()(),nn._1(16777216,null,null,1,null,P)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._1(16777216,null,null,1,null,I)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._1(16777216,null,null,1,null,k)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                            "]))],function(l,n){l(n,4,0,2==n.parent.context.$implicit.wfOpslI),l(n,7,0,2!=n.parent.context.$implicit.wfOpslI),l(n,10,0,1==n.parent.context.$implicit.wfOpslI),l(n,13,0,1!=n.parent.context.$implicit.wfOpslI&&2!=n.parent.context.$implicit.wfOpslI),l(n,16,0,n.parent.context.$implicit.scan)},null)}function S(l){return nn._25(0,[(l()(),nn._5(0,null,null,4,"button",[["ion-button",""],["outline",""],["round",""],["style","width: auto;"],["type","button"]],null,[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.updateForm(l.parent.parent.context.$implicit.model,l.context.$implicit.value)&&u),u},tt.b,tt.a)),nn._4(278528,null,0,hn.f,[nn.s,nn.t,nn.k,nn.F],{ngClass:[0,"ngClass"]},null),nn._20(["buttonsSelected"]),nn._4(1097728,[[1,4]],0,ut.a,[[8,""],Gn.a,nn.k,nn.F],{outline:[0,"outline"],round:[1,"round"]},null),(l()(),nn._24(0,["\n                      ","\n                  "]))],function(l,n){l(n,1,0,l(n,2,0,n.component.wfInputForm.controls[n.parent.parent.context.$implicit.model].value===n.context.$implicit.value));l(n,3,0,"","")},function(l,n){l(n,4,0,n.context.$implicit.label)})}function F(l){return nn._25(0,[(l()(),nn._5(0,null,null,13,"ion-row",[["align-items-center",""],["class","row"],["justify-content-left",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                    ","\n                                "])),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._5(0,null,null,6,"ion-buttons",[],null,null,null,null,null)),nn._4(16384,null,1,rt.a,[Gn.a,nn.k,nn.F,[2,st.a],[2,_t.a]],null,null),nn._22(603979776,1,{_buttons:1}),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,S)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._24(null,["\n                            "]))],function(l,n){l(n,11,0,n.parent.context.$implicit.buttons)},function(l,n){l(n,4,0,n.parent.context.$implicit.title)})}function x(l){return nn._25(0,[(l()(),nn._5(0,null,null,7,"ion-row",[["align-items-center",""],["class","row"],["justify-content-center",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._5(0,null,null,0,"div",[["style","width: 45px;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._5(0,null,null,1,"div",[["style","text-align: center;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                        ","\n                                    "])),(l()(),nn._24(null,["\n                                "]))],null,function(l,n){l(n,6,0,n.parent.parent.context.$implicit.header)})}function O(l){return nn._25(0,[(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                        ","\n                                    "]))],null,function(l,n){l(n,1,0,n.parent.context.$implicit.title)})}function M(l){return nn._25(0,[(l()(),nn._5(0,null,null,1,"ion-icon",[["icon-right",""],["name","md-calendar"],["role","img"],["style","font-size:1.6em; margin: 0 6px;"]],[[2,"hide",null]],[[null,"click"]],function(l,n,t){var u=!0;return"click"===n&&(u=!1!==nn._18(l.parent,8).open()&&u),u},null,null)),nn._4(147456,null,0,at.a,[Gn.a,nn.k,nn.F],{name:[0,"name"]},null)],function(l,n){l(n,1,0,"md-calendar")},function(l,n){l(n,0,0,nn._18(n,1)._hidden)})}function $(l){return nn._25(0,[(l()(),nn._5(0,null,null,13,"div",[["class","gridborder"],["style","width: 8em;display: inline-flex;align-items: center;"]],null,null,null,null,null)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._1(16777216,null,null,1,null,M)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,5,"ion-datetime",[["pickerFormat","DD/MM/YYYY"],["style","display: inline-block; padding: 13px 0;"]],[[2,"datetime-disabled",null],[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"click"],[null,"keyup.space"]],function(l,n,t){var u=!0;return"click"===n&&(u=!1!==nn._18(l,8)._click(t)&&u),"keyup.space"===n&&(u=!1!==nn._18(l,8)._keyup()&&u),u},It.b,It.a)),nn._4(1228800,[["picker",4]],0,kt.a,[On.a,Gn.a,nn.k,nn.F,[2,nt.a],[2,Rn.a]],{min:[0,"min"],pickerFormat:[1,"pickerFormat"]},null),nn._21(1024,null,kn.i,function(l){return[l]},[kt.a]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[2,kn.i]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),(l()(),nn._24(null,["\n                                    "]))],function(l,n){var t=n.component;l(n,1,0,l(n,2,0,n.parent.context.$implicit.size)),l(n,5,0,"date"==n.parent.context.$implicit.type);l(n,8,0,t.datePickerMin,"DD/MM/YYYY"),l(n,10,0,nn._9(1,"",n.parent.context.$implicit.model,""))},function(l,n){l(n,7,0,nn._18(n,8)._disabled,nn._18(n,12).ngClassUntouched,nn._18(n,12).ngClassTouched,nn._18(n,12).ngClassPristine,nn._18(n,12).ngClassDirty,nn._18(n,12).ngClassValid,nn._18(n,12).ngClassInvalid,nn._18(n,12).ngClassPending)})}function R(l){return nn._25(0,[(l()(),nn._5(0,null,null,1,"ion-icon",[["icon-right",""],["name","md-clock"],["role","img"],["style","font-size:1.6em; margin: 0 6px;"]],[[2,"hide",null]],[[null,"click"]],function(l,n,t){var u=!0;return"click"===n&&(u=!1!==nn._18(l.parent,8).open()&&u),u},null,null)),nn._4(147456,null,0,at.a,[Gn.a,nn.k,nn.F],{name:[0,"name"]},null)],function(l,n){l(n,1,0,"md-clock")},function(l,n){l(n,0,0,nn._18(n,1)._hidden)})}function N(l){return nn._25(0,[(l()(),nn._5(0,null,null,13,"div",[["class","gridborder"],["style","width: 8em;display: inline-flex;align-items: center;"]],null,null,null,null,null)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._1(16777216,null,null,1,null,R)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,5,"ion-datetime",[["displayFormat","HH:mm"],["pickerFormat","HH:mm"],["style","display: inline-block; padding: 13px 0;"]],[[2,"datetime-disabled",null],[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"click"],[null,"keyup.space"]],function(l,n,t){var u=!0;return"click"===n&&(u=!1!==nn._18(l,8)._click(t)&&u),"keyup.space"===n&&(u=!1!==nn._18(l,8)._keyup()&&u),u},It.b,It.a)),nn._4(1228800,[["picker",4]],0,kt.a,[On.a,Gn.a,nn.k,nn.F,[2,nt.a],[2,Rn.a]],{displayFormat:[0,"displayFormat"],pickerFormat:[1,"pickerFormat"]},null),nn._21(1024,null,kn.i,function(l){return[l]},[kt.a]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[2,kn.i]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),(l()(),nn._24(null,["\n                                    "]))],function(l,n){l(n,1,0,l(n,2,0,n.parent.context.$implicit.size)),l(n,5,0,"time"==n.parent.context.$implicit.type);l(n,8,0,"HH:mm","HH:mm"),l(n,10,0,nn._9(1,"",n.parent.context.$implicit.model,""))},function(l,n){l(n,7,0,nn._18(n,8)._disabled,nn._18(n,12).ngClassUntouched,nn._18(n,12).ngClassTouched,nn._18(n,12).ngClassPristine,nn._18(n,12).ngClassDirty,nn._18(n,12).ngClassValid,nn._18(n,12).ngClassInvalid,nn._18(n,12).ngClassPending)})}function D(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-input",[["class","gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{type:[0,"type"]},null)],function(l,n){l(n,1,0,l(n,2,0,n.parent.context.$implicit.size)),l(n,3,0,nn._9(1,"",n.parent.context.$implicit.model,"")),l(n,6,0,nn._9(1,"",n.parent.context.$implicit.type,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function A(l){return nn._25(0,[(l()(),nn._5(0,null,null,2,"button",[["class","barcodeButton"],["ion-button",""],["item-end",""],["type","button"]],null,[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.scanBarcode(l.parent.context.$implicit.model)&&u),u},tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(0,["\n                                        扫一扫\n                                    "]))],null,null)}function T(l){return nn._25(0,[(l()(),nn._5(0,null,null,18,"ion-row",[["align-items-center",""],["class","row"],["justify-content-center",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,O)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,$)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,N)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,D)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,A)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                "]))],function(l,n){l(n,4,0,"date"!=n.context.$implicit.type&&"time"!=n.context.$implicit.type),l(n,8,0,"date"==n.context.$implicit.type),l(n,11,0,"time"==n.context.$implicit.type),l(n,14,0,"date"!=n.context.$implicit.type&&"time"!=n.context.$implicit.type),l(n,17,0,n.context.$implicit.scan)},null)}function j(l){return nn._25(0,[(l()(),nn._5(0,null,null,8,"ion-col",[["class","col"]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._1(16777216,null,null,1,null,x)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._1(16777216,null,null,1,null,T)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n\n                            "]))],function(l,n){l(n,4,0,n.parent.context.$implicit.header),l(n,7,0,n.parent.context.$implicit.options)},null)}function z(l){return nn._25(0,[(l()(),nn._5(0,null,null,2,"ion-col",[["class","col"],["col-3",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "]))],null,null)}function B(l){return nn._25(0,[(l()(),nn._5(0,null,null,12,"ion-row",[["align-items-center",""],["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                    ","\n                                "])),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,5,"ion-textarea",[["class","gridborder"],["style","min-width: auto;"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._24(null,["\n                            "]))],function(l,n){l(n,7,0,nn._9(1,"",n.parent.context.$implicit.model,""))},function(l,n){l(n,4,0,n.parent.context.$implicit.title),l(n,6,0,nn._18(n,9).ngClassUntouched,nn._18(n,9).ngClassTouched,nn._18(n,9).ngClassPristine,nn._18(n,9).ngClassDirty,nn._18(n,9).ngClassValid,nn._18(n,9).ngClassInvalid,nn._18(n,9).ngClassPending)})}function L(l){return nn._25(0,[(l()(),nn._5(0,null,null,7,"ion-row",[["align-items-center",""],["class","row"],["justify-content-center",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._5(0,null,null,0,"div",[["style","width: 45px;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._5(0,null,null,1,"div",[["style","text-align: center;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                        ","\n                                    "])),(l()(),nn._24(null,["\n                                "]))],null,function(l,n){l(n,6,0,n.parent.parent.context.$implicit.header)})}function Q(l){return nn._25(0,[(l()(),nn._5(0,null,null,10,"div",[["class","gridborder"]],null,null,null,null,null)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,5,"ion-datetime",[["displayFormat","DD/MM/YYYY"],["pickerFormat","DD MM YYYY"]],[[2,"datetime-disabled",null],[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"click"],[null,"keyup.space"]],function(l,n,t){var u=!0;return"click"===n&&(u=!1!==nn._18(l,5)._click(t)&&u),"keyup.space"===n&&(u=!1!==nn._18(l,5)._keyup()&&u),u},It.b,It.a)),nn._4(1228800,null,0,kt.a,[On.a,Gn.a,nn.k,nn.F,[2,nt.a],[2,Rn.a]],{displayFormat:[0,"displayFormat"],pickerFormat:[1,"pickerFormat"]},null),nn._21(1024,null,kn.i,function(l){return[l]},[kt.a]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[2,kn.i]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),(l()(),nn._24(null,["\n                                    "]))],function(l,n){l(n,1,0,l(n,2,0,n.parent.context.$implicit.size));l(n,5,0,"DD/MM/YYYY","DD MM YYYY"),l(n,7,0,nn._9(1,"",n.parent.context.$implicit.model,""))},function(l,n){l(n,4,0,nn._18(n,5)._disabled,nn._18(n,9).ngClassUntouched,nn._18(n,9).ngClassTouched,nn._18(n,9).ngClassPristine,nn._18(n,9).ngClassDirty,nn._18(n,9).ngClassValid,nn._18(n,9).ngClassInvalid,nn._18(n,9).ngClassPending)})}function E(l){return nn._25(0,[(l()(),nn._5(0,null,null,10,"div",[["class","gridborder"]],null,null,null,null,null)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,5,"ion-datetime",[["displayFormat","HH:mm"],["pickerFormat","HH:mm"]],[[2,"datetime-disabled",null],[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"click"],[null,"keyup.space"]],function(l,n,t){var u=!0;return"click"===n&&(u=!1!==nn._18(l,5)._click(t)&&u),"keyup.space"===n&&(u=!1!==nn._18(l,5)._keyup()&&u),u},It.b,It.a)),nn._4(1228800,null,0,kt.a,[On.a,Gn.a,nn.k,nn.F,[2,nt.a],[2,Rn.a]],{displayFormat:[0,"displayFormat"],pickerFormat:[1,"pickerFormat"]},null),nn._21(1024,null,kn.i,function(l){return[l]},[kt.a]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[2,kn.i]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),(l()(),nn._24(null,["\n                                    "]))],function(l,n){l(n,1,0,l(n,2,0,n.parent.context.$implicit.size));l(n,5,0,"HH:mm","HH:mm"),l(n,7,0,nn._9(1,"",n.parent.context.$implicit.model,""))},function(l,n){l(n,4,0,nn._18(n,5)._disabled,nn._18(n,9).ngClassUntouched,nn._18(n,9).ngClassTouched,nn._18(n,9).ngClassPristine,nn._18(n,9).ngClassDirty,nn._18(n,9).ngClassValid,nn._18(n,9).ngClassInvalid,nn._18(n,9).ngClassPending)})}function V(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-input",[["class","gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{type:[0,"type"]},null)],function(l,n){l(n,1,0,l(n,2,0,n.parent.context.$implicit.size)),l(n,3,0,nn._9(1,"",n.parent.context.$implicit.model,"")),l(n,6,0,nn._9(1,"",n.parent.context.$implicit.type,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function U(l){return nn._25(0,[(l()(),nn._5(0,null,null,2,"button",[["class","barcodeButton"],["ion-button",""],["item-end",""],["type","button"]],null,[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.checkBeforeScan()&&u),u},tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(0,["\n                                        扫一扫\n                                    "]))],null,null)}function G(l){return nn._25(0,[(l()(),nn._5(0,null,null,17,"ion-row",[["align-items-center",""],["class","row"],["justify-content-center",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                        ","\n                                    "])),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,Q)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,E)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,V)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,U)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                "]))],function(l,n){l(n,7,0,"date"==n.context.$implicit.type),l(n,10,0,"time"==n.context.$implicit.type),l(n,13,0,"date"!=n.context.$implicit.type&&"time"!=n.context.$implicit.type),l(n,16,0,n.context.$implicit.scan)},function(l,n){l(n,4,0,n.context.$implicit.title)})}function H(l){return nn._25(0,[(l()(),nn._5(0,null,null,8,"ion-col",[["class","col"]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._1(16777216,null,null,1,null,L)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._1(16777216,null,null,1,null,G)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n\n                            "]))],function(l,n){l(n,4,0,n.parent.context.$implicit.header),l(n,7,0,n.parent.context.$implicit.options)},null)}function W(l){return nn._25(0,[(l()(),nn._5(0,null,null,21,"ion-col",[["class","col"],["col-auto",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._24(null,["\n                            "])),(l()(),nn._1(16777216,null,null,1,null,C)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._1(16777216,null,null,1,null,F)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._1(16777216,null,null,1,null,j)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._1(16777216,null,null,1,null,z)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._1(16777216,null,null,1,null,B)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._1(16777216,null,null,1,null,H)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                        "]))],function(l,n){var t=n.component;l(n,5,0,"input"==n.context.$implicit.method),l(n,8,0,"buttons"==n.context.$implicit.method),l(n,11,0,"inputs"==n.context.$implicit.method),l(n,14,0,"breaks"==n.context.$implicit.method),l(n,17,0,"textarea"==n.context.$implicit.method),l(n,20,0,n.context.$implicit.method=="inputs"+t.wfNavParams.wfProcess)},null)}function Y(l){return nn._25(0,[(l()(),nn._5(0,null,null,4,"div",[["class","inputHeader"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,1,"ion-icon",[["name","md-hand"],["role","img"]],[[2,"hide",null]],null,null,null,null)),nn._4(147456,null,0,at.a,[Gn.a,nn.k,nn.F],{name:[0,"name"]},null),(l()(),nn._24(null,["\n                                  手工老化\n                            "]))],function(l,n){l(n,3,0,"md-hand")},function(l,n){l(n,2,0,nn._18(n,3)._hidden)})}function q(l){return nn._25(0,[(l()(),nn._5(0,null,null,4,"div",[["class","inputHeader"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,1,"ion-icon",[["name","ios-color-wand-outline"],["role","img"]],[[2,"hide",null]],null,null,null,null)),nn._4(147456,null,0,at.a,[Gn.a,nn.k,nn.F],{name:[0,"name"]},null),(l()(),nn._24(null,["\n                                  自动老化\n                            "]))],function(l,n){l(n,3,0,"ios-color-wand-outline")},function(l,n){l(n,2,0,nn._18(n,3)._hidden)})}function K(l){return nn._25(0,[(l()(),nn._5(0,null,null,9,"div",[],null,null,null,null,null)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),(l()(),nn._24(null,["\n                                                "])),(l()(),nn._5(0,null,null,4,"ion-input",[["class","gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{type:[0,"type"]},null),(l()(),nn._24(null,["\n                                            "]))],function(l,n){l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size)),l(n,5,0,nn._9(1,"",n.parent.context.$implicit.model,"")),l(n,8,0,nn._9(1,"",n.parent.context.$implicit.type,""))},function(l,n){l(n,4,0,nn._18(n,7).ngClassUntouched,nn._18(n,7).ngClassTouched,nn._18(n,7).ngClassPristine,nn._18(n,7).ngClassDirty,nn._18(n,7).ngClassValid,nn._18(n,7).ngClassInvalid,nn._18(n,7).ngClassPending)})}function X(l){return nn._25(0,[(l()(),nn._5(0,null,null,9,"div",[],null,null,null,null,null)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),(l()(),nn._24(null,["\n                                                "])),(l()(),nn._5(0,null,null,4,"ion-input",[["class","gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{type:[0,"type"]},null),(l()(),nn._24(null,["\n                                            "]))],function(l,n){l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size)),l(n,5,0,nn._9(1,"",n.parent.context.$implicit.model,"")),l(n,8,0,nn._9(1,"",n.parent.context.$implicit.type,""))},function(l,n){l(n,4,0,nn._18(n,7).ngClassUntouched,nn._18(n,7).ngClassTouched,nn._18(n,7).ngClassPristine,nn._18(n,7).ngClassDirty,nn._18(n,7).ngClassValid,nn._18(n,7).ngClassInvalid,nn._18(n,7).ngClassPending)})}function J(l){return nn._25(0,[(l()(),nn._5(0,null,null,7,"div",[],null,null,null,null,null)),(l()(),nn._24(null,["\n                                            "])),(l()(),nn._1(16777216,null,null,1,null,K)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                            "])),(l()(),nn._1(16777216,null,null,1,null,X)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                        "]))],function(l,n){var t=n.component;l(n,3,0,!1===n.context.$implicit.auto),l(n,6,0,!0===n.context.$implicit.auto&&"5b0"==t.wfNavParams.wfProcess)},null)}function Z(l){return nn._25(0,[(l()(),nn._5(0,null,null,9,"ion-row",[["align-items-center",""],["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n\n                                        "])),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                            ","\n                                        "])),(l()(),nn._24(null,["\n\n                                        "])),(l()(),nn._1(16777216,null,null,1,null,J)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                                    "]))],function(l,n){l(n,8,0,n.context.$implicit.cols)},function(l,n){l(n,5,0,n.context.$implicit.title)})}function ll(l){return nn._25(0,[(l()(),nn._5(0,null,null,13,"ion-col",[["class","col"],["padding-horizontal",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._5(0,null,null,5,"ion-row",[["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                            特殊说明\n                                        "])),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._5(0,null,null,2,"ion-textarea",[["class","gridborder"],["name","wfAgeingNote"],["style","min-height: 20em; width: auto"]],null,null,null,Jn.b,Jn.a)),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],null,null),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._24(null,["\n                                "]))],null,null)}function nl(l){return nn._25(0,[(l()(),nn._5(0,null,null,20,"ion-col",[["class","col"],["col-6",""],["no-padding",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n\n                                                "])),(l()(),nn._5(0,null,null,16,"ion-row",[["align-items-center",""],["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                                    "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                                        ","\n                                                    "])),(l()(),nn._24(null,["\n\n                                                    "])),(l()(),nn._5(0,null,null,9,"div",[],null,null,null,null,null)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),(l()(),nn._24(null,["\n                                                        "])),(l()(),nn._5(0,null,null,4,"ion-input",[["class","gridborder"],["no-padding",""]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{type:[0,"type"]},null),(l()(),nn._24(null,["\n                                                    "])),(l()(),nn._24(null,["\n\n                                                "])),(l()(),nn._24(null,["\n                                            "]))],function(l,n){l(n,10,0,l(n,11,0,n.context.$implicit.size)),l(n,14,0,nn._9(1,"",n.context.$implicit.model,"")),l(n,17,0,nn._9(1,"",n.context.$implicit.type,""))},function(l,n){l(n,7,0,n.context.$implicit.title),l(n,13,0,nn._18(n,16).ngClassUntouched,nn._18(n,16).ngClassTouched,nn._18(n,16).ngClassPristine,nn._18(n,16).ngClassDirty,nn._18(n,16).ngClassValid,nn._18(n,16).ngClassInvalid,nn._18(n,16).ngClassPending)})}function tl(l){return nn._25(0,[(l()(),nn._5(0,null,null,29,"ion-row",[["class","ageingSubPart row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._5(0,null,null,9,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,5,"ion-row",[["align-items-center",""],["class","row"],["wrap",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                            "])),(l()(),nn._1(16777216,null,null,1,null,nl)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._5(0,null,null,13,"ion-col",[["class","col"],["padding-horizontal",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,5,"ion-row",[["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                            "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                                特殊说明\n                                            "])),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,2,"ion-textarea",[["class","gridborder"],["name","wfAgeingNote"],["style","min-height: 20em; width: auto"]],null,null,null,Jn.b,Jn.a)),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],null,null),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._24(null,["\n\n                                "]))],function(l,n){l(n,10,0,n.component.wfAutoAgeingDetails)},null)}function ul(l){return nn._25(0,[(l()(),nn._5(0,null,null,55,"ion-row",[["align-items-center",""],["class","sec row"],["justify-content-start",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,8,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._1(16777216,null,null,1,null,Y)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._1(16777216,null,null,1,null,q)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,39,"ion-col",[["class","col"],["col-auto",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,35,"ion-row",[["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,15,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._5(0,null,null,11,"ion-row",[["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,1,"div",[["style","width: 45px"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                               \n                                        "])),(l()(),nn._24(null,["\n\n                                        "])),(l()(),nn._5(0,null,null,1,"div",[["style","width: 8em; text-align: center;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                              规格\n                                        "])),(l()(),nn._24(null,["\n\n                                        "])),(l()(),nn._5(0,null,null,1,"div",[["style","width: 8em; text-align: center;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                              实际\n                                        "])),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._24(null,["\n                                "])),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,5,"ion-col",[["class","col"]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,Z)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._24(null,["\n                                "])),(l()(),nn._1(16777216,null,null,1,null,ll)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._24(null,["\n                                "])),(l()(),nn._1(16777216,null,null,1,null,tl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n\n                            "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n\n                    "]))],function(l,n){var t=n.component;l(n,8,0,"5a0"==t.wfNavParams.wfProcess),l(n,11,0,"5b0"==t.wfNavParams.wfProcess),l(n,44,0,t.wfAgeingDetails),l(n,48,0,"5a0"==t.wfNavParams.wfProcess),l(n,52,0,"5b0"==t.wfNavParams.wfProcess)},null)}function el(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-input",[["class","gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"change"]],function(l,n,t){var u=!0,e=l.component;return"change"===n&&(u=!1!==e.updateTextChg()&&u),u},Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"],isDisabled:[1,"isDisabled"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{value:[0,"value"],disabled:[1,"disabled"],type:[2,"type"]},null)],function(l,n){var t=n.component;l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size)),l(n,3,0,nn._9(1,"",n.parent.parent.context.$implicit.model,""),""==t.wfInputForm.value.wfOptBadQty||""==t.wfInputForm.value.wfOptGoodQty),l(n,6,0,nn._9(1,"",t.wfInputForm.controls[n.parent.parent.context.$implicit.model].value,""),""==t.wfInputForm.value.wfOptBadQty||""==t.wfInputForm.value.wfOptGoodQty,nn._9(1,"",n.parent.parent.context.$implicit.type,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function il(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-input",[["class","gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"],isDisabled:[1,"isDisabled"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{value:[0,"value"],disabled:[1,"disabled"],type:[2,"type"]},null)],function(l,n){var t=n.component;l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size)),l(n,3,0,nn._9(1,"",n.parent.parent.context.$implicit.model,""),""==t.wfInputForm.value.wfOptBadQty||""==t.wfInputForm.value.wfOptGoodQty),l(n,6,0,nn._9(1,"",t.wfInputForm.controls[n.parent.parent.context.$implicit.model].value,""),""==t.wfInputForm.value.wfOptBadQty||""==t.wfInputForm.value.wfOptGoodQty,nn._9(1,"",n.parent.parent.context.$implicit.type,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function ol(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-input",[["class","gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"],isDisabled:[1,"isDisabled"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{value:[0,"value"],disabled:[1,"disabled"],type:[2,"type"]},null)],function(l,n){var t=n.component;l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size)),l(n,3,0,nn._9(1,"",n.parent.parent.context.$implicit.model,""),""==t.wfInputForm.value.wfOptBadQty||""==t.wfInputForm.value.wfOptGoodQty),l(n,6,0,nn._9(1,"",t.wfInputForm.controls[n.parent.parent.context.$implicit.model].value,""),""==t.wfInputForm.value.wfOptBadQty||""==t.wfInputForm.value.wfOptGoodQty,nn._9(1,"",n.parent.parent.context.$implicit.type,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function al(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-input",[["class","gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{value:[0,"value"],type:[1,"type"]},null)],function(l,n){var t=n.component;l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size)),l(n,3,0,nn._9(1,"",n.parent.parent.context.$implicit.model,"")),l(n,6,0,nn._9(1,"",t.wfInputForm.controls[n.parent.parent.context.$implicit.model].value,""),nn._9(1,"",n.parent.parent.context.$implicit.type,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function rl(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-input",[["class","gridborder"],["style","display: inline-block;"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"],isDisabled:[1,"isDisabled"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{value:[0,"value"],disabled:[1,"disabled"],type:[2,"type"]},null)],function(l,n){var t=n.component;l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size)),l(n,3,0,nn._9(1,"",n.parent.parent.context.$implicit.model,""),""==t.wfInputForm.value.wfOptBadQty||""==t.wfInputForm.value.wfOptGoodQty),l(n,6,0,nn._9(1,"",t.wfInputForm.controls[n.parent.parent.context.$implicit.model].value,""),""==t.wfInputForm.value.wfOptBadQty||""==t.wfInputForm.value.wfOptGoodQty,nn._9(1,"",n.parent.parent.context.$implicit.type,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function sl(l){return nn._25(0,[(l()(),nn._5(0,null,null,2,"button",[["class","barcodeButton"],["ion-button",""],["item-end",""],["type","button"]],[[8,"disabled",0]],[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.scanBarcode(l.parent.parent.context.$implicit.model)&&u),u},tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(0,["\n                                      簽署\n                                    "]))],null,function(l,n){var t=n.component;l(n,0,0,!(2==t.wfInputForm.value.wfQCPass||1==t.wfInputForm.value.wfQCPass))})}function _l(l){return nn._25(0,[(l()(),nn._5(0,null,null,27,"ion-row",[["align-items-center",""],["class","row"],["justify-content-center",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                    ","\n                                "])),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,19,"div",[],null,[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.showWfOpsInputsAlert(e.wfInputForm.value.wfOptBadQty,e.wfInputForm.value.wfOptGoodQty)&&u),u},null,null)),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,el)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,il)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,ol)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,al)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,rl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,sl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._24(null,["\n                                "])),(l()(),nn._24(null,["\n                            "]))],function(l,n){l(n,9,0,1==n.parent.context.$implicit.wfPplI),l(n,12,0,2==n.parent.context.$implicit.wfPplI),l(n,15,0,3==n.parent.context.$implicit.wfPplI),l(n,18,0,4==n.parent.context.$implicit.wfPplI),l(n,21,0,5==n.parent.context.$implicit.wfPplI),l(n,24,0,5==n.parent.context.$implicit.scan)},function(l,n){l(n,4,0,n.parent.context.$implicit.title)})}function cl(l){return nn._25(0,[(l()(),nn._5(0,null,null,20,"ion-row",[["align-items-center",""],["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                    备注\n                                "])),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,6,"ion-textarea",[["class","textarea gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],null,null),(l()(),nn._24(null,["\n                                    \n\n                                "])),(l()(),nn._5(0,null,null,5,"button",[["ion-button",""],["type","button"]],null,[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.takePhoto()&&u),u},tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(0,["\n                                        "])),(l()(),nn._5(0,null,0,1,"ion-icon",[["ios","ios-camera"],["md","md-camera"],["role","img"]],[[2,"hide",null]],null,null,null,null)),nn._4(147456,null,0,at.a,[Gn.a,nn.k,nn.F],{ios:[0,"ios"],md:[1,"md"]},null),(l()(),nn._24(0,["\n                                          拍照 "])),(l()(),nn._24(null,["\n\n                            "]))],function(l,n){l(n,7,0,l(n,8,0,n.parent.context.$implicit.size)),l(n,9,0,nn._9(1,"",n.parent.context.$implicit.model,""));l(n,18,0,"ios-camera","md-camera")},function(l,n){l(n,6,0,nn._18(n,11).ngClassUntouched,nn._18(n,11).ngClassTouched,nn._18(n,11).ngClassPristine,nn._18(n,11).ngClassDirty,nn._18(n,11).ngClassValid,nn._18(n,11).ngClassInvalid,nn._18(n,11).ngClassPending),l(n,17,0,nn._18(n,18)._hidden)})}function pl(l){return nn._25(0,[(l()(),nn._5(0,null,null,7,"button",[["ion-button",""],["outline",""],["round",""],["style","width: auto;"],["type","button"]],null,[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.updateForm(l.parent.parent.context.$implicit.model,l.context.$implicit.value)&&u),u},tt.b,tt.a)),nn._4(278528,null,0,hn.f,[nn.s,nn.t,nn.k,nn.F],{ngClass:[0,"ngClass"]},null),nn._20(["buttonsSelected"]),nn._4(1097728,[[2,4]],0,ut.a,[[8,""],Gn.a,nn.k,nn.F],{outline:[0,"outline"],round:[1,"round"]},null),(l()(),nn._24(0,["\n                                    "])),(l()(),nn._5(0,null,0,1,"ion-icon",[["role","img"]],[[2,"hide",null]],null,null,null,null)),nn._4(147456,null,0,at.a,[Gn.a,nn.k,nn.F],{name:[0,"name"]},null),(l()(),nn._24(0,["\n                                      ","\n                                  "]))],function(l,n){l(n,1,0,l(n,2,0,n.component.wfInputForm.controls[n.parent.parent.context.$implicit.model].value===n.context.$implicit.value));l(n,3,0,"",""),l(n,6,0,nn._9(1,"",n.context.$implicit.icon,""))},function(l,n){l(n,5,0,nn._18(n,6)._hidden),l(n,7,0,n.context.$implicit.label)})}function dl(l){return nn._25(0,[(l()(),nn._5(0,null,null,19,"ion-row",[["align-items-center",""],["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                    ","\n                                "])),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._5(0,null,null,4,"ion-input",[["hidden",""]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],null,null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._5(0,null,null,6,"ion-buttons",[],null,null,null,null,null)),nn._4(16384,null,1,rt.a,[Gn.a,nn.k,nn.F,[2,st.a],[2,_t.a]],null,null),nn._22(603979776,2,{_buttons:1}),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,pl)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._24(null,["\n                            "]))],function(l,n){l(n,7,0,nn._9(1,"",n.parent.context.$implicit.model,"")),l(n,17,0,n.parent.context.$implicit.buttons)},function(l,n){l(n,4,0,n.parent.context.$implicit.title),l(n,6,0,nn._18(n,9).ngClassUntouched,nn._18(n,9).ngClassTouched,nn._18(n,9).ngClassPristine,nn._18(n,9).ngClassDirty,nn._18(n,9).ngClassValid,nn._18(n,9).ngClassInvalid,nn._18(n,9).ngClassPending)})}function fl(l){return nn._25(0,[(l()(),nn._5(0,null,null,3,"div",[],null,null,null,null,null)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),(l()(),nn._24(null,["\n                            "]))],function(l,n){l(n,1,0,l(n,2,0,n.parent.context.$implicit.size))},null)}function gl(l){return nn._25(0,[(l()(),nn._5(0,null,null,17,"ion-col",[["align-items-left",""],["class","col"],["col-auto",""],["justify-content-center",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._24(null,["\n                            "])),(l()(),nn._1(16777216,null,null,1,null,_l)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n\n                            "])),(l()(),nn._1(16777216,null,null,1,null,cl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._24(null,["\n                            "])),(l()(),nn._1(16777216,null,null,1,null,dl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._24(null,["\n                            "])),(l()(),nn._1(16777216,null,null,1,null,fl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                        "]))],function(l,n){l(n,5,0,"input"==n.context.$implicit.method),l(n,8,0,"textarea"==n.context.$implicit.method),l(n,12,0,"buttons"==n.context.$implicit.method),l(n,16,0,"break"==n.context.$implicit.method)},null)}function ml(l){return nn._25(0,[(l()(),nn._5(0,null,null,5,"ion-row",[["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,0,"img",[["class","img"]],[[8,"src",4]],null,null,null,null)),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                    "]))],null,function(l,n){l(n,3,0,nn._9(1,"",n.context.$implicit,""))})}function hl(l){return nn._25(0,[(l()(),nn._5(0,null,null,15,"ion-header",[["style","margin-top: 0px !important;margin-left: 0px !important;"]],null,null,null,null,null)),nn._4(16384,null,0,dt.a,[Gn.a,nn.k,nn.F,[2,Vn.a]],null,null),(l()(),nn._24(null,["\n    "])),(l()(),nn._5(0,null,null,11,"ion-navbar",[["class","toolbar"]],[[8,"hidden",0],[2,"statusbar-padding",null]],null,null,ft.b,ft.a)),nn._4(49152,null,0,_t.a,[vn.a,[2,Vn.a],[2,Un.a],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(3,["\n        "])),(l()(),nn._5(0,null,3,7,"div",[["style","align-items: center; display: inline;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n            "])),(l()(),nn._5(0,null,null,0,"img",[["class","icon"],["src","./assets/img/vt_icon.png"]],null,null,null,null,null)),(l()(),nn._24(null,["\n            "])),(l()(),nn._5(0,null,null,2,"ion-title",[],null,null,null,gt.b,gt.a)),nn._4(49152,null,0,mt.a,[Gn.a,nn.k,nn.F,[2,st.a],[2,_t.a]],null,null),(l()(),nn._24(0,["\n                  ( ","裸品流程卡 )  工序:  ","\n            "])),(l()(),nn._24(null,["\n        "])),(l()(),nn._24(3,["\n    "])),(l()(),nn._24(null,["\n"])),(l()(),nn._24(null,["\n\n"])),(l()(),nn._5(0,null,null,114,"ion-content",[["padding",""]],[[2,"statusbar-padding",null],[2,"has-refresher",null]],null,null,ht.b,ht.a)),nn._4(4374528,null,0,lt.a,[Gn.a,Hn.a,yn.a,nn.k,nn.F,vn.a,$n.a,nn.z,[2,Vn.a],[2,Un.a]],null,null),(l()(),nn._24(1,["\n    "])),(l()(),nn._5(0,null,1,110,"form",[["novalidate",""]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngSubmit"],[null,"submit"],[null,"reset"]],function(l,n,t){var u=!0,e=l.component;return"submit"===n&&(u=!1!==nn._18(l,22).onSubmit(t)&&u),"reset"===n&&(u=!1!==nn._18(l,22).onReset()&&u),"ngSubmit"===n&&(u=!1!==e.onSubmit()&&u),u},null,null)),nn._4(16384,null,0,kn.r,[],null,null),nn._4(540672,null,0,kn.f,[[8,null],[8,null]],{form:[0,"form"]},{ngSubmit:"ngSubmit"}),nn._21(2048,null,kn.b,null,[kn.f]),nn._4(16384,null,0,kn.l,[kn.b],null,null),(l()(),nn._24(null,["\n        "])),(l()(),nn._5(0,null,null,103,"ion-grid",[["class","grid"]],null,null,null,null,null)),nn._4(16384,null,0,wt.a,[],null,null),(l()(),nn._24(null,["\n            "])),(l()(),nn._24(null,["\n            "])),(l()(),nn._5(0,null,null,5,"ion-row",[["class","main headbar row"],["wrap",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                "])),(l()(),nn._1(16777216,null,null,1,null,w)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n            "])),(l()(),nn._24(null,["\n\n            "])),(l()(),nn._24(null,["\n            "])),(l()(),nn._5(0,null,null,90,"ion-row",[["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                "])),(l()(),nn._24(null,["\n                "])),(l()(),nn._5(0,null,null,28,"ion-col",[["class","main col"],["col-5",""],["no-padding",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                    "])),(l()(),nn._24(null,["\n                    "])),(l()(),nn._5(0,null,null,19,"ion-row",[["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,1,"ion-col",[["class","col"],["col-1",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,5,"ion-col",[["class","col"],["col-7",""],["text-center",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,1,"h4",[["class","inputHeader"]],null,null,null,null,null)),(l()(),nn._24(null,["材料"])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,5,"ion-col",[["class","col"],["text-center",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,1,"h4",[["class","inputHeader"]],null,null,null,null,null)),(l()(),nn._24(null,["批号"])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                    "])),(l()(),nn._24(null,["\n\n                    "])),(l()(),nn._24(null,["\n                    "])),(l()(),nn._1(16777216,null,null,1,null,y)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                "])),(l()(),nn._24(null,["\n\n                "])),(l()(),nn._24(null,["\n                "])),(l()(),nn._5(0,null,null,47,"ion-col",[["class","col"],["col-7",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n\n                    "])),(l()(),nn._24(null,["\n                    "])),(l()(),nn._5(0,null,null,6,"ion-row",[["align-self-stretch",""],["class","sec row"],["justify-content-left",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._1(16777216,null,null,1,null,W)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n\n                    "])),(l()(),nn._24(null,["\n\n                    "])),(l()(),nn._24(null,["\n                    "])),(l()(),nn._1(16777216,null,null,1,null,ul)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                    "])),(l()(),nn._24(null,["\n                    "])),(l()(),nn._5(0,null,null,25,"ion-row",[["align-items-center",""],["class","sec staff row"],["justify-content-left",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,8,"ion-col",[["class","col"],["col-12",""],["text-left",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,4,"h4",[["class","inputHeader"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,1,"ion-icon",[["name","md-contacts"],["role","img"]],[[2,"hide",null]],null,null,null,null)),nn._4(147456,null,0,at.a,[Gn.a,nn.k,nn.F],{name:[0,"name"]},null),(l()(),nn._24(null,["\n                                  员工信息\n                            "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n\n\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._1(16777216,null,null,1,null,gl)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,6,"ion-row",[["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                \n                            "])),(l()(),nn._5(0,null,null,2,"button",[["ion-button",""],["type","button"]],[[8,"disabled",0]],[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.showWfOpsFinalInputsAlert(e.wfInputForm.value.wfOrderTotalQty,e.wfInputForm.value.wfOrderTotalGoodQty,e.wfInputForm.value.wfOptBadQty,e.wfInputForm.value.wfOptGoodQty)&&u),u},tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(0,["上存"])),(l()(),nn._24(null,["\n\n                        "])),(l()(),nn._24(null,["\n                    "])),(l()(),nn._24(null,["\n\n                    "])),(l()(),nn._5(0,null,null,2,"ion-row",[["class","row"],["justify-content-end",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n\n                    "])),(l()(),nn._24(null,["\n\n                "])),(l()(),nn._24(null,["\n\n                "])),(l()(),nn._5(0,null,null,5,"ion-col",[["class","col"]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                    "])),(l()(),nn._1(16777216,null,null,1,null,ml)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                "])),(l()(),nn._24(null,["\n\n            "])),(l()(),nn._24(null,["\n        "])),(l()(),nn._24(null,["\n    "])),(l()(),nn._24(1,["\n"]))],function(l,n){var t=n.component;l(n,22,0,t.wfInputForm),l(n,34,0,t.wfOrderDetails),l(n,69,0,t.wfRMDetails),l(n,82,0,t.wfOpsInputs),l(n,87,0,"5a0"==t.wfNavParams.wfProcess||"5b0"==t.wfNavParams.wfProcess);l(n,100,0,"md-contacts"),l(n,106,0,t.wfPplInputs),l(n,126,0,t.images)},function(l,n){var t=n.component;l(n,3,0,nn._18(n,4)._hidden,nn._18(n,4)._sbPadding),l(n,12,0,t.wfInputForm.value.wfFormName,t.wfInputForm.value.wfProcessName),l(n,17,0,nn._18(n,18).statusbarPadding,nn._18(n,18)._hasRefresher),l(n,20,0,nn._18(n,24).ngClassUntouched,nn._18(n,24).ngClassTouched,nn._18(n,24).ngClassPristine,nn._18(n,24).ngClassDirty,nn._18(n,24).ngClassValid,nn._18(n,24).ngClassInvalid,nn._18(n,24).ngClassPending),l(n,99,0,nn._18(n,100)._hidden),l(n,111,0,!(2==t.wfInputForm.value.wfQCPass||1==t.wfInputForm.value.wfQCPass))})}function wl(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-input",[["class","gridborder"],["disabled",""]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"],isDisabled:[1,"isDisabled"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{disabled:[0,"disabled"],type:[1,"type"]},null)],function(l,n){l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size));l(n,3,0,nn._9(1,"",n.parent.parent.context.$implicit.model,""),"");l(n,6,0,"",nn._9(1,"",n.parent.parent.context.$implicit.type,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function yl(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-textarea",[["class","textarea gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],null,null)],function(l,n){l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size)),l(n,3,0,nn._9(1,"",n.parent.parent.context.$implicit.model,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function bl(l){return nn._25(0,[(l()(),nn._5(0,null,null,15,"ion-col",[["class","col"],["no-padding",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._5(0,null,null,11,"ion-row",[["align-items-center",""],["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"],["no-padding",""]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                    ","\n                                "])),(l()(),nn._24(null,["\n                                "])),(l()(),nn._1(16777216,null,null,1,null,wl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._1(16777216,null,null,1,null,yl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._24(null,["\n                        "]))],function(l,n){l(n,10,0,"textarea"!=n.parent.context.$implicit.type),l(n,13,0,"textarea"===n.parent.context.$implicit.type)},function(l,n){l(n,7,0,n.parent.context.$implicit.title)})}function vl(l){return nn._25(0,[(l()(),nn._5(0,null,null,3,"ion-col",[["class","col"],["no-padding",""]],null,null,null,null,null)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(16384,null,0,ct.a,[],null,null)],function(l,n){l(n,1,0,l(n,2,0,n.parent.context.$implicit.size))},null)}function Pl(l){return nn._25(0,[(l()(),nn._5(0,null,null,24,"ion-col",[["class","col"]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                    "])),(l()(),nn._5(0,null,null,20,"ion-row",[["class","row"],["justify-content-center",""],["wrap",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._1(16777216,null,null,1,null,bl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n\n                        "])),(l()(),nn._1(16777216,null,null,1,null,vl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                    "])),(l()(),nn._24(null,["\n                "]))],function(l,n){var t=n.component;l(n,7,0,"input"===n.context.$implicit.method&&n.context.$implicit.process[t.wfNavProcess]),l(n,22,0,"break"===n.context.$implicit.method)},null)}function Il(l){return nn._25(0,[(l()(),nn._5(0,null,null,23,"ion-row",[["align-items-center",""],["class","row"],["justify-content-center",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,5,"ion-col",[["class","col"],["col-auto",""],["wrap",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                ","\n                            "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,5,"ion-col",[["class","col"],["col-6",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,1,"ion-input",[["class","gridborder"],["disabled",""]],null,null,null,Jn.b,Jn.a)),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{value:[0,"value"],disabled:[1,"disabled"]},null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,5,"ion-col",[["class","col"]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,1,"ion-input",[["class","gridborder"]],null,null,null,Jn.b,Jn.a)),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{value:[0,"value"]},null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                    "]))],function(l,n){var t=n.component;l(n,14,0,nn._9(1,"",t.wfInputForm.controls[n.context.$implicit.modelName].value,""),""),l(n,21,0,nn._9(1,"",t.wfInputForm.controls[n.context.$implicit.modelSerial].value,""))},function(l,n){l(n,7,0,n.context.$implicit.title)})}function kl(l){return nn._25(0,[(l()(),nn._5(0,null,null,1,"div",[["style","margin-left: 5px;margin-right: 5px;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                    ","\n                                "]))],null,function(l,n){l(n,1,0,n.parent.parent.context.$implicit.title)})}function Cl(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-input",[["class","gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{type:[0,"type"]},null)],function(l,n){l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size)),l(n,3,0,nn._9(1,"",n.parent.parent.context.$implicit.model,"")),l(n,6,0,nn._9(1,"",n.parent.parent.context.$implicit.type,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function Sl(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-textarea",[["class","textarea gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],null,null)],function(l,n){l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size)),l(n,3,0,nn._9(1,"",n.parent.parent.context.$implicit.model,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function Fl(l){return nn._25(0,[(l()(),nn._5(0,null,null,2,"button",[["class","barcodeButton"],["ion-button",""],["item-end",""],["type","button"]],null,[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.scanBarcode(l.parent.parent.context.$implicit.model)&&u),u},tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(0,["\n                                    扫一扫\n                                "]))],null,null)}function xl(l){return nn._25(0,[(l()(),nn._5(0,null,null,14,"ion-row",[["align-items-center",""],["class","row"],["justify-content-center",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._1(16777216,null,null,1,null,kl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._1(16777216,null,null,1,null,Cl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._1(16777216,null,null,1,null,Sl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._1(16777216,null,null,1,null,Fl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                            "]))],function(l,n){var t=n.component;l(n,4,0,n.parent.context.$implicit.process[t.wfNavProcess]),l(n,7,0,"textarea"!=n.parent.context.$implicit.type),l(n,10,0,"textarea"===n.parent.context.$implicit.type),l(n,13,0,n.parent.context.$implicit.scan)},null)}function Ol(l){return nn._25(0,[(l()(),nn._5(0,null,null,4,"button",[["ion-button",""],["outline",""],["round",""],["style","width: auto;"],["type","button"]],null,[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.updateForm(l.parent.parent.context.$implicit.model,l.context.$implicit.value)&&u),u},tt.b,tt.a)),nn._4(278528,null,0,hn.f,[nn.s,nn.t,nn.k,nn.F],{ngClass:[0,"ngClass"]},null),nn._20(["buttonsSelected"]),nn._4(1097728,[[1,4]],0,ut.a,[[8,""],Gn.a,nn.k,nn.F],{outline:[0,"outline"],round:[1,"round"]},null),(l()(),nn._24(0,["\n                                          ","\n                                    "]))],function(l,n){l(n,1,0,l(n,2,0,n.component.wfInputForm.controls[n.parent.parent.context.$implicit.model].value===n.context.$implicit.value));l(n,3,0,"","")},function(l,n){l(n,4,0,n.context.$implicit.label)})}function Ml(l){return nn._25(0,[(l()(),nn._5(0,null,null,13,"ion-row",[["align-items-center",""],["class","row"],["justify-content-left",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                    ","\n                                "])),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._5(0,null,null,6,"ion-buttons",[],null,null,null,null,null)),nn._4(16384,null,1,rt.a,[Gn.a,nn.k,nn.F,[2,st.a],[2,_t.a]],null,null),nn._22(603979776,1,{_buttons:1}),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,Ol)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._24(null,["\n                            "]))],function(l,n){l(n,11,0,n.parent.context.$implicit.buttons)},function(l,n){l(n,4,0,n.parent.context.$implicit.title)})}function $l(l){return nn._25(0,[(l()(),nn._5(0,null,null,7,"ion-row",[["align-items-center",""],["class","row"],["justify-content-center",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._5(0,null,null,0,"div",[["style","width: 45px;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._5(0,null,null,1,"div",[["style","text-align: center;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                        ","\n                                    "])),(l()(),nn._24(null,["                                                                                                                                                             2\n                                "]))],null,function(l,n){l(n,6,0,n.parent.parent.context.$implicit.header)})}function Rl(l){return nn._25(0,[(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                        ","\n                                    "]))],null,function(l,n){l(n,1,0,n.parent.context.$implicit.title)})}function Nl(l){return nn._25(0,[(l()(),nn._5(0,null,null,10,"div",[["class","gridborder"]],null,null,null,null,null)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,5,"ion-datetime",[["displayFormat","DD/MM/YYYY"],["pickerFormat","DD MM YYYY"]],[[2,"datetime-disabled",null],[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"click"],[null,"keyup.space"]],function(l,n,t){var u=!0;return"click"===n&&(u=!1!==nn._18(l,5)._click(t)&&u),"keyup.space"===n&&(u=!1!==nn._18(l,5)._keyup()&&u),u},It.b,It.a)),nn._4(1228800,null,0,kt.a,[On.a,Gn.a,nn.k,nn.F,[2,nt.a],[2,Rn.a]],{displayFormat:[0,"displayFormat"],pickerFormat:[1,"pickerFormat"]},null),nn._21(1024,null,kn.i,function(l){return[l]},[kt.a]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[2,kn.i]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),(l()(),nn._24(null,["\n                                    "]))],function(l,n){l(n,1,0,l(n,2,0,n.parent.context.$implicit.size));l(n,5,0,"DD/MM/YYYY","DD MM YYYY"),l(n,7,0,nn._9(1,"",n.parent.context.$implicit.model,""))},function(l,n){l(n,4,0,nn._18(n,5)._disabled,nn._18(n,9).ngClassUntouched,nn._18(n,9).ngClassTouched,nn._18(n,9).ngClassPristine,nn._18(n,9).ngClassDirty,nn._18(n,9).ngClassValid,nn._18(n,9).ngClassInvalid,nn._18(n,9).ngClassPending)})}function Dl(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-input",[["class","gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{type:[0,"type"]},null)],function(l,n){l(n,1,0,l(n,2,0,n.parent.context.$implicit.size)),l(n,3,0,nn._9(1,"",n.parent.context.$implicit.model,"")),l(n,6,0,nn._9(1,"",n.parent.context.$implicit.type,""))},function(l,n){l(n,0,0,nn._18(n,5).ngClassUntouched,nn._18(n,5).ngClassTouched,nn._18(n,5).ngClassPristine,nn._18(n,5).ngClassDirty,nn._18(n,5).ngClassValid,nn._18(n,5).ngClassInvalid,nn._18(n,5).ngClassPending)})}function Al(l){return nn._25(0,[(l()(),nn._5(0,null,null,2,"button",[["class","barcodeButton"],["ion-button",""],["item-end",""],["type","button"]],null,[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.scanBarcode(l.parent.context.$implicit.model)&&u),u},tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(0,["\n                                        扫一扫\n                                    "]))],null,null)}function Tl(l){return nn._25(0,[(l()(),nn._5(0,null,null,15,"ion-row",[["align-items-center",""],["class","row"],["justify-content-center",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,Rl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,Nl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,Dl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,Al)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                "]))],function(l,n){var t=n.component;l(n,4,0,n.context.$implicit.process[t.wfNavProcess]),l(n,8,0,"date"==n.context.$implicit.type&&n.context.$implicit.process[t.wfNavProcess]),l(n,11,0,"date"!=n.context.$implicit.type&&n.context.$implicit.process[t.wfNavProcess]),l(n,14,0,n.context.$implicit.scan&&n.context.$implicit.process[t.wfNavProcess])},null)}function jl(l){return nn._25(0,[(l()(),nn._5(0,null,null,8,"ion-col",[["class","col"]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._1(16777216,null,null,1,null,$l)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                "])),(l()(),nn._1(16777216,null,null,1,null,Tl)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n\n                            "]))],function(l,n){l(n,4,0,n.parent.context.$implicit.header),l(n,7,0,n.parent.context.$implicit.options)},null)}function zl(l){return nn._25(0,[(l()(),nn._5(0,null,null,6,"ion-col",[["class","col"],["no-padding",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,2,"div",[],null,null,null,null,null)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),(l()(),nn._24(null,["\n                            "]))],function(l,n){l(n,4,0,l(n,5,0,n.parent.context.$implicit.size))},null)}function Bl(l){return nn._25(0,[(l()(),nn._5(0,null,null,12,"ion-row",[["align-items-center",""],["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                    ","\n                                "])),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,5,"ion-textarea",[["class","gridborder"],["style","min-width: auto;"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._24(null,["\n                            "]))],function(l,n){l(n,7,0,nn._9(1,"",n.parent.context.$implicit.model,""))},function(l,n){l(n,4,0,n.parent.context.$implicit.title),l(n,6,0,nn._18(n,9).ngClassUntouched,nn._18(n,9).ngClassTouched,nn._18(n,9).ngClassPristine,nn._18(n,9).ngClassDirty,nn._18(n,9).ngClassValid,nn._18(n,9).ngClassInvalid,nn._18(n,9).ngClassPending)})}function Ll(l){return nn._25(0,[(l()(),nn._5(0,null,null,18,"ion-col",[["class","col"],["col-auto",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._24(null,["\n                            "])),(l()(),nn._1(16777216,null,null,1,null,xl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._1(16777216,null,null,1,null,Ml)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                            "])),(l()(),nn._1(16777216,null,null,1,null,jl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n\n                            "])),(l()(),nn._1(16777216,null,null,1,null,zl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n\n                            "])),(l()(),nn._1(16777216,null,null,1,null,Bl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                        "]))],function(l,n){var t=n.component;l(n,5,0,"input"==n.context.$implicit.method&&n.context.$implicit.process[t.wfNavProcess]),l(n,8,0,"buttons"==n.context.$implicit.method&&n.context.$implicit.process[t.wfNavProcess]),l(n,11,0,"inputs"==n.context.$implicit.method&&n.context.$implicit.process[t.wfNavProcess]),l(n,14,0,"break"===n.context.$implicit.method&&t.option.process[t.wfNavProcess]),l(n,17,0,"textarea"==n.context.$implicit.method&&t.option.process[t.wfNavProcess])},null)}function Ql(l){return nn._25(0,[(l()(),nn._5(0,null,null,2,"button",[["class","barcodeButton"],["ion-button",""],["item-end",""],["type","button"]],[[8,"disabled",0]],[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.scanBarcode(l.parent.parent.parent.context.$implicit.model)&&u),u},tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(0,["\n                                                扫一扫\n                                            "]))],null,function(l,n){var t=n.component;l(n,0,0,""==t.wfInputForm.value.wfOptBadQty||""==t.wfInputForm.value.wfOptGoodQty)})}function El(l){return nn._25(0,[(l()(),nn._5(0,null,null,2,"button",[["class","barcodeButton"],["ion-button",""],["item-end",""],["type","button"]],[[8,"disabled",0]],[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.scanBarcode(l.parent.parent.parent.context.$implicit.model)&&u),u},tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(0,["\n                                                扫一扫\n                                            "]))],null,function(l,n){var t=n.component;l(n,0,0,""==t.wfInputForm.value.wfOptBadQty||""==t.wfInputForm.value.wfOptGoodQty)})}function Vl(l){return nn._25(0,[(l()(),nn._5(0,null,null,2,"button",[["class","barcodeButton"],["ion-button",""],["item-end",""],["type","button"]],[[8,"disabled",0]],[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.scanBarcode(l.parent.parent.parent.context.$implicit.model)&&u),u},tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(0,["\n                                                扫一扫\n                                            "]))],null,function(l,n){var t=n.component;l(n,0,0,""==t.wfInputForm.value.wfOptBadQty||""==t.wfInputForm.value.wfOptGoodQty)})}function Ul(l){return nn._25(0,[(l()(),nn._5(0,null,null,2,"button",[["class","barcodeButton"],["ion-button",""],["item-end",""],["type","button"]],[[8,"disabled",0]],[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.scanBarcode(l.parent.parent.parent.context.$implicit.model)&&u),u},tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(0,["\n                                                扫一扫\n                                            "]))],null,function(l,n){var t=n.component;l(n,0,0,!(2==t.wfInputForm.value.wfQCPass||1==t.wfInputForm.value.wfQCPass))})}function Gl(l){return nn._25(0,[(l()(),nn._5(0,null,null,31,"ion-row",[["align-items-center",""],["class","row"],["justify-content-center",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n\n                                        "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                            ","\n                                        "])),(l()(),nn._24(null,["\n\n                                        "])),(l()(),nn._5(0,null,null,6,"ion-input",[["class","gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],{value:[0,"value"],type:[1,"type"]},null),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,10,"div",[],null,[[null,"mouseover"]],function(l,n,t){var u=!0,e=l.component;return"mouseover"===n&&(u=!1!==e.showWfOpsInputsAlert(e.wfInputForm.value.wfOptBadQty,e.wfInputForm.value.wfOptGoodQty)&&u),u},null,null)),(l()(),nn._24(null,["\n                                            "])),(l()(),nn._1(16777216,null,null,1,null,Ql)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                            "])),(l()(),nn._1(16777216,null,null,1,null,El)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                            "])),(l()(),nn._1(16777216,null,null,1,null,Vl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,4,"div",[],null,[[null,"mouseover"]],function(l,n,t){var u=!0,e=l.component;return"mouseover"===n&&(u=!1!==e.showWfQCPassAlert(e.wfInputForm.value.wfQCPass)&&u),u},null,null)),(l()(),nn._24(null,["\n                                            "])),(l()(),nn._1(16777216,null,null,1,null,Ul)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._24(null,["\n                                    "]))],function(l,n){var t=n.component;l(n,7,0,l(n,8,0,n.parent.parent.context.$implicit.size)),l(n,9,0,nn._9(1,"",n.parent.parent.context.$implicit.model,"")),l(n,12,0,nn._9(1,"",t.wfInputForm.controls[n.parent.parent.context.$implicit.model].value,""),nn._9(1,"",n.parent.parent.context.$implicit.type,"")),l(n,17,0,1==n.parent.parent.context.$implicit.scan),l(n,20,0,2==n.parent.parent.context.$implicit.scan),l(n,23,0,3==n.parent.parent.context.$implicit.scan),l(n,29,0,4==n.parent.parent.context.$implicit.scan&&n.parent.parent.context.$implicit.process[t.wfNavProcess])},function(l,n){l(n,4,0,n.parent.parent.context.$implicit.title),l(n,6,0,nn._18(n,11).ngClassUntouched,nn._18(n,11).ngClassTouched,nn._18(n,11).ngClassPristine,nn._18(n,11).ngClassDirty,nn._18(n,11).ngClassValid,nn._18(n,11).ngClassInvalid,nn._18(n,11).ngClassPending)})}function Hl(l){return nn._25(0,[(l()(),nn._5(0,null,null,13,"ion-row",[["align-items-center",""],["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                            备注\n                                        "])),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,6,"ion-textarea",[["class","textarea gridborder"]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],null,null),(l()(),nn._24(null,["\n                                    "]))],function(l,n){l(n,7,0,l(n,8,0,n.parent.parent.context.$implicit.size)),l(n,9,0,nn._9(1,"",n.parent.parent.context.$implicit.model,""))},function(l,n){l(n,6,0,nn._18(n,11).ngClassUntouched,nn._18(n,11).ngClassTouched,nn._18(n,11).ngClassPristine,nn._18(n,11).ngClassDirty,nn._18(n,11).ngClassValid,nn._18(n,11).ngClassInvalid,nn._18(n,11).ngClassPending)})}function Wl(l){return nn._25(0,[(l()(),nn._5(0,null,null,7,"button",[["ion-button",""],["outline",""],["round",""],["style","width: auto;"],["type","button"]],null,[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.updateForm(l.parent.parent.parent.context.$implicit.model,l.context.$implicit.value)&&u),u},tt.b,tt.a)),nn._4(278528,null,0,hn.f,[nn.s,nn.t,nn.k,nn.F],{ngClass:[0,"ngClass"]},null),nn._20(["buttonsSelected"]),nn._4(1097728,[[2,4]],0,ut.a,[[8,""],Gn.a,nn.k,nn.F],{outline:[0,"outline"],round:[1,"round"]},null),(l()(),nn._24(0,["\n                                                "])),(l()(),nn._5(0,null,0,1,"ion-icon",[["role","img"]],[[2,"hide",null]],null,null,null,null)),nn._4(147456,null,0,at.a,[Gn.a,nn.k,nn.F],{name:[0,"name"]},null),(l()(),nn._24(0,["\n                                                  ","\n                                            "]))],function(l,n){l(n,1,0,l(n,2,0,n.component.wfInputForm.controls[n.parent.parent.parent.context.$implicit.model].value===n.context.$implicit.value));l(n,3,0,"",""),l(n,6,0,nn._9(1,"",n.context.$implicit.icon,""))},function(l,n){l(n,5,0,nn._18(n,6)._hidden),l(n,7,0,n.context.$implicit.label)})}function Yl(l){return nn._25(0,[(l()(),nn._5(0,null,null,19,"ion-row",[["align-items-center",""],["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._5(0,null,null,1,"div",[["class","inputLabel"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                            ","\n                                        "])),(l()(),nn._24(null,["\n\n                                        "])),(l()(),nn._5(0,null,null,4,"ion-input",[["hidden",""]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],null,null,Jn.b,Jn.a)),nn._4(671744,null,0,kn.e,[[3,kn.b],[8,null],[8,null],[8,null]],{name:[0,"name"]},null),nn._21(2048,null,kn.j,null,[kn.e]),nn._4(16384,null,0,kn.k,[kn.j],null,null),nn._4(5423104,null,0,Zn.a,[Gn.a,Hn.a,On.a,vn.a,nn.k,nn.F,[2,lt.a],[2,nt.a],[2,kn.j],yn.a],null,null),(l()(),nn._24(null,["\n\n\n                                        "])),(l()(),nn._5(0,null,null,6,"ion-buttons",[],null,null,null,null,null)),nn._4(16384,null,1,rt.a,[Gn.a,nn.k,nn.F,[2,st.a],[2,_t.a]],null,null),nn._22(603979776,2,{_buttons:1}),(l()(),nn._24(null,["\n                                            "])),(l()(),nn._1(16777216,null,null,1,null,Wl)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                                        "])),(l()(),nn._24(null,["\n                                    "]))],function(l,n){l(n,7,0,nn._9(1,"",n.parent.parent.context.$implicit.model,"")),l(n,17,0,n.parent.parent.context.$implicit.buttons)},function(l,n){l(n,4,0,n.parent.parent.context.$implicit.title),l(n,6,0,nn._18(n,9).ngClassUntouched,nn._18(n,9).ngClassTouched,nn._18(n,9).ngClassPristine,nn._18(n,9).ngClassDirty,nn._18(n,9).ngClassValid,nn._18(n,9).ngClassInvalid,nn._18(n,9).ngClassPending)})}function ql(l){return nn._25(0,[(l()(),nn._5(0,null,null,3,"div",[],null,null,null,null,null)),nn._4(278528,null,0,hn.k,[nn.t,nn.k,nn.F],{ngStyle:[0,"ngStyle"]},null),nn._20(["width.em"]),(l()(),nn._24(null,["\n                                    "]))],function(l,n){l(n,1,0,l(n,2,0,n.parent.parent.context.$implicit.size))},null)}function Kl(l){return nn._25(0,[(l()(),nn._5(0,null,null,17,"ion-col",[["align-items-left",""],["class","col"],["col-auto",""],["justify-content-center",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,Gl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,Hl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,Yl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                    "])),(l()(),nn._24(null,["\n                                    "])),(l()(),nn._1(16777216,null,null,1,null,ql)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n\n                                "]))],function(l,n){var t=n.component;l(n,5,0,"input"==n.parent.context.$implicit.method&&n.parent.context.$implicit.process[t.wfNavProcess]),l(n,8,0,"textarea"==n.parent.context.$implicit.method&&n.parent.context.$implicit.process[t.wfNavProcess]),l(n,12,0,"buttons"==n.parent.context.$implicit.method&&n.parent.context.$implicit.process[t.wfNavProcess]),l(n,16,0,"break"==n.parent.context.$implicit.method&&n.parent.context.$implicit.process[t.wfNavProcess])},null)}function Xl(l){return nn._25(0,[(l()(),nn._5(0,null,null,8,"div",[],null,null,null,null,null)),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,5,"ion-row",[["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                                "])),(l()(),nn._1(16777216,null,null,1,null,Kl)),nn._4(16384,null,0,hn.h,[nn.P,nn.M],{ngIf:[0,"ngIf"]},null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._24(null,["\n                        "]))],function(l,n){var t=n.component;l(n,6,0,n.context.$implicit.process[t.wfNavProcess])},null)}function Jl(l){return nn._25(0,[(l()(),nn._5(0,null,null,7,"ion-row",[["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,0,"img",[["class","img"]],[[8,"src",4]],null,null,null,null)),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,1,"ion-img",[],null,null,null,Ot.b,Ot.a)),nn._4(1228800,null,0,Mt.a,[nn.k,nn.F,Hn.a,[2,lt.a],yn.a],{src:[0,"src"]},null),(l()(),nn._24(null,["\n                    "]))],function(l,n){l(n,6,0,nn._9(1,"",n.context.$implicit,""))},function(l,n){l(n,3,0,nn._9(1,"",n.context.$implicit,""))})}function Zl(l){return nn._25(0,[(l()(),nn._5(0,null,null,16,"ion-header",[["style","margin-top: 0px !important;margin-left: 0px !important;"]],null,null,null,null,null)),nn._4(16384,null,0,dt.a,[Gn.a,nn.k,nn.F,[2,Vn.a]],null,null),(l()(),nn._24(null,["\n    "])),(l()(),nn._5(0,null,null,12,"ion-navbar",[["class","toolbar"]],[[8,"hidden",0],[2,"statusbar-padding",null]],null,null,ft.b,ft.a)),nn._4(49152,null,0,_t.a,[vn.a,[2,Vn.a],[2,Un.a],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(3,["\n        "])),(l()(),nn._5(0,null,3,8,"div",[["style","align-items: center; display: inline;"]],null,null,null,null,null)),(l()(),nn._24(null,["\n            "])),(l()(),nn._5(0,null,null,0,"img",[["class","icon"],["src","./assets/img/vt_icon.png"]],null,null,null,null,null)),(l()(),nn._24(null,["\n            "])),(l()(),nn._5(0,null,null,3,"ion-title",[],null,null,null,gt.b,gt.a)),nn._4(49152,null,0,mt.a,[Gn.a,nn.k,nn.F,[2,st.a],[2,_t.a]],null,null),(l()(),nn._24(0,["\n                "])),(l()(),nn._24(0,["\n            "])),(l()(),nn._24(null,["\n        "])),(l()(),nn._24(3,["\n    "])),(l()(),nn._24(null,["\n"])),(l()(),nn._24(null,["\n\n"])),(l()(),nn._5(0,null,null,128,"ion-content",[["padding",""]],[[2,"statusbar-padding",null],[2,"has-refresher",null]],null,null,ht.b,ht.a)),nn._4(4374528,null,0,lt.a,[Gn.a,Hn.a,yn.a,nn.k,nn.F,vn.a,$n.a,nn.z,[2,Vn.a],[2,Un.a]],null,null),(l()(),nn._24(1,["\n    "])),(l()(),nn._5(0,null,1,124,"form",[["novalidate",""]],[[2,"ng-untouched",null],[2,"ng-touched",null],[2,"ng-pristine",null],[2,"ng-dirty",null],[2,"ng-valid",null],[2,"ng-invalid",null],[2,"ng-pending",null]],[[null,"ngSubmit"],[null,"submit"],[null,"reset"]],function(l,n,t){var u=!0,e=l.component;return"submit"===n&&(u=!1!==nn._18(l,23).onSubmit(t)&&u),"reset"===n&&(u=!1!==nn._18(l,23).onReset()&&u),"ngSubmit"===n&&(u=!1!==e.onSubmit()&&u),u},null,null)),nn._4(16384,null,0,kn.r,[],null,null),nn._4(540672,null,0,kn.f,[[8,null],[8,null]],{form:[0,"form"]},{ngSubmit:"ngSubmit"}),nn._21(2048,null,kn.b,null,[kn.f]),nn._4(16384,null,0,kn.l,[kn.b],null,null),(l()(),nn._24(null,["\n        "])),(l()(),nn._5(0,null,null,117,"ion-grid",[["class","grid"]],null,null,null,null,null)),nn._4(16384,null,0,wt.a,[],null,null),(l()(),nn._24(null,["\n            "])),(l()(),nn._24(null,["\n            "])),(l()(),nn._5(0,null,null,5,"ion-row",[["class","main headbar row"],["wrap",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                "])),(l()(),nn._1(16777216,null,null,1,null,Pl)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n            "])),(l()(),nn._24(null,["\n\n            "])),(l()(),nn._24(null,["\n            "])),(l()(),nn._5(0,null,null,104,"ion-row",[["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                "])),(l()(),nn._24(null,["\n                "])),(l()(),nn._5(0,null,null,28,"ion-col",[["class","main col"],["col-5",""],["no-padding",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                    "])),(l()(),nn._24(null,["\n                    "])),(l()(),nn._5(0,null,null,19,"ion-row",[["class","row"]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,1,"ion-col",[["class","col"],["col-1",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,5,"ion-col",[["class","col"],["col-7",""],["text-center",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,1,"h4",[["class","inputHeader"]],null,null,null,null,null)),(l()(),nn._24(null,["材料"])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,5,"ion-col",[["class","col"],["text-center",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,1,"h4",[["class","inputHeader"]],null,null,null,null,null)),(l()(),nn._24(null,["批号"])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n                    "])),(l()(),nn._24(null,["\n\n                    "])),(l()(),nn._24(null,["\n                    "])),(l()(),nn._1(16777216,null,null,1,null,Il)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                "])),(l()(),nn._24(null,["\n\n                "])),(l()(),nn._24(null,["\n                "])),(l()(),nn._5(0,null,null,61,"ion-col",[["class","col"],["col-7",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n\n                    "])),(l()(),nn._24(null,["\n                    "])),(l()(),nn._5(0,null,null,17,"ion-row",[["align-self-stretch",""],["class","sec row"],["justify-content-left",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,8,"ion-col",[["class","col"],["col-12",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,4,"h4",[["class","inputHeader"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,1,"ion-icon",[["name","clipboard"],["role","img"]],[[2,"hide",null]],null,null,null,null)),nn._4(147456,null,0,at.a,[Gn.a,nn.k,nn.F],{name:[0,"name"]},null),(l()(),nn._24(null,["\n                                  参数要求\n                            "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._1(16777216,null,null,1,null,Ll)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n\n                    "])),(l()(),nn._24(null,["\n\n                    "])),(l()(),nn._24(null,["\n                    "])),(l()(),nn._5(0,null,null,17,"ion-row",[["align-items-center",""],["class","sec staff row"],["justify-content-left",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,8,"ion-col",[["class","col"],["col-12",""],["text-left",""]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                            "])),(l()(),nn._5(0,null,null,4,"h4",[["class","inputHeader"]],null,null,null,null,null)),(l()(),nn._24(null,["\n                                "])),(l()(),nn._5(0,null,null,1,"ion-icon",[["name","md-contacts"],["role","img"]],[[2,"hide",null]],null,null,null,null)),nn._4(147456,null,0,at.a,[Gn.a,nn.k,nn.F],{name:[0,"name"]},null),(l()(),nn._24(null,["\n                                  员工信息\n                            "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._24(null,["\n\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._1(16777216,null,null,1,null,Xl)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n\n\n                    "])),(l()(),nn._24(null,["\n\n                    "])),(l()(),nn._5(0,null,null,17,"ion-row",[["class","row"],["justify-content-end",""]],null,null,null,null,null)),nn._4(16384,null,0,pt.a,[],null,null),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,6,"button",[["ion-button",""],["type","submit"]],[[8,"disabled",0]],null,null,tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(0,["\n                            "])),(l()(),nn._5(0,null,0,2,"ion-icon",[["ios","ios-checkbox-outline"],["md","md-checkbox-outline"],["role","img"]],[[2,"hide",null]],null,null,null,null)),nn._4(147456,null,0,at.a,[Gn.a,nn.k,nn.F],{ios:[0,"ios"],md:[1,"md"]},null),(l()(),nn._24(null,["\n                                  批次完成\n                            "])),(l()(),nn._24(0,["\n                        "])),(l()(),nn._24(null,["\n                        "])),(l()(),nn._5(0,null,null,5,"button",[["ion-button",""],["type","button"]],null,[[null,"click"]],function(l,n,t){var u=!0,e=l.component;return"click"===n&&(u=!1!==e.takePhoto()&&u),u},tt.b,tt.a)),nn._4(1097728,null,0,ut.a,[[8,""],Gn.a,nn.k,nn.F],null,null),(l()(),nn._24(0,["\n                            "])),(l()(),nn._5(0,null,0,1,"ion-icon",[["ios","ios-camera"],["md","md-camera"],["role","img"]],[[2,"hide",null]],null,null,null,null)),nn._4(147456,null,0,at.a,[Gn.a,nn.k,nn.F],{ios:[0,"ios"],md:[1,"md"]},null),(l()(),nn._24(0,["\n                              拍照\n                        "])),(l()(),nn._24(null,["\n\n                    "])),(l()(),nn._24(null,["\n\n                "])),(l()(),nn._24(null,["\n\n                "])),(l()(),nn._5(0,null,null,5,"ion-col",[["class","col"]],null,null,null,null,null)),nn._4(16384,null,0,ct.a,[],null,null),(l()(),nn._24(null,["\n                    "])),(l()(),nn._1(16777216,null,null,1,null,Jl)),nn._4(802816,null,0,hn.g,[nn.P,nn.M,nn.s],{ngForOf:[0,"ngForOf"]},null),(l()(),nn._24(null,["\n                "])),(l()(),nn._24(null,["\n\n            "])),(l()(),nn._24(null,["\n        "])),(l()(),nn._24(null,["\n    "])),(l()(),nn._24(1,["\n"]))],function(l,n){var t=n.component;l(n,23,0,t.wfInputForm),l(n,35,0,t.wfOrderDetails),l(n,70,0,t.wfRMDetails);l(n,88,0,"clipboard"),l(n,94,0,t.wfOpsInputs);l(n,108,0,"md-contacts"),l(n,114,0,t.wfPplInputs);l(n,124,0,"ios-checkbox-outline","md-checkbox-outline");l(n,132,0,"ios-camera","md-camera"),l(n,141,0,t.images)},function(l,n){var t=n.component;l(n,3,0,nn._18(n,4)._hidden,nn._18(n,4)._sbPadding),l(n,18,0,nn._18(n,19).statusbarPadding,nn._18(n,19)._hasRefresher),l(n,21,0,nn._18(n,25).ngClassUntouched,nn._18(n,25).ngClassTouched,nn._18(n,25).ngClassPristine,nn._18(n,25).ngClassDirty,nn._18(n,25).ngClassValid,nn._18(n,25).ngClassInvalid,nn._18(n,25).ngClassPending),l(n,87,0,nn._18(n,88)._hidden),l(n,107,0,nn._18(n,108)._hidden),l(n,120,0,!(2==t.wfInputForm.value.wfQCPass||1==t.wfInputForm.value.wfQCPass)),l(n,123,0,nn._18(n,124)._hidden),l(n,131,0,nn._18(n,132)._hidden)})}Object.defineProperty(n,"__esModule",{value:!0});var ln=t(36),nn=t(1),tn=(t(54),t(93)),un=t(94),en=t(69),on=t(95),an=t(115),rn=function(){return function(l,n,t,u){this.screenOrientation=t,this.rootPage=an.a,l.ready().then(function(){n.styleDefault(),u.hide()})}}(),sn=t(40),_n=t(122),cn=t(123),pn=t(51),dn=t(50),fn=t(121),gn=function(){return function(){}}(),mn=function(){return function(){}}(),hn=t(13),wn=t(155),yn=t(10),bn=t(56),vn=t(9),Pn=t(11),In=t(109),kn=t(17),Cn=t(156),Sn=t(114),Fn=t(45),xn=t(111),On=t(18),Mn=t(47),$n=t(38),Rn=t(44),Nn=t(110),Dn=t(43),An=t(460),Tn=t(461),jn=t(462),zn=t(463),Bn=t(464),Ln=t(465),Qn=t(466),En=t(87),Vn=t(8),Un=t(26),Gn=t(2),Hn=t(7),Wn=t(28),Yn=t(65),qn=[],Kn=nn._3({encapsulation:2,styles:qn,data:{}}),Xn=nn._2("ng-component",rn,function(l){return nn._25(0,[(l()(),nn._5(0,null,null,1,"ng-component",[],null,null,null,u,Kn)),nn._4(49152,null,0,rn,[Hn.a,un.a,on.a,tn.a],null,null)],null,null)},{},{},[]),Jn=t(124),Zn=t(48),lt=t(29),nt=t(23),tt=t(30),ut=t(21),et=t(88),it=t(467),ot=t(91),at=t(34),rt=t(67),st=t(39),_t=t(35),ct=t(62),pt=t(64),dt=t(66),ft=t(125),gt=t(126),mt=t(49),ht=t(127),wt=t(63),yt=t(70),bt=[],vt=nn._3({encapsulation:2,styles:bt,data:{}}),Pt=nn._2("page-workflow",an.a,function(l){return nn._25(0,[(l()(),nn._5(0,null,null,1,"page-workflow",[],null,null,null,d,vt)),nn._4(114688,null,0,an.a,[yt.a,dn.a,kn.d,Un.a,Fn.a,sn.a],null,null)],function(l,n){l(n,1,0)},null)},{},{},[]),It=t(182),kt=t(60),Ct=t(22),St=[],Ft=nn._3({encapsulation:2,styles:St,data:{}}),xt=nn._2("page-edit-workflow1",_n.a,function(l){return nn._25(0,[(l()(),nn._5(0,null,null,1,"page-edit-workflow1",[],null,null,null,hl,Ft)),nn._4(114688,null,0,_n.a,[yt.a,kn.d,sn.a,Fn.a,pn.a,Ct.a,dn.a,Un.a],null,null)],function(l,n){l(n,1,0)},null)},{},{},[]),Ot=t(468),Mt=t(86),$t=[],Rt=nn._3({encapsulation:2,styles:$t,data:{}}),Nt=nn._2("page-edit-workflow2",cn.a,function(l){return nn._25(0,[(l()(),nn._5(0,null,null,1,"page-edit-workflow2",[],null,null,null,Zl,Rt)),nn._4(114688,null,0,cn.a,[yt.a,kn.d,sn.a,Fn.a,pn.a,Ct.a],null,null)],function(l,n){l(n,1,0)},null)},{},{},[]),Dt=t(80),At=t(112),Tt=t(90),jt=t(113),zt=t(55),Bt=this&&this.__extends||function(){var l=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(l,n){l.__proto__=n}||function(l,n){for(var t in n)n.hasOwnProperty(t)&&(l[t]=n[t])};return function(n,t){function u(){this.constructor=n}l(n,t),n.prototype=null===t?Object.create(t):(u.prototype=t.prototype,new u)}}(),Lt=function(l){function n(n){return l.call(this,n,[An.a,Tn.a,jn.a,zn.a,Bn.a,Ln.a,Xn,Pt,xt,Nt],[jn.a])||this}return Bt(n,l),Object.defineProperty(n.prototype,"_LOCALE_ID_27",{get:function(){return null==this.__LOCALE_ID_27&&(this.__LOCALE_ID_27=nn._16(this.parent.get(nn.u,null))),this.__LOCALE_ID_27},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_NgLocalization_28",{get:function(){return null==this.__NgLocalization_28&&(this.__NgLocalization_28=new hn.i(this._LOCALE_ID_27)),this.__NgLocalization_28},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_APP_ID_29",{get:function(){return null==this.__APP_ID_29&&(this.__APP_ID_29=nn._7()),this.__APP_ID_29},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_IterableDiffers_30",{get:function(){return null==this.__IterableDiffers_30&&(this.__IterableDiffers_30=nn._13()),this.__IterableDiffers_30},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_KeyValueDiffers_31",{get:function(){return null==this.__KeyValueDiffers_31&&(this.__KeyValueDiffers_31=nn._15()),this.__KeyValueDiffers_31},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_DomSanitizer_32",{get:function(){return null==this.__DomSanitizer_32&&(this.__DomSanitizer_32=new ln.s(this.parent.get(ln.b))),this.__DomSanitizer_32},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_Sanitizer_33",{get:function(){return null==this.__Sanitizer_33&&(this.__Sanitizer_33=this._DomSanitizer_32),this.__Sanitizer_33},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_HAMMER_GESTURE_CONFIG_34",{get:function(){return null==this.__HAMMER_GESTURE_CONFIG_34&&(this.__HAMMER_GESTURE_CONFIG_34=new Sn.a),this.__HAMMER_GESTURE_CONFIG_34},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_EVENT_MANAGER_PLUGINS_35",{get:function(){return null==this.__EVENT_MANAGER_PLUGINS_35&&(this.__EVENT_MANAGER_PLUGINS_35=[new ln.l(this.parent.get(ln.b)),new ln.p(this.parent.get(ln.b)),new ln.o(this.parent.get(ln.b),this._HAMMER_GESTURE_CONFIG_34)]),this.__EVENT_MANAGER_PLUGINS_35},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_EventManager_36",{get:function(){return null==this.__EventManager_36&&(this.__EventManager_36=new ln.e(this._EVENT_MANAGER_PLUGINS_35,this.parent.get(nn.z))),this.__EventManager_36},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_ɵDomSharedStylesHost_37",{get:function(){return null==this.__ɵDomSharedStylesHost_37&&(this.__ɵDomSharedStylesHost_37=new ln.n(this.parent.get(ln.b))),this.__ɵDomSharedStylesHost_37},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_ɵDomRendererFactory2_38",{get:function(){return null==this.__ɵDomRendererFactory2_38&&(this.__ɵDomRendererFactory2_38=new ln.m(this._EventManager_36,this._ɵDomSharedStylesHost_37)),this.__ɵDomRendererFactory2_38},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_RendererFactory2_39",{get:function(){return null==this.__RendererFactory2_39&&(this.__RendererFactory2_39=this._ɵDomRendererFactory2_38),this.__RendererFactory2_39},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_ɵSharedStylesHost_40",{get:function(){return null==this.__ɵSharedStylesHost_40&&(this.__ɵSharedStylesHost_40=this._ɵDomSharedStylesHost_37),this.__ɵSharedStylesHost_40},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_Testability_41",{get:function(){return null==this.__Testability_41&&(this.__Testability_41=new nn.N(this.parent.get(nn.z))),this.__Testability_41},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_Meta_42",{get:function(){return null==this.__Meta_42&&(this.__Meta_42=new ln.h(this.parent.get(ln.b))),this.__Meta_42},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_Title_43",{get:function(){return null==this.__Title_43&&(this.__Title_43=new ln.j(this.parent.get(ln.b))),this.__Title_43},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_BrowserXhr_44",{get:function(){return null==this.__BrowserXhr_44&&(this.__BrowserXhr_44=new fn.c),this.__BrowserXhr_44},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_ResponseOptions_45",{get:function(){return null==this.__ResponseOptions_45&&(this.__ResponseOptions_45=new fn.b),this.__ResponseOptions_45},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_XSRFStrategy_46",{get:function(){return null==this.__XSRFStrategy_46&&(this.__XSRFStrategy_46=fn.k()),this.__XSRFStrategy_46},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_XHRBackend_47",{get:function(){return null==this.__XHRBackend_47&&(this.__XHRBackend_47=new fn.i(this._BrowserXhr_44,this._ResponseOptions_45,this._XSRFStrategy_46)),this.__XHRBackend_47},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_RequestOptions_48",{get:function(){return null==this.__RequestOptions_48&&(this.__RequestOptions_48=new fn.a),this.__RequestOptions_48},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_Http_49",{get:function(){return null==this.__Http_49&&(this.__Http_49=fn.l(this._XHRBackend_47,this._RequestOptions_48)),this.__Http_49},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_ɵi_50",{get:function(){return null==this.__ɵi_50&&(this.__ɵi_50=new kn.s),this.__ɵi_50},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_FormBuilder_51",{get:function(){return null==this.__FormBuilder_51&&(this.__FormBuilder_51=new kn.d),this.__FormBuilder_51},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_AlertController_55",{get:function(){return null==this.__AlertController_55&&(this.__AlertController_55=new Fn.a(this._App_8,this._Config_5)),this.__AlertController_55},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_Events_56",{get:function(){return null==this.__Events_56&&(this.__Events_56=new xn.a),this.__Events_56},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_Form_57",{get:function(){return null==this.__Form_57&&(this.__Form_57=new On.a),this.__Form_57},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_Haptic_58",{get:function(){return null==this.__Haptic_58&&(this.__Haptic_58=new Mn.a(this._Platform_4)),this.__Haptic_58},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_Keyboard_59",{get:function(){return null==this.__Keyboard_59&&(this.__Keyboard_59=new $n.a(this._Config_5,this._Platform_4,this.parent.get(nn.z),this._DomController_6)),this.__Keyboard_59},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_LocationStrategy_61",{get:function(){return null==this.__LocationStrategy_61&&(this.__LocationStrategy_61=Cn.b(this.parent.get(hn.p),this._APP_BASE_HREF_53,this._Config_5)),this.__LocationStrategy_61},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_Location_62",{get:function(){return null==this.__Location_62&&(this.__Location_62=new hn.d(this._LocationStrategy_61)),this.__Location_62},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_UrlSerializer_63",{get:function(){return null==this.__UrlSerializer_63&&(this.__UrlSerializer_63=Dt.d(this._App_8,this._DeepLinkConfigToken_10)),this.__UrlSerializer_63},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_DeepLinker_64",{get:function(){return null==this.__DeepLinker_64&&(this.__DeepLinker_64=Wn.b(this._App_8,this._UrlSerializer_63,this._Location_62,this._ModuleLoader_13,this.componentFactoryResolver)),this.__DeepLinker_64},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_PickerController_66",{get:function(){return null==this.__PickerController_66&&(this.__PickerController_66=new Rn.a(this._App_8,this._Config_5)),this.__PickerController_66},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_TapClick_68",{get:function(){return null==this.__TapClick_68&&(this.__TapClick_68=new Nn.a(this._Config_5,this._Platform_4,this._DomController_6,this._App_8,this._GestureController_9)),this.__TapClick_68},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_TransitionController_70",{get:function(){return null==this.__TransitionController_70&&(this.__TransitionController_70=new Dn.a(this._Platform_4,this._Config_5)),this.__TransitionController_70},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_Storage_72",{get:function(){return null==this.__Storage_72&&(this.__Storage_72=yt.c(this._StorageConfigToken_71)),this.__Storage_72},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_StatusBar_73",{get:function(){return null==this.__StatusBar_73&&(this.__StatusBar_73=new un.a),this.__StatusBar_73},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_SplashScreen_74",{get:function(){return null==this.__SplashScreen_74&&(this.__SplashScreen_74=new tn.a),this.__SplashScreen_74},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_Camera_75",{get:function(){return null==this.__Camera_75&&(this.__Camera_75=new pn.a),this.__Camera_75},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_BarcodeScanner_76",{get:function(){return null==this.__BarcodeScanner_76&&(this.__BarcodeScanner_76=new sn.a),this.__BarcodeScanner_76},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_ScreenOrientation_77",{get:function(){return null==this.__ScreenOrientation_77&&(this.__ScreenOrientation_77=new on.a),this.__ScreenOrientation_77},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_WorkflowService_78",{get:function(){return null==this.__WorkflowService_78&&(this.__WorkflowService_78=new dn.a(this._Http_49)),this.__WorkflowService_78},enumerable:!0,configurable:!0}),Object.defineProperty(n.prototype,"_QrCodeService_79",{get:function(){return null==this.__QrCodeService_79&&(this.__QrCodeService_79=new gn),this.__QrCodeService_79},enumerable:!0,configurable:!0}),n.prototype.createInternal=function(){return this._CommonModule_0=new hn.b,this._ErrorHandler_1=new wn.a,this._ConfigToken_2=null,this._PlatformConfigToken_3=At.b(),this._Platform_4=Hn.b(this.parent.get(ln.b),this._PlatformConfigToken_3,this.parent.get(nn.z)),this._Config_5=Gn.c(this._ConfigToken_2,this._Platform_4),this._DomController_6=new yn.a(this._Platform_4),this._MenuController_7=new bn.a,this._App_8=new vn.a(this._Config_5,this._Platform_4,this._MenuController_7),this._GestureController_9=new Pn.f(this._App_8),this._DeepLinkConfigToken_10=null,this._Compiler_11=new nn.i,this._NgModuleLoader_12=new In.a(this._Compiler_11),this._ModuleLoader_13=Tt.c(this._NgModuleLoader_12,this),this._APP_INITIALIZER_14=[nn._19,ln.r(this.parent.get(ln.i,null),this.parent.get(nn.y,null)),jt.a(this._Config_5),xn.b(this._Platform_4,this._DomController_6),Nn.b(this._Config_5,this._Platform_4,this._DomController_6,this._App_8,this._GestureController_9),Tt.d(this._Config_5,this._DeepLinkConfigToken_10,this._ModuleLoader_13,this.parent.get(nn.z))],this._ApplicationInitStatus_15=new nn.d(this._APP_INITIALIZER_14),this._ɵf_16=new nn._6(this.parent.get(nn.z),this.parent.get(nn.Z),this,this._ErrorHandler_1,this.componentFactoryResolver,this._ApplicationInitStatus_15),this._ApplicationRef_17=this._ɵf_16,this._ApplicationModule_18=new nn.e(this._ApplicationRef_17),this._BrowserModule_19=new ln.a(this.parent.get(ln.a,null)),this._HttpModule_20=new fn.f,this._ɵba_21=new kn.q,this._FormsModule_22=new kn.g,this._ReactiveFormsModule_23=new kn.o,this._IonicModule_24=new Cn.a,this._IonicStorageModule_25=new en.a,this._AppModule_26=new mn,this._AppRootToken_52=rn,this._APP_BASE_HREF_53="/",this._StorageConfigToken_71={name:"__mydbtest",driverOrder:["indexeddb","sqlite","websql"]},this._AppModule_26},n.prototype.getInternal=function(l,n){return l===hn.b?this._CommonModule_0:l===nn.l?this._ErrorHandler_1:l===Gn.b?this._ConfigToken_2:l===At.a?this._PlatformConfigToken_3:l===Hn.a?this._Platform_4:l===Gn.a?this._Config_5:l===yn.a?this._DomController_6:l===bn.a?this._MenuController_7:l===vn.a?this._App_8:l===Pn.f?this._GestureController_9:l===Dt.a?this._DeepLinkConfigToken_10:l===nn.i?this._Compiler_11:l===In.a?this._NgModuleLoader_12:l===Tt.b?this._ModuleLoader_13:l===nn.c?this._APP_INITIALIZER_14:l===nn.d?this._ApplicationInitStatus_15:l===nn._6?this._ɵf_16:l===nn.f?this._ApplicationRef_17:l===nn.e?this._ApplicationModule_18:l===ln.a?this._BrowserModule_19:l===fn.f?this._HttpModule_20:l===kn.q?this._ɵba_21:l===kn.g?this._FormsModule_22:l===kn.o?this._ReactiveFormsModule_23:l===Cn.a?this._IonicModule_24:l===en.a?this._IonicStorageModule_25:l===mn?this._AppModule_26:l===nn.u?this._LOCALE_ID_27:l===hn.j?this._NgLocalization_28:l===nn.b?this._APP_ID_29:l===nn.s?this._IterableDiffers_30:l===nn.t?this._KeyValueDiffers_31:l===ln.c?this._DomSanitizer_32:l===nn.I?this._Sanitizer_33:l===ln.f?this._HAMMER_GESTURE_CONFIG_34:l===ln.d?this._EVENT_MANAGER_PLUGINS_35:l===ln.e?this._EventManager_36:l===ln.n?this._ɵDomSharedStylesHost_37:l===ln.m?this._ɵDomRendererFactory2_38:l===nn.G?this._RendererFactory2_39:l===ln.q?this._ɵSharedStylesHost_40:l===nn.N?this._Testability_41:l===ln.h?this._Meta_42:l===ln.j?this._Title_43:l===fn.c?this._BrowserXhr_44:l===fn.h?this._ResponseOptions_45:l===fn.j?this._XSRFStrategy_46:l===fn.i?this._XHRBackend_47:l===fn.g?this._RequestOptions_48:l===fn.e?this._Http_49:l===kn.s?this._ɵi_50:l===kn.d?this._FormBuilder_51:l===zt.a?this._AppRootToken_52:l===hn.a?this._APP_BASE_HREF_53:l===Fn.a?this._AlertController_55:l===xn.a?this._Events_56:l===On.a?this._Form_57:l===Mn.a?this._Haptic_58:l===$n.a?this._Keyboard_59:l===hn.e?this._LocationStrategy_61:l===hn.d?this._Location_62:l===Dt.b?this._UrlSerializer_63:l===Wn.a?this._DeepLinker_64:l===Rn.a?this._PickerController_66:l===Nn.a?this._TapClick_68:l===Dn.a?this._TransitionController_70:l===yt.b?this._StorageConfigToken_71:l===yt.a?this._Storage_72:l===un.a?this._StatusBar_73:l===tn.a?this._SplashScreen_74:l===pn.a?this._Camera_75:l===sn.a?this._BarcodeScanner_76:l===on.a?this._ScreenOrientation_77:l===dn.a?this._WorkflowService_78:l===gn?this._QrCodeService_79:n},n.prototype.destroyInternal=function(){this._ɵf_16.ngOnDestroy(),this.__ɵDomSharedStylesHost_37&&this._ɵDomSharedStylesHost_37.ngOnDestroy()},n}(nn._0),Qt=new nn.w(Lt,mn);Object(nn.T)(),Object(ln.k)().bootstrapModuleFactory(Qt)},50:function(l,n,t){"use strict";t.d(n,"a",function(){return r});var u=t(1),e=t(193),i=(t.n(e),t(121)),o=this&&this.__decorate||function(l,n,t,u){var e,i=arguments.length,o=i<3?n:null===u?u=Object.getOwnPropertyDescriptor(n,t):u;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)o=Reflect.decorate(l,n,t,u);else for(var a=l.length-1;a>=0;a--)(e=l[a])&&(o=(i<3?e(o):i>3?e(n,t,o):e(n,t))||o);return i>3&&o&&Object.defineProperty(n,t,o),o},a=this&&this.__metadata||function(l,n){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(l,n)},r=function(){function l(l){this.http=l,this.httpHeaders=new i.d({"Content-type":"application/json"}),this.httpOptions=new i.g({headers:this.httpHeaders}),this.baseUrl="http://localhost:3000/workflow/"}return l.prototype.upload=function(l,n){console.log("Begin to upload onto server"),console.log("Printing packet to server"),console.log(l);var t=this.baseUrl+"form"+n+"/submit/";return console.log(t),this.http.post(t,l,this.httpOptions).map(function(l){return console.log("Responding from Server"),console.log(l.json()),l.json()})},l.prototype.query=function(l,n){console.log("Begin to load data from server"),console.log("Printing request to server"),console.log(l);var t=this.baseUrl+"form"+n+"/query/";return console.log(t),this.http.post(t,l,this.httpOptions).map(function(l){return console.log("Responding from Server"),console.log(l.json()[0]),l.json()})},l}();r=o([Object(u.p)(),a("design:paramtypes",["function"==typeof(s=void 0!==i.e&&i.e)&&s||Object])],r);var s}},[183]);
+webpackJsonp([0],{
+
+/***/ 142:
+/***/ (function(module, exports) {
+
+function webpackEmptyAsyncContext(req) {
+	// Here Promise.resolve().then() is used instead of new Promise() to prevent
+	// uncatched exception popping up in devtools
+	return Promise.resolve().then(function() {
+		throw new Error("Cannot find module '" + req + "'.");
+	});
+}
+webpackEmptyAsyncContext.keys = function() { return []; };
+webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
+module.exports = webpackEmptyAsyncContext;
+webpackEmptyAsyncContext.id = 142;
+
+/***/ }),
+
+/***/ 185:
+/***/ (function(module, exports) {
+
+function webpackEmptyAsyncContext(req) {
+	// Here Promise.resolve().then() is used instead of new Promise() to prevent
+	// uncatched exception popping up in devtools
+	return Promise.resolve().then(function() {
+		throw new Error("Cannot find module '" + req + "'.");
+	});
+}
+webpackEmptyAsyncContext.keys = function() { return []; };
+webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
+module.exports = webpackEmptyAsyncContext;
+webpackEmptyAsyncContext.id = 185;
+
+/***/ }),
+
+/***/ 231:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WorkflowPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_workflow__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__edit_workflow1_edit_workflow1__ = __webpack_require__(255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__edit_workflow2_edit_workflow2__ = __webpack_require__(256);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+// import { EditWorkflowPage } from "../edit-workflow/edit-workflow";
+
+
+var WorkflowPage = (function () {
+    function WorkflowPage(storage, wfSvc, formBuilder, navCtrl, alertCtrl, barcodeScanner) {
+        this.storage = storage;
+        this.wfSvc = wfSvc;
+        this.formBuilder = formBuilder;
+        this.navCtrl = navCtrl;
+        this.alertCtrl = alertCtrl;
+        this.barcodeScanner = barcodeScanner;
+        // Other variables to be named
+        this.staffIdBarcode = null;
+        this.orderIdBarcode = null;
+        this.wfForms = [1, 2];
+        this.wfProcesses = [];
+        this.wfMachineProcess = [];
+        this.wfStages = [];
+        this.wfInputs = [];
+        this.wfMachineData = [];
+        this.wfForm1Process = {};
+        this.wfForm2Process = {
+            1: "打印",
+            2: "测试上带",
+            3: "贴片外观",
+            4: "终检"
+        };
+        this.testRadioOpen = false;
+        this.dataWfProcess = {
+            "1": { "wfFormName": "裸品流程卡", "Process": { "1": "釘卷", "2": "含浸", "3": "组立", "4": "清洗" } },
+            "2": { "wfFormName": "成品流程卡", "Process": { "1": "打印", "2": "测试上带", "3": "贴片外观", "4": "终检" } }
+        };
+        this.dataMachine = {
+            "AA01": { "staffID": "0001", "staffName": "用户01", "techID": "0001", "techName": "用户01", "xrayID": "", "xrayName": "", "shift": "A" },
+            "AB001": { "staffID": "0001", "staffName": "用户01", "techID": "0001", "techName": "用户01", "xrayID": "", "xrayName": "", "shift": "A" }
+        };
+        storage.ready().then(function () { });
+        this.wfProcesses = [
+            { title: '钉卷', process: "1", show: true },
+            { title: '含浸', process: "2", show: true },
+            { title: '组立', process: "3", show: true },
+            { title: '清洗', process: "4", show: true },
+            { title: '手工老化', process: '5a0', show: true },
+            { title: '自動老化', process: '5b0', show: true },
+        ];
+        this.wfInputs = [
+            { title: "流程卡号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 30 },
+            { title: "工单号", method: 'input', type: 'text', model: 'wfOrderId', scan: false, size: 20 },
+            //{title: "总量(预设)", method: 'input', type: 'number', model: 'wfOrderTotalQty', scan: false, size: 10},
+            // Prompt Screen alert to pick the workflow batch id
+            { title: "批次号", method: 'input', type: 'text', model: 'wfOrderBatchId', scan: false, size: 20 },
+            { title: "总量(批次)", method: 'input', type: 'number', model: 'wfOrderBatchQty', scan: false, size: 10 },
+            { method: "break", size: 20 },
+            // Expand as buttons
+            { title: "流程卡", method: 'buttons', options: [
+                    { value: 1, label: '裸品' },
+                    { value: 2, label: '成品' },
+                    { value: 3, label: '电容器' }
+                ], model: 'wfForm', scan: false, size: 100 }
+        ];
+    }
+    WorkflowPage.prototype.ngOnInit = function () {
+        this.formInit();
+        /*
+        this.storage.get('VT00001').then((resultStorageItemX) => {
+          if(resultStorageItemX){ alert(JSON.stringify(resultStorageItemX)); }
+        });
+        */
+        // Testing code for Server connection
+        /*
+        this.wfSvc.query({wfFormId: "VT00001"})
+          .subscribe((data)=> {
+              console.log("success");
+              console.log(data[0]);
+            },
+            error => {
+              console.log(error);
+            }
+          );
+        */
+        // This this for dev env
+        this.storage.clear();
+        this.storage.set("wfProcess", this.dataWfProcess);
+        this.storage.set("wfMachine", this.dataMachine);
+        this.storage.get("wfProcess");
+        this.storage.get("wfMachine");
+    };
+    ;
+    WorkflowPage.prototype.onAddWf = function () {
+        // Testing code for storage for demonstration purpose
+        // Check if there is any result from the storage
+        // 3 degrees of checking, 1. Check Server, Check Local Storage, Else it is a new order
+        var _this = this;
+        console.log("onAddWF is triggered!");
+        var form = this.wfInputForm;
+        var alertTest = this.alertCtrl.create({
+            title: '确认工单',
+            message: '嚫，请选择工单',
+            buttons: [
+                {
+                    text: '取消',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('Cancel clicked');
+                    }
+                },
+                {
+                    text: '裸品流程卡',
+                    handler: function () {
+                        if (form.value.wfFormId === "") {
+                            console.log("nothing in the form");
+                            // Predefined data for testing purpose
+                            // workflow 1
+                            var data = JSON.stringify({ "headers": { "erpData": "ngForm" },
+                                "bodies": { "erpData": { "wfProcess": "1",
+                                        "wfProcessName": "釘卷",
+                                        "wfForm": "1",
+                                        "wfFormId": "VT00001",
+                                        "wfOrderFormId": "VTOF00001",
+                                        "wfOrderId": "VTO00001",
+                                        "wfOrderBatchId": "VTOB0001",
+                                        "wfOrderBatchQty": "100",
+                                        "wfOrderTotalQty": "1000",
+                                        "wfOrderTotalGoodQty": "100",
+                                        "wfOrderTotalBadQty": "0",
+                                        "wfOrderRMId": "VT原材料",
+                                        "wfOrderSeries": "VT系列",
+                                        "wfOrderSpec": "VT規格",
+                                        "wfOrderDim": "VT尺寸",
+                                        "wfRMFoilPosName": "100LG04B-33VF-48UF 5.5mm",
+                                        "wfRMFoilPosSerial": "17074049",
+                                        "wfRMFoilPosLName": "184",
+                                        "wfRMFoilNegName": "F-545M-450UF-5.5MM",
+                                        "wfRMFoilNegSerial": "0619A04A06",
+                                        "wfRMFoilNegLName": "184",
+                                        "wfRMPaperName": "SM250-50 6.5mm",
+                                        "wfRMPaperSerial": "17032519A1-B47",
+                                        "wfRMGlueName": "",
+                                        "wfRMGlueSerial": "17.7.22",
+                                        "wfRMSolName": "KVP-1B",
+                                        "wfRMSolSerial": "富凱2017.7119",
+                                        "wfRMPinPosName": "15080(+)",
+                                        "wfRMPinPosSerial": "1706241163",
+                                        "wfRMPinNegName": "15080(-)",
+                                        "wfRMPinNegSerial": "1707201194",
+                                        "wfRMPlasticName": "9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",
+                                        "wfRMPlasticSerial": "17704310121",
+                                        "wfRMCoverName": "10x10.6 3004材质(防爆)",
+                                        "wfRMCoverSerial": "1670722-053842",
+                                        "wfProcessStatus": "0",
+                                        "wfFormStatus": "0"
+                                    }
+                                }
+                            });
+                            _this.qrCodePopulate(data);
+                            _this.storage.set(form.value.wfFormId, form.value);
+                            _this.workflowStateChange();
+                        }
+                        else {
+                            _this.wfSvc.query(form.value, form.value.wfForm).subscribe(function (serverData) {
+                                console.log("Response from server: " + JSON.stringify(serverData[0]));
+                                _this.populateDataToForm(form, serverData[0]);
+                                _this.workflowStateChange();
+                            }, function (err) {
+                                alert("嚫,网路不给力");
+                                console.log(err);
+                                _this.storage.get(form.value.wfFormId).then(function (storageData) {
+                                    if (storageData) {
+                                        console.log("Result found:" + form.value.wfFormId);
+                                        _this.populateDataToForm(form, storageData);
+                                        _this.workflowStateChange();
+                                    }
+                                    else {
+                                        alert("嚫，查木记录");
+                                    }
+                                });
+                            });
+                        }
+                        console.log('Buy clicked');
+                    }
+                },
+                {
+                    text: '成品流程卡',
+                    handler: function () {
+                        if (form.value.wfFormId === "") {
+                            console.log("nothing in the form");
+                            // workflow 2
+                            var data = JSON.stringify({ "headers": { "erpData": "ngForm" },
+                                "bodies": { "erpData": { "wfForm": "2",
+                                        "wfProcess": "1",
+                                        "wfProcessName": "打印",
+                                        "wfFormId": "VT0002",
+                                        "wfOrderId": "VTO0002",
+                                        "wfOrderBatchId": "VTB0002",
+                                        "wfOrderBatchQty": "100",
+                                        "wfOrderFormNote": "嚫，這是測試FORM",
+                                        "wfOrderBOMNote": "嚫，這是測試BOM",
+                                        "wfOrderNote": "嚫，這是測試Note",
+                                        "wfOrderTotalQty": "10000",
+                                        "wfOrderTotalGoodQty": "1000",
+                                        "wfOrderTotalBadQty": "0",
+                                        "wfOrderRMId": "VTRM0001",
+                                        "wfOrderSeries": "VTRM 10x10x20",
+                                        "wfOrderSpec": "20x20x10",
+                                        "wfOrderDim": "10cm",
+                                        "wfRMUpBeltName": "上帶RM001",
+                                        "wfRMDownBeltName": "下帶RM001",
+                                        "wfRMBaseName": "底座 001",
+                                        "wfRMCircleName": "圓卡 0001",
+                                        "wfRMPrintName": "Ink2001",
+                                        "wfOptMachineId": "AAA01",
+                                        "wfClientId": "SA0001",
+                                        "wfFormName": "成品流程卡",
+                                        "wfSalesOrderId": "VTSO001",
+                                        "wfProcessStatus": "0",
+                                        "wfFormStatus": "0"
+                                    }
+                                }
+                            });
+                            _this.qrCodePopulate(data);
+                            _this.storage.set(form.value.wfFormId, form.value);
+                            _this.workflowStateChange();
+                        }
+                        else {
+                            _this.wfSvc.query(form.value, form.value.wfForm).subscribe(function (serverData) {
+                                console.log("Response from server: " + JSON.stringify(serverData[0]));
+                                _this.populateDataToForm(form, serverData[0]);
+                                _this.workflowStateChange();
+                            }, function (err) {
+                                alert("嚫,网路不给力");
+                                console.log(err);
+                                _this.storage.get(form.value.wfFormId).then(function (storageData) {
+                                    if (storageData) {
+                                        console.log("Result found:" + form.value.wfFormId);
+                                        _this.populateDataToForm(form, storageData);
+                                        _this.workflowStateChange();
+                                    }
+                                    else {
+                                        alert("嚫，查木记录");
+                                    }
+                                });
+                            });
+                        }
+                        console.log('Buy clicked');
+                    }
+                }
+            ]
+        });
+        alertTest.present();
+    };
+    WorkflowPage.prototype.scanBarcode = function (model) {
+        var _this = this;
+        var form = this.wfInputForm;
+        console.log("scanning Barcode");
+        console.log(model);
+        this.barcodeScanner.scan().then(function (barcodeData) {
+            // Success! Barcode data is here
+            // Limiter to assume the Barcode is default used in this orderID
+            if (barcodeData.format && barcodeData.format != "QR_CODE") {
+                console.log("this is barcode");
+                var data = barcodeData.text;
+                form.controls[model].setValue(data);
+            }
+            else if (barcodeData.format == "QR_CODE") {
+                // alert('嚫，请确定你所扫描的条码是正确的');
+                // Try if it is QR code
+                console.log(barcodeData.text);
+                //alert(barcodeData.text);
+                console.log("This is QR Code");
+                _this.qrCodePopulate(barcodeData.text);
+            }
+            else {
+                alert('嚫，请确定你所扫描的条码是正确的');
+            }
+        }, function (err) {
+            // An error occurred
+            alert(err);
+        });
+    };
+    WorkflowPage.prototype.setFormValue = function (model, value) {
+        var form = this.wfInputForm;
+        form.controls[model].setValue(value);
+    };
+    /*
+    setWfProcess( process: any, title: string, storage: Storage) {
+  
+      let form = this.wfInputForm;
+  
+      console.log(form.value);
+  
+      // Update the value of the Form on the Process steps and Process Name on the form
+      form.controls['wfProcess'].setValue(process);
+      form.controls['wfProcessName'].setValue(title);
+  
+      // Create additional alerts to let the user to choose the right subprocesses from the Ageing process
+      if (typeof process  === 'string') {
+        let alert = this.alertCtrl.create();
+        alert.setTitle('请选择老化工序');
+  
+        if (process == '5a') {
+  
+          // This subprocess is unique to Manual Ageing
+          alert.addInput({
+            type: 'radio',
+            label: '串排',
+            value: '串排',
+          });
+  
+          var processTitle = '手工老化'
+        } else {
+          var processTitle = '自动老化'
+        }
+  
+        alert.addInput({
+          type: 'radio',
+          label: processTitle,
+          value: processTitle
+        });
+  
+  
+        alert.addInput({
+          type: 'radio',
+          label: '測試分选',
+          value: '測試分选'
+        });
+  
+        alert.addInput({
+          type: 'radio',
+          label: '外观',
+          value: '外观'
+        });
+  
+        alert.addButton('取消');
+  
+        alert.addButton({
+          text: '確定',
+          handler: (data: any) => {
+            // Once selected the subprocess, update the form and then submit the form to next process stage
+            form.controls['wfProcessName'].setValue(data);
+            this.onAddWf();
+          }
+        });
+  
+        alert.present();
+      } else {
+        // Simply submit the form and send over to next process
+        this.onAddWf();
+      }
+  
+      // console.log('After');
+      // console.log(form.value);
+    }
+  
+    setWfStage( process: number) {
+  
+      let form = this.wfInputForm;
+      // console.log( form.value );
+      // console.log(this.wfProcesses[process].title);
+      console.log("This is the process from the ion-select");
+      console.log(process);
+  
+      // This is temp fix for the array value to process value
+      // *TO BE FIXED*
+      let _wfStage = this.wfStages[ process-1 ];
+  
+      // there is a bug to load this method when the view is first init,
+      // So i have added a try here to cancel the error msg
+      try {
+        // console.log( _wfStage.title );
+        form.controls[ 'wfProcess' ].setValue( _wfStage.process );
+        form.controls[ 'wfProcessName' ].setValue( _wfStage.title );
+        console.log("This is the form value");
+        console.log(JSON.stringify(form.value));
+      } catch (err) {}
+  
+  
+      // console.log(_wfProcess.title);
+      // console.log(_wfProcess.process);
+  
+      // Update the value of the Form on the Process steps and Process Name on the form
+      // form.controls['wfProcess'].setValue(_wfProcess.process);
+      // form.controls['wfProcessName'].setValue(_wfProcess.title);
+    }
+  
+    presentAlertFuck() {
+      let alert = this.alertCtrl.create({
+        title: 'Low battery',
+        subTitle: '10% of battery remaining',
+        buttons: ['Dismiss']
+      });
+      alert.present();
+    }
+  
+    presentConfirm() {
+      let alert = this.alertCtrl.create({
+        title: 'Confirm purchase',
+        message: 'Do you want to buy this book?',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Buy',
+            handler: () => {
+              console.log('Buy clicked');
+            }
+          }
+        ]
+      });
+      alert.present();
+    }
+  
+  */
+    WorkflowPage.prototype.qrCodePopulate = function (barcodeData) {
+        // This function takes the barcode data and then process the JSON object
+        // Assume each barcode data is a JSON object and it has a headers and bodies component
+        // Loop through the headers
+        // for each header,
+        //    check if the length is > 0, which is a sub JSON array object for data table
+        //    else loop through the keys inside that header JSON object
+        console.log("running qrCodePop");
+        console.log(barcodeData);
+        var data = JSON.parse(barcodeData);
+        var headers = data.headers;
+        var bodies = data.bodies;
+        var form = this.wfInputForm;
+        var _loop_1 = function (key) {
+            // console.log(key + " : " + headers[key])
+            switch (headers[key]) {
+                case "ngForm":
+                    // console.log(key + " is a form")
+                    var formBodies = bodies[key];
+                    for (var formKey in formBodies) {
+                        // console.log("populate form model " + formKey);
+                        // console.log("populating model " + formKey + " " + formBodies[formKey]);
+                        try {
+                            // Dynamically set form value from the scanned code data
+                            // try and catch here is to protect if some of the fields are missing or failed,
+                            // then it will skip onto the next key
+                            // backup code for assigning the value into form
+                            // ngForm.controls[formKey].setValue(form[formKey]);
+                            // This use form control for the value setting
+                            console.log("formKey : " + formKey);
+                            console.log("Form " + form[formKey]);
+                            this_1.setFormValue(formKey, formBodies[formKey]);
+                        }
+                        catch (err) {
+                            console.log(err.message);
+                            eval('form.value.' + formKey + '= "' + formBodies[formKey] + '"; ');
+                            eval('console.log("Retrying force input " + form.value.' + formKey + ')');
+                            eval('console.log(form.value.' + formKey + ');');
+                            console.log("barcode loaded in form:" + JSON.stringify(form.value));
+                        }
+                    }
+                    console.log("barcode loaded in form:" + JSON.stringify(form.value));
+                    break;
+                case "ngStorage":
+                    console.log(key + " is a storage");
+                    this_1.storage.set(key, bodies[key]);
+                    console.log(bodies[key]);
+                    // Testing the storage has been set
+                    this_1.storage.get(key).then(function (values) {
+                        for (var valKey in values) {
+                            console.log(values[valKey]);
+                        }
+                        console.log(key);
+                        console.log(JSON.stringify(values));
+                    });
+                    break;
+                case "ngInput":
+                    console.log(key + " is for input");
+                    console.log(bodies[key]);
+                    var inputBodies = bodies[key];
+                    for (var inputKey in inputBodies) {
+                        console.log("populate form model" + inputKey);
+                        try {
+                            // Dynamically set form value from the scanned code data
+                            // try and catch here is to protect if some of the fields are missing or failed,
+                            // then it will skip onto the next key
+                            // backup code for assigning the value into form
+                            // ngForm.controls[formKey].setValue(form[formKey]);
+                            // This line no longer works
+                            eval('this.' + inputKey + " = " + inputBodies[inputKey]);
+                            // this.setFormValue(inputKey, inputBodies[inputKey]);
+                            //  form.value.
+                        }
+                        catch (err) {
+                            console.log(err.message);
+                        }
+                    }
+                    break;
+                default:
+                    console.log(key + " is error");
+            }
+        };
+        var this_1 = this;
+        // console.log(data);
+        for (var key in headers) {
+            _loop_1(key);
+        }
+    };
+    WorkflowPage.prototype.workflowStateChange = function () {
+        var _this = this;
+        // If the form is mark completed, then trigger the process
+        // Check the type of wfForm,
+        // Then increment the wfProcess if it is mark completed
+        console.log("In the func of workflowStateChange");
+        var form = this.wfInputForm;
+        var wfPOldState;
+        var wfPNewState;
+        this.storage.get("wfProcess").then(function (storageData) {
+            var wfStorage = storageData;
+            console.log(wfStorage);
+            console.log("Loading the form from stateChange");
+            console.log('form.value.wfFormStatus ' + form.value.wfFormStatus);
+            console.log('form.value.wfProcessStatus ' + form.value.wfProcessStatus);
+            if (form.value.wfFormStatus === "" || form.value.wfFormStatus == null) {
+                form.value.wfFormStatus = '0';
+            }
+            if (form.value.wfProcessStatus === "" || form.value.wfProcessStatus == null) {
+                form.value.wfProcessStatus = "1";
+                wfPNewState = "1";
+                form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
+            }
+            if (form.value.wfFormStatus == '0' && form.value.wfProcessStatus == '1') {
+                // load the process from storage
+                console.log("Loading wfProcess from storage");
+                console.log("wfForm is: " + form.value.wfFormId);
+                console.log("Printing wfProcess: " + JSON.stringify(wfStorage[form.value.wfForm].Process));
+                console.log("form.value.wfProcess " + form.value.wfProcess.toString() + " " + typeof (form.value.wfProcess.toString()));
+                // load the next state of the change
+                // Change all to String for safety
+                if (form.value.wfProcess.toString() == "" || form.value.wfProcess.toString() == null) {
+                    wfPNewState = "1";
+                }
+                else {
+                    wfPOldState = Object.keys(wfStorage[form.value.wfForm].Process).indexOf(form.value.wfProcess.toString());
+                    wfPNewState = Object.keys(wfStorage[form.value.wfForm].Process)[wfPOldState + 1];
+                    // If there is no more process, then break the process
+                    if (wfPNewState == null) {
+                        return alert("嚫，此工單的所有工序己完成!");
+                    }
+                }
+                console.log("wfPOldState: " + wfPOldState);
+                console.log("wfPNewState: " + wfPNewState);
+                // Assign new value into the form
+                form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
+                form.value.wfProcess = wfPNewState;
+                form.value.wfProcessName = wfStorage[form.value.wfForm].Process[wfPNewState];
+                console.log("New state is " + form.value.wfProcess + " " + form.value.wfProcessName);
+                console.log(form.value);
+                _this.storage.set(form.value.wfFormId, form.value);
+            }
+            else if (form.value.wfProcessStatus == '0') {
+                console.log("Previous process has not completed and will resume now");
+                form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
+            }
+            else if (form.value.wfFormStatus == '1') {
+                return alert("This wfForm has been marked complete");
+            }
+            console.log("This is the form after the state change");
+            console.log(form.value);
+            // The following part will trigger the next stage wfPage
+            console.log("Will enter " + form.value.wfFormName + " edit page now");
+            console.log("流程卡" + form.value.wfFormId);
+            switch (form.value.wfForm.toString()) {
+                case '1':
+                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__edit_workflow1_edit_workflow1__["a" /* EditWorkflow1Page */], form.value.wfFormId);
+                    break;
+                case '2':
+                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__edit_workflow2_edit_workflow2__["a" /* EditWorkflow2Page */], form.value.wfFormId);
+                    break;
+                case '3':
+                    console.log("Form 3 is not ready");
+                    // this.navCtrl.push(EditWorkflow3Page);
+                    break;
+                default:
+                    console.log("Requesting form beyond 3");
+            }
+        });
+    };
+    WorkflowPage.prototype.populateDataToForm = function (form, data) {
+        var qrCode = { "headers": { "erpData": "ngForm" },
+            "bodies": { "erpData": data } };
+        var _data = JSON.stringify(qrCode);
+        this.qrCodePopulate(_data);
+    };
+    WorkflowPage.prototype.formInit = function () {
+        this.wfInputForm = this.formBuilder.group({
+            wfProcess: [''],
+            wfProcessName: [''],
+            wfForm: [''],
+            wfFormId: [''],
+            wfOrderId: [''],
+            wfOrderBatchId: [''],
+            wfOrderBatchQty: [''],
+            wfOrderTotalQty: ['']
+        });
+    };
+    return WorkflowPage;
+}());
+WorkflowPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        selector: 'page-workflow',template:/*ion-inline-start:"/Users/thomasq/Sites/vtApp/src/pages/workflow/workflow.html"*/'<ion-header>\n    <ion-navbar>\n        <div style="align-items: center; display: inline;">\n            <img src="./assets/img/vt_icon.png" class="icon">\n            <ion-title>工序流程卡纪录系统</ion-title>\n        </div>\n    </ion-navbar>\n</ion-header>\n<ion-content padding>\n    <form [formGroup]="wfInputForm" (ngSubmit)="onAddWf()">\n\n        <!-- First section for the input field -->\n        <div>\n            <ion-grid>\n                <ion-row wrap justify-content-left align-items-center>\n                    <!-- Main loop of the Form Module -->\n                    <ion-col *ngFor="let wfInput of wfInputs">\n                        <!-- Non Buttons input fields of wfForms -->\n                        <ion-row align-items-center>\n                            <div class="label">{{wfInput.title}}</div>\n\n                            <!-- Form Normal Input Module-->\n                            <ion-input *ngIf="wfInput.method === \'input\'" [ngStyle]="{\'width.em\':wfInput.size}" type={{wfInput.type}} formControlName={{wfInput.model}} no-padding class="gridborder" required></ion-input>\n\n                            <button *ngIf="wfInput.scan" (click)="scanBarcode(wfInput.model)" item-end ion-button class="barcodeButton" type="button">\n                                <!--<ion-icon name="barcode"></ion-icon>-->\n                                扫一扫\n                            </button>\n\n                            <!-- Form Selector Module -->\n                            <ion-select *ngIf="wfInput.method === \'select\'" [ngStyle]="{\'width.em\':wfInput.size}" interface="popover" style="height: 34px !important;" (ionChange)="setWfStage($event)" formControlName={{wfInput.model}} class="gridborder" okText="确定" cancelText="取消">\n                                <ion-option *ngFor="let key of wfMachineData" value={{key}}>\n                                    {{wfMachineProcess[0][key]}}\n                                </ion-option>\n                            </ion-select>\n\n                            <!-- Buttons input fields of wfForms -->\n                            <div *ngIf="wfInput.method === \'buttons\'" [ngStyle]="{\'width.em\':wfInput.size}">\n                                <ion-buttons>\n                                    <!-- Button for Form submission -->\n                                    <button *ngFor="let option of wfInput.options" [ngClass]="{\'buttonsSelected\': wfInputForm.value.wfForm == option.value }" (click)="setFormValue(wfInput.model,option.value)" item-right ion-button outline type="button" round>\n                                        <ion-icon name="clipboard"></ion-icon>\n                                        &nbsp; {{option.label}}\n                                    </button>\n                                </ion-buttons>\n\n                                <button style="width: 25%; margin: 0 auto;" ion-button type="submit" block>\n                                    确定\n                                </button>\n                            </div>\n\n                            <div *ngIf="wfInput.method === \'break\'" [ngStyle]="{\'width.em\':wfInput.size}"></div>\n\n                        </ion-row>\n\n                    </ion-col>\n                </ion-row>\n            </ion-grid>\n        </div>\n\n        <div>\n\n\n        </div>\n\n        <!-- Display the workflow process with img -->\n        <div>\n            <ion-grid style="padding-left: 50px; padding-right: 50px;">\n                <ion-row wrap class="card-background-page">\n                    <ion-col *ngFor="let wfProcess of wfProcesses" col-3>\n                        <div class="imgButton">\n                            <img src="{{\'./assets/img/f1p\' + wfProcess.process + \'.jpeg\'}}">\n                            <div class="card-title">\n                                {{wfProcess.title}}\n                            </div>\n                        </div>\n                        <!-- For original design -->\n                        <!--<div [navPush]="pushPage" [navParams]=wfProcess>-->\n                    </ion-col>\n                </ion-row>\n            </ion-grid>\n        </div>\n\n        <!-- manual ageing will have an action sheet to prompt the sub process -->\n        <!-- 規格 Need attention highlight -->\n        <!-- 料號 = 產品編號 -->\n\n    </form>\n</ion-content>'/*ion-inline-end:"/Users/thomasq/Sites/vtApp/src/pages/workflow/workflow.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */],
+        __WEBPACK_IMPORTED_MODULE_5__services_workflow__["a" /* WorkflowService */],
+        __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */],
+        __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */]])
+], WorkflowPage);
+
+//# sourceMappingURL=workflow.js.map
+
+/***/ }),
+
+/***/ 255:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditWorkflow1Page; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_workflow__ = __webpack_require__(74);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var EditWorkflow1Page = (function () {
+    function EditWorkflow1Page(storage, formBuilder, barcodeScanner, alertCtrl, camera, navParams, wfSvc, navCtrl) {
+        this.storage = storage;
+        this.formBuilder = formBuilder;
+        this.barcodeScanner = barcodeScanner;
+        this.alertCtrl = alertCtrl;
+        this.camera = camera;
+        this.navParams = navParams;
+        this.wfSvc = wfSvc;
+        this.navCtrl = navCtrl;
+        this.form = __WEBPACK_IMPORTED_MODULE_3__angular_forms__["e" /* NgForm */];
+        this.wfOrderDetails = [];
+        this.wfRMDetails = [];
+        this.wfAgeingDetails = [];
+        this.wfAutoAgeingDetails = [];
+        this.wfAutoAgeingSubDetails = [];
+        this.wfOpsInputs = [];
+        this.wfPplInputs = [];
+        this.images = [];
+        this.wfNavParams = this.navParams.data;
+        // For calculating the time value
+        this.tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+        this.appDate = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0, -1);
+        storage.ready().then(function () { });
+        // Assume all are ion-input except the one specificed as textarea
+        this.wfOrderDetails = [
+            { method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 20, highlight: false },
+            { method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 20, highlight: false },
+            /*
+             {model: "wfOrderBatchId", title: "批次号", type: "text", highlight: false},
+             {model: "wfOrderQty", title: "总量(批次)", type: "text", highlight: false},
+             */
+            { method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 20, highlight: false },
+            { method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 10, highlight: false },
+            { method: "input", model: "wfOrderSpec", title: "规格", type: "text", size: 8, highlight: false },
+            { method: "input", model: "wfOrderDim", title: "尺寸", type: "text", size: 8, highlight: false },
+            // {method: "break", size: 10},
+            { method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 30, highlight: false },
+            { method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 30, highlight: false },
+            { method: "input", model: "wfOrderTotalQty", title: "预设总量", type: "number", size: 5, highlight: false },
+            { method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 5, highlight: false },
+        ];
+        this.wfRMDetails = [
+            { modelName: "wfRMFoilPosName", title: "正箔", type: "text", modelSerial: 'wfRMFoilPosSerial', highlight: false },
+            { modelName: "wfRMFoilPosLName", title: "正箔 - L", type: "text", modelSerial: 'wfRMFoilPosLSerial', highlight: false },
+            { modelName: "wfRMFoilNegName", title: "負箔", type: "text", modelSerial: 'wfRMFoilNegSerial', highlight: false },
+            { modelName: "wfRMFoilNegLName", title: "負箔 - L", type: "text", modelSerial: 'wfRMFoilNegLSerial', highlight: false },
+            { modelName: "wfRMPaperName", title: "电解纸", type: "text", modelSerial: 'wfRMPaperSerial', highlight: false },
+            { modelName: "wfRMGlueName", title: "胶水/胶带", type: "text", modelSerial: 'wfRMGlueSerial', highlight: false },
+            { modelName: "wfRMSolName", title: "电解液", type: "text", modelSerial: 'wfRMSolSerial', highlight: false },
+            { modelName: "wfRMPinPosName", title: "正导针", type: "text", modelSerial: 'wfRMPinPosSerial', highlight: false },
+            { modelName: "wfRMPinNegName", title: "负导针", type: "text", modelSerial: 'wfRMPinNegSerial', highlight: false },
+            { modelName: "wfRMPlasticName", title: "胶粒", type: "textarea", modelSerial: 'wfRMPlasticSerial', highlight: false },
+            { modelName: "wfRMShellName", title: "铝壳", type: "text", modelSerial: 'wfRMShellSerial', highlight: false },
+            { modelName: "wfRMCoverName", title: "套管", type: "text", modelSerial: 'wfRMCoverSerial', highlight: false },
+        ];
+        this.wfOpsInputs = [
+            { title: "分單", method: "input", model: "wfFormSplit", type: "text", icon: 'ios-copy-outline', scan: false, size: 2, wfOpslI: 2 },
+            { title: "流程卡号", method: "input", model: "wfFormId", type: "text", icon: 'ios-copy-outline', scan: false, size: 9 },
+            { title: "机台", method: "input", model: "wfOptMachineId", type: "text", icon: 'cog', wfOpslI: 1, scan: true, size: 6 },
+            { title: "批次号", method: "input", model: "wfOrderBatchId", type: "text", icon: 'ios-basket-outline', scan: false, size: 11 },
+            { title: "批次量", method: "input", model: "wfOrderBatchQty", type: "text", icon: 'ios-basket-outline', scan: false, size: 5 },
+            { method: "break", title: "" },
+            { method: "inputs", options: [
+                    { title: "正箔 - L", model: "wfRMFoilPosLName", type: "number", icon: 'ios-add-circle-outline', scan: false, size: 8 },
+                    { title: "負箔 - L", model: "wfRMFoilNegLName", type: "number", icon: 'md-remove-circle', scan: false, size: 8 }
+                ] },
+            { method: "inputs2", header: "素子烘烤", options: [
+                    { title: "时间 H", model: "wfRMWindingTime", type: "number", icon: 'ios-add-circle-outline', scan: false, size: 8 },
+                    { title: "温度 ℃", model: "wfRMWindingDeg", type: "number", icon: 'md-remove-circle', scan: false, size: 8 }
+                ] },
+            { method: 'inputs', options: [
+                    { title: "日期", model: "wfOptInputDate", type: "date", icon: "calender", scan: false, size: 8 },
+                    { title: "开始", model: "wfOptStartTime", type: "time", icon: "time", scan: false, size: 8 },
+                    { title: "完成", model: "wfOptFinishTime", type: "time", icon: "md-alarm", scan: false, size: 8 }
+                ] },
+            { method: "inputs", options: [
+                    { title: "不良数", model: "wfOptBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8 },
+                    { title: "良品数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8 }
+                ] },
+        ];
+        this.wfAgeingDetails = [
+            { title: "电压 DC/V", icon: 'md-flash', method: "table", size: 7, cols: [
+                    { model: "wfAgeVoltSet", type: "number", auto: false },
+                    { model: "wfAgeVoltAct", type: "number", auto: false },
+                    { model: "wfAutoAgeVoltAct1", type: "number", auto: true },
+                    { model: "wfAutoAgeVoltAct2", type: "number", auto: true },
+                    { model: "wfAutoAgeVoltAct3", type: "number", auto: true },
+                    { model: "wfAutoAgeVoltAct4", type: "number", auto: true },
+                    { model: "wfAutoAgeVoltAct5", type: "number", auto: true },
+                ] },
+            { title: "时间 H", icon: 'timer', method: "table", size: 7, cols: [
+                    { model: "wfAgeTimeSet", type: "number", auto: false },
+                    { model: "wfAgeTimeAct", type: "number", auto: false }
+                ] },
+            { title: "温度 ℃", icon: 'ios-thermometer-outline', method: "table", size: 7, cols: [
+                    { model: "wfAgeDegSet", type: "number", auto: false },
+                    { model: "wfAgeDegAct", type: "number", auto: false }
+                ] },
+            { title: "电流 µA", icon: 'md-pulse', method: "table", size: 7, cols: [
+                    { model: "wfAgeCurrentSet", type: "number", auto: false },
+                    { model: "wfAgeCurrentAct", type: "number", auto: false }
+                ] },
+        ];
+        this.wfAutoAgeingDetails = [
+            { title: "开路电压", method: "input", size: 8, model: "wfAutoAgeOpenVolt", type: "number" },
+            { title: "高容", method: "input", size: 8, model: "wfAutoAgeHighCapacity", type: "number" },
+            { title: "短路电压", method: "input", size: 8, model: "wfAutoAgeShortVolt", type: "number" },
+            { title: "低容", method: "input", size: 8, model: "wfAutoAgeLowCapacity", type: "number" },
+            { title: "开路", method: "input", size: 8, model: "wfAutoAgeOpen", type: "number" },
+            { title: "损耗", method: "input", size: 8, model: "wfAutoAgeWear", type: "number" },
+            { title: "短路", method: "input", size: 8, model: "wfAutoAgeShort", type: "number" },
+            { title: "漏电", method: "input", size: 8, model: "wfAutoAgeVoltLeak", type: "number" },
+            { title: "外观", method: "input", size: 8, model: "wfAutoAgeLook", type: "number" }
+        ];
+        this.wfPplInputs = [
+            { title: "作业員", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: false, wfPplI: 1, size: 7 },
+            { title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 3 },
+            { title: "技術員", method: "input", model: "wfStaffTechId", type: "text", icon: 'construct', scan: false, wfPplI: 3, size: 7 },
+            { title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: false, wfPplI: 4, size: 7 },
+            { title: "终检", method: "buttons", model: "wfQCPass", icon: "md-checkmark-circle-outline", buttons: [
+                    { label: "通过", value: 1, icon: 'checkmark' },
+                    { label: "失败", value: 2, icon: 'close' }
+                ] },
+            { title: "品检員", method: "input", model: "wfQCSignOff", type: "text", icon: 'search', scan: 5, wfPplI: 5, size: 11 },
+            { title: "品检备注", method: "textarea", model: "wfQCInputNote", type: "text", icon: 'chatbubbles', scan: false, size: 27 },
+        ];
+    }
+    EditWorkflow1Page.prototype.open = function () {
+        var _this = this;
+        if (!this.dataInicial) {
+            this.dataInicial = new Date().toJSON().split('T')[0];
+            setTimeout(function () {
+                _this.datePicker.open();
+            }, 50);
+        }
+        else {
+            this.datePicker.open();
+        }
+    };
+    EditWorkflow1Page.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad EditWorkflowPage');
+        console.log(this.wfNavParams);
+        console.log(this.appDate);
+    };
+    EditWorkflow1Page.prototype.ngOnInit = function () {
+        var _this = this;
+        console.log("Initialise the page 裸品流程卡");
+        this.formInit();
+        var form = this.wfInputForm;
+        var storageData;
+        console.log("loading from storage");
+        this.storage.get(this.wfNavParams).then(function (dataDumpJsonXTmp) {
+            console.log("this is storage");
+            console.log("storage:" + JSON.stringify(dataDumpJsonXTmp));
+            storageData = dataDumpJsonXTmp;
+            // for (let key in storageData) {
+            //   console.log(key + " : " +storageData[key]);
+            // };
+            //alert(storageData['wfForm']);
+            /*
+            if(storageData['wfForm'] == 1)
+            {
+              form.controls['wfFormName'].setValue('裸品流程卡');
+            }
+            */
+            for (var key in form.value) {
+                // console.log("Loading " + key + " Storage:" + storageData[key]);
+                try {
+                    if (key == 'wfStaffTechId') {
+                        _this.wfStaffTechIdTmp = storageData[key];
+                        //alert('staff 1:' + StaffArr.wfStaffTechIda);
+                        form.controls[key].setValue('');
+                        // console.log('storage test 1: ' + this.wfStaffTechIdTmp);
+                    }
+                    else if (key == 'wfStaffOptShift') {
+                        _this.wfStaffOptShiftTmp = storageData[key];
+                        form.controls[key].setValue('');
+                        //alert('staff 2:' + this.wfStaffOptShiftTmp);
+                        // console.log('storage test 1: ' + this.wfStaffOptShiftTmp);
+                    }
+                    else if (key == 'wfQCSignOff') {
+                        _this.wfQCSignOffTmp = storageData[key];
+                        form.controls[key].setValue('');
+                        //alert('staff 3:' + this.wfQCSignOffTmp);
+                        // console.log('storage test 1: ' + this.wfQCSignOffTmp);
+                    }
+                    else {
+                        form.controls[key].setValue(storageData[key]);
+                    }
+                }
+                catch (err) {
+                    // console.log(err);
+                }
+            }
+        });
+        // alert(this.wfRMDetails[1].modelName)
+    };
+    EditWorkflow1Page.prototype.checkBeforeScan = function (form) {
+        if (form.value.wfOptBadQty === '') {
+            alert("请输入良品数!");
+            return false;
+        }
+        else if (form.value.wfOptGoodQty === '') {
+            alert("请输入良品数!");
+            return false;
+        }
+    };
+    EditWorkflow1Page.prototype.scanBarcode = function (model) {
+        var _this = this;
+        console.log("scanning Barcode");
+        /*
+         console.log(form.value);
+    
+         form.controls['wfProcess'].setValue(1);
+         form.controls['wfProcessName'].setValue('钉卷');
+         form.controls["wfForm"].setValue(1);
+    
+         console.log(form.value);
+         */
+        var form = this.wfInputForm;
+        this.barcodeScanner.scan().then(function (barcodeData) {
+            // Success! Barcode data is here
+            // Limiter to assume the Barcode is default used in this orderID
+            form.controls[model].setValue(barcodeData.text);
+            if (barcodeData.format && barcodeData.format != "QR_CODE" && model == "wfSignOff") {
+                switch (barcodeData.text) {
+                    case 'QC0001':
+                        form.controls['wfSignOff'].setValue(barcodeData.text);
+                        _this.promptAlert();
+                        break;
+                    case 'QC0002':
+                        form.controls['wfSignOff'].setValue(barcodeData.text);
+                        _this.promptAlert();
+                        break;
+                    case 'QC0003':
+                        form.controls['wfSignOff'].setValue(barcodeData.text);
+                        _this.promptAlert();
+                        break;
+                    default:
+                        alert('嚫，请确定你所扫描的条码是正确的');
+                }
+            }
+            else {
+                alert('嚫，请确定你所扫描的条码是正确的');
+            }
+        }, function (err) {
+            // An error occurred
+            alert(err);
+        });
+    };
+    EditWorkflow1Page.prototype.inputWf = function () {
+        console.log('inputWf activated');
+    };
+    EditWorkflow1Page.prototype.setWfPass = function () {
+        console.log('checked');
+        /*
+         // this.wfPass = result;
+         */
+    };
+    EditWorkflow1Page.prototype.onSubmit = function () {
+        var form = this.wfInputForm;
+        var storageData;
+        //alert(" < " + form.value + " > !");
+        console.log(this.wfInputForm);
+    };
+    EditWorkflow1Page.prototype.updateForm = function (model, value) {
+        var form = this.wfInputForm;
+        console.log(form);
+        form.controls[model].setValue(value);
+        console.log(form.controls[model].value);
+    };
+    EditWorkflow1Page.prototype.promptAlert = function () {
+        var alertCtl = this.alertCtrl.create();
+        alertCtl.setTitle("确定完成和上传");
+        alertCtl.addButton('取消');
+        alertCtl.addButton({
+            text: '確定',
+            handler: function (data) {
+                // Once selected the subprocess, update the form and then submit the form to next process stage
+                alert("上传成功");
+            }
+        });
+        alertCtl.present();
+    };
+    EditWorkflow1Page.prototype.keyPress = function (keycode) {
+        if (keycode == 13) {
+            alert('next');
+        }
+    };
+    EditWorkflow1Page.prototype.updateTextChg = function () {
+        var _this = this;
+        if (this.wfInputForm.value.wfOptMachineId) {
+            var machineId_1 = this.wfInputForm.value.wfOptMachineId;
+            this.storage.get('wfMachine').then(function (dataMachineXTmp) {
+                if (dataMachineXTmp) {
+                    //alert(dataMachineXTmp);
+                    dataMachineXTmp = JSON.parse(dataMachineXTmp);
+                    //alert(dataMachineXTmp[machineId]['staffName']);
+                    _this.wfInputForm.patchValue({ wfStaffOptShift: dataMachineXTmp[machineId_1]['shift'], wfStaffOptId: dataMachineXTmp[machineId_1]['staffName'],
+                        wfOrderTotalGoodQty: _this.wfOrderTotalGoodQtyTmp, wfStaffTechId: dataMachineXTmp[machineId_1]['techName'], wfStaffXrayId: dataMachineXTmp[machineId_1]['xrayName'], });
+                }
+                else {
+                    var alert_1 = _this.alertCtrl.create({
+                        title: '',
+                        subTitle: '机台号不存在，请重新输入。',
+                        buttons: ['返回']
+                    });
+                    alert_1.present();
+                }
+            });
+        }
+        this.wfOrderTotalGoodQtyTmp = parseFloat(this.wfInputForm.value.wfOrderTotalGoodQty) + parseFloat(this.wfInputForm.value.wfOptGoodQty);
+        //alert(StaffArr.wfStaffTechId + ' staff 2: ' + StaffArr.wfStaffOptShift  + ' staff 3: ' + StaffArr.wfQCSignOff );
+    };
+    EditWorkflow1Page.prototype.updateTotalGoodQty = function (wfOptGoodQtyValue) {
+        var goodQtyTmp = this.wfNavParams.wfOrderTotalGoodQty + wfOptGoodQtyValue;
+        this.wfInputForm.patchValue({ wfOrderTotalGoodQty: goodQtyTmp, });
+    };
+    EditWorkflow1Page.prototype.showWfOpsInputsAlert = function (wfOptBadQtyValue, wfOptGoodQtyValue) {
+        if (wfOptBadQtyValue == '' || wfOptGoodQtyValue == '') {
+            var alert_2 = this.alertCtrl.create({
+                title: '',
+                subTitle: '请确定内容: 日期，开始，完成，良品数，不良数 ',
+                buttons: ['確定']
+            });
+            alert_2.present();
+        }
+    };
+    EditWorkflow1Page.prototype.showWfOpsFinalInputsAlert = function (wfOrderTotalQty, wfOrderTotalGoodQty, wfOptBadQtyValue, wfOptGoodQtyValue) {
+        var _this = this;
+        if (wfOrderTotalQty > wfOptGoodQtyValue) {
+            var alert_3 = this.alertCtrl.create({
+                title: '',
+                subTitle: '预设总量 (' + wfOptGoodQtyValue + ') 小於 批次量 (' + wfOrderTotalQty + ')!',
+                buttons: ['確定']
+            });
+            alert_3.present();
+        }
+        else if (wfOrderTotalQty <= wfOptGoodQtyValue) {
+            var form_1 = this.wfInputForm;
+            var alert_4 = this.alertCtrl.create({
+                /*
+                title: '',
+                
+                subTitle: '确定完成和上传' + ' Order Total: ' + wfOrderTotalQty + ' Good Total: ' + wfOrderTotalGoodQty + ' Bad:' + wfOptBadQtyValue + ' opt good: ' + wfOptGoodQtyValue,
+                */
+                buttons: [{
+                        text: '上存',
+                        handler: function () {
+                            console.log('save clicked');
+                        }
+                    },
+                    {
+                        text: '上存 + 完成工序',
+                        handler: function () {
+                            console.log('submit and save clicked');
+                            console.log(form_1.value);
+                            var alert = _this.alertCtrl.create({
+                                title: '嚫!',
+                                // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
+                                // comment above for faster process
+                                subTitle: '完成终检!' + form_1.value.wfProcess + ' ' + form_1.value.wfProcessName + ' ' + form_1.value.wfFormId,
+                                buttons: [{ text: '確定',
+                                        handler: function () {
+                                            form_1.value.wfProcessStatus = "1";
+                                            _this.storage.set(form_1.value.wfFormId, form_1.value);
+                                            // Upload to Server
+                                            console.log("uploading to server");
+                                            _this.wfSvc.upload(form_1.value, 1)
+                                                .subscribe(function (data) {
+                                                console.log("Successfully uploading to server");
+                                                console.log(data);
+                                            }, function (error) {
+                                                console.log(error);
+                                            });
+                                            // Return back to main page
+                                            _this.navCtrl.pop();
+                                        }
+                                    }]
+                            });
+                            alert.present();
+                            //this.onSubmit();
+                        }
+                    }, {
+                        text: '取消',
+                        role: 'cancel',
+                        handler: function () {
+                            console.log('Cancel clicked');
+                        }
+                    }]
+            });
+            alert_4.present();
+        }
+        else {
+            var alert_5 = this.alertCtrl.create({
+                title: '',
+                subTitle: '请确定内容: 日期，开始，完成，良品数，不良数 ',
+                buttons: ['確定']
+            });
+            alert_5.present();
+        }
+    };
+    EditWorkflow1Page.prototype.showWfQCPassAlert = function (wfQCPassValue) {
+        if (!(wfQCPassValue == 2 || wfQCPassValue == 1)) {
+            var alert_6 = this.alertCtrl.create({
+                title: 'Please Check!',
+                subTitle: 'Please select 终检!',
+                buttons: ['OK']
+            });
+            alert_6.present();
+        }
+    };
+    EditWorkflow1Page.prototype.presentPrompt = function () {
+        var alert = this.alertCtrl.create({
+            title: '嚫，请轻描淡写照片内容',
+            inputs: [
+                {
+                    name: 'imgDes',
+                    placeholder: '木有问题'
+                }
+            ],
+            buttons: [
+                {
+                    text: '取消',
+                    role: 'cancel',
+                    handler: function (data) {
+                        console.log('User has clicked Cancel');
+                    }
+                },
+                {
+                    text: '确定',
+                    handler: function (data) {
+                        console.log("User has saved the description");
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    EditWorkflow1Page.prototype.takePhoto = function () {
+        // alert("taking photos");
+        var _this = this;
+        this.presentPrompt();
+        var options = {
+            quality: 50,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            correctOrientation: true,
+            saveToPhotoAlbum: true
+        };
+        this.camera.getPicture(options).then(function (imageData) {
+            // imageData is either a base64 encoded string or a file URI
+            // If it's base64:
+            // Photo attribute: wfForm, time, date, process or description
+            var imgUrl = 'data:image/jpeg;base64,' + imageData;
+            _this.images.push(imgUrl);
+            _this.storage.set('images', _this.images);
+            // console.log(this.images);
+        }, function (err) {
+            // Handle error
+        });
+    };
+    EditWorkflow1Page.prototype.formInit = function () {
+        this.wfInputForm = this.formBuilder.group({
+            wfProcess: [''],
+            wfProcessName: [''],
+            wfFormName: [''],
+            // Order Inputs detail
+            wfFormId: [''],
+            // wfOrderFormId: [''],
+            wfOrderId: [''],
+            wfOrderBatchId: [''],
+            wfOrderBatchQty: [''],
+            wfOrderBOMNote: [''],
+            wfOrderNote: [''],
+            wfOrderTotalQty: [''],
+            wfOrderTotalGoodQty: [''],
+            wfOrderRMId: [''],
+            wfOrderSeries: [''],
+            wfOrderSpec: [''],
+            wfOrderDim: [''],
+            wfFormSplit: [''],
+            // Raw Material Inputs
+            wfRMFoilPosName: [''],
+            wfRMFoilPosSerial: [''],
+            wfRMFoilPosLName: [''],
+            wfRMFoilPosLSerial: [''],
+            wfRMFoilNegName: [''],
+            wfRMFoilNegSerial: [''],
+            wfRMFoilNegLName: [''],
+            wfRMFoilNegLSerial: [''],
+            wfRMPaperName: [''],
+            wfRMPaperSerial: [''],
+            wfRMGlueName: [''],
+            wfRMGlueSerial: [''],
+            wfRMSolName: [''],
+            wfRMSolSerial: [''],
+            wfRMPinPosName: [''],
+            wfRMPinPosSerial: [''],
+            wfRMPinNegName: [''],
+            wfRMPinNegSerial: [''],
+            wfRMPlasticName: [''],
+            wfRMPlasticSerial: [''],
+            wfRMShellName: [''],
+            wfRMShellSerial: [''],
+            wfRMCoverName: [''],
+            wfRMCoverSerial: [''],
+            wfRMWindingTime: [''],
+            wfRMWindingDeg: [''],
+            // Operational Input
+            wfOptMachineId: [''],
+            wfOptInputDate: [this.appDate],
+            wfOptStartTime: ['00:00'],
+            wfOptFinishTime: ['00:00'],
+            wfOptBadQty: [''],
+            wfOptGoodQty: [''],
+            // Ageing Part1
+            wfAgeDegSet: [''],
+            wfAgeDegAct: [''],
+            wfAgeVoltSet: [''],
+            wfAgeVoltAct: [''],
+            wfAgeCurrentSet: [''],
+            wfAgeCurrentAct: [''],
+            wfAgeTimeSet: [''],
+            wfAgeTimeAct: [''],
+            wfAgeNote: [''],
+            // Additional volt for Ageing
+            wfAutoAgeVoltAct1: [''],
+            wfAutoAgeVoltAct2: [''],
+            wfAutoAgeVoltAct3: [''],
+            wfAutoAgeVoltAct4: [''],
+            wfAutoAgeVoltAct5: [''],
+            wfAutoAgeVoltAct6: [''],
+            wfAutoAgeVoltAct7: [''],
+            // Auto ageing part2
+            wfAutoAgeOpenVolt: [''],
+            wfAutoAgeShortVolt: [''],
+            wfAutoAgeOpen: [''],
+            wfAutoAgeShort: [''],
+            wfAutoAgeHighCapacity: [''],
+            wfAutoAgeLowCapacity: [''],
+            wfAutoAgeWear: [''],
+            wfAutoAgeVoltLeak: [''],
+            wfAutoAgeLook: [''],
+            //Staff Input section
+            wfStaffOptId: [''],
+            wfStaffOptShift: [''],
+            wfStaffTechId: [''],
+            wfStaffXrayId: [''],
+            wfStageStatus: [''],
+            wfQCPass: [''],
+            wfQCPassCode: [''],
+            wfQCSignOff: [''],
+            wfQCInputNote: [''],
+            //  Appendix
+            wfFormStatus: [''],
+            wfProcessStatus: [''],
+        });
+    };
+    return EditWorkflow1Page;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('datePicker'),
+    __metadata("design:type", Object)
+], EditWorkflow1Page.prototype, "datePicker", void 0);
+EditWorkflow1Page = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        selector: 'page-edit-workflow1',template:/*ion-inline-start:"/Users/thomasq/Sites/vtApp/src/pages/edit-workflow1/edit-workflow1.html"*/'<ion-header style="margin-top: 0px !important;margin-left: 0px !important;">\n    <ion-navbar>\n        <div style="align-items: center; display: inline;">\n            <img src="./assets/img/vt_icon.png" class="icon">\n            <ion-title>\n                <!--&nbsp; ( {{wfInputForm.value.wfFormName}} )&nbsp;-->\n                &nbsp;( 裸品流程卡 )&nbsp;\n                工序:&nbsp; {{wfInputForm.value.wfProcessName}}\n            </ion-title>\n        </div>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <form [formGroup]="wfInputForm" (ngSubmit)="onSubmit()">\n        <ion-grid>\n            <!-- header bar -->\n            <ion-row wrap class="main headbar">\n                <ion-col *ngFor="let wfOrderDetail of wfOrderDetails">\n                    <ion-row justify-content-center wrap>\n                        <ion-col *ngIf="wfOrderDetail.method === \'input\'" no-padding>\n                            <ion-row align-items-center>\n                                <div class="inputLabel" no-padding>\n                                    {{wfOrderDetail.title}}\n                                </div>\n                                <ion-input *ngIf="wfOrderDetail.type != \'textarea\'" class="gridborder" disabled type={{wfOrderDetail.type}} [ngStyle]="{\'width.em\':wfOrderDetail.size}" formControlName={{wfOrderDetail.model}}></ion-input>\n\n                                <ion-textarea *ngIf="wfOrderDetail.type === \'textarea\'" formControlName={{wfOrderDetail.model}} [ngStyle]="{\'width.em\':wfOrderDetail.size}" class="textarea gridborder"></ion-textarea>\n                            </ion-row>\n                        </ion-col>\n\n                        <ion-col *ngIf="wfOrderDetail.method === \'break\'" no-padding [ngStyle]="{\'width.em\':wfOrderDetail.size}"></ion-col>\n\n                    </ion-row>\n                </ion-col>\n            </ion-row>\n\n            <!-- Content Section -->\n            <ion-row>\n                <!-- Material Info and Serial # -->\n                <ion-col class="main" col-5 no-padding>\n                    <!-- Header -->\n                    <ion-row>\n                        <ion-col col-1></ion-col>\n                        <ion-col text-center col-7>\n                            <h4 class="inputHeader">材料</h4>\n                        </ion-col>\n                        <ion-col text-center>\n                            <h4 class="inputHeader">批号</h4>\n                        </ion-col>\n                    </ion-row>\n\n                    <!-- Body -->\n                    <ion-row *ngFor="let wfRMDetail of wfRMDetails" justify-content-center align-items-center>\n                        <ion-col wrap col-auto>\n                            <div class="inputLabel">\n                                {{wfRMDetail.title}}\n                            </div>\n                        </ion-col>\n                        <ion-col col-6>\n                            <ion-input class="gridborder" disabled value={{wfInputForm.controls[wfRMDetail.modelName].value}}></ion-input>\n                        </ion-col>\n                        <ion-col>\n                            <ion-input class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelSerial].value}}></ion-input>\n                        </ion-col>\n                    </ion-row>\n                </ion-col>\n\n                <!-- Production Record + Ageing + Staff input -->\n                <ion-col col-7>\n\n                    <!-- Production input field -->\n                    <ion-row class="sec" align-self-stretch justify-content-left>\n\n                        <!-- Input field form -->\n                        <ion-col *ngFor="let wfInput of wfOpsInputs" col-auto>\n\n                            <!-- Simple Input field -->\n                            <ion-row *ngIf="wfInput.method == \'input\'" align-items-center justify-content-center>\n                                <div *ngIf="wfInput.wfOpslI == 2" style="height: 42px; width: 100vw;\n                                position: relative;">\n                                    <h4 class="inputHeader" style="display: inline-block; margin: 0;">\n                                        <ion-icon name="clipboard"></ion-icon>\n                                        &nbsp; 生產记录\n                                    </h4>\n\n                                    <div style="position: absolute;right: 10px; top: 0;">\n                                        <div style="margin-left: 5px;margin-right: 5px; display:inline-block;">\n                                            <!--<ion-icon name="{{wfInput.icon}}"></ion-icon>-->\n                                            {{wfInput.title}}\n                                        </div>\n                                        <ion-input (change)="updateTextChg();" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{\'width.em\':wfInput.size}" class="gridborder" style="display:inline-block;"></ion-input>\n                                    </div>\n                                </div>\n\n                                <div *ngIf="wfInput.wfOpslI != 2" style="margin-left: 5px;margin-right: 5px;">\n                                    <!--<ion-icon name="{{wfInput.icon}}"></ion-icon>-->\n                                    {{wfInput.title}}\n                                </div>\n\n\n                                <ion-input *ngIf="wfInput.wfOpslI == 1" (change)="updateTextChg();" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{\'width.em\':wfInput.size}" class="gridborder"></ion-input>\n\n                                <ion-input *ngIf="wfInput.wfOpslI != 1 && wfInput.wfOpslI != 2" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{\'width.em\':wfInput.size}" class="gridborder"></ion-input>\n\n                                <button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">\n                                    扫一扫\n                                </button>\n                            </ion-row>\n\n                            <ion-row *ngIf="wfInput.method == \'buttons\'" justify-content-left align-items-center>\n                                <div class="inputLabel">\n                                    {{wfInput.title}}\n                                </div>\n\n                                <ion-buttons>\n                                    <button ion-button round outline type="button" style="width: auto;" *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model, button.value)" [ngClass]="{\'buttonsSelected\': wfInputForm.controls[wfInput.model].value === button.value}">\n                    &nbsp; {{button.label}}\n                  </button>\n                                </ion-buttons>\n                            </ion-row>\n\n                            <ion-col *ngIf="wfInput.method == \'inputs\'">\n                                <ion-row *ngIf="wfInput.header" align-items-center justify-content-center>\n                                    <div style="width: 45px;"></div>\n                                    <div style="text-align: center;">\n                                        {{wfInput.header}}\n                                    </div>\n                                </ion-row>\n\n                                <ion-row *ngFor="let option of wfInput.options" align-items-center justify-content-center>\n\n                                    <div *ngIf="option.type != \'date\' && option.type != \'time\'" class="inputLabel">\n                                        {{option.title}}\n                                    </div>\n                                    <!-- datetime -->\n                                    <div *ngIf="option.type == \'date\'" [ngStyle]="{\'width.em\':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">\n                                        <ion-icon *ngIf="option.type == \'date\'" name="md-calendar" style="font-size:1.6em; margin: 0 6px;"></ion-icon>\n                                        <ion-datetime formControlName={{option.model}} #picker pickerFormat="DD/MM/YYYY" [min]="datePickerMin" style="display: inline-block; padding: 13px 0;"></ion-datetime>\n                                    </div>\n                                    <div *ngIf="option.type == \'time\'" [ngStyle]="{\'width.em\':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">\n                                        <ion-icon *ngIf="option.type == \'time\'" name="md-clock" style="font-size:1.6em; margin: 0 6px;"></ion-icon>\n                                        <ion-datetime formControlName={{option.model}} #picker displayFormat="HH:mm" pickerFormat="HH:mm" style="display: inline-block; padding: 13px 0;"></ion-datetime>\n                                    </div>\n\n                                    <ion-input *ngIf="option.type != \'date\' && option.type != \'time\'" formControlName={{option.model}} type={{option.type}} [ngStyle]="{\'width.em\':option.size}" class="gridborder"></ion-input>\n\n                                    <button *ngIf="option.scan" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(option.model)">\n                                        扫一扫\n                                    </button>\n                                </ion-row>\n\n                            </ion-col>\n\n                            <ion-col *ngIf="wfInput.method == \'breaks\'" col-3>\n                            </ion-col>\n\n                            <ion-row *ngIf="wfInput.method == \'textarea\'" align-items-center>\n                                <div class="inputLabel">\n                                    {{wfInput.title}}\n                                </div>\n                                <ion-textarea formControlName={{wfInput.model}} style="min-width: auto;" class="gridborder">\n                                </ion-textarea>\n                            </ion-row>\n\n                            <ion-col *ngIf="wfInput.method == \'inputs\' + wfNavParams.wfProcess">\n                                <ion-row *ngIf="wfInput.header" align-items-center justify-content-center>\n                                    <div style="width: 45px;"></div>\n                                    <div style="text-align: center;">\n                                        {{wfInput.header}}\n                                    </div>\n                                </ion-row>\n\n                                <ion-row *ngFor="let option of wfInput.options" align-items-center justify-content-center>\n\n                                    <div class="inputLabel">\n                                        {{option.title}}\n                                    </div>\n\n                                    <div *ngIf="option.type == \'date\'" [ngStyle]="{\'width.em\':option.size}" class="gridborder">\n                                        <ion-datetime formControlName={{option.model}} displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY"></ion-datetime>\n                                    </div>\n\n                                    <div *ngIf="option.type == \'time\'" [ngStyle]="{\'width.em\':option.size}" class="gridborder">\n                                        <ion-datetime formControlName={{option.model}} displayFormat="HH:mm" pickerFormat="HH:mm"></ion-datetime>\n                                    </div>\n\n                                    <ion-input *ngIf="option.type != \'date\' && option.type != \'time\'" formControlName={{option.model}} type={{option.type}} [ngStyle]="{\'width.em\':option.size}" class="gridborder"></ion-input>\n\n                                    <button *ngIf="option.scan" item-end ion-button class="barcodeButton" type="button" (click)="checkBeforeScan()">\n                                        扫一扫\n                                    </button>\n                                </ion-row>\n\n                            </ion-col>\n\n                        </ion-col>\n\n                    </ion-row>\n\n                    <!-- Ageing Input field -->\n                    <ion-row *ngIf=" wfNavParams.wfProcess== \'5a0\' || wfNavParams.wfProcess == \'5b0\'" class="sec" align-items-center justify-content-start>\n\n                        <!-- Ageing field Title -->\n                        <ion-col col-12>\n                            <div *ngIf="wfNavParams.wfProcess== \'5a0\'" class="inputHeader">\n                                <ion-icon name="md-hand"></ion-icon>\n                                &nbsp; 手工老化\n                            </div>\n                            <div *ngIf="wfNavParams.wfProcess== \'5b0\'" class="inputHeader">\n                                <ion-icon name="ios-color-wand-outline"></ion-icon>\n                                &nbsp; 自动老化\n                            </div>\n                        </ion-col>\n\n                        <!-- Auto老化 Input field form -->\n                        <ion-col col-auto>\n                            <ion-row>\n\n                                <!-- Ageing Header -->\n                                <ion-col col-12>\n                                    <ion-row>\n                                        <div style="width: 45px">\n                                            &nbsp; &nbsp;\n                                        </div>\n\n                                        <div style="width: 8em; text-align: center;">\n                                            &nbsp; 规格\n                                        </div>\n\n                                        <div style="width: 8em; text-align: center;">\n                                            &nbsp; 实际\n                                        </div>\n                                    </ion-row>\n                                </ion-col>\n\n                                <!-- Ageing Input -->\n                                <ion-col>\n                                    <ion-row *ngFor="let wfInput of wfAgeingDetails" align-items-center>\n\n                                        <!-- Simple Input field -->\n                                        <div class="inputLabel">\n                                            {{wfInput.title}}\n                                        </div>\n\n                                        <div *ngFor="let col of wfInput.cols">\n                                            <div *ngIf="col.auto === false" [ngStyle]="{\'width.em\':wfInput.size}">\n                                                <ion-input formControlName={{col.model}} type={{col.type}} class="gridborder"></ion-input>\n                                            </div>\n\n                                            <div *ngIf="col.auto === true && wfNavParams.wfProcess == \'5b0\'" [ngStyle]="{\'width.em\':wfInput.size}">\n                                                <ion-input formControlName={{col.model}} type={{col.type}} class="gridborder"></ion-input>\n                                            </div>\n                                        </div>\n                                    </ion-row>\n                                </ion-col>\n                                <ion-col *ngIf="wfNavParams.wfProcess== \'5a0\'" padding-horizontal>\n                                    <ion-row>\n                                        <div class="inputLabel">\n                                            特殊说明\n                                        </div>\n                                    </ion-row>\n                                    <ion-textarea name="wfAgeingNote" style="min-height: 20em; width: auto" class="gridborder">\n                                    </ion-textarea>\n                                </ion-col>\n\n                                <!-- Auto Ageing 2nd part -->\n                                <ion-row *ngIf="wfNavParams.wfProcess== \'5b0\'" class="ageingSubPart">\n\n                                    <ion-col col-6>\n                                        <ion-row wrap align-items-center>\n                                            <ion-col *ngFor="let wfInput of wfAutoAgeingDetails" no-padding col-6>\n\n                                                <ion-row align-items-center>\n                                                    <div class="inputLabel">\n                                                        {{wfInput.title}}\n                                                    </div>\n\n                                                    <div [ngStyle]="{\'width.em\':wfInput.size}">\n                                                        <ion-input formControlName={{wfInput.model}} type={{wfInput.type}} no-padding class="gridborder"></ion-input>\n                                                    </div>\n\n                                                </ion-row>\n                                            </ion-col>\n                                        </ion-row>\n                                    </ion-col>\n\n                                    <!-- Note -->\n                                    <ion-col padding-horizontal>\n                                        <ion-row>\n                                            <div class="inputLabel">\n                                                特殊说明\n                                            </div>\n                                        </ion-row>\n                                        <ion-textarea name="wfAgeingNote" style="min-height: 20em; width: auto" class="gridborder">\n                                        </ion-textarea>\n                                    </ion-col>\n\n                                </ion-row>\n\n\n                            </ion-row>\n                        </ion-col>\n\n                    </ion-row>\n\n                    <!-- Workflow People input field -->\n                    <ion-row class="sec staff" align-items-center justify-content-left>\n\n                        <!-- Input field header -->\n                        <ion-col text-left col-12>\n                            <h4 class="inputHeader">\n                                <ion-icon name="md-contacts"></ion-icon>\n                                &nbsp; 员工信息\n                            </h4>\n                        </ion-col>\n\n\n                        <!-- Input field form -->\n                        <ion-col *ngFor="let wfInput of wfPplInputs" col-auto align-items-left justify-content-center>\n\n                            <!-- Simple Input field -->\n                            <ion-row align-items-center justify-content-center *ngIf="wfInput.method == \'input\'">\n\n                                <div class="inputLabel">\n                                    {{wfInput.title}}\n                                </div>\n                                <div (click)="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">\n                                    <ion-input [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')" (change)="updateTextChg();" *ngIf="wfInput.wfPplI == 1" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}}\n                                        [ngStyle]="{\'width.em\':wfInput.size}" class="gridborder"></ion-input>\n                                    <ion-input [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')" *ngIf="wfInput.wfPplI == 2" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{\'width.em\':wfInput.size}"\n                                        class="gridborder"></ion-input>\n\n                                    <ion-input [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')" *ngIf="wfInput.wfPplI == 3" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{\'width.em\':wfInput.size}"\n                                        class="gridborder"></ion-input>\n\n                                    <ion-input *ngIf="wfInput.wfPplI == 4" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{\'width.em\':wfInput.size}" class="gridborder"></ion-input>\n\n                                    <ion-input style="display: inline-block;" [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')" *ngIf="wfInput.wfPplI == 5" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}}\n                                        [ngStyle]="{\'width.em\':wfInput.size}" class="gridborder"></ion-input>\n                                    <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" *ngIf="wfInput.scan == 5" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">\n                                      簽署\n                                    </button>\n                                </div>\n                                <!--\n                                <div on-mouseover="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">\n                                    <button [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')" *ngIf="wfInput.scan == 3" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">\n                                    扫一扫\n                                </button>\n                                </div>\n                                <div on-mouseover="showWfQCPassAlert(wfInputForm.value.wfQCPass)">\n\n                                </div>\n                                -->\n                            </ion-row>\n\n\n                            <ion-row *ngIf="wfInput.method == \'textarea\'" align-items-center>\n                                <div class="inputLabel">\n                                    备注\n                                </div>\n                                <ion-textarea formControlName={{wfInput.model}} [ngStyle]="{\'width.em\':wfInput.size}" class="textarea gridborder"></ion-textarea>\n                                &nbsp;&nbsp;&nbsp;&nbsp;\n\n                                <button ion-button type="button" (click)="takePhoto()">\n                                        <ion-icon ios="ios-camera" md="md-camera"></ion-icon>\n                                        &nbsp; 拍照 </button>\n\n                            </ion-row>\n\n                            <!-- Select Buttons -->\n                            <ion-row *ngIf="wfInput.method == \'buttons\'" align-items-center>\n                                <div class="inputLabel">\n                                    {{wfInput.title}}\n                                </div>\n\n                                <ion-input formControlName={{wfInput.model}} hidden></ion-input>\n\n                                <ion-buttons>\n                                    <button ion-button round outline type="button" style="width: auto;" *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model,button.value)" [ngClass]="{\'buttonsSelected\': wfInputForm.controls[wfInput.model].value === button.value}">\n                                    <ion-icon name="{{button.icon}}"></ion-icon>\n                                    &nbsp; {{button.label}}\n                                  </button>\n                                </ion-buttons>\n                            </ion-row>\n\n                            <!-- Break -->\n                            <div *ngIf="wfInput.method == \'break\'" [ngStyle]="{\'width.em\':wfInput.size}">\n                            </div>\n\n                        </ion-col>\n                        <ion-row>\n                            &nbsp;&nbsp;&nbsp;&nbsp;\n                            <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="button" ion-button (click)="showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">上存</button>\n\n                        </ion-row>\n                    </ion-row>\n\n                    <ion-row justify-content-end>\n\n                    </ion-row>\n\n                </ion-col>\n\n                <ion-col>\n                    <ion-row *ngFor="let image of images">\n                        <img src="{{image}}" class="img">\n                        <!-- <ion-img src="{{image}}"></ion-img> -->\n                    </ion-row>\n                </ion-col>\n\n            </ion-row>\n        </ion-grid>\n    </form>\n</ion-content>'/*ion-inline-end:"/Users/thomasq/Sites/vtApp/src/pages/edit-workflow1/edit-workflow1.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */],
+        __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
+        __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */],
+        __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__["a" /* Camera */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavParams */],
+        __WEBPACK_IMPORTED_MODULE_6__services_workflow__["a" /* WorkflowService */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */]])
+], EditWorkflow1Page);
+
+//# sourceMappingURL=edit-workflow1.js.map
+
+/***/ }),
+
+/***/ 256:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditWorkflow2Page; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_workflow__ = __webpack_require__(74);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var EditWorkflow2Page = (function () {
+    function EditWorkflow2Page(storage, formBuilder, barcodeScanner, alertCtrl, camera, navParams, wfSvc, navCtrl) {
+        this.storage = storage;
+        this.formBuilder = formBuilder;
+        this.barcodeScanner = barcodeScanner;
+        this.alertCtrl = alertCtrl;
+        this.camera = camera;
+        this.navParams = navParams;
+        this.wfSvc = wfSvc;
+        this.navCtrl = navCtrl;
+        this.form = __WEBPACK_IMPORTED_MODULE_3__angular_forms__["e" /* NgForm */];
+        this.wfOrderDetails = [];
+        this.wfRMDetails = [];
+        this.wfOpsInputs = [];
+        this.wfPplInputs = [];
+        this.images = [];
+        this.wfNavParams = this.navParams.data;
+        // For calculating the time value
+        this.tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+        this.appDate = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0, -1);
+        // Assume all are ion-input except the one specificed as textarea
+        this.wfOrderDetails = [
+            { method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 20, disabled: true, highlight: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 20, disabled: true, highlight: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 20, disabled: true, highlight: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "input", model: "wfOrderTotalQty", title: "批次量", type: "number", size: 6, disabled: true, highlight: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 6, disabled: true, highlight: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 10, disabled: true, highlight: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 10, disabled: true, highlight: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "input", model: "wfOrderSpec", title: "规格", type: "text", size: 8, disabled: true, highlight: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "input", model: "wfOrderDim", title: "尺寸", type: "text", size: 4, disabled: true, highlight: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 10, disabled: true, highlight: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 10, disabled: true, highlight: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "input", model: "wfOrderFormNote", title: "流程卡备注", type: "textarea", size: 24, disabled: false, highlight: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 24, disabled: false, highlight: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 24, disabled: false, highlight: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { title: "CAP: μF", method: "input", model: "wfSpecCap", type: "text", scan: false, size: 9, disabled: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { title: "DF: %", method: "input", model: "wfSpecDF", type: "text", scan: false, size: 9, disabled: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { title: "LC: μA", method: "input", model: "wfSpecLC", type: "text", scan: false, size: 9, disabled: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { title: "Z/ESR(Ω):", method: "input", model: "wfSpecZESR", type: "text", scan: false, size: 9, disabled: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "input", model: "wfOrderSupNote", title: "异常记录", type: "textarea", size: 24, highlight: false, process: { 1: false, 2: false, 3: false, 4: true } },
+        ];
+        this.wfRMDetails = [
+            { modelName: "wfRMUpBeltName", title: "上带:", type: "text", modelSerial: 'wfRMUpBeltSerial', highlight: false },
+            { modelName: "wfRMDownBeltName", title: "下带:", type: "text", modelSerial: 'wfRMDownBeltSerial', highlight: false },
+            { modelName: "wfRMBaseName", title: "底座:", type: "text", modelSerial: 'wfRMBaseSerial', highlight: false },
+            { modelName: "wfRMCircleName", title: "纸圆卡:", type: "text", modelSerial: 'wfRMCricleSerial', highlight: false },
+            { modelName: "wfRMPrintName", title: "油墨:", type: "text", modelSerial: 'wfRMPrintSerial', highlight: false },
+            { modelName: "wfRMPrintNameText", title: "", type: "text", modelSerial: 'wfRMPrintSerial', highlight: false },
+        ];
+        this.wfOpsInputs = [
+            // {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 25, highlight: false},
+            // {method: "input", model: "wfOrderFormId", title: "流程卡号", type: "text", size: 25, highlight: false},
+            // {method: "input", model: "wfOrderBOMNote", title: "流程卡备注", type: "text", size: 100, highlight: false},
+            // {title: "批次号", method: "input", model: "wfOrderBatchId", type: "text", scan: false, size: 13},
+            // {title: "流程卡号", method: "input", model: "wfOrderFormId", type: "text", scan: false, size: 13},
+            // {method: "break", size: 20},
+            // {title: "流程卡备注", method: "input", model: "wfOrderBOMNote", type: "textarea", scan: false, size: 40},
+            // {method: "break", size: 20},
+            { method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 7, highlight: false, process: { 1: true, 2: true, 3: true, 4: true } },
+            // {method: "break", title: ""},
+            // {title: "客户代码:", method: "input", model: "wfClientId", type: "text", scan: false, size: 15},
+            // {title: "销售订单号:", method: "input", model: "wfSalesOrderId", type: "text", scan: false, size: 15},
+            // {title: "台机号:", method: "input", model: "wfOptMachineId", type: "text", scan: false, size: 9},
+            { method: 'inputs', options: [
+                    { title: "日期", model: "wfOptInputDate", type: "date", scan: false, size: 8, process: { 1: true, 2: true, 3: false, 4: false } },
+                ], process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "inputs", options: [
+                    // {title: "日期", model: "wfOptInputDate", type: "date", scan: false, size: 8},
+                    { title: "不良数", model: "wfOptBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8, process: { 1: true, 2: true, 3: false, 4: false } },
+                    { title: "良品数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8, process: { 1: true, 2: true, 3: false, 4: false } },
+                ], process: { 1: true, 2: true, 3: true, 4: true } },
+            { title: "", method: "buttons", model: "wfQCCheck", process: { 1: false, 2: false, 3: true, 4: false }, buttons: [
+                    { label: "全检", value: 1, icon: 'done-all' },
+                    { label: "抽检", value: 2, icon: 'checkmark' }
+                ] },
+            { title: "抽检数量", method: "input", model: "wfRandomCheckInfo", type: "text", icon: 'construct', scan: 0, size: 6, process: { 1: false, 2: false, 3: true, 4: false } },
+            { title: "备注:", method: "input", model: "wfSpecNote", type: "textarea", scan: false, size: 40, process: { 1: true, 2: true, 3: true, 4: true } },
+        ];
+        this.wfPplInputs = [
+            { title: "作业員", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: 0, size: 20, process: { 1: true, 2: true, 3: true, 4: false } },
+            // {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, size: 5},
+            { title: "技術員", method: "input", model: "wfStaffTechId", type: "text", icon: 'construct', scan: 0, size: 20, process: { 1: true, 2: true, 3: true, 4: false } },
+            // {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: 3, size: 20},
+            { title: "抽检", method: "buttons", model: "wfRandomCheckStatus", process: { 1: false, 2: false, 3: false, 4: false }, buttons: [
+                    { label: "通过", value: 1, icon: 'checkmark' },
+                    { label: "失败", value: 2, icon: 'close' }
+                ] },
+            { title: "电性", method: "buttons", model: "wfElecPass", process: { 1: false, 2: false, 3: false, 4: true }, buttons: [
+                    { label: "通过", value: 1, icon: 'checkmark' },
+                    { label: "失败", value: 2, icon: 'close' }
+                ] },
+            { method: "break", size: 15, process: { 1: false, 2: false, 3: false, 4: true } },
+            { title: "外观", method: "buttons", model: "wfLookPass", process: { 1: false, 2: false, 3: false, 4: true }, buttons: [
+                    { label: "通过", value: 1, icon: 'checkmark' },
+                    { label: "失败", value: 2, icon: 'close' }
+                ] },
+            { title: "终检", method: "buttons", model: "wfQCPass", icon: "md-checkmark-circle-outline", process: { 1: true, 2: true, 3: false, 4: false }, buttons: [
+                    { label: "通过", value: 1, icon: 'checkmark' },
+                    { label: "失败", value: 2, icon: 'close' }
+                ] },
+            { title: "品检員", method: "input", model: "wfQCSignOff", type: "text", icon: 'construct', scan: 3, size: 20, process: { 1: true, 2: true, 3: true, 4: true } },
+            { method: "break", size: 15, process: { 1: true, 2: true, 3: false, 4: true } },
+            { method: "break", size: 15, process: { 1: false, 2: false, 3: true, 4: true } },
+            { title: "备注:", method: "input", model: "wfQCInputNote", type: "textarea", scan: false, size: 40, process: { 1: true, 2: true, 3: true, 4: true } },
+        ];
+    }
+    EditWorkflow2Page.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad EditWorkflowPage2');
+        console.log(this.wfNavParams);
+        console.log(this.appDate);
+        // alert(JSON.stringify(this.wfNavParams));
+    };
+    EditWorkflow2Page.prototype.ngOnInit = function () {
+        var _this = this;
+        console.log("Initialise the page 成品流程卡");
+        console.log(this.navParams);
+        this.formInit();
+        var form = this.wfInputForm;
+        // alert(this.wfRMDetails[1].modelName)
+        var storageData;
+        console.log("loading from storage");
+        this.storage.get(this.wfNavParams).then(function (dataDumpJsonXTmp) {
+            console.log("this is storage");
+            console.log("storage:" + JSON.stringify(dataDumpJsonXTmp));
+            storageData = dataDumpJsonXTmp;
+            // for (let key in storageData) {
+            //   console.log(key + " : " +storageData[key]);
+            // };
+            //alert(storageData['wfForm']);
+            /*
+             if(storageData['wfForm'] == 1)
+             {
+             form.controls['wfFormName'].setValue('裸品流程卡');
+             }
+             */
+            for (var key in form.value) {
+                // console.log("Loading " + key + " Storage:" + storageData[key]);
+                try {
+                    if (key == 'wfStaffTechId') {
+                        _this.wfStaffTechIdTmp = storageData[key];
+                        //alert('staff 1:' + StaffArr.wfStaffTechIda);
+                        form.controls[key].setValue('');
+                        // console.log('storage test 1: ' + this.wfStaffTechIdTmp);
+                    }
+                    else if (key == 'wfStaffOptShift') {
+                        _this.wfStaffOptShiftTmp = storageData[key];
+                        form.controls[key].setValue('');
+                        //alert('staff 2:' + this.wfStaffOptShiftTmp);
+                        // console.log('storage test 1: ' + this.wfStaffOptShiftTmp);
+                    }
+                    else if (key == 'wfQCSignOff') {
+                        _this.wfQCSignOffTmp = storageData[key];
+                        form.controls[key].setValue('');
+                        //alert('staff 3:' + this.wfQCSignOffTmp);
+                        // console.log('storage test 1: ' + this.wfQCSignOffTmp);
+                    }
+                    else if (key == 'wfOptInputDate') {
+                        _this.wfQCSignOffTmp = storageData[key];
+                        form.controls[key].setValue(_this.appDate);
+                        //alert('staff 3:' + this.wfQCSignOffTmp);
+                        // console.log('storage test 1: ' + this.wfQCSignOffTmp);
+                    }
+                    else {
+                        form.controls[key].setValue(storageData[key]);
+                        console.log("Form value" + form.controls[key]);
+                    }
+                }
+                catch (err) {
+                    // console.log(err);
+                }
+            }
+            console.log(_this.wfInputForm.value);
+        });
+        console.log(this.wfInputForm.value);
+    };
+    EditWorkflow2Page.prototype.checkBeforeScan = function (form) {
+        if (form.value.wfOptBadQty === '') {
+            alert("请输入良品数!");
+            return false;
+        }
+        else if (form.value.wfOptGoodQty === '') {
+            alert("请输入不良品数!");
+            return false;
+        }
+    };
+    EditWorkflow2Page.prototype.scanBarcode = function (model) {
+        var _this = this;
+        console.log("scanning Barcode");
+        /*
+        console.log(form.value);
+   
+        form.controls['wfProcess'].setValue(1);
+        form.controls['wfProcessName'].setValue('钉卷');
+        form.controls["wfForm"].setValue(1);
+   
+        console.log(form.value);
+        */
+        var form = this.wfInputForm;
+        this.barcodeScanner.scan().then(function (barcodeData) {
+            // Success! Barcode data is here
+            // Limiter to assume the Barcode is default used in this orderID
+            form.controls[model].setValue(barcodeData.text);
+            if (barcodeData.format && barcodeData.format != "QR_CODE" && model == "wfSignOff") {
+                switch (barcodeData.text) {
+                    case 'QC0001':
+                        form.controls['wfSignOff'].setValue(barcodeData.text);
+                        _this.promptAlert();
+                        break;
+                    case 'QC0002':
+                        form.controls['wfSignOff'].setValue(barcodeData.text);
+                        _this.promptAlert();
+                        break;
+                    case 'QC0003':
+                        form.controls['wfSignOff'].setValue(barcodeData.text);
+                        _this.promptAlert();
+                        break;
+                    default:
+                        alert('嚫，请确定你所扫描的条码是正确的');
+                }
+            }
+            else {
+                alert('嚫，请确定你所扫描的条码是正确的');
+            }
+        }, function (err) {
+            // An error occurred
+            alert(err);
+        });
+    };
+    EditWorkflow2Page.prototype.inputWf = function () {
+        console.log('inputWf activated');
+    };
+    EditWorkflow2Page.prototype.setWfPass = function () {
+        console.log('checked');
+        /*
+         // this.wfPass = result;
+         */
+    };
+    EditWorkflow2Page.prototype.onSubmit = function () {
+        var form = this.wfInputForm;
+        var storageData;
+        // alert(" < " + form.value + " > !");
+        console.log("Submitting the form now");
+        console.log(form.value);
+        this.wfSvc.upload(form.value, form.value.wfForm);
+        switch (form.value.wfProcess) {
+            case "5":
+                alert("嚫,工序完成了!");
+                break;
+            default:
+        }
+        console.log("Saving to local storage");
+        this.storage.set(form.value.wfFormId, form.value);
+        console.log("Leaving this page");
+        this.navCtrl.pop();
+    };
+    EditWorkflow2Page.prototype.updateForm = function (model, value) {
+        var form = this.wfInputForm;
+        console.log(form);
+        form.controls[model].setValue(value);
+        console.log(form.controls[model].value);
+    };
+    EditWorkflow2Page.prototype.promptAlert = function () {
+        var alertCtl = this.alertCtrl.create();
+        alertCtl.setTitle("确定完成和上传");
+        alertCtl.addButton('取消');
+        alertCtl.addButton({
+            text: '確定',
+            handler: function (data) {
+                // Once selected the subprocess, update the form and then submit the form to next process stage
+                alert("上传成功");
+            }
+        });
+        alertCtl.present();
+    };
+    EditWorkflow2Page.prototype.formInit = function () {
+        this.wfInputForm = this.formBuilder.group({
+            wfProcess: [''],
+            wfProcessName: [''],
+            wfFormName: [''],
+            wfForm: [''],
+            wfProcessStatus: [''],
+            // Order Inputs detail
+            wfFormId: [''],
+            wfOrderId: [''],
+            wfOrderBatchId: [''],
+            wfOrderBatchQty: [''],
+            wfOrderFormNote: [''],
+            wfOrderBOMNote: [''],
+            wfOrderNote: [''],
+            wfOrderSupNote: [''],
+            wfOrderTotalQty: [''],
+            wfOrderTotalGoodQty: [''],
+            wfOrderRMId: [''],
+            wfOrderSeries: [''],
+            wfOrderSpec: [''],
+            wfOrderDim: [''],
+            wfClientId: [''],
+            wfSalesOrderId: [''],
+            // Raw Material Inputs
+            wfRMUpBeltName: [''],
+            wfRMUpBeltSerial: [''],
+            wfRMDownBeltName: [''],
+            wfRMDownBeltSerial: [''],
+            wfRMBaseName: [''],
+            wfRMBaseSerial: [''],
+            wfRMCircleName: [''],
+            wfRMCricleSerial: [''],
+            wfRMPrintName: [''],
+            wfRMPrintSerial: [''],
+            wfRMPrintNameText: [''],
+            // Operational Input
+            wfSpecCap: [''],
+            wfSpecDF: [''],
+            wfSpecLC: [''],
+            wfSpecZESR: [''],
+            wfSpecNote: [''],
+            wfOptMachineId: '',
+            wfOptInputDate: [this.appDate],
+            wfOptStartTime: ['00:00'],
+            wfOptFinishTime: ['00:00'],
+            wfOptBadQty: [''],
+            wfOptGoodQty: [''],
+            //Staff Input section
+            wfStaffOptId: [''],
+            wfStaffOptShift: [''],
+            wfStaffTechId: [''],
+            wfQCCheck: [''],
+            wfRandomCheckInfo: [''],
+            wfElecPass: [''],
+            wfLookPass: [''],
+            wfQCPass: [''],
+            wfQCSignOff: [''],
+            wfQCInputNote: [''],
+        });
+    };
+    EditWorkflow2Page.prototype.keyPress = function (keycode) {
+        if (keycode == 13) {
+            alert('next');
+        }
+    };
+    EditWorkflow2Page.prototype.showWfOpsFinalInputsAlert = function (wfOrderTotalQty, wfOrderTotalGoodQty, wfOptBadQtyValue, wfOptGoodQtyValue) {
+        var _this = this;
+        var form = this.wfInputForm;
+        if (wfOrderTotalQty > wfOptGoodQtyValue && parseInt(form.value.wfProcess) < 2) {
+            var alert_1 = this.alertCtrl.create({
+                title: '',
+                subTitle: '预设总量 (' + wfOptGoodQtyValue + ') 小於 批次量 (' + wfOrderTotalQty + ')! ',
+                buttons: ['確定']
+            });
+            alert_1.present();
+        }
+        else if (wfOrderTotalQty <= wfOptGoodQtyValue || parseInt(form.value.wfProcess) > 2) {
+            var alert_2 = this.alertCtrl.create({
+                /*
+                title: '',
+                
+                subTitle: '确定完成和上传' + ' Order Total: ' + wfOrderTotalQty + ' Good Total: ' + wfOrderTotalGoodQty + ' Bad:' + wfOptBadQtyValue + ' opt good: ' + wfOptGoodQtyValue,
+                */
+                buttons: [{
+                        text: '上存',
+                        handler: function () {
+                            console.log('save clicked');
+                            form.value.wfProcessStatus = "0";
+                            _this.storage.set(form.value.wfFormId, form.value);
+                            _this.navCtrl.pop();
+                        }
+                    },
+                    {
+                        text: '上存 + 完成工序',
+                        handler: function () {
+                            console.log('submit and save clicked');
+                            console.log(form.value);
+                            // Upload to Server
+                            _this.wfSvc.upload(form.value, 1)
+                                .subscribe(function (data) {
+                                console.log("success");
+                                console.log(data[0]);
+                            }, function (error) {
+                                console.log(error);
+                            });
+                            var alert = _this.alertCtrl.create({
+                                title: 'Please Check!',
+                                // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
+                                // comment above for faster process
+                                subTitle: 'Please select 终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
+                                buttons: [{ text: '確定',
+                                        handler: function () {
+                                            form.value.wfProcessStatus = "1";
+                                            form.value.wfOptBadQty = '';
+                                            form.value.wfOptGoodQty = '';
+                                            _this.storage.set(form.value.wfFormId, form.value);
+                                            // Return back to main page
+                                            _this.navCtrl.pop();
+                                        }
+                                    }]
+                            });
+                            alert.present();
+                            //this.onSubmit();
+                        }
+                    }, {
+                        text: '取消',
+                        role: 'cancel',
+                        handler: function () {
+                            console.log('Cancel clicked');
+                        }
+                    }]
+            });
+            alert_2.present();
+        }
+        else {
+            var alert_3 = this.alertCtrl.create({
+                title: '',
+                subTitle: '请确定内容: 日期，开始，完成，良品数，不良数 ',
+                buttons: ['確定']
+            });
+            alert_3.present();
+        }
+    };
+    EditWorkflow2Page.prototype.showWfOpsInputsAlert = function (wfOptBadQtyValue, wfOptGoodQtyValue) {
+        if (wfOptBadQtyValue == '' || wfOptGoodQtyValue == '') {
+            var alert_4 = this.alertCtrl.create({
+                title: 'Please Check!',
+                subTitle: 'Please fill out the following: 日期，开始，完成，良品数，不良数 ',
+                buttons: ['OK']
+            });
+            alert_4.present();
+        }
+    };
+    EditWorkflow2Page.prototype.showWfQCPassAlert = function (wfQCPassValue) {
+        if (!(wfQCPassValue == 2 || wfQCPassValue == 1)) {
+            var alert_5 = this.alertCtrl.create({
+                title: 'Please Check!',
+                subTitle: 'Please select 终检!',
+                buttons: ['OK']
+            });
+            alert_5.present();
+        }
+    };
+    EditWorkflow2Page.prototype.takePhoto = function () {
+        // alert("taking photos");
+        var _this = this;
+        var options = {
+            quality: 50,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            correctOrientation: true,
+            saveToPhotoAlbum: true
+        };
+        this.camera.getPicture(options).then(function (imageData) {
+            // imageData is either a base64 encoded string or a file URI
+            // If it's base64:
+            var imgUrl = 'data:image/jpeg;base64,' + imageData;
+            _this.images.push(imgUrl);
+            _this.storage.set('images', _this.images);
+            // console.log(this.images);
+        }, function (err) {
+            // Handle error
+        });
+    };
+    return EditWorkflow2Page;
+}());
+EditWorkflow2Page = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        selector: 'page-edit-workflow2',template:/*ion-inline-start:"/Users/thomasq/Sites/vtApp/src/pages/edit-workflow2/edit-workflow2.html"*/'<ion-header style="margin-top: 0px !important;margin-left: 0px !important;">\n    <ion-navbar>\n        <div style="align-items: center; display: inline;">\n            <img src="./assets/img/vt_icon.png" class="icon">\n            <ion-title>\n                &nbsp; ( {{wfInputForm.value.wfFormName}} )&nbsp; 工序:&nbsp; {{wfInputForm.value.wfProcessName}}\n            </ion-title>\n        </div>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <form [formGroup]="wfInputForm" (ngSubmit)="onSubmit()">\n        <ion-grid>\n            <!-- header bar -->\n            <ion-row wrap class="main headbar">\n                <ion-col *ngFor="let wfOrderDetail of wfOrderDetails">\n\n                    <ion-row *ngIf="wfOrderDetail.model == \'wfSpecCap\'" justify-content-center wrap>\n                        <ion-col *ngIf="wfOrderDetail.method === \'input\' && wfOrderDetail.process[wfInputForm.value.wfProcess]" no-padding>\n                            <ion-row align-items-center>\n                                <div class="inputLabel" no-padding>\n                                    参数要求\n                                </div>\n                            </ion-row>\n                        </ion-col>\n                    </ion-row>\n\n                    <ion-row justify-content-center wrap>\n                        <ion-col *ngIf="wfOrderDetail.method === \'input\' && wfOrderDetail.process[wfInputForm.value.wfProcess]" no-padding>\n\n                            <ion-row align-items-center>\n\n                                <div class="inputLabel" no-padding>\n                                    {{wfOrderDetail.title}}\n                                </div>\n                                <ion-input *ngIf="wfOrderDetail.type != \'textarea\' && !wfOrderDetail.disabled" class="gridborder" type={{wfOrderDetail.type}} [ngStyle]="{\'width.em\':wfOrderDetail.size}" formControlName={{wfOrderDetail.model}}></ion-input>\n                                <ion-input *ngIf="wfOrderDetail.type != \'textarea\' && wfOrderDetail.disabled" class="gridborder" disabled type={{wfOrderDetail.type}} [ngStyle]="{\'width.em\':wfOrderDetail.size}" formControlName={{wfOrderDetail.model}}></ion-input>\n                                <ion-textarea *ngIf="wfOrderDetail.type === \'textarea\'" formControlName={{wfOrderDetail.model}} [ngStyle]="{\'width.em\':wfOrderDetail.size}" class="textarea gridborder"></ion-textarea>\n                            </ion-row>\n                        </ion-col>\n\n                        <ion-col *ngIf="wfOrderDetail.method === \'break\'" no-padding [ngStyle]="{\'width.em\':wfOrderDetail.size}"></ion-col>\n\n                    </ion-row>\n                </ion-col>\n            </ion-row>\n\n            <!-- Content Section -->\n            <ion-row>\n                <!-- Material Info and Serial # -->\n                <ion-col class="main" col-5 no-padding>\n                    <!-- Header -->\n                    <ion-row>\n                        <ion-col col-1></ion-col>\n                        <ion-col text-center col-7>\n                            <h4 class="inputHeader">材料</h4>\n                        </ion-col>\n                        <ion-col text-center>\n                            <h4 class="inputHeader">批号/备注</h4>\n                        </ion-col>\n                    </ion-row>\n\n                    <!-- Body -->\n                    <ion-row *ngFor="let wfRMDetail of wfRMDetails" justify-content-center align-items-center>\n                        <ion-col wrap col-auto>\n                            <div class="inputLabel">\n                                {{wfRMDetail.title}}\n                            </div>\n                        </ion-col>\n                        <ion-col *ngIf="wfRMDetail.modelName != \'wfRMPrintName\' && wfRMDetail.modelName != \'wfRMPrintNameText\'" col-6>\n                            <ion-input class="gridborder" disabled value={{wfInputForm.controls[wfRMDetail.modelName].value}}></ion-input>\n                        </ion-col>\n                        <ion-col *ngIf="wfRMDetail.modelName == \'wfRMPrintName\'" col-6>\n                            <ion-input class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelName].value}}></ion-input>\n                        </ion-col>\n                        <ion-col *ngIf="wfRMDetail.modelName != \'wfRMPrintNameText\'">\n                            <ion-input class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelSerial].value}}></ion-input>\n                        </ion-col>\n                        <ion-col *ngIf="wfRMDetail.modelName == \'wfRMPrintNameText\'" col-7>\n                            <ion-input class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelName].value}}></ion-input>\n                        </ion-col>\n                    </ion-row>\n                </ion-col>\n\n                <!-- Production Record + Ageing + Staff input -->\n                <ion-col col-7>\n\n                    <!-- Production input field -->\n                    <ion-row class="sec" align-self-stretch justify-content-left>\n\n                        <!-- Input field header -->\n                        <ion-col col-12>\n                            <h4 class="inputHeader">\n                                <ion-icon name="clipboard"></ion-icon>\n                                &nbsp; 生產记錄\n                            </h4>\n                        </ion-col>\n\n                        <!-- Input field form -->\n                        <ion-col *ngFor="let wfInput of wfOpsInputs" col-auto>\n\n                            <!-- Simple Input field -->\n                            <ion-row *ngIf="wfInput.method == \'input\' && wfInput.process[wfInputForm.value.wfProcess]" align-items-center justify-content-center>\n\n                                <div *ngIf="wfInput.process[wfInputForm.value.wfProcess]" style="margin-left: 5px;margin-right: 5px;">\n                                    {{wfInput.title}}\n                                </div>\n\n                                <ion-input *ngIf="wfInput.type != \'textarea\'" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{\'width.em\':wfInput.size}" class="gridborder"></ion-input>\n\n                                <ion-textarea *ngIf="wfInput.type === \'textarea\'" formControlName={{wfInput.model}} [ngStyle]="{\'width.em\':wfInput.size}" class="textarea gridborder"></ion-textarea>\n\n                                <button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">\n                                    扫一扫\n                                </button>\n                            </ion-row>\n\n                            <ion-row *ngIf="wfInput.method == \'buttons\' && wfInput.process[wfInputForm.value.wfProcess]" justify-content-left align-items-center>\n                                <div class="inputLabel">\n                                    {{wfInput.title}}\n                                </div>\n\n                                <ion-buttons>\n                                    <button *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model, button.value)" [ngClass]="{\'buttonsSelected\': wfInputForm.controls[wfInput.model].value === button.value}" ion-button round outline type="button" style="width: auto;">\n                                        &nbsp; {{button.label}}\n                                    </button>\n                                </ion-buttons>\n                            </ion-row>\n\n                            <ion-col *ngIf="wfInput.method == \'inputs\' && wfInput.process[wfInputForm.value.wfProcess]">\n                                <ion-row *ngIf="wfInput.header" align-items-center justify-content-center>\n                                    <div style="width: 45px;"></div>\n                                    <div style="text-align: center;">\n                                        {{wfInput.header}}\n                                    </div> 2\n                                </ion-row>\n\n                                <ion-row *ngFor="let option of wfInput.options" align-items-center justify-content-center>\n\n                                    <div *ngIf="option.process[wfInputForm.value.wfProcess]" class="inputLabel">\n                                        {{option.title}}\n                                    </div>\n                                    <!-- datetime -->\n                                    <div *ngIf="option.type == \'date\' && option.process[wfInputForm.value.wfProcess]" [ngStyle]="{\'width.em\':option.size}" class="gridborder">\n                                        <ion-datetime formControlName={{option.model}} #picker displayFormat="DD/MM/YYYY" [min]="datePickerMin" pickerFormat="DD MM YYYY"></ion-datetime>\n                                    </div>\n\n                                    <ion-input *ngIf="option.type != \'date\' && option.process[wfInputForm.value.wfProcess]" formControlName={{option.model}} type={{option.type}} [ngStyle]="{\'width.em\':option.size}" class="gridborder"></ion-input>\n\n                                    <button *ngIf="option.scan && option.process[wfInputForm.value.wfProcess]" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(option.model)">\n                                        扫一扫\n                                    </button>\n                                </ion-row>\n\n                            </ion-col>\n\n\n                            <ion-col *ngIf="wfInput.method === \'break\' && option.process[wfInputForm.value.wfProcess]" no-padding>\n                                <div [ngStyle]="{\'width.em\':wfInput.size}"></div>\n                            </ion-col>\n\n\n                            <ion-row *ngIf="wfInput.method == \'textarea\' && option.process[wfInputForm.value.wfProcess]" align-items-center>\n                                <div class="inputLabel">\n                                    {{wfInput.title}}\n                                </div>\n                                <ion-textarea formControlName={{wfInput.model}} style="min-width: auto;" class="gridborder">\n                                </ion-textarea>\n                            </ion-row>\n\n                        </ion-col>\n\n                    </ion-row>\n\n                    <!-- Workflow People input field -->\n                    <ion-row class="sec staff" align-items-center justify-content-left>\n\n                        <!-- Input field header -->\n                        <ion-col text-left col-12>\n                            <h4 class="inputHeader">\n                                <ion-icon name="md-contacts"></ion-icon>\n                                &nbsp; 员工信息\n                            </h4>\n                        </ion-col>\n\n                        <!-- Input field form -->\n                        <div *ngFor="let wfInput of wfPplInputs">\n                            <ion-row>\n                                <ion-col *ngIf="wfInput.process[wfInputForm.value.wfProcess]" col-auto align-items-left justify-content-center>\n\n                                    <!-- Simple Input field -->\n                                    <ion-row *ngIf="wfInput.method == \'input\' && wfInput.process[wfInputForm.value.wfProcess]" align-items-center justify-content-center>\n\n                                        <div class="inputLabel">\n                                            {{wfInput.title}}\n                                        </div>\n\n                                        <ion-input formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{\'width.em\':wfInput.size}" class="gridborder"></ion-input>\n                                        <div on-mouseover="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">\n                                            <button *ngIf="wfInput.scan == 1" [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">\n                                                扫一扫\n                                            </button>\n                                            <button *ngIf="wfInput.scan == 2" [disabled]="(wfInputForm.value.wfOptBadQty == \'\' || wfInputForm.value.wfOptGoodQty == \'\')" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">\n                                                扫一扫\n                                            </button>\n                                            <button *ngIf="wfInput.scan == 3" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">\n                                                簽署\n                                            </button>\n                                        </div>\n                                        <div on-mouseover="showWfQCPassAlert(wfInputForm.value.wfQCPass)">\n                                            <button *ngIf="wfInput.scan == 4 && wfInput.process[wfInputForm.value.wfProcess]" [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">\n                                                扫一扫\n                                            </button>\n                                        </div>\n                                    </ion-row>\n\n\n                                    <ion-row *ngIf="wfInput.method == \'textarea\' && wfInput.process[wfInputForm.value.wfProcess]" align-items-center>\n                                        <div class="inputLabel">\n                                            备注\n                                        </div>\n                                        <ion-textarea formControlName={{wfInput.model}} [ngStyle]="{\'width.em\':wfInput.size}" class="textarea gridborder"></ion-textarea>\n                                    </ion-row>\n\n                                    <!-- Select Buttons -->\n                                    <ion-row *ngIf="wfInput.method == \'buttons\' && wfInput.process[wfInputForm.value.wfProcess]" align-items-center>\n                                        <div class="inputLabel">\n                                            {{wfInput.title}}\n                                        </div>\n\n                                        <ion-input formControlName={{wfInput.model}} hidden></ion-input>\n\n\n                                        <ion-buttons>\n                                            <button ion-button round outline type="button" style="width: auto;" *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model,button.value)" [ngClass]="{\'buttonsSelected\': wfInputForm.controls[wfInput.model].value === button.value}">\n                                                <ion-icon name="{{button.icon}}"></ion-icon>\n                                                &nbsp; {{button.label}}\n                                            </button>\n                                        </ion-buttons>\n                                    </ion-row>\n\n                                    <!-- Break -->\n                                    <div *ngIf="wfInput.method == \'break\' && wfInput.process[wfInputForm.value.wfProcess]" [ngStyle]="{\'width.em\':wfInput.size}">\n                                    </div>\n\n                                </ion-col>\n                            </ion-row>\n                        </div>\n\n\n                    </ion-row>\n\n                    <ion-row justify-content-end>\n                        <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="button" ion-button (click)="showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)"\n                            ion-button>\n                            <ion-icon ios="ios-cloud-upload-outline" md="ios-cloud-upload-outline">\n                                &nbsp; 上存\n                            </ion-icon>\n                        </button>\n                        <button ion-button type="button" (click)="takePhoto()">\n                            <ion-icon ios="ios-camera" md="md-camera"></ion-icon>\n                            &nbsp; 拍照\n                        </button>\n\n                    </ion-row>\n\n                </ion-col>\n\n                <ion-col>\n                    <ion-row *ngFor="let image of images">\n                        <img src="{{image}}" class="img">\n                        <ion-img src="{{image}}"></ion-img>\n                    </ion-row>\n                </ion-col>\n\n            </ion-row>\n        </ion-grid>\n    </form>\n</ion-content>'/*ion-inline-end:"/Users/thomasq/Sites/vtApp/src/pages/edit-workflow2/edit-workflow2.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */],
+        __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
+        __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */],
+        __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__["a" /* Camera */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavParams */],
+        __WEBPACK_IMPORTED_MODULE_6__services_workflow__["a" /* WorkflowService */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */]])
+], EditWorkflow2Page);
+
+//# sourceMappingURL=edit-workflow2.js.map
+
+/***/ }),
+
+/***/ 257:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(258);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(262);
+
+
+Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
+//# sourceMappingURL=main.js.map
+
+/***/ }),
+
+/***/ 262:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_workflow_workflow__ = __webpack_require__(231);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_barcode_scanner__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_screen_orientation__ = __webpack_require__(230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_edit_workflow1_edit_workflow1__ = __webpack_require__(255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_edit_workflow2_edit_workflow2__ = __webpack_require__(256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_workflow__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__angular_http__ = __webpack_require__(254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__services_qrCode__ = __webpack_require__(576);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { HTTP } from "@ionic-native/http";
+
+
+var AppModule = (function () {
+    function AppModule() {
+    }
+    return AppModule;
+}());
+AppModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModule */])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */],
+            __WEBPACK_IMPORTED_MODULE_7__pages_workflow_workflow__["a" /* WorkflowPage */],
+            __WEBPACK_IMPORTED_MODULE_10__pages_edit_workflow1_edit_workflow1__["a" /* EditWorkflow1Page */],
+            __WEBPACK_IMPORTED_MODULE_11__pages_edit_workflow2_edit_workflow2__["a" /* EditWorkflow2Page */]
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
+            __WEBPACK_IMPORTED_MODULE_14__angular_http__["c" /* HttpModule */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */]),
+            __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["a" /* IonicStorageModule */].forRoot({
+                name: '__mydbtest',
+                driverOrder: ['indexeddb', 'sqlite', 'websql']
+            })
+        ],
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
+        entryComponents: [
+            __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */],
+            __WEBPACK_IMPORTED_MODULE_7__pages_workflow_workflow__["a" /* WorkflowPage */],
+            __WEBPACK_IMPORTED_MODULE_10__pages_edit_workflow1_edit_workflow1__["a" /* EditWorkflow1Page */],
+            __WEBPACK_IMPORTED_MODULE_11__pages_edit_workflow2_edit_workflow2__["a" /* EditWorkflow2Page */]
+        ],
+        providers: [
+            { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
+            __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__["a" /* StatusBar */],
+            __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
+            __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_native_barcode_scanner__["a" /* BarcodeScanner */],
+            __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["a" /* IonicStorageModule */],
+            __WEBPACK_IMPORTED_MODULE_9__ionic_native_screen_orientation__["a" /* ScreenOrientation */],
+            __WEBPACK_IMPORTED_MODULE_13__services_workflow__["a" /* WorkflowService */],
+            __WEBPACK_IMPORTED_MODULE_15__services_qrCode__["a" /* QrCodeService */]
+        ]
+    })
+], AppModule);
+
+//# sourceMappingURL=app.module.js.map
+
+/***/ }),
+
+/***/ 308:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_screen_orientation__ = __webpack_require__(230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_workflow_workflow__ = __webpack_require__(231);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_20" /* enableProdMode */])();
+var MyApp = (function () {
+    // rootPage:any = EditWorkflow1Page;
+    function MyApp(platform, statusBar, screenOrientation, splashScreen) {
+        this.screenOrientation = screenOrientation;
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_workflow_workflow__["a" /* WorkflowPage */];
+        platform.ready().then(function () {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            statusBar.styleDefault();
+            splashScreen.hide();
+        });
+        // Uncomment below command for screenOrientation lock
+        // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    }
+    return MyApp;
+}());
+MyApp = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/thomasq/Sites/vtApp/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/thomasq/Sites/vtApp/src/app/app.html"*/
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */],
+        __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */],
+        __WEBPACK_IMPORTED_MODULE_4__ionic_native_screen_orientation__["a" /* ScreenOrientation */],
+        __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+], MyApp);
+
+//# sourceMappingURL=app.component.js.map
+
+/***/ }),
+
+/***/ 576:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QrCodeService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var QrCodeService = (function () {
+    function QrCodeService() {
+    }
+    return QrCodeService;
+}());
+QrCodeService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])()
+], QrCodeService);
+
+//# sourceMappingURL=qrCode.js.map
+
+/***/ }),
+
+/***/ 74:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WorkflowService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(254);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+// import { HTTP } from "@ionic-native/http";
+
+
+var WorkflowService = (function () {
+    function WorkflowService(http) {
+        this.http = http;
+        this.httpHeaders = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Headers */]({ 'Content-type': 'application/json' });
+        this.httpOptions = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["d" /* RequestOptions */]({ headers: this.httpHeaders });
+        // private baseUrl = "http://localhost:3000/workflow/";
+        // For hosting server
+        // private baseUrl = "http://192.168.4.200:3000/workflow/";
+        this.baseUrl = "http://172.20.10.2:3000/workflow/";
+    }
+    WorkflowService.prototype.upload = function (wfInputForm, wfForm) {
+        console.log("Begin to upload onto server");
+        console.log("Printing packet to server");
+        console.log(wfInputForm);
+        var queryUrl = this.baseUrl + "form" + wfForm + "/submit/";
+        console.log(queryUrl);
+        return this.http.post(queryUrl, wfInputForm, this.httpOptions)
+            .timeout(1000)
+            .map(function (response) {
+            console.log("Responding from Server");
+            console.log(response.json());
+            return response.json();
+        });
+    };
+    WorkflowService.prototype.query = function (wfInputForm, wfForm) {
+        console.log("Begin to load data from server");
+        console.log("Printing request to server");
+        console.log(wfInputForm);
+        var queryUrl = this.baseUrl + "form" + wfForm + "/query/";
+        console.log(queryUrl);
+        return this.http.post(queryUrl, wfInputForm, this.httpOptions)
+            .timeout(1000)
+            .map(function (response) {
+            console.log("Responding from Server");
+            console.log(response.json()[0]);
+            return response.json();
+        });
+    };
+    return WorkflowService;
+}());
+WorkflowService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]])
+], WorkflowService);
+
+//# sourceMappingURL=workflow.js.map
+
+/***/ })
+
+},[257]);
+//# sourceMappingURL=main.js.map

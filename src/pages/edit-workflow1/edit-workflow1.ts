@@ -64,7 +64,7 @@ export class EditWorkflow1Page implements OnInit{
   
       {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 20, highlight: false},
        
-      {method: "input", model: "WfOrderId", title: "工单号", type: "text", size: 20, highlight: false},
+      {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 20, highlight: false},
 
       /*
        {model: "wfOrderBatchId", title: "批次号", type: "text", highlight: false},
@@ -100,7 +100,7 @@ export class EditWorkflow1Page implements OnInit{
 
     this.wfOpsInputs = [
       {title: "分單", method: "input", model: "wfFormSplit", type: "text", icon: 'ios-copy-outline', scan: false, size: 2, wfOpslI: 2},
-      {title: "流程卡号", method: "input", model: "wfOrderFormId", type: "text", icon: 'ios-copy-outline', scan: false, size: 9},
+      {title: "流程卡号", method: "input", model: "wfFormId", type: "text", icon: 'ios-copy-outline', scan: false, size: 9},
       {title: "机台", method: "input", model: "wfOptMachineId", type: "text", icon: 'cog', wfOpslI: 1, scan: true, size: 6},
       {title: "批次号", method: "input", model: "wfOrderBatchId", type: "text", icon: 'ios-basket-outline', scan: false, size: 11},
       {title: "批次量", method: "input", model: "wfOrderBatchQty", type: "text", icon: 'ios-basket-outline', scan: false, size: 5},
@@ -273,59 +273,6 @@ export class EditWorkflow1Page implements OnInit{
       alert("请输入良品数!");
       return false;
     }
-  }
-
-  scanBarcode(model: string){
-    console.log("scanning Barcode");
-
-    /*
-     console.log(form.value);
-
-     form.controls['wfProcess'].setValue(1);
-     form.controls['wfProcessName'].setValue('钉卷');
-     form.controls["wfForm"].setValue(1);
-
-     console.log(form.value);
-     */
-
-    let form = this.wfInputForm;
-
-    this.barcodeScanner.scan().then((barcodeData) => {
-      // Success! Barcode data is here
-      // Limiter to assume the Barcode is default used in this orderID
-
-
-      form.controls[model].setValue(barcodeData.text);
-
-      if ( barcodeData.format && barcodeData.format != "QR_CODE" && model == "wfSignOff" ) {
-
-        switch (barcodeData.text) {
-          case 'QC0001':
-            form.controls['wfSignOff'].setValue(barcodeData.text);
-            this.promptAlert();
-            break;
-
-          case 'QC0002':
-            form.controls['wfSignOff'].setValue(barcodeData.text);
-            this.promptAlert();
-            break;
-
-          case 'QC0003':
-            form.controls['wfSignOff'].setValue(barcodeData.text);
-            this.promptAlert();
-            break;
-
-          default:
-            alert('嚫，请确定你所扫描的条码是正确的');
-        }
-
-      } else {
-        alert('嚫，请确定你所扫描的条码是正确的');
-      }
-    }, (err) => {
-      // An error occurred
-      alert(err);
-    });
   }
 
   inputWf(){
@@ -587,6 +534,163 @@ export class EditWorkflow1Page implements OnInit{
 
   }
 
+  scanBarcode(model: string){
+
+    let form = this.wfInputForm;
+
+    console.log("scanning Barcode");
+    console.log(model);
+
+    this.barcodeScanner.scan().then((barcodeData) => {
+      // Success! Barcode data is here
+      // Limiter to assume the Barcode is default used in this orderID
+
+      if ( barcodeData.format && barcodeData.format != "QR_CODE" ) {
+        console.log("this is barcode");
+
+        let data = barcodeData.text;
+
+        form.controls[model].setValue(data);
+
+      } else if (barcodeData.format == "QR_CODE") {
+        // alert('嚫，请确定你所扫描的条码是正确的');
+        // Try if it is QR code
+        console.log(barcodeData.text);
+        //alert(barcodeData.text);
+        console.log("This is QR Code");
+        this.qrCodePopulate(barcodeData.text);
+
+      } else {
+
+        alert('嚫，请确定你所扫描的条码是正确的');
+      }
+    }, (err) => {
+      // An error occurred
+      alert(err);
+    });
+  }
+
+  qrCodePopulate(barcodeData: string) {
+
+    // This function takes the barcode data and then process the JSON object
+    // Assume each barcode data is a JSON object and it has a headers and bodies component
+    // Loop through the headers
+    // for each header,
+    //    check if the length is > 0, which is a sub JSON array object for data table
+    //    else loop through the keys inside that header JSON object
+
+    console.log("running qrCodePop");
+    console.log(barcodeData);
+
+    let data = JSON.parse(barcodeData);
+    let headers = data.headers;
+    let bodies = data.bodies;
+    let form = this.wfInputForm;
+
+    // console.log(data);
+
+    for (let key in headers) {
+      // console.log(key + " : " + headers[key])
+      switch(headers[key]) {
+        case "ngForm":
+          // console.log(key + " is a form")
+
+          let formBodies = bodies[key];
+          for (let formKey in formBodies) {
+            // console.log("populate form model " + formKey);
+            // console.log("populating model " + formKey + " " + formBodies[formKey]);
+
+            try {
+              // Dynamically set form value from the scanned code data
+              // try and catch here is to protect if some of the fields are missing or failed,
+              // then it will skip onto the next key
+
+              // backup code for assigning the value into form
+              // ngForm.controls[formKey].setValue(form[formKey]);
+
+              // This use form control for the value setting
+              console.log("formKey : " + formKey);
+              console.log("Form " + form[formKey]);
+
+              this.setFormValue(formKey, formBodies[formKey]);
+
+            }
+            catch(err) {
+              console.log(err.message);
+              eval('form.value.' + formKey + '= "' + formBodies[formKey] + '"; ');
+              eval('console.log("Retrying force input " + form.value.'+ formKey + ')');
+              eval('console.log(form.value.' + formKey + ');');
+              console.log("barcode loaded in form:" + JSON.stringify(form.value));
+            }
+
+          }
+
+          console.log("barcode loaded in form:" + JSON.stringify(form.value));
+          break;
+
+        case "ngStorage":
+          console.log(key + " is a storage");
+
+          this.storage.set(key, bodies[key]);
+
+          console.log(bodies[key]);
+
+          // Testing the storage has been set
+          this.storage.get(key).then((values) => {
+            for (let valKey in values) {
+              console.log(values[valKey]);
+            }
+            console.log(key);
+            console.log(JSON.stringify(values));
+          });
+
+          break;
+
+        case "ngInput":
+          console.log(key + " is for input");
+
+          console.log(bodies[key]);
+
+          let inputBodies = bodies[key];
+          for (let inputKey in inputBodies) {
+            console.log("populate form model" + inputKey);
+
+            try {
+              // Dynamically set form value from the scanned code data
+              // try and catch here is to protect if some of the fields are missing or failed,
+              // then it will skip onto the next key
+
+              // backup code for assigning the value into form
+              // ngForm.controls[formKey].setValue(form[formKey]);
+
+              // This line no longer works
+              eval('this.' + inputKey + " = " + inputBodies[inputKey]);
+
+              // this.setFormValue(inputKey, inputBodies[inputKey]);
+
+              //  form.value.
+            }
+            catch(err) {
+              console.log(err.message);
+            }
+
+          }
+
+          break;
+
+        default:
+          console.log(key + " is error");
+      }
+    }
+  }
+
+  setFormValue(model: string, value: any){
+
+    let form = this.wfInputForm;
+
+    form.controls[model].setValue(value);
+  }
+
   private formInit() {
     this.wfInputForm = this.formBuilder.group({
       wfProcess: [''],
@@ -595,8 +699,8 @@ export class EditWorkflow1Page implements OnInit{
 
       // Order Inputs detail
       wfFormId: [''],
-      wfOrderFormId: [''],
-      WfOrderId: [''],
+      // wfOrderFormId: [''],
+      wfOrderId: [''],
       wfOrderBatchId: [''],
       wfOrderBatchQty: [''],
 

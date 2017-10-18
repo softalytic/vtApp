@@ -5,10 +5,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ScreenOrientation } from "@ionic-native/screen-orientation";
 import { WorkflowPage } from "../pages/workflow/workflow";
 import { EditWorkflow1Page } from "../pages/edit-workflow1/edit-workflow1";
+import {enableProdMode} from '@angular/core';
 
 
 
-
+enableProdMode();
 @Component({
   templateUrl: 'app.html'
 })

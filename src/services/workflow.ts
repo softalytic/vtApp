@@ -8,7 +8,9 @@ import { Headers, Http, RequestOptions, Response } from "@angular/http";
 export class WorkflowService {
   private httpHeaders = new Headers({ 'Content-type':'application/json' });
   private httpOptions = new RequestOptions({ headers:this.httpHeaders });
-  private baseUrl = "http://localhost:3000/workflow/";
+  // private baseUrl = "http://localhost:3000/workflow/";
+  // For hosting server
+  private baseUrl = "http://192.168.4.200:3000/workflow/";
 
   constructor(private http: Http){}
 
@@ -21,6 +23,7 @@ export class WorkflowService {
     console.log(queryUrl);
 
     return this.http.post(queryUrl, wfInputForm, this.httpOptions)
+      .timeout(1000)
       .map((response: Response) => {
         console.log("Responding from Server");
         console.log(response.json());
@@ -37,6 +40,7 @@ export class WorkflowService {
     console.log(queryUrl);
 
     return this.http.post(queryUrl, wfInputForm, this.httpOptions)
+      .timeout(1000)
       .map((response: Response) => {
         console.log("Responding from Server");
         console.log(response.json()[0]);

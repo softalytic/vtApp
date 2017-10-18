@@ -4,8 +4,8 @@
     <list default="true" id="e4cec853-1425-4d8c-84e2-faa32da6519f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" afterPath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" afterPath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/workflow/workflow.ts" afterPath="$PROJECT_DIR$/src/pages/workflow/workflow.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/services/workflow.ts" afterPath="$PROJECT_DIR$/src/services/workflow.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,14 +21,14 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.55954325">
+    <splitter split-orientation="horizontal" split-proportion="0.60440457">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="edit-workflow1.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="460">
-                  <caret line="378" column="0" lean-forward="false" selection-start-line="378" selection-start-column="0" selection-end-line="378" selection-end-column="0" />
+                <state relative-caret-position="0">
+                  <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
                   <folding>
                     <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow1Page#0" expanded="false" />
                     <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow1Page#0" expanded="false" />
@@ -57,8 +57,8 @@
           <file leaf-file-name="workflow.ts" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-415">
-                  <caret line="596" column="9" lean-forward="true" selection-start-line="596" selection-start-column="9" selection-end-line="596" selection-end-column="9" />
+                <state relative-caret-position="305">
+                  <caret line="592" column="16" lean-forward="true" selection-start-line="592" selection-start-column="16" selection-end-line="592" selection-end-column="16" />
                   <folding>
                     <element signature="e#0#50#0" expanded="true" />
                     <element signature="e#427#496#0" expanded="true" />
@@ -69,15 +69,13 @@
                     <element signature="e#6020#7291#0" expanded="false" />
                     <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
                     <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
-                    <element signature="e#9082#12510#0" expanded="false" />
+                    <element signature="e#9134#12562#0" expanded="false" />
                     <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
-                    <element signature="e#15164#15618#0" expanded="false" />
-                    <element signature="e#15628#16583#0" expanded="false" />
                     <element signature="n#!!block;n#populateDataToForm#0;n#WorkflowPage#0" expanded="false" />
                     <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
-                    <element signature="e#20494#20759#0" expanded="false" />
-                    <marker date="1508256349000" expanded="false" signature="10768:11832" ph="{...}" />
-                    <marker date="1508256349000" expanded="false" signature="12049:12506" ph="{...}" />
+                    <element signature="e#20573#20838#0" expanded="false" />
+                    <marker date="1508298234000" expanded="false" signature="10820:11884" ph="{...}" />
+                    <marker date="1508298234000" expanded="false" signature="12101:12558" ph="{...}" />
                   </folding>
                 </state>
               </provider>
@@ -90,12 +88,14 @@
           <file leaf-file-name="edit-workflow1.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="75">
-                  <caret line="5" column="58" lean-forward="false" selection-start-line="5" selection-start-column="58" selection-end-line="5" selection-end-column="58" />
+                <state relative-caret-position="90">
+                  <caret line="6" column="37" lean-forward="false" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
                   <folding>
+                    <element signature="e#329#335#0" expanded="true" />
+                    <element signature="e#344#350#0" expanded="true" />
                     <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
                     <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-                    <marker date="1508255015000" expanded="true" signature="24068:24112" ph="..." />
+                    <marker date="1508296993000" expanded="true" signature="24129:24173" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -172,10 +172,10 @@
         <option value="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.scss" />
         <option value="$PROJECT_DIR$/src/services/qrCode.ts" />
         <option value="$PROJECT_DIR$/src/app/app.module.ts" />
-        <option value="$PROJECT_DIR$/src/services/workflow.ts" />
         <option value="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.html" />
         <option value="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts" />
         <option value="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" />
+        <option value="$PROJECT_DIR$/src/services/workflow.ts" />
         <option value="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" />
         <option value="$PROJECT_DIR$/src/pages/workflow/workflow.ts" />
       </list>
@@ -215,6 +215,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -258,7 +259,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -357,12 +357,13 @@
       <workItem from="1507470896858" duration="5277000" />
       <workItem from="1507650301333" duration="14643000" />
       <workItem from="1507946786652" duration="37212000" />
-      <workItem from="1508224533924" duration="21533000" />
+      <workItem from="1508224533924" duration="24628000" />
+      <workItem from="1508297655997" duration="477000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="90674000" />
+    <option name="totallyTimeSpent" value="94246000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -373,8 +374,8 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2962515" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -413,6 +414,89 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+          <folding>
+            <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#scanBarcode#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#inputWf#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#setWfPass#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#onSubmit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#updateForm#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#promptAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#keyPress#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#updateTextChg#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#updateTotalGoodQty#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfOpsInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#presentPrompt#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#takePhoto#0;n#EditWorkflow1Page#0" expanded="false" />
+            <element signature="n#!!block;n#formInit#0;n#EditWorkflow1Page#0" expanded="false" />
+            <marker date="1508253999000" expanded="true" signature="7:26" ph="..." />
+            <marker date="1508253999000" expanded="true" signature="17177:18432" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="148" column="20" lean-forward="false" selection-start-line="148" selection-start-column="20" selection-end-line="148" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#427#496#0" expanded="true" />
+            <element signature="e#1962#2259#0" expanded="false" />
+            <element signature="e#2282#3119#0" expanded="false" />
+            <element signature="n#!!block;n#ngOnInit#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#4315#6010#0" expanded="false" />
+            <element signature="e#6020#7291#0" expanded="false" />
+            <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#9134#12562#0" expanded="false" />
+            <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="n#!!block;n#populateDataToForm#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#20573#20838#0" expanded="false" />
+            <marker date="1508298234000" expanded="false" signature="10820:11884" ph="{...}" />
+            <marker date="1508298234000" expanded="false" signature="12101:12558" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#329#335#0" expanded="true" />
+            <element signature="e#344#350#0" expanded="true" />
+            <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <marker date="1508296993000" expanded="true" signature="24129:24173" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/workflow.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="12" column="25" lean-forward="false" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9450">
           <caret line="636" column="14" lean-forward="false" selection-start-line="636" selection-start-column="14" selection-end-line="648" selection-end-column="16" />
           <folding>
@@ -444,7 +528,7 @@
         <state relative-caret-position="1365">
           <caret line="328" column="0" lean-forward="false" selection-start-line="309" selection-start-column="0" selection-end-line="328" selection-end-column="0" />
           <folding>
-            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#0#50#0" expanded="false" />
             <marker date="1508243974000" expanded="false" signature="7884:9297" ph="[...]" />
             <marker date="1508243974000" expanded="false" signature="9323:9495" ph="{...}" />
             <marker date="1508243974000" expanded="false" signature="9510:11513" ph="{...}" />
@@ -473,7 +557,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="63" lean-forward="false" selection-start-line="0" selection-start-column="63" selection-end-line="0" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -481,10 +564,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#58#0" expanded="false" />
-            <element signature="e#892#935#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -502,15 +581,13 @@
             <element signature="e#6020#7291#0" expanded="false" />
             <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#9082#12510#0" expanded="false" />
+            <element signature="e#9134#12562#0" expanded="false" />
             <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#15164#15618#0" expanded="false" />
-            <element signature="e#15628#16583#0" expanded="false" />
             <element signature="n#!!block;n#populateDataToForm#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#20494#20759#0" expanded="false" />
-            <marker date="1508256349000" expanded="false" signature="10768:11832" ph="{...}" />
-            <marker date="1508256349000" expanded="false" signature="12049:12506" ph="{...}" />
+            <element signature="e#20573#20838#0" expanded="false" />
+            <marker date="1508298234000" expanded="false" signature="10820:11884" ph="{...}" />
+            <marker date="1508298234000" expanded="false" signature="12101:12558" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -520,19 +597,19 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#256#262#0" expanded="true" />
-            <element signature="e#299#305#0" expanded="true" />
-            <element signature="e#309#315#0" expanded="true" />
+            <element signature="e#256#262#0" expanded="false" />
+            <element signature="e#299#305#0" expanded="false" />
+            <element signature="e#309#315#0" expanded="false" />
             <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="e#3831#3837#0" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="e#5857#5863#0" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ion-textarea#0;n#ion-row#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="e#9155#9161#0" expanded="true" />
+            <element signature="n#style#0;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="e#3831#3837#0" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#button#0;n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="e#5857#5863#0" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ion-textarea#0;n#ion-row#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="e#9155#9161#0" expanded="false" />
             <marker date="1508243974000" expanded="false" signature="12820:13770" ph="..." />
             <marker date="1508243974000" expanded="false" signature="13256:13268" ph="..." />
             <marker date="1508243974000" expanded="false" signature="13592:13598" ph=" " />
@@ -549,9 +626,11 @@
         <state relative-caret-position="5130">
           <caret line="387" column="0" lean-forward="false" selection-start-line="387" selection-start-column="0" selection-end-line="387" selection-end-column="0" />
           <folding>
+            <element signature="e#329#335#0" expanded="true" />
+            <element signature="e#344#350#0" expanded="true" />
             <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
             <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <marker date="1508255015000" expanded="true" signature="24068:24112" ph="..." />
+            <marker date="1508296993000" expanded="true" signature="24129:24173" ph="..." />
           </folding>
         </state>
       </provider>
@@ -569,7 +648,7 @@
         <state relative-caret-position="465">
           <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
-            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#0#50#0" expanded="false" />
             <marker date="1508243974000" expanded="false" signature="7884:9297" ph="[...]" />
             <marker date="1508243974000" expanded="false" signature="9323:9495" ph="{...}" />
             <marker date="1508243974000" expanded="false" signature="9510:11513" ph="{...}" />
@@ -600,15 +679,13 @@
             <element signature="e#6020#7291#0" expanded="false" />
             <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#9082#12510#0" expanded="false" />
+            <element signature="e#9134#12562#0" expanded="false" />
             <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#15164#15618#0" expanded="false" />
-            <element signature="e#15628#16583#0" expanded="false" />
             <element signature="n#!!block;n#populateDataToForm#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#20494#20759#0" expanded="false" />
-            <marker date="1508256349000" expanded="false" signature="10768:11832" ph="{...}" />
-            <marker date="1508256349000" expanded="false" signature="12049:12506" ph="{...}" />
+            <element signature="e#20573#20838#0" expanded="false" />
+            <marker date="1508298234000" expanded="false" signature="10820:11884" ph="{...}" />
+            <marker date="1508298234000" expanded="false" signature="12101:12558" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -618,19 +695,19 @@
         <state relative-caret-position="900">
           <caret line="60" column="21" lean-forward="true" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="21" />
           <folding>
-            <element signature="e#256#262#0" expanded="true" />
-            <element signature="e#299#305#0" expanded="true" />
-            <element signature="e#309#315#0" expanded="true" />
+            <element signature="e#256#262#0" expanded="false" />
+            <element signature="e#299#305#0" expanded="false" />
+            <element signature="e#309#315#0" expanded="false" />
             <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="e#3831#3837#0" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="e#5857#5863#0" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ion-textarea#0;n#ion-row#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="e#9155#9161#0" expanded="true" />
+            <element signature="n#style#0;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="e#3831#3837#0" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#button#0;n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="e#5857#5863#0" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ion-textarea#0;n#ion-row#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="e#9155#9161#0" expanded="false" />
             <marker date="1508243974000" expanded="false" signature="12820:13770" ph="..." />
             <marker date="1508243974000" expanded="false" signature="13256:13268" ph="..." />
             <marker date="1508243974000" expanded="false" signature="13592:13598" ph=" " />
@@ -675,9 +752,11 @@
         <state relative-caret-position="675">
           <caret line="45" column="33" lean-forward="false" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
           <folding>
+            <element signature="e#329#335#0" expanded="true" />
+            <element signature="e#344#350#0" expanded="true" />
             <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
             <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <marker date="1508255015000" expanded="true" signature="24068:24112" ph="..." />
+            <marker date="1508296993000" expanded="true" signature="24129:24173" ph="..." />
           </folding>
         </state>
       </provider>
@@ -695,7 +774,7 @@
         <state relative-caret-position="225">
           <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
           <folding>
-            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#0#50#0" expanded="false" />
             <marker date="1508243974000" expanded="false" signature="7884:9297" ph="[...]" />
             <marker date="1508243974000" expanded="false" signature="9323:9495" ph="{...}" />
             <marker date="1508243974000" expanded="false" signature="9510:11513" ph="{...}" />
@@ -726,15 +805,13 @@
             <element signature="e#6020#7291#0" expanded="false" />
             <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#9082#12510#0" expanded="false" />
+            <element signature="e#9134#12562#0" expanded="false" />
             <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#15164#15618#0" expanded="false" />
-            <element signature="e#15628#16583#0" expanded="false" />
             <element signature="n#!!block;n#populateDataToForm#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#20494#20759#0" expanded="false" />
-            <marker date="1508256349000" expanded="false" signature="10768:11832" ph="{...}" />
-            <marker date="1508256349000" expanded="false" signature="12049:12506" ph="{...}" />
+            <element signature="e#20573#20838#0" expanded="false" />
+            <marker date="1508298234000" expanded="false" signature="10820:11884" ph="{...}" />
+            <marker date="1508298234000" expanded="false" signature="12101:12558" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -772,7 +849,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#0#50#0" expanded="false" />
             <marker date="1508243974000" expanded="false" signature="7884:9297" ph="[...]" />
             <marker date="1508243974000" expanded="false" signature="9323:9495" ph="{...}" />
             <marker date="1508243974000" expanded="false" signature="9510:11513" ph="{...}" />
@@ -809,9 +886,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#42#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -829,7 +903,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="63" lean-forward="false" selection-start-line="0" selection-start-column="63" selection-end-line="0" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -837,10 +910,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
           <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#58#0" expanded="false" />
-            <element signature="e#892#935#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -849,19 +918,19 @@
         <state relative-caret-position="-84">
           <caret line="84" column="36" lean-forward="false" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="36" />
           <folding>
-            <element signature="e#256#262#0" expanded="true" />
-            <element signature="e#299#305#0" expanded="true" />
-            <element signature="e#309#315#0" expanded="true" />
+            <element signature="e#256#262#0" expanded="false" />
+            <element signature="e#299#305#0" expanded="false" />
+            <element signature="e#309#315#0" expanded="false" />
             <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="e#3831#3837#0" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="e#5857#5863#0" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ion-textarea#0;n#ion-row#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="true" />
-            <element signature="e#9155#9161#0" expanded="true" />
+            <element signature="n#style#0;n#ion-row#0;n#ion-col#0;n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="e#3831#3837#0" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#button#0;n#ion-buttons#0;n#ion-row#1;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="e#5857#5863#0" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#ion-row#0;n#ion-col#0;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ion-textarea#0;n#ion-row#2;n#ion-col#1;n#ion-row#0;n#ion-col#1;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="e#9155#9161#0" expanded="false" />
             <marker date="1508243974000" expanded="false" signature="12820:13770" ph="..." />
             <marker date="1508243974000" expanded="false" signature="13256:13268" ph="..." />
             <marker date="1508243974000" expanded="false" signature="13592:13598" ph=" " />
@@ -873,20 +942,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/workflow.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1528">
           <caret line="332" column="37" lean-forward="false" selection-start-line="332" selection-start-column="37" selection-end-line="332" selection-end-column="37" />
           <folding>
-            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#0#50#0" expanded="false" />
             <marker date="1508243974000" expanded="false" signature="7884:9297" ph="[...]" />
             <marker date="1508243974000" expanded="false" signature="9323:9495" ph="{...}" />
             <marker date="1508243974000" expanded="false" signature="9510:11513" ph="{...}" />
@@ -903,22 +964,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="58" lean-forward="false" selection-start-line="5" selection-start-column="58" selection-end-line="5" selection-end-column="58" />
-          <folding>
-            <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
-            <marker date="1508255015000" expanded="true" signature="24068:24112" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="378" column="0" lean-forward="false" selection-start-line="378" selection-start-column="0" selection-end-line="378" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
           <folding>
             <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow1Page#0" expanded="false" />
@@ -943,10 +992,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="37" lean-forward="false" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
+          <folding>
+            <element signature="e#329#335#0" expanded="true" />
+            <element signature="e#344#350#0" expanded="true" />
+            <element signature="n#ion-row#0;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <element signature="n#ion-col#0;n#ion-row#1;n#ion-grid#0;n#form#0;n#ion-content#0;n#!!top" expanded="false" />
+            <marker date="1508296993000" expanded="true" signature="24129:24173" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/workflow.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="26" column="23" lean-forward="false" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-415">
-          <caret line="596" column="9" lean-forward="true" selection-start-line="596" selection-start-column="9" selection-end-line="596" selection-end-column="9" />
+        <state relative-caret-position="305">
+          <caret line="592" column="16" lean-forward="true" selection-start-line="592" selection-start-column="16" selection-end-line="592" selection-end-column="16" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
@@ -957,15 +1028,13 @@
             <element signature="e#6020#7291#0" expanded="false" />
             <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#9082#12510#0" expanded="false" />
+            <element signature="e#9134#12562#0" expanded="false" />
             <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#15164#15618#0" expanded="false" />
-            <element signature="e#15628#16583#0" expanded="false" />
             <element signature="n#!!block;n#populateDataToForm#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#20494#20759#0" expanded="false" />
-            <marker date="1508256349000" expanded="false" signature="10768:11832" ph="{...}" />
-            <marker date="1508256349000" expanded="false" signature="12049:12506" ph="{...}" />
+            <element signature="e#20573#20838#0" expanded="false" />
+            <marker date="1508298234000" expanded="false" signature="10820:11884" ph="{...}" />
+            <marker date="1508298234000" expanded="false" signature="12101:12558" ph="{...}" />
           </folding>
         </state>
       </provider>

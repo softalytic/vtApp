@@ -224,25 +224,28 @@ export class WorkflowPage implements OnInit {
       this.storage.set(form.value.wfFormId, form.value);
 
     } else {
-      this.wfSvc.query(form.value, form.value.wfForm).subscribe( serverData => {
-        if(serverData){
-          console.log("Response from server: " + JSON.stringify(serverData[0]));
-          this.populateDataToForm(form, serverData[0]);
-          this.workflowStateChange();
+      // Below script are for Server communication
+      this.wfSvc.query(form.value, form.value.wfForm).subscribe( (serverData) => {
+        console.log("Response from server: " + JSON.stringify(serverData[0]));
+        this.populateDataToForm(form, serverData[0]);
+        this.workflowStateChange();
 
-        } else {
-          this.storage.get(form.value.wfFormId).then(storageData => {
-            if(storageData){
-              console.log("Result found:" + form.value.wfFormId);
-              this.populateDataToForm(form, storageData);
-              this.workflowStateChange();
+      }, (err) => {
+        alert("嚫,网路不给力");
+        console.log(err);
 
-            } else {
-              alert("嚫，查木记录")
+        this.storage.get(form.value.wfFormId).then(storageData => {
+          if(storageData){
+            console.log("Result found:" + form.value.wfFormId);
+            this.populateDataToForm(form, storageData);
+            this.workflowStateChange();
 
-            }
-          });
-        }
+          } else {
+            alert("嚫，查木记录")
+
+          }
+        });
+
       });
     }
 
@@ -572,7 +575,8 @@ export class WorkflowPage implements OnInit {
       }
 
       if (form.value.wfProcessStatus === "" || form.value.wfProcessStatus == null) {
-        form.value.wfProcessStatus = "1";
+        form.value.wfProcessStatus = "0";
+        wfPNewState = "1";
       }
 
       if (form.value.wfFormStatus == '0' && form.value.wfProcessStatus == '1') {

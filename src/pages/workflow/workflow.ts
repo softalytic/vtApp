@@ -759,7 +759,7 @@ export class WorkflowPage implements OnInit {
       }
 
       if (form.value.wfProcessStatus === "" || form.value.wfProcessStatus == null) {
-        form.value.wfProcessStatus = "1";
+        form.value.wfProcessStatus = "0";
       }
 
       if (form.value.wfFormStatus == '0' && form.value.wfProcessStatus == '1') {

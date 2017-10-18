@@ -2,132 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4cec853-1425-4d8c-84e2-faa32da6519f" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/platforms/android/assets/www/.gitkeep" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.2/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.2/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.2/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.2/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.2/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.2/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.2/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.2/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_CordovaLib_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/platforms/android/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/bundles/debug/classes.jar" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/bundles/debug/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/bundles/release/classes.jar" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/bundles/release/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/CordovaBridge.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/CordovaBridge.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/CordovaPlugin.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/CordovaPlugin.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/CordovaResourceApi.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/CordovaResourceApi.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/Whitelist$URLPattern.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/debug/org/apache/cordova/Whitelist$URLPattern.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/CordovaBridge.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/CordovaBridge.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/CordovaPlugin.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/CordovaPlugin.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/CordovaResourceApi.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/CordovaResourceApi.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/Whitelist$URLPattern.class" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/classes/release/org/apache/cordova/Whitelist$URLPattern.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/outputs/aar/CordovaLib-debug.aar" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/outputs/aar/CordovaLib-debug.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/outputs/aar/CordovaLib-release.aar" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/outputs/aar/CordovaLib-release.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/drawable-land-hdpi/screen.png" afterPath="$PROJECT_DIR$/platforms/android/res/drawable-land-hdpi/screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/drawable-land-ldpi/screen.png" afterPath="$PROJECT_DIR$/platforms/android/res/drawable-land-ldpi/screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/drawable-land-mdpi/screen.png" afterPath="$PROJECT_DIR$/platforms/android/res/drawable-land-mdpi/screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/drawable-land-xhdpi/screen.png" afterPath="$PROJECT_DIR$/platforms/android/res/drawable-land-xhdpi/screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/drawable-land-xxhdpi/screen.png" afterPath="$PROJECT_DIR$/platforms/android/res/drawable-land-xxhdpi/screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/drawable-land-xxxhdpi/screen.png" afterPath="$PROJECT_DIR$/platforms/android/res/drawable-land-xxxhdpi/screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/drawable-port-hdpi/screen.png" afterPath="$PROJECT_DIR$/platforms/android/res/drawable-port-hdpi/screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/drawable-port-ldpi/screen.png" afterPath="$PROJECT_DIR$/platforms/android/res/drawable-port-ldpi/screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/drawable-port-mdpi/screen.png" afterPath="$PROJECT_DIR$/platforms/android/res/drawable-port-mdpi/screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/drawable-port-xhdpi/screen.png" afterPath="$PROJECT_DIR$/platforms/android/res/drawable-port-xhdpi/screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/drawable-port-xxhdpi/screen.png" afterPath="$PROJECT_DIR$/platforms/android/res/drawable-port-xxhdpi/screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/drawable-port-xxxhdpi/screen.png" afterPath="$PROJECT_DIR$/platforms/android/res/drawable-port-xxxhdpi/screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/mipmap-hdpi/icon.png" afterPath="$PROJECT_DIR$/platforms/android/res/mipmap-hdpi/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/mipmap-ldpi/icon.png" afterPath="$PROJECT_DIR$/platforms/android/res/mipmap-ldpi/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/mipmap-mdpi/icon.png" afterPath="$PROJECT_DIR$/platforms/android/res/mipmap-mdpi/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/mipmap-xhdpi/icon.png" afterPath="$PROJECT_DIR$/platforms/android/res/mipmap-xhdpi/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/mipmap-xxhdpi/icon.png" afterPath="$PROJECT_DIR$/platforms/android/res/mipmap-xxhdpi/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/mipmap-xxxhdpi/icon.png" afterPath="$PROJECT_DIR$/platforms/android/res/mipmap-xxxhdpi/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/icon/drawable-hdpi-icon.png" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-hdpi-icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/icon/drawable-ldpi-icon.png" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-ldpi-icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/icon/drawable-mdpi-icon.png" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-mdpi-icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/icon/drawable-xhdpi-icon.png" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-xhdpi-icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/icon/drawable-xxhdpi-icon.png" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-xxhdpi-icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/icon/drawable-xxxhdpi-icon.png" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-xxxhdpi-icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-hdpi-screen.png" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-hdpi-screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-ldpi-screen.png" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-ldpi-screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-mdpi-screen.png" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-mdpi-screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-xhdpi-screen.png" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-xhdpi-screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-xxhdpi-screen.png" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-xxhdpi-screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-xxxhdpi-screen.png" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-xxxhdpi-screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-hdpi-screen.png" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-hdpi-screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-ldpi-screen.png" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-ldpi-screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-mdpi-screen.png" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-mdpi-screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-xhdpi-screen.png" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-xhdpi-screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-xxhdpi-screen.png" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-xxhdpi-screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-xxxhdpi-screen.png" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-xxxhdpi-screen.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.xml" afterPath="$PROJECT_DIR$/config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/abbrev/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/abbrev/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/ansi/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/ansi/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/balanced-match/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/balanced-match/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/base64-js/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/base64-js/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/big-integer/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/big-integer/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/bplist-parser/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/bplist-parser/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/brace-expansion/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/brace-expansion/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/concat-map/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/concat-map/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/cordova-common/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/cordova-common/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/cordova-registry-mapper/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/cordova-registry-mapper/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/elementtree/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/elementtree/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/glob/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/glob/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/inflight/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/inflight/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/inherits/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/inherits/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/lodash/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/lodash/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/minimatch/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/minimatch/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/nopt/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/nopt/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/once/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/once/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/os-homedir/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/os-homedir/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/os-tmpdir/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/os-tmpdir/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/osenv/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/osenv/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/path-is-absolute/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/path-is-absolute/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/plist/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/plist/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/properties-parser/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/properties-parser/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/q/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/q/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/sax/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/sax/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/semver/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/semver/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/shelljs/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/shelljs/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/underscore/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/underscore/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/unorm/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/unorm/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/util-deprecate/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/util-deprecate/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/wrappy/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/wrappy/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/xmlbuilder/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/xmlbuilder/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/xmldom/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/xmldom/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/cordova-android/package.json" afterPath="$PROJECT_DIR$/node_modules/cordova-android/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/AndroidManifest.xml" afterPath="$PROJECT_DIR$/platforms/android/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeDebugAssets/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeDebugShaders/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeDebugShaders/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeReleaseAssets/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeReleaseAssets/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeReleaseShaders/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/mergeReleaseShaders/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageDebugResources/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageDebugResources/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageReleaseResources/merger.xml" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build/intermediates/incremental/packageReleaseResources/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/android.json" afterPath="$PROJECT_DIR$/platforms/android/android.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/assets/www/build/main.css" afterPath="$PROJECT_DIR$/platforms/android/assets/www/build/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/assets/www/build/main.js" afterPath="$PROJECT_DIR$/platforms/android/assets/www/build/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/assets/www/build/vendor.js" afterPath="$PROJECT_DIR$/platforms/android/assets/www/build/vendor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/assets/www/cordova_plugins.js" afterPath="$PROJECT_DIR$/platforms/android/assets/www/cordova_plugins.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/platform_www/cordova_plugins.js" afterPath="$PROJECT_DIR$/platforms/android/platform_www/cordova_plugins.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/android/res/xml/config.xml" afterPath="$PROJECT_DIR$/platforms/android/res/xml/config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/android.json" afterPath="$PROJECT_DIR$/plugins/android.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/app.component.ts" afterPath="$PROJECT_DIR$/src/app/app.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" afterPath="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts" afterPath="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/workflow/workflow.ts" afterPath="$PROJECT_DIR$/src/pages/workflow/workflow.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/services/workflow.ts" afterPath="$PROJECT_DIR$/src/services/workflow.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -149,9 +25,12 @@
           <file leaf-file-name="edit-workflow1.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="146">
-                  <caret line="460" column="0" lean-forward="true" selection-start-line="460" selection-start-column="0" selection-end-line="460" selection-end-column="0" />
+                <state relative-caret-position="2565">
+                  <caret line="535" column="0" lean-forward="true" selection-start-line="535" selection-start-column="0" selection-end-line="535" selection-end-column="0" />
                   <folding>
+                    <element signature="e#1825#3114#0" expanded="false" />
+                    <element signature="e#3140#4544#0" expanded="false" />
+                    <element signature="e#4570#6435#0" expanded="false" />
                     <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow1Page#0" expanded="false" />
                     <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow1Page#0" expanded="false" />
                     <element signature="n#!!block;n#inputWf#0;n#EditWorkflow1Page#0" expanded="false" />
@@ -178,10 +57,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="edit-workflow2.ts" pinned="false" current-in-tab="true">
+          <file leaf-file-name="edit-workflow2.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="202">
+                <state relative-caret-position="1246">
                   <caret line="442" column="0" lean-forward="true" selection-start-line="442" selection-start-column="0" selection-end-line="442" selection-end-column="0" />
                   <folding>
                     <element signature="e#5386#6087#0" expanded="false" />
@@ -205,16 +84,27 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="workflow.ts" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/services/workflow.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="195">
+                  <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="workflow.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="144">
-                  <caret line="343" column="2" lean-forward="false" selection-start-line="343" selection-start-column="2" selection-end-line="348" selection-end-column="3" />
+                <state relative-caret-position="161">
+                  <caret line="589" column="0" lean-forward="false" selection-start-line="589" selection-start-column="0" selection-end-line="589" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#50#0" expanded="true" />
                     <element signature="e#427#496#0" expanded="true" />
                     <element signature="e#1164#1336#0" expanded="false" />
-                    <element signature="e#1355#1628#0" expanded="false" />
+                    <element signature="e#1977#2274#0" expanded="false" />
+                    <element signature="e#2297#3136#0" expanded="false" />
                     <element signature="n#!!block;n#ngOnInit#0;n#WorkflowPage#0" expanded="false" />
                     <element signature="n#!!block;n#onAddWf#0;n#WorkflowPage#0" expanded="false" />
                     <element signature="e#7431#7754#0" expanded="false" />
@@ -226,9 +116,10 @@
                     <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
                     <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
                     <element signature="e#11740#15168#0" expanded="false" />
-                    <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
+                    <element signature="e#16082#17133#0" expanded="false" />
                     <element signature="n#!!block;n#workflowStateChange#0;n#WorkflowPage#0" expanded="false" />
-                    <marker date="1508329488000" expanded="false" signature="22626:22797" ph="{...}" />
+                    <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
+                    <marker date="1508333911000" expanded="false" signature="22608:22779" ph="{...}" />
                   </folding>
                 </state>
               </provider>
@@ -333,12 +224,12 @@
         <option value="$PROJECT_DIR$/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.html" />
         <option value="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html" />
-        <option value="$PROJECT_DIR$/src/services/workflow.ts" />
         <option value="$PROJECT_DIR$/platforms/android/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/src/pages/workflow/workflow.ts" />
         <option value="$PROJECT_DIR$/src/app/app.component.ts" />
         <option value="$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts" />
         <option value="$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts" />
+        <option value="$PROJECT_DIR$/src/pages/workflow/workflow.ts" />
+        <option value="$PROJECT_DIR$/src/services/workflow.ts" />
       </list>
     </option>
   </component>
@@ -532,19 +423,19 @@
       <workItem from="1507650301333" duration="14643000" />
       <workItem from="1507946786652" duration="37212000" />
       <workItem from="1508224533924" duration="24628000" />
-      <workItem from="1508297655997" duration="17950000" />
+      <workItem from="1508297655997" duration="20118000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111719000" />
+    <option name="totallyTimeSpent" value="113887000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13601127" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13601127" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -581,7 +472,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="20" />
+      <option name="time" value="21" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -591,6 +482,9 @@
         <state relative-caret-position="150">
           <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
           <folding>
+            <element signature="e#1825#3114#0" expanded="false" />
+            <element signature="e#3140#4544#0" expanded="false" />
+            <element signature="e#4570#6435#0" expanded="false" />
             <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#inputWf#0;n#EditWorkflow1Page#0" expanded="false" />
@@ -624,7 +518,8 @@
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
             <element signature="e#1164#1336#0" expanded="false" />
-            <element signature="e#1355#1628#0" expanded="false" />
+            <element signature="e#1977#2274#0" expanded="false" />
+            <element signature="e#2297#3136#0" expanded="false" />
             <element signature="n#!!block;n#ngOnInit#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#onAddWf#0;n#WorkflowPage#0" expanded="false" />
             <element signature="e#7431#7754#0" expanded="false" />
@@ -636,9 +531,10 @@
             <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
             <element signature="e#11740#15168#0" expanded="false" />
-            <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#16082#17133#0" expanded="false" />
             <element signature="n#!!block;n#workflowStateChange#0;n#WorkflowPage#0" expanded="false" />
-            <marker date="1508329488000" expanded="false" signature="22626:22797" ph="{...}" />
+            <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
+            <marker date="1508333911000" expanded="false" signature="22608:22779" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -685,6 +581,9 @@
         <state relative-caret-position="9450">
           <caret line="636" column="14" lean-forward="false" selection-start-line="636" selection-start-column="14" selection-end-line="648" selection-end-column="16" />
           <folding>
+            <element signature="e#1825#3114#0" expanded="false" />
+            <element signature="e#3140#4544#0" expanded="false" />
+            <element signature="e#4570#6435#0" expanded="false" />
             <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#inputWf#0;n#EditWorkflow1Page#0" expanded="false" />
@@ -765,7 +664,8 @@
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
             <element signature="e#1164#1336#0" expanded="false" />
-            <element signature="e#1355#1628#0" expanded="false" />
+            <element signature="e#1977#2274#0" expanded="false" />
+            <element signature="e#2297#3136#0" expanded="false" />
             <element signature="n#!!block;n#ngOnInit#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#onAddWf#0;n#WorkflowPage#0" expanded="false" />
             <element signature="e#7431#7754#0" expanded="false" />
@@ -777,9 +677,10 @@
             <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
             <element signature="e#11740#15168#0" expanded="false" />
-            <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#16082#17133#0" expanded="false" />
             <element signature="n#!!block;n#workflowStateChange#0;n#WorkflowPage#0" expanded="false" />
-            <marker date="1508329488000" expanded="false" signature="22626:22797" ph="{...}" />
+            <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
+            <marker date="1508333911000" expanded="false" signature="22608:22779" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -866,7 +767,8 @@
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
             <element signature="e#1164#1336#0" expanded="false" />
-            <element signature="e#1355#1628#0" expanded="false" />
+            <element signature="e#1977#2274#0" expanded="false" />
+            <element signature="e#2297#3136#0" expanded="false" />
             <element signature="n#!!block;n#ngOnInit#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#onAddWf#0;n#WorkflowPage#0" expanded="false" />
             <element signature="e#7431#7754#0" expanded="false" />
@@ -878,9 +780,10 @@
             <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
             <element signature="e#11740#15168#0" expanded="false" />
-            <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#16082#17133#0" expanded="false" />
             <element signature="n#!!block;n#workflowStateChange#0;n#WorkflowPage#0" expanded="false" />
-            <marker date="1508329488000" expanded="false" signature="22626:22797" ph="{...}" />
+            <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
+            <marker date="1508333911000" expanded="false" signature="22608:22779" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -910,6 +813,9 @@
         <state relative-caret-position="330">
           <caret line="27" column="16" lean-forward="true" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
           <folding>
+            <element signature="e#1825#3114#0" expanded="false" />
+            <element signature="e#3140#4544#0" expanded="false" />
+            <element signature="e#4570#6435#0" expanded="false" />
             <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#inputWf#0;n#EditWorkflow1Page#0" expanded="false" />
@@ -997,7 +903,8 @@
             <element signature="e#0#50#0" expanded="true" />
             <element signature="e#427#496#0" expanded="true" />
             <element signature="e#1164#1336#0" expanded="false" />
-            <element signature="e#1355#1628#0" expanded="false" />
+            <element signature="e#1977#2274#0" expanded="false" />
+            <element signature="e#2297#3136#0" expanded="false" />
             <element signature="n#!!block;n#ngOnInit#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#onAddWf#0;n#WorkflowPage#0" expanded="false" />
             <element signature="e#7431#7754#0" expanded="false" />
@@ -1009,9 +916,10 @@
             <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
             <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
             <element signature="e#11740#15168#0" expanded="false" />
-            <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#16082#17133#0" expanded="false" />
             <element signature="n#!!block;n#workflowStateChange#0;n#WorkflowPage#0" expanded="false" />
-            <marker date="1508329488000" expanded="false" signature="22626:22797" ph="{...}" />
+            <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
+            <marker date="1508333911000" expanded="false" signature="22608:22779" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1021,6 +929,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#1825#3114#0" expanded="false" />
+            <element signature="e#3140#4544#0" expanded="false" />
+            <element signature="e#4570#6435#0" expanded="false" />
             <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#inputWf#0;n#EditWorkflow1Page#0" expanded="false" />
@@ -1146,14 +1057,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/workflow.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -1178,38 +1081,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
+    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="343" column="2" lean-forward="false" selection-start-line="343" selection-start-column="2" selection-end-line="348" selection-end-column="3" />
+        <state relative-caret-position="1246">
+          <caret line="442" column="0" lean-forward="true" selection-start-line="442" selection-start-column="0" selection-end-line="442" selection-end-column="0" />
           <folding>
-            <element signature="e#0#50#0" expanded="true" />
-            <element signature="e#427#496#0" expanded="true" />
-            <element signature="e#1164#1336#0" expanded="false" />
-            <element signature="e#1355#1628#0" expanded="false" />
-            <element signature="n#!!block;n#ngOnInit#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="n#!!block;n#onAddWf#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#7431#7754#0" expanded="false" />
-            <element signature="e#7958#9772#0" expanded="false" />
-            <element signature="e#8093#9606#0" expanded="false" />
-            <element signature="e#9778#10589#0" expanded="false" />
-            <element signature="e#9869#10080#0" expanded="false" />
-            <element signature="e#10232#10555#0" expanded="false" />
-            <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="e#11740#15168#0" expanded="false" />
-            <element signature="n#!!block;n#qrCodePopulate#0;n#WorkflowPage#0" expanded="false" />
-            <element signature="n#!!block;n#workflowStateChange#0;n#WorkflowPage#0" expanded="false" />
-            <marker date="1508329488000" expanded="false" signature="22626:22797" ph="{...}" />
+            <element signature="e#5386#6087#0" expanded="false" />
+            <element signature="e#9060#11433#0" expanded="false" />
+            <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow2Page#0" expanded="false" />
+            <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow2Page#0" expanded="false" />
+            <element signature="n#!!block;n#onSubmit#0;n#EditWorkflow2Page#0" expanded="false" />
+            <element signature="n#!!block;n#updateForm#0;n#EditWorkflow2Page#0" expanded="false" />
+            <element signature="n#!!block;n#promptAlert#0;n#EditWorkflow2Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow2Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfOpsInputsAlert#0;n#EditWorkflow2Page#0" expanded="false" />
+            <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow2Page#0" expanded="false" />
+            <element signature="n#!!block;n#takePhoto#0;n#EditWorkflow2Page#0" expanded="false" />
+            <element signature="n#!!block;n#scanBarcode#0;n#EditWorkflow2Page#0" expanded="false" />
+            <element signature="n#!!block;n#qrCodePopulate#0;n#EditWorkflow2Page#0" expanded="false" />
+            <element signature="n#!!block;n#setFormValue#0;n#EditWorkflow2Page#0" expanded="false" />
+            <element signature="n#!!block;n#formInit#0;n#EditWorkflow2Page#0" expanded="false" />
+            <marker date="1508331657000" expanded="false" signature="18231:18235" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow1/edit-workflow1.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="460" column="0" lean-forward="true" selection-start-line="460" selection-start-column="0" selection-end-line="460" selection-end-column="0" />
+        <state relative-caret-position="2565">
+          <caret line="535" column="0" lean-forward="true" selection-start-line="535" selection-start-column="0" selection-end-line="535" selection-end-column="0" />
           <folding>
+            <element signature="e#1825#3114#0" expanded="false" />
+            <element signature="e#3140#4544#0" expanded="false" />
+            <element signature="e#4570#6435#0" expanded="false" />
             <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow1Page#0" expanded="false" />
             <element signature="n#!!block;n#inputWf#0;n#EditWorkflow1Page#0" expanded="false" />
@@ -1235,28 +1139,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/edit-workflow2/edit-workflow2.ts">
+    <entry file="file://$PROJECT_DIR$/src/pages/workflow/workflow.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="442" column="0" lean-forward="true" selection-start-line="442" selection-start-column="0" selection-end-line="442" selection-end-column="0" />
+        <state relative-caret-position="161">
+          <caret line="589" column="0" lean-forward="false" selection-start-line="589" selection-start-column="0" selection-end-line="589" selection-end-column="0" />
           <folding>
-            <element signature="e#5386#6087#0" expanded="false" />
-            <element signature="e#9060#11433#0" expanded="false" />
-            <element signature="n#!!block;n#ngOnInit#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#checkBeforeScan#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#onSubmit#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#updateForm#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#promptAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#showWfOpsFinalInputsAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#showWfOpsInputsAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#showWfQCPassAlert#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#takePhoto#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#scanBarcode#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#qrCodePopulate#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#setFormValue#0;n#EditWorkflow2Page#0" expanded="false" />
-            <element signature="n#!!block;n#formInit#0;n#EditWorkflow2Page#0" expanded="false" />
-            <marker date="1508331657000" expanded="false" signature="18231:18235" ph="{...}" />
+            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#427#496#0" expanded="true" />
+            <element signature="e#1164#1336#0" expanded="false" />
+            <element signature="e#1977#2274#0" expanded="false" />
+            <element signature="e#2297#3136#0" expanded="false" />
+            <element signature="n#!!block;n#ngOnInit#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="n#!!block;n#onAddWf#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#7431#7754#0" expanded="false" />
+            <element signature="e#7958#9772#0" expanded="false" />
+            <element signature="e#8093#9606#0" expanded="false" />
+            <element signature="e#9778#10589#0" expanded="false" />
+            <element signature="e#9869#10080#0" expanded="false" />
+            <element signature="e#10232#10555#0" expanded="false" />
+            <element signature="n#!!block;n#scanBarcode#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="n#!!block;n#setFormValue#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="e#11740#15168#0" expanded="false" />
+            <element signature="e#16082#17133#0" expanded="false" />
+            <element signature="n#!!block;n#workflowStateChange#0;n#WorkflowPage#0" expanded="false" />
+            <element signature="n#!!block;n#formInit#0;n#WorkflowPage#0" expanded="false" />
+            <marker date="1508333911000" expanded="false" signature="22608:22779" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/workflow.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

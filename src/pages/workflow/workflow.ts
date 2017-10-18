@@ -518,12 +518,9 @@ export class WorkflowPage implements OnInit {
               // try and catch here is to protect if some of the fields are missing or failed,
               // then it will skip onto the next key
 
-              // backup code for assigning the value into form
-              // ngForm.controls[formKey].setValue(form[formKey]);
-
               // This use form control for the value setting
-              console.log("formKey : " + formKey);
-              console.log("Form " + form[formKey]);
+              // console.log("formKey : " + formKey);
+              // console.log("Form " + form[formKey]);
 
               this.setFormValue(formKey, formBodies[formKey]);
 
@@ -533,7 +530,7 @@ export class WorkflowPage implements OnInit {
               eval('form.value.' + formKey + '= "' + formBodies[formKey] + '"; ');
               eval('console.log("Retrying force input " + form.value.'+ formKey + ')');
               eval('console.log(form.value.' + formKey + ');');
-              console.log("barcode loaded in form:" + JSON.stringify(form.value));
+              // console.log("barcode loaded in form:" + JSON.stringify(form.value));
             }
 
           }
@@ -566,30 +563,42 @@ export class WorkflowPage implements OnInit {
 
           let inputBodies = bodies[key];
           for (let inputKey in inputBodies) {
-            console.log("populate form model" + inputKey);
+            // console.log("populate form model" + inputKey);
 
             try {
               // Dynamically set form value from the scanned code data
               // try and catch here is to protect if some of the fields are missing or failed,
               // then it will skip onto the next key
 
-              // backup code for assigning the value into form
-              // ngForm.controls[formKey].setValue(form[formKey]);
-
               // This line no longer works
               eval('this.' + inputKey + " = " + inputBodies[inputKey]);
 
-              // this.setFormValue(inputKey, inputBodies[inputKey]);
-
-              //  form.value.
             }
             catch(err) {
               console.log(err.message);
             }
-
           }
 
           break;
+
+        case "wfMachine":
+
+          let wfMachineId = bodies[key];
+
+          this.storage.get(wfMachineId).then((values) => {
+            let staffData = values[wfMachineId];
+
+          });
+
+          console.log("barcode loaded in form:" + JSON.stringify(form.value));
+
+
+          break;
+
+        case "wfQC":
+
+          break;
+
 
         default:
           console.log(key + " is error");
@@ -722,6 +731,5 @@ export class WorkflowPage implements OnInit {
 
     });
   }
-
 
 }

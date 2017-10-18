@@ -75,7 +75,7 @@ export class WorkflowPage implements OnInit {
     this.wfInputs = [
       {title: "流程卡号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 30},
       {title: "工单号", method: 'input', type: 'text', model: 'WfOrderId', scan: false, size: 20},
-      {title: "总量(预设)", method: 'input', type: 'number', model: 'wfOrderTotalQty', scan: false, size: 10},
+      //{title: "总量(预设)", method: 'input', type: 'number', model: 'wfOrderTotalQty', scan: false, size: 10},
 
       // Prompt Screen alert to pick the workflow batch id
       {title: "批次号", method: 'input', type: 'text', model: 'wfOrderBatchId', scan: false, size: 20},
@@ -150,7 +150,6 @@ export class WorkflowPage implements OnInit {
             if (form.value.wfFormId === "") {
               console.log("nothing in the form");
         
-              
               // Predefined data for testing purpose
         
               // workflow 1
@@ -168,6 +167,7 @@ export class WorkflowPage implements OnInit {
                       "wfOrderBatchQty": "100",
                       "wfOrderTotalQty": "1000",
                       "wfOrderTotalGoodQty": "100",
+                      "wfOrderTotalBadQty": "0",
                       "wfOrderRMId": "VT原材料",
                       "wfOrderSeries": "VT系列",
                       "wfOrderSpec": "VT規格",
@@ -260,6 +260,7 @@ export class WorkflowPage implements OnInit {
                       "wfOrderNote": "嚫，這是測試Note",
                       "wfOrderTotalQty":"10000",
                       "wfOrderTotalGoodQty":"1000",
+                      "wfOrderTotalBadQty": "0",
                       "wfOrderRMId":"VTRM0001",
                       "wfOrderSeries": "VTRM 10x10x20",
                       "wfOrderSpec": "20x20x10",
@@ -279,7 +280,6 @@ export class WorkflowPage implements OnInit {
                   }
               });
               
-        
               this.qrCodePopulate(data);
               this.storage.set(form.value.wfFormId, form.value);
               
@@ -762,7 +762,7 @@ export class WorkflowPage implements OnInit {
       }
 
       if (form.value.wfProcessStatus === "" || form.value.wfProcessStatus == null) {
-        form.value.wfProcessStatus = "0";
+        form.value.wfProcessStatus = "1";
         wfPNewState = "1";
       }
 

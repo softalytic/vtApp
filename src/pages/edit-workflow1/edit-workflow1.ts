@@ -438,7 +438,7 @@ export class EditWorkflow1Page implements OnInit{
         buttons: ['確定']
       });
       alert.present();
-    } else if(wfOrderTotalQty < wfOptGoodQtyValue) {
+    } else if(wfOrderTotalQty <= wfOptGoodQtyValue) {
       let form = this.wfInputForm;
       let alert = this.alertCtrl.create({
         /*
@@ -447,12 +447,6 @@ export class EditWorkflow1Page implements OnInit{
         subTitle: '确定完成和上传' + ' Order Total: ' + wfOrderTotalQty + ' Good Total: ' + wfOrderTotalGoodQty + ' Bad:' + wfOptBadQtyValue + ' opt good: ' + wfOptGoodQtyValue,
         */
         buttons: [{
-          text: '取消',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        },{
           text: '上存',
           handler: () => {
             console.log('save clicked');
@@ -495,6 +489,12 @@ export class EditWorkflow1Page implements OnInit{
               alert.present();
 
               //this.onSubmit();
+            }
+          }, {
+            text: '取消',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
             }
           }]
       });

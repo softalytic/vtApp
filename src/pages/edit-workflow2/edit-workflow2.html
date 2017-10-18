@@ -34,8 +34,8 @@
                                 <div class="inputLabel" no-padding>
                                     {{wfOrderDetail.title}}
                                 </div>
-                                <ion-input *ngIf="wfOrderDetail.type != 'textarea'" class="gridborder" disabled type={{wfOrderDetail.type}} [ngStyle]="{'width.em':wfOrderDetail.size}" formControlName={{wfOrderDetail.model}}></ion-input>
-
+                                <ion-input *ngIf="wfOrderDetail.type != 'textarea' && !wfOrderDetail.disabled" class="gridborder" type={{wfOrderDetail.type}} [ngStyle]="{'width.em':wfOrderDetail.size}" formControlName={{wfOrderDetail.model}}></ion-input>
+                                <ion-input *ngIf="wfOrderDetail.type != 'textarea' && wfOrderDetail.disabled" class="gridborder" disabled type={{wfOrderDetail.type}} [ngStyle]="{'width.em':wfOrderDetail.size}" formControlName={{wfOrderDetail.model}}></ion-input>
                                 <ion-textarea *ngIf="wfOrderDetail.type === 'textarea'" formControlName={{wfOrderDetail.model}} [ngStyle]="{'width.em':wfOrderDetail.size}" class="textarea gridborder"></ion-textarea>
                             </ion-row>
                         </ion-col>
@@ -68,11 +68,17 @@
                                 {{wfRMDetail.title}}
                             </div>
                         </ion-col>
-                        <ion-col col-6>
+                        <ion-col *ngIf="wfRMDetail.modelName != 'wfRMPrintName' && wfRMDetail.modelName != 'wfRMPrintNameText'" col-6>
                             <ion-input class="gridborder" disabled value={{wfInputForm.controls[wfRMDetail.modelName].value}}></ion-input>
                         </ion-col>
-                        <ion-col>
+                        <ion-col *ngIf="wfRMDetail.modelName == 'wfRMPrintName'" col-6>
+                            <ion-input class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelName].value}}></ion-input>
+                        </ion-col>
+                        <ion-col *ngIf="wfRMDetail.modelName != 'wfRMPrintNameText'">
                             <ion-input class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelSerial].value}}></ion-input>
+                        </ion-col>
+                        <ion-col *ngIf="wfRMDetail.modelName == 'wfRMPrintNameText'" col-7>
+                            <ion-input class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelName].value}}></ion-input>
                         </ion-col>
                     </ion-row>
                 </ion-col>
@@ -198,7 +204,7 @@
                                             <button *ngIf="wfInput.scan == 2" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
                                                 扫一扫
                                             </button>
-                                            <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" *ngIf="wfInput.scan == 3" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
+                                            <button *ngIf="wfInput.scan == 3" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
                                                 簽署
                                             </button>
                                         </div>

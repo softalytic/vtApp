@@ -246,9 +246,9 @@
                     </ion-row>
 
                     <ion-row justify-content-end>
-                        <button type="submit" ion-button>
-                            <ion-icon ios="ios-checkbox-outline" md="md-checkbox-outline">
-                                &nbsp; 批次完成
+                        <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="submit" ion-button>
+                            <ion-icon ios="ios-cloud-upload-outline" md="ios-cloud-upload-outline">
+                                &nbsp; 上存
                             </ion-icon>
                         </button>
                         <button ion-button type="button" (click)="takePhoto()">

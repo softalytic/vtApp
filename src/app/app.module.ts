@@ -15,7 +15,7 @@ import { Camera } from "@ionic-native/camera";
 import { WorkflowService } from "../services/workflow";
 // import { HTTP } from "@ionic-native/http";
 import { HttpModule } from "@angular/http";
-import { QrCodeService } from "../services/qrCode";
+import { QRCodeService } from "../services/qrCode";
 
 @NgModule({
   declarations: [
@@ -49,7 +49,7 @@ import { QrCodeService } from "../services/qrCode";
     IonicStorageModule,
     ScreenOrientation,
     WorkflowService,
-    QrCodeService
+    QRCodeService
   ]
 })
 export class AppModule {}

@@ -5,6 +5,7 @@ import { NgForm, FormGroup, FormControl, FormBuilder, Validators } from "@angula
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { WorkflowService } from "../../services/workflow";
+import { QRCodeService } from "../../services/qrCode";
 
 @Component({
   selector: 'page-edit-workflow2',
@@ -41,7 +42,7 @@ export class EditWorkflow2Page implements OnInit{
 
   constructor(public storage: Storage,
               private formBuilder: FormBuilder,
-              private barcodeScanner: BarcodeScanner,
+              private QRCode: QRCodeService,
               private alertCtrl: AlertController,
               private camera: Camera,
               private navParams: NavParams,
@@ -162,7 +163,7 @@ export class EditWorkflow2Page implements OnInit{
         {label: "通过", value: 1, icon: 'checkmark'},
         {label: "失败", value: 2, icon: 'close'}
       ]},
-      {title: "品检員", method: "input", model: "wfQCSignOff", type: "text", icon: 'construct', scan: 3, size: 20, process: {1: true, 2: true, 3: true, 4:true}},
+      {title: "品检員", method: "input", model: "wfStaffQCName", type: "text", icon: 'construct', scan: 3, size: 20, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "break", size: 15, process: {1: true, 2: true, 3: false, 4:true}},
       {method: "break", size: 15, process: {1: false, 2: false, 3: true, 4:true}},
       {title: "备注:", method: "input", model: "wfQCInputNote", type: "textarea", scan: false, size: 40, process: {1: true, 2: true, 3: true, 4:true}},
@@ -304,7 +305,6 @@ export class EditWorkflow2Page implements OnInit{
 
   }
 
-
   promptAlert(){
     let alertCtl = this.alertCtrl.create();
 
@@ -322,8 +322,6 @@ export class EditWorkflow2Page implements OnInit{
 
     alertCtl.present();
   }
-
-
 
   keyPress(keycode: number) {
     if (keycode == 13) {
@@ -472,6 +470,7 @@ export class EditWorkflow2Page implements OnInit{
 
   }
 
+  /*
   scanBarcode(model: string){
 
     let form = this.wfInputForm;
@@ -628,6 +627,7 @@ export class EditWorkflow2Page implements OnInit{
 
     form.controls[model].setValue(value);
   }
+  */
 
   private formInit() {
 
@@ -687,8 +687,14 @@ export class EditWorkflow2Page implements OnInit{
 
       //Staff Input section
       wfStaffOptId: [''],
+      wfStaffOptName: [''],
       wfStaffOptShift: [''],
       wfStaffTechId: [''],
+      wfStaffTechName: [''],
+      wfStaffXrayId: [''],
+      wfStaffXrayName: [''],
+      wfStaffQCId: [''],
+      wfStaffQCName: [''],
       wfQCCheck: [''],
       wfRandomCheckInfo: [''],
       wfElecPass: [''],

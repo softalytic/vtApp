@@ -5,6 +5,7 @@ import { NgForm, FormGroup, FormControl, FormBuilder, Validators } from "@angula
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { WorkflowService } from "../../services/workflow";
+import { QRCodeService } from "../../services/qrCode";
 
 
 @Component({
@@ -48,7 +49,7 @@ export class EditWorkflow1Page implements OnInit{
 
   constructor(private storage: Storage,
               private formBuilder: FormBuilder,
-              private barcodeScanner: BarcodeScanner,
+              private QRCode: QRCodeService,
               private alertCtrl: AlertController,
               private camera: Camera,
               private navParams: NavParams,
@@ -171,17 +172,17 @@ export class EditWorkflow1Page implements OnInit{
     ];
 
     this.wfPplInputs = [
-      {title: "作业員", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: false, wfPplI: 1, size: 7},
+      {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: false, wfPplI: 1, size: 7},
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 3},
-      {title: "技術員", method: "input", model: "wfStaffTechId", type: "text", icon: 'construct', scan: false, wfPplI: 3, size: 7},
-      {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: false, wfPplI: 4, size: 7},
+      {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: false, wfPplI: 3, size: 7},
+      {title: "X-RAY确认", method: "input", model: "wfStaffXrayName", type: "text", icon: 'construct', scan: false, wfPplI: 4, size: 7},
 
       {title: "终检", method: "buttons", model: "wfQCPass", icon: "md-checkmark-circle-outline",buttons: [
         {label: "通过", value: 1, icon: 'checkmark'},
         {label: "失败", value: 2, icon: 'close'}
       ]},
 
-      {title: "品检員", method: "input", model: "wfQCSignOff", type: "text", icon: 'search', scan: 5, wfPplI: 5, size: 11},
+      {title: "品检員", method: "input", model: "wfStaffQCName", type: "text", icon: 'search', scan: 5, wfPplI: 5, size: 11},
       {title: "品检备注", method: "textarea", model: "wfQCInputNote", type: "text", icon: 'chatbubbles', scan: false, size: 27},
     ];
   }
@@ -534,6 +535,7 @@ export class EditWorkflow1Page implements OnInit{
 
   }
 
+  /*
   scanBarcode(model: string){
 
     let form = this.wfInputForm;
@@ -691,6 +693,8 @@ export class EditWorkflow1Page implements OnInit{
     form.controls[model].setValue(value);
   }
 
+  */
+
   private formInit() {
     this.wfInputForm = this.formBuilder.group({
       wfProcess: [''],
@@ -783,9 +787,14 @@ export class EditWorkflow1Page implements OnInit{
 
       //Staff Input section
       wfStaffOptId: [''],
+      wfStaffOptName: [''],
       wfStaffOptShift: [''],
       wfStaffTechId: [''],
+      wfStaffTechName: [''],
       wfStaffXrayId: [''],
+      wfStaffXrayName: [''],
+      wfStaffQCId: [''],
+      wfStaffQCName: [''],
       wfStageStatus: [''],
       wfQCPass: [''],
       wfQCPassCode: [''],

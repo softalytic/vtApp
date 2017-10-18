@@ -3,7 +3,7 @@
     <name>工序流程卡纪录系统</name>
     <description>VT工序流程卡纪录系统</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://172.20.10.3:8100" />
+    <content original-src="index.html" src="http://192.168.0.102:8100" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />
@@ -87,6 +87,7 @@
     <allow-navigation href="http://192.168.87.24:8100" />
     <allow-navigation href="http://172.20.10.13:8100" />
     <allow-navigation href="http://172.20.10.13:8101" />
+    <allow-navigation href="http://192.168.0.102:8100" />
     <engine name="android" spec="^6.2.3" />
     <plugin name="cordova-plugin-camera" spec="^2.4.1" />
     <plugin name="cordova-plugin-screen-orientation" spec="^2.0.1" />

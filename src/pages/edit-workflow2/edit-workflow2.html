@@ -246,7 +246,8 @@
                     </ion-row>
 
                     <ion-row justify-content-end>
-                        <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="submit" ion-button>
+                        <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="button" ion-button (click)="showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)"
+                            ion-button>
                             <ion-icon ios="ios-cloud-upload-outline" md="ios-cloud-upload-outline">
                                 &nbsp; 上存
                             </ion-icon>

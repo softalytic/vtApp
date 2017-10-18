@@ -751,8 +751,8 @@ export class WorkflowPage implements OnInit {
       console.log(wfStorage);
       console.log("Loading the form from stateChange");
 
-      console.log('form.value.wfFormStatus' + form.value.wfFormStatus);
-      console.log('form.value.wfProcessStatus' + form.value.wfProcessStatus);
+      console.log('form.value.wfFormStatus ' + form.value.wfFormStatus);
+      console.log('form.value.wfProcessStatus ' + form.value.wfProcessStatus);
 
       if (form.value.wfFormStatus === "" || form.value.wfFormStatus == null) {
         form.value.wfFormStatus = '0';

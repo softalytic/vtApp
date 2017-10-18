@@ -464,27 +464,29 @@ export class EditWorkflow1Page implements OnInit{
               console.log('submit and save clicked');
               console.log(form.value);
 
-
-              // Upload to Server
-              this.wfSvc.upload(form.value,1)
-                .subscribe((data)=> {
-                    console.log("success");
-                    console.log(data[0]);
-                  },
-                  error => {
-                    console.log(error);
-                  }
-                );
-
               let alert = this.alertCtrl.create({
-                title: 'Please Check!',
+                title: '嚫!',
                 // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
                 // comment above for faster process
-                subTitle: 'Please select 终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
+                subTitle: '完成终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
                 buttons: [{text: '確定',
                   handler: () => {
                     form.value.wfProcessStatus = "1";
                     this.storage.set(form.value.wfFormId, form.value);
+
+                    // Upload to Server
+                    console.log("uploading to server");
+                    this.wfSvc.upload(form.value,1)
+                      .subscribe((data)=> {
+                          console.log("Successfully uploading to server");
+                          console.log(data);
+                        },
+                        error => {
+                          console.log(error);
+                        }
+                      );
+
+
 
                     // Return back to main page
                     this.navCtrl.pop();

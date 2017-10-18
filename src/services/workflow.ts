@@ -10,7 +10,8 @@ export class WorkflowService {
   private httpOptions = new RequestOptions({ headers:this.httpHeaders });
   // private baseUrl = "http://localhost:3000/workflow/";
   // For hosting server
-  private baseUrl = "http://192.168.4.200:3000/workflow/";
+  // private baseUrl = "http://192.168.4.200:3000/workflow/";
+  private baseUrl = "http://172.20.10.2:3000/workflow/";
 
   constructor(private http: Http){}
 

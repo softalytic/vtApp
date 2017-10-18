@@ -134,18 +134,18 @@ export class WorkflowPage implements OnInit {
     let form = this.wfInputForm;
 
     let alerTest = this.alertCtrl.create({
-      title: 'Confirm purchase',
-      message: 'Do you want to buy this book?',
+      title: '确认工单',
+      message: '嚫，请选择工单',
       buttons: [
         {
-          text: 'cancel X',
+          text: '取消',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Manual Form 1 Server Data',
+          text: '裸品流程卡',
           handler: () => {
             if (form.value.wfFormId === "") {
               console.log("nothing in the form");
@@ -200,45 +200,46 @@ export class WorkflowPage implements OnInit {
         
               this.qrCodePopulate(data);
               this.storage.set(form.value.wfFormId, form.value);
+              this.workflowStateChange();
         
             } else {
-              this.wfSvc.query(form.value, form.value.wfForm).subscribe( serverData => {
-                if(serverData){
-                  console.log("Response from server: " + JSON.stringify(serverData[0]));
-                  this.populateDataToForm(form, serverData[0]);
-                  this.workflowStateChange();
-        
-                } else {
-                  this.storage.get(form.value.wfFormId).then(storageData => {
-                    if(storageData){
-                      console.log("Result found:" + form.value.wfFormId);
-                      this.populateDataToForm(form, storageData);
-                      this.workflowStateChange();
-        
-                    } else {
-                      alert("嚫，查木记录")
-        
-                    }
-                  });
-                }
+              this.wfSvc.query(form.value, form.value.wfForm).subscribe( (serverData) => {
+                console.log("Response from server: " + JSON.stringify(serverData[0]));
+                this.populateDataToForm(form, serverData[0]);
+                this.workflowStateChange();
+
+              },(err)=>{
+                alert("嚫,网路不给力");
+                console.log(err);
+                this.storage.get(form.value.wfFormId).then(storageData => {
+                  if(storageData){
+                    console.log("Result found:" + form.value.wfFormId);
+                    this.populateDataToForm(form, storageData);
+                    this.workflowStateChange();
+
+                  } else {
+                    alert("嚫，查木记录")
+
+                  }
+                });
               });
             }
-            this.storage.get(form.value.wfFormId).then(storageData => {
-              if(storageData){
-                console.log("Result found:" + form.value.wfFormId);
-                this.populateDataToForm(form, storageData);
-                this.workflowStateChange();
-        
-              } else {
-                alert("嚫，查木记录")
-        
-              }
-            });
+            // this.storage.get(form.value.wfFormId).then(storageData => {
+            //   if(storageData){
+            //     console.log("Result found:" + form.value.wfFormId);
+            //     this.populateDataToForm(form, storageData);
+            //     this.workflowStateChange();
+            //
+            //   } else {
+            //     alert("嚫，查木记录")
+            //
+            //   }
+            // });
             console.log('Buy clicked');
           }
         },
         {
-          text: 'Manual Form 2',
+          text: '成品流程卡',
           handler: () => {
             if (form.value.wfFormId === "") {
               console.log("nothing in the form");
@@ -282,8 +283,6 @@ export class WorkflowPage implements OnInit {
         
               this.qrCodePopulate(data);
               this.storage.set(form.value.wfFormId, form.value);
-              
-        
             }
             this.storage.get(form.value.wfFormId).then(storageData => {
               if(storageData){
@@ -764,6 +763,7 @@ export class WorkflowPage implements OnInit {
       if (form.value.wfProcessStatus === "" || form.value.wfProcessStatus == null) {
         form.value.wfProcessStatus = "0";
         wfPNewState = "1";
+        form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
       }
 
       if (form.value.wfFormStatus == '0' && form.value.wfProcessStatus == '1') {
@@ -801,7 +801,8 @@ export class WorkflowPage implements OnInit {
         this.storage.set(form.value.wfFormId, form.value);
 
       } else if (form.value.wfProcessStatus == '0') {
-        console.log("Previous process has not completed and will resume now")
+        console.log("Previous process has not completed and will resume now");
+        form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
 
       } else if (form.value.wfFormStatus == '1') {
         return alert("This wfForm has been marked complete");

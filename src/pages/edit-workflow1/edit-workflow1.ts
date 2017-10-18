@@ -454,7 +454,6 @@ export class EditWorkflow1Page implements OnInit{
           }
         },{
           text: '上存',
-          role: 'cancel',
           handler: () => {
             console.log('save clicked');
           }

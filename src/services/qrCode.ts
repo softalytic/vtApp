@@ -132,13 +132,18 @@ export class QRCodeService {
               // try and catch here is to protect if some of the fields are missing or failed,
               // then it will skip onto the next key
 
-              // This line no longer works
-              eval('this.' + inputKey + " = " + inputBodies[inputKey]);
+              // This use form control for the value setting
+              console.log("InputKey : " + inputKey);
+              console.log("Form " + form[inputKey]);
+              form.controls[inputKey].setValue(inputBodies[inputKey]);
 
             }
             catch(err) {
               console.log(err.message);
+              eval('console.log(form.value.' + inputKey + ');');
+              // console.log("barcode loaded in form:" + JSON.stringify(form.value));
             }
+
           }
 
           break;
@@ -189,11 +194,6 @@ export class QRCodeService {
 
           console.log("barcode loaded in form:" + JSON.stringify(form.value));
           break;
-
-        case "wfQC":
-
-          break;
-
 
         default:
           console.log(key + " is error");

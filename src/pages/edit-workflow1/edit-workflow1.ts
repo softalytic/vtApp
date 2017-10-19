@@ -379,14 +379,8 @@ export class EditWorkflow1Page implements OnInit{
   }
 
   showWfOpsFinalInputsAlert(wfOrderTotalQty: any, wfOrderTotalGoodQty: any, wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
-    if(wfOrderTotalQty > wfOptGoodQtyValue) {
-      let alert = this.alertCtrl.create({
-        title: '',
-        subTitle: '预设总量 (' + wfOptGoodQtyValue + ') 小於 批次量 ('  + wfOrderTotalQty + ')!',
-        buttons: ['確定']
-      });
-      alert.present();
-    } else if(wfOrderTotalQty <= wfOptGoodQtyValue) {
+
+    if(wfOptGoodQtyValue) {
       let form = this.wfInputForm;
       let alert = this.alertCtrl.create({
         /*

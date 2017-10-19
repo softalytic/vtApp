@@ -51,8 +51,8 @@ export class WorkflowPage implements OnInit {
   };
 
   dataMachine = {
-    "AA01":{"wfStaffOptId":"S0001","wfStaffOptIdName":"員工01","wfStaffTechId":"T0001","wfStaffTechName":"技術員工01","wfStaffXrayId":"X0001","wfStaffXrayName":"Xray員工01","wfStaffQCId":"QC0001","wfStaffQCName":"QC員工01","wfStaffOptShift":"A"},
-    "AB001":{"wfStaffOptId":"S0002","wfStaffOptIdName":"員工02","wfStaffTechId":"T0002","wfStaffTechName":"技術員工01","wfStaffXrayId":"X0002","wfStaffXrayName":"Xray員工02","wfStaffQCId":"QC0002","wfStaffQCName":"QC員工02","wfStaffOptShift":"B"}
+    "AA01":{"wfStaffOptId":"S0001","wfStaffOptName":"員工01","wfStaffTechId":"T0001","wfStaffTechName":"技術員工01","wfStaffXrayId":"X0001","wfStaffXrayName":"Xray員工01","wfStaffQCId":"QC0001","wfStaffQCName":"QC員工01","wfStaffOptShift":"A"},
+    "AB001":{"wfStaffOptId":"S0002","wfStaffOptName":"員工02","wfStaffTechId":"T0002","wfStaffTechName":"技術員工01","wfStaffXrayId":"X0002","wfStaffXrayName":"Xray員工02","wfStaffQCId":"QC0002","wfStaffQCName":"QC員工02","wfStaffOptShift":"B"}
   };
 
   constructor(private storage: Storage,

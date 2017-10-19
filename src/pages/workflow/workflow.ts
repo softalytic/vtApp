@@ -29,6 +29,9 @@ export class WorkflowPage implements OnInit {
   wfProcessStorage: any;
   wfMachineStorage: any;
 
+  // For Dev model
+  wfDev = true;
+
   wfForms = [1,2];
   wfProcesses = [];
   wfMachineProcess = [];
@@ -51,8 +54,8 @@ export class WorkflowPage implements OnInit {
   };
 
   dataMachine = {
-    "AA01":{"wfStaffOptId":"S0001","wfStaffOptName":"員工01","wfStaffTechId":"T0001","wfStaffTechName":"技術員工01","wfStaffXrayId":"X0001","wfStaffXrayName":"Xray員工01","wfStaffQCId":"QC0001","wfStaffQCName":"QC員工01","wfStaffOptShift":"A"},
-    "AB001":{"wfStaffOptId":"S0002","wfStaffOptName":"員工02","wfStaffTechId":"T0002","wfStaffTechName":"技術員工01","wfStaffXrayId":"X0002","wfStaffXrayName":"Xray員工02","wfStaffQCId":"QC0002","wfStaffQCName":"QC員工02","wfStaffOptShift":"B"}
+    "AA01":{"wfStaffOptId":"S0001","wfStaffOptName":"員工01","wfStaffTechId":"T0001","wfStaffTechName":"技術員工01","wfStaffXrayId":"X0001","wfStaffXrayName":"Xray員工01","wfStaffOptShift":"A"},
+    "AB001":{"wfStaffOptId":"S0002","wfStaffOptName":"員工02","wfStaffTechId":"T0002","wfStaffTechName":"技術員工01","wfStaffXrayId":"X0002","wfStaffXrayName":"Xray員工02","wfStaffOptShift":"B"}
   };
 
   constructor(private storage: Storage,
@@ -134,25 +137,23 @@ export class WorkflowPage implements OnInit {
 
     let form = this.wfInputForm;
 
-    let alertTest = this.alertCtrl.create({
-      title: '确认工单',
-      message: '嚫，请选择工单',
-      buttons: [
-        {
-          text: '取消',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: '裸品流程卡',
-          handler: () => {
-            if (form.value.wfFormId === "") {
+    if (form.value.wfFormId === "") {
+      let alertTest = this.alertCtrl.create({
+        title: '确认工单',
+        message: '嚫，请选择工单',
+        buttons: [
+          {
+            text: '取消',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: '裸品流程卡',
+            handler: () => {
               console.log("nothing in the form");
-        
-              // Predefined data for testing purpose
-        
+
               // workflow 1
               let data = JSON.stringify({ "headers":
                 { "erpData": "ngForm"},
@@ -198,42 +199,15 @@ export class WorkflowPage implements OnInit {
                     }
                   }
               });
-        
-              this.QRCode.qrCodePopulate(data,form);
-              this.storage.set(form.value.wfFormId, form.value);
-              this.workflowStateChange();
-        
-            } else {
-              this.wfSvc.query(form.value, form.value.wfForm).subscribe( (serverData) => {
-                console.log("Response from server: " + JSON.stringify(serverData[0]));
-                this.populateDataToForm(form, serverData[0]);
-                this.workflowStateChange();
-
-              },(err)=>{
-                alert("嚫,网路不给力");
-                console.log(err);
-                this.storage.get(form.value.wfFormId).then(storageData => {
-                  if(storageData){
-                    console.log("Result found:" + form.value.wfFormId);
-                    this.populateDataToForm(form, storageData);
-                    this.workflowStateChange();
-
-                  } else {
-                    alert("嚫，查木记录")
-
-                  }
-                });
-              });
+              this.testDataPopulate(data,form);
+              console.log("裸品流程卡 Alert Controller has been clicked");
             }
-            console.log('Buy clicked');
-          }
-        },
-        {
-          text: '成品流程卡',
-          handler: () => {
-            if (form.value.wfFormId === "") {
+          },
+          {
+            text: '成品流程卡',
+            handler: () => {
               console.log("nothing in the form");
-              
+
               // workflow 2
               let data = JSON.stringify({ "headers":
                 { "erpData": "ngForm"},
@@ -270,40 +244,20 @@ export class WorkflowPage implements OnInit {
                     }
                   }
               });
-
-              this.QRCode.qrCodePopulate(data,form);
-              this.storage.set(form.value.wfFormId, form.value);
-              this.workflowStateChange();
-
-            } else {
-              this.wfSvc.query(form.value, form.value.wfForm).subscribe( (serverData) => {
-                console.log("Response from server: " + JSON.stringify(serverData[0]));
-                this.populateDataToForm(form, serverData[0]);
-                this.workflowStateChange();
-
-              },(err)=>{
-                alert("嚫,网路不给力");
-                console.log(err);
-                this.storage.get(form.value.wfFormId).then(storageData => {
-                  if(storageData){
-                    console.log("Result found:" + form.value.wfFormId);
-                    this.populateDataToForm(form, storageData);
-                    this.workflowStateChange();
-
-                  } else {
-                    alert("嚫，查木记录")
-
-                  }
-                });
-              });
+              this.testDataPopulate(data,form);
+              console.log("成品流程卡 Alert Controller has been clicked");
             }
-            console.log('Buy clicked');
           }
-        }
-        
-      ]
-    });
-    alertTest.present();
+
+        ]
+      });
+      alertTest.present();
+    }
+
+    this.dataSubmission(form);
+
+    console.log('onAddWf has completed!');
+
   }
 
   // scanBarcode(model: string){
@@ -606,6 +560,35 @@ export class WorkflowPage implements OnInit {
   //     }
   //   }
   // }
+
+  testDataPopulate(data:any, form:any) {
+    this.QRCode.qrCodePopulate(data,form);
+    this.storage.set(form.value.wfFormId, form.value);
+    this.workflowStateChange();
+  }
+
+  dataSubmission(form: any) {
+    this.wfSvc.query(form.value, form.value.wfForm).subscribe( (serverData) => {
+      console.log("Response from server: " + JSON.stringify(serverData[0]));
+      this.populateDataToForm(form, serverData[0]);
+      this.workflowStateChange();
+
+    },(err)=>{
+      alert("嚫,网路不给力");
+      console.log(err);
+      this.storage.get(form.value.wfFormId).then(storageData => {
+        if(storageData){
+          console.log("Result found:" + form.value.wfFormId);
+          this.populateDataToForm(form, storageData);
+        } else {
+          alert("嚫，查木记录")
+        }
+
+        // Execute workflowStateChange for New Form or continue existing form
+        this.workflowStateChange();
+      });
+    });
+  }
 
   workflowStateChange() {
     // If the form is mark completed, then trigger the process

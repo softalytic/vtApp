@@ -107,7 +107,7 @@ export class EditWorkflow2Page implements OnInit{
       // {method: "break", size: 20},
       // {title: "流程卡备注", method: "input", model: "wfOrderBOMNote", type: "textarea", scan: false, size: 40},
       // {method: "break", size: 20},
-      {method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 7, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 7, scan: true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
       // {method: "break", title: ""},
 
@@ -140,9 +140,9 @@ export class EditWorkflow2Page implements OnInit{
     ];
 
     this.wfPplInputs = [
-      {title: "作业員", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: 0, size: 20, process: {1: true, 2: true, 3: true, 4:false}},
+      {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: 0, size: 20, process: {1: true, 2: true, 3: true, 4:false}},
       // {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, size: 5},
-      {title: "技術員", method: "input", model: "wfStaffTechId", type: "text", icon: 'construct', scan: 0, size: 20, process: {1: true, 2: true, 3: true, 4:false}},
+      {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: 0, size: 20, process: {1: true, 2: true, 3: true, 4:false}},
       // {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: 3, size: 20},
       
       {title: "抽检", method: "buttons", model: "wfRandomCheckStatus", process: {1: false, 2: false, 3: false, 4:false},buttons: [

@@ -29,7 +29,7 @@ export class MyApp {
     });
 
     // Uncomment below command for screenOrientation lock
-    // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
 
   }
 

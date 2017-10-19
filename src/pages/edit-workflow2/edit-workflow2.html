@@ -111,7 +111,7 @@
 
                                 <ion-textarea *ngIf="wfInput.type === 'textarea'" formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="textarea gridborder"></ion-textarea>
 
-                                <button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
+                                <button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)">
                                     扫一扫
                                 </button>
                             </ion-row>
@@ -198,18 +198,18 @@
 
                                         <ion-input formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
                                         <div on-mouseover="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">
-                                            <button *ngIf="wfInput.scan == 1" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
+                                            <button *ngIf="wfInput.scan == 1" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)">
                                                 扫一扫
                                             </button>
-                                            <button *ngIf="wfInput.scan == 2" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
+                                            <button *ngIf="wfInput.scan == 2" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)">
                                                 扫一扫
                                             </button>
-                                            <button *ngIf="wfInput.scan == 3" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
+                                            <button *ngIf="wfInput.scan == 3" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)">
                                                 簽署
                                             </button>
                                         </div>
                                         <div on-mouseover="showWfQCPassAlert(wfInputForm.value.wfQCPass)">
-                                            <button *ngIf="wfInput.scan == 4 && wfInput.process[wfInputForm.value.wfProcess]" [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" item-end ion-button class="barcodeButton" type="button" (click)="scanBarcode(wfInput.model)">
+                                            <button *ngIf="wfInput.scan == 4 && wfInput.process[wfInputForm.value.wfProcess]" [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)">
                                                 扫一扫
                                             </button>
                                         </div>

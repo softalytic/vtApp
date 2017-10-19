@@ -252,9 +252,11 @@ export class WorkflowPage implements OnInit {
         ]
       });
       alertTest.present();
-    }
 
-    this.dataSubmission(form);
+    } else {
+      this.dataSubmission(form);
+
+    }
 
     console.log('onAddWf has completed!');
 

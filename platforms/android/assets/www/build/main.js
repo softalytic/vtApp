@@ -266,7 +266,9 @@ var WorkflowPage = (function () {
             });
             alertTest.present();
         }
-        this.dataSubmission(form);
+        else {
+            this.dataSubmission(form);
+        }
         console.log('onAddWf has completed!');
     };
     // scanBarcode(model: string){

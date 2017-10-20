@@ -51,23 +51,22 @@ export class EditWorkflow2Page implements OnInit{
 
     // Assume all are ion-input except the one specificed as textarea
     this.wfOrderDetails = [
-      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 20, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 20, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 20, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderTotalQty", title: "批次量", type: "number", size: 6, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 28, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 28, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 28, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderTotalQty", title: "批次量", type: "number", size: 9, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       // {method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 6, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
-      {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 10, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 10, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderSpec", title: "规格", type: "text", size: 8, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderDim", title: "尺寸", type: "text", size: 4, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 15, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 15, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderSpec", title: "规格", type: "text", size: 15, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderDim", title: "尺寸", type: "text", size: 15, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 15, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 20, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
-      {method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 10, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 10, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-
-      {method: "input", model: "wfOrderFormNote", title: "流程卡备注", type: "textarea", size: 24, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 24, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 24, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderFormNote", title: "流程卡备注", type: "textarea", size: 33, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 33, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 33, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
       {title: "CAP: μF", method: "input", model: "wfSpecCap", type: "text", scan: false, size: 9, disabled:false, process: {1: true, 2: true, 3: true, 4:true}},
       {title: "DF: %", method: "input", model: "wfSpecDF", type: "text", scan: false, size: 9, disabled:false, process: {1: true, 2: true, 3: true, 4:true}},
@@ -133,7 +132,7 @@ export class EditWorkflow2Page implements OnInit{
         {label: "全检", value: 1, icon: 'done-all'},
         {label: "抽检", value: 2, icon: 'checkmark'}
       ]},
-      {title: "抽检数量", method: "input", model: "wfRandomCheckInfo", type: "text", icon: 'construct', scan: 0, size: 6, process: {1: false, 2: false, 3: true, 4:false}},
+      {title: "抽检数量", method: "input", model: "wfRandomCheckInfo", type: "number", icon: 'construct', scan: 0, size: 6, process: {1: false, 2: false, 3: true, 4:false}},
 
       {title: "备注:", method: "input", model: "wfSpecNote", type: "textarea", scan: false, size: 40, process: {1: true, 2: true, 3: true, 4:true}},
       // {title: "备注:", method: "input", model: "wfSpecNote", type: "textarea", scan: false, size: 20},
@@ -330,20 +329,13 @@ export class EditWorkflow2Page implements OnInit{
   }
 
   showWfOpsFinalInputsAlert(wfOrderTotalQty: any, wfOrderTotalGoodQty: any, wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
-    let form = this.wfInputForm;
-    if(wfOrderTotalQty > wfOptGoodQtyValue && parseInt(form.value.wfProcess) < 2) {
-      let alert = this.alertCtrl.create({
-        title: '',
-        subTitle: '预设总量 (' + wfOptGoodQtyValue + ') 小於 批次量 ('  + wfOrderTotalQty + ')! ',
-        buttons: ['確定']
-      });
-      alert.present();
-    } else if(wfOrderTotalQty <= wfOptGoodQtyValue || parseInt(form.value.wfProcess) > 2 ) {
-      
+
+    if(wfOptGoodQtyValue) {
+      let form = this.wfInputForm;
       let alert = this.alertCtrl.create({
         /*
         title: '',
-        
+
         subTitle: '确定完成和上传' + ' Order Total: ' + wfOrderTotalQty + ' Good Total: ' + wfOrderTotalGoodQty + ' Bad:' + wfOptBadQtyValue + ' opt good: ' + wfOptGoodQtyValue,
         */
         buttons: [{
@@ -361,29 +353,27 @@ export class EditWorkflow2Page implements OnInit{
               console.log('submit and save clicked');
               console.log(form.value);
 
-
-              // Upload to Server
-              this.wfSvc.upload(form.value,form.value.wfForm)
-                .subscribe((data)=> {
-                    console.log("success");
-                    console.log(data[0]);
-                  },
-                  error => {
-                    console.log(error);
-                  }
-                );
-
               let alert = this.alertCtrl.create({
-                title: 'Please Check!',
+                title: '嚫!',
                 // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
                 // comment above for faster process
-                subTitle: 'Please select 终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
+                subTitle: '完成终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
                 buttons: [{text: '確定',
                   handler: () => {
                     form.value.wfProcessStatus = "1";
-                    form.value.wfOptBadQty = '';
-                    form.value.wfOptGoodQty = '';
                     this.storage.set(form.value.wfFormId, form.value);
+
+                    // Upload to Server
+                    console.log("uploading to server");
+                    this.wfSvc.upload(form.value,1)
+                      .subscribe((data)=> {
+                          console.log("Successfully uploading to server");
+                          console.log(data);
+                        },
+                        error => {
+                          console.log(error);
+                        }
+                      );
 
                     // Return back to main page
                     this.navCtrl.pop();
@@ -395,7 +385,7 @@ export class EditWorkflow2Page implements OnInit{
 
               //this.onSubmit();
             }
-          },{
+          }, {
             text: '取消',
             role: 'cancel',
             handler: () => {
@@ -412,7 +402,7 @@ export class EditWorkflow2Page implements OnInit{
       });
       alert.present();
 
-    } 
+    }
   }
 
   showWfOpsInputsAlert(wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
@@ -637,7 +627,6 @@ export class EditWorkflow2Page implements OnInit{
       wfProcessName: [''],
       wfFormName: [''],
       wfForm: [''],
-      wfProcessStatus: [''],
 
       // Order Inputs detail
       wfFormId: [''],
@@ -702,6 +691,10 @@ export class EditWorkflow2Page implements OnInit{
       wfQCPass: [''],
       wfQCSignOff: [''],
       wfQCInputNote: [''],
+
+      //  Appendix
+      wfFormStatus: [''],
+      wfProcessStatus: [''],
 
     });
 

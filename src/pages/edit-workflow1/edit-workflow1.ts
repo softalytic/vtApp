@@ -385,13 +385,16 @@ export class EditWorkflow1Page implements OnInit{
       let alert = this.alertCtrl.create({
         /*
         title: '',
-        
+
         subTitle: '确定完成和上传' + ' Order Total: ' + wfOrderTotalQty + ' Good Total: ' + wfOrderTotalGoodQty + ' Bad:' + wfOptBadQtyValue + ' opt good: ' + wfOptGoodQtyValue,
         */
         buttons: [{
           text: '上存',
           handler: () => {
             console.log('save clicked');
+            form.value.wfProcessStatus = "0";
+            this.storage.set(form.value.wfFormId, form.value);
+            this.navCtrl.pop();
           }
         },
           {
@@ -416,16 +419,16 @@ export class EditWorkflow1Page implements OnInit{
                       .subscribe((data)=> {
                           console.log("Successfully uploading to server");
                           console.log(data);
+                          // Return back to main page
+                          this.navCtrl.pop();
                         },
                         error => {
                           console.log(error);
+                          // alert("嚫!网路不给力,请再试一次")
                         }
                       );
 
 
-
-                    // Return back to main page
-                    this.navCtrl.pop();
                   }
                 }]
               });
@@ -451,7 +454,7 @@ export class EditWorkflow1Page implements OnInit{
       });
       alert.present();
 
-    } 
+    }
   }
 
   showWfQCPassAlert(wfQCPassValue: any) {
@@ -796,7 +799,6 @@ export class EditWorkflow1Page implements OnInit{
       wfQCInputNote: [''],
 
       //  Appendix
-
       wfFormStatus: [''],
       wfProcessStatus: [''],
 

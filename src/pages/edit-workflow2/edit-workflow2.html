@@ -252,8 +252,10 @@
                     </ion-row>
 
                     <ion-row justify-content-end>
-                        <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="button" ion-button (click)="showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)"
-                            ion-button>
+                        <!--[disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1) && (wfInputForm.value.wfProcess == '1' || wfInputForm.value.wfProcess == '2')"-->
+                        <button (click)="showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)"
+                                type="button"
+                                ion-button>
                             <ion-icon ios="ios-cloud-upload-outline" md="ios-cloud-upload-outline">
                                 &nbsp; 上存
                             </ion-icon>

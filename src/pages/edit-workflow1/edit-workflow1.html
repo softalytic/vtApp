@@ -116,7 +116,7 @@
                                 <ion-buttons>
                                     <button ion-button round outline type="button" style="width: auto;" *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model, button.value)" [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}">
                     &nbsp;                  {{button.label}}
-                                    </button>
+                                     </button>
                                 </ion-buttons>
                             </ion-row>
 
@@ -254,6 +254,7 @@
                                         </div>
                                     </ion-row>
                                 </ion-col>
+
                                 <ion-col *ngIf="wfNavParams.wfProcess== '5a0'" padding-horizontal>
                                     <ion-row>
                                         <div class="inputLabel">
@@ -359,12 +360,14 @@
                                 <div class="inputLabel">
                                     备注
                                 </div>
-                                <ion-textarea formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="textarea gridborder"></ion-textarea>
+                                <ion-textarea
+                                        formControlName={{wfInput.model}}
+                                        [ngStyle]="{'width.em':wfInput.size}"
+                                        class="textarea gridborder"></ion-textarea>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-
                                 <button ion-button type="button" (click)="takePhoto()">
-                                        <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
-                                        &nbsp; 拍照
+                                    <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+                                    &nbsp; 拍照
                                 </button>
 
                             </ion-row>
@@ -378,7 +381,14 @@
                                 <ion-input formControlName={{wfInput.model}} hidden></ion-input>
 
                                 <ion-buttons>
-                                    <button ion-button round outline type="button" style="width: auto;" *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model,button.value)" [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}">
+                                    <button *ngFor="let button of wfInput.buttons"
+                                            ion-button
+                                            round
+                                            outline
+                                            type="button"
+                                            style="width: auto;"
+                                            (click)="updateForm(wfInput.model,button.value)"
+                                            [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}">
                                     <ion-icon name="{{button.icon}}"></ion-icon>
                                     &nbsp; {{button.label}}
                                   </button>
@@ -392,7 +402,12 @@
                         </ion-col>
                         <ion-row>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="button" ion-button (click)="showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">上存</button>
+                            <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)"
+                                    type="button"
+                                    ion-button
+                                    (click)="showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">
+                                上存
+                            </button>
 
                         </ion-row>
                     </ion-row>

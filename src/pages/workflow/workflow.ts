@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { NgForm, FormGroup, FormBuilder } from "@angular/forms";
-import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { WorkflowService } from "../../services/workflow";
 
-// import { EditWorkflowPage } from "../edit-workflow/edit-workflow";
 import { EditWorkflow1Page } from "../edit-workflow1/edit-workflow1";
 import { EditWorkflow2Page } from "../edit-workflow2/edit-workflow2";
 import { QRCodeService } from "../../services/qrCode";
-
+import { EditWorkflow3Page } from "../edit-workflow3/edit-workflow3";
 
 @Component({
   selector: 'page-workflow',
@@ -50,7 +48,8 @@ export class WorkflowPage implements OnInit {
 
   dataWfProcess = {
     "1":{"wfFormName": "裸品流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗"}},
-    "2":{"wfFormName": "成品流程卡", "Process":{"1":"打印","2":"测试上带","3":"贴片外观","4":"终检"}}
+    "2":{"wfFormName": "成品流程卡", "Process":{"1":"打印","2":"测试上带","3":"贴片外观","4":"终检"}},
+    "3":{"wfFormName": "电容器流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗"}},
   };
 
   dataMachine = {
@@ -583,12 +582,12 @@ export class WorkflowPage implements OnInit {
         if(storageData){
           console.log("Result found:" + form.value.wfFormId);
           this.populateDataToForm(form, storageData);
-        } else {
-          alert("嚫，查木记录")
         }
 
         // Execute workflowStateChange for New Form or continue existing form
         this.workflowStateChange();
+      }, err => {
+        console.log("cant find record")
       });
     });
   }
@@ -606,9 +605,7 @@ export class WorkflowPage implements OnInit {
     this.storage.get("wfProcess").then(storageData => {
 
       let wfStorage = storageData;
-      console.log(wfStorage);
-      console.log("Loading the form from stateChange");
-
+      console.log("Loading the form from stateChange" + JSON.stringify(wfStorage));
       console.log('form.value.wfFormStatus ' + form.value.wfFormStatus);
       console.log('form.value.wfProcessStatus ' + form.value.wfProcessStatus);
 
@@ -652,8 +649,8 @@ export class WorkflowPage implements OnInit {
         form.value.wfProcessName = wfStorage[form.value.wfForm].Process[wfPNewState];
 
         console.log("New state is " + form.value.wfProcess + " " + form.value.wfProcessName);
-        console.log(form.value);
-
+        console.log( "New state form : " + JSON.stringify(form.value));
+        console.log("Saving the form into storage");
         this.storage.set(form.value.wfFormId, form.value);
 
       } else if (form.value.wfProcessStatus == '0') {
@@ -664,8 +661,7 @@ export class WorkflowPage implements OnInit {
         return alert("This wfForm has been marked complete");
       }
 
-      console.log("This is the form after the state change");
-      console.log(form.value);
+      console.log("This is the form after the state change" + JSON.stringify(form.value));
 
       // The following part will trigger the next stage wfPage
       console.log("Will enter " + form.value.wfFormName + " edit page now");
@@ -681,8 +677,7 @@ export class WorkflowPage implements OnInit {
           break;
 
         case '3':
-          console.log("Form 3 is not ready");
-          // this.navCtrl.push(EditWorkflow3Page);
+          this.navCtrl.push(EditWorkflow3Page, form.value.wfFormId);
           break;
 
         default:

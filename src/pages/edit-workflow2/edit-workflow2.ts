@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, NavParams, AlertController, Events } from 'ionic-angular';
 import { NgForm, FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
-import { BarcodeScanner } from "@ionic-native/barcode-scanner";
-import { Camera, CameraOptions } from "@ionic-native/camera";
 import { WorkflowService } from "../../services/workflow";
 import { QRCodeService } from "../../services/qrCode";
+import { PhotoService } from "../../services/photo";
 
 @Component({
   selector: 'page-edit-workflow2',
@@ -42,12 +41,14 @@ export class EditWorkflow2Page implements OnInit{
 
   constructor(public storage: Storage,
               private formBuilder: FormBuilder,
-              private QRCode: QRCodeService,
               private alertCtrl: AlertController,
-              private camera: Camera,
               private navParams: NavParams,
+              private navCtrl: NavController,
               private wfSvc: WorkflowService,
-              private navCtrl: NavController) {
+              private QRCode: QRCodeService,
+              private photoSvc: PhotoService) {
+
+    storage.ready().then(() => { });
 
     // Assume all are ion-input except the one specificed as textarea
     this.wfOrderDetails = [
@@ -181,61 +182,48 @@ export class EditWorkflow2Page implements OnInit{
   ngOnInit() {
     console.log("Initialise the page 成品流程卡");
 
-    console.log(this.navParams);
-
     this.formInit();
-
     let form = this.wfInputForm;
 
-    // alert(this.wfRMDetails[1].modelName)
-
-    let storageData: any;
+    console.log("The Nav Params bought to this page is" + this.wfNavParams);
 
     console.log("loading from storage");
-    this.storage.get(this.wfNavParams).then((dataDumpJsonXTmp) => {
-      console.log("this is storage");
-      console.log("storage:" + JSON.stringify(dataDumpJsonXTmp));
-      storageData = dataDumpJsonXTmp;
-
+    this.storage.get(this.wfNavParams).then((storageData) => {
+      console.log("Storage Data:" + JSON.stringify(storageData));
 
       for (let key in form.value) {
         // console.log("Loading " + key + " Storage:" + storageData[key]);
+
         try {
           if(key == 'wfStaffTechId') {
             this.wfStaffTechIdTmp = storageData[key];
-            //alert('staff 1:' + StaffArr.wfStaffTechIda);
             form.controls[key].setValue('');
-            // console.log('storage test 1: ' + this.wfStaffTechIdTmp);
+
           } else if(key == 'wfStaffOptShift') {
             this.wfStaffOptShiftTmp = storageData[key];
             form.controls[key].setValue('');
-            //alert('staff 2:' + this.wfStaffOptShiftTmp);
-            // console.log('storage test 1: ' + this.wfStaffOptShiftTmp);
+
           } else if(key == 'wfQCSignOff') {
             this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue('');
-            //alert('staff 3:' + this.wfQCSignOffTmp);
-            // console.log('storage test 1: ' + this.wfQCSignOffTmp);
+
           } else if(key == 'wfOptInputDate') {
             this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue(this.appDate);
-            //alert('staff 3:' + this.wfQCSignOffTmp);
-            // console.log('storage test 1: ' + this.wfQCSignOffTmp);
+
           } else {
             form.controls[key].setValue(storageData[key]);
             console.log("Form value" + form.controls[key])
+
           }
         } catch (err) {
-          // console.log(err);
+          console.log("Got an error from formInit populating from storage: "  + err);
+
         }
       }
-
-      console.log(this.wfInputForm.value);
+      console.log("Populated form now is: " + JSON.stringify(this.wfInputForm.value));
 
     });
-
-    console.log(this.wfInputForm.value);
-
 
   }
 
@@ -248,7 +236,6 @@ export class EditWorkflow2Page implements OnInit{
       return false;
     }
   }
-
 
 
   inputWf(){
@@ -429,36 +416,36 @@ export class EditWorkflow2Page implements OnInit{
     }
   }
 
-  takePhoto() {
-    // alert("taking photos");
-
-    const options: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      saveToPhotoAlbum: true
-    };
-
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64:
-
-      let imgUrl = 'data:image/jpeg;base64,' + imageData;
-
-      this.images.push(imgUrl);
-
-      this.storage.set('images', this.images);
-
-      // console.log(this.images);
-
-
-    }, (err) => {
-      // Handle error
-    });
-
-  }
+  // takePhoto() {
+  //   // alert("taking photos");
+  //
+  //   const options: CameraOptions = {
+  //     quality: 50,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     mediaType: this.camera.MediaType.PICTURE,
+  //     correctOrientation: true,
+  //     saveToPhotoAlbum: true
+  //   };
+  //
+  //   this.camera.getPicture(options).then((imageData) => {
+  //     // imageData is either a base64 encoded string or a file URI
+  //     // If it's base64:
+  //
+  //     let imgUrl = 'data:image/jpeg;base64,' + imageData;
+  //
+  //     this.images.push(imgUrl);
+  //
+  //     this.storage.set('images', this.images);
+  //
+  //     // console.log(this.images);
+  //
+  //
+  //   }, (err) => {
+  //     // Handle error
+  //   });
+  //
+  // }
 
   /*
   scanBarcode(model: string){

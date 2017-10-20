@@ -316,7 +316,6 @@
                             </h4>
                         </ion-col>
 
-
                         <!-- Input field form -->
                         <ion-col *ngFor="let wfInput of wfPplInputs" col-auto align-items-left justify-content-center>
 
@@ -365,7 +364,7 @@
                                         [ngStyle]="{'width.em':wfInput.size}"
                                         class="textarea gridborder"></ion-textarea>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <button ion-button type="button" (click)="takePhoto()">
+                                <button ion-button type="button" (click)="this.photoSvc.shoot(this.images, this.wfInputForm)">
                                     <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
                                     &nbsp; 拍照
                                 </button>
@@ -400,6 +399,7 @@
                             </div>
 
                         </ion-col>
+
                         <ion-row>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)"
@@ -410,10 +410,6 @@
                             </button>
 
                         </ion-row>
-                    </ion-row>
-
-                    <ion-row justify-content-end>
-
                     </ion-row>
 
                 </ion-col>

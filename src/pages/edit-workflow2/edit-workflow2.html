@@ -260,7 +260,7 @@
                                 &nbsp; 上存
                             </ion-icon>
                         </button>
-                        <button ion-button type="button" (click)="takePhoto()">
+                        <button ion-button type="button" (click)="this.photoSvc.shoot(this.images, this.wfInputForm)">
                             <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
                             &nbsp; 拍照
                         </button>

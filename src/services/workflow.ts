@@ -2,24 +2,26 @@ import { Injectable} from "@angular/core";
 // import { HTTP } from "@ionic-native/http";
 import 'rxjs/Rx';
 import { Headers, Http, RequestOptions, Response } from "@angular/http";
-import { AlertController } from "ionic-angular";
+
 
 
 @Injectable()
 export class WorkflowService {
   private httpHeaders = new Headers({ 'Content-type':'application/json' });
   private httpOptions = new RequestOptions({ headers:this.httpHeaders });
-  // private baseUrl = "http://localhost:3000/workflow/";
-  // For hosting server
-  private baseUrl = "http://192.168.4.200:3000/workflow/";
+
+  // For Dev url
+  private baseUrl = "http://localhost:3000/workflow/";
+
+  // For Test url
+  // private baseUrl = "http://192.168.4.200:3000/workflow/";
   // private baseUrl = "http://172.20.10.2:3000/workflow/";
 
   constructor(private http: Http){}
 
   upload(wfInputForm: any, wfForm: number){
     console.log("Begin to upload onto server");
-    console.log("Printing packet to server");
-    console.log(wfInputForm);
+    console.log("Printing packet to server : " + JSON.stringify(wfInputForm));
 
     let queryUrl = this.baseUrl + "form" + wfForm +"/submit/";
     console.log(queryUrl);
@@ -35,8 +37,7 @@ export class WorkflowService {
 
   query(wfInputForm: any, wfForm: number){
     console.log("Begin to load data from server");
-    console.log("Printing request to server");
-    console.log(wfInputForm);
+    console.log("Printing request to server : " + JSON.stringify(wfInputForm));
 
     let queryUrl = this.baseUrl + "form" + wfForm +"/query/";
     console.log(queryUrl);
@@ -49,7 +50,5 @@ export class WorkflowService {
         return response.json();
       });
   }
-
-
 
 }

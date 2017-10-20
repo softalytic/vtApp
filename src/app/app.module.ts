@@ -11,18 +11,21 @@ import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { ScreenOrientation } from "@ionic-native/screen-orientation";
 import { EditWorkflow1Page } from "../pages/edit-workflow1/edit-workflow1";
 import { EditWorkflow2Page } from "../pages/edit-workflow2/edit-workflow2";
+import { EditWorkflow3Page } from "../pages/edit-workflow3/edit-workflow3";
 import { Camera } from "@ionic-native/camera";
 import { WorkflowService } from "../services/workflow";
-// import { HTTP } from "@ionic-native/http";
 import { HttpModule } from "@angular/http";
 import { QRCodeService } from "../services/qrCode";
+import { PhotoService } from "../services/photo";
+
 
 @NgModule({
   declarations: [
     MyApp,
     WorkflowPage,
     EditWorkflow1Page,
-    EditWorkflow2Page
+    EditWorkflow2Page,
+    EditWorkflow3Page
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { QRCodeService } from "../services/qrCode";
     MyApp,
     WorkflowPage,
     EditWorkflow1Page,
-    EditWorkflow2Page
+    EditWorkflow2Page,
+    EditWorkflow3Page
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -49,7 +53,8 @@ import { QRCodeService } from "../services/qrCode";
     IonicStorageModule,
     ScreenOrientation,
     WorkflowService,
-    QRCodeService
+    QRCodeService,
+    PhotoService
   ]
 })
 export class AppModule {}

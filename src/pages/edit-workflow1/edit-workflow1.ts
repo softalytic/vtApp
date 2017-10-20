@@ -2,10 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, NavParams, AlertController, Events } from 'ionic-angular';
 import { NgForm, FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
-import { BarcodeScanner } from "@ionic-native/barcode-scanner";
-import { Camera, CameraOptions } from "@ionic-native/camera";
 import { WorkflowService } from "../../services/workflow";
 import { QRCodeService } from "../../services/qrCode";
+import { PhotoService } from "../../services/photo";
 
 
 @Component({
@@ -51,22 +50,18 @@ export class EditWorkflow1Page implements OnInit{
               private formBuilder: FormBuilder,
               private QRCode: QRCodeService,
               private alertCtrl: AlertController,
-              private camera: Camera,
               private navParams: NavParams,
               private wfSvc: WorkflowService,
-              private navCtrl: NavController) {
+              private navCtrl: NavController,
+              private photoSvc: PhotoService) {
 
     storage.ready().then(() => { });
-
-
 
     // Assume all are ion-input except the one specificed as textarea
     this.wfOrderDetails = [
   
       {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 20, highlight: false},
-       
       {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 20, highlight: false},
-
       /*
        {model: "wfOrderBatchId", title: "批次号", type: "text", highlight: false},
        {model: "wfOrderQty", title: "总量(批次)", type: "text", highlight: false},
@@ -202,7 +197,7 @@ export class EditWorkflow1Page implements OnInit{
 }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad EditWorkflowPage');
+    console.log('ionViewDidLoad EditWorkflowPage1');
     console.log(this.wfNavParams);
     console.log(this.appDate);
   }
@@ -211,59 +206,48 @@ export class EditWorkflow1Page implements OnInit{
     console.log("Initialise the page 裸品流程卡");
 
     this.formInit();
-
     let form = this.wfInputForm;
-    let storageData: any;
+
+    console.log("The Nav Params bought to this page is" + this.wfNavParams);
 
     console.log("loading from storage");
-    this.storage.get(this.wfNavParams).then((dataDumpJsonXTmp) => {
-      console.log("this is storage");
-      console.log("storage:" + JSON.stringify(dataDumpJsonXTmp));
-      storageData = dataDumpJsonXTmp;
+    this.storage.get(this.wfNavParams).then((storageData) => {
+      console.log("Storage Data:" + JSON.stringify(storageData));
 
-      // for (let key in storageData) {
-      //   console.log(key + " : " +storageData[key]);
-      // };
-      
-      //alert(storageData['wfForm']);
-      /*
-      if(storageData['wfForm'] == 1)
-      {
-        form.controls['wfFormName'].setValue('裸品流程卡');
-      }
-      */
       for (let key in form.value) {
         // console.log("Loading " + key + " Storage:" + storageData[key]);
+
         try {
           if(key == 'wfStaffTechId') {
             this.wfStaffTechIdTmp = storageData[key];
-            //alert('staff 1:' + StaffArr.wfStaffTechIda);
             form.controls[key].setValue('');
-            // console.log('storage test 1: ' + this.wfStaffTechIdTmp);
+
           } else if(key == 'wfStaffOptShift') {
             this.wfStaffOptShiftTmp = storageData[key];
             form.controls[key].setValue('');
-            //alert('staff 2:' + this.wfStaffOptShiftTmp);
-            // console.log('storage test 1: ' + this.wfStaffOptShiftTmp);
+
           } else if(key == 'wfQCSignOff') {
             this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue('');
-            //alert('staff 3:' + this.wfQCSignOffTmp);
-            // console.log('storage test 1: ' + this.wfQCSignOffTmp);
+
+          } else if(key == 'wfOptInputDate') {
+            this.wfQCSignOffTmp = storageData[key];
+            form.controls[key].setValue(this.appDate);
+
           } else {
             form.controls[key].setValue(storageData[key]);
+            console.log("Form value" + form.controls[key])
+
           }
-          
         } catch (err) {
-          // console.log(err);
+          console.log("Got an error from formInit populating from storage: "  + err);
+
         }
       }
+      console.log("Populated form now is: " + JSON.stringify(this.wfInputForm.value));
 
     });
 
-
-
-    // alert(this.wfRMDetails[1].modelName)
   }
 
   checkBeforeScan(form: NgForm) {
@@ -497,40 +481,40 @@ export class EditWorkflow1Page implements OnInit{
     alert.present();
   }
 
-  takePhoto() {
-    // alert("taking photos");
-
-    this.presentPrompt();
-
-    const options: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      saveToPhotoAlbum: true
-    };
-
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64:
-
-      // Photo attribute: wfForm, time, date, process or description
-
-      let imgUrl = 'data:image/jpeg;base64,' + imageData;
-
-      this.images.push(imgUrl);
-
-      this.storage.set('images', this.images);
-
-      // console.log(this.images);
-
-
-    }, (err) => {
-      // Handle error
-    });
-
-  }
+  // takePhoto() {
+  //   // alert("taking photos");
+  //
+  //   this.presentPrompt();
+  //
+  //   const options: CameraOptions = {
+  //     quality: 50,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     mediaType: this.camera.MediaType.PICTURE,
+  //     correctOrientation: true,
+  //     saveToPhotoAlbum: true
+  //   };
+  //
+  //   this.camera.getPicture(options).then((imageData) => {
+  //     // imageData is either a base64 encoded string or a file URI
+  //     // If it's base64:
+  //
+  //     // Photo attribute: wfForm, time, date, process or description
+  //
+  //     let imgUrl = 'data:image/jpeg;base64,' + imageData;
+  //
+  //     this.images.push(imgUrl);
+  //
+  //     this.storage.set('images', this.images);
+  //
+  //     // console.log(this.images);
+  //
+  //
+  //   }, (err) => {
+  //     // Handle error
+  //   });
+  //
+  // }
 
   /*
   scanBarcode(model: string){
@@ -700,7 +684,6 @@ export class EditWorkflow1Page implements OnInit{
 
       // Order Inputs detail
       wfFormId: [''],
-      // wfOrderFormId: [''],
       wfOrderId: [''],
       wfOrderBatchId: [''],
       wfOrderBatchQty: [''],

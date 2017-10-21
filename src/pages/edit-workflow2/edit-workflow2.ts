@@ -315,82 +315,104 @@ export class EditWorkflow2Page implements OnInit{
     }
   }
 
-  showWfOpsFinalInputsAlert(wfOrderTotalQty: any, wfOrderTotalGoodQty: any, wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
-
-    if(wfOptGoodQtyValue) {
-      let form = this.wfInputForm;
-      let alert = this.alertCtrl.create({
-        /*
-        title: '',
-
-        subTitle: '确定完成和上传' + ' Order Total: ' + wfOrderTotalQty + ' Good Total: ' + wfOrderTotalGoodQty + ' Bad:' + wfOptBadQtyValue + ' opt good: ' + wfOptGoodQtyValue,
-        */
-        buttons: [{
-          text: '上存',
-          handler: () => {
-            console.log('save clicked');
-            form.value.wfProcessStatus = "0";
-            this.storage.set(form.value.wfFormId, form.value);
-            this.navCtrl.pop();
-          }
-        },
-          {
-            text: '上存 + 完成工序',
-            handler: () => {
-              console.log('submit and save clicked');
-              console.log(form.value);
-
-              let alert = this.alertCtrl.create({
-                title: '嚫!',
-                // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
-                // comment above for faster process
-                subTitle: '完成终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
-                buttons: [{text: '確定',
-                  handler: () => {
-                    form.value.wfProcessStatus = "1";
-                    this.storage.set(form.value.wfFormId, form.value);
-
-                    // Upload to Server
-                    console.log("uploading to server");
-                    this.wfSvc.upload(form.value,1)
-                      .subscribe((data)=> {
-                          console.log("Successfully uploading to server");
-                          console.log(data);
-                        },
-                        error => {
-                          console.log(error);
-                        }
-                      );
-
-                    // Return back to main page
-                    this.navCtrl.pop();
-                  }
-                }]
-              });
-
-              alert.present();
-
-              //this.onSubmit();
-            }
-          }, {
-            text: '取消',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancel clicked');
-            }
-          }]
-      });
-      alert.present();
-    } else {
-      let alert = this.alertCtrl.create({
-        title: '',
-        subTitle: '请确定内容: 日期，开始，完成，良品数，不良数 ',
-        buttons: ['確定']
-      });
-      alert.present();
-
-    }
-  }
+  // showWfOpsFinalInputsAlert(wfOrderTotalQty: any, wfOrderTotalGoodQty: any, wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
+  //
+  //   if(wfOptGoodQtyValue) {
+  //     let form = this.wfInputForm;
+  //     let alert = this.alertCtrl.create({
+  //       /*
+  //       title: '',
+  //
+  //       subTitle: '确定完成和上传' + ' Order Total: ' + wfOrderTotalQty + ' Good Total: ' + wfOrderTotalGoodQty + ' Bad:' + wfOptBadQtyValue + ' opt good: ' + wfOptGoodQtyValue,
+  //       */
+  //       buttons: [{
+  //         text: '上存',
+  //         handler: () => {
+  //           console.log('save clicked');
+  //           form.value.wfProcessStatus = "0";
+  //           this.storage.set(form.value.wfFormId, form.value);
+  //           this.navCtrl.pop();
+  //         }
+  //       },
+  //         {
+  //           text: '上存 + 完成工序',
+  //           handler: () => {
+  //             console.log('submit and save clicked');
+  //             console.log(form.value);
+  //
+  //             let alertCtrl = this.alertCtrl.create({
+  //               title: '嚫!',
+  //               // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
+  //               // comment above for faster process
+  //               subTitle: '完成终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
+  //               buttons: [{text: '確定',
+  //                 handler: () => {
+  //                   form.value.wfProcessStatus = "1";
+  //                   this.storage.set(form.value.wfFormId, form.value);
+  //
+  //                   // Upload to Server
+  //                   console.log("uploading to server");
+  //
+  //                   // Upload images
+  //                   this.wfSvc.upload(form.value,1)
+  //                     .subscribe((data)=> {
+  //                         console.log("Successfully uploading to server");
+  //                         console.log("Upload wfInput reply from server" + JSON.stringify(data));
+  //
+  //                         if (this.images.length > 0){
+  //                           console.log("uploading images to server");
+  //                           let imgTotal = this.images.length;
+  //
+  //                           for (let i = 0; i < imgTotal; i++) {
+  //                             this.wfSvc.uploadImage(form,1,this.images[i],i,imgTotal)
+  //                               .subscribe((data)=> {
+  //                                   console.log("Successfully uploading to server");
+  //                                   console.log("Upload img reply from server" + JSON.stringify(data));
+  //
+  //                                 },
+  //                                 error => {
+  //                                   console.log(error);
+  //                                   // alert("嚫!网路不给力,请再试一次")
+  //                                 }
+  //                               );
+  //                           }
+  //                         }
+  //
+  //                         // Return back to main page
+  //                         this.navCtrl.pop();
+  //                       },
+  //                       error => {
+  //                         console.log(error);
+  //                         // alert("嚫!网路不给力,请再试一次")
+  //                       }
+  //                     );
+  //                 }
+  //               }]
+  //             });
+  //
+  //             alertCtrl.present();
+  //
+  //             //this.onSubmit();
+  //           }
+  //         }, {
+  //           text: '取消',
+  //           role: 'cancel',
+  //           handler: () => {
+  //             console.log('Cancel clicked');
+  //           }
+  //         }]
+  //     });
+  //     alert.present();
+  //   } else {
+  //     let alert = this.alertCtrl.create({
+  //       title: '',
+  //       subTitle: '请确定内容: 日期，开始，完成，良品数，不良数 ',
+  //       buttons: ['確定']
+  //     });
+  //     alert.present();
+  //
+  //   }
+  // }
 
   showWfOpsInputsAlert(wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
     if(wfOptBadQtyValue == '' || wfOptGoodQtyValue == '') {

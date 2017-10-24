@@ -161,8 +161,7 @@ export class WorkflowPage implements OnInit {
                 { "erpData": "ngForm"},
                 "bodies":
                   { "erpData":
-                    {"wfProcess": "1",
-                      "wfProcessName": "釘卷",
+                    {
                       "wfForm": "1",
                       "wfFormId": "VT00001",
                       "wfOrderFormId": "VTOF00001",
@@ -202,6 +201,9 @@ export class WorkflowPage implements OnInit {
                   }
               });
               this.testDataPopulate(data,form);
+              //form.value.wfProcess = ;
+              //"wfProcess": "1",
+              //"wfProcessName": "釘卷",
               console.log("裸品流程卡 Alert Controller has been clicked");
             }
           },
@@ -216,8 +218,6 @@ export class WorkflowPage implements OnInit {
                 "bodies":
                   { "erpData":
                     {"wfForm":"2",
-                      "wfProcess": "1",
-                      "wfProcessName": "打印",
                       "wfFormId": "VT0002",
                       "wfOrderId": "VTO0002",
                       "wfOrderBatchId": "VTB0002",
@@ -247,7 +247,65 @@ export class WorkflowPage implements OnInit {
                   }
               });
               this.testDataPopulate(data,form);
+              /*      "wfProcess": "1",
+                      "wfProcessName": "打印",
+              */
               console.log("成品流程卡 Alert Controller has been clicked");
+            }
+          }, {
+            text: '电容器流程卡',
+            handler: () => {
+              console.log("nothing in the form");
+
+              // workflow 1 
+              let data = JSON.stringify({ "headers":
+                { "erpData": "ngForm"},
+                "bodies":
+                  { "erpData":
+                    {
+                      "wfForm": "3",
+                      "wfFormId": "VT00001",
+                      "wfOrderFormId": "VTOF00001",
+                      "wfOrderId": "VTO00001",
+                      "wfOrderBatchId": "VTOB0001",
+                      "wfOrderBatchQty": "100",
+                      "wfOrderTotalQty": "1000",
+                      "wfOrderTotalGoodQty": "100",
+                      "wfOrderTotalBadQty": "0",
+                      "wfOrderRMId": "VT原材料",
+                      "wfOrderSeries": "VT系列",
+                      "wfOrderSpec": "VT規格",
+                      "wfOrderDim": "VT尺寸",
+                      "wfRMFoilPosName": "100LG04B-33VF-48UF 5.5mm",
+                      "wfRMFoilPosSerial": "17074049",
+                      "wfRMFoilPosLName": "184",
+                      "wfRMFoilNegName": "F-545M-450UF-5.5MM",
+                      "wfRMFoilNegSerial": "0619A04A06",
+                      "wfRMFoilNegLName": "184",
+                      "wfRMPaperName": "SM250-50 6.5mm",
+                      "wfRMPaperSerial": "17032519A1-B47",
+                      "wfRMGlueName": "",
+                      "wfRMGlueSerial": "17.7.22",
+                      "wfRMSolName": "KVP-1B",
+                      "wfRMSolSerial": "富凱2017.7119",
+                      "wfRMPinPosName": "15080(+)",
+                      "wfRMPinPosSerial": "1706241163",
+                      "wfRMPinNegName": "15080(-)",
+                      "wfRMPinNegSerial": "1707201194",
+                      "wfRMPlasticName": "9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",
+                      "wfRMPlasticSerial": "17704310121",
+                      "wfRMCoverName": "10x10.6 3004材质(防爆)",
+                      "wfRMCoverSerial": "1670722-053842",
+                      "wfProcessStatus": "0",
+                      "wfFormStatus": "0"
+                    }
+                  }
+              });
+              this.testDataPopulate(data,form);
+              //form.value.wfProcess = ;
+              //"wfProcess": "1",
+              //"wfProcessName": "釘卷",
+              console.log("裸品流程卡 Alert Controller has been clicked");
             }
           }
 

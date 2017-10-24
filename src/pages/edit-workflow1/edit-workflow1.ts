@@ -6,7 +6,6 @@ import { WorkflowService } from "../../services/workflow";
 import { QRCodeService } from "../../services/qrCode";
 import { PhotoService } from "../../services/photo";
 
-
 @Component({
   selector: 'page-edit-workflow1',
   templateUrl: 'edit-workflow1.html',

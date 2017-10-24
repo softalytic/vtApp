@@ -57,7 +57,7 @@
                                     [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcess == key }"
                                     (click)="setFormValue('wfProcess',key); setFormValue('wfProcessName',dataWfProcess[this.wfInputForm.value.wfForm].Process[key]);"
                                     item-right ion-button outline type="button" round>
-                                <ion-icon name="clipboard"></ion-icon>
+                                <!--<ion-icon name="clipboard"></ion-icon>-->
                                 {{dataWfProcess[this.wfInputForm.value.wfForm].Process[key]}}
                             </button>
                         </ion-row>

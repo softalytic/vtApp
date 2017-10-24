@@ -44,9 +44,9 @@ webpackEmptyAsyncContext.id = 185;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_workflow__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__edit_workflow1_edit_workflow1__ = __webpack_require__(255);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__edit_workflow2_edit_workflow2__ = __webpack_require__(258);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_qrCode__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_qrCode__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__edit_workflow1_edit_workflow1__ = __webpack_require__(256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__edit_workflow2_edit_workflow2__ = __webpack_require__(258);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__edit_workflow3_edit_workflow3__ = __webpack_require__(259);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -94,9 +94,9 @@ var WorkflowPage = (function () {
         };
         this.testRadioOpen = false;
         this.dataWfProcess = {
-            "1": { "wfFormName": "裸品流程卡", "Process": { "1": "釘卷", "2": "含浸", "3": "组立", "4": "清洗" } },
+            "1": { "wfFormName": "裸品流程卡", "Process": { "1": "釘卷", "2": "含浸", "3": "组立", "4": "清洗", "5": "自動/手工老化", "6": "串排", "7": "测试分选", "8": "外观" } },
             "2": { "wfFormName": "成品流程卡", "Process": { "1": "打印", "2": "测试上带", "3": "贴片外观", "4": "终检" } },
-            "3": { "wfFormName": "电容器流程卡", "Process": { "1": "釘卷", "2": "含浸", "3": "组立", "4": "清洗" } },
+            "3": { "wfFormName": "电容器流程卡", "Process": { "1": "素子钉卷", "2": "組立", "3": "套管", "4": "老化选别", "5": "手工分选", "6": "外观全检", "7": "编带剪切", "8": "包装" } }
         };
         this.dataMachine = {
             "AA001": { "wfStaffOptId": "S0001", "wfStaffOptName": "員工01", "wfStaffTechId": "T0001", "wfStaffTechName": "技術員工01", "wfStaffXrayId": "X0001", "wfStaffXrayName": "Xray員工01", "wfStaffOptShift": "A" },
@@ -114,17 +114,18 @@ var WorkflowPage = (function () {
         ];
         this.wfInputs = [
             { title: "流程卡号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 30 },
-            { title: "工单号", method: 'input', type: 'text', model: 'wfOrderId', scan: false, size: 20 },
+            { title: "台机号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 30 },
+            // {title: "工单号", method: 'input', type: 'text', model: 'wfOrderId', scan: false, size: 20},
             //{title: "总量(预设)", method: 'input', type: 'number', model: 'wfOrderTotalQty', scan: false, size: 10},
             // Prompt Screen alert to pick the workflow batch id
-            { title: "批次号", method: 'input', type: 'text', model: 'wfOrderBatchId', scan: false, size: 20 },
-            { title: "总量(批次)", method: 'input', type: 'number', model: 'wfOrderBatchQty', scan: false, size: 10 },
+            // {title: "批次号", method: 'input', type: 'text', model: 'wfOrderBatchId', scan: false, size: 20},
+            // {title: "总量(批次)", method: 'input', type: 'number', model: 'wfOrderBatchQty', scan: false, size: 10},
             { method: "break", size: 20 },
             // Expand as buttons
             { title: "流程卡", method: 'buttons', options: [
-                    { value: 1, label: '裸品' },
-                    { value: 2, label: '成品' },
-                    { value: 3, label: '电容器' }
+                    { value: '1', label: '裸品' },
+                    { value: '2', label: '成品' },
+                    { value: '3', label: '电容器' }
                 ], model: 'wfForm', scan: false, size: 100 }
         ];
     }
@@ -660,10 +661,10 @@ var WorkflowPage = (function () {
             console.log("流程卡" + form.value.wfFormId);
             switch (form.value.wfForm.toString()) {
                 case '1':
-                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__edit_workflow1_edit_workflow1__["a" /* EditWorkflow1Page */], form.value.wfFormId);
+                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__edit_workflow1_edit_workflow1__["a" /* EditWorkflow1Page */], form.value.wfFormId);
                     break;
                 case '2':
-                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__edit_workflow2_edit_workflow2__["a" /* EditWorkflow2Page */], form.value.wfFormId);
+                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__edit_workflow2_edit_workflow2__["a" /* EditWorkflow2Page */], form.value.wfFormId);
                     break;
                 case '3':
                     _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__edit_workflow3_edit_workflow3__["a" /* EditWorkflow3Page */], form.value.wfFormId);
@@ -685,31 +686,28 @@ var WorkflowPage = (function () {
             wfProcessName: [''],
             wfForm: [''],
             wfFormId: [''],
-            wfOrderId: [''],
-            wfOrderBatchId: [''],
-            wfOrderBatchQty: [''],
-            wfOrderTotalQty: ['']
+            // wfOrderId: [''],
+            // wfOrderBatchId: [''],
+            // wfOrderBatchQty: [''],
+            // wfOrderTotalQty: [''],
+            wfOptMachineId: [''],
         });
     };
     return WorkflowPage;
 }());
 WorkflowPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-workflow',template:/*ion-inline-start:"/Users/thomasq/Sites/vtApp/src/pages/workflow/workflow.html"*/'<ion-header>\n    <ion-navbar>\n        <div style="align-items: center; display: inline;">\n            <img src="./assets/img/vt_icon.png" class="icon">\n            <ion-title>工序流程卡纪录系统</ion-title>\n        </div>\n    </ion-navbar>\n</ion-header>\n<ion-content padding>\n    <form [formGroup]="wfInputForm" (ngSubmit)="onAddWf()">\n\n        <!-- First section for the input field -->\n        <div>\n            <ion-grid>\n                <ion-row wrap justify-content-left align-items-center>\n                    <!-- Main loop of the Form Module -->\n                    <ion-col *ngFor="let wfInput of wfInputs">\n                        <!-- Non Buttons input fields of wfForms -->\n                        <ion-row align-items-center>\n                            <div class="label">{{wfInput.title}}</div>\n\n                            <!-- Form Normal Input Module-->\n                            <ion-input *ngIf="wfInput.method === \'input\'" [ngStyle]="{\'width.em\':wfInput.size}" type={{wfInput.type}} formControlName={{wfInput.model}} no-padding class="gridborder" required></ion-input>\n\n                            <button *ngIf="wfInput.scan" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)" item-end ion-button class="barcodeButton" type="button">\n                                <!--<ion-icon name="barcode"></ion-icon>-->\n                                扫一扫\n                            </button>\n\n                            <!-- Form Selector Module -->\n                            <ion-select *ngIf="wfInput.method === \'select\'" [ngStyle]="{\'width.em\':wfInput.size}" interface="popover" style="height: 34px !important;" (ionChange)="setWfStage($event)" formControlName={{wfInput.model}} class="gridborder" okText="确定" cancelText="取消">\n                                <ion-option *ngFor="let key of wfMachineData" value={{key}}>\n                                    {{wfMachineProcess[0][key]}}\n                                </ion-option>\n                            </ion-select>\n\n                            <!-- Buttons input fields of wfForms -->\n                            <div *ngIf="wfInput.method === \'buttons\'" [ngStyle]="{\'width.em\':wfInput.size}">\n                                <ion-buttons>\n                                    <!-- Button for Form submission -->\n                                    <button *ngFor="let option of wfInput.options" [ngClass]="{\'buttonsSelected\': wfInputForm.value.wfForm == option.value }" (click)="setFormValue(wfInput.model,option.value)" item-right ion-button outline type="button" round>\n                                        <ion-icon name="clipboard"></ion-icon>\n                                        &nbsp; {{option.label}}\n                                    </button>\n                                </ion-buttons>\n\n                                <button style="width: 25%; margin: 0 auto;" ion-button type="submit" block>\n                                    确定\n                                </button>\n                            </div>\n\n                            <div *ngIf="wfInput.method === \'break\'" [ngStyle]="{\'width.em\':wfInput.size}"></div>\n\n                        </ion-row>\n\n                    </ion-col>\n                </ion-row>\n            </ion-grid>\n        </div>\n\n        <div>\n\n\n        </div>\n\n        <!-- Display the workflow process with img -->\n        <div>\n            <ion-grid style="padding-left: 50px; padding-right: 50px;">\n                <ion-row wrap class="card-background-page">\n                    <ion-col *ngFor="let wfProcess of wfProcesses" col-3>\n                        <div class="imgButton">\n                            <img src="{{\'./assets/img/f1p\' + wfProcess.process + \'.jpeg\'}}">\n                            <div class="card-title">\n                                {{wfProcess.title}}\n                            </div>\n                        </div>\n                        <!-- For original design -->\n                        <!--<div [navPush]="pushPage" [navParams]=wfProcess>-->\n                    </ion-col>\n                </ion-row>\n            </ion-grid>\n        </div>\n\n        <!-- manual ageing will have an action sheet to prompt the sub process -->\n        <!-- 規格 Need attention highlight -->\n        <!-- 料號 = 產品編號 -->\n\n    </form>\n</ion-content>'/*ion-inline-end:"/Users/thomasq/Sites/vtApp/src/pages/workflow/workflow.html"*/,
+        selector: 'page-workflow',template:/*ion-inline-start:"/Users/thomasq/Sites/vtApp/src/pages/workflow/workflow.html"*/'<ion-header>\n    <ion-navbar>\n        <div style="align-items: center; display: inline;">\n            <img src="./assets/img/vt_icon.png" class="icon">\n            <ion-title>工序流程卡纪录系统</ion-title>\n        </div>\n    </ion-navbar>\n</ion-header>\n<ion-content padding>\n    <form [formGroup]="wfInputForm" (ngSubmit)="onAddWf()">\n\n        <!-- First section for the input field -->\n        <div>\n            <ion-grid>\n                <ion-row wrap justify-content-left align-items-center>\n                    <!-- Main loop of the Form Module -->\n                    <ion-col *ngFor="let wfInput of wfInputs">\n                        <!-- Non Buttons input fields of wfForms -->\n                        <ion-row align-items-center>\n                            <div class="label">{{wfInput.title}}</div>\n\n                            <!-- Form Normal Input Module-->\n                            <ion-input *ngIf="wfInput.method === \'input\'" [ngStyle]="{\'width.em\':wfInput.size}" type={{wfInput.type}} formControlName={{wfInput.model}} no-padding class="gridborder" required></ion-input>\n\n                            <button *ngIf="wfInput.scan" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)" item-end ion-button class="barcodeButton" type="button">\n                                <!--<ion-icon name="barcode"></ion-icon>-->\n                                扫一扫\n                            </button>\n\n                            <!-- Form Selector Module -->\n                            <ion-select *ngIf="wfInput.method === \'select\'" [ngStyle]="{\'width.em\':wfInput.size}" interface="popover" style="height: 34px !important;" (ionChange)="setWfStage($event)" formControlName={{wfInput.model}} class="gridborder" okText="确定" cancelText="取消">\n                                <ion-option *ngFor="let key of wfMachineData" value={{key}}>\n                                    {{wfMachineProcess[0][key]}}\n                                </ion-option>\n                            </ion-select>\n\n                            <!-- Buttons input fields of wfForms -->\n                            <div *ngIf="wfInput.method === \'buttons\'" [ngStyle]="{\'width.em\':wfInput.size}">\n                                <ion-buttons>\n                                    <!-- Button for Form submission -->\n                                    <button *ngFor="let option of wfInput.options" [ngClass]="{\'buttonsSelected\': wfInputForm.value.wfForm == option.value }" (click)="setFormValue(wfInput.model,option.value)" item-right ion-button outline type="button" round>\n                                        <ion-icon name="clipboard"></ion-icon>\n                                        &nbsp; {{option.label}}\n                                    </button>\n                                </ion-buttons>\n                            </div>\n\n                            <div *ngIf="wfInput.method === \'break\'" [ngStyle]="{\'width.em\':wfInput.size}"></div>\n\n                        </ion-row>\n\n                    </ion-col>\n                    <ion-col *ngIf="wfInputForm.value.wfForm != \'\'">\n                        <ion-row align-items-center>\n                            <div class="label">工序</div>\n                            <button *ngFor="let key of dataWfProcess[this.wfInputForm.value.wfForm].Process | keys"\n                                    [ngClass]="{\'buttonsSelected\': wfInputForm.value.wfProcess == key }"\n                                    (click)="setFormValue(\'wfProcess\',key); setFormValue(\'wfProcessName\',dataWfProcess[this.wfInputForm.value.wfForm].Process[key]);"\n                                    item-right ion-button outline type="button" round>\n                                <ion-icon name="clipboard"></ion-icon>\n                                {{dataWfProcess[this.wfInputForm.value.wfForm].Process[key]}}\n                            </button>\n                        </ion-row>\n                    </ion-col>\n                </ion-row>\n\n                <ion-row>\n                    <button style="width: 25%; margin: 0 auto;" ion-button type="submit" block>\n                        确定\n                    </button>\n                </ion-row>\n            </ion-grid>\n        </div>\n\n        <!-- Display the workflow process with img -->\n\n\n        <!-- manual ageing will have an action sheet to prompt the sub process -->\n        <!-- 規格 Need attention highlight -->\n        <!-- 料號 = 產品編號 -->\n\n    </form>\n</ion-content>'/*ion-inline-end:"/Users/thomasq/Sites/vtApp/src/pages/workflow/workflow.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */],
-        __WEBPACK_IMPORTED_MODULE_7__services_qrCode__["a" /* QRCodeService */],
-        __WEBPACK_IMPORTED_MODULE_4__services_workflow__["a" /* WorkflowService */],
-        __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__services_qrCode__["a" /* QRCodeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_qrCode__["a" /* QRCodeService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__services_workflow__["a" /* WorkflowService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_workflow__["a" /* WorkflowService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _f || Object])
 ], WorkflowPage);
 
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=workflow.js.map
 
 /***/ }),
 
-/***/ 255:
+/***/ 256:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1348,6 +1346,7 @@ var EditWorkflow1Page = (function () {
             wfOrderId: [''],
             wfOrderBatchId: [''],
             wfOrderBatchQty: [''],
+            wfOptMachineId: [''],
             wfOrderBOMNote: [''],
             wfOrderNote: [''],
             wfOrderTotalQty: [''],
@@ -1385,7 +1384,6 @@ var EditWorkflow1Page = (function () {
             wfRMWindingTime: [''],
             wfRMWindingDeg: [''],
             // Operational Input
-            wfOptMachineId: [''],
             wfOptInputDate: [this.appDate],
             wfOptStartTime: ['00:00'],
             wfOptFinishTime: ['00:00'],
@@ -2023,6 +2021,7 @@ var EditWorkflow2Page = (function () {
             wfOrderId: [''],
             wfOrderBatchId: [''],
             wfOrderBatchQty: [''],
+            wfOptMachineId: [''],
             wfOrderFormNote: [''],
             wfOrderBOMNote: [''],
             wfOrderNote: [''],
@@ -2053,7 +2052,6 @@ var EditWorkflow2Page = (function () {
             wfSpecLC: [''],
             wfSpecZESR: [''],
             wfSpecNote: [''],
-            wfOptMachineId: '',
             wfOptInputDate: [this.appDate],
             wfOptStartTime: ['00:00'],
             wfOptFinishTime: ['00:00'],
@@ -2197,7 +2195,7 @@ var EditWorkflow3Page = (function () {
         ];
         this.wfOpsInputs = [
             { title: "流程卡号", method: "input", model: "wfFormId", type: "text", icon: 'ios-copy-outline', scan: false, size: 10 },
-            { title: "机台", method: "input", model: "wfMachineId", type: "text", icon: 'cog', scan: false, size: 10 },
+            { title: "机台", method: "input", model: "wfOptMachineId", type: "text", icon: 'cog', scan: false, size: 10 },
             // {title: "批次号", method: "input", model: "wfBatchId", type: "text", icon: 'ios-basket-outline', scan: false, size: 10},
             // {title: "批次量", method: "input", model: "wfBatchQty", type: "text", icon: 'ios-basket-outline', scan: false, size: 5},
             { method: "break", title: "" },
@@ -2466,6 +2464,7 @@ var EditWorkflow3Page = (function () {
             wfOrderId: [''],
             wfOrderBatchId: [''],
             wfOrderBatchQty: [''],
+            wfOptMachineId: [''],
             wfOrderFormNote: [''],
             wfOrderBOMNote: [''],
             wfOrderNote: [''],
@@ -2503,7 +2502,6 @@ var EditWorkflow3Page = (function () {
             wfRMCoverSerial: [''],
             wfRMWindingTime: [''],
             wfRMWindingDeg: [''],
-            wfMachineId: [''],
             wfShift: [''],
             wfInputDate: [this.appDate],
             wfStartTime: [''],
@@ -2602,9 +2600,9 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(311);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_workflow_workflow__ = __webpack_require__(231);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_barcode_scanner__ = __webpack_require__(256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_barcode_scanner__ = __webpack_require__(255);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_screen_orientation__ = __webpack_require__(230);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_edit_workflow1_edit_workflow1__ = __webpack_require__(255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_edit_workflow1_edit_workflow1__ = __webpack_require__(256);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_edit_workflow2_edit_workflow2__ = __webpack_require__(258);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_edit_workflow3_edit_workflow3__ = __webpack_require__(259);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_camera__ = __webpack_require__(257);
@@ -2612,12 +2610,14 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__angular_http__ = __webpack_require__(254);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__services_qrCode__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__services_photo__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_keyPipe__ = __webpack_require__(579);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -2648,7 +2648,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_7__pages_workflow_workflow__["a" /* WorkflowPage */],
             __WEBPACK_IMPORTED_MODULE_10__pages_edit_workflow1_edit_workflow1__["a" /* EditWorkflow1Page */],
             __WEBPACK_IMPORTED_MODULE_11__pages_edit_workflow2_edit_workflow2__["a" /* EditWorkflow2Page */],
-            __WEBPACK_IMPORTED_MODULE_12__pages_edit_workflow3_edit_workflow3__["a" /* EditWorkflow3Page */]
+            __WEBPACK_IMPORTED_MODULE_12__pages_edit_workflow3_edit_workflow3__["a" /* EditWorkflow3Page */],
+            __WEBPACK_IMPORTED_MODULE_18__services_keyPipe__["a" /* KeysPipe */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -3113,12 +3114,45 @@ WorkflowService = __decorate([
 
 /***/ }),
 
+/***/ 579:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return KeysPipe; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var KeysPipe = (function () {
+    function KeysPipe() {
+    }
+    KeysPipe.prototype.transform = function (value, args) {
+        var keys = [];
+        for (var key in value) {
+            keys.push(key);
+        }
+        return keys;
+    };
+    return KeysPipe;
+}());
+KeysPipe = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["W" /* Pipe */])({ name: 'keys' })
+], KeysPipe);
+
+//# sourceMappingURL=keyPipe.js.map
+
+/***/ }),
+
 /***/ 58:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QRCodeService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_barcode_scanner__ = __webpack_require__(256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_barcode_scanner__ = __webpack_require__(255);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(1);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {

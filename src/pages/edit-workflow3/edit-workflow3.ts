@@ -102,7 +102,7 @@ export class EditWorkflow3Page implements OnInit{
 
     this.wfOpsInputs = [
       {title: "流程卡号", method: "input", model: "wfFormId", type: "text", icon: 'ios-copy-outline', scan: false, size: 10},
-      {title: "机台", method: "input", model: "wfMachineId", type: "text", icon: 'cog', scan: false, size: 10},
+      {title: "机台", method: "input", model: "wfOptMachineId", type: "text", icon: 'cog', scan: false, size: 10},
       // {title: "批次号", method: "input", model: "wfBatchId", type: "text", icon: 'ios-basket-outline', scan: false, size: 10},
       // {title: "批次量", method: "input", model: "wfBatchQty", type: "text", icon: 'ios-basket-outline', scan: false, size: 5},
       {method: "break", title: ""},
@@ -406,6 +406,7 @@ export class EditWorkflow3Page implements OnInit{
       wfOrderId: [''],
       wfOrderBatchId: [''],
       wfOrderBatchQty: [''],
+      wfOptMachineId: [''],
 
       wfOrderFormNote: [''],
       wfOrderBOMNote: [''],
@@ -446,7 +447,6 @@ export class EditWorkflow3Page implements OnInit{
       wfRMWindingTime: [''],
       wfRMWindingDeg: [''],
 
-      wfMachineId: [''],
       wfShift: [''],
       wfInputDate: [this.appDate],
       wfStartTime: [''],
@@ -454,10 +454,8 @@ export class EditWorkflow3Page implements OnInit{
       wfBadQty: [''],
       wfGoodQty: [''],
 
-
       wfAgeingDegSet: [''],
       wfAgeingDegAct: [''],
-
 
       wfAgeingVoltAct1: [''],
       wfAgeingVoltAct2: [''],

@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { NgForm, FormGroup, FormBuilder } from "@angular/forms";
 import { WorkflowService } from "../../services/workflow";
+import { QRCodeService } from "../../services/qrCode";
 
 import { EditWorkflow1Page } from "../edit-workflow1/edit-workflow1";
 import { EditWorkflow2Page } from "../edit-workflow2/edit-workflow2";
-import { QRCodeService } from "../../services/qrCode";
 import { EditWorkflow3Page } from "../edit-workflow3/edit-workflow3";
+
 
 @Component({
   selector: 'page-workflow',
-  templateUrl: 'workflow.html',
+  templateUrl: 'workflow.html'
 })
 
 export class WorkflowPage implements OnInit {
@@ -47,9 +48,9 @@ export class WorkflowPage implements OnInit {
   testRadioOpen = false;
 
   dataWfProcess = {
-    "1":{"wfFormName": "裸品流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗"}},
+    "1":{"wfFormName": "裸品流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗","5":"自動/手工老化","6":"串排","7":"测试分选","8":"外观"}},
     "2":{"wfFormName": "成品流程卡", "Process":{"1":"打印","2":"测试上带","3":"贴片外观","4":"终检"}},
-    "3":{"wfFormName": "电容器流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗"}},
+    "3":{"wfFormName": "电容器流程卡", "Process":{"1":"素子钉卷","2":"組立","3":"套管","4":"老化选别","5":"手工分选","6":"外观全检","7":"编带剪切","8":"包装"}}
   };
 
   dataMachine = {
@@ -78,20 +79,21 @@ export class WorkflowPage implements OnInit {
 
     this.wfInputs = [
       {title: "流程卡号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 30},
-      {title: "工单号", method: 'input', type: 'text', model: 'wfOrderId', scan: false, size: 20},
+      {title: "台机号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 30},
+      // {title: "工单号", method: 'input', type: 'text', model: 'wfOrderId', scan: false, size: 20},
       //{title: "总量(预设)", method: 'input', type: 'number', model: 'wfOrderTotalQty', scan: false, size: 10},
 
       // Prompt Screen alert to pick the workflow batch id
-      {title: "批次号", method: 'input', type: 'text', model: 'wfOrderBatchId', scan: false, size: 20},
-      {title: "总量(批次)", method: 'input', type: 'number', model: 'wfOrderBatchQty', scan: false, size: 10},
+      // {title: "批次号", method: 'input', type: 'text', model: 'wfOrderBatchId', scan: false, size: 20},
+      // {title: "总量(批次)", method: 'input', type: 'number', model: 'wfOrderBatchQty', scan: false, size: 10},
 
       {method: "break", size: 20},
 
       // Expand as buttons
       {title: "流程卡", method: 'buttons', options: [
-        {value: 1, label: '裸品'},
-        {value: 2, label: '成品'},
-        {value: 3, label: '电容器'}
+        {value: '1', label: '裸品'},
+        {value: '2', label: '成品'},
+        {value: '3', label: '电容器'}
       ], model: 'wfForm', scan: false, size: 100}
     ];
 
@@ -704,10 +706,12 @@ export class WorkflowPage implements OnInit {
       wfProcessName: [''],
       wfForm: [''],
       wfFormId: [''],
-      wfOrderId: [''],
-      wfOrderBatchId: [''],
-      wfOrderBatchQty: [''],
-      wfOrderTotalQty: ['']
+
+      // wfOrderId: [''],
+      // wfOrderBatchId: [''],
+      // wfOrderBatchQty: [''],
+      // wfOrderTotalQty: [''],
+      wfOptMachineId: [''],
 
     });
   }

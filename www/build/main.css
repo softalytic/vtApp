@@ -25668,3 +25668,7 @@ ion-header {
   padding-left: 0px !important;
   padding-top: 0px !important;
 }
+
+.hide {
+  display: none;
+}

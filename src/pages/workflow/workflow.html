@@ -43,10 +43,6 @@
                                         &nbsp; {{option.label}}
                                     </button>
                                 </ion-buttons>
-
-                                <button style="width: 25%; margin: 0 auto;" ion-button type="submit" block>
-                                    确定
-                                </button>
                             </div>
 
                             <div *ngIf="wfInput.method === 'break'" [ngStyle]="{'width.em':wfInput.size}"></div>
@@ -54,32 +50,30 @@
                         </ion-row>
 
                     </ion-col>
+                    <ion-col *ngIf="wfInputForm.value.wfForm != ''">
+                        <ion-row align-items-center>
+                            <div class="label">工序</div>
+                            <button *ngFor="let key of dataWfProcess[this.wfInputForm.value.wfForm].Process | keys"
+                                    [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcess == key }"
+                                    (click)="setFormValue('wfProcess',key); setFormValue('wfProcessName',dataWfProcess[this.wfInputForm.value.wfForm].Process[key]);"
+                                    item-right ion-button outline type="button" round>
+                                <ion-icon name="clipboard"></ion-icon>
+                                {{dataWfProcess[this.wfInputForm.value.wfForm].Process[key]}}
+                            </button>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <button style="width: 25%; margin: 0 auto;" ion-button type="submit" block>
+                        确定
+                    </button>
                 </ion-row>
             </ion-grid>
-        </div>
-
-        <div>
-
-
         </div>
 
         <!-- Display the workflow process with img -->
-        <div>
-            <ion-grid style="padding-left: 50px; padding-right: 50px;">
-                <ion-row wrap class="card-background-page">
-                    <ion-col *ngFor="let wfProcess of wfProcesses" col-3>
-                        <div class="imgButton">
-                            <img src="{{'./assets/img/f1p' + wfProcess.process + '.jpeg'}}">
-                            <div class="card-title">
-                                {{wfProcess.title}}
-                            </div>
-                        </div>
-                        <!-- For original design -->
-                        <!--<div [navPush]="pushPage" [navParams]=wfProcess>-->
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </div>
+
 
         <!-- manual ageing will have an action sheet to prompt the sub process -->
         <!-- 規格 Need attention highlight -->

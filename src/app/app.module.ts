@@ -17,6 +17,7 @@ import { WorkflowService } from "../services/workflow";
 import { HttpModule } from "@angular/http";
 import { QRCodeService } from "../services/qrCode";
 import { PhotoService } from "../services/photo";
+import { KeysPipe } from "../services/keyPipe";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { PhotoService } from "../services/photo";
     WorkflowPage,
     EditWorkflow1Page,
     EditWorkflow2Page,
-    EditWorkflow3Page
+    EditWorkflow3Page,
+    KeysPipe
   ],
   imports: [
     BrowserModule,

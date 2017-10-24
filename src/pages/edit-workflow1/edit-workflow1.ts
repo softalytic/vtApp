@@ -707,6 +707,7 @@ export class EditWorkflow1Page implements OnInit{
       wfOrderId: [''],
       wfOrderBatchId: [''],
       wfOrderBatchQty: [''],
+      wfOptMachineId: [''],
 
       wfOrderBOMNote: [''],
       wfOrderNote: [''],
@@ -747,7 +748,6 @@ export class EditWorkflow1Page implements OnInit{
       wfRMWindingDeg: [''],
 
       // Operational Input
-      wfOptMachineId: [''],
       wfOptInputDate: [this.appDate],
       wfOptStartTime: ['00:00'],
       wfOptFinishTime: ['00:00'],

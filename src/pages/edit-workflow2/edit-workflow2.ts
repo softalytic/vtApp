@@ -642,6 +642,7 @@ export class EditWorkflow2Page implements OnInit{
       wfOrderId: [''],
       wfOrderBatchId: [''],
       wfOrderBatchQty: [''],
+      wfOptMachineId: [''],
 
       wfOrderFormNote: [''],
       wfOrderBOMNote: [''],
@@ -676,7 +677,6 @@ export class EditWorkflow2Page implements OnInit{
       wfSpecZESR: [''],
       wfSpecNote: [''],
 
-      wfOptMachineId: '',
       wfOptInputDate: [this.appDate],
       wfOptStartTime: ['00:00'],
       wfOptFinishTime: ['00:00'],

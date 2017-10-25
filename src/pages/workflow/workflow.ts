@@ -79,7 +79,7 @@ export class WorkflowPage implements OnInit {
 
     this.wfInputs = [
       {title: "流程卡号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 30},
-      {title: "台机号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 30},
+      {title: "台机号", method: 'input', type: 'text', model: 'wfOptMachineId', scan: true, size: 30},
       // {title: "工单号", method: 'input', type: 'text', model: 'wfOrderId', scan: false, size: 20},
       //{title: "总量(预设)", method: 'input', type: 'number', model: 'wfOrderTotalQty', scan: false, size: 10},
 
@@ -632,7 +632,12 @@ export class WorkflowPage implements OnInit {
   dataSubmission(form: any) {
     this.wfSvc.query(form.value, form.value.wfForm).subscribe( (serverData) => {
       console.log("Response from server: " + JSON.stringify(serverData[0]));
-      this.populateDataToForm(form, serverData[0]);
+      // this.populateDataToForm(form, serverData[0]);
+
+      // This code below replace the upper function,
+      // this is to assume the latest input from user is always correct
+      // Only will override if there is no input at all
+      this.loadDataToForm(form, serverData[0]);
       this.workflowStateChange();
 
     },(err)=>{
@@ -641,7 +646,13 @@ export class WorkflowPage implements OnInit {
       this.storage.get(form.value.wfFormId).then(storageData => {
         if(storageData){
           console.log("Result found:" + form.value.wfFormId);
-          this.populateDataToForm(form, storageData);
+          // this.populateDataToForm(form, storageData);
+
+          // This code below replace the upper function,
+          // this is to assume the latest input from user is always correct
+          // Only will override if there is no input at all
+          this.loadDataToForm(form, storageData);
+
         }
 
         // Execute workflowStateChange for New Form or continue existing form
@@ -665,21 +676,23 @@ export class WorkflowPage implements OnInit {
     this.storage.get("wfProcess").then(storageData => {
 
       let wfStorage = storageData;
-      console.log("Loading the form from stateChange" + JSON.stringify(wfStorage));
+      console.log("Loading the wfProcess from stateChange" + JSON.stringify(wfStorage));
       console.log('form.value.wfFormStatus ' + form.value.wfFormStatus);
       console.log('form.value.wfProcessStatus ' + form.value.wfProcessStatus);
 
-      if (form.value.wfFormStatus === "" || form.value.wfFormStatus == null) {
+      // Assign value
+      form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
+
+      if (form.value.wfFormStatus == "" || form.value.wfFormStatus == null) {
         form.value.wfFormStatus = '0';
       }
 
-      if (form.value.wfProcessStatus === "" || form.value.wfProcessStatus == null) {
-        form.value.wfProcessStatus = "1";
-        wfPNewState = "1";
-        form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
+      if (form.value.wfProcessStatus == "" || form.value.wfProcessStatus == null) {
+        form.value.wfProcessStatus = "0";
+        // wfPNewState = "1";
       }
 
-      if (form.value.wfFormStatus == '0' && form.value.wfProcessStatus == '1') {
+      if (form.value.wfFormStatus.toString() == '0' && form.value.wfProcessStatus.toString() == '1') {
         // load the process from storage
         console.log("Loading wfProcess from storage");
         console.log("wfForm is: " + form.value.wfFormId);
@@ -696,6 +709,7 @@ export class WorkflowPage implements OnInit {
 
           // If there is no more process, then break the process
           if (wfPNewState == null) {
+            // Need to fine tune this alert if have time
             return alert("嚫，此工單的所有工序己完成!");
           }
         }
@@ -704,28 +718,28 @@ export class WorkflowPage implements OnInit {
         console.log("wfPNewState: " + wfPNewState);
 
         // Assign new value into the form
-        form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
         form.value.wfProcess = wfPNewState;
         form.value.wfProcessName = wfStorage[form.value.wfForm].Process[wfPNewState];
 
         console.log("New state is " + form.value.wfProcess + " " + form.value.wfProcessName);
         console.log( "New state form : " + JSON.stringify(form.value));
-        console.log("Saving the form into storage");
-        this.storage.set(form.value.wfFormId, form.value);
 
       } else if (form.value.wfProcessStatus == '0') {
         console.log("Previous process has not completed and will resume now");
-        form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
 
       } else if (form.value.wfFormStatus == '1') {
         return alert("This wfForm has been marked complete");
+
       }
 
-      console.log("This is the form after the state change" + JSON.stringify(form.value));
+      console.log("Saving the form into storage");
+      this.storage.set(form.value.wfFormId, form.value);
+
+      console.log("This is the form after the state change " + JSON.stringify(form.value));
 
       // The following part will trigger the next stage wfPage
       console.log("Will enter " + form.value.wfFormName + " edit page now");
-      console.log("流程卡" + form.value.wfFormId);
+      console.log("流程卡 " + form.value.wfFormId);
 
       switch (form.value.wfForm.toString()) {
         case '1':
@@ -756,6 +770,28 @@ export class WorkflowPage implements OnInit {
 
     let _data = JSON.stringify(qrCode);
     this.QRCode.qrCodePopulate(_data, form);
+  }
+
+  loadDataToForm(form:any, data:any) {
+    // workflow main page only
+    for (let key in data) {
+      try {
+        // This use form control for the value setting
+        if (form.controls[key].value == null || form.controls[key].value == "" ) {
+          console.log("populate form model " + key);
+          console.log("populating model " + key + " " + data[key]);
+          form.controls[key].setValue(data[key]);
+        }
+
+      }
+      catch(err) {
+        console.log(err.message);
+        eval('form.value.' + key + '= "' + data[key] + '"; ');
+        eval('console.log("Retrying force input " + form.value.'+ key + ')');
+        eval('console.log(form.value.' + key + ');');
+      }
+
+    }
   }
 
   private formInit() {

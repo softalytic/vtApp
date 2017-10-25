@@ -4,8 +4,7 @@
             <img src="./assets/img/vt_icon.png" class="icon">
             <ion-title>
                 <!--&nbsp; ( {{wfInputForm.value.wfFormName}} )&nbsp;-->
-                &nbsp;( 裸品流程卡 )&nbsp;
-                工序:&nbsp; {{wfInputForm.value.wfProcessName}}
+                &nbsp;( 裸品流程卡 )&nbsp; 工序:&nbsp; {{wfInputForm.value.wfProcessName}}
             </ion-title>
         </div>
     </ion-navbar>
@@ -207,10 +206,7 @@
                                 <ion-icon name="md-color-wand"></ion-icon>
                                 &nbsp; 老化工序
                             </div>
-                            <button *ngFor="let wfProcessName of ['手工老化','自動老化']"
-                                    [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcessName == wfProcessName }"
-                                    (click)="setFormValue('wfProcessName',wfProcessName);"
-                                    item-right ion-button outline type="button" round>
+                            <button *ngFor="let wfProcessName of ['手工老化','自動老化']" [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcessName == wfProcessName }" (click)="setFormValue('wfProcessName',wfProcessName);" item-right ion-button outline type="button" round>
                                 <!--<ion-icon name="clipboard"></ion-icon>-->
                                 {{wfProcessName}}
                             </button>
@@ -361,10 +357,7 @@
                                 <div class="inputLabel">
                                     备注
                                 </div>
-                                <ion-textarea
-                                        formControlName={{wfInput.model}}
-                                        [ngStyle]="{'width.em':wfInput.size}"
-                                        class="textarea gridborder"></ion-textarea>
+                                <ion-textarea formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="textarea gridborder"></ion-textarea>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <button ion-button type="button" (click)="this.photoSvc.shoot(this.images, this.wfInputForm)">
                                     <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
@@ -382,14 +375,7 @@
                                 <ion-input formControlName={{wfInput.model}} hidden></ion-input>
 
                                 <ion-buttons>
-                                    <button *ngFor="let button of wfInput.buttons"
-                                            ion-button
-                                            round
-                                            outline
-                                            type="button"
-                                            style="width: auto;"
-                                            (click)="updateForm(wfInput.model,button.value)"
-                                            [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}">
+                                    <button *ngFor="let button of wfInput.buttons" ion-button round outline type="button" style="width: auto;" (click)="updateForm(wfInput.model,button.value)" [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}">
                                     <ion-icon name="{{button.icon}}"></ion-icon>
                                     &nbsp; {{button.label}}
                                   </button>
@@ -404,10 +390,7 @@
 
                         <ion-row>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)"
-                                    type="button"
-                                    ion-button
-                                    (click)="this.wfSvc.showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty,this.wfInputForm,this.navCtrl,this.images)">
+                            <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="button" ion-button (click)="this.wfSvc.showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty,this.wfInputForm,this.navCtrl,this.images)">
                                 上存
                             </button>
 

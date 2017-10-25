@@ -457,10 +457,7 @@
                             </div>
 
                             <!-- Array begins at 0-->
-                            <button *ngFor="let wfAgeingOptSeq of [0,1,2,3]"
-                                    [ngClass]="{'buttonsSelected': this.wfAgeingSeqDisplay == wfAgeingOptSeq }"
-                                    (click)="this.wfAgeingSeqDisplay = wfAgeingOptSeq;"
-                                    item-right ion-button outline type="button" round>
+                            <button *ngFor="let wfAgeingOptSeq of [0,1,2,3]" [ngClass]="{'buttonsSelected': this.wfAgeingSeqDisplay == wfAgeingOptSeq }" (click)="this.wfAgeingSeqDisplay = wfAgeingOptSeq;" item-right ion-button outline type="button" round>
                               第{{wfAgeingOptSeq + 1}}次作业
                             </button>
                         </ion-col>
@@ -470,23 +467,34 @@
                         <ion-col>
                             <ion-row *ngFor="let wfInput of wfAgeingDetails[this.wfAgeingSeqDisplay]" align-items-center>
 
-                                {{wfInput.title}}
+                                {{wfInput.title}}&nbsp;&nbsp;
 
                                 <!-- Auto Ageing 2nd part -->
-                                <ion-row class="ageingSubPart">
-                                    <ion-col col-6>
-                                        <ion-row wrap align-items-center>
 
-                                        </ion-row>
+
+                                <div>
+                                    <ion-input *ngIf="wfInput.method == 'input'" formControlName={{wfInput.model}} type={{wfInput.type}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+                                </div>
+
+                                <div *ngIf="wfInput.type == 'date'" [ngStyle]="{'width.em':wfInput.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
+                                    <ion-icon *ngIf="wfInput.type == 'date'" name="md-calendar" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                    <ion-datetime formControlName={{wfInput.model}} #picker pickerFormat="DD/MM/YYYY" [min]="datePickerMin" style="display: inline-block; padding: 13px 0;"></ion-datetime>
+                                </div>
+                                <div *ngIf="wfInput.type == 'time'" [ngStyle]="{'width.em':wfInput.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
+                                    <ion-icon *ngIf="wfInput.type == 'time'" name="md-clock" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                    <ion-datetime formControlName={{wfInput.model}} #picker displayFormat="HH:mm" pickerFormat="HH:mm" style="display: inline-block; padding: 13px 0;"></ion-datetime>
+                                </div>
+
+                                <!-- table body -->
+                                <ion-row *ngFor="let row of wfInput.data" align-items-center justify-content-center>
+                                    <div class="inputLabel" style="width: 60px;">{{row.label}}</div>
+                                    <ion-col>
+                                        <ion-input formControlName="{{row.model}}" [ngStyle]="{'width.em': row.size}" [ngClass]="{dim: row.disabled}" class="gridborder" type="{{row.type}}"></ion-input>
                                     </ion-col>
                                 </ion-row>
-
                             </ion-row>
 
-
                         </ion-col>
-
-
 
                     </ion-row>
 
@@ -555,9 +563,6 @@
                                     <ion-input formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
                                 </div>
                             </ion-row>
-
-
-
 
                             <ion-row *ngIf="wfInput.method == 'textarea'" align-items-center>
                                 <div class="inputLabel">

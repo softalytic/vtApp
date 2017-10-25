@@ -256,6 +256,48 @@
                 <!-- Production Record + Ageing + Staff input -->
                 <ion-col col-7>
 
+                    <!-- aging Details input field -->
+                    <ion-row *ngIf="wfInputForm.value.wfProcess == '4'" class="sec" align-items-center justify-content-left>
+
+                        <!-- Input field header -->
+                        <ion-col text-left col-12>
+                            <h4 class="inputHeader">
+                                <!-- <ion-icon name="md-contacts"></ion-icon> -->
+                                &nbsp; 老化标淮
+                            </h4>
+                        </ion-col>
+
+                        <!-- Input field form -->
+                        <ion-col *ngFor="let wfInput of wfAgeDetailInputs" col-auto align-items-left justify-content-center>
+
+                            <!-- Simple Input field -->
+                            <ion-row *ngFor="let option of wfInput.options" align-items-center justify-content-center>
+
+
+                                <div class="inputLabel">
+                                    {{option.title}}
+                                </div>
+
+                                <!-- datetime -->
+                                <div *ngIf="option.type == 'date'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
+                                    <ion-icon *ngIf="option.type == 'date'" name="md-calendar" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                    <ion-datetime formControlName={{option.model}} #picker pickerFormat="DD/MM/YYYY" [min]="datePickerMin" style="display: inline-block; padding: 13px 0;"></ion-datetime>
+                                </div>
+                                <div *ngIf="option.type == 'time'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
+                                    <ion-icon *ngIf="option.type == 'time'" name="md-clock" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                    <ion-datetime formControlName={{option.model}} #picker displayFormat="HH:mm" pickerFormat="HH:mm" style="display: inline-block; padding: 13px 0;"></ion-datetime>
+                                </div>
+
+                                <ion-input *ngIf="option.type != 'date' && option.type != 'time'" formControlName={{option.model}} type={{option.type}} [ngStyle]="{'width.em':option.size}" class="gridborder"></ion-input>
+
+
+                            </ion-row>
+
+                        </ion-col>
+
+                    </ion-row>
+                    <!-- end aging Details input field -->
+
                     <!-- Production input field -->
                     <ion-row class="sec" align-self-stretch justify-content-left>
 
@@ -525,7 +567,7 @@
                         <ion-col *ngFor="let wfInput of wfPplInputs" col-auto align-items-left justify-content-center>
 
                             <!-- Simple Input field -->
-                            <ion-row align-items-center justify-content-center *ngIf="wfInput.method == 'input'">
+                            <ion-row *ngIf="(wfInput.method == 'input') && (wfInput.wfPplI != 4) && (wfInput.wfPplI != 6)" align-items-center justify-content-center>
 
                                 <div class="inputLabel">
                                     {{wfInput.title}}
@@ -535,8 +577,6 @@
                                     <ion-input *ngIf="wfInput.wfPplI == 2" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
 
                                     <ion-input *ngIf="wfInput.wfPplI == 3" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
-
-                                    <ion-input *ngIf="wfInput.wfPplI == 4" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
 
                                     <ion-input style="display: inline-block;" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" *ngIf="wfInput.wfPplI == 5" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}}
                                         [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
@@ -555,6 +595,30 @@
                               </div>
                               -->
                             </ion-row>
+
+                            <!-- Simple Input field -->
+                            <ion-row *ngIf="(wfInput.method == 'input') && (wfInput.wfPplI == 4) && (wfInputForm.value.wfProcess != '6')" align-items-center justify-content-center>
+
+                                <div class="inputLabel">
+                                    {{wfInput.title}}
+                                </div>
+                                <div (click)="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">
+                                    <ion-input formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+                                </div>
+                            </ion-row>
+
+                            <!-- Simple Input field -->
+                            <ion-row *ngIf="(wfInput.method == 'input') && (wfInput.wfPplI == 6) && (wfInputForm.value.wfProcess == '6')" align-items-center justify-content-center>
+
+                                <div class="inputLabel">
+                                    {{wfInput.title}}
+                                </div>
+                                <div (click)="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">
+                                    <ion-input formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+                                </div>
+                            </ion-row>
+
+
 
 
                             <ion-row *ngIf="wfInput.method == 'textarea'" align-items-center>

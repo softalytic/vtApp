@@ -455,100 +455,38 @@
                                 <ion-icon name="md-color-wand"></ion-icon>
                                 &nbsp; 老化工序
                             </div>
-                            <button *ngFor="let wfProcessName of ['手工老化','自動老化']" [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcessName == wfProcessName }" (click)="setFormValue('wfProcessName',wfProcessName);" item-right ion-button outline type="button" round>
-                              <!--<ion-icon name="clipboard"></ion-icon>-->
-                              {{wfProcessName}}
-                          </button>
+
+                            <!-- Array begins at 0-->
+                            <button *ngFor="let wfAgeingOptSeq of [0,1,2,3]"
+                                    [ngClass]="{'buttonsSelected': this.wfAgeingSeqDisplay == wfAgeingOptSeq }"
+                                    (click)="this.wfAgeingSeqDisplay = wfAgeingOptSeq;"
+                                    item-right ion-button outline type="button" round>
+                              第{{wfAgeingOptSeq + 1}}次作业
+                            </button>
                         </ion-col>
 
                         <!-- Auto老化 Input field form -->
-                        <ion-col col-auto>
-                            <ion-row>
+                        <!-- Ageing Input -->
+                        <ion-col>
+                            <ion-row *ngFor="let wfInput of wfAgeingDetails[this.wfAgeingSeqDisplay]" align-items-center>
 
-                                <!-- Ageing Header -->
-                                <ion-col col-12>
-                                    <ion-row>
-                                        <div style="width: 45px">
-                                            &nbsp; &nbsp;
-                                        </div>
-
-                                        <div style="width: 6em; text-align: center;">
-                                            &nbsp; 规格
-                                        </div>
-
-                                        <div style="width: 6em; text-align: center;">
-                                            &nbsp; 实际
-                                        </div>
-                                    </ion-row>
-                                </ion-col>
-
-                                <!-- Ageing Input -->
-                                <ion-col>
-                                    <ion-row *ngFor="let wfInput of wfAgeingDetails" align-items-center>
-
-                                        <!-- Simple Input field -->
-                                        <div class="inputLabel">
-                                            {{wfInput.title}}
-                                        </div>
-
-                                        <div *ngFor="let col of wfInput.cols">
-                                            <div *ngIf="col.auto === false" [ngStyle]="{'width.em':wfInput.size}">
-                                                <ion-input formControlName={{col.model}} type={{col.type}} class="gridborder"></ion-input>
-                                            </div>
-
-                                            <div *ngIf="col.auto === true && this.wfInputForm.value.wfProcessName == '自動老化'" [ngStyle]="{'width.em':wfInput.size}">
-                                                <ion-input formControlName={{col.model}} type={{col.type}} class="gridborder"></ion-input>
-                                            </div>
-                                        </div>
-                                    </ion-row>
-                                </ion-col>
-
-                                <ion-col *ngIf="this.wfInputForm.value.wfProcessName == '手工老化'" padding-horizontal>
-                                    <ion-row>
-                                        <div class="inputLabel">
-                                            特殊说明
-                                        </div>
-                                    </ion-row>
-                                    <ion-textarea name="wfAgeingNote" style="min-height: 20em; width: auto" class="gridborder">
-                                    </ion-textarea>
-                                </ion-col>
+                                {{wfInput.title}}
 
                                 <!-- Auto Ageing 2nd part -->
-                                <ion-row *ngIf="this.wfInputForm.value.wfProcessName == '自動老化'" class="ageingSubPart">
+                                <ion-row class="ageingSubPart">
                                     <ion-col col-6>
                                         <ion-row wrap align-items-center>
-                                            <ion-col *ngFor="let wfInput of wfAutoAgeingDetails" no-padding col-6>
 
-                                                <ion-row align-items-center>
-                                                    <div class="inputLabel">
-                                                        {{wfInput.title}}
-                                                    </div>
-
-                                                    <div [ngStyle]="{'width.em':wfInput.size}">
-                                                        <ion-input formControlName={{wfInput.model}} type={{wfInput.type}} no-padding class="gridborder"></ion-input>
-                                                    </div>
-
-                                                </ion-row>
-                                            </ion-col>
                                         </ion-row>
                                     </ion-col>
-
-                                    <!-- Note -->
-                                    <ion-col padding-horizontal>
-                                        <ion-row>
-                                            <div class="inputLabel">
-                                                特殊说明
-                                            </div>
-                                        </ion-row>
-                                        <ion-textarea name="wfAgeingNote" style="min-height: 20em; width: auto" class="gridborder">
-                                        </ion-textarea>
-                                    </ion-col>
-
                                 </ion-row>
 
-
                             </ion-row>
+
+
                         </ion-col>
+
+
 
                     </ion-row>
 

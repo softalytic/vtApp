@@ -57,7 +57,7 @@
                             </div>
                         </ion-col>
                         <ion-col col-6>
-                            <ion-input class="gridborder" disabled value={{wfInputForm.controls[wfRMDetail.modelName].value}}></ion-input>
+                            <ion-input class="gridborder" [disabled]="!((wfRMDetail.modelName == 'wfRMFoilPosLName' || wfRMDetail.modelName == 'wfRMFoilNegLName') && wfInputForm.value.wfProcess == '1')" value={{wfInputForm.controls[wfRMDetail.modelName].value}}></ion-input>
                         </ion-col>
                         <ion-col>
                             <ion-input class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelSerial].value}}></ion-input>
@@ -359,16 +359,16 @@
 
                                 <ion-row *ngFor="let option of wfInput.options" align-items-center justify-content-center>
 
-                                    <div *ngIf="option.type != 'date' && option.type != 'time'" class="inputLabel">
-                                        {{option.title}}
+                                    <div class="inputLabel">
+                                        {{option.title}}&nbsp;
                                     </div>
                                     <!-- datetime -->
                                     <div *ngIf="option.type == 'date'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
-                                        <ion-icon *ngIf="option.type == 'date'" name="md-calendar" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                        <!-- <ion-icon *ngIf="option.type == 'date'" name="md-calendar" style="font-size:1.6em; margin: 0 6px;"></ion-icon> -->
                                         <ion-datetime formControlName={{option.model}} #picker pickerFormat="DD/MM/YYYY" [min]="datePickerMin" style="display: inline-block; padding: 13px 0;"></ion-datetime>
                                     </div>
                                     <div *ngIf="option.type == 'time'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
-                                        <ion-icon *ngIf="option.type == 'time'" name="md-clock" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                        <!-- <ion-icon *ngIf="option.type == 'time'" name="md-clock" style="font-size:1.6em; margin: 0 6px;"></ion-icon> -->
                                         <ion-datetime formControlName={{option.model}} #picker displayFormat="HH:mm" pickerFormat="HH:mm" style="display: inline-block; padding: 13px 0;"></ion-datetime>
                                     </div>
 

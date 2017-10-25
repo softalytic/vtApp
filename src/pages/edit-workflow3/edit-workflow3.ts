@@ -253,23 +253,20 @@ export class EditWorkflow3Page implements OnInit{
       {title: "流程卡号", method: "input", model: "wfFormId", type: "text", icon: 'ios-copy-outline', scan: false, size: 7},
       {title: "批次号", method: "input", model: "wfOrderBatchId", type: "text", icon: 'ios-basket-outline', scan: false, size: 7},
       {title: "批次量", method: "input", model: "wfOrderBatchQty", type: "text", icon: 'ios-basket-outline', scan: false, size: 5},
-      {title: "投入数", method: "input", model: "wfOptStartQty", type: "number", icon: 'ios-sad', scan: false, size: 6},
+      
       //{method: "break", title: ""},
 
-      {method: "inputs", options: [
-        {title: "机台", model: "wfOptMachineId", type: "text", scan: false, size: 8},
-        {title: "清机确认", model: "wfOptWashMachine", type: "text", scan: false, size: 8},
-        {title: "正箔 - L", model: "wfRMFoilPosLName", type: "number", icon: 'ios-add-circle-outline', scan: false, size: 8},
-        {title: "負箔 - L", model: "wfRMFoilNegLName", type: "number", icon: 'md-remove-circle', scan: false, size: 8}       
-      ]},
       {method: "inputs2", header: "素子烘烤", options: [
         {title: "时间 H", model: "wfRMWindingTime", type: "number", icon: 'ios-add-circle-outline', scan: false, size: 8},
         {title: "温度 ℃", model: "wfRMWindingDeg", type: "number", icon: 'md-remove-circle', scan: false, size: 8}
       ]},
       {method: 'inputs', options: [
         {title: "日期", model: "wfOptInputDate", type: "date", icon: "calender", scan: false, size: 8},
-        {title: "开始", model: "wfOptStartTime", type: "time", icon: "time", scan: false, size: 8},
-        {title: "完成", model: "wfOptFinishTime", type: "time", icon: "md-alarm", scan: false, size: 8}
+        {title: "清机确认", model: "wfOptWashMachine", type: "text", scan: false, size: 8},  
+        {title: "迄止时间开始", model: "wfOptStartTime", type: "time", icon: "time", scan: false, size: 8},
+        {title: "迄止时间完成", model: "wfOptFinishTime", type: "time", icon: "md-alarm", scan: false, size: 8},
+        {title: "机台No.", model: "wfOptMachineId", type: "text", scan: false, size: 8}, 
+        {title: "投入数", method: "input", model: "wfOptStartQty", type: "number", icon: 'ios-sad', scan: false, size: 6},
       ]},
     
       /*

@@ -107,7 +107,7 @@ export class EditWorkflow2Page implements OnInit{
       // {method: "break", size: 20},
       // {title: "流程卡备注", method: "input", model: "wfOrderBOMNote", type: "textarea", scan: false, size: 40},
       // {method: "break", size: 20},
-      {method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 7, scan: true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 7, scan: false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
       // {method: "break", title: ""},
 

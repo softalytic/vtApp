@@ -1,5 +1,5 @@
-www/
-platforms/
-node_modules/
-.idea/
+www/*
+platforms/*
+node_modules/*
+.idea/*
 

@@ -17,6 +17,10 @@ export class EditWorkflow3Page implements OnInit{
   wfAgeingDetails = [];
   wfAutoAgeingDetails = [];
   wfAutoAgeingSubDetails = [];
+  wfDryWetWashDetails = [];
+  wfDryDetails = [];
+  wfWetDetails = [];
+  wfWashDetails = [];
   wfDryInputs = [];
   wfWetInputs = [];
   wfWashInputs = [];
@@ -95,43 +99,113 @@ export class EditWorkflow3Page implements OnInit{
       {modelName: "wfRMCoverName", title: "套管", type: "text", modelSerial: 'wfRMCoverSerial', highlight: false},
     ];
 
+    /*
+    
+    this.wfDryDetails = [
+      {method: "table", size: 8, headers: [{title: "烘千"}],rows: [
+        {title: "迄时间", cols: [
+          {model: "wfDryStartTime", type: "time", disabled: false},
+        ]},
+        {title: "止时间 1", cols: [
+          {model: "wfDryFinishTime1", type: "text", disabled: false},
+        ]},
+        {title: "止时间 2", cols: [
+          {model: "wfDryFinishTime2", type: "text", disabled: false},
+        ]},
+        {title: "温度 ℃", cols: [
+          {model: "wfDryWindingDeg", type: "number", disabled: false},
+        ]},
+        {title: "作业者", cols: [
+          {model: "wfStaffDryName", type: "text", disabled: false},
+        ]}
+      ]}
+
+    ];
+
+    this.wfWetDetails = [
+      {method: "table", size: 8, headers: [{title: "含浸"}],rows: [
+        {title: "真空度", cols: [
+          {model: "wfWetEmptyAir", type: "text", disabled: false},
+        ]},
+        {title: "气压值", cols: [
+          {model: "wfWetAir", type: "text", disabled: false},
+        ]},
+        {title: "迄时间 2", cols: [
+          {model: "wfWetStartTime", type: "time", disabled: false},
+        ]},
+        {title: "止时间 ℃", cols: [
+          {model: "wfWetFinishTime", type: "time", disabled: false},
+        ]},
+        {title: "作业者", cols: [
+          {model: "wfStaffWetName", type: "text", disabled: false},
+        ]}
+      ]}
+
+    ];
+
+    this.wfWashDetails = [
+      {method: "table", size: 8, headers: [{title: "清洗"}],rows: [
+        {title: "批序/温度 ℃", cols: [
+          {model: "wfWashWindingDeg", type: "number", disabled: false},
+        ]},
+        {title: "清冼迄时间", cols: [
+          {model: "wfWashStartTime", type: "time", disabled: false},
+        ]},
+        {title: "清冼止时间", cols: [
+          {model: "wfWashFinishTime", type: "time", disabled: false},
+        ]},
+        {title: "烘千温度 ℃", cols: [
+          {model: "wfWashDryWindingDeg", type: "number", disabled: false},
+        ]},
+        {title: "烘千时间", cols: [
+          {model: "wfWashDryTime", type: "time", disabled: false},
+        ]},
+        {title: "作业者", cols: [
+          {model: "wfStaffWashName", type: "text", disabled: false},
+        ]}
+      ]}
+
+    ];
+
+    */
+
     this.wfDryInputs = [
       {method: "inputs", options: [
         {title: "迄时间", model: "wfDryStartTime", type: "time", icon: "time", scan: false, size: 8},
-        {title: "止时间1", model: "wfDryFinishTime1", type: "text", icon: "md-alarm", scan: false, size: 8},
-        {title: "止时间2", model: "wfDryFinishTime2", type: "text", icon: "md-alarm", scan: false, size: 8},
+        {title: "止时间1", model: "wfDryFinishTime1", type: "text", icon: "time", scan: false, size: 8},
+        {title: "止时间2", model: "wfDryFinishTime2", type: "text", icon: "time", scan: false, size: 8},
       ]},
       {method: 'inputs', options: [
         {title: "温度 ℃", model: "wfDryWindingDeg", type: "number", icon: 'md-remove-circle', scan: false, size: 8},
         {title: "作业者", model: "wfStaffDryName", type: "text", icon: 'person', scan: false, size: 8}
       ]},
     ];
+  
+  this.wfWetInputs = [
+    {method: 'inputs', options: [
+      {title: "真空度", model: "wfWetEmptyAir", type: "text", scan: false, size: 8},
+      {title: "气压值", model: "wfWetAir", type: "text", scan: false, size: 8}
+    ]},
+    {method: "inputs", options: [
+      {title: "迄时间", model: "wfWetStartTime", type: "time", icon: "time", scan: false, size: 8},
+      {title: "止时间", model: "wfWetFinishTime", type: "time", icon: "time", scan: false, size: 8},
+      {title: "作业者", model: "wfStaffWetName", type: "text", icon: 'person', scan: false, size: 8}
+    ]},
+  ];
+  
+  this.wfWashInputs = [
 
-    this.wfWetInputs = [
-      {method: 'inputs', options: [
-        {title: "真空度", model: "wfWetEmptyAir", type: "text", scan: false, size: 8},
-        {title: "气压值", model: "wfWetAir", type: "text", scan: false, size: 8}
-      ]},
-      {method: "inputs", options: [
-        {title: "迄时间", model: "wfWetStartTime", type: "time", icon: "time", scan: false, size: 8},
-        {title: "止时间", model: "wfWetFinishTime", type: "time", icon: "md-alarm", scan: false, size: 8},
-        {title: "作业者", model: "wfStaffWetName", type: "text", icon: 'person', scan: false, size: 8}
-      ]},
-    ];
-
-    this.wfWashInputs = [
-
-      {method: 'inputs', options: [
-        {title: "批序/温度 ℃", model: "wfWashWindingDeg", type: "number", icon: 'md-remove-circle', scan: false, size: 8},
-        {title: "清冼迄时间", model: "wfWashStartTime", type: "time", icon: "time", scan: false, size: 8},
-        {title: "清冼止时间", model: "wfWashFinishTime", type: "time", icon: "md-alarm", scan: false, size: 8}
-      ]},
-      {method: "inputs", options: [
-        {title: "烘千温度 ℃", model: "wfWashDryWindingDeg", type: "number", icon: 'md-remove-circle', scan: false, size: 8},
-        {title: "烘千时间", model: "wfWashDryTime", type: "time", icon: "time", scan: false, size: 8},
-        {title: "作业者", model: "wfStaffWashName", type: "text", icon: 'person', scan: false, size: 8}
-      ]},
-    ];
+    {method: 'inputs', options: [
+      {title: "批序/温度 ℃", model: "wfWashWindingDeg", type: "number", icon: 'md-remove-circle', scan: false, size: 8},
+      {title: "清冼迄时间", model: "wfWashStartTime", type: "time", icon: "time", scan: false, size: 8},
+      {title: "清冼止时间", model: "wfWashFinishTime", type: "time", icon: "time", scan: false, size: 8}
+    ]},
+    {method: "inputs", options: [
+      {title: "烘千温度 ℃", model: "wfWashDryWindingDeg", type: "number", icon: 'md-remove-circle', scan: false, size: 8},
+      {title: "烘千时间", model: "wfWashDryTime", type: "time", icon: "time", scan: false, size: 8},
+      {title: "作业者", model: "wfStaffWashName", type: "text", icon: 'person', scan: false, size: 8}
+    ]},
+  ];
 
     this.wfOpsInputs = [
       {title: "分單", method: "input", model: "wfFormSplit", type: "text", icon: 'ios-copy-outline', scan: false, size: 2, wfOpslI: 2},
@@ -156,6 +230,7 @@ export class EditWorkflow3Page implements OnInit{
         {title: "开始", model: "wfOptStartTime", type: "time", icon: "time", scan: false, size: 8},
         {title: "完成", model: "wfOptFinishTime", type: "time", icon: "md-alarm", scan: false, size: 8}
       ]},
+    
       /*
       {method: "inputs", options: [
         
@@ -248,6 +323,7 @@ export class EditWorkflow3Page implements OnInit{
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 3},
       {title: "班长硧认", method: "input", model: "wfOptQtyChecked", type: "number", icon: 'construct', scan: false, wfPplI: 3, size: 7},
       {title: "維修摘要", method: "input", model: "wfStaffRepairName", type: "text", icon: 'construct', scan: false, wfPplI: 4, size: 7},
+      {title: "外覌抽验判定", method: "input", model: "wfStaffRandomPickName", type: "text", icon: 'construct', scan: false, wfPplI: 6, size: 7},
 
       {title: "终检", method: "buttons", model: "wfQCPass", icon: "md-checkmark-circle-outline",buttons: [
         {label: "通过", value: 1, icon: 'checkmark'},
@@ -917,6 +993,7 @@ export class EditWorkflow3Page implements OnInit{
       wfStaffQCName: [''],
       wfStageStatus: [''],
       wfStaffQCSummary: [''],
+      wfStaffRandomPickName: [''],
       wfQCPass: [''],
       wfQCPassCode: [''],
       wfQCSignOff: [''],

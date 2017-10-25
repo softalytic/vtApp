@@ -63,6 +63,194 @@
                             <ion-input class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelSerial].value}}></ion-input>
                         </ion-col>
                     </ion-row>
+
+                    <ion-row justify-content-center align-items-center>
+
+                        <ion-col *ngFor="let wfInput of wfDryDetails">
+                            <!-- table header -->
+                            <ion-row justify-content-center align-items-center>
+                                <div class="inputLabel" style="width: 60px;"></div>
+                                <ion-col *ngFor="let header of wfInput.headers">
+                                    <div style="text-align: center;">
+                                        {{header.title}}
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                            <!-- table body -->
+                            <ion-row *ngFor="let row of wfInput.rows" align-items-center justify-content-center>
+                                <div class="inputLabel" style="width: 60px;">{{row.title}}</div>
+                                <ion-col *ngFor="let col of row.cols">
+                                    <ion-input formControlName="{{col.model}}" [ngStyle]="{'width.em': wfInput.size}" [ngClass]="{dim: col.disabled}" class="gridborder" type="{{col.type}}"></ion-input>
+                                </ion-col>
+                            </ion-row>
+                        </ion-col>
+
+                        <ion-col *ngFor="let wfInput of wfWetDetails">
+                            <!-- table header -->
+                            <ion-row justify-content-center align-items-center>
+                                <div class="inputLabel" style="width: 60px;"></div>
+                                <ion-col *ngFor="let header of wfInput.headers">
+                                    <div style="text-align: center;">
+                                        {{header.title}}
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                            <!-- table body -->
+                            <ion-row *ngFor="let row of wfInput.rows" align-items-center justify-content-center>
+                                <div class="inputLabel" style="width: 60px;">{{row.title}}</div>
+                                <ion-col *ngFor="let col of row.cols">
+                                    <ion-input formControlName="{{col.model}}" [ngStyle]="{'width.em': wfInput.size}" [ngClass]="{dim: col.disabled}" class="gridborder" type="{{col.type}}"></ion-input>
+                                </ion-col>
+                            </ion-row>
+                        </ion-col>
+
+                        <ion-col *ngFor="let wfInput of wfWashDetails">
+                            <!-- table header -->
+                            <ion-row justify-content-center align-items-center>
+                                <div class="inputLabel" style="width: 60px;"></div>
+                                <ion-col *ngFor="let header of wfInput.headers">
+                                    <div style="text-align: center;">
+                                        {{header.title}}
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                            <!-- table body -->
+                            <ion-row *ngFor="let row of wfInput.rows" align-items-center justify-content-center>
+                                <div class="inputLabel" style="width: 60px;">{{row.title}}</div>
+                                <ion-col *ngFor="let col of row.cols">
+                                    <ion-input formControlName="{{col.model}}" [ngStyle]="{'width.em': wfInput.size}" [ngClass]="{dim: col.disabled}" class="gridborder" type="{{col.type}}"></ion-input>
+                                </ion-col>
+                            </ion-row>
+                        </ion-col>
+
+                    </ion-row>
+
+                    <!-- dry input field -->
+                    <ion-row class="sec staff" align-items-center justify-content-left>
+
+                        <!-- Input field header -->
+                        <ion-col text-left col-12>
+                            <h4 class="inputHeader">
+                                <!-- <ion-icon name="md-contacts"></ion-icon> -->
+                                &nbsp; 烘千
+                            </h4>
+                        </ion-col>
+
+                        <!-- Input field form -->
+                        <ion-col *ngFor="let wfInput of wfDryInputs" col-auto align-items-left justify-content-center>
+
+                            <!-- Simple Input field -->
+                            <ion-row *ngFor="let option of wfInput.options" align-items-center justify-content-center>
+
+
+                                <div class="inputLabel">
+                                    {{option.title}}
+                                </div>
+
+                                <!-- datetime -->
+                                <div *ngIf="option.type == 'date'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
+                                    <ion-icon *ngIf="option.type == 'date'" name="md-calendar" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                    <ion-datetime formControlName={{option.model}} #picker pickerFormat="DD/MM/YYYY" [min]="datePickerMin" style="display: inline-block; padding: 13px 0;"></ion-datetime>
+                                </div>
+                                <div *ngIf="option.type == 'time'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
+                                    <ion-icon *ngIf="option.type == 'time'" name="md-clock" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                    <ion-datetime formControlName={{option.model}} #picker displayFormat="HH:mm" pickerFormat="HH:mm" style="display: inline-block; padding: 13px 0;"></ion-datetime>
+                                </div>
+
+                                <ion-input *ngIf="option.type != 'date' && option.type != 'time'" formControlName={{option.model}} type={{option.type}} [ngStyle]="{'width.em':option.size}" class="gridborder"></ion-input>
+
+
+                            </ion-row>
+
+                        </ion-col>
+
+                    </ion-row>
+                    <!-- end dry input field -->
+
+                    <!-- Wet input field -->
+                    <ion-row class="sec staff" align-items-center justify-content-left>
+
+                        <!-- Input field header -->
+                        <ion-col text-left col-12>
+                            <h4 class="inputHeader">
+                                <!-- <ion-icon name="md-contacts"></ion-icon> -->
+                                &nbsp; 含浸
+                            </h4>
+                        </ion-col>
+
+                        <!-- Input field form -->
+                        <ion-col *ngFor="let wfInput of wfWetInputs" col-auto align-items-left justify-content-center>
+
+                            <!-- Simple Input field -->
+                            <ion-row *ngFor="let option of wfInput.options" align-items-center justify-content-center>
+
+
+                                <div class="inputLabel">
+                                    {{option.title}}
+                                </div>
+
+                                <!-- datetime -->
+                                <div *ngIf="option.type == 'date'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
+                                    <ion-icon *ngIf="option.type == 'date'" name="md-calendar" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                    <ion-datetime formControlName={{option.model}} #picker pickerFormat="DD/MM/YYYY" [min]="datePickerMin" style="display: inline-block; padding: 13px 0;"></ion-datetime>
+                                </div>
+                                <div *ngIf="option.type == 'time'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
+                                    <ion-icon *ngIf="option.type == 'time'" name="md-clock" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                    <ion-datetime formControlName={{option.model}} #picker displayFormat="HH:mm" pickerFormat="HH:mm" style="display: inline-block; padding: 13px 0;"></ion-datetime>
+                                </div>
+
+                                <ion-input *ngIf="option.type != 'date' && option.type != 'time'" formControlName={{option.model}} type={{option.type}} [ngStyle]="{'width.em':option.size}" class="gridborder"></ion-input>
+
+
+                            </ion-row>
+
+                        </ion-col>
+
+                    </ion-row>
+                    <!-- end Wet input field -->
+
+                    <!-- Wash input field -->
+                    <ion-row class="sec staff" align-items-center justify-content-left>
+
+                        <!-- Input field header -->
+                        <ion-col text-left col-12>
+                            <h4 class="inputHeader">
+                                <!-- <ion-icon name="md-contacts"></ion-icon> -->
+                                &nbsp; 清洗
+                            </h4>
+                        </ion-col>
+
+                        <!-- Input field form -->
+                        <ion-col *ngFor="let wfInput of wfWashInputs" col-auto align-items-left justify-content-center>
+
+                            <!-- Simple Input field -->
+                            <ion-row *ngFor="let option of wfInput.options" align-items-center justify-content-center>
+
+
+                                <div class="inputLabel">
+                                    {{option.title}}
+                                </div>
+
+                                <!-- datetime -->
+                                <div *ngIf="option.type == 'date'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
+                                    <ion-icon *ngIf="option.type == 'date'" name="md-calendar" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                    <ion-datetime formControlName={{option.model}} #picker pickerFormat="DD/MM/YYYY" [min]="datePickerMin" style="display: inline-block; padding: 13px 0;"></ion-datetime>
+                                </div>
+                                <div *ngIf="option.type == 'time'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
+                                    <ion-icon *ngIf="option.type == 'time'" name="md-clock" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                    <ion-datetime formControlName={{option.model}} #picker displayFormat="HH:mm" pickerFormat="HH:mm" style="display: inline-block; padding: 13px 0;"></ion-datetime>
+                                </div>
+
+                                <ion-input *ngIf="option.type != 'date' && option.type != 'time'" formControlName={{option.model}} type={{option.type}} [ngStyle]="{'width.em':option.size}" class="gridborder"></ion-input>
+
+
+                            </ion-row>
+
+                        </ion-col>
+
+                    </ion-row>
+                    <!-- end Wash input field -->
+
                 </ion-col>
 
                 <!-- Production Record + Ageing + Staff input -->
@@ -348,7 +536,7 @@
 
                                     <ion-input *ngIf="wfInput.wfPplI == 3" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
 
-                                    <ion-input *ngIf="wfInput.wfPplI == 4" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+                                    <ion-input *ngIf="(wfInput.wfPplI == 4" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
 
                                     <ion-input style="display: inline-block;" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" *ngIf="wfInput.wfPplI == 5" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}}
                                         [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>

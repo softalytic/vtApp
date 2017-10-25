@@ -63,6 +63,7 @@
                             <ion-input class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelSerial].value}}></ion-input>
                         </ion-col>
                     </ion-row>
+
                 </ion-col>
 
                 <!-- Production Record + Ageing + Staff input -->
@@ -114,7 +115,7 @@
 
                                 <ion-buttons>
                                     <button ion-button round outline type="button" style="width: auto;" *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model, button.value)" [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}">
-                  &nbsp;                  {{button.label}}
+                                        &nbsp;{{button.label}}
                                    </button>
                                 </ion-buttons>
                             </ion-row>

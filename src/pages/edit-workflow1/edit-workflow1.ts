@@ -122,47 +122,47 @@ export class EditWorkflow1Page implements OnInit{
     ];
 
     this.wfAgeingDetails = [
-      {title: "电压 DC/V", icon: 'md-flash', method: "table", size: 7, cols: [
+      {title: "电压 DC/V", icon: 'md-flash', method: "table", size: 6, cols: [
         {model: "wfAgeVoltSet", type: "number", auto: false},
         {model: "wfAgeVoltAct", type: "number", auto: false},
         {model: "wfAutoAgeVoltAct1", type: "number", auto: true},
         {model: "wfAutoAgeVoltAct2", type: "number", auto: true},
         {model: "wfAutoAgeVoltAct3", type: "number", auto: true},
         {model: "wfAutoAgeVoltAct4", type: "number", auto: true},
-        {model: "wfAutoAgeVoltAct5", type: "number", auto: true},
+        // {model: "wfAutoAgeVoltAct5", type: "number", auto: true},
       ]},
-      {title: "时间 H", icon: 'timer', method: "table", size: 7, cols:[
+      {title: "时间 H", icon: 'timer', method: "table", size: 6, cols:[
         {model: "wfAgeTimeSet", type: "number", auto: false},
         {model: "wfAgeTimeAct", type: "number", auto: false}
       ]},
-      {title: "温度 ℃", icon: 'ios-thermometer-outline', method: "table", size: 7, cols:[
+      {title: "温度 ℃", icon: 'ios-thermometer-outline', method: "table", size: 6, cols:[
         {model: "wfAgeDegSet", type: "number", auto: false},
         {model: "wfAgeDegAct", type: "number", auto: false}
       ]},
-      {title: "电流 µA", icon: 'md-pulse', method: "table", size: 7, cols:[
+      {title: "电流 µA", icon: 'md-pulse', method: "table", size: 6, cols:[
         {model: "wfAgeCurrentSet", type: "number", auto: false},
         {model: "wfAgeCurrentAct", type: "number", auto: false}
       ]},
     ];
 
     this.wfAutoAgeingDetails = [
-      {title: "开路电压", method: "input", size: 8, model: "wfAutoAgeOpenVolt", type: "number"},
+      {title: "开路电压", method: "input", size: 6, model: "wfAutoAgeOpenVolt", type: "number"},
 
-      {title: "高容", method: "input", size: 8, model: "wfAutoAgeHighCapacity", type: "number"},
+      {title: "高容", method: "input", size: 6, model: "wfAutoAgeHighCapacity", type: "number"},
 
-      {title: "短路电压", method: "input", size: 8, model: "wfAutoAgeShortVolt", type: "number"},
+      {title: "短路电压", method: "input", size: 6, model: "wfAutoAgeShortVolt", type: "number"},
 
-      {title: "低容", method: "input", size: 8, model: "wfAutoAgeLowCapacity", type: "number"},
+      {title: "低容", method: "input", size: 6, model: "wfAutoAgeLowCapacity", type: "number"},
 
-      {title: "开路", method: "input", size: 8, model: "wfAutoAgeOpen", type: "number"},
+      {title: "开路", method: "input", size: 6, model: "wfAutoAgeOpen", type: "number"},
 
-      {title: "损耗", method: "input", size: 8, model: "wfAutoAgeWear", type: "number"},
+      {title: "损耗", method: "input", size: 6, model: "wfAutoAgeWear", type: "number"},
 
-      {title: "短路", method: "input", size: 8, model: "wfAutoAgeShort", type: "number"},
+      {title: "短路", method: "input", size: 6, model: "wfAutoAgeShort", type: "number"},
 
-      {title: "漏电",  method: "input", size: 8, model: "wfAutoAgeVoltLeak", type: "number"},
+      {title: "漏电",  method: "input", size: 6, model: "wfAutoAgeVoltLeak", type: "number"},
 
-      {title: "外观", method: "input", size: 8, model: "wfAutoAgeLook", type: "number"}
+      {title: "外观", method: "input", size: 6, model: "wfAutoAgeLook", type: "number"}
     ];
 
     this.wfPplInputs = [
@@ -207,7 +207,7 @@ export class EditWorkflow1Page implements OnInit{
     this.formInit();
     let form = this.wfInputForm;
 
-    console.log("The Nav Params bought to this page is" + this.wfNavParams);
+    console.log("The Nav Params bought to this page is " + this.wfNavParams);
 
     console.log("loading from storage");
     this.storage.get(this.wfNavParams).then((storageData) => {
@@ -239,7 +239,7 @@ export class EditWorkflow1Page implements OnInit{
 
           }
         } catch (err) {
-          console.log("Got an error from formInit populating from storage: "  + err);
+          // console.log("Got an error from formInit populating from storage: "  + err);
 
         }
       }
@@ -686,14 +686,16 @@ export class EditWorkflow1Page implements OnInit{
     }
   }
 
-  setFormValue(model: string, value: any){
 
+
+  */
+
+  setFormValue(model: string, value: any){
+    //It is used for html
     let form = this.wfInputForm;
 
     form.controls[model].setValue(value);
   }
-
-  */
 
   private formInit() {
     this.wfInputForm = this.formBuilder.group({

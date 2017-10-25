@@ -2,6 +2,12 @@ page-edit-workflow {
     //.col {
     //  padding: 0px !important;
     //}
+    .hr {
+        border-bottom: 1px solid #ccc;
+        margin: 10px 0;
+        width: 100%;
+    }
+
     .inputHeader {
         margin-top: 10px !important;
         margin-left: 1em !important;
@@ -13,16 +19,7 @@ page-edit-workflow {
     ion-datetime {
         padding: 8px !important;
     }
-    .ageingSubPart {
-        //border: solid;
-        border-top: solid;
-        //border-right: solid;
-        //border-right-width: 1px;
-        border-top-width: 1px;
-        border-color: #8e9093;
-        margin-top: 1em;
-        padding-top: 1em;
-    }
+
     .bread {
         height: 5em;
     }
@@ -155,4 +152,15 @@ ion-item {
     margin-right: 2px !important;
     min-width: 50px !important;
     text-align: right !important;
+}
+
+.ageingSubPart {
+    //border: solid;
+    border-top: solid!important;
+    //border-right: solid;
+    //border-right-width: 1px;
+    border-top-width: 1px !important;
+    border-color: #8e9093!important;
+    margin-top: 1em!important;
+    padding-top: 1em!important;
 }

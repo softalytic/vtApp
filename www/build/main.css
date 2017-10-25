@@ -25199,6 +25199,12 @@ ion-navbar.toolbar {
   }
 }
 
+page-edit-workflow .hr {
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0;
+  width: 100%;
+}
+
 page-edit-workflow .inputHeader {
   margin-top: 10px !important;
   margin-left: 1em !important;
@@ -25212,14 +25218,6 @@ page-edit-workflow .inputHeader {
 
 page-edit-workflow ion-datetime {
   padding: 8px !important;
-}
-
-page-edit-workflow .ageingSubPart {
-  border-top: solid;
-  border-top-width: 1px;
-  border-color: #8e9093;
-  margin-top: 1em;
-  padding-top: 1em;
 }
 
 page-edit-workflow .bread {
@@ -25366,6 +25364,14 @@ ion-item {
   margin-right: 2px !important;
   min-width: 50px !important;
   text-align: right !important;
+}
+
+.ageingSubPart {
+  border-top: solid !important;
+  border-top-width: 1px !important;
+  border-color: #8e9093 !important;
+  margin-top: 1em !important;
+  padding-top: 1em !important;
 }
 
 page-edit-workflow2 .dim {

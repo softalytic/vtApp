@@ -1,12 +1,14 @@
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { Storage } from '@ionic/storage';
 import { Injectable } from "@angular/core";
+import { WorkflowService } from "./workflow";
 
 @Injectable()
 export class QRCodeService {
 
   constructor(private storage: Storage,
-              private QR: BarcodeScanner){}
+              private QR: BarcodeScanner,
+              private wfSvc: WorkflowService){}
 
   scanBarcode(model: string, form: any){
 
@@ -23,10 +25,14 @@ export class QRCodeService {
       if ( barcodeData.format && barcodeData.format != "QR_CODE" ) {
         console.log("this is barcode");
 
-
         let data = barcodeData.text;
 
         form.controls[model].setValue(data);
+
+        if (model == "wfFormId") {
+          console.log("Execute ERP query process")
+        }
+
 
       } else if (barcodeData.format == "QR_CODE") {
         // alert('嚫，请确定你所扫描的条码是正确的');

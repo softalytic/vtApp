@@ -64,23 +64,32 @@ export class EditWorkflow3Page implements OnInit{
 
     // Assume all are ion-input except the one specificed as textarea
     this.wfOrderDetails = [
-  
-      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 20, highlight: false},
-      {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 20, highlight: false},
-      /*
-       {model: "wfOrderBatchId", title: "批次号", type: "text", highlight: false},
-       {model: "wfOrderQty", title: "总量(批次)", type: "text", highlight: false},
-       */
 
-      {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 20, highlight: false},
+      // Production spec
+      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 15, highlight: false},
+      {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 15, highlight: false},
+      {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 15, highlight: false},
       {method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 10, highlight: false},
       {method: "input", model: "wfOrderSpec", title: "规格", type: "text", size: 8, highlight: false},
       {method: "input", model: "wfOrderDim", title: "尺寸", type: "text", size: 8, highlight: false},
-      // {method: "break", size: 10},
-      {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 30, highlight: false},
-      {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 30, highlight: false},
-      {method: "input", model: "wfOrderTotalQty", title: "预设总量", type: "number", size: 5, highlight: false},
-      {method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 5, highlight: false},
+
+
+      {method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 8, disabled:true, highlight: false},
+      // {method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 15, disabled:true, highlight: false},
+      {method: "input", model: "wfSalesOrderQty", title: "销售订总量:", type: "text", size: 8, disabled:true, highlight: false},
+      {method: "input", model: "wfOrderTotalQty", title: "预设总量", type: "number", size: 8, highlight: false},
+      {method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 8, highlight: false},
+
+      // Date
+      {method: "input", model: "wfOrderDate", title: "开单日期:", type: "text", size: 10, disabled:true, highlight: false},
+      {method: "input", model: "wfOrderStartDate", title: "开工日期:", type: "text", size: 10, disabled:true, highlight: false},
+      {method: "input", model: "wfOrderEstFinishDate", title: "完工日期:", type: "text", size: 10, disabled:true, highlight: false},
+      {method: "input", model: "wfOrderDeliveryDate", title: "交期:", type: "text", size: 10, disabled:true, highlight: false},
+
+      // Note
+      {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 25, highlight: false},
+      {method: "input", model: "wfSalesOrderNote", title: "订单记录说明", type: "textarea", size: 25, highlight: false},
+      {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 25, highlight: false},
 
     ];
 
@@ -866,6 +875,7 @@ export class EditWorkflow3Page implements OnInit{
 
       wfOrderBOMNote: [''],
       wfOrderNote: [''],
+      wfSalesOrderNote: [''],
       wfOrderTotalQty: [''],
       wfOrderTotalGoodQty: [''],
       wfOrderRMId: [''],
@@ -873,8 +883,16 @@ export class EditWorkflow3Page implements OnInit{
       wfOrderSpec: [''],
       wfOrderDim: [''],
       wfFormSplit: [''],
+      wfClientId: [''],
+      wfSalesOrderId: [''],
+      wfSalesOrderQty: [''],
+      // Date
+      wfOrderDate: [''],
+      wfOrderStartDate: [''],
+      wfOrderEstFinishDate: [''],
+      wfOrderDeliveryDate: [''],
 
-      // Raw Material Inputs
+    // Raw Material Inputs
       wfRMFoilPosName: [''],
       wfRMFoilPosSerial: [''],
       wfRMFoilPosLName: [''],

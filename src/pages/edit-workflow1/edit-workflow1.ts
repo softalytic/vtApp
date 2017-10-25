@@ -59,22 +59,23 @@ export class EditWorkflow1Page implements OnInit{
     // Assume all are ion-input except the one specificed as textarea
     this.wfOrderDetails = [
   
-      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 20, highlight: false},
-      {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 20, highlight: false},
+      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 15, highlight: false},
+      {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 15, highlight: false},
       /*
        {model: "wfOrderBatchId", title: "批次号", type: "text", highlight: false},
        {model: "wfOrderQty", title: "总量(批次)", type: "text", highlight: false},
        */
 
-      {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 20, highlight: false},
+      {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 15, highlight: false},
       {method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 10, highlight: false},
       {method: "input", model: "wfOrderSpec", title: "规格", type: "text", size: 8, highlight: false},
       {method: "input", model: "wfOrderDim", title: "尺寸", type: "text", size: 8, highlight: false},
+      {method: "input", model: "wfOrderTotalQty", title: "预设总量", type: "number", size: 5, highlight: false},
+      {method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 5, highlight: false},
       // {method: "break", size: 10},
       {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 30, highlight: false},
       {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 30, highlight: false},
-      {method: "input", model: "wfOrderTotalQty", title: "预设总量", type: "number", size: 5, highlight: false},
-      {method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 5, highlight: false},
+
 
     ];
 

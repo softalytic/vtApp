@@ -15,6 +15,11 @@ export class EditWorkflow3Page implements OnInit{
   wfOrderDetails = [];
   wfRMDetails = [];
   wfAgeingDetails = [];
+
+  wfAgeDetailInputs = [];
+  wfAutoAgeingDetails = [];
+  wfAutoAgeingSubDetails = [];
+
   wfDryWetWashDetails = [];
   wfDryDetails = [];
   wfWetDetails = [];
@@ -214,6 +219,33 @@ export class EditWorkflow3Page implements OnInit{
       {title: "烘千时间", model: "wfWashDryTime", type: "time", icon: "time", scan: false, size: 8},
       {title: "作业者", model: "wfStaffWashName", type: "text", icon: 'person', scan: false, size: 8}
     ]},
+  ];
+
+  this.wfAgeDetailInputs = [
+    {method: 'inputs', options: [
+      {title: "AG1", model: "wfAgeDetailAG1", type: "text", scan: false, size: 4},
+      {title: "AG2", model: "wfAgeDetailAG2", type: "text", scan: false, size: 4},
+      {title: "AG3", model: "wfAgeDetailAG3", type: "text", scan: false, size: 4}
+    ]},
+    {method: 'inputs', options: [
+      {title: "AG4", model: "wfAgeDetailAG4", type: "text", scan: false, size: 4},
+      {title: "AG5", model: "wfAgeDetailAG5", type: "text", scan: false, size: 4},
+      {title: "AG6", model: "wfAgeDetailAG6", type: "text", scan: false, size: 4}
+    ]},
+    {method: 'inputs', options: [
+      {title: "LC-T", model: "wfAgeDetailLCT", type: "text", scan: false, size: 4},
+      {title: "LC", model: "wfAgeDetailLC", type: "text", scan: false, size: 4},
+      {title: "CAP", model: "wfAgeDetailCAP", type: "text", scan: false, size: 4}
+    ]},
+    {method: 'inputs', options: [
+      {title: "DF", model: "wfAgeDetailDF", type: "text", scan: false, size: 4},
+      {title: "时间", model: "wfAgeDetailTime", type: "text", scan: false, size: 4}
+    ]},
+    {method: 'inputs', options: [
+      {title: "核准", model: "wfAgeDetailStaffApprove", type: "text", scan: false, size: 4},
+      {title: "作成", model: "wfAgeDetailStaffFinish", type: "text", scan: false, size: 4},
+      {title: "审核", model: "wfAgeDetailStaffConfirm", type: "text", scan: false, size: 4}
+    ]}
   ];
 
     this.wfOpsInputs = [
@@ -477,6 +509,7 @@ export class EditWorkflow3Page implements OnInit{
       ]},
       {title: "QC检查不良墑认", method: "input", model: "wfStaffQCSummary", scan: false, wfPplI: 3, type: "text", size: 15},
       {title: "QC判定者", method: "input", model: "wfStaffQCName", type: "text", icon: 'search', scan: 5, wfPplI: 5, size: 11},
+      {title: "编切/包装前特性抽獫判𤴓", method: "input", model: "wfStaffQCPreRandomCheck", scan: false, wfPplI: 6, type: "text", size: 15},
       {title: "品检备注", method: "textarea", model: "wfQCInputNote", type: "text", icon: 'chatbubbles', scan: false, size: 27},
     ];
   }
@@ -1079,6 +1112,22 @@ export class EditWorkflow3Page implements OnInit{
       wfWashDryTime: [''],
       wfStaffWashName: [''],
 
+      // aging input details
+      wfAgeDetailAG1: [''],
+      wfAgeDetailAG2: [''],
+      wfAgeDetailAG3: [''],
+      wfAgeDetailAG4: [''],
+      wfAgeDetailAG5: [''],
+      wfAgeDetailAG6: [''],
+      wfAgeDetailLCT: [''],
+      wfAgeDetailLC: [''],
+      wfAgeDetailCAP: [''],
+      wfAgeDetailDF: [''],
+      wfAgeDetailTime: [''],
+      wfAgeDetailStaffApprove: [''],
+      wfAgeDetailStaffFinish: [''],
+      wfAgeDetailStaffConfirm: [''],
+
       // Operational Input
       wfOptInputDate: [this.appDate],
       wfOptWashMachine: [''],
@@ -1148,6 +1197,7 @@ export class EditWorkflow3Page implements OnInit{
       wfStaffQCName: [''],
       wfStageStatus: [''],
       wfStaffQCSummary: [''],
+      wfStaffQCPreRandomCheck: [''],
       wfStaffRandomPickName: [''],
       wfQCPass: [''],
       wfQCPassCode: [''],

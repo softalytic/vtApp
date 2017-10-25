@@ -135,10 +135,11 @@ export class EditWorkflow3Page implements OnInit{
 
     this.wfOpsInputs = [
       {title: "分單", method: "input", model: "wfFormSplit", type: "text", icon: 'ios-copy-outline', scan: false, size: 2, wfOpslI: 2},
-      {title: "流程卡号", method: "input", model: "wfFormId", type: "text", icon: 'ios-copy-outline', scan: false, size: 9},
-      {title: "批次号", method: "input", model: "wfOrderBatchId", type: "text", icon: 'ios-basket-outline', scan: false, size: 11},
+      {title: "流程卡号", method: "input", model: "wfFormId", type: "text", icon: 'ios-copy-outline', scan: false, size: 7},
+      {title: "批次号", method: "input", model: "wfOrderBatchId", type: "text", icon: 'ios-basket-outline', scan: false, size: 7},
       {title: "批次量", method: "input", model: "wfOrderBatchQty", type: "text", icon: 'ios-basket-outline', scan: false, size: 5},
-      {method: "break", title: ""},
+      {title: "投入数", method: "input", model: "wfOptStartQty", type: "number", icon: 'ios-sad', scan: false, size: 6},
+      //{method: "break", title: ""},
 
       {method: "inputs", options: [
         {title: "机台", model: "wfOptMachineId", type: "text", scan: false, size: 8},
@@ -155,13 +156,47 @@ export class EditWorkflow3Page implements OnInit{
         {title: "开始", model: "wfOptStartTime", type: "time", icon: "time", scan: false, size: 8},
         {title: "完成", model: "wfOptFinishTime", type: "time", icon: "md-alarm", scan: false, size: 8}
       ]},
+      /*
       {method: "inputs", options: [
-        {title: "投入数", model: "wfOptStartQty", type: "number", icon: 'ios-sad', scan: false, size: 8},
-        {title: "不良数(项目)", model: "wfOptBadQtyItem", type: "text", icon: 'ios-sad', scan: false, size: 8},
-        {title: "不良数", model: "wfOptBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8},
-        {title: "良品数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8}
+        
+        //{title: "不良数(项目)", model: "wfOptBadQtyItem", type: "text", icon: 'ios-sad', scan: false, size: 8},
+        //{title: "不良数", model: "wfOptBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8},
+        //{title: "良品数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8}
+        
       ]},
-      
+      */
+      {method: "table", size: 8, headers: [{title: "种类"},{title: "数量"}],rows: [
+        {title: "不良數1", cols: [
+          {model: "wfBadItem1", type: "number", disabled: false},
+          {model: "wfBadQty1", type: "number", disabled: false},
+        ]},
+        {title: "不良數2", cols: [
+          {model: "wfBadItem2", type: "number", disabled: false},
+          {model: "wfBadQty2", type: "number", disabled: false},
+        ]},
+        {title: "不良數3", cols: [
+          {model: "wfBadItem3", type: "number", disabled: false},
+          {model: "wfBadQty3", type: "number", disabled: false},
+        ]},
+        {title: "不良數4", cols: [
+          {model: "wfBadItem4", type: "number", disabled: false},
+          {model: "wfBadQty4", type: "number", disabled: false},
+        ]},
+        {title: "不良數5", cols: [
+          {model: "wfBadItem5", type: "number", disabled: false},
+          {model: "wfBadQty5", type: "number", disabled: false},
+        ]},
+        {title: "不良數總和", cols: [
+          {model: "wfBadTotal", type: "number", disabled: true},
+          {model: "wfBadTotal", type: "number", disabled: false},
+        ]},
+        {title: "良品數", cols: [
+          {model: "wfGoodTotal", type: "number", disabled: true},
+          {model: "wfGoodTotal", type: "number", disabled: false},
+        ]},
+        // {title: "不良數", model: "wfBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8},
+        // {title: "良品數", model: "wfGoodQty", type: "number", icon: 'happy', scan: false, size: 8}
+      ]}
     ];
 
     this.wfAgeingDetails = [
@@ -822,6 +857,20 @@ export class EditWorkflow3Page implements OnInit{
       wfOptBadQtyItem: [''],
       wfOptBadQty: [''],
       wfOptGoodQty: [''],
+
+      // Good / Bad Qty Input
+      wfBadItem1: [''],
+      wfBadQty1: [''],
+      wfBadItem2: [''],
+      wfBadQty2: [''],
+      wfBadItem3: [''],
+      wfBadQty3: [''],
+      wfBadItem4: [''],
+      wfBadQty4: [''],
+      wfBadItem5: [''],
+      wfBadQty5: [''],
+      wfBadTotal: [''],
+      wfGoodTotal: [''],
 
       // Ageing Part1
       wfAgeDegSet: [''],

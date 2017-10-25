@@ -151,6 +151,25 @@
 
                             </ion-col>
 
+                            <ion-col *ngIf="wfInput.method === 'table'">
+                                <!-- table header -->
+                                <ion-row justify-content-center align-items-center>
+                                    <div class="inputLabel" style="width: 60px;"></div>
+                                    <ion-col *ngFor="let header of wfInput.headers">
+                                        <div style="text-align: center;">
+                                            {{header.title}}
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                                <!-- table body -->
+                                <ion-row *ngFor="let row of wfInput.rows" align-items-center justify-content-center>
+                                    <div class="inputLabel" style="width: 60px;">{{row.title}}</div>
+                                    <ion-col *ngFor="let col of row.cols">
+                                        <ion-input formControlName="{{col.model}}" [ngStyle]="{'width.em': wfInput.size}" [ngClass]="{dim: col.disabled}" class="gridborder" type="{{col.type}}"></ion-input>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-col>
+
                             <ion-col *ngIf="wfInput.method == 'breaks'" col-3>
                             </ion-col>
 

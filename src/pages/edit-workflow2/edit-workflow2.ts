@@ -65,10 +65,11 @@ export class EditWorkflow2Page implements OnInit{
       {method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 15, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 20, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
-      {method: "input", model: "wfOrderFormNote", title: "流程卡备注", type: "textarea", size: 33, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 33, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 33, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderFormNote", title: "流程卡备注", type: "textarea", size: 35, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 35, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 35, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
+      {method: "label",process: {1: true, 2: true, 3: true, 4:true}},
       {title: "CAP: μF", method: "input", model: "wfSpecCap", type: "text", scan: false, size: 9, disabled:false, process: {1: true, 2: true, 3: true, 4:true}},
       {title: "DF: %", method: "input", model: "wfSpecDF", type: "text", scan: false, size: 9, disabled:false, process: {1: true, 2: true, 3: true, 4:true}},
       {title: "LC: μA", method: "input", model: "wfSpecLC", type: "text", scan: false, size: 9, disabled:false, process: {1: true, 2: true, 3: true, 4:true}},

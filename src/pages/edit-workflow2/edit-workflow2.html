@@ -15,18 +15,14 @@
             <!-- header bar -->
             <ion-row wrap class="main headbar">
                 <ion-col *ngFor="let wfOrderDetail of wfOrderDetails">
-
-                    <ion-row *ngIf="wfOrderDetail.model == 'wfSpecCap'" justify-content-center wrap>
-                        <ion-col *ngIf="wfOrderDetail.method === 'input' && wfOrderDetail.process[wfInputForm.value.wfProcess]" no-padding>
-                            <ion-row align-items-center>
-                                <div class="inputLabel" no-padding>
-                                    参数要求
-                                </div>
+                    <ion-row justify-content-center wrap align-items-center>
+                        <ion-col *ngIf="wfOrderDetail.method === 'label'  && wfOrderDetail.process[wfInputForm.value.wfProcess]" justify-content-center wrap
+                                 align-items-center class="inputLabel" no-padding col-auto>
+                            <ion-row class="inputLabel" no-padding align-items-center>
+                                参数要求
                             </ion-row>
                         </ion-col>
-                    </ion-row>
 
-                    <ion-row justify-content-center wrap>
                         <ion-col *ngIf="wfOrderDetail.method === 'input' && wfOrderDetail.process[wfInputForm.value.wfProcess]" no-padding>
 
                             <ion-row align-items-center>

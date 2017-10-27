@@ -10,6 +10,7 @@ import { PhotoService } from "../../services/photo";
   selector: 'page-edit-workflow3',
   templateUrl: 'edit-workflow3.html',
 })
+
 export class EditWorkflow3Page implements OnInit{
   form = NgForm;
   wfOrderDetails = [];
@@ -195,7 +196,7 @@ export class EditWorkflow3Page implements OnInit{
       ]},
     ];
   
-  this.wfWetInputs = [
+    this.wfWetInputs = [
     {method: 'inputs', options: [
       {title: "真空度", model: "wfWetEmptyAir", type: "text", scan: false, size: 8},
       {title: "气压值", model: "wfWetAir", type: "text", scan: false, size: 8}
@@ -207,7 +208,7 @@ export class EditWorkflow3Page implements OnInit{
     ]},
   ];
   
-  this.wfWashInputs = [
+    this.wfWashInputs = [
 
     {method: 'inputs', options: [
       {title: "批序/温度 ℃", model: "wfWashWindingDeg", type: "number", icon: 'md-remove-circle', scan: false, size: 8},
@@ -221,7 +222,7 @@ export class EditWorkflow3Page implements OnInit{
     ]},
   ];
 
-  this.wfAgeDetailInputs = [
+    this.wfAgeDetailInputs = [
     {method: 'inputs', options: [
       {title: "AG1", model: "wfAgeDetailAG1", type: "text", scan: false, size: 4},
       {title: "AG2", model: "wfAgeDetailAG2", type: "text", scan: false, size: 4},

@@ -14,7 +14,7 @@
             <ion-grid>
                 <ion-row wrap justify-content-left align-items-center>
                     <!-- Main loop of the Form Module -->
-                    <ion-col *ngFor="let wfInput of wfInputs">
+                    <ion-col *ngFor="let wfInput of wfInputs" col-auto>
                         <!-- Non Buttons input fields of wfForms -->
                         <ion-row align-items-center>
                             <div class="label">{{wfInput.title}}</div>
@@ -50,7 +50,7 @@
                         </ion-row>
 
                     </ion-col>
-                    <ion-col *ngIf="wfInputForm.value.wfForm != ''">
+                    <ion-row *ngIf="wfInputForm.value.wfForm != ''">
                         <ion-row align-items-center>
                             <div class="label">工序</div>
                             <button *ngFor="let key of dataWfProcess[this.wfInputForm.value.wfForm].Process | keys"
@@ -61,7 +61,7 @@
                                 {{dataWfProcess[this.wfInputForm.value.wfForm].Process[key]}}
                             </button>
                         </ion-row>
-                    </ion-col>
+                    </ion-row>
                 </ion-row>
 
                 <ion-row>

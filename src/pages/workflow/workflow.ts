@@ -501,11 +501,22 @@ export class WorkflowPage implements OnInit {
   }
 
   loadDataToForm(form:any, data:any) {
+    // This function populate the data to form in the main page workflow because
+    // it will not overwrite existing data field on the form.
     //
+    // For each key field in the data to be filled
+    //    Check If form control field being filled then
+    //      Skip it with assumption that current user input is always correct
+    //    Else
+    //      Fill it
+    // If form.control populate has filled, then
+    // Try to fill it by force
+    // Note: The sequence is important, must first execute all the form.control filling
+    //       Then proceed to fill the non form control fields.
+    //       Otherwise, the form control will clear all the inputs
 
     console.log("Loading data to form, data are " + JSON.stringify(data));
 
-    // workflow main page only
     for (let key in data) {
       try {
         // This use form control for the value setting
@@ -518,6 +529,7 @@ export class WorkflowPage implements OnInit {
       }
       catch(err) {
         console.log(err.message);
+        // Use eval to dynamically inject the value into the form
         eval('form.value.' + key + '= "' + data[key] + '"; ');
         eval('console.log("Retrying force input " + form.value.'+ key + ')');
         eval('console.log(form.value.' + key + ');');

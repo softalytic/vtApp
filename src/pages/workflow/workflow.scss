@@ -1,90 +1,69 @@
 page-workflow {
-  ion-content {
-    font-size: 10px !important;
-  }
-
-  ion-row {
-    p {
-      margin-right: 5px;
+    ion-content {
+        font-size: 18px !important;
     }
-  }
-
-  button {
-    transition-duration: 1s;
-  }
-
-
-
-
-  ion-input {
-    max-width: 100%;
-  }
-
-  .popover-content {
-    width: 100px !important;
-  }
-
-
-
-  .card-background-page {
-
-    //margin-bottom: 1em;
-
-    .imgButton {
-      background-color: orange;
-      max-width: 100%;
-      min-height: 130%;
-      height: 130% !important;
-      border-radius: 8px;
-      height: auto;
+    ion-row {
+        p {
+            margin-right: 5px;
+        }
     }
-
-
-    ion-col {
-      position: relative;
-      text-align: center;
-      border-radius: 8px;
-      margin-bottom: 5em;
-
+    button {
+        transition-duration: 1s;
     }
-
-    .card-title {
-      position: absolute;
-      top: 92%;
-      font-size: 3em;
-      width: 100%;
-      font-weight: bold;
-      color: #ffffff;
-      text-shadow: 2px 2px 5px black;
+    ion-input {
+        max-width: 100%;
     }
-
-    .card-subtitle {
-      font-size: 1.0em;
-      position: absolute;
-      top: 52%;
-      width: 100%;
-      color: #ffffff;
+    .popover-content {
+        width: 100px !important;
     }
-
-    img {
-      border-radius: 8px;
-      max-width: 100%;
-      height: auto;
+    .card-background-page {
+        //margin-bottom: 1em;
+        .imgButton {
+            background-color: orange;
+            max-width: 100%;
+            min-height: 130%;
+            height: 130% !important;
+            border-radius: 8px;
+            height: auto;
+        }
+        ion-col {
+            position: relative;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 5em;
+        }
+        .card-title {
+            position: absolute;
+            top: 92%;
+            font-size: 5em;
+            width: 100%;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 2px 2px 5px black;
+        }
+        .card-subtitle {
+            font-size: 3em;
+            position: absolute;
+            top: 52%;
+            width: 100%;
+            color: #ffffff;
+        }
+        img {
+            border-radius: 8px;
+            max-width: 100%;
+            height: auto;
+        }
+        div:hover {
+            img {
+                -webkit-filter: blur(5px);
+                filter: blur(5px);
+            }
+        }
     }
-
-    div:hover {
-      img {
-        -webkit-filter: blur(5px);
-        filter: blur(5px);
-      }
+    .item-md {
+        font-size: 18px;
+        padding-left: 0px;
     }
-  }
-
-  .item-md {
-    font-size: 10px;
-    padding-left: 0px;
-  }
-
 }
 
 //ion-select {
@@ -105,70 +84,66 @@ page-workflow {
 //    //text-align: center !important;
 //  }
 //}
-
-
 .buttonsSelected {
-  background-color: orange;
-  color: #ffffff !important;
+    background-color: orange;
+    font-size: 18px;
+    color: #ffffff !important;
 }
 
 .barcodeButton {
-  width: auto;
-  font-size: 10px;
-  background-color: #8c8c8c;
+    width: auto;
+    font-size: 18px;
+    background-color: #8c8c8c;
 }
 
 //.buttonSelector {
 //  width: 400px !important;
 //  max-width: 400px !important;
 //}
-
 ion-navbar {
-  div {
-    font-size: 3.0em;
-    //width: 100%;
-    color: black;
-    text-align: center;
-    img {
-      top: 15%;
-      left: 35%;
-      position: absolute;
+    div {
+        font-size: 7em;
+        //width: 100%;
+        color: black;
+        text-align: center;
+        img {
+            top: 15%;
+            left: 35%;
+            position: absolute;
+        }
+        h1 {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            position: absolute;
+            top: 25%;
+            left: 42%;
+        }
     }
-    h1 {
-      margin-top: 0px;
-      margin-bottom: 0px;
-      position: absolute;
-      top: 25%;
-      left: 42%;
-
+    .icon {
+        border-radius: 8px;
+        max-width: 40px;
+        height: auto;
     }
-  }
-  .icon {
-    border-radius: 8px;
-    max-width: 40px;
-    height: auto;
-  }
 }
 
 .input-wrapper {
-  ion-label {
-    text-align: left !important;
-  }
-
-  size: 10px !important;
+    ion-label {
+        text-align: left !important;
+    }
+    size: 15px !important;
 }
 
 .select-text {
-  padding-left: 5px;
-  position: relative;
-  top: 25%;
+    padding-left: 5px;
+    position: relative;
+    top: 25%;
 }
 
 ion-header {
-  padding-left: 0px !important;
-  padding-top: 0px !important;
+    padding-left: 0px !important;
+    padding-top: 0px !important;
 }
 
 .hide {
-  display: none;
+    display: none;
 }

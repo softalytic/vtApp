@@ -51,14 +51,13 @@
 
                     </ion-col>
                     <ion-row *ngIf="wfInputForm.value.wfForm != ''">
+                        <div class="label" style="width:100% !important;">工序</div>
+                        <ion-row align-items-center>&nbsp;</ion-row>
                         <ion-row align-items-center>
-                            <div class="label">工序</div>
-                            <button *ngFor="let key of dataWfProcess[this.wfInputForm.value.wfForm].Process | keys"
-                                    [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcess == key }"
-                                    (click)="setFormValue('wfProcess',key); setFormValue('wfProcessName',dataWfProcess[this.wfInputForm.value.wfForm].Process[key]);"
-                                    item-right ion-button outline type="button" round>
+                            <button *ngFor="let key of dataWfProcess[this.wfInputForm.value.wfForm].Process | keys" [disabled]="(this.wfInputForm.value.wfForm == '1' && key == '2')" [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcess == key }" (click)="setFormValue('wfProcess',key); setFormValue('wfProcessName',dataWfProcess[this.wfInputForm.value.wfForm].Process[key]);"
+                                item-right ion-button outline type="button" round>
                                 <!--<ion-icon name="clipboard"></ion-icon>-->
-                                {{dataWfProcess[this.wfInputForm.value.wfForm].Process[key]}}
+                                {{dataWfProcess[this.wfInputForm.value.wfForm].Process[key]}} 
                             </button>
                         </ion-row>
                     </ion-row>
@@ -73,7 +72,6 @@
         </div>
 
         <!-- Display the workflow process with img -->
-
 
         <!-- manual ageing will have an action sheet to prompt the sub process -->
         <!-- 規格 Need attention highlight -->

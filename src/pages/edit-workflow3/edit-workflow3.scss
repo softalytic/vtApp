@@ -1,3 +1,46 @@
 page-edit-workflow3 {
-
+    .inputLabel.short {
+        min-width: 20px !important;
+    }
+    .inputLabel {
+        font-size: 12.9px !important;
+    }
+    .toolbar-title.toolbar-title-md {
+        font-size: 25px;
+    }
+    ion-row.rowSpace.row {
+        margin: 6px 0;
+    }
+    ion-row.sec.lessSpace.row {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    ion-navbar div img {
+        position: initial;
+        vertical-align: middle;
+    }
+    .inputLabel.tableAgeRow {
+        min-width: 0px !important;
+    }
+    .tableAgeColDivTitle {
+        text-align: center;
+    }
+    .tableAgeDivColLabel {
+        min-width: 0px !important;
+    }
+    ion-col.materialLabel.col {
+        width: 14%;
+    }
+    .noPaddingCol {
+        padding: 0px !important;
+    }
+    .subBreak {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+    .processBGColor {
+        background-color: #FF0;
+        border-radius: 25px;
+        padding: 5px;
+    }
 }

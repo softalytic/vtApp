@@ -52,22 +52,32 @@ export class EditWorkflow2Page implements OnInit{
 
     // Assume all are ion-input except the one specificed as textarea
     this.wfOrderDetails = [
-      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 28, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 28, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 28, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderTotalQty", title: "批次量", type: "number", size: 9, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 7, scan: false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       // {method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 6, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
-      {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 15, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 15, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderSpec", title: "规格", type: "text", size: 15, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderDim", title: "尺寸", type: "text", size: 15, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 15, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 20, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "break", size: "110", visibility: "hidden"},
+      
+      {method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderTotalQty", title: "批次量", type: "number", size: 9, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+
+      {method: "break", size: "110", visibility: "hidden"},
+
+      {method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderSpec", title: "规格", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderDim", title: "尺寸", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+
+      {method: "break", size: "110", visibility: "hidden"},
 
       {method: "input", model: "wfOrderFormNote", title: "流程卡备注", type: "textarea", size: 35, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 35, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 35, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+
+      {method: "break", size: "110", visibility: "hidden"},
 
       {method: "label",process: {1: true, 2: true, 3: true, 4:true}},
       {title: "CAP: μF", method: "input", model: "wfSpecCap", type: "text", scan: false, size: 9, disabled:false, process: {1: true, 2: true, 3: true, 4:true}},
@@ -108,7 +118,7 @@ export class EditWorkflow2Page implements OnInit{
       // {method: "break", size: 20},
       // {title: "流程卡备注", method: "input", model: "wfOrderBOMNote", type: "textarea", scan: false, size: 40},
       // {method: "break", size: 20},
-      {method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 7, scan: false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      // {method: "input", model: "wfOptMachineId", title: "台机号:", type: "text", size: 7, scan: false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
       // {method: "break", title: ""},
 

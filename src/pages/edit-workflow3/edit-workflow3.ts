@@ -81,15 +81,15 @@ export class EditWorkflow3Page implements OnInit{
       {method: "break", size: "88", visibility: "hidden"},
       
       // {method: "input", model: "wfSalesOrderId", title: "销售订单号:", type: "text", size: 15, disabled:true, highlight: false},
-      {method: "input", model: "wfClientId", title: "客户代码:", type: "text", size: 8, disabled:true, highlight: false},
+      {method: "input", model: "wfClientId", title: "客户別:", type: "text", size: 8, disabled:true, highlight: false},
       {method: "input", model: "wfOrderDate", title: "开单日期:", type: "text", size: 10, disabled:true, highlight: false},
       {method: "input", model: "wfOrderBatchQty", title: "批次量", type: "text", size: 5, disabled: true, highlight: false},
 
       {method: "break", size: "88", visibility: "hidden"},
 
-      {method: "input", model: "wfSalesOrderQty", title: "销售订总量:", type: "text", size: 8, disabled:true, highlight: false},
+      {method: "input", model: "wfSalesOrderQty", title: "订单量:", type: "text", size: 8, disabled:true, highlight: false},
       {method: "input", model: "wfOrderStartDate", title: "开工日期:", type: "text", size: 10, disabled:true, highlight: false},
-      {method: "input", model: "wfOrderTotalQty", title: "预设总量", type: "number", size: 8, highlight: false},
+      {method: "input", model: "wfOrderTotalQty", title: "你总批数", type: "number", size: 8, highlight: false},
 
       {method: "break", size: "88", visibility: "hidden"},
 
@@ -241,17 +241,14 @@ export class EditWorkflow3Page implements OnInit{
       {method: 'inputs', options: [
         {title: "AG1", model: "wfAgeDetailAG1", type: "text", scan: false, size: 4},
         {title: "LC-T", model: "wfAgeDetailLCT", type: "text", scan: false, size: 4},
-        {title: "核准", model: "wfAgeDetailStaffApprove", type: "text", scan: false, size: 4},
       ]},
       {method: 'inputs', options: [
         {title: "AG2", model: "wfAgeDetailAG2", type: "text", scan: false, size: 4},
         {title: "LC", model: "wfAgeDetailLC", type: "text", scan: false, size: 4},
-        {title: "作成", model: "wfAgeDetailStaffFinish", type: "text", scan: false, size: 4},
       ]},
       {method: 'inputs', options: [
         {title: "AG3", model: "wfAgeDetailAG3", type: "text", scan: false, size: 4},
         {title: "CAP", model: "wfAgeDetailCAP", type: "text", scan: false, size: 4},
-        {title: "审核", model: "wfAgeDetailStaffConfirm", type: "text", scan: false, size: 4}
       ]},
       {method: 'inputs', options: [
         {title: "AG4", model: "wfAgeDetailAG4", type: "text", scan: false, size: 4},
@@ -259,6 +256,7 @@ export class EditWorkflow3Page implements OnInit{
       ]},
       {method: 'inputs', options: [
         {title: "AG5", model: "wfAgeDetailAG5", type: "text", scan: false, size: 4},
+        {title: "审核", model: "wfAgeDetailStaffConfirm", type: "text", scan: false, size: 4}
       ]},
       {method: 'inputs', options: [
         {title: "AG6", model: "wfAgeDetailAG6", type: "text", scan: false, size: 4},
@@ -302,14 +300,21 @@ export class EditWorkflow3Page implements OnInit{
         {title: "温度 ℃", model: "wfRMWindingDeg", type: "number", icon: 'md-remove-circle', inputType: 1, scan: false, size: 8}
       ]},
       */
-      {method: 'inputs', options: [
-         
+      {title: "", method: "buttons", inputType: 9, model: "wfQCCheck", buttons: [
+        {label: "全检", value: 1, icon: 'done-all'},
+        {label: "抽检", value: 2, icon: 'checkmark'},
+      ]},
+      {title: "抽检数量", method: "input", model: "wfRandomCheckInfo", type: "number", icon: 'construct', scan: 0, size: 6},
+      
+      {title: "备注:", method: "input", model: "wfSpecNote", type: "textarea", scan: false, size: 40},
 
+      {method: 'inputs', options: [
         {title: "开始日期", model: "wfOptInputDate", type: "date", icon: "calender", scan: false, size: 8},        
         {title: "开始时间", model: "wfOptStartTime", type: "time", icon: "time", scan: false, size: 8},
         {title: "清机确认", model: "wfOptWashMachine", type: "text", inputType: 1, scan: false, size: 8}, 
         {title: "投入数", method: "input", model: "wfOptStartQty", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
         {title: "良品數", method: "input", model: "wfGoodTotal", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
+        {title: "抽检数量", model: "wfRandomCheckInfo", type: "number", icon: 'construct', inputType: 9, scan: false, size: 8},
       ]},
 
       {method: 'inputs', options: [
@@ -328,6 +333,11 @@ export class EditWorkflow3Page implements OnInit{
         {title: "烘干时间", model: "wfWashDryTime", type: "time", icon: "time", inputType: 5, scan: false, size: 8},
 
       ]},
+      
+      {method: 'inputs', options: [
+        {title: "备注", model: "wfSpecNote", type: "textarea", inputType: 9, size: 40},
+      ]},
+      
     
       /*
       {method: "inputs", options: [
@@ -340,23 +350,23 @@ export class EditWorkflow3Page implements OnInit{
       */
       {method: "table", size: 8, headers: [{title: "不良數种类"},{title: "数量"}],rows: [
         {title: "1", cols: [
-          {model: "wfBadItem1", type: "text", disabled: false},
+          {model: "wfBadItem1", type: "text", size:"6", disabled: false},
           {model: "wfBadQty1", type: "number", size:"6", disabled: false},
         ]},
         {title: "2", cols: [
-          {model: "wfBadItem2", type: "text", disabled: false},
+          {model: "wfBadItem2", type: "text", size:"6", disabled: false},
           {model: "wfBadQty2", type: "number", size:"6",  disabled: false},
         ]},
         {title: "3", cols: [
-          {model: "wfBadItem3", type: "text", disabled: false},
+          {model: "wfBadItem3", type: "text", size:"6", disabled: false},
           {model: "wfBadQty3", type: "number", size:"6",  disabled: false},
         ]},
         {title: "4", cols: [
-          {model: "wfBadItem4", type: "text", disabled: false},
+          {model: "wfBadItem4", type: "text", size:"6", disabled: false},
           {model: "wfBadQty4", type: "number", size:"6",  disabled: false},
         ]},
         {title: "5", cols: [
-          {model: "wfBadItem5", type: "text", disabled: false},
+          {model: "wfBadItem5", type: "text", size:"6", disabled: false},
           {model: "wfBadQty5", type: "number", size:"6",  disabled: false},
         ]},
         /*
@@ -371,6 +381,8 @@ export class EditWorkflow3Page implements OnInit{
         // {title: "不良數", model: "wfBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8},
         // {title: "良品數", model: "wfGoodQty", type: "number", icon: 'happy', scan: false, size: 8}
         */
+
+        
       ]}
     ];
 
@@ -1177,6 +1189,9 @@ export class EditWorkflow3Page implements OnInit{
       wfWashDryWindingDeg: [''],      
       wfWashDryTime: ['00:00'],
       wfStaffWashName: [''],
+      wfQCCheck: [''],
+      wfRandomCheckInfo: [''],
+      wfSpecNote: [''],
 
       // aging input details
       wfAgeDetailAG1: [''],

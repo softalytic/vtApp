@@ -54,7 +54,6 @@
                         <div class="label" style="width:100% !important;">工序</div>
                         <ion-row align-items-center>&nbsp;</ion-row>
                         <ion-row align-items-center>
-                            <div class="label">工序</div>
                             <button *ngFor="let key of dataWfProcess[this.wfInputForm.value.wfForm].Process | keys" [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcess == key }" (click)="setFormValue('wfProcess',key); setFormValue('wfProcessName',dataWfProcess[this.wfInputForm.value.wfForm].Process[key]);"
                                 item-right ion-button outline type="button" round>
                                 {{dataWfProcess[this.wfInputForm.value.wfForm].Process[key]}}
@@ -64,7 +63,7 @@
                 </ion-row>
 
                 <ion-row>
-                    <button style="width: 25%; margin: 0 auto;" ion-button type="submit" block>
+                    <button style="width: 25%; margin: 0 auto; margin-top:20px !important; " ion-button type="submit" block>
                         确定
                     </button>
                 </ion-row>

@@ -1,10 +1,10 @@
 <ion-header style="margin-top: 0px !important;margin-left: 0px !important;">
     <ion-navbar>
         <div style="align-items: center; display: inline;">
-            <img src="./assets/img/vt_icon.png" class="icon">
+
             <ion-title>
-                <!--&nbsp; ( {{wfInputForm.value.wfFormName}} )&nbsp;-->
-                &nbsp;( 裸品流程卡 )&nbsp; 工序:&nbsp; {{wfInputForm.value.wfProcessName}}
+                <img src="./assets/img/vt_icon.png" class="icon" style="position: initial !important; vertical-align: middle !important;">
+                <b>&nbsp;( 裸品流程卡 )&nbsp;工序:&nbsp;&nbsp;<span class="processBGColor">{{wfInputForm.value.wfProcessName}}</span>&nbsp;&nbsp;&nbsp;&nbsp;流程卡号:&nbsp;<u>{{wfInputForm.value.wfFormId}}</u>&nbsp;&nbsp;&nbsp;&nbsp;机台号:&nbsp;<u>{{wfInputForm.value.wfOptMachineId}}</u></b>
             </ion-title>
         </div>
     </ion-navbar>
@@ -15,7 +15,7 @@
         <ion-grid>
             <!-- header bar -->
             <ion-row wrap class="main headbar">
-                <ion-col *ngFor="let wfOrderDetail of wfOrderDetails">
+                <ion-col *ngFor="let wfOrderDetail of wfOrderDetails" [class.noPaddingCol]="wfOrderDetail.method === 'break' ">
                     <ion-row justify-content-center wrap>
                         <ion-col *ngIf="wfOrderDetail.method === 'input'" no-padding>
                             <ion-row align-items-center>
@@ -28,7 +28,7 @@
                             </ion-row>
                         </ion-col>
 
-                        <ion-col *ngIf="wfOrderDetail.method === 'break'" no-padding [ngStyle]="{'width.em':wfOrderDetail.size}"></ion-col>
+                        <ion-col *ngIf="wfOrderDetail.method === 'break'" no-padding [ngStyle]="{'width.em':wfOrderDetail.size, 'visibility':wfOrderDetail.visibility }" class="ageingSubPart subBreak"></ion-col>
 
                     </ion-row>
                 </ion-col>
@@ -79,7 +79,7 @@
                                 <div *ngIf="wfInput.wfOpslI == 2" style="height: 42px; width: 100vw;
                                 position: relative;">
                                     <h4 class="inputHeader" style="display: inline-block; margin: 0;">
-                                        <ion-icon name="clipboard"></ion-icon>
+                                        <!-- <ion-icon name="clipboard"></ion-icon> -->
                                         &nbsp; 生產记录
                                     </h4>
 
@@ -134,11 +134,11 @@
                                     </div>
                                     <!-- datetime -->
                                     <div *ngIf="option.type == 'date'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
-                                        <ion-icon *ngIf="option.type == 'date'" name="md-calendar" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                        <!-- <ion-icon *ngIf="option.type == 'date'" name="md-calendar" style="font-size:1.6em; margin: 0 6px;"></ion-icon> -->
                                         <ion-datetime formControlName={{option.model}} #picker pickerFormat="DD/MM/YYYY" [min]="datePickerMin" style="display: inline-block; padding: 13px 0;"></ion-datetime>
                                     </div>
                                     <div *ngIf="option.type == 'time'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
-                                        <ion-icon *ngIf="option.type == 'time'" name="md-clock" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                        <!-- <ion-icon *ngIf="option.type == 'time'" name="md-clock" style="font-size:1.6em; margin: 0 6px;"></ion-icon> -->
                                         <ion-datetime formControlName={{option.model}} #picker displayFormat="HH:mm" pickerFormat="HH:mm" style="display: inline-block; padding: 13px 0;"></ion-datetime>
                                     </div>
 
@@ -203,7 +203,7 @@
                         <!-- Ageing field Title -->
                         <ion-col col-12>
                             <div class="inputHeader">
-                                <ion-icon name="md-color-wand"></ion-icon>
+                                <!-- <ion-icon name="md-color-wand"></ion-icon> -->
                                 &nbsp; 老化工序
                             </div>
                             <button *ngFor="let wfProcessName of ['手工老化','自動老化']" [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcessName == wfProcessName }" (click)="setFormValue('wfProcessName',wfProcessName);" item-right ion-button outline type="button" round>
@@ -309,7 +309,7 @@
                         <!-- Input field header -->
                         <ion-col text-left col-12>
                             <h4 class="inputHeader">
-                                <ion-icon name="md-contacts"></ion-icon>
+                                <!-- <ion-icon name="md-contacts"></ion-icon> -->
                                 &nbsp; 员工信息
                             </h4>
                         </ion-col>

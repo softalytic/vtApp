@@ -574,6 +574,7 @@ export class EditWorkflow3Page implements OnInit{
     this.wfPplInputs = [
       {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: false, wfPplI: 1, size: 7},
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 3},
+      {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: false, wfPplI: 9, size: 7},
       {title: "班长硧认", method: "input", model: "wfOptQtyChecked", type: "number", icon: 'construct', scan: false, wfPplI: 3, size: 7},
       {title: "維修員", method: "input", model: "wfStaffRepairName", type: "text", icon: 'construct', scan: false, wfPplI: 4, size: 7},
       //{title: "外覌抽验判定", method: "input", model: "wfStaffRandomPickName", type: "text", icon: 'construct', scan: false, wfPplI: 6, size: 7},

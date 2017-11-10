@@ -58,14 +58,29 @@ export class EditWorkflow1Page implements OnInit{
 
     // Assume all are ion-input except the one specificed as textarea
     this.wfOrderDetails = [
-      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 20, highlight: false},
-      {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 20, highlight: false},
-      {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 20, highlight: false},
-      {method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 15, highlight: false},
+      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 12, highlight: false},
+      {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 12, highlight: false},
+      {method: "input", model: "wfOptMachineId", title: "机台号", type: "text", size: 6, highlight: false},
+      {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 12, highlight: false},
+      {method: "input", model: "wfOrderBatchQty", title: "批次量", type: "number", size: 5, highlight: false},
+
+      /*
+      {method: "break", size: "88", visibility: "hidden"},
+      
+      {method: "input", model: "wfOrderTotalQty", title: "预设总量", type: "number", size: 5, highlight: false},
+      */     
+            
+
+      {method: "break", size: "88", visibility: "hidden"},
+
+      {method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 12, highlight: false},
+      {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 12, highlight: false},
       {method: "input", model: "wfOrderSpec", title: "规格", type: "text", size: 10, highlight: false},
       {method: "input", model: "wfOrderDim", title: "尺寸", type: "text", size: 10, highlight: false},
-      {method: "input", model: "wfOrderTotalQty", title: "预设总量", type: "number", size: 5, highlight: false},
       {method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 5, highlight: false},
+
+      {method: "break", size: "88", visibility: "hidden"},
+
       {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 20, highlight: false},
       {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 20, highlight: false},
 
@@ -87,11 +102,8 @@ export class EditWorkflow1Page implements OnInit{
     ];
 
     this.wfOpsInputs = [
-      {title: "分單", method: "input", model: "wfFormSplit", type: "text", icon: 'ios-copy-outline', scan: false, size: 2, wfOpslI: 2},
-      {title: "流程卡号", method: "input", model: "wfFormId", type: "text", icon: 'ios-copy-outline', scan: false, size: 12},
-      {title: "机台", method: "input", model: "wfOptMachineId", type: "text", icon: 'cog', wfOpslI: 1, scan: false, size: 8},
-      {title: "批次号", method: "input", model: "wfOrderBatchId", type: "text", icon: 'ios-basket-outline', scan: false, size: 12},
-      {title: "批次量", method: "input", model: "wfOrderBatchQty", type: "text", icon: 'ios-basket-outline', scan: false, size: 5},
+      {title: "分單", method: "input", model: "wfFormSplit", type: "text", icon: 'ios-copy-outline', scan: false, size: 6, wfOpslI: 2},
+      
       {method: "break", title: ""},
 
       {method: "inputs2", header: "素子烘烤", options: [
@@ -99,9 +111,9 @@ export class EditWorkflow1Page implements OnInit{
         {title: "温度 ℃", model: "wfRMWindingDeg", type: "number", icon: 'md-remove-circle', scan: false, size: 8}
       ]},
       {method: 'inputs', options: [
-        {title: "日期", model: "wfOptInputDate", type: "date", icon: "calender", scan: false, size: 8},
-        {title: "开始", model: "wfOptStartTime", type: "time", icon: "time", scan: false, size: 8},
-        {title: "完成", model: "wfOptFinishTime", type: "time", icon: "md-alarm", scan: false, size: 8}
+        {title: "完成日期", model: "wfOptInputDate", type: "date", icon: "calender", scan: false, size: 8},
+        {title: "开始时间", model: "wfOptStartTime", type: "time", icon: "time", scan: false, size: 8},
+        {title: "完成时间", model: "wfOptFinishTime", type: "time", icon: "md-alarm", scan: false, size: 8}
       ]},
       {method: "inputs", options: [
         {title: "不良数", model: "wfOptBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8},
@@ -121,8 +133,8 @@ export class EditWorkflow1Page implements OnInit{
         // {model: "wfAutoAgeVoltAct5", type: "number", auto: true},
       ]},
       {title: "时间 H", icon: 'timer', method: "table", size: 6, cols:[
-        {model: "wfAgeTimeSet", type: "number", auto: false},
-        {model: "wfAgeTimeAct", type: "number", auto: false}
+        {model: "wfAgeTimeSet", type: "text", auto: false},
+        {model: "wfAgeTimeAct", type: "text", auto: false}
       ]},
       {title: "温度 ℃", icon: 'ios-thermometer-outline', method: "table", size: 6, cols:[
         {model: "wfAgeDegSet", type: "number", auto: false},
@@ -536,6 +548,7 @@ export class EditWorkflow1Page implements OnInit{
       wfProcess: [''],
       wfProcessName: [''],
       wfFormName: [''],
+      wfForm: [''],
 
       // Order Inputs detail
       wfFormId: [''],
@@ -596,8 +609,8 @@ export class EditWorkflow1Page implements OnInit{
       wfAgeVoltAct: [''],
       wfAgeCurrentSet: [''],
       wfAgeCurrentAct: [''],
-      wfAgeTimeSet: [''],
-      wfAgeTimeAct: [''],
+      wfAgeTimeSet: ['00:00'],
+      wfAgeTimeAct: ['00:00'],
       wfAgeNote: [''],
 
       // Additional volt for Ageing

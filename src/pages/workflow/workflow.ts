@@ -48,7 +48,7 @@ export class WorkflowPage implements OnInit {
   testRadioOpen = false;
 
   dataWfProcess = {
-    "1":{"wfFormName": "裸品流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗","5":"自動/手工老化","6":"串排","7":"测试分选","8":"外观"}},
+    "1":{"wfFormName": "裸品流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗","5":"自動老化","6":"手工老化","7":"串排","8":"测试分选","9":"外观"}},
     "2":{"wfFormName": "成品流程卡", "Process":{"1":"打印","2":"测试上带","3":"贴片外观","4":"终检"}},
     "3":{"wfFormName": "电容器流程卡", "Process":{"1":"素子钉卷","2":"烘干","3":"含浸","4":"組立","5":"清洗","6":"套管","7":"老化","8":"手工分选","9":"外观全检","10":"编带剪切","11":"包装"}}
   };
@@ -93,7 +93,7 @@ export class WorkflowPage implements OnInit {
       {title: "流程卡", method: 'buttons', options: [
         {value: '1', label: '裸品'},
         {value: '2', label: '成品'},
-        {value: '3', label: '电容器'}
+        {value: '3', label: '锂电(电容器)'}
       ], model: 'wfForm', scan: false, size: 100}
     ];
 

@@ -1,10 +1,10 @@
 <ion-header style="margin-top: 0px !important;margin-left: 0px !important;">
-    <ion-navbar>
+    <ion-navbar hideBackButton>
         <div style="align-items: center; display: inline;">
-            <img src="./assets/img/vt_icon.png" class="icon">
+
             <ion-title>
-                <!--&nbsp; ( {{wfInputForm.value.wfFormName}} )&nbsp;-->
-                &nbsp;( 裸品流程卡 )&nbsp; 工序:&nbsp; {{wfInputForm.value.wfProcessName}}
+                <img src="./assets/img/vt_icon.png" class="icon" style="position: initial !important; vertical-align: middle !important;">
+                <b>&nbsp;( 裸品流程卡 )&nbsp;工序:&nbsp;&nbsp;<span class="processBGColor">{{wfInputForm.value.wfProcessName}}</span>&nbsp;&nbsp;&nbsp;&nbsp;流程卡号:&nbsp;<u>{{wfInputForm.value.wfFormId}}</u>&nbsp;&nbsp;&nbsp;&nbsp;机台号:&nbsp;<u>{{wfInputForm.value.wfOptMachineId}}</u></b>
             </ion-title>
         </div>
     </ion-navbar>
@@ -15,7 +15,7 @@
         <ion-grid>
             <!-- header bar -->
             <ion-row wrap class="main headbar">
-                <ion-col *ngFor="let wfOrderDetail of wfOrderDetails">
+                <ion-col *ngFor="let wfOrderDetail of wfOrderDetails" [class.noPaddingCol]="wfOrderDetail.method === 'break' ">
                     <ion-row justify-content-center wrap>
                         <ion-col *ngIf="wfOrderDetail.method === 'input'" no-padding>
                             <ion-row align-items-center>
@@ -28,7 +28,7 @@
                             </ion-row>
                         </ion-col>
 
-                        <ion-col *ngIf="wfOrderDetail.method === 'break'" no-padding [ngStyle]="{'width.em':wfOrderDetail.size}"></ion-col>
+                        <ion-col *ngIf="wfOrderDetail.method === 'break'" no-padding [ngStyle]="{'width.em':wfOrderDetail.size, 'visibility':wfOrderDetail.visibility }" class="ageingSubPart subBreak"></ion-col>
 
                     </ion-row>
                 </ion-col>
@@ -79,7 +79,7 @@
                                 <div *ngIf="wfInput.wfOpslI == 2" style="height: 42px; width: 100vw;
                                 position: relative;">
                                     <h4 class="inputHeader" style="display: inline-block; margin: 0;">
-                                        <ion-icon name="clipboard"></ion-icon>
+                                        <!-- <ion-icon name="clipboard"></ion-icon> -->
                                         &nbsp; 生產记录
                                     </h4>
 
@@ -97,8 +97,7 @@
                                     {{wfInput.title}}
                                 </div>
 
-
-                                <ion-input *ngIf="wfInput.wfOpslI == 1" (change)="updateTextChg();" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+                                <ion-input *ngIf="wfInput.wfOpslI == 1" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
 
                                 <ion-input *ngIf="wfInput.wfOpslI != 1 && wfInput.wfOpslI != 2" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
 
@@ -129,16 +128,16 @@
 
                                 <ion-row *ngFor="let option of wfInput.options" align-items-center justify-content-center>
 
-                                    <div *ngIf="option.type != 'date' && option.type != 'time'" class="inputLabel">
+                                    <div class="inputLabel">
                                         {{option.title}}
                                     </div>
                                     <!-- datetime -->
                                     <div *ngIf="option.type == 'date'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
-                                        <ion-icon *ngIf="option.type == 'date'" name="md-calendar" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                        <!-- <ion-icon *ngIf="option.type == 'date'" name="md-calendar" style="font-size:1.6em; margin: 0 6px;"></ion-icon> -->
                                         <ion-datetime formControlName={{option.model}} #picker pickerFormat="DD/MM/YYYY" [min]="datePickerMin" style="display: inline-block; padding: 13px 0;"></ion-datetime>
                                     </div>
                                     <div *ngIf="option.type == 'time'" [ngStyle]="{'width.em':option.size}" (click)="picker.open()" class="gridborder" style="width: 8em;display: inline-flex;align-items: center;">
-                                        <ion-icon *ngIf="option.type == 'time'" name="md-clock" style="font-size:1.6em; margin: 0 6px;"></ion-icon>
+                                        <!-- <ion-icon *ngIf="option.type == 'time'" name="md-clock" style="font-size:1.6em; margin: 0 6px;"></ion-icon> -->
                                         <ion-datetime formControlName={{option.model}} #picker displayFormat="HH:mm" pickerFormat="HH:mm" style="display: inline-block; padding: 13px 0;"></ion-datetime>
                                     </div>
 
@@ -198,15 +197,16 @@
                     </ion-row>
 
                     <!-- Ageing Input field -->
-                    <ion-row *ngIf="wfInputForm.value.wfProcess == '5'" class="sec" align-items-center justify-content-start>
+                    <ion-row *ngIf="wfInputForm.value.wfProcess == '5' " class="sec" align-items-center justify-content-start>
 
                         <!-- Ageing field Title -->
                         <ion-col col-12>
-                            <div class="inputHeader">
-                                <ion-icon name="md-color-wand"></ion-icon>
-                                &nbsp; 老化工序
+                            <div class="inputHeader" style="display: inline-block; margin: 0; font-size: 2rem !important;">
+                                <!-- <ion-icon name="md-color-wand"></ion-icon> -->
+                                &nbsp; 自動老化
                             </div>
-                            <button *ngFor="let wfProcessName of ['手工老化','自動老化']" [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcessName == wfProcessName }" (click)="setFormValue('wfProcessName',wfProcessName);" item-right ion-button outline type="button" round>
+                            <button *ngFor="let wfProcessName of ['自動老化']" style="visibility: hidden;" [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcessName == wfProcessName }" (click)="setFormValue('wfProcessName',wfProcessName);" item-right ion-button outline type="button"
+                                round>
                                 <!--<ion-icon name="clipboard"></ion-icon>-->
                                 {{wfProcessName}}
                             </button>
@@ -302,6 +302,115 @@
                         </ion-col>
 
                     </ion-row>
+                    <!-- Ageing Input Field Close -->
+
+                    <!-- Ageing Input field -->
+                    <ion-row *ngIf="wfInputForm.value.wfProcess == '6' " class="sec" align-items-center justify-content-start>
+
+                        <!-- Ageing field Title -->
+                        <ion-col col-12>
+                            <div class="inputHeader" style="display: inline-block; margin: 0; font-size: 2rem !important;">
+                                <!-- <ion-icon name="md-color-wand"></ion-icon> -->
+                                &nbsp; 手工老化
+                            </div>
+                            <button *ngFor="let wfProcessName of ['手工老化']" style="visibility: hidden;" [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcessName == wfProcessName }" (click)="setFormValue('wfProcessName',wfProcessName);" item-right ion-button outline type="button"
+                                round>
+                                                                                <!--<ion-icon name="clipboard"></ion-icon>-->
+                                                                                {{wfProcessName}}
+                                                                            </button>
+                        </ion-col>
+
+                        <!-- Auto老化 Input field form -->
+                        <ion-col col-auto>
+                            <ion-row>
+
+                                <!-- Ageing Header -->
+                                <ion-col col-12>
+                                    <ion-row>
+                                        <div style="width: 45px">
+                                            &nbsp; &nbsp;
+                                        </div>
+
+                                        <div style="width: 6em; text-align: center;">
+                                            &nbsp; 规格
+                                        </div>
+
+                                        <div style="width: 6em; text-align: center;">
+                                            &nbsp; 实际
+                                        </div>
+                                    </ion-row>
+                                </ion-col>
+
+                                <!-- Ageing Input -->
+                                <ion-col>
+                                    <ion-row *ngFor="let wfInput of wfAgeingDetails" align-items-center>
+
+                                        <!-- Simple Input field -->
+                                        <div class="inputLabel">
+                                            {{wfInput.title}}
+                                        </div>
+
+                                        <div *ngFor="let col of wfInput.cols">
+                                            <div *ngIf="col.auto === false" [ngStyle]="{'width.em':wfInput.size}">
+                                                <ion-input formControlName={{col.model}} type={{col.type}} class="gridborder"></ion-input>
+                                            </div>
+
+                                            <div *ngIf="col.auto === true && this.wfInputForm.value.wfProcessName == '自動老化'" [ngStyle]="{'width.em':wfInput.size}">
+                                                <ion-input formControlName={{col.model}} type={{col.type}} class="gridborder"></ion-input>
+                                            </div>
+                                        </div>
+                                    </ion-row>
+                                </ion-col>
+
+                                <ion-col *ngIf="this.wfInputForm.value.wfProcessName == '手工老化'" padding-horizontal>
+                                    <ion-row>
+                                        <div class="inputLabel">
+                                            特殊说明
+                                        </div>
+                                    </ion-row>
+                                    <ion-textarea name="wfAgeingNote" style="min-height: 20em; width: auto" class="gridborder">
+                                    </ion-textarea>
+                                </ion-col>
+
+                                <!-- Auto Ageing 2nd part -->
+                                <ion-row *ngIf="this.wfInputForm.value.wfProcessName == '自動老化'" class="ageingSubPart">
+                                    <ion-col col-6>
+                                        <ion-row wrap align-items-center>
+                                            <ion-col *ngFor="let wfInput of wfAutoAgeingDetails" no-padding col-6>
+
+                                                <ion-row align-items-center>
+                                                    <div class="inputLabel">
+                                                        {{wfInput.title}}
+                                                    </div>
+
+                                                    <div [ngStyle]="{'width.em':wfInput.size}">
+                                                        <ion-input formControlName={{wfInput.model}} type={{wfInput.type}} no-padding class="gridborder"></ion-input>
+                                                    </div>
+
+                                                </ion-row>
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-col>
+
+                                    <!-- Note -->
+                                    <ion-col padding-horizontal>
+                                        <ion-row>
+                                            <div class="inputLabel">
+                                                特殊说明
+                                            </div>
+                                        </ion-row>
+                                        <ion-textarea name="wfAgeingNote" style="min-height: 20em; width: auto" class="gridborder">
+                                        </ion-textarea>
+                                    </ion-col>
+
+                                </ion-row>
+
+
+                            </ion-row>
+                        </ion-col>
+
+                    </ion-row>
+                    <!-- Ageing Input Field Close -->
 
                     <!-- Workflow People input field -->
                     <ion-row class="sec staff" align-items-center justify-content-left>
@@ -309,7 +418,7 @@
                         <!-- Input field header -->
                         <ion-col text-left col-12>
                             <h4 class="inputHeader">
-                                <ion-icon name="md-contacts"></ion-icon>
+                                <!-- <ion-icon name="md-contacts"></ion-icon> -->
                                 &nbsp; 员工信息
                             </h4>
                         </ion-col>
@@ -324,7 +433,7 @@
                                     {{wfInput.title}}
                                 </div>
                                 <div (click)="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">
-                                    <ion-input [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" (change)="updateTextChg();" *ngIf="wfInput.wfPplI == 1" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}}
+                                    <ion-input [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" (change)="this.wfSvc.updateTextChg(this.wfInputForm);" *ngIf="wfInput.wfPplI == 1" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}}
                                         [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
                                     <ion-input [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" *ngIf="wfInput.wfPplI == 2" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}"
                                         class="gridborder"></ion-input>
@@ -336,7 +445,7 @@
 
                                     <ion-input style="display: inline-block;" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" *ngIf="wfInput.wfPplI == 5" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}}
                                         [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
-                                    <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" *ngIf="wfInput.scan == 5" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)">
+                                    <button *ngIf="wfInput.scan == 5" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)">
                                       簽署
                                     </button>
                                 </div>
@@ -375,7 +484,7 @@
                                 <ion-input formControlName={{wfInput.model}} hidden></ion-input>
 
                                 <ion-buttons>
-                                    <button *ngFor="let button of wfInput.buttons" ion-button round outline type="button" style="width: auto;" (click)="updateForm(wfInput.model,button.value)" [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}">
+                                    <button *ngFor="let button of wfInput.buttons" ion-button round outline type="button" style="width: auto;" (click)="this.wfSvc.showGoodBadQtyInputsAlert(this.wfInputForm); updateForm(wfInput.model,button.value);" [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}">
                                     <ion-icon name="{{button.icon}}"></ion-icon>
                                     &nbsp; {{button.label}}
                                   </button>
@@ -390,8 +499,22 @@
 
                         <ion-row>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <button [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" type="button" ion-button (click)="this.wfSvc.showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty,this.wfInputForm,this.navCtrl,this.images)">
+                            <button type="button" ion-button (click)="this.wfSvc.showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty,this.wfInputForm,this.navCtrl,this.images, '裸品流程卡')">
                                 上存
+                            </button>
+
+                        </ion-row>
+                        <ion-row class="row" justify-content-center="" wrap="">
+                            <!---->
+
+                            <!---->
+                            <ion-col class="ageingSubPart subBreak col" no-padding="" style="width: 88em; visibility: hidden;"></ion-col>
+
+                        </ion-row>
+                        <ion-row>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button" ion-button (click)="this.wfSvc.cancelBtn(this.navCtrl)">
+                                取消
                             </button>
 
                         </ion-row>
@@ -399,10 +522,14 @@
 
                 </ion-col>
 
+
                 <ion-col>
-                    <ion-row *ngFor="let image of images">
+                    <ion-row *ngFor="let image of images; let iX =index">
+                        <!-- <div style="background-image:url('{{image}}'); background-repeat:no-repeat; background-size:contain; "></div> -->
                         <img src="{{image}}" class="img">
                         <!-- <ion-img src="{{image}}"></ion-img> -->
+                        <button ion-button type="button" (click)="this.photoSvc.imgDelete(this.images, iX, this.wfInputForm)">
+                            <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon></button>
                     </ion-row>
                 </ion-col>
 

@@ -3,7 +3,7 @@ import 'rxjs/Rx';
 import { Headers, Http, RequestOptions, Response } from "@angular/http";
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
+import { WorkflowPage } from "../pages/workflow/workflow";
 
 @Injectable()
 export class WorkflowService {
@@ -21,10 +21,10 @@ export class WorkflowService {
   // Comment out below url that is not applicable
   // For Dev url
   // private baseUrl = "http://localhost:3000/workflow/";
-  private baseUrl = "http://192.168.31.170:3000/workflow/";
+  // private baseUrl = "http://192.168.31.170:3000/workflow/";
 
   // For Test url
-  // private baseUrl = "http://192.168.4.200:3000/workflow/";
+  private baseUrl = "http://192.168.4.200:3000/workflow/";
   // private baseUrl = "http://172.20.10.2:3000/workflow/";
 
   constructor(private http: Http,
@@ -141,7 +141,7 @@ export class WorkflowService {
       });
   }
 
-  showWfOpsFinalInputsAlert(wfOrderTotalQty: any, wfOrderTotalGoodQty: any, wfOptBadQtyValue: any, wfOptGoodQtyValue: any, wfInputForm: any, navCtrl: any, images: any) {
+  showWfOpsFinalInputsAlert(wfOrderTotalQty: any, wfOrderTotalGoodQty: any, wfOptBadQtyValue: any, wfOptGoodQtyValue: any, wfInputForm: any, navCtrl: any, images: any, wfPName: any) {
     // This function manage all the form submission in each of the wfForm and connect with the server call
     // 7 inputs for this function,
     //    1. wfOrderTotalQty,
@@ -170,10 +170,20 @@ export class WorkflowService {
 
 
     let form = wfInputForm;
+    /*
+    let wfPName = '';
+    if(form.value.wfProcess == '1') {
+      wfPName = '裸品流程卡'+form.value.wfProcess;
+    } else if(form.value.wfProcess == '2') {
+      wfPName = '成品流程卡'+form.value.wfProcess;
+    } else if(form.value.wfProcess == '3') {
+      wfPName = '电容器流程卡'+form.value.wfProcess;
+    }
+    */
     let alert = this.alertCtrl.create({
 
-      title: '注意!',
-      subTitle: '确定完成和上存工單' + form.value.wfFormId,
+      //title: wfPName + ' (' + form.value.wfFormId + ')',
+      subTitle:  wfPName + ' (' + form.value.wfFormId + ')' + '<br><br>工序 = ' + form.value.wfProcessName,
       buttons: [{
         text: '上存',
         handler: () => {
@@ -239,7 +249,9 @@ export class WorkflowService {
             let alertCtrl = this.alertCtrl.create({
               // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
               // comment above for faster process
-              title: '嚫,完成终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
+              //title: '嚫,完成终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
+              //title: '上存及完成工序',
+              subTitle: '上存及完成工序<br><br>注意: 按"確定"後其他人員將不能再输入同一流程卡，同一工序资料',
               buttons: [{
                 text: '確定',
                 handler: () => {
@@ -472,7 +484,73 @@ export class WorkflowService {
     // }
   }
 
-  formSubmission(form: any, images: any, navCtrl: any){
+  showGoodBadQtyInputsAlert(wfInputForm: any) {
+
+    let form = wfInputForm;   
+    
+    let wfOptBadQtyValue = form.value.wfOptBadQty;
+    let wfOptGoodQtyValue = form.value.wfOptGoodQty;
+    let wfOrderBatchQtyValue = form.value.wfOrderBatchQty;
+    
+    if(wfOptGoodQtyValue === '') {
+      this.warningAlert('', '請輸入良品数', '继續');
+    } else if(wfOptBadQtyValue === '') {
+      this.warningAlert('', '請輸入不良数', '继續');
+    }
+    wfOptBadQtyValue = parseInt(wfOptBadQtyValue);
+    wfOptGoodQtyValue = parseInt(wfOptGoodQtyValue);
+    wfOrderBatchQtyValue = parseInt(wfOrderBatchQtyValue);
+    /*
+    if(wfOptGoodQtyValue <= 0) {
+      this.warningAlert('', '請輸入良品数('+wfOptGoodQtyValue+')', '继續');
+    } 
+    if(wfOptBadQtyValue <= 0 ) {
+      this.warningAlert('', '請輸入不良数('+wfOptBadQtyValue+')', '继續');
+    } else */ if(wfOptBadQtyValue > wfOptGoodQtyValue) {
+      this.warningAlert('', '不良数('+wfOptBadQtyValue+')大於良品数('+wfOptGoodQtyValue+')', '继續');
+    } else if(wfOptGoodQtyValue > wfOrderBatchQtyValue) {
+      this.warningAlert('', '良品数('+wfOptGoodQtyValue+')大於批次量('+wfOrderBatchQtyValue+')', '继續');
+    } 
+    
+  }
+
+  updateTextChg(wfInputForm: any) {
+    let form = wfInputForm;
+    form.controls['wfStaffOptShift'].setValue('A');
+    form.controls['wfStaffTechName'].setValue('技術員A');
+    form.controls['wfStaffQCName'].setValue('品检員A');
+  }
+
+  updateTextChg2(wfInputForm: any) {
+    let form = wfInputForm;
+    form.controls['wfStaffTechName'].setValue('技術員A');
+    form.controls['wfStaffQCName'].setValue('品检員A');
+  }
+
+  updateTextChg3(wfInputForm: any) {
+    let form = wfInputForm;
+    form.controls['wfStaffOptShift'].setValue('A');
+    form.controls['wfStaffTechName'].setValue('技術員A');
+    form.controls['wfOptQtyChecked'].setValue(8);
+    form.controls['wfStaffRepairName'].setValue('維修員A');
+    form.controls['wfStaffQCName'].setValue('品检員A');
+  }
+
+  warningAlert(titleTxt: any, subTitleTxt: any, buttons: any) {
+    let alert = this.alertCtrl.create({
+      title: titleTxt,
+      subTitle: subTitleTxt,
+      buttons: [buttons]
+    });
+    alert.present();
+  }
+
+  cancelBtn(navCtrl: any) {
+    this.storage.clear();
+    navCtrl.setRoot(WorkflowPage);
+  }
+
+  formSubmission(form: any, images: any, navCtrl: any) {
     // This function manage all the form submission in each of the wfForm and connect with the server call
     // 3 inputs for this function,
     //    1. form itself,
@@ -500,7 +578,32 @@ export class WorkflowService {
     //       with a button to send all the pending data
 
     this.storage.set(form.value.wfFormId, form.value);
+    /*
+    //added this for testing clear
+    this.storage.clear();
+    let dataWfProcess = {
+      "1":{"wfFormName": "裸品流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗","5":"自動老化","6":"手工老化","7":"串排","8":"测试分选","9":"外观"}},
+      "2":{"wfFormName": "成品流程卡", "Process":{"1":"打印","2":"测试上带","3":"贴片外观","4":"终检"}},
+      "3":{"wfFormName": "电容器流程卡", "Process":{"1":"素子钉卷","2":"烘干","3":"含浸","4":"組立","5":"清洗","6":"套管","7":"老化","8":"手工分选","9":"外观全检","10":"编带剪切","11":"包装"}}
+    };
+  
+    let dataMachine = {
+      "AA001":{"wfStaffOptId":"S0001","wfStaffOptName":"員工01","wfStaffTechId":"T0001","wfStaffTechName":"技術員工01","wfStaffXrayId":"X0001","wfStaffXrayName":"Xray員工01","wfStaffOptShift":"A"},
+      "AB002":{"wfStaffOptId":"S0002","wfStaffOptName":"員工02","wfStaffTechId":"T0002","wfStaffTechName":"技術員工01","wfStaffXrayId":"X0002","wfStaffXrayName":"Xray員工02","wfStaffOptShift":"B"},
+      "AC003":{"wfStaffOptId":"S0003","wfStaffOptName":"員工03","wfStaffTechId":"T0003","wfStaffTechName":"技術員工03","wfStaffXrayId":"X0003","wfStaffXrayName":"Xray員工03","wfStaffOptShift":"A"}
+    };
+    this.storage.set("wfProcess", dataWfProcess);
+    this.storage.set("wfMachine", dataMachine);
+    */
 
+    //navCtrl.popToRoot();
+    //navCtrl.remove(0, 1); 
+    //navCtrl.insert(1, WorkflowPage);
+    this.storage.clear();
+    navCtrl.setRoot(WorkflowPage);
+    //navCtrl.pop();
+    
+    
     this.upload(form.value,form.value.wfForm)
       .subscribe((data)=> {
           console.log("Successfully uploading to server");
@@ -544,8 +647,9 @@ export class WorkflowService {
             buttons: ['好的']
           });
           alert.present();
-
+          
         }
+        
       );
   }
 }

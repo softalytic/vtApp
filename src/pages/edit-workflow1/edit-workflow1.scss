@@ -7,7 +7,6 @@ page-edit-workflow {
         margin: 10px 0;
         width: 100%;
     }
-
     .inputHeader {
         margin-top: 10px !important;
         margin-left: 1em !important;
@@ -16,10 +15,9 @@ page-edit-workflow {
         //position: relative;
         align-items: left;
     }
-    ion-datetime {
+    adatetime {
         padding: 8px !important;
     }
-
     .bread {
         height: 5em;
     }
@@ -163,4 +161,29 @@ ion-item {
     border-color: #8e9093!important;
     margin-top: 1em!important;
     padding-top: 1em!important;
+}
+
+.subBreak {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.processBGColor {
+    background-color: #FF0;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+.inputLabel {
+    font-size: 12.9px !important;
+}
+
+.noPaddingCol {
+    padding: 0px !important;
+}
+
+.img {
+    max-height: 350px;
+    // max-width: 350px;
+    width: auto;
 }

@@ -59,7 +59,9 @@ export class PhotoService {
 
         // Store the img into storage with wfFormIdimg as the key
         this.storage.set(form.value.wfFormId + 'img', images);
-
+        console.log("from items " + form.value.wfFormId + 'img');
+        alert("from items " + form.value.wfFormId + 'img');
+        //alert()
       }, (err) => {
         console.log("Got and error on taking photo of " + form.value.wfFormId + " : " +err);
 
@@ -78,4 +80,44 @@ export class PhotoService {
 
   }
 
+  imgDelete(images:any, imgIndex: any, form: any) {
+    this.storage.get(form.value.wfFormId + 'img').then((imagesX) => {
+      if(imagesX) {
+        let alert = this.alertCtrl.create({
+          title: '删除照片',
+          subTitle: '',
+          buttons: [
+            {
+              text: '取消',
+              role: 'cancel',
+              handler: data => {
+                console.log('User has clicked Cancel on img delete');
+              }
+            },
+            {
+              text: '确定',
+              handler: data => {
+                //images = JSON.parse(images);
+                images.splice(imgIndex, 1);
+                //alert(JSON.stringify(images));
+                //this.storage.remove(form.value.wfFormId + 'img');
+                this.storage.set(form.value.wfFormId + 'img', images);
+                console.log("User has delete the img")
+              }
+            }
+          ]
+        });
+        alert.present();
+        
+      } else {
+        let alert = this.alertCtrl.create({
+          title: '',
+          subTitle: '不存在。',
+          buttons: ['返回']
+        });
+        alert.present();
+      }
+      
+    });
+  }
 }

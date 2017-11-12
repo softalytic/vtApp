@@ -1,186 +1,179 @@
 page-edit-workflow2 {
-
-  .dim {
-    background-color: #8c8c8c;
-    display: none;
-  }
-
-  .header {
-    margin-top: 10px !important;
-    margin-left: 1em !important;
-    margin-bottom: 5px;
-    font-size: 14px;
-    //position: relative;
-    align-items: left;
-  }
-
-
-  .prodLabel {
-    margin-right: 5px !important;
-    max-width: 45px !important;
-    min-width: 45px !important;
-    text-align: right !important;
-  }
-
-
-  ion-datetime {
-    padding: 8px !important;
-  }
-
-  .ageingSubPart {
-    //border: solid;
-    border-top: solid;
-    //border-right: solid;
-    //border-right-width: 1px;
-    border-top-width: 1px;
-    border-color: #8e9093;
-    margin-top: 1em;
-    padding-top: 1em;
-  }
-
-  .bread {
-    height: 5em;
-  }
-
-
-
-  .note {
-    padding-left: 1em !important;
-    padding-right: 1em !important;
-    padding-bottom: 1em !important;
-  }
-
-  .staff {
-
-    margin-right: 0px !important;
-    p {
-      margin-left: 0px !important;
-
-      max-width: 5em !important;
+    .dim {
+        background-color: #8c8c8c;
+        display: none;
     }
-
-  }
-
-
-  .headbar {
-    p {
-      width: 60px !important;
-      margin-left: 20px !important;
-      align-items: left;
-      text-align: left;
-    }
-  }
-
-  .highlight {
-    background-color: orange;
-    color: #ffffff;
-  }
-
-  .sec  {
-    ion-row {
-      p {
-        width: 60px !important;
-        margin-left: 25px !important;
+    .header {
+        margin-top: 10px !important;
+        margin-left: 1em !important;
+        margin-bottom: 5px;
+        font-size: 14px;
+        //position: relative;
         align-items: left;
-        text-align: left;
-      }
     }
-  }
-
-
-  ion-grid {
-    font-size: 10px !important;
-    h4 {
-      font-size: 14px !important;
+    .prodLabel {
+        margin-right: 5px !important;
+        max-width: 45px !important;
+        min-width: 45px !important;
+        text-align: right !important;
     }
-    ion-item {
-      font-size: 10px !important;
+    ion-datetime {
+        padding: 8px !important;
     }
-  }
-
-  .barcodeButton {
-    font-size: 10px !important;
-    max-width: 60px;
-  }
-
-  p {
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-right: 5px;
-
-    text-align: right !important;
-    width: auto;
-  }
-
-  ion-buttons {
-    button {
-      font-size: 10px !important;
+    .ageingSubPart {
+        //border: solid;
+        border-top: solid;
+        //border-right: solid;
+        //border-right-width: 1px;
+        border-top-width: 1px;
+        border-color: #8e9093;
+        margin-top: 1em;
+        padding-top: 1em;
     }
-  }
-
-
-
-  .grid {
-    padding: 3px;
-  }
-
-  .col {
-    padding: 3px;
-  }
+    .bread {
+        height: 5em;
+    }
+    .note {
+        padding-left: 1em !important;
+        padding-right: 1em !important;
+        padding-bottom: 1em !important;
+    }
+    .staff {
+        margin-right: 0px !important;
+        p {
+            margin-left: 0px !important;
+            max-width: 5em !important;
+        }
+    }
+    .headbar {
+        p {
+            width: 60px !important;
+            margin-left: 20px !important;
+            align-items: left;
+            text-align: left;
+        }
+    }
+    .highlight {
+        background-color: orange;
+        color: #ffffff;
+    }
+    .sec {
+        ion-row {
+            p {
+                width: 60px !important;
+                margin-left: 25px !important;
+                align-items: left;
+                text-align: left;
+            }
+        }
+    }
+    ion-grid {
+        font-size: 10px !important;
+        h4 {
+            font-size: 14px !important;
+        }
+        ion-item {
+            font-size: 10px !important;
+        }
+    }
+    .barcodeButton {
+        font-size: 10px !important;
+        max-width: 60px;
+    }
+    p {
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-right: 5px;
+        text-align: right !important;
+        width: auto;
+    }
+    ion-buttons {
+        button {
+            font-size: 10px !important;
+        }
+    }
+    .grid {
+        padding: 3px;
+    }
+    .col {
+        padding: 3px;
+    }
+    .subBreak {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+    .processBGColor {
+        background-color: #FF0;
+        border-radius: 25px;
+        padding: 5px;
+    }
+    .inputLabel {
+        font-size: 12.9px !important;
+    }
+    .noPaddingCol {
+        padding: 0px !important;
+    }
 }
+
 .main {
-  border: 1px;
-  border-radius: 5px;
-  border-style: solid;
-  border-color: orange;
-  margin-bottom: 10px;
-  //background-color: orange;
+    border: 1px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: orange;
+    margin-bottom: 10px;
+    //background-color: orange;
 }
+
 .sec {
-  border: 1px;
-  border-radius: 5px;
-  border-style: solid;
-  border-color: #8e9093;
-  padding-bottom: 20px;
-  margin-bottom: 10px;
-  margin-left: 5px;
+    border: 1px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #8e9093;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+    margin-left: 5px;
 }
+
 .gridborder {
-  border: 1px solid #cccccc !important;
-  border-radius: 5px !important;
-  padding: 1px !important;
-  text-align:center !important;
-  p {
-    margin-left: 10px;
-  }
+    border: 1px solid #cccccc !important;
+    border-radius: 5px !important;
+    padding: 1px !important;
+    text-align: center !important;
+    p {
+        margin-left: 10px;
+    }
 }
 
 .pad {
-  padding: 5px;
+    padding: 5px;
 }
 
 ion-textarea :focus {
-  overflow: hidden;
-  height: 50px !important;
+    overflow: hidden;
+    height: 50px !important;
 }
 
 input {
-  margin-top: 8px !important;
-  margin-bottom: 8px !important;
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
 }
 
 ion-label {
-  margin-top: 8px !important;
-  margin-bottom: 8px !important;
-  margin-left: 8px !important;
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+    margin-left: 8px !important;
 }
 
 ion-item {
-  margin-left: 0px !important;
+    margin-left: 0px !important;
 }
 
 .picker-wrapper {
-  transform: translateY(-100%) !important;
+    transform: translateY(-100%) !important;
 }
 
-
+.img {
+    max-height: 350px;
+    // max-width: 350px;
+    width: auto;
+}

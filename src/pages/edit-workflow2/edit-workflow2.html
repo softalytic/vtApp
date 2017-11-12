@@ -1,9 +1,9 @@
 <ion-header style="margin-top: 0px !important;margin-left: 0px !important;">
-    <ion-navbar>
+    <ion-navbar hideBackButton>
         <div style="align-items: center; display: inline;">
-            <img src="./assets/img/vt_icon.png" class="icon">
             <ion-title>
-                &nbsp; ( {{wfInputForm.value.wfFormName}} )&nbsp; 工序:&nbsp; {{wfInputForm.value.wfProcessName}}
+                <img src="./assets/img/vt_icon.png" class="icon" style="position: initial !important; vertical-align: middle !important;">
+                <b>&nbsp;( 成品流程卡 )&nbsp;工序:&nbsp;&nbsp;<span class="processBGColor">{{wfInputForm.value.wfProcessName}}</span>&nbsp;&nbsp;&nbsp;&nbsp;流程卡号:&nbsp;<u>{{wfInputForm.value.wfFormId}}</u>&nbsp;&nbsp;&nbsp;&nbsp;机台号:&nbsp;<u>{{wfInputForm.value.wfOptMachineId}}</u></b>
             </ion-title>
         </div>
     </ion-navbar>
@@ -14,10 +14,9 @@
         <ion-grid>
             <!-- header bar -->
             <ion-row wrap class="main headbar">
-                <ion-col *ngFor="let wfOrderDetail of wfOrderDetails">
+                <ion-col *ngFor="let wfOrderDetail of wfOrderDetails" [class.noPaddingCol]="wfOrderDetail.method === 'break' ">
                     <ion-row justify-content-center wrap align-items-center>
-                        <ion-col *ngIf="wfOrderDetail.method === 'label'  && wfOrderDetail.process[wfInputForm.value.wfProcess]" justify-content-center wrap
-                                 align-items-center class="inputLabel" no-padding col-auto>
+                        <ion-col *ngIf="wfOrderDetail.method === 'label'  && wfOrderDetail.process[wfInputForm.value.wfProcess]" justify-content-center wrap align-items-center class="inputLabel" no-padding col-auto>
                             <ion-row class="inputLabel" no-padding align-items-center>
                                 参数要求
                             </ion-row>
@@ -36,7 +35,7 @@
                             </ion-row>
                         </ion-col>
 
-                        <ion-col *ngIf="wfOrderDetail.method === 'break'" no-padding [ngStyle]="{'width.em':wfOrderDetail.size}"></ion-col>
+                        <ion-col *ngIf="wfOrderDetail.method === 'break'" no-padding [ngStyle]="{'width.em':wfOrderDetail.size, 'visibility':wfOrderDetail.visibility }" class="ageingSubPart subBreak"></ion-col>
 
                     </ion-row>
                 </ion-col>
@@ -88,7 +87,7 @@
                         <!-- Input field header -->
                         <ion-col col-12>
                             <h4 class="inputHeader">
-                                <ion-icon name="clipboard"></ion-icon>
+                                <!--<ion-icon name="clipboard"></ion-icon>-->
                                 &nbsp; 生產记錄
                             </h4>
                         </ion-col>
@@ -175,7 +174,7 @@
                         <!-- Input field header -->
                         <ion-col text-left col-12>
                             <h4 class="inputHeader">
-                                <ion-icon name="md-contacts"></ion-icon>
+                                <!--<ion-icon name="md-contacts"></ion-icon>-->
                                 &nbsp; 员工信息
                             </h4>
                         </ion-col>
@@ -192,7 +191,10 @@
                                             {{wfInput.title}}
                                         </div>
 
-                                        <ion-input formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+                                        <ion-input *ngIf="wfInput.wfPplI != 1" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+
+                                        <ion-input *ngIf="wfInput.wfPplI == 1" (change)="this.wfSvc.updateTextChg2(this.wfInputForm);" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+
                                         <div on-mouseover="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">
                                             <button *ngIf="wfInput.scan == 1" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)">
                                                 扫一扫
@@ -249,18 +251,19 @@
 
                     <ion-row justify-content-end>
                         <!--[disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1) && (wfInputForm.value.wfProcess == '1' || wfInputForm.value.wfProcess == '2')"-->
-                        <button (click)="this.wfSvc.showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty,this.wfInputForm,this.navCtrl,this.images)"
-                                type="button"
-                                ion-button>
+                        <button type="button" ion-button (click)="this.wfSvc.cancelBtn(this.navCtrl)">
+                            取消
+                        </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button ion-button type="button" (click)="this.photoSvc.shoot(this.images, this.wfInputForm)">
+                            <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+                            &nbsp; 拍照
+                        </button> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button (click)="this.wfSvc.showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty,this.wfInputForm,this.navCtrl,this.images, '成品流程卡' )" type="button"
+                            ion-button>
                             <ion-icon ios="ios-cloud-upload-outline" md="ios-cloud-upload-outline">
                                 &nbsp; 上存
                             </ion-icon>
                         </button>
-                        <button ion-button type="button" (click)="this.photoSvc.shoot(this.images, this.wfInputForm)">
-                            <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
-                            &nbsp; 拍照
-                        </button>
-
                     </ion-row>
 
                 </ion-col>
@@ -268,7 +271,9 @@
                 <ion-col>
                     <ion-row *ngFor="let image of images">
                         <img src="{{image}}" class="img">
-                        <ion-img src="{{image}}"></ion-img>
+                        <!--<ion-img src="{{image}}"></ion-img>-->
+                        <button ion-button type="button" (click)="this.photoSvc.imgDelete(this.images, iX, this.wfInputForm)">
+                                <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon></button>
                     </ion-row>
                 </ion-col>
 

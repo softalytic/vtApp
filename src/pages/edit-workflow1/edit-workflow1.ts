@@ -62,6 +62,7 @@ export class EditWorkflow1Page implements OnInit{
       {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 12, highlight: false},
       {method: "input", model: "wfOptMachineId", title: "机台号", type: "text", size: 6, highlight: false},
       {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 12, highlight: false},
+
       {method: "input", model: "wfOrderBatchQty", title: "批次量", type: "number", size: 5, highlight: false},
 
       /*
@@ -69,7 +70,7 @@ export class EditWorkflow1Page implements OnInit{
       
       {method: "input", model: "wfOrderTotalQty", title: "预设总量", type: "number", size: 5, highlight: false},
       */     
-            
+
 
       {method: "break", size: "88", visibility: "hidden"},
 
@@ -77,6 +78,13 @@ export class EditWorkflow1Page implements OnInit{
       {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 12, highlight: false},
       {method: "input", model: "wfOrderSpec", title: "规格", type: "text", size: 10, highlight: false},
       {method: "input", model: "wfOrderDim", title: "尺寸", type: "text", size: 10, highlight: false},
+
+
+      {method: "break", size: "88", visibility: "hidden"},
+
+      {method: "input", model: "wfOrderTotalQty", title: "预设总量", type: "number", size: 5, highlight: false},
+      {method: "input", model: "wfOrderBatchQty", title: "批次量", type: "number", size: 5, highlight: false},
+
       {method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 5, highlight: false},
 
       {method: "break", size: "88", visibility: "hidden"},

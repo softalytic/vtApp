@@ -52,20 +52,19 @@ export class EditWorkflow2Page implements OnInit{
 
     // Assume all are ion-input except the one specificed as textarea
     this.wfOrderDetails = [
-      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 12, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 12, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "input", model: "wfOptMachineId", title: "台机号", type: "text", size: 7, scan: false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 12, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       // {method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 6, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
       {method: "break", size: "135", visibility: "hidden"},
-      
+      {method: "input", model: "wfPriorWfFormId", title: "裸品卡号", type: "text", size: 12, scan: true, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "input", model: "wfClientId", title: "客户代码", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "input", model: "wfSalesOrderId", title: "销售订单号", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderTotalQty", title: "批次量", type: "number", size: 9, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderBatchQty", title: "批次量", type: "number", size: 9, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
       {method: "break", size: "135", visibility: "hidden"},
-
       {method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "input", model: "wfOrderSpec", title: "规格", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
@@ -100,12 +99,14 @@ export class EditWorkflow2Page implements OnInit{
     ];
 
     this.wfRMDetails = [
+
+      {modelName: "wfNakedProductSpec", title: "裸品规格", type: "text", modelSerial: 'wfNakedProductSerial', highlight: false},
       {modelName: "wfRMUpBeltName", title: "上带", type: "text", modelSerial: 'wfRMUpBeltSerial', highlight: false},
       {modelName: "wfRMDownBeltName", title: "下带", type: "text", modelSerial: 'wfRMDownBeltSerial', highlight: false},
       {modelName: "wfRMBaseName", title: "底座", type: "text", modelSerial: 'wfRMBaseSerial', highlight: false},
       {modelName: "wfRMCircleName", title: "纸圆卡", type: "text", modelSerial: 'wfRMCricleSerial', highlight: false},
       {modelName: "wfRMPrintName", title: "油墨", type: "text", modelSerial: 'wfRMPrintSerial', highlight: false},
-      {modelName: "wfRMPrintNameText", title: "", type: "text", modelSerial: 'wfRMPrintSerial', highlight: false},
+      //{modelName: "wfRMPrintNameText", title: "", type: "text", modelSerial: 'wfRMPrintSerial', highlight: false},
     ];
     
     this.wfOpsInputs = [
@@ -133,28 +134,32 @@ export class EditWorkflow2Page implements OnInit{
       ], process: {1: true, 2: true, 3: true, 4:true}},
 
 
-      {method: "inputs", options: [
-        // {title: "日期", model: "wfOptInputDate", type: "date", scan: false, size: 8},
-        {title: "不良数", model: "wfOptBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8, process: {1: true, 2: true, 3: false, 4:false}},
-        {title: "良品数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8, process: {1: true, 2: true, 3: false, 4:false}},
-        // {title: "抽查数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8, process: {1: false, 2: true, 3: false, 4:true}}
-      ], process: {1: true, 2: true, 3: true, 4:true}},
-
       {title: "", method: "buttons", model: "wfQCCheck", process: {1: false, 2: false, 3: true, 4:false} ,buttons: [
         {label: "全检", value: 1, icon: 'done-all'},
         {label: "抽检", value: 2, icon: 'checkmark'}
       ]},
+
       {title: "抽检数量", method: "input", model: "wfRandomCheckInfo", type: "number", icon: 'construct', scan: 0, size: 6, process: {1: false, 2: false, 3: true, 4:false}},
       {title: "終检数量", method: "input", model: "wfFinalCheckInfo", type: "number", icon: 'construct', scan: 0, size: 6, process: {1: false, 2: false, 3: false, 4:true}},
+
+      {method: "inputs", options: [
+        // {title: "日期", model: "wfOptInputDate", type: "date", scan: false, size: 8},
+        {title: "投入数", model: "wfOptStartQty", type: "number", icon: 'ios-sad', scan: false, size: 6, process: {1: true, 2: true, 3:true, 4:true}},
+        {title: "不良数", model: "wfOptBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8, process: {1: true, 2: true, 3:true, 4:true}},
+        {title: "良品数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8, process: {1: true, 2:true, 3:true, 4:true}},
+        // {title: "抽查数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8, process: {1: false, 2: true, 3: false, 4:true}}
+      ], process: {1: true, 2: true, 3: true, 4:true}},
+
 
       {title: "备注", method: "input", model: "wfSpecNote", type: "textarea", scan: false, size: 40, process: {1: true, 2: true, 3: true, 4:true}},
       // {title: "备注", method: "input", model: "wfSpecNote", type: "textarea", scan: false, size: 20},
     ];
 
     this.wfPplInputs = [
-      {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: 0, wfPplI: 1,size: 20, process: {1: true, 2: true, 3: true, 4:false}},
+      {title: "作业員ID", method: "input", model: "wfStaffOptNameID", type: "text", icon: 'person', scan: 3, wfPplI: 1,size: 20, process: {1: true, 2: true, 3: true, 4:false}},
+      {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: 0,size: 20, process: {1: true, 2: true, 3: true, 4:false}},
       // {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, size: 5},
-      {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: 0, size: 20, process: {1: true, 2: true, 3: true, 4:false}},
+      {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: 1, size: 20, process: {1: true, 2: true, 3: true, 4:false}},
       // {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: 3, size: 20},
       
       {title: "抽检", method: "buttons", model: "wfRandomCheckStatus", process: {1: false, 2: false, 3: false, 4:false},buttons: [
@@ -233,6 +238,14 @@ export class EditWorkflow2Page implements OnInit{
 
         }
       }
+
+      if (form.value.wfProcess == "4") {
+        // Default to pass per user request
+        form.controls['wfElecPass'].setValue(1);
+        form.controls['wfLookPass'].setValue(1);
+
+      }
+
       console.log("Populated form now is: " + JSON.stringify(this.wfInputForm.value));
 
     });
@@ -648,6 +661,8 @@ export class EditWorkflow2Page implements OnInit{
       wfProcessName: [''],
       wfFormName: [''],
       wfForm: [''],
+      wfPriorWfFormId: [''],
+      wfNakedProductSpec: [''],
 
       // Order Inputs detail
       wfFormId: [''],
@@ -669,7 +684,8 @@ export class EditWorkflow2Page implements OnInit{
       wfClientId: [''],
       wfSalesOrderId: [''],
 
-      // Raw Material Inputs
+      // Raw Material 
+      wfNakedProductSerial: [''],
       wfRMUpBeltName: [''],
       wfRMUpBeltSerial: [''],
       wfRMDownBeltName: [''],
@@ -690,14 +706,15 @@ export class EditWorkflow2Page implements OnInit{
       wfSpecNote: [''],
 
       wfOptInputDate: [this.appDate],
-      wfOptStartTime: ['00:00'],
-      wfOptFinishTime: ['00:00'],
+      wfOptStartTime: [''],
+      wfOptFinishTime: [''],
       wfOptBadQty: [''],
       wfOptGoodQty: [''],
 
       //Staff Input section
       wfStaffOptId: [''],
       wfStaffOptName: [''],
+      wfStaffOptNameID: [''],
       wfStaffOptShift: [''],
       wfStaffTechId: [''],
       wfStaffTechName: [''],
@@ -715,6 +732,9 @@ export class EditWorkflow2Page implements OnInit{
       wfQCInputNote: [''],
 
       //  Appendix
+      wfOptStartQty: [''],
+      wfBadTotal: [''],
+      wfGoodTotal: [''],
       wfFormStatus: [''],
       wfProcessStatus: [''],
 

@@ -73,17 +73,17 @@ export class EditWorkflow3Page implements OnInit{
 
       // Production spec
 
-      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 10, disabled: true, highlight: false},      
-      {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 10, disabled: true, highlight: false},
+      {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 10, disabled: false, highlight: false},      
+      {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 10, disabled: false, highlight: false},
       {method: "input", model: "wfOptMachineId", title: "机台号", type: "text", size: 10, disabled: false, highlight: false},
-      {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 10, disabled: true, highlight: false},
+      {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 10, disabled: false, highlight: false},
 
       {method: "break", size: "88", visibility: "hidden"},
       
       // {method: "input", model: "wfSalesOrderId", title: "销售订单号", type: "text", size: 15, disabled:true, highlight: false},
       {method: "input", model: "wfClientId", title: "客户別", type: "text", size: 8, disabled:true, highlight: false},
       {method: "input", model: "wfOrderDate", title: "开单日期", type: "text", size: 10, disabled:true, highlight: false},
-      {method: "input", model: "wfOrderBatchQty", title: "批次量", type: "text", size: 5, disabled: true, highlight: false},
+      {method: "input", model: "wfOrderBatchQty", title: "批次量", type: "text", size: 5, disabled: false, highlight: false},
 
       {method: "break", size: "88", visibility: "hidden"},
 
@@ -116,19 +116,31 @@ export class EditWorkflow3Page implements OnInit{
 
     this.wfRMDetails = [
       {modelName: "wfRMFoilPosName", title: "正箔", type: "text", modelSerial: 'wfRMFoilPosSerial', highlight: false},
-      {modelName: "wfRMFoilPosLName", title: "正箔 - L", type: "text", modelSerial: 'wfRMFoilPosLSerial', highlight: false},
+      {modelName: "wfRMFoilPosCapFrom", title: "Cap", type: "text", modelSerial: 'wfRMFoilPosCapTo', highlight: false},
+      {modelName: "wfRMFoilPosWidth", title: "寛长", type: "number", modelSerial: 'wfRMFoilPosLength', highlight: false},
+      {modelName: "wfRMFoilPosQty", title: "数量", type: "number",  highlight: false},
+      // {modelName: "wfRMFoilPosLName", title: "L", type: "text", modelSerial: 'wfRMFoilPosLSerial', highlight: false},
       {modelName: "wfRMFoilNegName", title: "負箔", type: "text", modelSerial: 'wfRMFoilNegSerial', highlight: false},
-      {modelName: "wfRMFoilNegLName", title: "負箔 - L", type: "text", modelSerial: 'wfRMFoilNegLSerial', highlight: false},
+      {modelName: "wfRMFoilNegCapFrom", title: "Cap", type: "text", modelSerial: 'wfRMFoilNegCapTo', highlight: false},
+      {modelName: "wfRMFoilNegWidth", title: "寛长", type: "number", modelSerial: 'wfRMFoilNegLength', highlight: false},
+      {modelName: "wfRMFoilNegQty", title: "数量", type: "number", highlight: false},
+      // {modelName: "wfRMFoilNegLName", title: "L", type: "text", modelSerial: 'wfRMFoilNegLSerial', highlight: false},
       {modelName: "wfRMPaperName", title: "电解纸", type: "text", modelSerial: 'wfRMPaperSerial', highlight: false},
+      {modelName: "wfRMPaperQty", title: "数量", type: "number", highlight: false},
       {modelName: "wfRMGlueName", title: "胶水/胶带", type: "text", modelSerial: 'wfRMGlueSerial', highlight: false},
       {modelName: "wfRMSolName", title: "电解液", type: "text", modelSerial: 'wfRMSolSerial', highlight: false},
+      {modelName: "wfRMSolQty", title: "数量", type: "number", highlight: false},
       {modelName: "wfRMPinPosName", title: "正导针", type: "text", modelSerial: 'wfRMPinPosSerial', highlight: false},
       {modelName: "wfRMPinNegName", title: "负导针", type: "text", modelSerial: 'wfRMPinNegSerial', highlight: false},
-      {modelName: "wfRMPinAmtName", title: "导针数量", type: "text", modelSerial: 'wfRMPinAmtSerial', highlight: false},
-      {modelName: "wfRMPlasticName", title: "胶粒", type: "textarea", modelSerial: 'wfRMPlasticSerial', highlight: false},
+      {modelName: "wfRMPinQty", title: "数量", type: "number", highlight: false},
+      // {modelName: "wfRMPinAmtName", title: "导针数量", type: "text", modelSerial: 'wfRMPinAmtSerial', highlight: false},
+      {modelName: "wfRMPlasticName", title: "胶粒", type: "text", modelSerial: 'wfRMPlasticSerial', highlight: false},
+      {modelName: "wfRMPlasticQty", title: "数量", type: "number", highlight: false},
       {modelName: "wfRMShellName", title: "铝壳", type: "text", modelSerial: 'wfRMShellSerial', highlight: false},
+      {modelName: "wfRMShellQty", title: "数量", type: "number", highlight: false},
       {modelName: "wfRMCoverName", title: "套管", type: "text", modelSerial: 'wfRMCoverSerial', highlight: false},
-      {modelName: "wfRMCoverCheck", title: "周期", type: "text", modelSerial: 'wfRMCoverWeek', highlight: false},
+      {modelName: "wfRMCoverQty", title: "数量", type: "number", highlight: false},
+      {modelName: "wfRMCoverCheck", title: "周期", type: "text",highlight: false},
     ];
 
     /*
@@ -261,7 +273,6 @@ export class EditWorkflow3Page implements OnInit{
       {method: 'inputs', options: [
         {title: "AG6", model: "wfAgeDetailAG6", type: "text", scan: false, size: 4},
       ]},
-      
       /*
     {method: 'inputs', options: [
       {title: "AG1", model: "wfAgeDetailAG1", type: "text", scan: false, size: 4},
@@ -292,7 +303,6 @@ export class EditWorkflow3Page implements OnInit{
 
     this.wfOpsInputs = [
       {title: "分單", method: "input", model: "wfFormSplit", type: "text", icon: 'ios-copy-outline', inputType: 1, scan: false, size: 5, wfOpslI: 2},
-      
       //{method: "break", title: ""},
       /*
       {method: "inputs2", header: "素子烘烤", options: [
@@ -310,16 +320,18 @@ export class EditWorkflow3Page implements OnInit{
 
       {method: 'inputs', options: [
         {title: "开始日期", model: "wfOptInputDate", type: "date", icon: "calender", scan: false, size: 8},        
-        {title: "开始时间", model: "wfOptStartTime", type: "text", icon: "text", scan: false, size: 8},
+        {title: "开始时间", model: "wfOptStartTime", type: "number", icon: "text", scan: false, size: 8},
+        {title: "完成时间", model: "wfOptFinishTime", type: "number", icon: "md-alarm", scan: false, size: 8},
+        
+      ]},
+
+      {method: 'inputs', options: [
+        //{title: "完成日期", model: "wfOptInputEndDate", type: "date", icon: "calender", scan: false, size: 8},        
+        //{title: "完成时间", model: "wfOptFinishTime", type: "text", icon: "md-alarm", scan: false, size: 8},
         {title: "清机确认", model: "wfOptWashMachine", type: "text", inputType: 1, scan: false, size: 8}, 
         {title: "投入数", method: "input", model: "wfOptStartQty", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
         {title: "良品數", method: "input", model: "wfGoodTotal", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
         {title: "抽检数量", model: "wfRandomCheckInfo", type: "number", icon: 'construct', inputType: 9, scan: false, size: 8},
-      ]},
-
-      {method: 'inputs', options: [
-        {title: "完成日期", model: "wfOptInputEndDate", type: "date", icon: "calender", scan: false, size: 8},        
-        {title: "完成时间", model: "wfOptFinishTime", type: "text", icon: "md-alarm", scan: false, size: 8},
       ]},
 
       {method: 'inputs', options: [
@@ -337,8 +349,6 @@ export class EditWorkflow3Page implements OnInit{
       {method: 'inputs', options: [
         {title: "备注", model: "wfSpecNote", type: "textarea", inputType: 9, size: 40},
       ]},
-      
-    
       /*
       {method: "inputs", options: [
         
@@ -369,7 +379,17 @@ export class EditWorkflow3Page implements OnInit{
           {model: "wfBadItem5", type: "text", size:"6", disabled: false},
           {model: "wfBadQty5", type: "number", size:"6",  disabled: false},
         ]},
+        {title: "6", cols: [
+          {model: "wfBadItem6", type: "text", size:"6", disabled: false},
+          {model: "wfBadQty6", type: "number", size:"6",  disabled: false},
+        ]},
+        
         /*
+        {title: "", cols: [
+          {model: "wfBadItemTotal", type: "text", size:"7", disabled: false, wftotal: "t", title: "不良数總和"},
+          {model: "wfOptBadQty", type: "number", size:"6",  disabled: false},
+        ]},
+        
         {title: "不良數總和", cols: [
           {model: "wfBadTotal", type: "text", disabled: true},
           {model: "wfBadTotal", type: "number", disabled: false},
@@ -381,11 +401,10 @@ export class EditWorkflow3Page implements OnInit{
         // {title: "不良數", model: "wfBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8},
         // {title: "良品數", model: "wfGoodQty", type: "number", icon: 'happy', scan: false, size: 8}
         */
-
-        
       ]}
     ];
 
+    /*
     this.wfAgeingDetails = [
       [
         {title: "机台号", method: "input", size: 6, model: "wfAge1MachineId", type: "text"},
@@ -568,23 +587,23 @@ export class EditWorkflow3Page implements OnInit{
         {title: "判定", method: "input", size: 6, model: "wfAge4DisQC", type: "text"},
       ]
     ];
-
+    */
     this.wfAgeingSeqDisplay = 0;
-
+    
     this.wfPplInputs = [
-      {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: false, wfPplI: 1, size: 7},
-      {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 3},
-      {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: false, wfPplI: 6, size: 7},
-      {title: "班长硧认", method: "input", model: "wfOptQtyChecked", type: "number", icon: 'construct', scan: false, wfPplI: 3, size: 7},
-      {title: "維修員", method: "input", model: "wfStaffRepairName", type: "text", icon: 'construct', scan: false, wfPplI: 4, size: 7},
+      {title: "作业員ID", method: "input", model: "wfStaffOptNameID", type: "text", icon: 'person', scan: true, wfPplI: 1, size: 7},
+      {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: false, wfPplI: 2, size: 7},
+      {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 4},
+      {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 6, size: 7},
+      {title: "班长硧认", method: "input", model: "wfOptQtyChecked", type: "text", icon: 'construct', scan: true, wfPplI: 3, size: 7},
+      {title: "維修員", method: "input", model: "wfStaffRepairName", type: "text", icon: 'construct', scan: true, wfPplI: 4, size: 7},
       //{title: "外覌抽验判定", method: "input", model: "wfStaffRandomPickName", type: "text", icon: 'construct', scan: false, wfPplI: 6, size: 7},
-
       {title: "终检", method: "buttons", model: "wfQCPass", icon: "md-checkmark-circle-outline",buttons: [
         {label: "通过", value: 1, icon: 'checkmark'},
         {label: "失败", value: 2, icon: 'close'}
       ]},
       //{title: "QC检查不良墑认", method: "input", model: "wfStaffQCSummary", scan: false, wfPplI: 3, type: "text", size: 15},
-      {title: "品检員", method: "input", model: "wfStaffQCName", type: "text", icon: 'search', scan: 5, wfPplI: 5, size: 11},
+      {title: "品检員", method: "input", model: "wfStaffQCName", type: "text", icon: 'search', scan: true, wfPplI: 5, size: 7},
       //{title: "编切/包装前特性抽獫判𤴓", method: "input", model: "wfStaffQCPreRandomCheck", scan: false, wfPplI: 6, type: "text", size: 15},
       {title: "品检备注", method: "textarea", model: "wfQCInputNote", type: "text", icon: 'chatbubbles', scan: false, size: 27},
     ];
@@ -647,11 +666,28 @@ export class EditWorkflow3Page implements OnInit{
             // console.log("Form value" + form.controls[key])
 
           }
+
+
+
         } catch (err) {
           // console.log("Got an error from formInit populating from storage: "  + err);
 
         }
       }
+
+      //  initial the form for the bad Qty
+      if (form.value.wfProcess == "7" || form.value.wfProcess == "8") {
+
+        form.controls['wfBadItem1'].setValue('开路');
+        form.controls['wfBadItem2'].setValue('短路');
+        form.controls['wfBadItem3'].setValue('高容');
+        form.controls['wfBadItem4'].setValue('低容');
+        form.controls['wfBadItem5'].setValue('损耗');
+        form.controls['wfBadItem6'].setValue('漏电');
+        form.controls['wfBadItemTotal'].setValue('不良数總和');
+
+      }
+
       console.log("Populated form now is: " + JSON.stringify(this.wfInputForm.value));
 
     });
@@ -1142,54 +1178,74 @@ export class EditWorkflow3Page implements OnInit{
     // Raw Material Inputs
       wfRMFoilPosName: [''],
       wfRMFoilPosSerial: [''],
-      wfRMFoilPosLName: [''],
-      wfRMFoilPosLSerial: [''],
+      wfRMFoilPosCapFrom: [''],
+      wfRMFoilPosCapTo: [''],
+      wfRMFoilPosWidth: [''],
+      wfRMFoilPosLength: [''],
+      wfRMFoilPosQty: [''],
+      // wfRMFoilPosLName: [''],
+      // wfRMFoilPosLSerial: [''],
       wfRMFoilNegName: [''],
       wfRMFoilNegSerial: [''],
-      wfRMFoilNegLName: [''],
-      wfRMFoilNegLSerial: [''],
+      wfRMFoilNegCapFrom: [''],
+      wfRMFoilNegCapTo: [''],
+      wfRMFoilNegWidth: [''],
+      wfRMFoilNegLength: [''],
+      wfRMFoilNegQty: [''],
+      // wfRMFoilNegLName: [''],
+      // wfRMFoilNegLSerial: [''],
       wfRMPaperName: [''],
       wfRMPaperSerial: [''],
+      //
+      wfRMPaperQty: [''],
       wfRMGlueName: [''],
       wfRMGlueSerial: [''],
       wfRMSolName: [''],
       wfRMSolSerial: [''],
+      //
+      wfRMSolQty: [''],
       wfRMPinPosName: [''],
       wfRMPinPosSerial: [''],
       wfRMPinNegName: [''],
       wfRMPinNegSerial: [''],
-      wfRMPinAmtName: [''],
-      wfRMPinAmtSerial: [''],
+      //
+      wfRMPinQty: [''],
       wfRMPlasticName: [''],
       wfRMPlasticSerial: [''],
+      //
+      wfRMPlasticQty: [''],
       wfRMShellName: [''],
       wfRMShellSerial: [''],
+      //
+      wfRMShellQty: [''],
       wfRMCoverName: [''],
       wfRMCoverSerial: [''],
+      //
+      wfRMCoverQty: [''],
       wfRMCoverCheck: [''],
-      wfRMWindingTime: ['00:00'],
+      wfRMWindingTime: [''],
       wfRMCoverWeek: [''],      
       wfRMWindingDeg: [''],
 
       // dry input
-      wfDryStartTime: ['00:00'],
-      wfDryFinishTime: ['00:00'],
+      wfDryStartTime: [''],
+      wfDryFinishTime: [''],
       wfDryWindingDeg: ['0'],
       wfStaffDryName: [''],
 
       // wet Input
       wfWetEmptyAir: ['0'],
       wfWetAir: ['0'],
-      wfWetStartTime: ['00:00'],
-      wfWetFinishTime: ['00:00'],
+      wfWetStartTime: [''],
+      wfWetFinishTime: [''],
       wfStaffWetName: [''],
 
       // Wash Input
       wfWashWindingDeg: ['0'],
-      wfWashStartTime: ['00:00'],
-      wfWashFinishTime: ['00:00'],
+      wfWashStartTime: [''],
+      wfWashFinishTime: [''],
       wfWashDryWindingDeg: [''],      
-      wfWashDryTime: ['00:00'],
+      wfWashDryTime: ['MM Mins'],
       wfStaffWashName: [''],
       wfQCCheck: [''],
       wfRandomCheckInfo: [''],
@@ -1212,7 +1268,7 @@ export class EditWorkflow3Page implements OnInit{
       wfAgeDetailLC: [''],
       wfAgeDetailCAP: [''],
       wfAgeDetailDF: [''],
-      wfAgeDetailTime: ['00:00'],
+      wfAgeDetailTime: [''],
       wfAgeDetailStaffApprove: [''],
       wfAgeDetailStaffFinish: [''],
       wfAgeDetailStaffConfirm: [''],
@@ -1221,26 +1277,27 @@ export class EditWorkflow3Page implements OnInit{
       wfOptInputDate: [this.appDate],
       wfOptInputEndDate: [this.appDate],
       wfOptWashMachine: [''],
-      wfOptStartTime: ['00:00'],
-      wfOptFinishTime: ['00:00'],
-      wfOptStartQty: [''],
+      wfOptStartTime: [''],
+      wfOptFinishTime: [''],
       wfOptBadQtyItem: [''],
-      wfOptBadQty: [''],
-      wfOptGoodQty: [''],
+      wfOptBadQty: ['0'],
+      wfOptGoodQty: ['0'],
+      
 
       // Good / Bad Qty Input
       wfBadItem1: [''],
-      wfBadQty1: [''],
+      wfBadQty1: ['0'],
       wfBadItem2: [''],
-      wfBadQty2: [''],
+      wfBadQty2: ['0'],
       wfBadItem3: [''],
-      wfBadQty3: [''],
+      wfBadQty3: ['0'],
       wfBadItem4: [''],
-      wfBadQty4: [''],
+      wfBadQty4: ['0'],
       wfBadItem5: [''],
-      wfBadQty5: [''],
-      wfBadTotal: [''],
-      wfGoodTotal: [''],
+      wfBadQty5: ['0'],    
+      wfBadItem6: [''],
+      wfBadQty6: ['0'],
+      wfBadItemTotal: [''],
 
       // Ageing Part1
       wfAgeDegSet: [''],
@@ -1249,8 +1306,8 @@ export class EditWorkflow3Page implements OnInit{
       wfAgeVoltAct: [''],
       wfAgeCurrentSet: [''],
       wfAgeCurrentAct: [''],
-      wfAgeTimeSet: ['00:00'],
-      wfAgeTimeAct: ['00:00'],
+      wfAgeTimeSet: [''],
+      wfAgeTimeAct: [''],
       wfAgeNote: [''],
 
       // Additional volt for Ageing
@@ -1276,6 +1333,7 @@ export class EditWorkflow3Page implements OnInit{
       //Staff Input section
       wfStaffOptId: [''],
       wfStaffOptName: [''],
+      wfStaffOptNameID: [''],
       wfStaffOptShift: [''],
       wfOptQtyChecked: [''],
       wfStaffRepairName: [''],
@@ -1298,7 +1356,7 @@ export class EditWorkflow3Page implements OnInit{
       wfAge1MachineId: [''],
       wfAge1StaffId: [''],
       wfAge1MachineClear: [''],
-      wfAge1Time: ['00:00'],
+      wfAge1Time: [''],
       wfAge1Temp: [''],
       wfAge1AG1: [''],
       wfAge1AG2: [''],
@@ -1344,7 +1402,7 @@ export class EditWorkflow3Page implements OnInit{
       wfAge2MachineId: [''],
       wfAge2StaffId: [''],
       wfAge2MachineClear: [''],
-      wfAge2Time: ['00:00'],
+      wfAge2Time: [''],
       wfAge2Temp: [''],
       wfAge2AG1: [''],
       wfAge2AG2: [''],
@@ -1360,8 +1418,8 @@ export class EditWorkflow3Page implements OnInit{
       wfAge2CapD: [''],
       wfAge2DFU: [''],
       wfAge2LCU: [''],
-      wfAge2Start: ['00:00'],
-      wfAge2End: ['00:00'],
+      wfAge2Start: [''],
+      wfAge2End: [''],
       wfAge2DeployQty: [''],
       wfAge2GoodQty: [''],
       wfAge2OptInsertOpen: [''],
@@ -1386,7 +1444,7 @@ export class EditWorkflow3Page implements OnInit{
       wfAge3MachineId: [''],
       wfAge3StaffId: [''],
       wfAge3MachineClear: [''],
-      wfAge3Time: ['00:00'],
+      wfAge3Time: [''],
       wfAge3Temp: [''],
       wfAge3AG1: [''],
       wfAge3AG2: [''],
@@ -1402,8 +1460,8 @@ export class EditWorkflow3Page implements OnInit{
       wfAge3CapD: [''],
       wfAge3DFU: [''],
       wfAge3LCU: [''],
-      wfAge3Start: ['00:00'],
-      wfAge3End: ['00:00'],
+      wfAge3Start: [''],
+      wfAge3End: [''],
       wfAge3DeployQty: [''],
       wfAge3GoodQty: [''],
       wfAge3OptInsertOpen: [''],
@@ -1428,7 +1486,7 @@ export class EditWorkflow3Page implements OnInit{
       wfAge4MachineId: [''],
       wfAge4StaffId: [''],
       wfAge4MachineClear: [''],
-      wfAge4Time: ['00:00'],
+      wfAge4Time: [''],
       wfAge4Temp: [''],
       wfAge4AG1: [''],
       wfAge4AG2: [''],
@@ -1466,7 +1524,10 @@ export class EditWorkflow3Page implements OnInit{
       wfAge4DisLCSmall: [''],
       wfAge4DisQC: [''],
 
-      //  Appendix
+      //  Status control fields
+      wfOptStartQty: [''],
+      wfBadTotal: [''],
+      wfGoodTotal: [''],
       wfFormStatus: [''],
       wfProcessStatus: [''],
 

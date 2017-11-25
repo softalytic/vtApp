@@ -1,4 +1,7 @@
 page-workflow {
+    .label{
+        width: 100px !important;
+    }
     ion-content {
         font-size: 18px !important;
     }
@@ -147,3 +150,4 @@ ion-header {
 .hide {
     display: none;
 }
+

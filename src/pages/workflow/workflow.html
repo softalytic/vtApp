@@ -36,7 +36,7 @@
 
                             <!-- Buttons input fields of wfForms -->
                             <div *ngIf="wfInput.method === 'buttons'" [ngStyle]="{'width.em':wfInput.size}">
-                                <ion-buttons>
+                                <ion-buttons style="padding-left: 100px;">
                                     <!-- Button for Form submission -->
                                     <button *ngFor="let option of wfInput.options" [ngClass]="{'buttonsSelected': wfInputForm.value.wfForm == option.value }" (click)="setFormValue(wfInput.model,option.value)" item-right ion-button outline type="button" round>
                                         <ion-icon name="clipboard"></ion-icon>
@@ -51,10 +51,12 @@
 
                     </ion-col>
                     <ion-row *ngIf="wfInputForm.value.wfForm != ''">
-                        <div class="label" style="width:100% !important;">工序</div>
+                        <div class="label" style="padding-left: 5px;">工序</div>
                         <ion-row align-items-center>&nbsp;</ion-row>
-                        <ion-row align-items-center>
-                            <button *ngFor="let key of dataWfProcess[this.wfInputForm.value.wfForm].Process | keys" [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcess == key }" (click)="setFormValue('wfProcess',key); setFormValue('wfProcessName',dataWfProcess[this.wfInputForm.value.wfForm].Process[key]);"
+                        <ion-row align-items-center style="padding-left: 100px; width: 2100px;">
+                            <button *ngFor="let key of dataWfProcess[this.wfInputForm.value.wfForm].Process | keys"
+                                    [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcess == key }"
+                                    (click)="setFormValue('wfProcess',key); setFormValue('wfProcessName',dataWfProcess[this.wfInputForm.value.wfForm].Process[key]);"
                                 item-right ion-button outline type="button" round>
                                 {{dataWfProcess[this.wfInputForm.value.wfForm].Process[key]}}
                             </button>
@@ -63,7 +65,7 @@
                 </ion-row>
 
                 <ion-row>
-                    <button style="width: 25%; margin: 0 auto; margin-top:20px !important; " ion-button type="submit" block>
+                    <button style="width: 25%; margin: 0 auto; margin-top:40px !important; " ion-button type="submit" block>
                         确定
                     </button>
                 </ion-row>

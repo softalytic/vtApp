@@ -92,8 +92,8 @@ export class WorkflowPage implements OnInit {
       // Expand as buttons
       {title: "流程卡", method: 'buttons', options: [
         {value: '1', label: '裸品'},
-        {value: '2', label: '成品'},
-        {value: '3', label: '锂电(电容器)'}
+        {value: '2', label: '贴片电容器'},
+        {value: '3', label: '插件电容器'}
       ], model: 'wfForm', scan: false, size: 100}
     ];
 
@@ -122,6 +122,7 @@ export class WorkflowPage implements OnInit {
 
     let form = this.wfInputForm;
 
+    /*
     if (form.value.wfFormId === "") {
       let alertTest = this.alertCtrl.create({
         title: '确认工单',
@@ -144,43 +145,7 @@ export class WorkflowPage implements OnInit {
                 { "erpData": "ngForm"},
                 "bodies":
                   { "erpData":
-                    {
-                      "wfForm": "1",
-                      "wfFormId": "VT00001",
-                      "wfOrderFormId": "VTOF00001",
-                      "wfOrderId": "VTO00001",
-                      "wfOrderBatchId": "VTOB0001",
-                      "wfOrderBatchQty": "100",
-                      "wfOrderTotalQty": "1000",
-                      "wfOrderTotalGoodQty": "100",
-                      "wfOrderTotalBadQty": "0",
-                      "wfOrderRMId": "VT原材料",
-                      "wfOrderSeries": "VT系列",
-                      "wfOrderSpec": "VT規格",
-                      "wfOrderDim": "VT尺寸",
-                      "wfRMFoilPosName": "100LG04B-33VF-48UF 5.5mm",
-                      "wfRMFoilPosSerial": "17074049",
-                      "wfRMFoilPosLName": "184",
-                      "wfRMFoilNegName": "F-545M-450UF-5.5MM",
-                      "wfRMFoilNegSerial": "0619A04A06",
-                      "wfRMFoilNegLName": "184",
-                      "wfRMPaperName": "SM250-50 6.5mm",
-                      "wfRMPaperSerial": "17032519A1-B47",
-                      "wfRMGlueName": "",
-                      "wfRMGlueSerial": "17.7.22",
-                      "wfRMSolName": "KVP-1B",
-                      "wfRMSolSerial": "富凱2017.7119",
-                      "wfRMPinPosName": "15080(+)",
-                      "wfRMPinPosSerial": "1706241163",
-                      "wfRMPinNegName": "15080(-)",
-                      "wfRMPinNegSerial": "1707201194",
-                      "wfRMPlasticName": "9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",
-                      "wfRMPlasticSerial": "17704310121",
-                      "wfRMCoverName": "10x10.6 3004材质(防爆)",
-                      "wfRMCoverSerial": "1670722-053842",
-                      "wfProcessStatus": "0",
-                      "wfFormStatus": "0"
-                    }
+                  {"wfForm":"1","wfFormId":"","wfOptMachineId":"0","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilNegName":"","wfRMPaperName":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMGlueName":"","wfRMSolName":"","wfRMShellName":"","wfRMPlasticName":"","wfRMCoverName":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","created":{},"wfFormName":"裸品流程卡","wfFormStatus":"0","wfProcessStatus":"0"}
                   }
               });
               this.testDataPopulate(data,form);
@@ -198,33 +163,7 @@ export class WorkflowPage implements OnInit {
                 { "erpData": "ngForm"},
                 "bodies":
                   { "erpData":
-                    {"wfForm":"2",
-                      "wfFormId": "VT0002",
-                      "wfOrderId": "VTO0002",
-                      "wfOrderBatchId": "VTB0002",
-                      "wfOrderBatchQty": "100",
-                      "wfOrderFormNote": "嚫，這是測試FORM",
-                      "wfOrderBOMNote": "嚫，這是測試BOM",
-                      "wfOrderNote": "嚫，這是測試Note",
-                      "wfOrderTotalQty":"10000",
-                      "wfOrderTotalGoodQty":"1000",
-                      "wfOrderTotalBadQty": "0",
-                      "wfOrderRMId":"VTRM0001",
-                      "wfOrderSeries": "VTRM 10x10x20",
-                      "wfOrderSpec": "20x20x10",
-                      "wfOrderDim": "10cm",
-                      "wfRMUpBeltName": "上帶RM001",
-                      "wfRMDownBeltName": "下帶RM001",
-                      "wfRMBaseName": "底座 001",
-                      "wfRMCircleName": "圓卡 0001",
-                      "wfRMPrintName": "Ink2001",
-                      "wfOptMachineId": "AAA01",
-                      "wfClientId": "SA0001",
-                      "wfFormName":"成品流程卡",
-                      "wfSalesOrderId": "VTSO001",
-                      "wfProcessStatus": "0",
-                      "wfFormStatus": "0"
-                    }
+                  {"wfForm":"2","wfFormId":"VT0002","wfOptMachineId":"AAA01","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"VTO0002","wfOrderSeries":"VTRM 10x10x20","wfOrderBatchId":"VTB0002","wfOrderRMId":"VTRM0001","wfOrderSpec":"20x20x10","wfOrderDim":"10cm","wfOrderBatchQty":"100","wfOrderTotalQty":"10000","wfSalesOrderQty":"","wfClientId":"SA0001","wfOrderFormNote":"嚫，這是測試FORM","wfOrderNote":"嚫，這是測試Note","wfOrderBOMNote":"嚫，這是測試BOM","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilNegName":"","wfRMPaperName":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMGlueName":"","wfRMSolName":"","wfRMShellName":"","wfRMPlasticName":"","wfRMCoverName":"","wfRMUpBeltName":"上帶RM001","wfRMDownBeltName":"下帶RM001","wfRMBaseName":"底座 001","wfRMCircleName":"圓卡 0001","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","created":{},"wfFormName":"成品流程卡","wfSalesOrderId":"VTSO001","wfProcessStatus":"0","wfFormStatus":"0"}
                   }
               });
               this.testDataPopulate(data,form);
@@ -241,43 +180,7 @@ export class WorkflowPage implements OnInit {
                 { "erpData": "ngForm"},
                 "bodies":
                   { "erpData":
-                    {
-                      "wfForm": "3",
-                      "wfFormId": "VT00001",
-                      "wfOrderFormId": "VTOF00001",
-                      "wfOrderId": "VTO00001",
-                      "wfOrderBatchId": "VTOB0001",
-                      "wfOrderBatchQty": "100",
-                      "wfOrderTotalQty": "1000",
-                      "wfOrderTotalGoodQty": "100",
-                      "wfOrderTotalBadQty": "0",
-                      "wfOrderRMId": "VT原材料",
-                      "wfOrderSeries": "VT系列",
-                      "wfOrderSpec": "VT規格",
-                      "wfOrderDim": "VT尺寸",
-                      "wfRMFoilPosName": "100LG04B-33VF-48UF 5.5mm",
-                      "wfRMFoilPosSerial": "17074049",
-                      "wfRMFoilPosLName": "184",
-                      "wfRMFoilNegName": "F-545M-450UF-5.5MM",
-                      "wfRMFoilNegSerial": "0619A04A06",
-                      "wfRMFoilNegLName": "184",
-                      "wfRMPaperName": "SM250-50 6.5mm",
-                      "wfRMPaperSerial": "17032519A1-B47",
-                      "wfRMGlueName": "",
-                      "wfRMGlueSerial": "17.7.22",
-                      "wfRMSolName": "KVP-1B",
-                      "wfRMSolSerial": "富凱2017.7119",
-                      "wfRMPinPosName": "15080(+)",
-                      "wfRMPinPosSerial": "1706241163",
-                      "wfRMPinNegName": "15080(-)",
-                      "wfRMPinNegSerial": "1707201194",
-                      "wfRMPlasticName": "9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)",
-                      "wfRMPlasticSerial": "17704310121",
-                      "wfRMCoverName": "10x10.6 3004材质(防爆)",
-                      "wfRMCoverSerial": "1670722-053842",
-                      "wfProcessStatus": "0",
-                      "wfFormStatus": "0"
-                    }
+                  {"wfForm":"3","wfFormId":"VT00001","wfOptMachineId":"0","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"VTO00001","wfOrderSeries":"VT系列","wfOrderBatchId":"VTOB0001","wfOrderRMId":"VT原材料","wfOrderSpec":"VT規格","wfOrderDim":"VT尺寸","wfOrderBatchQty":"100","wfOrderTotalQty":"1000","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"100LG04B-33VF-48UF 5.5mm","wfRMFoilNegName":"F-545M-450UF-5.5MM","wfRMPaperName":"SM250-50 6.5mm","wfRMPinPosName":"15080(+)","wfRMPinNegName":"15080(-)","wfRMGlueName":"","wfRMSolName":"KVP-1B","wfRMShellName":"","wfRMPlasticName":"9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)","wfRMCoverName":"10x10.6 3004材质(防爆)","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"17074049","wfRMFoilNegSerial":"0619A04A06","wfRMPaperSerial":"17032519A1-B47","wfRMGlueSerial":"17.7.22","wfRMSolSerial":"富凱2017.7119","wfRMPinPosSerial":"1706241163","wfRMPinNegSerial":"1707201194","wfRMPlasticSerial":"17704310121","wfRMShellSerial":"","wfRMCoverSerial":"1670722-053842","created":{},"wfProcessStatus":"0","wfFormStatus":"0","wfFormName":"电容器流程卡"}
                   }
               });
               this.testDataPopulate(data,form);
@@ -290,7 +193,26 @@ export class WorkflowPage implements OnInit {
       });
       alertTest.present();
 
-    } else {
+    } */
+    if (form.value.wfFormId === "" || form.value.wfForm === "" || form.value.wfProcess === "" || form.value.wfOptMachineId === "") {
+      //this.wfSvc.warningAlert(' name:' + form.value.wfFormName + ' id: ' + form.value.wfFormId + ' ' + form.value.wfProcess + ' form id' + form.value.wfForm, '嚫，请选择工单', '继續');
+      let formMsgAlert = '';
+      if(form.value.wfFormId === "") {
+        formMsgAlert += '<br><br>1. 輸入流程卡号';
+      }
+      if(form.value.wfOptMachineId === "") {
+        formMsgAlert += '<br><br>2. 輸入台机号';
+      }
+      if(form.value.wfForm === "") {
+        formMsgAlert += '<br><br>3. 選擇流程卡';
+      }
+      if(form.value.wfProcess === "") {
+        formMsgAlert += '<br><br>4. 選擇工序';
+      }
+      this.wfSvc.warningAlert('請提供或更正下列资料：', formMsgAlert + '<br><br>然後按 \" 確定\”', '继續');
+    } 
+    else {
+      
       this.dataSubmission(form);
 
     }
@@ -327,27 +249,107 @@ export class WorkflowPage implements OnInit {
     //   3. Else it is a new record on the app
 
     this.wfSvc.query(form.value, form.value.wfForm).subscribe( (serverData) => {
-      console.log("Response from server: " + JSON.stringify(serverData[0]));
-      // this.populateDataToForm(form, serverData[0]);
 
-      // The codes below replace the upper function, with below assumption
-      // 1. All the input on the screen assume to be latest and correct before user proceed to next stage
-      // 2. Through the barcode scan, which all the data will be called from the server
-      // 3. Which user can then decide what is the phase of next step
-      this.loadDataToForm(form, serverData[0]);
+      if(serverData[0] == "" || serverData[0] == [] || serverData[0] == null){
+        this.wfSvc.erpQuery(form.value).subscribe( (serverData) => {
 
-      // This function is for automatic workflow state change base on previous business rule
-      // As the current app has lift up the limitation and let user choose the workflow,
-      // then you can either comment out most of the code within this function
-      // or simply re-write the nav push in a separate function
+          if(serverData[0] == "" || serverData[0] == [] || serverData[0] == null){
+            alert("查无此单号")
+          } else {
+            // alert(JSON.stringify(serverData[0]));
+            console.log("Response from ERP server: " + JSON.stringify(serverData[0]));
+            // The codes below replace the upper function, with below assumption
+            // 1. All the input on the screen assume to be latest and correct before user proceed to next stage
+            // 2. Through the barcode scan, which all the data will be called from the server
+            // 3. Which user can then decide what is the phase of next step
+            this.loadDataToForm(form, serverData[0]);
+            // this.populateDataToForm(form, serverData[0]);
+
+            // This function is for automatic workflow state change base on previous business rule
+            // As the current app has lift up the limitation and let user choose the workflow,
+            // then you can either comment out most of the code within this function
+            // or simply re-write the nav push in a separate function
+
+            this.workflowStateChange();
+
+          }
+        });
+
+      } else {
+        // alert(JSON.stringify(serverData[0]));
+        console.log("Response from App server: " + JSON.stringify(serverData[0]));
+        // The codes below replace the upper function, with below assumption
+        // 1. All the input on the screen assume to be latest and correct before user proceed to next stage
+        // 2. Through the barcode scan, which all the data will be called from the server
+        // 3. Which user can then decide what is the phase of next step
+        this.loadDataToForm(form, serverData[0]);
+        // this.populateDataToForm(form, serverData[0]);
+
+        // This function is for automatic workflow state change base on previous business rule
+        // As the current app has lift up the limitation and let user choose the workflow,
+        // then you can either comment out most of the code within this function
+        // or simply re-write the nav push in a separate function
+
+        this.workflowStateChange();
+
+      }
+
       this.workflowStateChange();
+
 
     },(err)=>{
       // If there is any error or unsuccessful connection
       // Then throw alert to user about the network error
+      // alert("Running ERP data");
+      console.log(err);
+      console.log("Trying to load data from storage");
+
       alert("嚫,网路不给力");
       console.log(err);
       console.log("Trying to load data from storage");
+
+      // prefill empty data
+      /*
+      if(form.value.wfForm == 1) {
+        console.log("nothing in the form");
+
+        // workflow 1
+        let data = JSON.stringify({ "headers":
+          { "erpData": "ngForm"},
+          "bodies":
+            { "erpData":
+              {"wfForm":"1","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilNegName":"","wfRMPaperName":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMGlueName":"","wfRMSolName":"","wfRMShellName":"","wfRMPlasticName":"","wfRMCoverName":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","created":{},"wfFormName":"裸品流程卡","wfFormStatus":"0","wfProcessStatus":"0"}
+            }
+        });
+
+        this.testDataPopulate(data,form);
+
+      } else if(form.value.wfForm == 2) {
+        console.log("nothing in the form");
+
+        // workflow 2
+        let data = JSON.stringify({ "headers":
+          { "erpData": "ngForm"},
+          "bodies":
+            { "erpData":
+              {"wfForm":"2","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilNegName":"","wfRMPaperName":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMGlueName":"","wfRMSolName":"","wfRMShellName":"","wfRMPlasticName":"","wfRMCoverName":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","created":{},"wfFormName":"成品流程卡","wfSalesOrderId":"","wfProcessStatus":"0","wfFormStatus":"0"}
+            }
+        });
+        this.testDataPopulate(data,form);
+
+      } else if(form.value.wfForm == 3) {
+        // workflow 3
+        let data = JSON.stringify({ "headers":
+          { "erpData": "ngForm"},
+          "bodies":
+            { "erpData":
+              {"wfForm":"3","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilNegName":"","wfRMPaperName":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMGlueName":"","wfRMSolName":"","wfRMShellName":"","wfRMPlasticName":"","wfRMCoverName":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","created":{},"wfProcessStatus":"0","wfFormStatus":"0","wfFormName":"电容器流程卡"}
+            }
+        });
+        this.testDataPopulate(data,form);
+
+      }
+      */
 
       // Proceed to checking with storage, in event of offline mode
       this.storage.get(form.value.wfFormId).then(storageData => {
@@ -376,7 +378,12 @@ export class WorkflowPage implements OnInit {
       }, err => {
         console.log("cant find record");
 
+        this.workflowStateChange();
+
       });
+
+      // this.workflowStateChange();
+
     });
   }
 
@@ -397,6 +404,7 @@ export class WorkflowPage implements OnInit {
     // There is no need to automatically set the workflow status.
     // Then you can either comment out or delete the function below
     console.log("In the func of workflowStateChange");
+    console.log(JSON.stringify(this.wfInputForm.value));
 
     let form = this.wfInputForm;
     let wfPOldState: any;
@@ -520,19 +528,23 @@ export class WorkflowPage implements OnInit {
     for (let key in data) {
       try {
         // This use form control for the value setting
+        // form.controls[key].setValue(data[key]);
+
         if (form.controls[key].value == null || form.controls[key].value == "" ) {
           console.log("populate form model " + key);
           console.log("populating model " + key + " " + data[key]);
           form.controls[key].setValue(data[key]);
+          eval('console.log(form.value.' + key + ');');
+          console.log(JSON.stringify(form.value));
         }
 
       }
       catch(err) {
         console.log(err.message);
         // Use eval to dynamically inject the value into the form
-        eval('form.value.' + key + '= "' + data[key] + '"; ');
-        eval('console.log("Retrying force input " + form.value.'+ key + ')');
-        eval('console.log(form.value.' + key + ');');
+        // eval('form.value.' + key + '= "' + data[key] + '"; ');
+        // eval('console.log("Retrying force input " + form.value.'+ key + ')');
+        // eval('console.log(form.value.' + key + ');');
       }
 
     }
@@ -549,7 +561,86 @@ export class WorkflowPage implements OnInit {
       // wfOrderBatchId: [''],
       // wfOrderBatchQty: [''],
       // wfOrderTotalQty: [''],
-      wfOptMachineId: ['0'],
+      wfOptMachineId: [''],
+
+      wfSpecCap: [''],
+      wfSpecDF: [''],
+      wfSpecLC: [''],
+      wfSpecZESR: [''],
+      wfAgeVoltSet: [''],
+      wfPriorWfFormId: [''],
+      wfNakedProductSpec: [''],
+      wfOrderId: [''],
+      wfOrderSeries: [''],
+      wfOrderBatchId: [''],
+      wfOrderRMId: [''],
+      wfOrderSpec: [''],
+      wfOrderDim: [''],
+      wfOrderBatchQty: [''],
+      wfOrderTotalQty: [''],
+      wfSalesOrderQty: [''],
+      wfClientId: [''],
+      wfOrderFormNote: [''],
+      wfOrderNote: [''],
+      wfOrderBOMNote: [''],
+      wfSalesOrderNote: [''],
+      wfOrderDate: [''],
+      wfOrderStartDate: [''],
+      wfOrderEstFinishDate: [''],
+      wfOrderDeliveryDate: [''],
+      wfOrderTK: [''],
+
+      // RM part of the detail
+      wfRMFoilPosName: [''],
+      wfRMFoilPosCapFrom: [''],
+      wfRMFoilPosCapTo: [''],
+      wfRMFoilPosWidth: [''],
+      wfRMFoilPosLength: [''],
+
+      wfRMFoilNegName: [''],
+      wfRMFoilNegCapFrom: [''],
+      wfRMFoilNegCapTo: [''],
+      wfRMFoilNegWidth: [''],
+      wfRMFoilNegLength: [''],
+      wfRMFoilNegQty: [''],
+
+      wfRMPaperName: [''],
+      wfRMPaperQty: [''],
+      wfRMPinPosName: [''],
+      wfRMPinNegName: [''],
+      wfRMPinQty: [''],
+      wfRMGlueName: [''],
+      wfRMSolName: [''],
+      wfRMSolQty: [''],
+      wfRMShellName: [''],
+      wfRMShellQty: [''],
+      wfRMPlasticName: [''],
+      wfRMPlasticQty: [''],
+      wfRMCoverName: [''],
+      wfRMCoverQty: [''],
+      wfRMUpBeltName: [''],
+      wfRMDownBeltName: [''],
+      wfRMBaseName: [''],
+      wfRMCircleName: [''],
+      wfRMFoilPosSerial: [''],
+      wfRMFoilNegSerial: [''],
+      wfRMPaperSerial: [''],
+      wfRMGlueSerial: [''],
+      wfRMSolSerial: [''],
+      wfRMPinPosSerial: [''],
+      wfRMPinNegSerial: [''],
+      wfRMPlasticSerial: [''],
+      wfRMShellSerial: [''],
+      wfRMCoverSerial: [''],
+
+      // Status update part of the data
+      wfOptStartQty: [''],
+      wfBadTotal: [''],
+      wfGoodTotal: [''],
+
+      wfFormStatus: [''],
+      wfProcessStatus: [''],
+      created: ['']
 
     });
   }

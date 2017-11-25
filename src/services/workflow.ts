@@ -174,169 +174,255 @@ export class WorkflowService {
 
 
     let form = wfInputForm;
-    /*
-    let wfPName = '';
-    if(form.value.wfProcess == '1') {
-      wfPName = '裸品流程卡'+form.value.wfProcess;
-    } else if(form.value.wfProcess == '2') {
-      wfPName = '成品流程卡'+form.value.wfProcess;
-    } else if(form.value.wfProcess == '3') {
-      wfPName = '电容器流程卡'+form.value.wfProcess;
-    }
-    */
+
+    //form.controls['wfStaffOptName'].setValue('作业員A');
+
     let alert = this.alertCtrl.create({
-
-      //title: wfPName + ' (' + form.value.wfFormId + ')',
-      subTitle:  wfPName + ' (' + form.value.wfFormId + ')' + '<br><br>工序 = ' + form.value.wfProcessName,
-      buttons: [{
-        text: '上存',
-        handler: () => {
-          console.log('上存 is clicked');
-          console.log("uploading form" + JSON.stringify(form.value));
-
-          form.value.wfProcessStatus = "0";
-          this.formSubmission(form,images,navCtrl);
-          // This function replace below code block
-          // this.storage.set(form.value.wfFormId, form.value);
-          //
-          // this.upload(form.value,form.value.wfForm)
-          //   .subscribe((data)=> {
-          //       console.log("Successfully uploading to server");
-          //       console.log("Upload wfInput reply from server" + JSON.stringify(data));
-          //
-          //       if (images.length > 0){
-          //         console.log("uploading images to server");
-          //         let imgTotal = images.length;
-          //
-          //         for (let i = 0; i < imgTotal; i++) {
-          //           this.uploadImage(form,1,images[i],i,imgTotal)
-          //             .subscribe((data)=> {
-          //                 console.log("Successfully uploading to server");
-          //                 console.log("Upload img reply from server" + JSON.stringify(data));
-          //
-          //               },
-          //               error => {
-          //                 console.log(error);
-          //                 let alert = this.alertCtrl.create({
-          //                   title: '注意!',
-          //                   message: '嚫!网路不给力,请再试一次!',
-          //                   buttons: ['好的']
-          //                 });
-          //                 alert.present();
-          //               }
-          //             );
-          //         }
-          //       }
-          //
-          //       // Return back to main page
-          //       navCtrl.pop();
-          //     },
-          //     error => {
-          //       console.log(error);
-          //       let alert = this.alertCtrl.create({
-          //         title: '注意!',
-          //         message: '嚫!网路不给力,请再试一次!',
-          //         buttons: ['好的']
-          //       });
-          //       alert.present();
-          //
-          //     }
-          //   );
-
-        }
-      },
-        {
-          text: '上存 + 完成工序',
-          handler: () => {
-            console.log('上存 + 完成工序 is clicked');
-
-            let alertCtrl = this.alertCtrl.create({
-              // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
-              // comment above for faster process
-              //title: '嚫,完成终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
-              //title: '上存及完成工序',
-              subTitle: '上存及完成工序<br><br>注意: 按"確定"後其他人員將不能再输入同一流程卡，同一工序资料',
-              buttons: [{
-                text: '確定',
+      
+            //title: wfPName + ' (' + form.value.wfFormId + ')',
+            subTitle:  wfPName + ' (' + form.value.wfFormId + ')' + '<br><br>工序 = ' + form.value.wfProcessName,
+            buttons: [{
+              text: '上存',
+              handler: () => {
+                console.log('上存 is clicked');
+                console.log("uploading form" + JSON.stringify(form.value));
+      
+                form.value.wfProcessStatus = "0";
+                this.formSubmission(form,images,navCtrl);
+      
+              }
+            },
+              {
+                text: '上存 + 完成工序',
                 handler: () => {
-                  console.log('Final confirmation of mark completion is clicked');
-                  console.log("uploading form" + JSON.stringify(form.value));
-
-                  form.value.wfProcessStatus = "1";
-                  this.formSubmission(form,images,navCtrl);
-                  // This function replace below code block
-                  // this.storage.set(form.value.wfFormId, form.value);
-                  //
-                  // // Upload to Server
-                  // console.log("uploading to server");
-                  //
-                  // // Upload images
-                  // this.upload(form.value,form.value.wfForm)
-                  //   .subscribe((data)=> {
-                  //       console.log("Successfully uploading to server");
-                  //       console.log("Upload wfInput reply from server" + JSON.stringify(data));
-                  //
-                  //       if (images.length > 0){
-                  //         console.log("uploading images to server");
-                  //         let imgTotal = images.length;
-                  //
-                  //         for (let i = 0; i < imgTotal; i++) {
-                  //           this.uploadImage(form,form.value.wfForm,images[i],i,imgTotal)
-                  //             .subscribe((data)=> {
-                  //                 console.log("Successfully uploading to server");
-                  //                 console.log("Upload img reply from server" + JSON.stringify(data));
-                  //
-                  //               },
-                  //               error => {
-                  //                 console.log(error);
-                  //                 // let alert = this.alertCtrl.create({
-                  //                 //   title: '注意!',
-                  //                 //   message: '嚫!网路不给力,请再试一次!',
-                  //                 //   buttons: ['好的']
-                  //                 // });
-                  //                 // alert.present();
-                  //               }
-                  //             );
-                  //         }
-                  //       }
-                  //
-                  //       // Return back to main page
-                  //       navCtrl.pop();
-                  //     },
-                  //     error => {
-                  //       console.log(error);
-                  //       let alert = this.alertCtrl.create({
-                  //         title: '注意!',
-                  //         message: '嚫!网路不给力,请再试一次!',
-                  //         buttons: ['好的']
-                  //       });
-                  //       alert.present();
-                  //
-                  //     }
-                  //   );
-
+                  console.log('上存 + 完成工序 is clicked');
+      
+                  let alertCtrl = this.alertCtrl.create({
+                    // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
+                    // comment above for faster process
+                    //title: '嚫,完成终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
+                    //title: '上存及完成工序',
+                    subTitle: '上存及完成工序<br><br>注意: 按"確定"後其他人員將不能再输入同一流程卡，同一工序资料',
+                    buttons: [{
+                      text: '    確定    ',
+                      handler: () => {
+                        console.log('Final confirmation of mark completion is clicked');
+                        console.log("uploading form" + JSON.stringify(form.value));
+      
+                        form.value.wfProcessStatus = "1";
+                        this.formSubmission(form,images,navCtrl);
+                      }
+                    },{
+                      text: '    取消    ',
+                      role: 'cancel',
+                      handler: () => {
+                        console.log('Cancel clicked');
+                      }
+                    }]
+                  });
+      
+                  alertCtrl.present();
+      
                 }
-              },{
-                text: '取消',
+              }, {
+                text: '    取消    ',
                 role: 'cancel',
                 handler: () => {
                   console.log('Cancel clicked');
                 }
               }]
-            });
+          });
+    
+    let missingFeildAlert = true;
+    let missingFeildMsg = '';
 
-            alertCtrl.present();
+    if(form.value.wfForm == '1') {
+      if(typeof form.value.wfOptStartTime === 'undefined' || isNaN(form.value.wfOptStartTime)) {
+        missingFeildMsg += '<br><br>1. 正確开始时间值必须为 0000 - 2359 之間!';
+        form.controls['wfOptStartTime'].setValue(this.toInt(form.value.wfOptStartTime));
+      } else {
+        let starTimeX = form.value.wfOptStartTime;
+        let firstStarTimeX = starTimeX[0]+starTimeX[1];
+        let secStarTimeX = starTimeX[2]+starTimeX[3];
+        if(starTimeX.length < 4 || starTimeX.length > 4 || this.toInt(firstStarTimeX) < 0 || this.toInt(firstStarTimeX) > 23 || this.toInt(secStarTimeX) < 0 || this.toInt(secStarTimeX) > 59) {
+          missingFeildMsg += '<br><br>1. 正確开始时间值必须为 0000 - 2359 之間!';
+          form.controls['wfOptStartTime'].setValue(this.toInt(starTimeX));
+        }
+      }
+      
+      if(typeof form.value.wfOptFinishTime === 'undefined' || isNaN(form.value.wfOptFinishTime)) {
+        missingFeildMsg += '<br><br>2. 完成时间值必须为 0000 - 2359 之間!';
+        form.controls['wfOptFinishTime'].setValue(this.toInt(form.value.wfOptFinishTime));
+      } else {
+        let endTimeX = form.value.wfOptFinishTime;
+        let firstEndTimeX = endTimeX[0]+endTimeX[1];
+        let secEndTimeX = endTimeX[2]+endTimeX[3];
+        if(typeof endTimeX === 'undefined'  || endTimeX.length < 4 || endTimeX.length > 4 || this.toInt(firstEndTimeX) < 0 || this.toInt(firstEndTimeX) > 23 || this.toInt(secEndTimeX) < 0 || this.toInt(secEndTimeX) > 59) {
+          missingFeildMsg += '<br><br>2. 完成时间值必须为 0000 - 2359 之間!';
+          form.controls['wfOptFinishTime'].setValue(endTimeX);
+        }
+      }
+      
+      if(form.value.wfOptBadQty < 0) {
+        missingFeildMsg += '<br><br>3. 不良数不能小於零!';
+      } 
+      if(form.value.wfOptGoodQty <= 0) {
+        missingFeildMsg += '<br><br>4. 良品数必須为正数!';
+      }
+      if(typeof form.value.wfStaffOptName === 'undefined') {
+        missingFeildMsg += '<br><br>5. 輸入作业員!';
+      }
+      
+      
+    } else if(form.value.wfForm == '2') {
 
+      if(form.value.wfOptBadQty < 0) {
+        missingFeildMsg += '<br><br>3. 不良数不能小於零';
+      } 
+      if(form.value.wfOptGoodQty <= 0) {
+        missingFeildMsg += '<br><br>4. 良品数必須为正数!';
+      }
+      if(typeof form.value.wfStaffOptName === 'undefined' && form.value.wfProcess != 4) {
+        missingFeildMsg += '<br><br>5. 輸入作业員!';
+
+      }
+      
+    } else if(form.value.wfForm == '3' && form.value.wfProcess != '9') {
+        if(typeof form.value.wfOptStartTime === 'undefined' || isNaN(form.value.wfOptStartTime)) {
+          missingFeildMsg += '<br><br>1. 正確开始时间值必须为 0000 - 2359 之間!';
+          form.controls['wfOptStartTime'].setValue(this.toInt(form.value.wfOptStartTime));
+        } else {
+          let starTimeX = form.value.wfOptStartTime;
+          let firstStarTimeX = starTimeX[0]+starTimeX[1];
+          let secStarTimeX = starTimeX[2]+starTimeX[3];
+          if(starTimeX.length < 4 || starTimeX.length > 4 || this.toInt(firstStarTimeX) < 0 || this.toInt(firstStarTimeX) > 23 || this.toInt(secStarTimeX) < 0 || this.toInt(secStarTimeX) > 59) {
+            missingFeildMsg += '<br><br>1. 正確开始时间值必须为 0000 - 2359 之間!';
+            form.controls['wfOptStartTime'].setValue(this.toInt(starTimeX));
           }
-        }, {
-          text: '取消',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
+        }
+        
+        if(typeof form.value.wfOptFinishTime === 'undefined' || isNaN(form.value.wfOptFinishTime)) {
+          missingFeildMsg += '<br><br>2. 正確完成时间值必须为 0000 - 2359 之間!';
+          form.controls['wfOptFinishTime'].setValue(this.toInt(form.value.wfOptFinishTime));
+        } else {
+          let endTimeX = form.value.wfOptFinishTime;
+          let firstEndTimeX = endTimeX[0]+endTimeX[1];
+          let secEndTimeX = endTimeX[2]+endTimeX[3];
+          if(typeof endTimeX === 'undefined'  || endTimeX.length < 4 || endTimeX.length > 4 || this.toInt(firstEndTimeX) < 0 || this.toInt(firstEndTimeX) > 23 || this.toInt(secEndTimeX) < 0 || this.toInt(secEndTimeX) > 59) {
+            missingFeildMsg += '<br><br>2. 正確完成时间值必须为 0000 - 2359 之間!';
+            form.controls['wfOptFinishTime'].setValue(endTimeX);
           }
-        }]
-    });
-    alert.present();
+        }
+
+      if(form.value.wfOptBadQty < 0) {
+        missingFeildMsg += '<br><br>3. 不良数不能小於零!';
+
+      } 
+      if(form.value.wfOptGoodQty <= 0) {
+        missingFeildMsg += '<br><br>4. 良品数必須为正数!';
+
+      }
+      if ( typeof form.value.wfStaffOptName === 'undefined' ) {
+        missingFeildMsg += '<br><br>5. 輸入作业員!';
+
+      }
+    } 
+
+    if(missingFeildMsg != '') { 
+      missingFeildAlert = false; 
+      this.warningAlert('請提供或更正下列资料：', missingFeildMsg, '继續');
+
+    }
+    
+    //this.warningAlert('Q', form.value.wfForm + ' ' + form.value.wfProcess, '继續');
+    if(missingFeildAlert) {
+      if((form.value.wfForm == '1' && (form.value.wfProcess == '5' || form.value.wfProcess == '6' || form.value.wfProcess == '8')) || (form.value.wfForm == '3' && (form.value.wfProcess == '7' || form.value.wfProcess == '8')))
+      {
+        let totalBadQtyX = this.toInt(form.value.wfBadQty1);
+        totalBadQtyX += this.toInt(form.value.wfBadQty2);
+        totalBadQtyX += this.toInt(form.value.wfBadQty3);
+        totalBadQtyX += this.toInt(form.value.wfBadQty4);
+        totalBadQtyX += this.toInt(form.value.wfBadQty5);
+        totalBadQtyX += this.toInt(form.value.wfBadQty6);
+  
+        form.controls['wfOptBadQty'].setValue(totalBadQtyX);
+      }
+
+      // if(form.value.wfForm == '1' || (form.value.wfForm == '3' && form.value.wfProcess != '9' && form.value.wfProcess != '2') ) {
+      //   let starTime = form.value.wfOptStartTime;
+      //   if(!starTime.includes(':')){
+      //     starTime = [starTime.slice(0, 2), ':', starTime.slice(2)].join('');
+      //     form.controls['wfOptStartTime'].setValue(starTime);
+      //   }
+      //
+      //   let endTime = form.value.wfOptFinishTime;
+      //   if(!endTime.includes(':')){
+      //     endTime = [endTime.slice(0, 2), ':', endTime.slice(2)].join('');
+      //     form.controls['wfOptFinishTime'].setValue(endTime);
+      //   }
+      //
+      // }
+  
+      let updatedGoodQty = this.toInt(form.value.wfOptGoodQty) / 1000;
+      
+      let qtyCheckMsg = '不良数總和: ' + this.toInt(form.value.wfOptBadQty);
+  
+      qtyCheckMsg += '<br><br>良品数: ' + this.toInt(form.value.wfOptGoodQty) + ' (' + updatedGoodQty + 'K)';
+      
+      if(this.toInt(form.value.wfOptBadQty) > this.toInt(form.value.wfOptGoodQty)) {
+        qtyCheckMsg += '<br><br>不良数 ('+form.value.wfOptBadQty+') 大於 良品数 ('+form.value.wfOptGoodQty+')！';
+      }
+  
+      if(this.toInt(form.value.wfOptGoodQty) > this.toInt(form.value.wfOrderBatchQty) * 1000) {
+        qtyCheckMsg += '<br><br>良品数 ('+form.value.wfOptGoodQty+') 大於 批次量 ('+ form.value.wfOrderBatchQty * 1000 +')！';
+      }
+  
+      qtyCheckMsg += '<br><br>如需修改，請按 “取消” 再重新輸入。';
+
+      let qtyConfirm = this.alertCtrl.create({
+        title: '',
+        message: qtyCheckMsg,
+        buttons: [
+          {
+            text: '    取消    ',
+            handler: () => {
+              console.log('Disagree clicked');
+            }
+          },
+          {
+            text: '    继續    ',
+            handler: () => {
+              console.log('Agree clicked');
+
+              //Move it to here
+              /*
+              if(form.value.wfForm == '1' || (form.value.wfForm == '3' && form.value.wfProcess != '9' && form.value.wfProcess != '2') ) {
+                let starTime = form.value.wfOptStartTime;
+                if(!starTime.includes(':')){
+                  starTime = [starTime.slice(0, 2), ':', starTime.slice(2)].join('');
+                  form.controls['wfOptStartTime'].setValue(starTime);
+                }
+
+                let endTime = form.value.wfOptFinishTime;
+                if(!endTime.includes(':')){
+                  endTime = [endTime.slice(0, 2), ':', endTime.slice(2)].join('');
+                  form.controls['wfOptFinishTime'].setValue(endTime);
+                }
+
+              }
+              */
+              alert.present();
+            }
+          }
+        ]
+      });
+
+      if(form.value.wfForm == '3' && (form.value.wfProcess == '9' || form.value.wfProcess == '2')) {
+        alert.present();
+      } else {
+        qtyConfirm.present();
+      }
+    }
 
     // if(wfOptGoodQtyValue) {
     //   let form = wfInputForm;
@@ -506,9 +592,9 @@ export class WorkflowService {
     } else if(wfOptBadQtyValue === '') {
       this.warningAlert('', '請輸入不良数', '继續');
     }
-    wfOptBadQtyValue = parseInt(wfOptBadQtyValue);
-    wfOptGoodQtyValue = parseInt(wfOptGoodQtyValue);
-    wfOrderBatchQtyValue = parseInt(wfOrderBatchQtyValue);
+    wfOptBadQtyValue = this.toInt(wfOptBadQtyValue);
+    wfOptGoodQtyValue = this.toInt(wfOptGoodQtyValue);
+    wfOrderBatchQtyValue = this.toInt(wfOrderBatchQtyValue);
     /*
     if(wfOptGoodQtyValue <= 0) {
       this.warningAlert('', '請輸入良品数('+wfOptGoodQtyValue+')', '继續');
@@ -517,14 +603,15 @@ export class WorkflowService {
       this.warningAlert('', '請輸入不良数('+wfOptBadQtyValue+')', '继續');
     } else */ if(wfOptBadQtyValue > wfOptGoodQtyValue) {
       this.warningAlert('', '不良数('+wfOptBadQtyValue+')大於良品数('+wfOptGoodQtyValue+')', '继續');
-    } else if(wfOptGoodQtyValue > wfOrderBatchQtyValue) {
-      this.warningAlert('', '良品数('+wfOptGoodQtyValue+')大於批次量('+wfOrderBatchQtyValue+')', '继續');
+    } else if(wfOptGoodQtyValue > wfOrderBatchQtyValue * 1000) {
+      this.warningAlert('', '良品数('+wfOptGoodQtyValue+')大於批次量('+wfOrderBatchQtyValue * 1000+')', '继續');
     } 
     
   }
 
   updateTextChg(wfInputForm: any) {
     let form = wfInputForm;
+    form.controls['wfStaffOptName'].setValue('作业員A');
     form.controls['wfStaffOptShift'].setValue('A');
     form.controls['wfStaffTechName'].setValue('技術員A');
     form.controls['wfStaffQCName'].setValue('品检員A');
@@ -532,12 +619,14 @@ export class WorkflowService {
 
   updateTextChg2(wfInputForm: any) {
     let form = wfInputForm;
+    form.controls['wfStaffOptName'].setValue('作业員A');
     form.controls['wfStaffTechName'].setValue('技術員A');
     form.controls['wfStaffQCName'].setValue('品检員A');
   }
 
   updateTextChg3(wfInputForm: any) {
     let form = wfInputForm;
+    form.controls['wfStaffOptName'].setValue('作业員A');
     form.controls['wfStaffOptShift'].setValue('A');
     form.controls['wfStaffTechName'].setValue('技術員A');
     form.controls['wfOptQtyChecked'].setValue(8);
@@ -557,6 +646,14 @@ export class WorkflowService {
   cancelBtn(navCtrl: any) {
     this.storage.clear();
     navCtrl.setRoot(WorkflowPage);
+  }
+
+  setBadQty(wfForm: any) {
+    let form = wfForm;
+
+    if(form.value.wfProcessName ){
+
+    }
   }
 
   formSubmission(form: any, images: any, navCtrl: any) {
@@ -587,32 +684,7 @@ export class WorkflowService {
     //       with a button to send all the pending data
 
     this.storage.set(form.value.wfFormId, form.value);
-    /*
-    //added this for testing clear
-    this.storage.clear();
-    let dataWfProcess = {
-      "1":{"wfFormName": "裸品流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗","5":"自動老化","6":"手工老化","7":"串排","8":"测试分选","9":"外观"}},
-      "2":{"wfFormName": "成品流程卡", "Process":{"1":"打印","2":"测试上带","3":"贴片外观","4":"终检"}},
-      "3":{"wfFormName": "电容器流程卡", "Process":{"1":"素子钉卷","2":"烘干","3":"含浸","4":"組立","5":"清洗","6":"套管","7":"老化","8":"手工分选","9":"外观全检","10":"编带剪切","11":"包装"}}
-    };
-  
-    let dataMachine = {
-      "AA001":{"wfStaffOptId":"S0001","wfStaffOptName":"員工01","wfStaffTechId":"T0001","wfStaffTechName":"技術員工01","wfStaffXrayId":"X0001","wfStaffXrayName":"Xray員工01","wfStaffOptShift":"A"},
-      "AB002":{"wfStaffOptId":"S0002","wfStaffOptName":"員工02","wfStaffTechId":"T0002","wfStaffTechName":"技術員工01","wfStaffXrayId":"X0002","wfStaffXrayName":"Xray員工02","wfStaffOptShift":"B"},
-      "AC003":{"wfStaffOptId":"S0003","wfStaffOptName":"員工03","wfStaffTechId":"T0003","wfStaffTechName":"技術員工03","wfStaffXrayId":"X0003","wfStaffXrayName":"Xray員工03","wfStaffOptShift":"A"}
-    };
-    this.storage.set("wfProcess", dataWfProcess);
-    this.storage.set("wfMachine", dataMachine);
-    */
 
-    //navCtrl.popToRoot();
-    //navCtrl.remove(0, 1); 
-    //navCtrl.insert(1, WorkflowPage);
-    this.storage.clear();
-    navCtrl.setRoot(WorkflowPage);
-    //navCtrl.pop();
-    
-    
     this.upload(form.value,form.value.wfForm)
       .subscribe((data)=> {
           console.log("Successfully uploading to server");
@@ -631,12 +703,7 @@ export class WorkflowService {
                   },
                   error => {
                     console.log(error);
-                    let alert = this.alertCtrl.create({
-                      title: '注意!',
-                      message: '嚫!网路不给力,请再试一次!',
-                      buttons: ['好的']
-                    });
-                    alert.present();
+                    // this.networkError(navCtrl);
                   }
                 );
             }
@@ -646,19 +713,78 @@ export class WorkflowService {
           // Return back to main page
           // BUG: Calling navCtrl.pop outside of the image upload will have issue that
           //      it is executed before images upload finish
-          navCtrl.pop();
+          // navCtrl.pop();
+          this.storage.clear();
+          navCtrl.setRoot(WorkflowPage);
         },
         error => {
           console.log(error);
-          let alert = this.alertCtrl.create({
-            title: '注意!',
-            message: '嚫!网路不给力,请再试一次!',
-            buttons: ['好的']
-          });
-          alert.present();
+          this.networkError(navCtrl);
           
         }
         
       );
+  }
+
+  networkError(navCtrl: any){
+    let alert = this.alertCtrl.create({
+      title: '注意!',
+      message: '嚫!网路不给力,请再试一次!',
+      buttons: [{
+        text: '    重试    ',
+        role: 'cancel',
+        handler: () => {
+          console.log('重试');
+        }},{
+        text: '    先储档    ',
+        handler: () => {
+          console.log('先储档,稍后再试');
+          navCtrl.setRoot(WorkflowPage);
+        }
+      }]
+    });
+    alert.present();
+  };
+
+  toInt(text: string){
+    if (text == "" || text == null) {
+      text = "0"
+    }
+
+    return parseInt(text);
+  };
+
+  erpQuery(form: any){
+    // This function simply query the wfFormId to the url based on the wfForm number
+    // 2 inputs for this function,
+    //    1. the form itself
+    //    2. the wfForm number
+    //
+    // Note:
+    //    1. This is a promise call function which means that
+    //       it will need to be executed with .subscribe in the call function's main body
+    //    2. The reason why wfForm is separated from extracting from the form because
+    //       I want it to be explicitly filled and make sure it has a value before calling
+    //
+    // Further work:
+    //    Right now the query if through submission of entire form,
+    //    can rework the query only on the wfFormId instead.
+    //    Original design concept is to let server side decide which field to be looked up
+
+    console.log("Loading from ERP");
+    console.log("Printing request to server : " + JSON.stringify(form));
+    console.log("Begin to load data from server");
+    console.log("Printing request to server : " + JSON.stringify(form));
+
+    let queryUrl = this.baseUrl + "erp/query/";
+    console.log("Requesting url: " + queryUrl);
+
+    return this.http.post(queryUrl, form, this.httpOptions)
+      .timeout(1000)
+      .map((response: Response) => {
+        console.log("Responding from Server");
+        console.log(response.json()[0]);
+        return response.json();
+      });
   }
 }

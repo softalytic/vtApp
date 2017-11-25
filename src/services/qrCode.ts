@@ -52,12 +52,39 @@ export class QRCodeService {
         // Backup code
         // eval('form.value.' + model + '= "' + data + '"; ');
 
+        /*
+
         if (model == "wfFormId") {
           console.log("Execute ERP query process");
+          //alert("Execute ERP query process");
+          //alert(JSON.stringify(form.value));
           // Further work need to be done on the Server Query
           // Decision to make: Pulling all Server records vs Single Query record
           // Ivan to decide
+
+          this.wfSvc.erpQuery(form.value).subscribe( (serverData) => {
+            console.log("Response from server: " + JSON.stringify(serverData[0]));
+            //alert("Response from server: " + JSON.stringify(serverData[0]));
+            // this.populateDataToForm(form, serverData[0]);
+
+            // The codes below replace the upper function, with below assumption
+            // 1. All the input on the screen assume to be latest and correct before user proceed to next stage
+            // 2. Through the barcode scan, which all the data will be called from the server
+            // 3. Which user can then decide what is the phase of next step
+
+            this.populateDataToForm(form, serverData[0]);
+
+          },(err)=>{
+            // If there is any error or unsuccessful connection
+            // Then throw alert to user about the network error
+            alert("嚫,网路不给力");
+            console.log(err);
+            console.log("Trying to load data from storage");
+
+          });
         }
+
+        */
 
 
       } else if (barcodeData.format == "QR_CODE") {

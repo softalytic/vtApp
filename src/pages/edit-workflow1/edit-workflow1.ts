@@ -274,23 +274,17 @@ export class EditWorkflow1Page implements OnInit{
             form.controls[key].setValue('漏电');
           } else if(key == 'wfBadQty1') {
             form.controls[key].setValue(0);
-
           }  else if(key == 'wfBadQty2') {
             form.controls[key].setValue(0);
-
           }  else if(key == 'wfBadQty3') {
             form.controls[key].setValue(0);
-
           }  else if(key == 'wfBadQty4') {
             form.controls[key].setValue(0);
-
           }  else if(key == 'wfBadQty5') {
             form.controls[key].setValue(0);
-
-          }  else if(key == 'wfBadQty6') {
+          } else if(key == 'wfBadQty6') {
             form.controls[key].setValue(0);
-          }
-            else if(key == 'wfBadItemTotal') {
+          } else if(key == 'wfBadItemTotal') {
             form.controls[key].setValue('不良数總和');
           }  else if(key == 'wfOptBadQty') {
             form.controls[key].setValue(0);

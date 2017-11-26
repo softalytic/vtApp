@@ -79,6 +79,7 @@ export class WorkflowPage implements OnInit {
 
     this.wfInputs = [
       {title: "流程卡号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 25},
+      {method: "break", size: 1},
       {title: "分单", method: 'select', type: 'text', model: 'wfFormSplit', scan: false, size: 5},
       {title: "台机号", method: 'input', type: 'text', model: 'wfOptMachineId', scan: true, size: 25},
 

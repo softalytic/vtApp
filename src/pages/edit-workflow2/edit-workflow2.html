@@ -3,7 +3,15 @@
         <div style="align-items: center; display: inline;">
             <ion-title>
                 <img src="./assets/img/vt_icon.png" class="icon" style="position: initial !important; vertical-align: middle !important;">
-                <b>&nbsp;( 贴片电容器流程卡 )&nbsp;工序:&nbsp;&nbsp;<span class="processBGColor">{{wfInputForm.value.wfProcessName}}</span>&nbsp;&nbsp;&nbsp;&nbsp;流程卡号:&nbsp;<u>{{wfInputForm.value.wfFormId}}</u>&nbsp;&nbsp;&nbsp;&nbsp;机台号:&nbsp;<u>{{wfInputForm.value.wfOptMachineId}}</u></b>
+                <b>&nbsp;( 贴片电容器流程卡 )&nbsp;工序:&nbsp;&nbsp;
+                    <span class="processBGColor">{{wfInputForm.value.wfProcessName}}</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;流程卡号:&nbsp;
+                    <u>{{wfInputForm.value.wfFormId}}</u>
+                    &nbsp;&nbsp;&nbsp;&nbsp;机台号:&nbsp;
+                    <u>{{wfInputForm.value.wfOptMachineId}}</u>
+                    <span *ngIf="wfInputForm.value.wfFormSplit != 0"
+                          class="processBGColor">分单:&nbsp;{{wfInputForm.value.wfFormSplit}}</span>
+                </b>
             </ion-title>
         </div>
     </ion-navbar>

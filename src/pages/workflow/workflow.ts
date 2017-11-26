@@ -31,7 +31,7 @@ export class WorkflowPage implements OnInit {
   // For Dev model
   wfDev = true;
 
-  wfForms = [1,2];
+  wfForms = [1,2,3];
   wfProcesses = [];
   wfMachineProcess = [];
   wfStages = [];
@@ -101,7 +101,7 @@ export class WorkflowPage implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit(){
     this.formInit();
 
     // This is to initialise the storage with core data tables for the app
@@ -480,12 +480,14 @@ export class WorkflowPage implements OnInit {
 
       // RM part of the detail
       wfRMFoilPosName: [''],
+      wfRMFoilPosLName: [''],
       wfRMFoilPosCapFrom: [''],
       wfRMFoilPosCapTo: [''],
       wfRMFoilPosWidth: [''],
       wfRMFoilPosLength: [''],
 
       wfRMFoilNegName: [''],
+      wfRMFoilNegLName: [''],
       wfRMFoilNegCapFrom: [''],
       wfRMFoilNegCapTo: [''],
       wfRMFoilNegWidth: [''],
@@ -512,6 +514,8 @@ export class WorkflowPage implements OnInit {
       wfRMCircleName: [''],
       wfRMFoilPosSerial: [''],
       wfRMFoilNegSerial: [''],
+      wfRMFoilPosLSerial: [''],
+      wfRMFoilNegLSerial: [''],
       wfRMPaperSerial: [''],
       wfRMGlueSerial: [''],
       wfRMSolSerial: [''],

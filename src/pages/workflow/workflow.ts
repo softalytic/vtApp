@@ -79,8 +79,9 @@ export class WorkflowPage implements OnInit {
 
     this.wfInputs = [
       {title: "流程卡号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 25},
+      {title: "分单", method: 'select', type: 'text', model: 'wfFormSplit', scan: false, size: 5},
       {title: "台机号", method: 'input', type: 'text', model: 'wfOptMachineId', scan: true, size: 25},
-      // {title: "工单号", method: 'input', type: 'text', model: 'wfOrderId', scan: false, size: 20},
+
       //{title: "总量(预设)", method: 'input', type: 'number', model: 'wfOrderTotalQty', scan: false, size: 10},
 
       // Prompt Screen alert to pick the workflow batch id
@@ -122,78 +123,6 @@ export class WorkflowPage implements OnInit {
 
     let form = this.wfInputForm;
 
-    /*
-    if (form.value.wfFormId === "") {
-      let alertTest = this.alertCtrl.create({
-        title: '确认工单',
-        message: '嚫，请选择工单',
-        buttons: [
-          {
-            text: '取消',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancel clicked');
-            }
-          },
-          {
-            text: '裸品流程卡',
-            handler: () => {
-              console.log("nothing in the form");
-
-              // workflow 1
-              let data = JSON.stringify({ "headers":
-                { "erpData": "ngForm"},
-                "bodies":
-                  { "erpData":
-                  {"wfForm":"1","wfFormId":"","wfOptMachineId":"0","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilNegName":"","wfRMPaperName":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMGlueName":"","wfRMSolName":"","wfRMShellName":"","wfRMPlasticName":"","wfRMCoverName":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","created":{},"wfFormName":"裸品流程卡","wfFormStatus":"0","wfProcessStatus":"0"}
-                  }
-              });
-              this.testDataPopulate(data,form);
-
-              console.log("裸品流程卡 Alert Controller has been clicked");
-            }
-          },
-          {
-            text: '成品流程卡',
-            handler: () => {
-              console.log("nothing in the form");
-
-              // workflow 2
-              let data = JSON.stringify({ "headers":
-                { "erpData": "ngForm"},
-                "bodies":
-                  { "erpData":
-                  {"wfForm":"2","wfFormId":"VT0002","wfOptMachineId":"AAA01","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"VTO0002","wfOrderSeries":"VTRM 10x10x20","wfOrderBatchId":"VTB0002","wfOrderRMId":"VTRM0001","wfOrderSpec":"20x20x10","wfOrderDim":"10cm","wfOrderBatchQty":"100","wfOrderTotalQty":"10000","wfSalesOrderQty":"","wfClientId":"SA0001","wfOrderFormNote":"嚫，這是測試FORM","wfOrderNote":"嚫，這是測試Note","wfOrderBOMNote":"嚫，這是測試BOM","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilNegName":"","wfRMPaperName":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMGlueName":"","wfRMSolName":"","wfRMShellName":"","wfRMPlasticName":"","wfRMCoverName":"","wfRMUpBeltName":"上帶RM001","wfRMDownBeltName":"下帶RM001","wfRMBaseName":"底座 001","wfRMCircleName":"圓卡 0001","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","created":{},"wfFormName":"成品流程卡","wfSalesOrderId":"VTSO001","wfProcessStatus":"0","wfFormStatus":"0"}
-                  }
-              });
-              this.testDataPopulate(data,form);
-
-              console.log("成品流程卡 Alert Controller has been clicked");
-            }
-          }, {
-            text: '电容器流程卡',
-            handler: () => {
-              console.log("nothing in the form");
-
-              // workflow 3
-              let data = JSON.stringify({ "headers":
-                { "erpData": "ngForm"},
-                "bodies":
-                  { "erpData":
-                  {"wfForm":"3","wfFormId":"VT00001","wfOptMachineId":"0","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"VTO00001","wfOrderSeries":"VT系列","wfOrderBatchId":"VTOB0001","wfOrderRMId":"VT原材料","wfOrderSpec":"VT規格","wfOrderDim":"VT尺寸","wfOrderBatchQty":"100","wfOrderTotalQty":"1000","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"100LG04B-33VF-48UF 5.5mm","wfRMFoilNegName":"F-545M-450UF-5.5MM","wfRMPaperName":"SM250-50 6.5mm","wfRMPinPosName":"15080(+)","wfRMPinNegName":"15080(-)","wfRMGlueName":"","wfRMSolName":"KVP-1B","wfRMShellName":"","wfRMPlasticName":"9.3x2.8x1.4 Φ 10x10.5/12.5 (材质IVR-50)","wfRMCoverName":"10x10.6 3004材质(防爆)","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"17074049","wfRMFoilNegSerial":"0619A04A06","wfRMPaperSerial":"17032519A1-B47","wfRMGlueSerial":"17.7.22","wfRMSolSerial":"富凱2017.7119","wfRMPinPosSerial":"1706241163","wfRMPinNegSerial":"1707201194","wfRMPlasticSerial":"17704310121","wfRMShellSerial":"","wfRMCoverSerial":"1670722-053842","created":{},"wfProcessStatus":"0","wfFormStatus":"0","wfFormName":"电容器流程卡"}
-                  }
-              });
-              this.testDataPopulate(data,form);
-
-              console.log("裸品流程卡 Alert Controller has been clicked");
-            }
-          }
-
-        ]
-      });
-      alertTest.present();
-
-    } */
     if (form.value.wfFormId === "" || form.value.wfForm === "" || form.value.wfProcess === "" || form.value.wfOptMachineId === "") {
       //this.wfSvc.warningAlert(' name:' + form.value.wfFormName + ' id: ' + form.value.wfFormId + ' ' + form.value.wfProcess + ' form id' + form.value.wfForm, '嚫，请选择工单', '继續');
       let formMsgAlert = '';
@@ -307,49 +236,6 @@ export class WorkflowPage implements OnInit {
       alert("嚫,网路不给力");
       console.log(err);
       console.log("Trying to load data from storage");
-
-      // prefill empty data
-      /*
-      if(form.value.wfForm == 1) {
-        console.log("nothing in the form");
-
-        // workflow 1
-        let data = JSON.stringify({ "headers":
-          { "erpData": "ngForm"},
-          "bodies":
-            { "erpData":
-              {"wfForm":"1","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilNegName":"","wfRMPaperName":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMGlueName":"","wfRMSolName":"","wfRMShellName":"","wfRMPlasticName":"","wfRMCoverName":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","created":{},"wfFormName":"裸品流程卡","wfFormStatus":"0","wfProcessStatus":"0"}
-            }
-        });
-
-        this.testDataPopulate(data,form);
-
-      } else if(form.value.wfForm == 2) {
-        console.log("nothing in the form");
-
-        // workflow 2
-        let data = JSON.stringify({ "headers":
-          { "erpData": "ngForm"},
-          "bodies":
-            { "erpData":
-              {"wfForm":"2","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilNegName":"","wfRMPaperName":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMGlueName":"","wfRMSolName":"","wfRMShellName":"","wfRMPlasticName":"","wfRMCoverName":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","created":{},"wfFormName":"成品流程卡","wfSalesOrderId":"","wfProcessStatus":"0","wfFormStatus":"0"}
-            }
-        });
-        this.testDataPopulate(data,form);
-
-      } else if(form.value.wfForm == 3) {
-        // workflow 3
-        let data = JSON.stringify({ "headers":
-          { "erpData": "ngForm"},
-          "bodies":
-            { "erpData":
-              {"wfForm":"3","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilNegName":"","wfRMPaperName":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMGlueName":"","wfRMSolName":"","wfRMShellName":"","wfRMPlasticName":"","wfRMCoverName":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","created":{},"wfProcessStatus":"0","wfFormStatus":"0","wfFormName":"电容器流程卡"}
-            }
-        });
-        this.testDataPopulate(data,form);
-
-      }
-      */
 
       // Proceed to checking with storage, in event of offline mode
       this.storage.get(form.value.wfFormId).then(storageData => {
@@ -556,6 +442,7 @@ export class WorkflowPage implements OnInit {
       wfProcessName: [''],
       wfForm: [''],
       wfFormId: [''],
+      wfFormSplit: [0],
 
       // wfOrderId: [''],
       // wfOrderBatchId: [''],

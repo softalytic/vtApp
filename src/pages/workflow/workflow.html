@@ -28,9 +28,13 @@
                             </button>
 
                             <!-- Form Selector Module -->
-                            <ion-select *ngIf="wfInput.method === 'select'" [ngStyle]="{'width.em':wfInput.size}" interface="popover" style="height: 34px !important;" (ionChange)="setWfStage($event)" formControlName={{wfInput.model}} class="gridborder" okText="确定" cancelText="取消">
-                                <ion-option *ngFor="let key of wfMachineData" value={{key}}>
-                                    {{wfMachineProcess[0][key]}}
+                            <ion-select *ngIf="wfInput.method === 'select'"
+                                        [ngStyle]="{'width.em':wfInput.size}"
+                                        interface="popover" style="height: 34px !important;"
+                                        formControlName={{wfInput.model}}
+                                        class="gridborder">
+                                <ion-option *ngFor="let key of [0,1,2,3]" value={{key}}>
+                                    {{key}}
                                 </ion-option>
                             </ion-select>
 

@@ -302,7 +302,7 @@ export class EditWorkflow3Page implements OnInit{
   ];
 
     this.wfOpsInputs = [
-      {title: "分單", method: "input", model: "wfFormSplit", type: "text", icon: 'ios-copy-outline', inputType: 1, scan: false, size: 5, wfOpslI: 2},
+      // {title: "分單", method: "input", model: "wfFormSplit", type: "text", icon: 'ios-copy-outline', inputType: 1, scan: false, size: 5, wfOpslI: 2},
       //{method: "break", title: ""},
       /*
       {method: "inputs2", header: "素子烘烤", options: [
@@ -806,105 +806,6 @@ export class EditWorkflow3Page implements OnInit{
     }
   }
 
-  // showWfOpsFinalInputsAlert(wfOrderTotalQty: any, wfOrderTotalGoodQty: any, wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
-  //
-  //   if(wfOptGoodQtyValue) {
-  //     let form = this.wfInputForm;
-  //     let alert = this.alertCtrl.create({
-  //       /*
-  //       title: '',
-  //
-  //       subTitle: '确定完成和上传' + ' Order Total: ' + wfOrderTotalQty + ' Good Total: ' + wfOrderTotalGoodQty + ' Bad:' + wfOptBadQtyValue + ' opt good: ' + wfOptGoodQtyValue,
-  //       */
-  //       buttons: [{
-  //         text: '上存',
-  //         handler: () => {
-  //           console.log('save clicked');
-  //           form.value.wfProcessStatus = "0";
-  //           this.storage.set(form.value.wfFormId, form.value);
-  //           this.navCtrl.pop();
-  //         }
-  //       },
-  //         {
-  //           text: '上存 + 完成工序',
-  //           handler: () => {
-  //             console.log('submit and save clicked');
-  //             console.log("uploading form" + JSON.stringify(form.value));
-  //
-  //             let alertCtrl = this.alertCtrl.create({
-  //               title: '嚫!',
-  //               // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
-  //               // comment above for faster process
-  //               subTitle: '完成终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
-  //               buttons: [{text: '確定',
-  //                 handler: () => {
-  //                   form.value.wfProcessStatus = "1";
-  //                   this.storage.set(form.value.wfFormId, form.value);
-  //
-  //                   // Upload to Server
-  //                   console.log("uploading to server");
-  //
-  //                   // Upload images
-  //                   this.wfSvc.upload(form.value,1)
-  //                     .subscribe((data)=> {
-  //                         console.log("Successfully uploading to server");
-  //                         console.log("Upload wfInput reply from server" + JSON.stringify(data));
-  //
-  //                         if (this.images.length > 0){
-  //                           console.log("uploading images to server");
-  //                           let imgTotal = this.images.length;
-  //
-  //                           for (let i = 0; i < imgTotal; i++) {
-  //                             this.wfSvc.uploadImage(form,1,this.images[i],i,imgTotal)
-  //                               .subscribe((data)=> {
-  //                                   console.log("Successfully uploading to server");
-  //                                   console.log("Upload img reply from server" + JSON.stringify(data));
-  //
-  //                                 },
-  //                                 error => {
-  //                                   console.log(error);
-  //                                   // alert("嚫!网路不给力,请再试一次")
-  //                                 }
-  //                               );
-  //                           }
-  //                         }
-  //
-  //                         // Return back to main page
-  //                         this.navCtrl.pop();
-  //                       },
-  //                       error => {
-  //                         console.log(error);
-  //                         // alert("嚫!网路不给力,请再试一次")
-  //                       }
-  //                     );
-  //                 }
-  //               }]
-  //             });
-  //
-  //             alertCtrl.present();
-  //
-  //             //this.onSubmit();
-  //           }
-  //         }, {
-  //           text: '取消',
-  //           role: 'cancel',
-  //           handler: () => {
-  //             console.log('Cancel clicked');
-  //           }
-  //         }]
-  //     });
-  //     alert.present();
-  //   } else {
-  //     let alert = this.alertCtrl.create({
-  //       title: '',
-  //       subTitle: '请确定内容: 日期，开始，完成，良品数，不良数 ',
-  //       buttons: ['確定']
-  //     });
-  //     alert.present();
-  //
-  //   }
-  // }
-
   showWfQCPassAlert(wfQCPassValue: any) {
     if(!(wfQCPassValue == 2 || wfQCPassValue == 1)) {
       let alert = this.alertCtrl.create({
@@ -945,196 +846,6 @@ export class EditWorkflow3Page implements OnInit{
     alert.present();
   }
 
-  // takePhoto() {
-  //   // alert("taking photos");
-  //
-  //   this.presentPrompt();
-  //
-  //   const options: CameraOptions = {
-  //     quality: 50,
-  //     destinationType: this.camera.DestinationType.DATA_URL,
-  //     encodingType: this.camera.EncodingType.JPEG,
-  //     mediaType: this.camera.MediaType.PICTURE,
-  //     correctOrientation: true,
-  //     saveToPhotoAlbum: true
-  //   };
-  //
-  //   this.camera.getPicture(options).then((imageData) => {
-  //     // imageData is either a base64 encoded string or a file URI
-  //     // If it's base64:
-  //
-  //     // Photo attribute: wfForm, time, date, process or description
-  //
-  //     let imgUrl = 'data:image/jpeg;base64,' + imageData;
-  //
-  //     this.images.push(imgUrl);
-  //
-  //     this.storage.set('images', this.images);
-  //
-  //     // console.log(this.images);
-  //
-  //
-  //   }, (err) => {
-  //     // Handle error
-  //   });
-  //
-  // }
-
-  /*
-  scanBarcode(model: string){
-
-    let form = this.wfInputForm;
-
-    console.log("scanning Barcode");
-    console.log(model);
-
-    this.barcodeScanner.scan().then((barcodeData) => {
-      // Success! Barcode data is here
-      // Limiter to assume the Barcode is default used in this orderID
-
-      if ( barcodeData.format && barcodeData.format != "QR_CODE" ) {
-        console.log("this is barcode");
-
-        let data = barcodeData.text;
-
-        form.controls[model].setValue(data);
-
-      } else if (barcodeData.format == "QR_CODE") {
-        // alert('嚫，请确定你所扫描的条码是正确的');
-        // Try if it is QR code
-        console.log(barcodeData.text);
-        //alert(barcodeData.text);
-        console.log("This is QR Code");
-        this.qrCodePopulate(barcodeData.text);
-
-      } else {
-
-        alert('嚫，请确定你所扫描的条码是正确的');
-      }
-    }, (err) => {
-      // An error occurred
-      alert(err);
-    });
-  }
-
-  qrCodePopulate(barcodeData: string) {
-
-    // This function takes the barcode data and then process the JSON object
-    // Assume each barcode data is a JSON object and it has a headers and bodies component
-    // Loop through the headers
-    // for each header,
-    //    check if the length is > 0, which is a sub JSON array object for data table
-    //    else loop through the keys inside that header JSON object
-
-    console.log("running qrCodePop");
-    console.log(barcodeData);
-
-    let data = JSON.parse(barcodeData);
-    let headers = data.headers;
-    let bodies = data.bodies;
-    let form = this.wfInputForm;
-
-    // console.log(data);
-
-    for (let key in headers) {
-      // console.log(key + " : " + headers[key])
-      switch(headers[key]) {
-        case "ngForm":
-          // console.log(key + " is a form")
-
-          let formBodies = bodies[key];
-          for (let formKey in formBodies) {
-            // console.log("populate form model " + formKey);
-            // console.log("populating model " + formKey + " " + formBodies[formKey]);
-
-            try {
-              // Dynamically set form value from the scanned code data
-              // try and catch here is to protect if some of the fields are missing or failed,
-              // then it will skip onto the next key
-
-              // backup code for assigning the value into form
-              // ngForm.controls[formKey].setValue(form[formKey]);
-
-              // This use form control for the value setting
-              console.log("formKey : " + formKey);
-              console.log("Form " + form[formKey]);
-
-              this.setFormValue(formKey, formBodies[formKey]);
-
-            }
-            catch(err) {
-              console.log(err.message);
-              eval('form.value.' + formKey + '= "' + formBodies[formKey] + '"; ');
-              eval('console.log("Retrying force input " + form.value.'+ formKey + ')');
-              eval('console.log(form.value.' + formKey + ');');
-              console.log("barcode loaded in form:" + JSON.stringify(form.value));
-            }
-
-          }
-
-          console.log("barcode loaded in form:" + JSON.stringify(form.value));
-          break;
-
-        case "ngStorage":
-          console.log(key + " is a storage");
-
-          this.storage.set(key, bodies[key]);
-
-          console.log(bodies[key]);
-
-          // Testing the storage has been set
-          this.storage.get(key).then((values) => {
-            for (let valKey in values) {
-              console.log(values[valKey]);
-            }
-            console.log(key);
-            console.log(JSON.stringify(values));
-          });
-
-          break;
-
-        case "ngInput":
-          console.log(key + " is for input");
-
-          console.log(bodies[key]);
-
-          let inputBodies = bodies[key];
-          for (let inputKey in inputBodies) {
-            console.log("populate form model" + inputKey);
-
-            try {
-              // Dynamically set form value from the scanned code data
-              // try and catch here is to protect if some of the fields are missing or failed,
-              // then it will skip onto the next key
-
-              // backup code for assigning the value into form
-              // ngForm.controls[formKey].setValue(form[formKey]);
-
-              // This line no longer works
-              eval('this.' + inputKey + " = " + inputBodies[inputKey]);
-
-              // this.setFormValue(inputKey, inputBodies[inputKey]);
-
-              //  form.value.
-            }
-            catch(err) {
-              console.log(err.message);
-            }
-
-          }
-
-          break;
-
-        default:
-          console.log(key + " is error");
-      }
-    }
-  }
-
-
-
-  */
-
   setFormValue(model: string, value: any){
     //It is used for html
     let form = this.wfInputForm;
@@ -1151,6 +862,7 @@ export class EditWorkflow3Page implements OnInit{
 
       // Order Inputs detail
       wfFormId: [''],
+      wfFormSplit: [''],
       wfOrderId: [''],
       wfOrderBatchId: [''],
       wfOrderBatchQty: [''],
@@ -1165,7 +877,6 @@ export class EditWorkflow3Page implements OnInit{
       wfOrderSeries: [''],
       wfOrderSpec: [''],
       wfOrderDim: [''],
-      wfFormSplit: [''],
       wfClientId: [''],
       wfSalesOrderId: [''],
       wfSalesOrderQty: [''],

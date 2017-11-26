@@ -61,30 +61,17 @@ export class EditWorkflow1Page implements OnInit{
       {method: "input", model: "wfFormId", title: "流程卡号", type: "text", size: 12, highlight: false},
       {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 12, highlight: false},
       {method: "input", model: "wfOptMachineId", title: "机台号", type: "text", size: 6, highlight: false},
-      
-
-      /*
-      {method: "break", size: "88", visibility: "hidden"},
-      
-      {method: "input", model: "wfOrderTotalQty", title: "预设总量", type: "number", size: 5, highlight: false},
-      */     
-
       {method: "break", size: "88", visibility: "hidden"},
 
       {method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 12, highlight: false},
       {method: "input", model: "wfOrderRMId", title: "料号", type: "text", size: 12, highlight: false},
       {method: "input", model: "wfOrderSpec", title: "规格", type: "text", size: 10, highlight: false},
       {method: "input", model: "wfOrderDim", title: "尺寸", type: "text", size: 10, highlight: false},
-
-
       {method: "break", size: "88", visibility: "hidden"},
-
-      //{method: "input", model: "wfOrderTotalQty", title: "预设总量", type: "number", size: 5, highlight: false},
 
       {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 12, highlight: false},
       {method: "input", model: "wfOrderBatchQty", title: "批次量", type: "number", size: 5, highlight: false},
       {method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 5, highlight: false},
-
       {method: "break", size: "88", visibility: "hidden"},
 
       {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 20, highlight: false},
@@ -108,9 +95,8 @@ export class EditWorkflow1Page implements OnInit{
     ];
 
     this.wfOpsInputs = [
-      {title: "分單", method: "input", model: "wfFormSplit", type: "text", icon: 'ios-copy-outline', scan: false, size: 6, wfOpslI: 2},
-      
-      {method: "break", title: ""},
+      // {title: "分單", method: "input", model: "wfFormSplit", type: "text", icon: 'ios-copy-outline', scan: false, size: 6, wfOpslI: 2},
+      // {method: "break", title: ""},
 
       {method: "inputs2", header: "素子烘烤", options: [
         {title: "时间 H", model: "wfRMWindingTime", type: "text", icon: 'ios-add-circle-outline', scan: false, size: 8},
@@ -122,8 +108,9 @@ export class EditWorkflow1Page implements OnInit{
         {title: "完成时间", model: "wfOptFinishTime", type: "number", icon: "md-alarm", scan: false, size: 8}
       ]},
       {method: "inputs", options: [
-        {title: "不良数", model: "wfOptBadQty", type: "number", icon: 'ios-sad', wfbadqty: '1', scan: false, size: 8},
-        {title: "良品数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8}
+        {title: "投入数", model: "wfOptStartQty", type: "number", scan: false, size: 8},
+        {title: "不良数", model: "wfOptBadQty", type: "number", wfBadQty: '1', scan: false, size: 8},
+        {title: "良品数", model: "wfOptGoodQty", type: "number",  scan: false, size: 8}
       ]},
       {method: "table", size: 8, headers: [{title: "不良數种类"},{title: "数量"}],rows: [
         {title: "1", cols: [
@@ -150,22 +137,7 @@ export class EditWorkflow1Page implements OnInit{
           {model: "wfBadItem6", type: "text", size:"6", disabled: false},
           {model: "wfBadQty6", type: "number", size:"6",  disabled: false},
         ]},
-        /*
-        {title: "", cols: [
-          {model: "wfBadItemTotal", type: "text", size:"7", disabled: false, wftotal: "t", title: "不良数總和"},
-          {model: "wfOptBadQty", type: "number", size:"6",  disabled: false},
-        ]},
-        {title: "不良數總和", cols: [
-          {model: "wfBadTotal", type: "text", disabled: true},
-          {model: "wfBadTotal", type: "number", disabled: false},
-        ]},        
-        {title: "良品數", cols: [
-          {model: "wfGoodTotal", type: "text", disabled: true},
-          {model: "wfGoodTotal", type: "number", disabled: false},
-        ]},
-        // {title: "不良數", model: "wfBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8},
-        // {title: "良品數", model: "wfGoodQty", type: "number", icon: 'happy', scan: false, size: 8}
-        */
+
       ]}
     ];
 
@@ -281,66 +253,50 @@ export class EditWorkflow1Page implements OnInit{
             form.controls[key].setValue('');
 
           } else if(key == 'wfOptInputDate') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue(this.appDate);
 
           }  else if(key == 'wfBadItem1') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue('开路');
 
           }  else if(key == 'wfBadItem2') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue('短路');
 
           }  else if(key == 'wfBadItem3') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue('高容');
 
           }  else if(key == 'wfBadItem4') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue('低容');
 
           }  else if(key == 'wfBadItem5') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue('损耗');
 
           }  else if(key == 'wfBadItem6') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue('漏电');
           } else if(key == 'wfBadQty1') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue(0);
 
           }  else if(key == 'wfBadQty2') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue(0);
 
           }  else if(key == 'wfBadQty3') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue(0);
 
           }  else if(key == 'wfBadQty4') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue(0);
 
           }  else if(key == 'wfBadQty5') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue(0);
 
           }  else if(key == 'wfBadQty6') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue(0);
           }
             else if(key == 'wfBadItemTotal') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue('不良数總和');
           }  else if(key == 'wfOptBadQty') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue(0);
           }  else if(key == 'wfOptGoodQty') {
-            this.wfQCSignOffTmp = storageData[key];
             form.controls[key].setValue(0);
-          }    
+          }
 
           else {
             form.controls[key].setValue(storageData[key]);
@@ -448,8 +404,7 @@ export class EditWorkflow1Page implements OnInit{
     
 
     this.wfOrderTotalGoodQtyTmp = parseFloat(this.wfInputForm.value.wfOrderTotalGoodQty)  + parseFloat(this.wfInputForm.value.wfOptGoodQty);
-    
-    //alert(StaffArr.wfStaffTechId + ' staff 2: ' + StaffArr.wfStaffOptShift  + ' staff 3: ' + StaffArr.wfQCSignOff );
+
   }
 
   updateTotalGoodQty(wfOptGoodQtyValue: any) {
@@ -468,105 +423,6 @@ export class EditWorkflow1Page implements OnInit{
 
     }
   }
-
-  // showWfOpsFinalInputsAlert(wfOrderTotalQty: any, wfOrderTotalGoodQty: any, wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
-  //
-  //   if(wfOptGoodQtyValue) {
-  //     let form = this.wfInputForm;
-  //     let alert = this.alertCtrl.create({
-  //       /*
-  //       title: '',
-  //
-  //       subTitle: '确定完成和上传' + ' Order Total: ' + wfOrderTotalQty + ' Good Total: ' + wfOrderTotalGoodQty + ' Bad:' + wfOptBadQtyValue + ' opt good: ' + wfOptGoodQtyValue,
-  //       */
-  //       buttons: [{
-  //         text: '上存',
-  //         handler: () => {
-  //           console.log('save clicked');
-  //           form.value.wfProcessStatus = "0";
-  //           this.storage.set(form.value.wfFormId, form.value);
-  //           this.navCtrl.pop();
-  //         }
-  //       },
-  //         {
-  //           text: '上存 + 完成工序',
-  //           handler: () => {
-  //             console.log('submit and save clicked');
-  //             console.log("uploading form" + JSON.stringify(form.value));
-  //
-  //             let alertCtrl = this.alertCtrl.create({
-  //               title: '嚫!',
-  //               // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
-  //               // comment above for faster process
-  //               subTitle: '完成终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
-  //               buttons: [{text: '確定',
-  //                 handler: () => {
-  //                   form.value.wfProcessStatus = "1";
-  //                   this.storage.set(form.value.wfFormId, form.value);
-  //
-  //                   // Upload to Server
-  //                   console.log("uploading to server");
-  //
-  //                   // Upload images
-  //                   this.wfSvc.upload(form.value,1)
-  //                     .subscribe((data)=> {
-  //                         console.log("Successfully uploading to server");
-  //                         console.log("Upload wfInput reply from server" + JSON.stringify(data));
-  //
-  //                         if (this.images.length > 0){
-  //                           console.log("uploading images to server");
-  //                           let imgTotal = this.images.length;
-  //
-  //                           for (let i = 0; i < imgTotal; i++) {
-  //                             this.wfSvc.uploadImage(form,1,this.images[i],i,imgTotal)
-  //                               .subscribe((data)=> {
-  //                                   console.log("Successfully uploading to server");
-  //                                   console.log("Upload img reply from server" + JSON.stringify(data));
-  //
-  //                                 },
-  //                                 error => {
-  //                                   console.log(error);
-  //                                   // alert("嚫!网路不给力,请再试一次")
-  //                                 }
-  //                               );
-  //                           }
-  //                         }
-  //
-  //                         // Return back to main page
-  //                         this.navCtrl.pop();
-  //                       },
-  //                       error => {
-  //                         console.log(error);
-  //                         // alert("嚫!网路不给力,请再试一次")
-  //                       }
-  //                     );
-  //                 }
-  //               }]
-  //             });
-  //
-  //             alertCtrl.present();
-  //
-  //             //this.onSubmit();
-  //           }
-  //         }, {
-  //           text: '取消',
-  //           role: 'cancel',
-  //           handler: () => {
-  //             console.log('Cancel clicked');
-  //           }
-  //         }]
-  //     });
-  //     alert.present();
-  //   } else {
-  //     let alert = this.alertCtrl.create({
-  //       title: '',
-  //       subTitle: '请确定内容: 日期，开始，完成，良品数，不良数 ',
-  //       buttons: ['確定']
-  //     });
-  //     alert.present();
-  //
-  //   }
-  // }
 
   showWfQCPassAlert(wfQCPassValue: any) {
     if(!(wfQCPassValue == 2 || wfQCPassValue == 1)) {
@@ -608,41 +464,6 @@ export class EditWorkflow1Page implements OnInit{
     alert.present();
   }
 
-  // takePhoto() {
-  //   // alert("taking photos");
-  //
-  //   this.presentPrompt();
-  //
-  //   const options: CameraOptions = {
-  //     quality: 50,
-  //     destinationType: this.camera.DestinationType.DATA_URL,
-  //     encodingType: this.camera.EncodingType.JPEG,
-  //     mediaType: this.camera.MediaType.PICTURE,
-  //     correctOrientation: true,
-  //     saveToPhotoAlbum: true
-  //   };
-  //
-  //   this.camera.getPicture(options).then((imageData) => {
-  //     // imageData is either a base64 encoded string or a file URI
-  //     // If it's base64:
-  //
-  //     // Photo attribute: wfForm, time, date, process or description
-  //
-  //     let imgUrl = 'data:image/jpeg;base64,' + imageData;
-  //
-  //     this.images.push(imgUrl);
-  //
-  //     this.storage.set('images', this.images);
-  //
-  //     // console.log(this.images);
-  //
-  //
-  //   }, (err) => {
-  //     // Handle error
-  //   });
-  //
-  // }
-
   setFormValue(model: string, value: any){
     //It is used for html
     let form = this.wfInputForm;
@@ -659,6 +480,7 @@ export class EditWorkflow1Page implements OnInit{
 
       // Order Inputs detail
       wfFormId: [''],
+      wfFormSplit: [''],
       wfOrderId: [''],
       wfOrderBatchId: [''],
       wfOrderBatchQty: [''],
@@ -672,7 +494,6 @@ export class EditWorkflow1Page implements OnInit{
       wfOrderSeries: [''],
       wfOrderSpec: [''],
       wfOrderDim: [''],
-      wfFormSplit: [''],
 
       // Good / Bad Qty Input
       wfBadItem1: ['开路'],

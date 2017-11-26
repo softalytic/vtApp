@@ -666,6 +666,7 @@ export class EditWorkflow2Page implements OnInit{
 
       // Order Inputs detail
       wfFormId: [''],
+      wfFormSplit: [''],
       wfOrderId: [''],
       wfOrderBatchId: [''],
       wfOrderBatchQty: [''],

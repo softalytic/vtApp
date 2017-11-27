@@ -79,14 +79,14 @@ export class WorkflowPage implements OnInit {
 
     this.wfInputs = [
       {title: "流程卡号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 25},
+      {title: "台机号", method: 'input', type: 'text', model: 'wfOptMachineId', scan: true, size: 25},
+
       {method: "break", size: 20},
 
       {title: "分单", method: 'select', type: 'text', model: 'wfFormSplit', scan: false, size: 5},
       {title: "", method: 'button', label: "異常", model: 'wfFormExcept', scan: false, size: 8},
       {method: "break", size: 20},
 
-
-      {title: "台机号", method: 'input', type: 'text', model: 'wfOptMachineId', scan: true, size: 25},
 
       //{title: "总量(预设)", method: 'input', type: 'number', model: 'wfOrderTotalQty', scan: false, size: 10},
 

@@ -17,7 +17,8 @@
                     <ion-col *ngFor="let wfInput of wfInputs" col-auto>
                         <!-- Non Buttons input fields of wfForms -->
                         <ion-row align-items-center>
-                            <div class="label">{{wfInput.title}}</div>
+                            <div *ngIf="wfInput.title != ''"
+                                 class="label">{{wfInput.title}}</div>
 
                             <!-- Form Normal Input Module-->
                             <ion-input *ngIf="wfInput.method === 'input'" [ngStyle]="{'width.em':wfInput.size}" type={{wfInput.type}} formControlName={{wfInput.model}} no-padding class="gridborder" required></ion-input>
@@ -38,11 +39,25 @@
                                 </ion-option>
                             </ion-select>
 
+                            <div *ngIf="wfInput.method === 'button'" [ngStyle]="{'width.em':wfInput.size}">
+                                <ion-row>
+                                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <button [ngClass]="{'buttonsSelected': wfInputForm.value.wfFormExcept == true }"
+                                            (click)="setFormValue(wfInput.model,!wfInputForm.value.wfFormExcept)"
+                                            item-right ion-button outline type="button" round>
+                                        &nbsp; {{wfInput.label}}
+                                    </button>
+                                </ion-row>
+                            </div>
+
                             <!-- Buttons input fields of wfForms -->
                             <div *ngIf="wfInput.method === 'buttons'" [ngStyle]="{'width.em':wfInput.size}">
                                 <ion-buttons style="padding-left: 100px;">
                                     <!-- Button for Form submission -->
-                                    <button *ngFor="let option of wfInput.options" [ngClass]="{'buttonsSelected': wfInputForm.value.wfForm == option.value }" (click)="setFormValue(wfInput.model,option.value)" item-right ion-button outline type="button" round>
+                                    <button *ngFor="let option of wfInput.options"
+                                            [ngClass]="{'buttonsSelected': wfInputForm.value.wfForm == option.value }"
+                                            (click)="setFormValue(wfInput.model,option.value)"
+                                            item-right ion-button outline type="button" round>
                                         <ion-icon name="clipboard"></ion-icon>
                                         &nbsp; {{option.label}}
                                     </button>

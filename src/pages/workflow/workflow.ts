@@ -79,8 +79,13 @@ export class WorkflowPage implements OnInit {
 
     this.wfInputs = [
       {title: "流程卡号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 25},
-      {method: "break", size: 1},
+      {method: "break", size: 20},
+
       {title: "分单", method: 'select', type: 'text', model: 'wfFormSplit', scan: false, size: 5},
+      {title: "", method: 'button', label: "異常", model: 'wfFormExcept', scan: false, size: 8},
+      {method: "break", size: 20},
+
+
       {title: "台机号", method: 'input', type: 'text', model: 'wfOptMachineId', scan: true, size: 25},
 
       //{title: "总量(预设)", method: 'input', type: 'number', model: 'wfOrderTotalQty', scan: false, size: 10},
@@ -92,6 +97,8 @@ export class WorkflowPage implements OnInit {
       {method: "break", size: 20},
 
       // Expand as buttons
+
+
       {title: "流程卡", method: 'buttons', options: [
         {value: '1', label: '裸品'},
         {value: '2', label: '贴片电容器'},
@@ -109,6 +116,7 @@ export class WorkflowPage implements OnInit {
     this.storage.set("wfProcess", this.dataWfProcess);
     this.storage.set("wfMachine", this.dataMachine);
 
+    this.wfInputForm.controls["wfFormExcept"].setValue(false)
   };
 
   onAddWf(){
@@ -445,12 +453,7 @@ export class WorkflowPage implements OnInit {
       wfFormId: [''],
       wfFormSplit: [0],
 
-      // wfOrderId: [''],
-      // wfOrderBatchId: [''],
-      // wfOrderBatchQty: [''],
-      // wfOrderTotalQty: [''],
       wfOptMachineId: [''],
-
       wfSpecCap: [''],
       wfSpecDF: [''],
       wfSpecLC: [''],
@@ -532,7 +535,9 @@ export class WorkflowPage implements OnInit {
 
       wfFormStatus: [''],
       wfProcessStatus: [''],
-      created: ['']
+      created: [''],
+
+      wfFormExcept: [false]
 
     });
   }

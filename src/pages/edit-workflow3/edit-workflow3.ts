@@ -1241,6 +1241,7 @@ export class EditWorkflow3Page implements OnInit{
       wfGoodTotal: [''],
       wfFormStatus: [''],
       wfProcessStatus: [''],
+      wfFormExcept: ['']
 
     });
 

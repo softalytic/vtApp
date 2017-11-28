@@ -348,23 +348,7 @@ export class WorkflowService {
         form.controls['wfOptBadQty'].setValue(totalBadQtyX);
       }
 
-      // if(form.value.wfForm == '1' || (form.value.wfForm == '3' && form.value.wfProcess != '9' && form.value.wfProcess != '2') ) {
-      //   let starTime = form.value.wfOptStartTime;
-      //   if(!starTime.includes(':')){
-      //     starTime = [starTime.slice(0, 2), ':', starTime.slice(2)].join('');
-      //     form.controls['wfOptStartTime'].setValue(starTime);
-      //   }
-      //
-      //   let endTime = form.value.wfOptFinishTime;
-      //   if(!endTime.includes(':')){
-      //     endTime = [endTime.slice(0, 2), ':', endTime.slice(2)].join('');
-      //     form.controls['wfOptFinishTime'].setValue(endTime);
-      //   }
-      //
-      // }
-  
       let updatedGoodQty = this.toInt(form.value.wfOptGoodQty) / 1000;
-      
       let qtyCheckMsg = '不良数總和: ' + this.toInt(form.value.wfOptBadQty);
   
       qtyCheckMsg += '<br><br>良品数: ' + this.toInt(form.value.wfOptGoodQty) + ' (' + updatedGoodQty + 'K)';
@@ -394,23 +378,6 @@ export class WorkflowService {
             handler: () => {
               console.log('Agree clicked');
 
-              //Move it to here
-              /*
-              if(form.value.wfForm == '1' || (form.value.wfForm == '3' && form.value.wfProcess != '9' && form.value.wfProcess != '2') ) {
-                let starTime = form.value.wfOptStartTime;
-                if(!starTime.includes(':')){
-                  starTime = [starTime.slice(0, 2), ':', starTime.slice(2)].join('');
-                  form.controls['wfOptStartTime'].setValue(starTime);
-                }
-
-                let endTime = form.value.wfOptFinishTime;
-                if(!endTime.includes(':')){
-                  endTime = [endTime.slice(0, 2), ':', endTime.slice(2)].join('');
-                  form.controls['wfOptFinishTime'].setValue(endTime);
-                }
-
-              }
-              */
               alert.present();
             }
           }
@@ -424,154 +391,6 @@ export class WorkflowService {
       }
     }
 
-    // if(wfOptGoodQtyValue) {
-    //   let form = wfInputForm;
-    //   let alert = this.alertCtrl.create({
-    //
-    //     title: '注意!',
-    //     subTitle: '确定完成和上存工單' + form.value.wfFormId,
-    //     buttons: [{
-    //       text: '上存',
-    //       handler: () => {
-    //         console.log('save clicked');
-    //         form.value.wfProcessStatus = "0";
-    //         this.storage.set(form.value.wfFormId, form.value);
-    //
-    //         this.upload(form.value,1)
-    //           .subscribe((data)=> {
-    //               console.log("Successfully uploading to server");
-    //               console.log("Upload wfInput reply from server" + JSON.stringify(data));
-    //
-    //               if (images.length > 0){
-    //                 console.log("uploading images to server");
-    //                 let imgTotal = images.length;
-    //
-    //                 for (let i = 0; i < imgTotal; i++) {
-    //                   this.uploadImage(form,1,images[i],i,imgTotal)
-    //                     .subscribe((data)=> {
-    //                         console.log("Successfully uploading to server");
-    //                         console.log("Upload img reply from server" + JSON.stringify(data));
-    //
-    //                       },
-    //                       error => {
-    //                         console.log(error);
-    //                         let alert = this.alertCtrl.create({
-    //                           title: '注意!',
-    //                           message: '嚫!网路不给力,请再试一次!',
-    //                           buttons: ['好的']
-    //                         });
-    //                         alert.present();
-    //                       }
-    //                     );
-    //                 }
-    //               }
-    //
-    //               // Return back to main page
-    //               navCtrl.pop();
-    //             },
-    //             error => {
-    //               console.log(error);
-    //               let alert = this.alertCtrl.create({
-    //                 title: '注意!',
-    //                 message: '嚫!网路不给力,请再试一次!',
-    //                 buttons: ['好的']
-    //               });
-    //               alert.present();
-    //
-    //             }
-    //           );
-    //
-    //         navCtrl.pop();
-    //       }
-    //     },
-    //       {
-    //         text: '上存 + 完成工序',
-    //         handler: () => {
-    //           console.log('submit and save clicked');
-    //           console.log("uploading form" + JSON.stringify(form.value));
-    //
-    //           let alertCtrl = this.alertCtrl.create({
-    //             title: '嚫!',
-    //             // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
-    //             // comment above for faster process
-    //             subTitle: '完成终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
-    //             buttons: [{text: '確定',
-    //               handler: () => {
-    //                 form.value.wfProcessStatus = "1";
-    //                 this.storage.set(form.value.wfFormId, form.value);
-    //
-    //                 // Upload to Server
-    //                 console.log("uploading to server");
-    //
-    //                 // Upload images
-    //                 this.upload(form.value,form.value.wfForm)
-    //                   .subscribe((data)=> {
-    //                       console.log("Successfully uploading to server");
-    //                       console.log("Upload wfInput reply from server" + JSON.stringify(data));
-    //
-    //                       if (images.length > 0){
-    //                         console.log("uploading images to server");
-    //                         let imgTotal = images.length;
-    //
-    //                         for (let i = 0; i < imgTotal; i++) {
-    //                           this.uploadImage(form,form.value.wfForm,images[i],i,imgTotal)
-    //                             .subscribe((data)=> {
-    //                                 console.log("Successfully uploading to server");
-    //                                 console.log("Upload img reply from server" + JSON.stringify(data));
-    //
-    //                               },
-    //                               error => {
-    //                                 console.log(error);
-    //                                 // let alert = this.alertCtrl.create({
-    //                                 //   title: '注意!',
-    //                                 //   message: '嚫!网路不给力,请再试一次!',
-    //                                 //   buttons: ['好的']
-    //                                 // });
-    //                                 // alert.present();
-    //                               }
-    //                             );
-    //                         }
-    //                       }
-    //
-    //                       // Return back to main page
-    //                       navCtrl.pop();
-    //                     },
-    //                     error => {
-    //                       console.log(error);
-    //                       let alert = this.alertCtrl.create({
-    //                         title: '注意!',
-    //                         message: '嚫!网路不给力,请再试一次!',
-    //                         buttons: ['好的']
-    //                       });
-    //                       alert.present();
-    //
-    //                     }
-    //                   );
-    //               }
-    //             }]
-    //           });
-    //
-    //           alertCtrl.present();
-    //
-    //           //this.onSubmit();
-    //         }
-    //       }, {
-    //         text: '取消',
-    //         role: 'cancel',
-    //         handler: () => {
-    //           console.log('Cancel clicked');
-    //         }
-    //       }]
-    //   });
-    //   alert.present();
-    // } else {
-    //   let alert = this.alertCtrl.create({
-    //     title: '',
-    //     subTitle: '请确定内容: 日期，开始，完成，良品数，不良数 ',
-    //     buttons: ['確定']
-    //   });
-    //   alert.present();
-    // }
   }
 
   showEndDateErrorAlert(endDate: any) {

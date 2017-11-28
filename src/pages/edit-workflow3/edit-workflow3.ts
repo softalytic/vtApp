@@ -127,12 +127,12 @@ export class EditWorkflow3Page implements OnInit{
       // {modelName: "wfRMFoilNegLName", title: "L", type: "text", modelSerial: 'wfRMFoilNegLSerial', highlight: false},
       {modelName: "wfRMPaperName", title: "电解纸", type: "text", modelSerial: 'wfRMPaperSerial', highlight: false},
       {modelName: "wfRMPaperQty", title: "数量", type: "number", highlight: false},
-      {modelName: "wfRMGlueName", title: "胶水/胶带", type: "text", modelSerial: 'wfRMGlueSerial', highlight: false},
+      {modelName: "wfRMGlueName", title: "胶水/带", type: "text", modelSerial: 'wfRMGlueSerial', highlight: false},
       {modelName: "wfRMSolName", title: "电解液", type: "text", modelSerial: 'wfRMSolSerial', highlight: false},
       {modelName: "wfRMSolQty", title: "数量", type: "number", highlight: false},
       {modelName: "wfRMPinPosName", title: "正导针", type: "text", modelSerial: 'wfRMPinPosSerial', highlight: false},
       {modelName: "wfRMPinNegName", title: "负导针", type: "text", modelSerial: 'wfRMPinNegSerial', highlight: false},
-      {modelName: "wfRMPinQty", title: "数量", type: "number", highlight: false},
+      {modelName: "wfRMPinPosQty", title: "数量", type: "number", highlight: false},
       // {modelName: "wfRMPinAmtName", title: "导针数量", type: "text", modelSerial: 'wfRMPinAmtSerial', highlight: false},
       {modelName: "wfRMPlasticName", title: "胶粒", type: "text", modelSerial: 'wfRMPlasticSerial', highlight: false},
       {modelName: "wfRMPlasticQty", title: "数量", type: "number", highlight: false},
@@ -643,35 +643,61 @@ export class EditWorkflow3Page implements OnInit{
 
       for (let key in form.value) {
         // console.log("Loading " + key + " Storage:" + storageData[key]);
+        if(key in storageData){
+          try {
+            switch (key) {
+              case 'wfStaffTechId':
+                this.wfStaffTechIdTmp = storageData[key];
+                form.controls[key].setValue('');
+                break;
 
-        try {
-          if(key == 'wfStaffTechId') {
-            this.wfStaffTechIdTmp = storageData[key];
-            form.controls[key].setValue('');
+              case 'wfStaffOptShift':
+                this.wfStaffOptShiftTmp = storageData[key];
+                form.controls[key].setValue('');
+                break;
 
-          } else if(key == 'wfStaffOptShift') {
-            this.wfStaffOptShiftTmp = storageData[key];
-            form.controls[key].setValue('');
+              case 'wfQCSignOff':
+                this.wfQCSignOffTmp = storageData[key];
+                form.controls[key].setValue('');
+                break;
 
-          } else if(key == 'wfQCSignOff') {
-            this.wfQCSignOffTmp = storageData[key];
-            form.controls[key].setValue('');
+              case 'wfOptInputDate':
+                form.controls[key].setValue(this.appDate);
+                break;
 
-          } else if(key == 'wfOptInputDate') {
-            this.wfQCSignOffTmp = storageData[key];
-            form.controls[key].setValue(this.appDate);
+              case 'wfGoodTotal':
+                if (form.value.wfProcessStatus) {
+                  form.controls[key].setValue(0);
+                  form.controls['wfOptStartQty'].setValue(storageData[key]);
+                } else {
+                  form.controls[key].setValue(storageData[key]);
+                }
+                break;
 
-          } else {
-            form.controls[key].setValue(storageData[key]);
-            // console.log("Form value" + form.controls[key])
+              case 'wfBadTotal':
+                if (form.value.wfProcessStatus) {
+                  form.controls[key].setValue(0);
+                }
+                break;
+
+              case 'wfOptStartQty':
+                if (form.value.wfProcessStatus) {
+                  break;
+                } else {
+                  form.controls[key].setValue(storageData[key]);
+                }
+                break;
+
+              default:
+                form.controls[key].setValue(storageData[key]);
+            }
+
+
+
+          } catch (err) {
+            // console.log("Got an error from formInit populating from storage: "  + err);
 
           }
-
-
-
-        } catch (err) {
-          // console.log("Got an error from formInit populating from storage: "  + err);
-
         }
       }
 
@@ -920,7 +946,7 @@ export class EditWorkflow3Page implements OnInit{
       wfRMPinNegName: [''],
       wfRMPinNegSerial: [''],
       //
-      wfRMPinQty: [''],
+      wfRMPinPosQty: [''],
       wfRMPlasticName: [''],
       wfRMPlasticSerial: [''],
       //

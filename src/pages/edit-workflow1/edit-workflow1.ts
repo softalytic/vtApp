@@ -85,7 +85,7 @@ export class EditWorkflow1Page implements OnInit{
       {modelName: "wfRMFoilNegName", title: "負箔", type: "text", modelSerial: 'wfRMFoilNegSerial', highlight: false},
       {modelName: "wfRMFoilNegLName", title: "負箔 - L", type: "text", modelSerial: 'wfRMFoilNegLSerial', highlight: false},
       {modelName: "wfRMPaperName", title: "电解纸", type: "text", modelSerial: 'wfRMPaperSerial', highlight: false},
-      {modelName: "wfRMGlueName", title: "胶水/胶带", type: "text", modelSerial: 'wfRMGlueSerial', highlight: false},
+      {modelName: "wfRMGlueName", title: "胶水/带", type: "text", modelSerial: 'wfRMGlueSerial', highlight: false},
       {modelName: "wfRMSolName", title: "电解液", type: "text", modelSerial: 'wfRMSolSerial', highlight: false},
       {modelName: "wfRMPinPosName", title: "正导针", type: "text", modelSerial: 'wfRMPinPosSerial', highlight: false},
       {modelName: "wfRMPinNegName", title: "负导针", type: "text", modelSerial: 'wfRMPinNegSerial', highlight: false},
@@ -239,69 +239,62 @@ export class EditWorkflow1Page implements OnInit{
       for (let key in form.value) {
         // console.log("Loading " + key + " Storage:" + storageData[key]);
 
-        try {
-          if(key == 'wfStaffTechId') {
-            this.wfStaffTechIdTmp = storageData[key];
-            form.controls[key].setValue('');
+        if(key in storageData){
+          try {
+            switch (key) {
+              case 'wfStaffTechId':
+                this.wfStaffTechIdTmp = storageData[key];
+                form.controls[key].setValue('');
+                break;
 
-          } else if(key == 'wfStaffOptShift') {
-            this.wfStaffOptShiftTmp = storageData[key];
-            form.controls[key].setValue('');
+              case 'wfStaffOptShift':
+                this.wfStaffOptShiftTmp = storageData[key];
+                form.controls[key].setValue('');
+                break;
 
-          } else if(key == 'wfQCSignOff') {
-            this.wfQCSignOffTmp = storageData[key];
-            form.controls[key].setValue('');
+              case 'wfQCSignOff':
+                this.wfQCSignOffTmp = storageData[key];
+                form.controls[key].setValue('');
+                break;
 
-          } else if(key == 'wfOptInputDate') {
-            form.controls[key].setValue(this.appDate);
+              case 'wfOptInputDate':
+                form.controls[key].setValue(this.appDate);
+                break;
 
-          }  else if(key == 'wfBadItem1') {
-            form.controls[key].setValue('开路');
+              case 'wfGoodTotal':
+                if (form.value.wfProcessStatus) {
+                  form.controls[key].setValue(0);
+                  form.controls['wfOptStartQty'].setValue(storageData[key]);
+                } else {
+                  form.controls[key].setValue(storageData[key]);
+                }
+                break;
 
-          }  else if(key == 'wfBadItem2') {
-            form.controls[key].setValue('短路');
+              case 'wfBadTotal':
+                if (form.value.wfProcessStatus) {
+                  form.controls[key].setValue(0);
+                }
+                break;
 
-          }  else if(key == 'wfBadItem3') {
-            form.controls[key].setValue('高容');
+              case 'wfOptStartQty':
+                if (form.value.wfProcessStatus) {
+                  break;
+                } else {
+                  form.controls[key].setValue(storageData[key]);
+                }
+                break;
 
-          }  else if(key == 'wfBadItem4') {
-            form.controls[key].setValue('低容');
+              default:
+                form.controls[key].setValue(storageData[key]);
+            }
 
-          }  else if(key == 'wfBadItem5') {
-            form.controls[key].setValue('损耗');
-
-          }  else if(key == 'wfBadItem6') {
-            form.controls[key].setValue('漏电');
-          } else if(key == 'wfBadQty1') {
-            form.controls[key].setValue(0);
-          }  else if(key == 'wfBadQty2') {
-            form.controls[key].setValue(0);
-          }  else if(key == 'wfBadQty3') {
-            form.controls[key].setValue(0);
-          }  else if(key == 'wfBadQty4') {
-            form.controls[key].setValue(0);
-          }  else if(key == 'wfBadQty5') {
-            form.controls[key].setValue(0);
-          } else if(key == 'wfBadQty6') {
-            form.controls[key].setValue(0);
-          } else if(key == 'wfBadItemTotal') {
-            form.controls[key].setValue('不良数總和');
-          }  else if(key == 'wfOptBadQty') {
-            form.controls[key].setValue(0);
-          }  else if(key == 'wfOptGoodQty') {
-            form.controls[key].setValue(0);
+          } catch (err) {
+            // console.log("Got an error from formInit populating from storage: "  + err);
           }
-
-          else {
-            form.controls[key].setValue(storageData[key]);
-            // console.log("Form value" + form.controls[key])
-
-          }
-        } catch (err) {
-          // console.log("Got an error from formInit populating from storage: "  + err);
-
         }
+
       }
+
       console.log("Populated form now is: " + JSON.stringify(this.wfInputForm.value));
 
     });

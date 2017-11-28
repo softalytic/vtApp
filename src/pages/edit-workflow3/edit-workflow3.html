@@ -78,11 +78,11 @@
                             </ion-input>
                         </ion-col>
                         <ion-col>
-                            <ion-input *ngIf="wfRMDetail.modelName!= 'wfRMCoverCheck' && wfRMDetail.modelName != 'wfRMFoilPosQty' && wfRMDetail.modelName != 'wfRMFoilNegQty' && wfRMDetail.modelName != 'wfRMPaperQty' && wfRMDetail.modelName != 'wfRMSolQty' && wfRMDetail.modelName != 'wfRMPinQty' && wfRMDetail.modelName != 'wfRMPlasticQty' && wfRMDetail.modelName != 'wfRMShellQty' && wfRMDetail.modelName != 'wfRMCoverQty'" class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelSerial].value}}
+                            <ion-input *ngIf="wfRMDetail.modelName!= 'wfRMCoverCheck' && wfRMDetail.modelName != 'wfRMFoilPosQty' && wfRMDetail.modelName != 'wfRMFoilNegQty' && wfRMDetail.modelName != 'wfRMPaperQty' && wfRMDetail.modelName != 'wfRMSolQty' && wfRMDetail.modelName != 'wfRMPinPosQty' && wfRMDetail.modelName != 'wfRMPlasticQty' && wfRMDetail.modelName != 'wfRMShellQty' && wfRMDetail.modelName != 'wfRMCoverQty'" class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelSerial].value}}
                                        type={{wfRMDetail.type}} ></ion-input>
                         </ion-col>
                         <!-- This is the break line-->
-                        <ion-col col-11 *ngIf="wfRMDetail.modelName === 'wfRMGlueName' || wfRMDetail.modelName === 'wfRMFoilPosQty' || wfRMDetail.modelName === 'wfRMFoilNegQty' || wfRMDetail.modelName == 'wfRMPaperQty' || wfRMDetail.modelName == 'wfRMSolQty' || wfRMDetail.modelName == 'wfRMPinQty' || wfRMDetail.modelName == 'wfRMPlasticQty' || wfRMDetail.modelName == 'wfRMShellQty' " no-padding style="width: 88em;" class="ageingSubPart"></ion-col>
+                        <ion-col col-11 *ngIf="wfRMDetail.modelName === 'wfRMGlueName' || wfRMDetail.modelName === 'wfRMFoilPosQty' || wfRMDetail.modelName === 'wfRMFoilNegQty' || wfRMDetail.modelName == 'wfRMPaperQty' || wfRMDetail.modelName == 'wfRMSolQty' || wfRMDetail.modelName == 'wfRMPinPosQty' || wfRMDetail.modelName == 'wfRMPlasticQty' || wfRMDetail.modelName == 'wfRMShellQty' " no-padding style="width: 88em;" class="ageingSubPart"></ion-col>
                     </ion-row>
 
                 </ion-col>

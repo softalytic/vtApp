@@ -45,6 +45,8 @@ export class WorkflowPage implements OnInit {
     4:"终检"
   };
 
+  wfLoad = false;
+
   testRadioOpen = false;
 
   dataWfProcess = {
@@ -97,8 +99,6 @@ export class WorkflowPage implements OnInit {
       {method: "break", size: 20},
 
       // Expand as buttons
-
-
       {title: "流程卡", method: 'buttons', options: [
         {value: '1', label: '裸品'},
         {value: '2', label: '贴片电容器'},
@@ -148,6 +148,7 @@ export class WorkflowPage implements OnInit {
         formMsgAlert += '<br><br>4. 選擇工序';
       }
       this.wfSvc.warningAlert('請提供或更正下列资料：', formMsgAlert + '<br><br>然後按 \" 確定\”', '继續');
+
     } 
     else {
       
@@ -207,8 +208,9 @@ export class WorkflowPage implements OnInit {
             // As the current app has lift up the limitation and let user choose the workflow,
             // then you can either comment out most of the code within this function
             // or simply re-write the nav push in a separate function
-
-            this.workflowStateChange();
+            if (!this.wfLoad){
+              this.workflowStateChange();
+            }
 
           }
         });
@@ -227,12 +229,13 @@ export class WorkflowPage implements OnInit {
         // As the current app has lift up the limitation and let user choose the workflow,
         // then you can either comment out most of the code within this function
         // or simply re-write the nav push in a separate function
-
-        this.workflowStateChange();
+        if (!this.wfLoad){
+          this.workflowStateChange();
+        }
 
       }
 
-      this.workflowStateChange();
+      // this.workflowStateChange();
 
 
     },(err)=>{
@@ -268,12 +271,15 @@ export class WorkflowPage implements OnInit {
         // As the current app has lift up the limitation and let user choose the workflow,
         // then you can either comment out most of the code within this function
         // or simply re-write the nav push in a separate function
-        this.workflowStateChange();
+        if (!this.wfLoad){
+          this.workflowStateChange();
+        }
 
       }, err => {
         console.log("cant find record");
-
-        this.workflowStateChange();
+        if (!this.wfLoad){
+          this.workflowStateChange();
+        }
 
       });
 
@@ -304,6 +310,7 @@ export class WorkflowPage implements OnInit {
     let form = this.wfInputForm;
     let wfPOldState: any;
     let wfPNewState: any;
+    this.wfLoad = true;
 
     this.storage.get("wfProcess").then(storageData => {
 
@@ -312,8 +319,9 @@ export class WorkflowPage implements OnInit {
       console.log('form.value.wfFormStatus ' + form.value.wfFormStatus);
       console.log('form.value.wfProcessStatus ' + form.value.wfProcessStatus);
 
-
       form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
+
+      /*
 
       if (form.value.wfFormStatus == "" || form.value.wfFormStatus == null) {
         form.value.wfFormStatus = '0';
@@ -330,6 +338,7 @@ export class WorkflowPage implements OnInit {
         console.log("wfForm is: " + form.value.wfFormId);
         console.log("Printing wfProcess: " + JSON.stringify(wfStorage[form.value.wfForm].Process));
         console.log("form.value.wfProcess " + form.value.wfProcess.toString() + " " + typeof(form.value.wfProcess.toString()));
+
 
         // load the next state of the change
         // Change all to String for safety
@@ -363,6 +372,8 @@ export class WorkflowPage implements OnInit {
         return alert("This wfForm has been marked complete");
 
       }
+
+      */
 
       console.log("Saving the form into storage");
       this.storage.set(form.value.wfFormId, form.value);
@@ -426,11 +437,11 @@ export class WorkflowPage implements OnInit {
         // form.controls[key].setValue(data[key]);
 
         if (form.controls[key].value == null || form.controls[key].value == "" ) {
-          console.log("populate form model " + key);
+          // console.log("populate form model " + key);
           console.log("populating model " + key + " " + data[key]);
           form.controls[key].setValue(data[key]);
-          eval('console.log(form.value.' + key + ');');
-          console.log(JSON.stringify(form.value));
+          // eval('console.log(form.value.' + key + ');');
+          // console.log(JSON.stringify(form.value));
         }
 
       }
@@ -501,7 +512,8 @@ export class WorkflowPage implements OnInit {
       wfRMPaperQty: [''],
       wfRMPinPosName: [''],
       wfRMPinNegName: [''],
-      wfRMPinQty: [''],
+      wfRMPinPosQty: [''],
+      wfRMPinNegQty: [''],
       wfRMGlueName: [''],
       wfRMSolName: [''],
       wfRMSolQty: [''],
@@ -533,8 +545,8 @@ export class WorkflowPage implements OnInit {
       wfBadTotal: [''],
       wfGoodTotal: [''],
 
-      wfFormStatus: [''],
-      wfProcessStatus: [''],
+      wfFormStatus: [false],
+      wfProcessStatus: [false],
       created: [''],
 
       wfFormExcept: [false]

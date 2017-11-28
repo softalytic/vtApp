@@ -210,33 +210,61 @@ export class EditWorkflow2Page implements OnInit{
 
       for (let key in form.value) {
         // console.log("Loading " + key + " Storage:" + storageData[key]);
+        if(key in storageData){
+          try {
+            switch (key) {
+              case 'wfStaffTechId':
+                this.wfStaffTechIdTmp = storageData[key];
+                form.controls[key].setValue('');
+                break;
 
-        try {
-          if(key == 'wfStaffTechId') {
-            this.wfStaffTechIdTmp = storageData[key];
-            form.controls[key].setValue('');
+              case 'wfStaffOptShift':
+                this.wfStaffOptShiftTmp = storageData[key];
+                form.controls[key].setValue('');
+                break;
 
-          } else if(key == 'wfStaffOptShift') {
-            this.wfStaffOptShiftTmp = storageData[key];
-            form.controls[key].setValue('');
+              case 'wfQCSignOff':
+                this.wfQCSignOffTmp = storageData[key];
+                form.controls[key].setValue('');
+                break;
 
-          } else if(key == 'wfQCSignOff') {
-            this.wfQCSignOffTmp = storageData[key];
-            form.controls[key].setValue('');
+              case 'wfOptInputDate':
+                form.controls[key].setValue(this.appDate);
+                break;
 
-          } else if(key == 'wfOptInputDate') {
-            this.wfQCSignOffTmp = storageData[key];
-            form.controls[key].setValue(this.appDate);
+              case 'wfGoodTotal':
+                if (form.value.wfProcessStatus) {
+                  form.controls[key].setValue(0);
+                  form.controls['wfOptStartQty'].setValue(storageData[key]);
+                } else {
+                  form.controls[key].setValue(storageData[key]);
+                }
+                break;
 
-          } else {
-            form.controls[key].setValue(storageData[key]);
-            console.log("Form value" + form.controls[key])
+              case 'wfBadTotal':
+                if (form.value.wfProcessStatus) {
+                  form.controls[key].setValue(0);
+                }
+                break;
+
+              case 'wfOptStartQty':
+                if (form.value.wfProcessStatus) {
+                  break;
+                } else {
+                  form.controls[key].setValue(storageData[key]);
+                }
+                break;
+
+              default:
+                form.controls[key].setValue(storageData[key]);
+            }
+
+          } catch (err) {
+            console.log("Got an error from formInit populating from storage: "  + err);
 
           }
-        } catch (err) {
-          console.log("Got an error from formInit populating from storage: "  + err);
-
         }
+
       }
 
       if (form.value.wfProcess == "4") {

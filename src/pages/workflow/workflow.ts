@@ -201,7 +201,7 @@ export class WorkflowPage implements OnInit {
             // 1. All the input on the screen assume to be latest and correct before user proceed to next stage
             // 2. Through the barcode scan, which all the data will be called from the server
             // 3. Which user can then decide what is the phase of next step
-            this.loadDataToForm(form, serverData[0]);
+            if (!this.loadDataToForm(form, serverData[0])){return;};
             // this.populateDataToForm(form, serverData[0]);
 
             // This function is for automatic workflow state change base on previous business rule
@@ -222,7 +222,7 @@ export class WorkflowPage implements OnInit {
         // 1. All the input on the screen assume to be latest and correct before user proceed to next stage
         // 2. Through the barcode scan, which all the data will be called from the server
         // 3. Which user can then decide what is the phase of next step
-        this.loadDataToForm(form, serverData[0]);
+        if (!this.loadDataToForm(form, serverData[0])){return;};
         // this.populateDataToForm(form, serverData[0]);
 
         // This function is for automatic workflow state change base on previous business rule
@@ -262,7 +262,7 @@ export class WorkflowPage implements OnInit {
           // This code below replace the upper function,
           // this is to assume the latest input from user is always correct
           // Only will override if there is no input at all
-          this.loadDataToForm(form, storageData);
+          if (!this.loadDataToForm(form, storageData)){return;};
 
         }
 
@@ -308,8 +308,8 @@ export class WorkflowPage implements OnInit {
     console.log(JSON.stringify(this.wfInputForm.value));
 
     let form = this.wfInputForm;
-    let wfPOldState: any;
-    let wfPNewState: any;
+    // let wfPOldState: any;
+    // let wfPNewState: any;
     this.wfLoad = true;
 
     this.storage.get("wfProcess").then(storageData => {
@@ -321,59 +321,7 @@ export class WorkflowPage implements OnInit {
 
       form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
 
-      /*
 
-      if (form.value.wfFormStatus == "" || form.value.wfFormStatus == null) {
-        form.value.wfFormStatus = '0';
-      }
-
-      if (form.value.wfProcessStatus == "" || form.value.wfProcessStatus == null) {
-        form.value.wfProcessStatus = "0";
-        // wfPNewState = "1";
-      }
-
-      if (form.value.wfFormStatus.toString() == '0' && form.value.wfProcessStatus.toString() == '1') {
-        // load the process from storage
-        console.log("Loading wfProcess from storage");
-        console.log("wfForm is: " + form.value.wfFormId);
-        console.log("Printing wfProcess: " + JSON.stringify(wfStorage[form.value.wfForm].Process));
-        console.log("form.value.wfProcess " + form.value.wfProcess.toString() + " " + typeof(form.value.wfProcess.toString()));
-
-
-        // load the next state of the change
-        // Change all to String for safety
-        if (form.value.wfProcess.toString() == "" || form.value.wfProcess.toString() == null ) {
-          wfPNewState = "1";
-        } else {
-          wfPOldState = Object.keys(wfStorage[form.value.wfForm].Process).indexOf(form.value.wfProcess.toString());
-          wfPNewState = Object.keys(wfStorage[form.value.wfForm].Process)[wfPOldState+1];
-
-          // If there is no more process, then break the process
-          if (wfPNewState == null) {
-            // Need to fine tune this alert if have time
-            return alert("嚫，此工單的所有工序己完成!");
-          }
-        }
-
-        console.log("wfPOldState: " + wfPOldState);
-        console.log("wfPNewState: " + wfPNewState);
-
-        // Assign new value into the form
-        form.value.wfProcess = wfPNewState;
-        form.value.wfProcessName = wfStorage[form.value.wfForm].Process[wfPNewState];
-
-        console.log("New state is " + form.value.wfProcess + " " + form.value.wfProcessName);
-        console.log( "New state form : " + JSON.stringify(form.value));
-
-      } else if (form.value.wfProcessStatus == '0') {
-        console.log("Previous process has not completed and will resume now");
-
-      } else if (form.value.wfFormStatus == '1') {
-        return alert("This wfForm has been marked complete");
-
-      }
-
-      */
 
       console.log("Saving the form into storage");
       this.storage.set(form.value.wfFormId, form.value);
@@ -431,29 +379,40 @@ export class WorkflowPage implements OnInit {
 
     console.log("Loading data to form, data are " + JSON.stringify(data));
 
-    for (let key in data) {
-      try {
-        // This use form control for the value setting
-        // form.controls[key].setValue(data[key]);
+    if(form.value.wfForm == data["wfForm"]){
+      if(this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfProcess']) && data['wfProcessStatus']){
+        form.value.wfProcessStatus = false;
+      }
 
-        if (form.controls[key].value == null || form.controls[key].value == "" ) {
-          // console.log("populate form model " + key);
-          console.log("populating model " + key + " " + data[key]);
-          form.controls[key].setValue(data[key]);
+      for (let key in data) {
+        try {
+          // This use form control for the value setting
+          // form.controls[key].setValue(data[key]);
+
+          if (form.controls[key].value == null || form.controls[key].value == "" ) {
+            // console.log("populate form model " + key);
+            console.log("populating model " + key + " " + data[key]);
+            form.controls[key].setValue(data[key]);
+            // eval('console.log(form.value.' + key + ');');
+            // console.log(JSON.stringify(form.value));
+          }
+
+        }
+        catch(err) {
+          console.log(err.message);
+          // Use eval to dynamically inject the value into the form
+          // eval('form.value.' + key + '= "' + data[key] + '"; ');
+          // eval('console.log("Retrying force input " + form.value.'+ key + ')');
           // eval('console.log(form.value.' + key + ');');
-          // console.log(JSON.stringify(form.value));
         }
 
       }
-      catch(err) {
-        console.log(err.message);
-        // Use eval to dynamically inject the value into the form
-        // eval('form.value.' + key + '= "' + data[key] + '"; ');
-        // eval('console.log("Retrying force input " + form.value.'+ key + ')');
-        // eval('console.log(form.value.' + key + ');');
-      }
-
+    } else {
+      alert("流程卡选择错了!");
+      return false;
     }
+
+
   }
 
   private formInit() {

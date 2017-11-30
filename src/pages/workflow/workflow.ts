@@ -111,10 +111,14 @@ export class WorkflowPage implements OnInit {
   ngOnInit(){
     this.formInit();
 
+    console.log("The beginning of the form " + JSON.stringify(this.wfInputForm.value));
+
     // This is to initialise the storage with core data tables for the app
-    this.storage.clear();
+    // this.storage.clear();
     this.storage.set("wfProcess", this.dataWfProcess);
     this.storage.set("wfMachine", this.dataMachine);
+
+    this.wfLoad = false;
 
     this.wfInputForm.controls["wfFormExcept"].setValue(false)
   };
@@ -255,6 +259,10 @@ export class WorkflowPage implements OnInit {
         //    proceed to load data to form
         // Else
         //    treat it as new record
+
+        console.log("storage data "+ JSON.stringify(storageData));
+
+
         if(storageData){
           console.log("Result found:" + form.value.wfFormId);
           // this.populateDataToForm(form, storageData);
@@ -262,7 +270,9 @@ export class WorkflowPage implements OnInit {
           // This code below replace the upper function,
           // this is to assume the latest input from user is always correct
           // Only will override if there is no input at all
-          if (!this.loadDataToForm(form, storageData)){return;};
+          if (!this.loadDataToForm(form, storageData)){
+            return;
+          };
 
         }
 
@@ -320,8 +330,6 @@ export class WorkflowPage implements OnInit {
       console.log('form.value.wfProcessStatus ' + form.value.wfProcessStatus);
 
       form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
-
-
 
       console.log("Saving the form into storage");
       this.storage.set(form.value.wfFormId, form.value);
@@ -401,16 +409,20 @@ export class WorkflowPage implements OnInit {
         catch(err) {
           console.log(err.message);
           // Use eval to dynamically inject the value into the form
-          // eval('form.value.' + key + '= "' + data[key] + '"; ');
           // eval('console.log("Retrying force input " + form.value.'+ key + ')');
           // eval('console.log(form.value.' + key + ');');
+          // eval('form.value.' + key + '= "' + data[key] + '"; ');
+
         }
 
       }
+
     } else {
       alert("流程卡选择错了!");
       return false;
     }
+
+    return true;
 
 
   }

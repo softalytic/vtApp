@@ -187,7 +187,8 @@ export class WorkflowService {
                 console.log('上存 is clicked');
                 console.log("uploading form" + JSON.stringify(form.value));
       
-                form.value.wfProcessStatus = "0";
+                form.value.wfProcessStatus = true;
+
                 this.formSubmission(form,images,navCtrl);
       
               }
@@ -209,7 +210,7 @@ export class WorkflowService {
                         console.log('Final confirmation of mark completion is clicked');
                         console.log("uploading form" + JSON.stringify(form.value));
       
-                        form.value.wfProcessStatus = "1";
+                        form.value.wfFormStatus = true;
                         this.formSubmission(form,images,navCtrl);
                       }
                     },{
@@ -502,6 +503,8 @@ export class WorkflowService {
     //       will be stored locally and show a counter in the main page
     //       with a button to send all the pending data
 
+    this.runningTotal(form);
+
     this.storage.set(form.value.wfFormId, form.value);
 
     this.upload(form.value,form.value.wfForm)
@@ -538,14 +541,14 @@ export class WorkflowService {
         },
         error => {
           console.log(error);
-          this.networkError(navCtrl);
+          this.networkError(form, navCtrl);
           
         }
         
       );
   }
 
-  networkError(navCtrl: any){
+  networkError(form:any, navCtrl: any){
     let alert = this.alertCtrl.create({
       title: '注意!',
       message: '嚫!网路不给力,请再试一次!',
@@ -558,6 +561,8 @@ export class WorkflowService {
         text: '    先储档    ',
         handler: () => {
           console.log('先储档,稍后再试');
+          // console.log('saving into storage now ' + JSON.stringify(form.value));
+          this.storage.set(form.value.wfFormId, form.value);
           navCtrl.setRoot(WorkflowPage);
         }
       }]
@@ -572,6 +577,17 @@ export class WorkflowService {
 
     return parseInt(text);
   };
+
+  runningTotal(form:any){
+    form.value.wfGoodTotal = ( this.toInt(form.value.wfOptGoodQty) + this.toInt(form.value.wfGoodTotal));
+    form.value.wfOptBadQtyItem = ( this.toInt(form.value.wfBadItem1) + this.toInt(form.value.wfBadItem2) + this.toInt(form.value.wfBadItem3) + this.toInt(form.value.wfBadItem4) + this.toInt(form.value.wfBadItem5) + this.toInt(form.value.wfBadItem6));
+    form.value.wfBadTotal = ( this.toInt(form.value.wfOptBadQty) + this.toInt(form.value.wfOptBadQtyItem) + form.value.wfBadTotal );
+
+    // need to recheck this feature
+    if(form.value.wfFormStatus){
+      form.value.wfOptStartQty = form.value.wfGoodTotal;
+    }
+  }
 
   erpQuery(form: any){
     // This function simply query the wfFormId to the url based on the wfForm number

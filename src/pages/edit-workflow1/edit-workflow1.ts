@@ -71,7 +71,7 @@ export class EditWorkflow1Page implements OnInit{
 
       {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 12, highlight: false},
       {method: "input", model: "wfOrderBatchQty", title: "批次量", type: "number", size: 5, highlight: false},
-      {method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 5, highlight: false},
+      {method: "input", model: "wfGoodTotal", title: "良品數總和", type: "number", size: 5, highlight: false},
       {method: "break", size: "88", visibility: "hidden"},
 
       {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 20, highlight: false},
@@ -262,7 +262,7 @@ export class EditWorkflow1Page implements OnInit{
                 break;
 
               case 'wfGoodTotal':
-                if (form.value.wfProcessStatus) {
+                if (form.value.wfFormStatus) {
                   form.controls[key].setValue(0);
                   form.controls['wfOptStartQty'].setValue(storageData[key]);
                 } else {
@@ -271,13 +271,13 @@ export class EditWorkflow1Page implements OnInit{
                 break;
 
               case 'wfBadTotal':
-                if (form.value.wfProcessStatus) {
+                if (form.value.wfFormStatus) {
                   form.controls[key].setValue(0);
                 }
                 break;
 
               case 'wfOptStartQty':
-                if (form.value.wfProcessStatus) {
+                if (form.value.wfFormStatus) {
                   break;
                 } else {
                   form.controls[key].setValue(storageData[key]);

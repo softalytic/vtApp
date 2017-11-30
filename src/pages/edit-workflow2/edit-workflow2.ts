@@ -77,6 +77,7 @@ export class EditWorkflow2Page implements OnInit{
       {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 35, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
       {method: "break", size: "135", visibility: "hidden"},
+      {method: "input", model: "wfGoodTotal", title: "良品數總和", type: "number", size: 5, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
       {method: "label",process: {1: true, 2: true, 3: true, 4:true}},
       {title: "CAP: μF", method: "input", model: "wfSpecCap", type: "text", scan: false, size: 12, disabled:false, process: {1: true, 2: true, 3: true, 4:true}},

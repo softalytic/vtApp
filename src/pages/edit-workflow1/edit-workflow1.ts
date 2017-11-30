@@ -295,6 +295,16 @@ export class EditWorkflow1Page implements OnInit{
 
       }
 
+      if(form.value.wfProcessStatus) {
+        form.controls['wfBadItem1'].setValue('开路');
+        form.controls['wfBadItem2'].setValue('短路');
+        form.controls['wfBadItem3'].setValue('高容');
+        form.controls['wfBadItem4'].setValue('低容');
+        form.controls['wfBadItem5'].setValue('损耗');
+        form.controls['wfBadItem6'].setValue('漏电');
+        form.controls['wfBadItemTotal'].setValue('不良数總和');
+      }
+
       console.log("Populated form now is: " + JSON.stringify(this.wfInputForm.value));
 
     });

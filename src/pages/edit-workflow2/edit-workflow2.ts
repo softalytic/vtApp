@@ -158,7 +158,7 @@ export class EditWorkflow2Page implements OnInit{
     this.wfPplInputs = [
       {title: "作业員ID", method: "input", model: "wfStaffOptNameID", type: "text", icon: 'person', scan: 3, wfPplI: 1,size: 20, process: {1: true, 2: true, 3: true, 4:false}},
       {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: 0,size: 20, process: {1: true, 2: true, 3: true, 4:false}},
-      // {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, size: 5},
+      {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, size: 5, process: {1: true, 2: true, 3: true, 4:false}},
       {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: 1, size: 20, process: {1: true, 2: true, 3: true, 4:false}},
       // {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: 3, size: 20},
       
@@ -182,7 +182,7 @@ export class EditWorkflow2Page implements OnInit{
       ]},
       {title: "品检員", method: "input", model: "wfStaffQCName", type: "text", icon: 'construct', scan: 3, size: 20, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "break", size: 15, process: {1: true, 2: true, 3: false, 4:true}},
-      {method: "break", size: 15, process: {1: false, 2: false, 3: true, 4:true}},
+      // {method: "break", size: 15, process: {1: false, 2: false, 3: true, 4:true}},
       {title: "备注", method: "input", model: "wfQCInputNote", type: "textarea", scan: false, size: 40, process: {1: true, 2: true, 3: true, 4:true}},
       // {title: "品检备注", method: "textarea", model: "wfQCInputNote", type: "text", icon: 'chatbubbles', scan: false, size: 30},
       //{title: "品检員", method: "input", model: "wfQCSignOff", type: "text", process: {1: false, 2: false, 3: true, 4:true}, scan: 4, size: 20},

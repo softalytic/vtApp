@@ -583,10 +583,6 @@ export class WorkflowService {
     form.value.wfOptBadQtyItem = ( this.toInt(form.value.wfBadItem1) + this.toInt(form.value.wfBadItem2) + this.toInt(form.value.wfBadItem3) + this.toInt(form.value.wfBadItem4) + this.toInt(form.value.wfBadItem5) + this.toInt(form.value.wfBadItem6));
     form.value.wfBadTotal = ( this.toInt(form.value.wfOptBadQty) + this.toInt(form.value.wfOptBadQtyItem) + form.value.wfBadTotal );
 
-    // need to recheck this feature
-    if(form.value.wfFormStatus){
-      form.value.wfOptStartQty = form.value.wfGoodTotal;
-    }
   }
 
   erpQuery(form: any){

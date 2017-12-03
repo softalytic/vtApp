@@ -286,6 +286,7 @@
                             &nbsp; 拍照
                         </button> &nbsp;&nbsp;&nbsp;&nbsp;
                         <button (click)="this.wfSvc.showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty,this.wfInputForm,this.navCtrl,this.images, '成品流程卡' )" type="button"
+                                [disabled]="this.wfInputForm.value.wfReadOnly"
                                 style="width: 80px;" ion-button>
                             <ion-icon ios="ios-cloud-upload-outline" md="ios-cloud-upload-outline">
                                 &nbsp; 上存

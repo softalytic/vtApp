@@ -21,7 +21,13 @@
                                  class="label">{{wfInput.title}}</div>
 
                             <!-- Form Normal Input Module-->
-                            <ion-input *ngIf="wfInput.method === 'input'" [ngStyle]="{'width.em':wfInput.size}" type={{wfInput.type}} formControlName={{wfInput.model}} no-padding class="gridborder" required></ion-input>
+                            <ion-input *ngIf="wfInput.method === 'input'"
+                                       [ngStyle]="{'width.em':wfInput.size}"
+                                       type={{wfInput.type}}
+                                       formControlName={{wfInput.model}}
+                                       no-padding class="gridborder"
+                                       (change)="this.resetForm(this.wfInputForm, wfInput.model)"
+                                       required></ion-input>
 
                             <button *ngIf="wfInput.scan" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)" item-end ion-button class="barcodeButton" type="button">
                                 <!--<ion-icon name="barcode"></ion-icon>-->
@@ -84,8 +90,15 @@
                 </ion-row>
 
                 <ion-row>
-                    <button style="width: 25%; margin: 0 auto; margin-top:40px !important; " ion-button type="submit" block>
+                    <button style="width: 25%; margin: 0 auto; margin-top:40px !important; "
+                            ion-button type="submit" block>
                         确定
+                    </button>
+
+                    <button style="width: 25%; margin: 0 auto; margin-top:40px !important; "
+                            (click)="this.wfInputForm.value.wfReadOnly = true"
+                            ion-button type="submit" block>
+                        浏览
                     </button>
                 </ion-row>
             </ion-grid>

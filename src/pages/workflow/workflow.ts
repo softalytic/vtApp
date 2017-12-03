@@ -123,6 +123,23 @@ export class WorkflowPage implements OnInit {
     this.wfInputForm.controls["wfFormExcept"].setValue(false)
   };
 
+  resetForm(form:any, model:string){
+    console.log("Evaluating if Form should be reset");
+
+    if (model == "wfFormId" && form.value.wfFormId != "" && form.value.wfFormId != null) {
+      console.log("There will be new input, resetting the form now");
+      for (let key in form.value) {
+        if( key != "wfFormId") {
+          if (key == "wfFormSplit") {
+            form.controls[key].setValue(0);
+          } else {
+            form.controls[key].setValue('');
+          }
+        }
+      }
+    }
+  }
+
   onAddWf(){
     // Main form submission function
     // Form validation steps
@@ -387,33 +404,60 @@ export class WorkflowPage implements OnInit {
 
     console.log("Loading data to form, data are " + JSON.stringify(data));
 
+    // First check if the user has selected the right wfForm
     if(form.value.wfForm == data["wfForm"]){
-      if(this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfProcess']) && data['wfProcessStatus']){
+
+
+
+      // If the last process has been completed and then current chosen step is higher than received data wfProcess
+      // Then reset the process status
+      if(this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfProcess']) && data['wfFormStatus']){
         form.value.wfProcessStatus = false;
+        form.value.wfFormStatus = false;
+        form.value.wfProcessNew = true;
+
+      } else if (this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfProcess']) && ! data['wfFormStatus']) {
+        alert("提示: 上一个工序还没完成");
+        form.value.wfProcessNew = false;
+
+      } else if (this.wfSvc.toInt(form.value.wfProcess) <= this.wfSvc.toInt(data['wfProcess']) && data['wfFormStatus']) {
+        alert("提示: 这工序巳经完成");
+        form.value.wfProcessNew = false;
+
       }
 
       for (let key in data) {
-        try {
-          // This use form control for the value setting
-          // form.controls[key].setValue(data[key]);
+        if(key in form.controls) {
+          try {
+            // This use form control for the value setting
+            // form.controls[key].setValue(data[key]);
 
-          if (form.controls[key].value == null || form.controls[key].value == "" ) {
-            // console.log("populate form model " + key);
-            console.log("populating model " + key + " " + data[key]);
-            form.controls[key].setValue(data[key]);
-            // eval('console.log(form.value.' + key + ');');
-            // console.log(JSON.stringify(form.value));
+            if (form.controls[key].value == null || form.controls[key].value == "" ) {
+              // console.log("populate form model " + key);
+              if ( ! (key in ["wfProcessStatus", "wfFormStatus", "wfProcessNew"])) {
+                console.log("populating model " + key + " " + data[key]);
+                form.controls[key].setValue(data[key]);
+                // eval('console.log(form.value.' + key + ');');
+                // console.log(JSON.stringify(form.value));
+              }
+
+            }
+
           }
 
-        }
-        catch(err) {
-          console.log(err.message);
-          // Use eval to dynamically inject the value into the form
-          // eval('console.log("Retrying force input " + form.value.'+ key + ')');
-          // eval('console.log(form.value.' + key + ');');
-          // eval('form.value.' + key + '= "' + data[key] + '"; ');
+          catch(err) {
+            console.log(err.message);
+            // Use eval to dynamically inject the value into the form
+            // eval('console.log("Retrying force input " + form.value.'+ key + ')');
+            // eval('console.log(form.value.' + key + ');');
+            // eval('form.value.' + key + '= "' + data[key] + '"; ');
+
+          }
+        } else {
+          console.log("Key: " + key + " is not in the formGroup, please check!")
 
         }
+
 
       }
 
@@ -643,177 +687,6 @@ export class WorkflowPage implements OnInit {
       wfQCSignOff: [''],
       wfQCInputNote: [''],
 
-      // Aging Part 1
-      wfAge1MachineId: [''],
-      wfAge1StaffId: [''],
-      wfAge1MachineClear: [''],
-      wfAge1Time: [''],
-      wfAge1Temp: [''],
-      wfAge1AG1: [''],
-      wfAge1AG2: [''],
-      wfAge1AG3: [''],
-      wfAge1AG4: [''],
-      wfAge1AG5: [''],
-      wfAge1AG6: [''],
-      wfAge1AG7: [''],
-      wfAge1AG8: [''],
-      wfAge1AG9: [''],
-      wfAge1AG10: [''],
-      wfAge1AG11: [''],
-      wfAge1AG12: [''],
-      wfAge1LC: [''],
-      wfAge1Feq: [''],
-      wfAge1CapU: [''],
-      wfAge1CapD: [''],
-      wfAge1DFU: [''],
-      wfAge1LCU: [''],
-      wfAge1Start: [''],
-      wfAge1End: [''],
-      wfAge1DeployQty: [''],
-      wfAge1GoodQty: [''],
-      wfAge1OptInsertOpen: [''],
-      wfAge1OptShort: [''],
-      wfAge1OptMark: [''],
-      wfAge1OptCx: [''],
-      wfAge1OptDx: [''],
-      wfAge1OptLCBig: [''],
-      wfAge1OptLCSmall: [''],
-      wfAge1OptQC: [''],
-
-      wfAge1DisInsertOpen: [''],
-      wfAge1DisShort: [''],
-      wfAge1DistMark: [''],
-      wfAge1DistCx: [''],
-      wfAge1DistDx: [''],
-      wfAge1DisLCBig: [''],
-      wfAge1DisLCSmall: [''],
-      wfAge1DisQC: [''],
-
-      // Aging Part 2
-      wfAge2MachineId: [''],
-      wfAge2StaffId: [''],
-      wfAge2MachineClear: [''],
-      wfAge2Time: [''],
-      wfAge2Temp: [''],
-      wfAge2AG1: [''],
-      wfAge2AG2: [''],
-      wfAge2AG3: [''],
-      wfAge2AG4: [''],
-      wfAge2AG5: [''],
-      wfAge2AG6: [''],
-      wfAge2AG7: [''],
-      wfAge2AG8: [''],
-      wfAge2LC: [''],
-      wfAge2Feq: [''],
-      wfAge2CapU: [''],
-      wfAge2CapD: [''],
-      wfAge2DFU: [''],
-      wfAge2LCU: [''],
-      wfAge2Start: [''],
-      wfAge2End: [''],
-      wfAge2DeployQty: [''],
-      wfAge2GoodQty: [''],
-      wfAge2OptInsertOpen: [''],
-      wfAge2OptShort: [''],
-      wfAge2OptMark: [''],
-      wfAge2OptCx: [''],
-      wfAge2OptDx: [''],
-      wfAge2OptLCBig: [''],
-      wfAge2OptLCSmall: [''],
-      wfAge2OptQC: [''],
-
-      wfAge2DisInsertOpen: [''],
-      wfAge2DisShort: [''],
-      wfAge2DistMark: [''],
-      wfAge2DistCx: [''],
-      wfAge2DistDx: [''],
-      wfAge2DisLCBig: [''],
-      wfAge2DisLCSmall: [''],
-      wfAge2DisQC: [''],
-
-      // Aging Part 3
-      wfAge3MachineId: [''],
-      wfAge3StaffId: [''],
-      wfAge3MachineClear: [''],
-      wfAge3Time: [''],
-      wfAge3Temp: [''],
-      wfAge3AG1: [''],
-      wfAge3AG2: [''],
-      wfAge3AG3: [''],
-      wfAge3AG4: [''],
-      wfAge3AG5: [''],
-      wfAge3AG6: [''],
-      wfAge3AG7: [''],
-      wfAge3AG8: [''],
-      wfAge3LC: [''],
-      wfAge3Feq: [''],
-      wfAge3CapU: [''],
-      wfAge3CapD: [''],
-      wfAge3DFU: [''],
-      wfAge3LCU: [''],
-      wfAge3Start: [''],
-      wfAge3End: [''],
-      wfAge3DeployQty: [''],
-      wfAge3GoodQty: [''],
-      wfAge3OptInsertOpen: [''],
-      wfAge3OptShort: [''],
-      wfAge3OptMark: [''],
-      wfAge3OptCx: [''],
-      wfAge3OptDx: [''],
-      wfAge3OptLCBig: [''],
-      wfAge3OptLCSmall: [''],
-      wfAge3OptQC: [''],
-
-      wfAge3DisInsertOpen: [''],
-      wfAge3DisShort: [''],
-      wfAge3DistMark: [''],
-      wfAge3DistCx: [''],
-      wfAge3DistDx: [''],
-      wfAge3DisLCBig: [''],
-      wfAge3DisLCSmall: [''],
-      wfAge3DisQC: [''],
-
-      // Aging Part 4
-      wfAge4MachineId: [''],
-      wfAge4StaffId: [''],
-      wfAge4MachineClear: [''],
-      wfAge4Time: [''],
-      wfAge4Temp: [''],
-      wfAge4AG1: [''],
-      wfAge4AG2: [''],
-      wfAge4AG3: [''],
-      wfAge4AG4: [''],
-      wfAge4AG5: [''],
-      wfAge4AG6: [''],
-      wfAge4AG7: [''],
-      wfAge4AG8: [''],
-      wfAge4LC: [''],
-      wfAge4Feq: [''],
-      wfAge4CapU: [''],
-      wfAge4CapD: [''],
-      wfAge4DFU: [''],
-      wfAge4LCU: [''],
-      wfAge4Start: [''],
-      wfAge4End: [''],
-      wfAge4DeployQty: [''],
-      wfAge4GoodQty: [''],
-      wfAge4OptInsertOpen: [''],
-      wfAge4OptShort: [''],
-      wfAge4OptMark: [''],
-      wfAge4OptCx: [''],
-      wfAge4OptDx: [''],
-      wfAge4OptLCBig: [''],
-      wfAge4OptLCSmall: [''],
-      wfAge4OptQC: [''],
-
-      wfAge4DisInsertOpen: [''],
-      wfAge4DisShort: [''],
-      wfAge4DistMark: [''],
-      wfAge4DistCx: [''],
-      wfAge4DistDx: [''],
-      wfAge4DisLCBig: [''],
-      wfAge4DisLCSmall: [''],
-      wfAge4DisQC: [''],
 
       wfOrderSupNote: [''],
 
@@ -841,7 +714,9 @@ export class WorkflowPage implements OnInit {
       created: [''],
       appUpload: [''],
 
-      wfFormExcept: [false]
+      wfFormExcept: [false],
+      wfReadOnly: [false],
+      wfProcessNew: ['']
 
     });
   }

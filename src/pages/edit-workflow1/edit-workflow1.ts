@@ -236,74 +236,79 @@ export class EditWorkflow1Page implements OnInit{
     this.storage.get(this.wfNavParams).then((storageData) => {
       console.log("Storage Data:" + JSON.stringify(storageData));
 
-      for (let key in form.value) {
-        // console.log("Loading " + key + " Storage:" + storageData[key]);
-
-        if(key in storageData){
-          try {
-            switch (key) {
-              case 'wfStaffTechId':
-                this.wfStaffTechIdTmp = storageData[key];
-                form.controls[key].setValue('');
-                break;
-
-              case 'wfStaffOptShift':
-                this.wfStaffOptShiftTmp = storageData[key];
-                form.controls[key].setValue('');
-                break;
-
-              case 'wfQCSignOff':
-                this.wfQCSignOffTmp = storageData[key];
-                form.controls[key].setValue('');
-                break;
-
-              case 'wfOptInputDate':
-                form.controls[key].setValue(this.appDate);
-                break;
-
-              case 'wfGoodTotal':
-                if (form.value.wfFormStatus) {
-                  form.controls[key].setValue(0);
-                  form.controls['wfOptStartQty'].setValue(storageData[key]);
-                } else {
-                  form.controls[key].setValue(storageData[key]);
-                }
-                break;
-
-              case 'wfBadTotal':
-                if (form.value.wfFormStatus) {
-                  form.controls[key].setValue(0);
-                }
-                break;
-
-              case 'wfOptStartQty':
-                if (form.value.wfFormStatus) {
-                  break;
-                } else {
-                  form.controls[key].setValue(storageData[key]);
-                }
-                break;
-
-              default:
-                form.controls[key].setValue(storageData[key]);
-            }
-
-          } catch (err) {
-            // console.log("Got an error from formInit populating from storage: "  + err);
-          }
+      if (storageData['wfReadOnly']) {
+        for (let key in form.controls) {
+          // console.log("Loading " + key + " Storage:" + storageData[key]);
+          form.controls[key].setValue(storageData[key]);
         }
 
+      } else {
+
+        // Preload the data for form
+        if (storageData['wfFormStatus']) {
+          form.controls['wfGoodTotal'].setValue(0);
+          form.controls['wfBadTotal'].setValue(0);
+          form.controls['wfOptStartQty'].setValue(storageData['wfGoodTotal']);
+        } else {
+          form.controls['wfGoodTotal'].setValue(storageData['wfGoodTotal']);
+          form.controls['wfBadTotal'].setValue(storageData['wfBadTotal']);
+          form.controls['wfOptStartQty'].setValue(storageData['wfOptStartQty']);
+        }
+
+
+        for (let key in form.value) {
+          // console.log("Loading " + key + " Storage:" + storageData[key]);
+
+          if(key in storageData){
+            try {
+              switch (key) {
+                case 'wfStaffTechId':
+                  this.wfStaffTechIdTmp = storageData[key];
+                  form.controls[key].setValue('');
+                  break;
+
+                case 'wfStaffOptShift':
+                  this.wfStaffOptShiftTmp = storageData[key];
+                  form.controls[key].setValue('');
+                  break;
+
+                case 'wfQCSignOff':
+                  this.wfQCSignOffTmp = storageData[key];
+                  form.controls[key].setValue('');
+                  break;
+
+                case 'wfOptInputDate':
+                  form.controls[key].setValue(this.appDate);
+                  break;
+
+                case 'wfGoodTotal':
+                case 'wfBadTotal':
+                case 'wfOptStartQty':
+                  break;
+
+                default:
+                  form.controls[key].setValue(storageData[key]);
+              }
+
+            } catch (err) {
+              // console.log("Got an error from formInit populating from storage: "  + err);
+            }
+          }
+
+        }
+
+        if(form.value.wfProcessStatus) {
+          form.controls['wfBadItem1'].setValue('开路');
+          form.controls['wfBadItem2'].setValue('短路');
+          form.controls['wfBadItem3'].setValue('高容');
+          form.controls['wfBadItem4'].setValue('低容');
+          form.controls['wfBadItem5'].setValue('损耗');
+          form.controls['wfBadItem6'].setValue('漏电');
+          form.controls['wfBadItemTotal'].setValue('不良数總和');
+        }
       }
 
-      if(form.value.wfProcessStatus) {
-        form.controls['wfBadItem1'].setValue('开路');
-        form.controls['wfBadItem2'].setValue('短路');
-        form.controls['wfBadItem3'].setValue('高容');
-        form.controls['wfBadItem4'].setValue('低容');
-        form.controls['wfBadItem5'].setValue('损耗');
-        form.controls['wfBadItem6'].setValue('漏电');
-        form.controls['wfBadItemTotal'].setValue('不良数總和');
-      }
+
 
       console.log("Populated form now is: " + JSON.stringify(this.wfInputForm.value));
 
@@ -597,7 +602,9 @@ export class EditWorkflow1Page implements OnInit{
       wfGoodTotal: [''],
       wfFormStatus: [''],
       wfProcessStatus: [''],
-      wfFormExcept: ['']
+      wfFormExcept: [''],
+      wfReadOnly: [''],
+      wfProcessNew: ['']
 
     });
 

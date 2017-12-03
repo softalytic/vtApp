@@ -541,6 +541,7 @@
                         <ion-row>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <button type="button"
+                                    [disabled]="this.wfInputForm.value.wfReadOnly"
                                     ion-button (click)="this.wfSvc.showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty,this.wfInputForm,this.navCtrl,this.images, '裸品流程卡')"
                                     style="width: 80px;">
                                 上存

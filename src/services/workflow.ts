@@ -211,6 +211,8 @@ export class WorkflowService {
                         console.log("uploading form" + JSON.stringify(form.value));
       
                         form.value.wfFormStatus = true;
+                        form.value.wfLastCompletedWf = form.value.wfProcess;
+
                         this.formSubmission(form,images,navCtrl);
                       }
                     },{
@@ -536,7 +538,7 @@ export class WorkflowService {
           // BUG: Calling navCtrl.pop outside of the image upload will have issue that
           //      it is executed before images upload finish
           // navCtrl.pop();
-          this.storage.clear();
+          // this.storage.clear();
           navCtrl.setRoot(WorkflowPage);
         },
         error => {

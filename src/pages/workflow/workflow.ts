@@ -222,7 +222,7 @@ export class WorkflowPage implements OnInit {
             // 1. All the input on the screen assume to be latest and correct before user proceed to next stage
             // 2. Through the barcode scan, which all the data will be called from the server
             // 3. Which user can then decide what is the phase of next step
-            if (!this.loadDataToForm(form, serverData[0])){return;};
+            if (!this.loadDataToForm(form, serverData[0])){return;}
             // this.populateDataToForm(form, serverData[0]);
 
             // This function is for automatic workflow state change base on previous business rule
@@ -281,7 +281,7 @@ export class WorkflowPage implements OnInit {
 
 
         if(storageData){
-          console.log("Result found:" + form.value.wfFormId);
+          console.log("Data Submission Result found:" + form.value.wfFormId);
           // this.populateDataToForm(form, storageData);
 
           // This code below replace the upper function,
@@ -407,67 +407,95 @@ export class WorkflowPage implements OnInit {
     // First check if the user has selected the right wfForm
     if(form.value.wfForm == data["wfForm"]){
 
-
-
       // If the last process has been completed and then current chosen step is higher than received data wfProcess
       // Then reset the process status
-      if(this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfProcess']) && data['wfFormStatus']){
-        form.value.wfProcessStatus = false;
-        form.value.wfFormStatus = false;
-        form.value.wfProcessNew = true;
 
-      } else if (this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfProcess']) && ! data['wfFormStatus']) {
+      if(this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfLastCompletedWf']) && data['wfFormStatus']){
+        // When selected process is ahead of last completed wf
+        console.log("New Workflow is triggered");
+        form.controls["wfProcessStatus"].setValue(false);
+        form.controls["wfFormStatus"].setValue(false);
+        form.controls["wfErrorMsg"].setValue(' ');
+        this.fillData(form,data);
+        // Preload below data
+        this.qtyReset(form);
+
+      } else if (this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfProcess']) && !data['wfFormStatus']) {
+        console.log("提示: 上一个工序还没完成");
         alert("提示: 上一个工序还没完成");
-        form.value.wfProcessNew = false;
+        form.controls["wfErrorMsg"].setValue('上一个工序还没完成');
+        this.fillData(form,data);
 
-      } else if (this.wfSvc.toInt(form.value.wfProcess) <= this.wfSvc.toInt(data['wfProcess']) && data['wfFormStatus']) {
+      } else if (this.wfSvc.toInt(form.value.wfProcess) <= this.wfSvc.toInt(data['wfLastCompletedWf'])) {
+        console.log("提示: 这工序巳经完成");
         alert("提示: 这工序巳经完成");
-        form.value.wfProcessNew = false;
+        form.controls["wfErrorMsg"].setValue('这工序巳经完成');
+        this.fillData(form,data);
+
+      } else {
+        console.log("Continue to fill data from last workflow");
+        this.fillData(form,data);
+        form.controls["wfOptGoodQty"].setValue(0);
+        form.controls["wfOptBadQty"].setValue(0);
+        form.controls["wfOptInputDate"].setValue('');
+        form.controls["wfOptInputEndDate"].setValue('');
+        form.controls["wfOptStartTime"].setValue('');
+        form.controls["wfOptFinishTime"].setValue('');
 
       }
 
-      for (let key in data) {
-        if(key in form.controls) {
-          try {
-            // This use form control for the value setting
-            // form.controls[key].setValue(data[key]);
-
-            if (form.controls[key].value == null || form.controls[key].value == "" ) {
-              // console.log("populate form model " + key);
-              if ( ! (key in ["wfProcessStatus", "wfFormStatus", "wfProcessNew"])) {
-                console.log("populating model " + key + " " + data[key]);
-                form.controls[key].setValue(data[key]);
-                // eval('console.log(form.value.' + key + ');');
-                // console.log(JSON.stringify(form.value));
-              }
-
-            }
-
-          }
-
-          catch(err) {
-            console.log(err.message);
-            // Use eval to dynamically inject the value into the form
-            // eval('console.log("Retrying force input " + form.value.'+ key + ')');
-            // eval('console.log(form.value.' + key + ');');
-            // eval('form.value.' + key + '= "' + data[key] + '"; ');
-
-          }
-        } else {
-          console.log("Key: " + key + " is not in the formGroup, please check!")
-
-        }
-
-
-      }
 
     } else {
       alert("流程卡选择错了!");
+      // Exit the loop
       return false;
     }
 
+    // Continue the scope
     return true;
 
+  }
+
+  fillData(form:any, data:any){
+    for (let key in data) {
+      if(key in form.controls) {
+        try {
+          // This use form control for the value setting
+          // form.controls[key].setValue(data[key]);
+
+          if (form.controls[key].value == null || form.controls[key].value == "" ) {
+            // console.log("populate form model " + key);
+            form.controls[key].setValue(data[key]);
+
+          }
+
+        } catch (err) {
+          console.log(err.message);
+          // Use eval to dynamically inject the value into the form
+          // eval('console.log("Retrying force input " + form.value.'+ key + ')');
+          // eval('console.log(form.value.' + key + ');');
+          // eval('form.value.' + key + '= "' + data[key] + '"; ');
+
+        }
+      } else {
+        console.log("Key: " + key + " is not in the formGroup, please check!")
+
+      }
+    }
+  }
+
+  qtyReset(form:any ){
+    form.controls["wfOptGoodQty"].setValue(0);
+    form.controls["wfOptBadQty"].setValue(0);
+    form.controls["wfGoodTotal"].setValue(0);
+    form.controls["wfBadTotal"].setValue(0);
+    form.controls["wfOptBadQtyItem"].setValue(0);
+    form.controls["wfBadItem1"].setValue(0);
+    form.controls["wfBadItem2"].setValue(0);
+    form.controls["wfBadItem3"].setValue(0);
+    form.controls["wfBadItem4"].setValue(0);
+    form.controls["wfBadItem5"].setValue(0);
+    form.controls["wfBadItem6"].setValue(0);
 
   }
 
@@ -594,20 +622,10 @@ export class WorkflowPage implements OnInit {
       wfAgeDetailAG4: [''],
       wfAgeDetailAG5: [''],
       wfAgeDetailAG6: [''],
-      wfAgeDetailAG7: [''],
-      wfAgeDetailAG8: [''],
-      wfAgeDetailAG9: [''],
-      wfAgeDetailAG10: [''],
-      wfAgeDetailAG11: [''],
-      wfAgeDetailAG12: [''],
       wfAgeDetailLCT: [''],
       wfAgeDetailLC: [''],
       wfAgeDetailCAP: [''],
       wfAgeDetailDF: [''],
-      wfAgeDetailTime: [''],
-      wfAgeDetailStaffApprove: [''],
-      wfAgeDetailStaffFinish: [''],
-      wfAgeDetailStaffConfirm: [''],
 
       // Operational Input
       wfOptInputDate: [''],
@@ -618,7 +636,6 @@ export class WorkflowPage implements OnInit {
       wfOptBadQtyItem: [''],
       wfOptBadQty: [''],
       wfOptGoodQty: [''],
-
 
       // Good / Bad Qty Input
       wfBadItem1: [''],
@@ -650,20 +667,6 @@ export class WorkflowPage implements OnInit {
       wfAutoAgeVoltAct2: [''],
       wfAutoAgeVoltAct3: [''],
       wfAutoAgeVoltAct4: [''],
-      wfAutoAgeVoltAct5: [''],
-      wfAutoAgeVoltAct6: [''],
-      wfAutoAgeVoltAct7: [''],
-
-      // Auto ageing part2
-      wfAutoAgeOpenVolt: [''],
-      wfAutoAgeShortVolt: [''],
-      wfAutoAgeOpen: [''],
-      wfAutoAgeShort: [''],
-      wfAutoAgeHighCapacity: [''],
-      wfAutoAgeLowCapacity: [''],
-      wfAutoAgeWear: [''],
-      wfAutoAgeVoltLeak: [''],
-      wfAutoAgeLook: [''],
 
       //Staff Input section
       wfStaffOptId: [''],
@@ -686,8 +689,6 @@ export class WorkflowPage implements OnInit {
       wfQCPassCode: [''],
       wfQCSignOff: [''],
       wfQCInputNote: [''],
-
-
       wfOrderSupNote: [''],
 
       // Raw Material
@@ -716,7 +717,9 @@ export class WorkflowPage implements OnInit {
 
       wfFormExcept: [false],
       wfReadOnly: [false],
-      wfProcessNew: ['']
+      wfProcessNew: [''],
+      wfLastCompletedWf: [0],
+      wfErrorMsg: ['']
 
     });
   }

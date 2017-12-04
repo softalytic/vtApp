@@ -164,28 +164,6 @@ export class EditWorkflow1Page implements OnInit{
         {model: "wfAgeCurrentAct", type: "number", auto: false}
       ]},
     ];
-
-    /*
-    this.wfAutoAgeingDetails = [
-      {title: "开路电压", method: "input", size: 6, model: "wfAutoAgeOpenVolt", type: "number"},
-
-      {title: "高容", method: "input", size: 6, model: "wfAutoAgeHighCapacity", type: "number"},
-
-      {title: "短路电压", method: "input", size: 6, model: "wfAutoAgeShortVolt", type: "number"},
-
-      {title: "低容", method: "input", size: 6, model: "wfAutoAgeLowCapacity", type: "number"},
-
-      {title: "开路", method: "input", size: 6, model: "wfAutoAgeOpen", type: "number"},
-
-      {title: "损耗", method: "input", size: 6, model: "wfAutoAgeWear", type: "number"},
-
-      {title: "短路", method: "input", size: 6, model: "wfAutoAgeShort", type: "number"},
-
-      {title: "漏电",  method: "input", size: 6, model: "wfAutoAgeVoltLeak", type: "number"},
-
-      {title: "外观", method: "input", size: 6, model: "wfAutoAgeLook", type: "number"}
-    ];
-    */
     
     this.wfPplInputs = [
       {title: "作业員ID", method: "input", model: "wfStaffOptNameID", type: "text", icon: 'person', scan: true, wfPplI: 1, size: 7},
@@ -563,20 +541,20 @@ export class EditWorkflow1Page implements OnInit{
       wfAutoAgeVoltAct2: [''],
       wfAutoAgeVoltAct3: [''],
       wfAutoAgeVoltAct4: [''],
-      wfAutoAgeVoltAct5: [''],
-      wfAutoAgeVoltAct6: [''],
-      wfAutoAgeVoltAct7: [''],
+      // wfAutoAgeVoltAct5: [''],
+      // wfAutoAgeVoltAct6: [''],
+      // wfAutoAgeVoltAct7: [''],
 
       // Auto ageing part2
-      wfAutoAgeOpenVolt: [''],
-      wfAutoAgeShortVolt: [''],
-      wfAutoAgeOpen: [''],
-      wfAutoAgeShort: [''],
-      wfAutoAgeHighCapacity: [''],
-      wfAutoAgeLowCapacity: [''],
-      wfAutoAgeWear: [''],
-      wfAutoAgeVoltLeak: [''],
-      wfAutoAgeLook: [''],
+      // wfAutoAgeOpenVolt: [''],
+      // wfAutoAgeShortVolt: [''],
+      // wfAutoAgeOpen: [''],
+      // wfAutoAgeShort: [''],
+      // wfAutoAgeHighCapacity: [''],
+      // wfAutoAgeLowCapacity: [''],
+      // wfAutoAgeWear: [''],
+      // wfAutoAgeVoltLeak: [''],
+      // wfAutoAgeLook: [''],
 
       //Staff Input section
       wfStaffOptId: [''],
@@ -604,7 +582,9 @@ export class EditWorkflow1Page implements OnInit{
       wfProcessStatus: [''],
       wfFormExcept: [''],
       wfReadOnly: [''],
-      wfProcessNew: ['']
+      wfProcessNew: [''],
+      wfLastCompletedWf: [''],
+      wfErrorMsg: ['']
 
     });
 

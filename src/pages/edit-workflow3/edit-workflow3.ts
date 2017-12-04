@@ -187,7 +187,7 @@ export class EditWorkflow3Page implements OnInit{
 
       {method: 'inputs', options: [
         {title: "清机确认", model: "wfOptWashMachine", type: "text", inputType: 1, scan: false, size: 8}, 
-        {title: "投入数", method: "input", model: "wfOptStartQty", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
+        {title: "总投入数", method: "input", model: "wfOptStartQty", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
         {title: "良品數", method: "input", model: "wfGoodTotal", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
         {title: "抽检数量", model: "wfRandomCheckInfo", type: "number", icon: 'construct', inputType: 9, scan: false, size: 8},
       ]},
@@ -294,6 +294,18 @@ export class EditWorkflow3Page implements OnInit{
         }
 
       } else {
+        // Preload the data for form
+        if (storageData['wfProcessNew']) {
+          form.controls['wfGoodTotal'].setValue(0);
+          form.controls['wfBadTotal'].setValue(0);
+          form.controls['wfOptStartQty'].setValue(storageData['wfGoodTotal']);
+          form.controls['wfProcessNew'].setValue(false);
+        } else {
+          form.controls['wfGoodTotal'].setValue(storageData['wfGoodTotal']);
+          form.controls['wfBadTotal'].setValue(storageData['wfBadTotal']);
+          form.controls['wfOptStartQty'].setValue(storageData['wfOptStartQty']);
+        }
+
         for (let key in storageData) {
           console.log("Loading " + key + " Storage: " + storageData[key]);
           if(key in form.controls){
@@ -341,6 +353,13 @@ export class EditWorkflow3Page implements OnInit{
                     form.controls[key].setValue(storageData['wfGoodTotal']);
                   }
                   break;
+
+                case 'wfGoodTotal':
+                case 'wfBadTotal':
+                case 'wfOptStartQty':
+                case 'wfProcessNew':
+                  break;
+
 
                 default:
                   form.controls[key].setValue(storageData[key]);
@@ -539,106 +558,113 @@ export class EditWorkflow3Page implements OnInit{
     this.wfInputForm = this.formBuilder.group({
       wfProcess: [''],
       wfProcessName: [''],
-      wfFormName: [''],
       wfForm: [''],
-
-      // Order Inputs detail
       wfFormId: [''],
       wfFormSplit: [''],
-      wfOrderId: [''],
-      wfOrderBatchId: [''],
-      wfOrderBatchQty: [''],
-      wfOptMachineId: [''],
 
-      wfOrderBOMNote: [''],
-      wfOrderNote: [''],
-      wfSalesOrderNote: [''],
-      wfOrderTotalQty: [''],
-      wfOrderTotalGoodQty: [''],
-      wfOrderRMId: [''],
+      wfOptMachineId: [''],
+      wfSpecCap: [''],
+      wfSpecDF: [''],
+      wfSpecLC: [''],
+      wfSpecZESR: [''],
+      wfAgeVoltSet: [''],
+      wfPriorWfFormId: [''],
+      wfNakedProductSpec: [''],
+      wfOrderId: [''],
       wfOrderSeries: [''],
+      wfOrderBatchId: [''],
+      wfOrderRMId: [''],
       wfOrderSpec: [''],
       wfOrderDim: [''],
-      wfClientId: [''],
-      wfSalesOrderId: [''],
+      wfOrderBatchQty: [''],
+      wfOrderTotalQty: [''],
       wfSalesOrderQty: [''],
-      // Date
+      wfClientId: [''],
+      wfOrderFormNote: [''],
+      wfOrderNote: [''],
+      wfOrderBOMNote: [''],
+      wfSalesOrderNote: [''],
       wfOrderDate: [''],
       wfOrderStartDate: [''],
       wfOrderEstFinishDate: [''],
       wfOrderDeliveryDate: [''],
+      wfOrderTK: [''],
 
-    // Raw Material Inputs
+      // RM part of the detail
       wfRMFoilPosName: [''],
-      wfRMFoilPosSerial: [''],
+      wfRMFoilPosLName: [''],
       wfRMFoilPosCapFrom: [''],
       wfRMFoilPosCapTo: [''],
       wfRMFoilPosWidth: [''],
       wfRMFoilPosLength: [''],
-      wfRMFoilPosQty: [''],
-      // wfRMFoilPosLName: [''],
-      // wfRMFoilPosLSerial: [''],
+
       wfRMFoilNegName: [''],
-      wfRMFoilNegSerial: [''],
+      wfRMFoilNegLName: [''],
       wfRMFoilNegCapFrom: [''],
       wfRMFoilNegCapTo: [''],
       wfRMFoilNegWidth: [''],
       wfRMFoilNegLength: [''],
       wfRMFoilNegQty: [''],
-      // wfRMFoilNegLName: [''],
-      // wfRMFoilNegLSerial: [''],
+
       wfRMPaperName: [''],
-      wfRMPaperSerial: [''],
-      //
       wfRMPaperQty: [''],
-      wfRMGlueName: [''],
-      wfRMGlueSerial: [''],
-      wfRMSolName: [''],
-      wfRMSolSerial: [''],
-      //
-      wfRMSolQty: [''],
       wfRMPinPosName: [''],
-      wfRMPinPosSerial: [''],
       wfRMPinNegName: [''],
-      wfRMPinNegSerial: [''],
-      //
       wfRMPinPosQty: [''],
-      wfRMPlasticName: [''],
-      wfRMPlasticSerial: [''],
-      //
-      wfRMPlasticQty: [''],
+      wfRMPinNegQty: [''],
+      wfRMGlueName: [''],
+      wfRMSolName: [''],
+      wfRMSolQty: [''],
       wfRMShellName: [''],
-      wfRMShellSerial: [''],
-      //
       wfRMShellQty: [''],
+      wfRMPlasticName: [''],
+      wfRMPlasticQty: [''],
       wfRMCoverName: [''],
-      wfRMCoverSerial: [''],
-      //
       wfRMCoverQty: [''],
+      wfRMUpBeltName: [''],
+      wfRMDownBeltName: [''],
+      wfRMBaseName: [''],
+      wfRMCircleName: [''],
+      wfRMFoilPosSerial: [''],
+      wfRMFoilNegSerial: [''],
+      wfRMFoilPosLSerial: [''],
+      wfRMFoilNegLSerial: [''],
+      wfRMPaperSerial: [''],
+      wfRMGlueSerial: [''],
+      wfRMSolSerial: [''],
+      wfRMPinPosSerial: [''],
+      wfRMPinNegSerial: [''],
+      wfRMPlasticSerial: [''],
+      wfRMShellSerial: [''],
+      wfRMCoverSerial: [''],
+
+      wfOrderTotalGoodQty: [''],
+      wfSalesOrderId: [''],
+      wfRMFoilPosQty: [''],
       wfRMCoverCheck: [''],
       wfRMWindingTime: [''],
-      wfRMCoverWeek: [''],      
+      wfRMCoverWeek: [''],
       wfRMWindingDeg: [''],
 
       // dry input
       wfDryStartTime: [''],
       wfDryFinishTime: [''],
-      wfDryWindingDeg: ['0'],
+      wfDryWindingDeg: [''],
       wfStaffDryName: [''],
 
       // wet Input
-      wfWetEmptyAir: ['0'],
-      wfWetAir: ['0'],
+      wfWetEmptyAir: [''],
+      wfWetAir: [''],
       wfWetStartTime: [''],
       wfWetFinishTime: [''],
       wfStaffWetName: [''],
 
       // Wash Input
-      wfWashWindingDeg: ['0'],
+      wfWashWindingDeg: [''],
       wfWashStartTime: [''],
       wfWashFinishTime: [''],
-      wfWashDryWindingDeg: [''],      
-      wfWashDryTime: ['MM Mins'],
+      wfWashDryWindingDeg: [''],
+      wfWashDryTime: [''],
       wfStaffWashName: [''],
       wfQCCheck: [''],
       wfRandomCheckInfo: [''],
@@ -651,20 +677,10 @@ export class EditWorkflow3Page implements OnInit{
       wfAgeDetailAG4: [''],
       wfAgeDetailAG5: [''],
       wfAgeDetailAG6: [''],
-      // wfAgeDetailAG7: [''],
-      // wfAgeDetailAG8: [''],
-      // wfAgeDetailAG9: [''],
-      // wfAgeDetailAG10: [''],
-      // wfAgeDetailAG11: [''],
-      // wfAgeDetailAG12: [''],
       wfAgeDetailLCT: [''],
       wfAgeDetailLC: [''],
       wfAgeDetailCAP: [''],
       wfAgeDetailDF: [''],
-      // wfAgeDetailTime: [''],
-      // wfAgeDetailStaffApprove: [''],
-      // wfAgeDetailStaffFinish: [''],
-      // wfAgeDetailStaffConfirm: [''],
 
       // Operational Input
       wfOptInputDate: [this.appDate],
@@ -673,55 +689,39 @@ export class EditWorkflow3Page implements OnInit{
       wfOptStartTime: [''],
       wfOptFinishTime: [''],
       wfOptBadQtyItem: [''],
-      wfOptBadQty: ['0'],
-      wfOptGoodQty: ['0'],
-      
+      wfOptBadQty: [''],
+      wfOptGoodQty: [''],
 
       // Good / Bad Qty Input
       wfBadItem1: [''],
-      wfBadQty1: ['0'],
+      wfBadQty1: [''],
       wfBadItem2: [''],
-      wfBadQty2: ['0'],
+      wfBadQty2: [''],
       wfBadItem3: [''],
-      wfBadQty3: ['0'],
+      wfBadQty3: [''],
       wfBadItem4: [''],
-      wfBadQty4: ['0'],
+      wfBadQty4: [''],
       wfBadItem5: [''],
-      wfBadQty5: ['0'],    
+      wfBadQty5: [''],
       wfBadItem6: [''],
-      wfBadQty6: ['0'],
+      wfBadQty6: [''],
       wfBadItemTotal: [''],
 
       // Ageing Part1
-      // wfAgeDegSet: [''],
-      // wfAgeDegAct: [''],
-      // wfAgeVoltSet: [''],
-      // wfAgeVoltAct: [''],
-      // wfAgeCurrentSet: [''],
-      // wfAgeCurrentAct: [''],
-      // wfAgeTimeSet: [''],
-      // wfAgeTimeAct: [''],
-      // wfAgeNote: [''],
+      wfAgeDegSet: [''],
+      wfAgeDegAct: [''],
+      wfAgeVoltAct: [''],
+      wfAgeCurrentSet: [''],
+      wfAgeCurrentAct: [''],
+      wfAgeTimeSet: [''],
+      wfAgeTimeAct: [''],
+      wfAgeNote: [''],
 
       // Additional volt for Ageing
       wfAutoAgeVoltAct1: [''],
       wfAutoAgeVoltAct2: [''],
       wfAutoAgeVoltAct3: [''],
       wfAutoAgeVoltAct4: [''],
-      // wfAutoAgeVoltAct5: [''],
-      // wfAutoAgeVoltAct6: [''],
-      // wfAutoAgeVoltAct7: [''],
-
-      // Auto ageing part2
-      // wfAutoAgeOpenVolt: [''],
-      // wfAutoAgeShortVolt: [''],
-      // wfAutoAgeOpen: [''],
-      // wfAutoAgeShort: [''],
-      // wfAutoAgeHighCapacity: [''],
-      // wfAutoAgeLowCapacity: [''],
-      // wfAutoAgeWear: [''],
-      // wfAutoAgeVoltLeak: [''],
-      // wfAutoAgeLook: [''],
 
       //Staff Input section
       wfStaffOptId: [''],
@@ -744,16 +744,37 @@ export class EditWorkflow3Page implements OnInit{
       wfQCPassCode: [''],
       wfQCSignOff: [''],
       wfQCInputNote: [''],
+      wfOrderSupNote: [''],
 
-      //  Status control fields
+      // Raw Material
+      wfNakedProductSerial: [''],
+      wfRMUpBeltSerial: [''],
+      wfRMDownBeltSerial: [''],
+      wfRMBaseSerial: [''],
+      wfRMCricleSerial: [''],
+      wfRMPrintName: [''],
+      wfRMPrintSerial: [''],
+      wfRMPrintNameText: [''],
+      wfFinalCheckInfo: [''],
+      wfElecPass: [''],
+      wfLookPass: [''],
+      wfStaffTitle: [''],
+
+      // Status update part of the data
       wfOptStartQty: [''],
       wfBadTotal: [''],
       wfGoodTotal: [''],
+
       wfFormStatus: [''],
       wfProcessStatus: [''],
+      created: [''],
+      appUpload: [''],
+
       wfFormExcept: [''],
       wfReadOnly: [''],
-      wfProcessNew: ['']
+      wfProcessNew: [''],
+      wfLastCompletedWf: [''],
+      wfErrorMsg: ['']
 
     });
 

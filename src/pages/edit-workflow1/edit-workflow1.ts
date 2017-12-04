@@ -108,7 +108,7 @@ export class EditWorkflow1Page implements OnInit{
         {title: "完成时间", model: "wfOptFinishTime", type: "number", icon: "md-alarm", scan: false, size: 8}
       ]},
       {method: "inputs", options: [
-        {title: "投入数", model: "wfOptStartQty", type: "number", scan: false, size: 8},
+        {title: "总投入数", model: "wfOptStartQty", type: "number", scan: false, size: 8},
         {title: "不良数", model: "wfOptBadQty", type: "number", wfBadQty: '1', scan: false, size: 8},
         {title: "良品数", model: "wfOptGoodQty", type: "number",  scan: false, size: 8}
       ]},
@@ -221,12 +221,12 @@ export class EditWorkflow1Page implements OnInit{
         }
 
       } else {
-
         // Preload the data for form
-        if (storageData['wfFormStatus']) {
+        if (storageData['wfProcessNew']) {
           form.controls['wfGoodTotal'].setValue(0);
           form.controls['wfBadTotal'].setValue(0);
           form.controls['wfOptStartQty'].setValue(storageData['wfGoodTotal']);
+          form.controls['wfProcessNew'].setValue(false);
         } else {
           form.controls['wfGoodTotal'].setValue(storageData['wfGoodTotal']);
           form.controls['wfBadTotal'].setValue(storageData['wfBadTotal']);
@@ -262,6 +262,7 @@ export class EditWorkflow1Page implements OnInit{
                 case 'wfGoodTotal':
                 case 'wfBadTotal':
                 case 'wfOptStartQty':
+                case 'wfProcessNew':
                   break;
 
                 default:
@@ -455,80 +456,158 @@ export class EditWorkflow1Page implements OnInit{
     this.wfInputForm = this.formBuilder.group({
       wfProcess: [''],
       wfProcessName: [''],
-      wfFormName: [''],
       wfForm: [''],
-
-      // Order Inputs detail
       wfFormId: [''],
       wfFormSplit: [''],
-      wfOrderId: [''],
-      wfOrderBatchId: [''],
-      wfOrderBatchQty: [''],
-      wfOptMachineId: [''],
 
-      wfOrderBOMNote: [''],
-      wfOrderNote: [''],
-      wfOrderTotalQty: [''],
-      wfOrderTotalGoodQty: [''],
-      wfOrderRMId: [''],
+      wfOptMachineId: [''],
+      wfSpecCap: [''],
+      wfSpecDF: [''],
+      wfSpecLC: [''],
+      wfSpecZESR: [''],
+      wfAgeVoltSet: [''],
+      wfPriorWfFormId: [''],
+      wfNakedProductSpec: [''],
+      wfOrderId: [''],
       wfOrderSeries: [''],
+      wfOrderBatchId: [''],
+      wfOrderRMId: [''],
       wfOrderSpec: [''],
       wfOrderDim: [''],
+      wfOrderBatchQty: [''],
+      wfOrderTotalQty: [''],
+      wfSalesOrderQty: [''],
+      wfClientId: [''],
+      wfOrderFormNote: [''],
+      wfOrderNote: [''],
+      wfOrderBOMNote: [''],
+      wfSalesOrderNote: [''],
+      wfOrderDate: [''],
+      wfOrderStartDate: [''],
+      wfOrderEstFinishDate: [''],
+      wfOrderDeliveryDate: [''],
+      wfOrderTK: [''],
 
-      // Good / Bad Qty Input
-      wfBadItem1: ['开路'],
-      wfBadQty1: ['0'],
-      wfBadItem2: ['短路'],
-      wfBadQty2: ['0'],
-      wfBadItem3: ['高容'],
-      wfBadQty3: ['0'],
-      wfBadItem4: ['低容'],
-      wfBadQty4: ['0'],
-      wfBadItem5: ['损耗'],
-      wfBadQty5: ['0'],    
-      wfBadItem6: ['漏电'],
-      wfBadQty6: ['0'],
-      wfBadItemTotal: ['不良数總和'],
-
-      // Raw Material Inputs
+      // RM part of the detail
       wfRMFoilPosName: [''],
-      wfRMFoilPosSerial: [''],
       wfRMFoilPosLName: [''],
-      wfRMFoilPosLSerial: [''],
+      wfRMFoilPosCapFrom: [''],
+      wfRMFoilPosCapTo: [''],
+      wfRMFoilPosWidth: [''],
+      wfRMFoilPosLength: [''],
+
       wfRMFoilNegName: [''],
-      wfRMFoilNegSerial: [''],
       wfRMFoilNegLName: [''],
-      wfRMFoilNegLSerial: [''],
+      wfRMFoilNegCapFrom: [''],
+      wfRMFoilNegCapTo: [''],
+      wfRMFoilNegWidth: [''],
+      wfRMFoilNegLength: [''],
+      wfRMFoilNegQty: [''],
+
       wfRMPaperName: [''],
-      wfRMPaperSerial: [''],
-      wfRMGlueName: [''],
-      wfRMGlueSerial: [''],
-      wfRMSolName: [''],
-      wfRMSolSerial: [''],
+      wfRMPaperQty: [''],
       wfRMPinPosName: [''],
-      wfRMPinPosSerial: [''],
       wfRMPinNegName: [''],
-      wfRMPinNegSerial: [''],
-      wfRMPlasticName: [''],
-      wfRMPlasticSerial: [''],
+      wfRMPinPosQty: [''],
+      wfRMPinNegQty: [''],
+      wfRMGlueName: [''],
+      wfRMSolName: [''],
+      wfRMSolQty: [''],
       wfRMShellName: [''],
-      wfRMShellSerial: [''],
+      wfRMShellQty: [''],
+      wfRMPlasticName: [''],
+      wfRMPlasticQty: [''],
       wfRMCoverName: [''],
+      wfRMCoverQty: [''],
+      wfRMUpBeltName: [''],
+      wfRMDownBeltName: [''],
+      wfRMBaseName: [''],
+      wfRMCircleName: [''],
+      wfRMFoilPosSerial: [''],
+      wfRMFoilNegSerial: [''],
+      wfRMFoilPosLSerial: [''],
+      wfRMFoilNegLSerial: [''],
+      wfRMPaperSerial: [''],
+      wfRMGlueSerial: [''],
+      wfRMSolSerial: [''],
+      wfRMPinPosSerial: [''],
+      wfRMPinNegSerial: [''],
+      wfRMPlasticSerial: [''],
+      wfRMShellSerial: [''],
       wfRMCoverSerial: [''],
+
+      wfOrderTotalGoodQty: [''],
+      wfSalesOrderId: [''],
+      wfRMFoilPosQty: [''],
+      wfRMCoverCheck: [''],
       wfRMWindingTime: [''],
+      wfRMCoverWeek: [''],
       wfRMWindingDeg: [''],
+
+      // dry input
+      wfDryStartTime: [''],
+      wfDryFinishTime: [''],
+      wfDryWindingDeg: [''],
+      wfStaffDryName: [''],
+
+      // wet Input
+      wfWetEmptyAir: [''],
+      wfWetAir: [''],
+      wfWetStartTime: [''],
+      wfWetFinishTime: [''],
+      wfStaffWetName: [''],
+
+      // Wash Input
+      wfWashWindingDeg: [''],
+      wfWashStartTime: [''],
+      wfWashFinishTime: [''],
+      wfWashDryWindingDeg: [''],
+      wfWashDryTime: [''],
+      wfStaffWashName: [''],
+      wfQCCheck: [''],
+      wfRandomCheckInfo: [''],
+      wfSpecNote: [''],
+
+      // aging input details
+      wfAgeDetailAG1: [''],
+      wfAgeDetailAG2: [''],
+      wfAgeDetailAG3: [''],
+      wfAgeDetailAG4: [''],
+      wfAgeDetailAG5: [''],
+      wfAgeDetailAG6: [''],
+      wfAgeDetailLCT: [''],
+      wfAgeDetailLC: [''],
+      wfAgeDetailCAP: [''],
+      wfAgeDetailDF: [''],
 
       // Operational Input
       wfOptInputDate: [this.appDate],
+      wfOptInputEndDate: [this.appDate],
+      wfOptWashMachine: [''],
       wfOptStartTime: [''],
       wfOptFinishTime: [''],
-      wfOptBadQty: ['0'],
-      wfOptGoodQty: ['0'],
+      wfOptBadQtyItem: [''],
+      wfOptBadQty: [''],
+      wfOptGoodQty: [''],
+
+      // Good / Bad Qty Input
+      wfBadItem1: [''],
+      wfBadQty1: [''],
+      wfBadItem2: [''],
+      wfBadQty2: [''],
+      wfBadItem3: [''],
+      wfBadQty3: [''],
+      wfBadItem4: [''],
+      wfBadQty4: [''],
+      wfBadItem5: [''],
+      wfBadQty5: [''],
+      wfBadItem6: [''],
+      wfBadQty6: [''],
+      wfBadItemTotal: [''],
 
       // Ageing Part1
       wfAgeDegSet: [''],
       wfAgeDegAct: [''],
-      wfAgeVoltSet: [''],
       wfAgeVoltAct: [''],
       wfAgeCurrentSet: [''],
       wfAgeCurrentAct: [''],
@@ -541,27 +620,14 @@ export class EditWorkflow1Page implements OnInit{
       wfAutoAgeVoltAct2: [''],
       wfAutoAgeVoltAct3: [''],
       wfAutoAgeVoltAct4: [''],
-      // wfAutoAgeVoltAct5: [''],
-      // wfAutoAgeVoltAct6: [''],
-      // wfAutoAgeVoltAct7: [''],
-
-      // Auto ageing part2
-      // wfAutoAgeOpenVolt: [''],
-      // wfAutoAgeShortVolt: [''],
-      // wfAutoAgeOpen: [''],
-      // wfAutoAgeShort: [''],
-      // wfAutoAgeHighCapacity: [''],
-      // wfAutoAgeLowCapacity: [''],
-      // wfAutoAgeWear: [''],
-      // wfAutoAgeVoltLeak: [''],
-      // wfAutoAgeLook: [''],
 
       //Staff Input section
       wfStaffOptId: [''],
       wfStaffOptName: [''],
       wfStaffOptNameID: [''],
-      wfStaffTitle: [''],
       wfStaffOptShift: [''],
+      wfOptQtyChecked: [''],
+      wfStaffRepairName: [''],
       wfStaffTechId: [''],
       wfStaffTechName: [''],
       wfStaffXrayId: [''],
@@ -569,17 +635,39 @@ export class EditWorkflow1Page implements OnInit{
       wfStaffQCId: [''],
       wfStaffQCName: [''],
       wfStageStatus: [''],
+      wfStaffQCSummary: [''],
+      wfStaffQCPreRandomCheck: [''],
+      wfStaffRandomPickName: [''],
       wfQCPass: [''],
       wfQCPassCode: [''],
       wfQCSignOff: [''],
       wfQCInputNote: [''],
+      wfOrderSupNote: [''],
 
-      //  Appendix
+      // Raw Material
+      wfNakedProductSerial: [''],
+      wfRMUpBeltSerial: [''],
+      wfRMDownBeltSerial: [''],
+      wfRMBaseSerial: [''],
+      wfRMCricleSerial: [''],
+      wfRMPrintName: [''],
+      wfRMPrintSerial: [''],
+      wfRMPrintNameText: [''],
+      wfFinalCheckInfo: [''],
+      wfElecPass: [''],
+      wfLookPass: [''],
+      wfStaffTitle: [''],
+
+      // Status update part of the data
       wfOptStartQty: [''],
       wfBadTotal: [''],
       wfGoodTotal: [''],
+
       wfFormStatus: [''],
       wfProcessStatus: [''],
+      created: [''],
+      appUpload: [''],
+
       wfFormExcept: [''],
       wfReadOnly: [''],
       wfProcessNew: [''],

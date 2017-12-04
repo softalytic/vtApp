@@ -413,34 +413,34 @@ export class WorkflowPage implements OnInit {
       if(this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfLastCompletedWf']) && data['wfFormStatus']){
         // When selected process is ahead of last completed wf
         console.log("New Workflow is triggered");
+        this.fillData(form,data);
         form.controls["wfProcessStatus"].setValue(false);
         form.controls["wfFormStatus"].setValue(false);
+        form.controls["wfProcessNew"].setValue(true);
         form.controls["wfErrorMsg"].setValue(' ');
-        this.fillData(form,data);
         // Preload below data
         this.qtyReset(form);
+        this.dttmReset(form);
 
       } else if (this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfProcess']) && !data['wfFormStatus']) {
         console.log("提示: 上一个工序还没完成");
         alert("提示: 上一个工序还没完成");
-        form.controls["wfErrorMsg"].setValue('上一个工序还没完成');
         this.fillData(form,data);
+        form.controls["wfErrorMsg"].setValue('上一个工序还没完成');
 
       } else if (this.wfSvc.toInt(form.value.wfProcess) <= this.wfSvc.toInt(data['wfLastCompletedWf'])) {
         console.log("提示: 这工序巳经完成");
         alert("提示: 这工序巳经完成");
-        form.controls["wfErrorMsg"].setValue('这工序巳经完成');
         this.fillData(form,data);
+        form.controls["wfErrorMsg"].setValue('这工序巳经完成');
 
       } else {
         console.log("Continue to fill data from last workflow");
         this.fillData(form,data);
+        this.dttmReset(form);
         form.controls["wfOptGoodQty"].setValue(0);
         form.controls["wfOptBadQty"].setValue(0);
-        form.controls["wfOptInputDate"].setValue('');
-        form.controls["wfOptInputEndDate"].setValue('');
-        form.controls["wfOptStartTime"].setValue('');
-        form.controls["wfOptFinishTime"].setValue('');
+
 
       }
 
@@ -487,8 +487,8 @@ export class WorkflowPage implements OnInit {
   qtyReset(form:any ){
     form.controls["wfOptGoodQty"].setValue(0);
     form.controls["wfOptBadQty"].setValue(0);
-    form.controls["wfGoodTotal"].setValue(0);
-    form.controls["wfBadTotal"].setValue(0);
+    // form.controls["wfGoodTotal"].setValue(0);
+    // form.controls["wfBadTotal"].setValue(0);
     form.controls["wfOptBadQtyItem"].setValue(0);
     form.controls["wfBadItem1"].setValue(0);
     form.controls["wfBadItem2"].setValue(0);
@@ -496,7 +496,13 @@ export class WorkflowPage implements OnInit {
     form.controls["wfBadItem4"].setValue(0);
     form.controls["wfBadItem5"].setValue(0);
     form.controls["wfBadItem6"].setValue(0);
+  }
 
+  dttmReset(form:any){
+    form.controls["wfOptInputDate"].setValue('');
+    form.controls["wfOptInputEndDate"].setValue('');
+    form.controls["wfOptStartTime"].setValue('');
+    form.controls["wfOptFinishTime"].setValue('');
   }
 
   private formInit() {

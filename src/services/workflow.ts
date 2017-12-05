@@ -51,7 +51,7 @@ export class WorkflowService {
     console.log("Printing packet to server : " + JSON.stringify(wfInputForm));
 
     // Dynamic url base on the wfForm number
-    let queryUrl = this.baseUrl + "form" + wfForm +"/submit/";
+    let queryUrl = this.baseUrl + "form/submit/";
     console.log("Requesting url: " + queryUrl);
 
     // Return the http post
@@ -84,7 +84,7 @@ export class WorkflowService {
     console.log("Begin to load data from server");
     console.log("Printing request to server : " + JSON.stringify(wfInputForm));
 
-    let queryUrl = this.baseUrl + "form" + wfForm +"/query/";
+    let queryUrl = this.baseUrl + "form/query/";
     console.log("Requesting url: " + queryUrl);
 
     return this.http.post(queryUrl, wfInputForm, this.httpOptions)
@@ -115,7 +115,7 @@ export class WorkflowService {
     //       to be handled by the main function call
 
     let form = wfInputForm;
-    let queryUrl = this.baseUrl + "form" + wfForm +"/image/submit/";
+    let queryUrl = this.baseUrl + "form/image/submit/";
     console.log("Requesting url: " + queryUrl);
     console.log("Begin to upload image onto server!");
     console.log("Printing wfInputForm :" + JSON.stringify(form.value));

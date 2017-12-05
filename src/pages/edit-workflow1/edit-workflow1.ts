@@ -459,7 +459,6 @@ export class EditWorkflow1Page implements OnInit{
       wfForm: [''],
       wfFormId: [''],
       wfFormSplit: [''],
-
       wfOptMachineId: [''],
       wfSpecCap: [''],
       wfSpecDF: [''],
@@ -487,15 +486,12 @@ export class EditWorkflow1Page implements OnInit{
       wfOrderEstFinishDate: [''],
       wfOrderDeliveryDate: [''],
       wfOrderTK: [''],
-
-      // RM part of the detail
       wfRMFoilPosName: [''],
       wfRMFoilPosLName: [''],
       wfRMFoilPosCapFrom: [''],
       wfRMFoilPosCapTo: [''],
       wfRMFoilPosWidth: [''],
       wfRMFoilPosLength: [''],
-
       wfRMFoilNegName: [''],
       wfRMFoilNegLName: [''],
       wfRMFoilNegCapFrom: [''],
@@ -503,7 +499,6 @@ export class EditWorkflow1Page implements OnInit{
       wfRMFoilNegWidth: [''],
       wfRMFoilNegLength: [''],
       wfRMFoilNegQty: [''],
-
       wfRMPaperName: [''],
       wfRMPaperQty: [''],
       wfRMPinPosName: [''],
@@ -535,40 +530,21 @@ export class EditWorkflow1Page implements OnInit{
       wfRMPlasticSerial: [''],
       wfRMShellSerial: [''],
       wfRMCoverSerial: [''],
-
       wfOrderTotalGoodQty: [''],
       wfSalesOrderId: [''],
       wfRMFoilPosQty: [''],
       wfRMCoverCheck: [''],
       wfRMWindingTime: [''],
-      wfRMCoverWeek: [''],
       wfRMWindingDeg: [''],
-
-      // dry input
-      wfDryStartTime: [''],
-      wfDryFinishTime: [''],
       wfDryWindingDeg: [''],
-      wfStaffDryName: [''],
-
-      // wet Input
       wfWetEmptyAir: [''],
       wfWetAir: [''],
-      wfWetStartTime: [''],
-      wfWetFinishTime: [''],
-      wfStaffWetName: [''],
-
-      // Wash Input
       wfWashWindingDeg: [''],
-      wfWashStartTime: [''],
-      wfWashFinishTime: [''],
       wfWashDryWindingDeg: [''],
       wfWashDryTime: [''],
-      wfStaffWashName: [''],
       wfQCCheck: [''],
       wfRandomCheckInfo: [''],
       wfSpecNote: [''],
-
-      // aging input details
       wfAgeDetailAG1: [''],
       wfAgeDetailAG2: [''],
       wfAgeDetailAG3: [''],
@@ -579,8 +555,7 @@ export class EditWorkflow1Page implements OnInit{
       wfAgeDetailLC: [''],
       wfAgeDetailCAP: [''],
       wfAgeDetailDF: [''],
-
-      // Operational Input
+      wfAgeDetailStaffConfirm: [''],
       wfOptInputDate: [this.appDate],
       wfOptInputEndDate: [this.appDate],
       wfOptWashMachine: [''],
@@ -589,8 +564,6 @@ export class EditWorkflow1Page implements OnInit{
       wfOptBadQtyItem: [''],
       wfOptBadQty: [''],
       wfOptGoodQty: [''],
-
-      // Good / Bad Qty Input
       wfBadItem1: [''],
       wfBadQty1: [''],
       wfBadItem2: [''],
@@ -604,8 +577,6 @@ export class EditWorkflow1Page implements OnInit{
       wfBadItem6: [''],
       wfBadQty6: [''],
       wfBadItemTotal: [''],
-
-      // Ageing Part1
       wfAgeDegSet: [''],
       wfAgeDegAct: [''],
       wfAgeVoltAct: [''],
@@ -614,17 +585,12 @@ export class EditWorkflow1Page implements OnInit{
       wfAgeTimeSet: [''],
       wfAgeTimeAct: [''],
       wfAgeNote: [''],
-
-      // Additional volt for Ageing
       wfAutoAgeVoltAct1: [''],
       wfAutoAgeVoltAct2: [''],
       wfAutoAgeVoltAct3: [''],
       wfAutoAgeVoltAct4: [''],
-
-      //Staff Input section
       wfStaffOptId: [''],
       wfStaffOptName: [''],
-      wfStaffOptNameID: [''],
       wfStaffOptShift: [''],
       wfOptQtyChecked: [''],
       wfStaffRepairName: [''],
@@ -634,17 +600,10 @@ export class EditWorkflow1Page implements OnInit{
       wfStaffXrayName: [''],
       wfStaffQCId: [''],
       wfStaffQCName: [''],
-      wfStageStatus: [''],
-      wfStaffQCSummary: [''],
-      wfStaffQCPreRandomCheck: [''],
-      wfStaffRandomPickName: [''],
       wfQCPass: [''],
-      wfQCPassCode: [''],
       wfQCSignOff: [''],
       wfQCInputNote: [''],
       wfOrderSupNote: [''],
-
-      // Raw Material
       wfNakedProductSerial: [''],
       wfRMUpBeltSerial: [''],
       wfRMDownBeltSerial: [''],
@@ -652,22 +611,16 @@ export class EditWorkflow1Page implements OnInit{
       wfRMCricleSerial: [''],
       wfRMPrintName: [''],
       wfRMPrintSerial: [''],
-      wfRMPrintNameText: [''],
       wfFinalCheckInfo: [''],
       wfElecPass: [''],
       wfLookPass: [''],
-      wfStaffTitle: [''],
-
-      // Status update part of the data
       wfOptStartQty: [''],
       wfBadTotal: [''],
       wfGoodTotal: [''],
-
       wfFormStatus: [''],
       wfProcessStatus: [''],
       created: [''],
       appUpload: [''],
-
       wfFormExcept: [''],
       wfReadOnly: [''],
       wfProcessNew: [''],

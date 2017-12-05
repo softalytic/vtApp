@@ -50,9 +50,9 @@ export class WorkflowPage implements OnInit {
   testRadioOpen = false;
 
   dataWfProcess = {
-    "1":{"wfFormName": "裸品流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗","5":"自動老化","6":"手工老化","7":"串排","8":"测试分选","9":"外观"}},
-    "2":{"wfFormName": "成品流程卡", "Process":{"1":"打印","2":"测试上带","3":"贴片外观","4":"终检"}},
-    "3":{"wfFormName": "电容器流程卡", "Process":{"1":"素子钉卷","2":"烘干","3":"含浸","4":"組立","5":"清洗","6":"套管","7":"老化","8":"手工分选","9":"外观全检","10":"编带剪切"}} /* ,"11":"包装" */
+    "1":{"wfForm": "裸品流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗","5":"自動老化","6":"手工老化","7":"串排","8":"测试分选","9":"外观"}},
+    "2":{"wfForm": "成品流程卡", "Process":{"1":"打印","2":"测试上带","3":"贴片外观","4":"终检"}},
+    "3":{"wfForm": "电容器流程卡", "Process":{"1":"素子钉卷","2":"烘干","3":"含浸","4":"組立","5":"清洗","6":"套管","7":"老化","8":"手工分选","9":"外观全检","10":"编带剪切"}} /* ,"11":"包装" */
   };
 
   dataMachine = {
@@ -126,6 +126,9 @@ export class WorkflowPage implements OnInit {
   resetForm(form:any, model:string){
     console.log("Evaluating if Form should be reset");
 
+    var str = form.controls[model].value;
+    form.controls[model].setValue(str.toUpperCase());
+
     if (model == "wfFormId" && form.value.wfFormId != "" && form.value.wfFormId != null) {
       console.log("There will be new input, resetting the form now");
       for (let key in form.value) {
@@ -154,7 +157,7 @@ export class WorkflowPage implements OnInit {
     let form = this.wfInputForm;
 
     if (form.value.wfFormId === "" || form.value.wfForm === "" || form.value.wfProcess === "" || form.value.wfOptMachineId === "") {
-      //this.wfSvc.warningAlert(' name:' + form.value.wfFormName + ' id: ' + form.value.wfFormId + ' ' + form.value.wfProcess + ' form id' + form.value.wfForm, '嚫，请选择工单', '继續');
+      //this.wfSvc.warningAlert(' name:' + form.value.wfForm + ' id: ' + form.value.wfFormId + ' ' + form.value.wfProcess + ' form id' + form.value.wfForm, '嚫，请选择工单', '继續');
       let formMsgAlert = '';
       if(form.value.wfFormId === "") {
         formMsgAlert += '<br><br>1. 輸入流程卡号';
@@ -346,14 +349,14 @@ export class WorkflowPage implements OnInit {
       console.log('form.value.wfFormStatus ' + form.value.wfFormStatus);
       console.log('form.value.wfProcessStatus ' + form.value.wfProcessStatus);
 
-      form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
+      form.value.wfForm = wfStorage[form.value.wfForm].wfForm;
 
       console.log("Saving the form into storage");
       this.storage.set(form.value.wfFormId, form.value);
       console.log("This is the form after the state change " + JSON.stringify(form.value));
 
       // The following part will trigger the next stage wfPage
-      console.log("Will enter " + form.value.wfFormName + " edit page now");
+      console.log("Will enter " + form.value.wfForm + " edit page now");
       console.log("流程卡 " + form.value.wfFormId);
 
       switch (form.value.wfForm.toString()) {
@@ -512,7 +515,6 @@ export class WorkflowPage implements OnInit {
       wfForm: [''],
       wfFormId: [''],
       wfFormSplit: [0],
-
       wfOptMachineId: [''],
       wfSpecCap: [''],
       wfSpecDF: [''],
@@ -540,15 +542,12 @@ export class WorkflowPage implements OnInit {
       wfOrderEstFinishDate: [''],
       wfOrderDeliveryDate: [''],
       wfOrderTK: [''],
-
-      // RM part of the detail
       wfRMFoilPosName: [''],
       wfRMFoilPosLName: [''],
       wfRMFoilPosCapFrom: [''],
       wfRMFoilPosCapTo: [''],
       wfRMFoilPosWidth: [''],
       wfRMFoilPosLength: [''],
-
       wfRMFoilNegName: [''],
       wfRMFoilNegLName: [''],
       wfRMFoilNegCapFrom: [''],
@@ -556,7 +555,6 @@ export class WorkflowPage implements OnInit {
       wfRMFoilNegWidth: [''],
       wfRMFoilNegLength: [''],
       wfRMFoilNegQty: [''],
-
       wfRMPaperName: [''],
       wfRMPaperQty: [''],
       wfRMPinPosName: [''],
@@ -588,40 +586,21 @@ export class WorkflowPage implements OnInit {
       wfRMPlasticSerial: [''],
       wfRMShellSerial: [''],
       wfRMCoverSerial: [''],
-
       wfOrderTotalGoodQty: [''],
       wfSalesOrderId: [''],
       wfRMFoilPosQty: [''],
       wfRMCoverCheck: [''],
       wfRMWindingTime: [''],
-      wfRMCoverWeek: [''],
       wfRMWindingDeg: [''],
-
-      // dry input
-      wfDryStartTime: [''],
-      wfDryFinishTime: [''],
       wfDryWindingDeg: [''],
-      wfStaffDryName: [''],
-
-      // wet Input
       wfWetEmptyAir: [''],
       wfWetAir: [''],
-      wfWetStartTime: [''],
-      wfWetFinishTime: [''],
-      wfStaffWetName: [''],
-
-      // Wash Input
       wfWashWindingDeg: [''],
-      wfWashStartTime: [''],
-      wfWashFinishTime: [''],
       wfWashDryWindingDeg: [''],
       wfWashDryTime: [''],
-      wfStaffWashName: [''],
       wfQCCheck: [''],
       wfRandomCheckInfo: [''],
       wfSpecNote: [''],
-
-      // aging input details
       wfAgeDetailAG1: [''],
       wfAgeDetailAG2: [''],
       wfAgeDetailAG3: [''],
@@ -632,8 +611,7 @@ export class WorkflowPage implements OnInit {
       wfAgeDetailLC: [''],
       wfAgeDetailCAP: [''],
       wfAgeDetailDF: [''],
-
-      // Operational Input
+      wfAgeDetailStaffConfirm: [''],
       wfOptInputDate: [''],
       wfOptInputEndDate: [''],
       wfOptWashMachine: [''],
@@ -642,8 +620,6 @@ export class WorkflowPage implements OnInit {
       wfOptBadQtyItem: [''],
       wfOptBadQty: [''],
       wfOptGoodQty: [''],
-
-      // Good / Bad Qty Input
       wfBadItem1: [''],
       wfBadQty1: [''],
       wfBadItem2: [''],
@@ -657,8 +633,6 @@ export class WorkflowPage implements OnInit {
       wfBadItem6: [''],
       wfBadQty6: [''],
       wfBadItemTotal: [''],
-
-      // Ageing Part1
       wfAgeDegSet: [''],
       wfAgeDegAct: [''],
       wfAgeVoltAct: [''],
@@ -667,17 +641,12 @@ export class WorkflowPage implements OnInit {
       wfAgeTimeSet: [''],
       wfAgeTimeAct: [''],
       wfAgeNote: [''],
-
-      // Additional volt for Ageing
       wfAutoAgeVoltAct1: [''],
       wfAutoAgeVoltAct2: [''],
       wfAutoAgeVoltAct3: [''],
       wfAutoAgeVoltAct4: [''],
-
-      //Staff Input section
       wfStaffOptId: [''],
       wfStaffOptName: [''],
-      wfStaffOptNameID: [''],
       wfStaffOptShift: [''],
       wfOptQtyChecked: [''],
       wfStaffRepairName: [''],
@@ -687,17 +656,10 @@ export class WorkflowPage implements OnInit {
       wfStaffXrayName: [''],
       wfStaffQCId: [''],
       wfStaffQCName: [''],
-      wfStageStatus: [''],
-      wfStaffQCSummary: [''],
-      wfStaffQCPreRandomCheck: [''],
-      wfStaffRandomPickName: [''],
       wfQCPass: [''],
-      wfQCPassCode: [''],
       wfQCSignOff: [''],
       wfQCInputNote: [''],
       wfOrderSupNote: [''],
-
-      // Raw Material
       wfNakedProductSerial: [''],
       wfRMUpBeltSerial: [''],
       wfRMDownBeltSerial: [''],
@@ -705,22 +667,16 @@ export class WorkflowPage implements OnInit {
       wfRMCricleSerial: [''],
       wfRMPrintName: [''],
       wfRMPrintSerial: [''],
-      wfRMPrintNameText: [''],
       wfFinalCheckInfo: [''],
       wfElecPass: [''],
       wfLookPass: [''],
-      wfStaffTitle: [''],
-
-      // Status update part of the data
       wfOptStartQty: [''],
       wfBadTotal: [''],
       wfGoodTotal: [''],
-
       wfFormStatus: [false],
       wfProcessStatus: [false],
       created: [''],
       appUpload: [''],
-
       wfFormExcept: [false],
       wfReadOnly: [false],
       wfProcessNew: [''],

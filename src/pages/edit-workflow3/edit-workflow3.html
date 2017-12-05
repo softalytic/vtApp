@@ -105,21 +105,6 @@
 
                                     <!-- Simple Input field -->
                                     <ion-row *ngIf="wfInput.method == 'input'" align-items-center justify-content-center>
-                                        <div *ngIf="wfInput.wfOpslI == 2" style="height: 42px; width: 100vw;
-                              position: relative;">
-                                            <h4 class="inputHeader" style="display: inline-block; margin: 0;">
-                                                <!--<ion-icon name="clipboard"></ion-icon>-->
-                                                &nbsp; 生產记录
-                                            </h4>
-
-                                            <div style="position: absolute;right: 10px; top: 0;">
-                                                <div style="margin-left: 5px;margin-right: 5px; display:inline-block;">
-                                                    <!--<ion-icon name="{{wfInput.icon}}"></ion-icon>-->
-                                                    {{wfInput.title}}
-                                                </div>
-                                                <ion-input type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder" style="display:inline-block;"></ion-input>
-                                            </div>
-                                        </div>
 
                                         <div *ngIf="wfInput.inputType == 4" style="margin-left: 5px;margin-right: 5px;">
                                             <!--<ion-icon name="{{wfInput.icon}}"></ion-icon>-->
@@ -135,21 +120,7 @@
                                             扫一扫
                                         </button>
                                     </ion-row>
-                                    <!--
-                                    <ion-row *ngIf="wfInput.method === 'buttons' && wfInput.inputType === 9 " justify-content-left align-items-center>
-                                        <div class="inputLabel">
-                                            {{wfInput.title}}
-                                        </div>
 
-                                        <ion-buttons>
-                                            <button ion-button round outline type="button" style="width: auto;" *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model, button.value)" [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}">
-                                &nbsp;                  {{button.label}}
-                                                 </button>
-                                        </ion-buttons>
-                                    </ion-row>
-
-                                -->
-                                    <!-- Simple Input field -->
                                     <ion-row *ngIf="wfInput.method == 'input' && wfInputForm.value.wfProcess == '9' && wfInput.title != '分單' " align-items-center justify-content-center>
 
                                         <div *ngIf="wfInputForm.value.wfProcess == 9" style="margin-left: 5px;margin-right: 5px;">

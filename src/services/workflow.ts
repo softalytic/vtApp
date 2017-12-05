@@ -269,7 +269,7 @@ export class WorkflowService {
       if(form.value.wfOptBadQty < 0) {
         missingFeildMsg += '<br><br>3. 不良数不能小於零!';
       } 
-      if(form.value.wfOptGoodQty <= 0) {
+      if(form.value.wfOptGoodQty < 0) {
         missingFeildMsg += '<br><br>4. 良品数必須为正数!';
       }
       if(typeof form.value.wfStaffOptName === 'undefined') {
@@ -282,7 +282,7 @@ export class WorkflowService {
       if(form.value.wfOptBadQty < 0) {
         missingFeildMsg += '<br><br>3. 不良数不能小於零';
       } 
-      if(form.value.wfOptGoodQty <= 0) {
+      if(form.value.wfOptGoodQty < 0) {
         missingFeildMsg += '<br><br>4. 良品数必須为正数!';
       }
       if(typeof form.value.wfStaffOptName === 'undefined' && form.value.wfProcess != 4) {
@@ -321,7 +321,7 @@ export class WorkflowService {
         missingFeildMsg += '<br><br>3. 不良数不能小於零!';
 
       } 
-      if(form.value.wfOptGoodQty <= 0) {
+      if(form.value.wfOptGoodQty < 0) {
         missingFeildMsg += '<br><br>4. 良品数必須为正数!';
 
       }

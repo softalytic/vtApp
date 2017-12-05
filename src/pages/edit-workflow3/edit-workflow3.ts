@@ -240,7 +240,7 @@ export class EditWorkflow3Page implements OnInit{
     this.wfAgeingSeqDisplay = 0;
     
     this.wfPplInputs = [
-      {title: "作业員ID", method: "input", model: "wfStaffOptNameID", type: "text", icon: 'person', scan: true, wfPplI: 1, size: 7},
+      {title: "作业員ID", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: true, wfPplI: 1, size: 7},
       {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: false, wfPplI: 2, size: 7},
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 4},
       {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 6, size: 7},
@@ -561,7 +561,6 @@ export class EditWorkflow3Page implements OnInit{
       wfForm: [''],
       wfFormId: [''],
       wfFormSplit: [''],
-
       wfOptMachineId: [''],
       wfSpecCap: [''],
       wfSpecDF: [''],
@@ -589,15 +588,12 @@ export class EditWorkflow3Page implements OnInit{
       wfOrderEstFinishDate: [''],
       wfOrderDeliveryDate: [''],
       wfOrderTK: [''],
-
-      // RM part of the detail
       wfRMFoilPosName: [''],
       wfRMFoilPosLName: [''],
       wfRMFoilPosCapFrom: [''],
       wfRMFoilPosCapTo: [''],
       wfRMFoilPosWidth: [''],
       wfRMFoilPosLength: [''],
-
       wfRMFoilNegName: [''],
       wfRMFoilNegLName: [''],
       wfRMFoilNegCapFrom: [''],
@@ -605,7 +601,6 @@ export class EditWorkflow3Page implements OnInit{
       wfRMFoilNegWidth: [''],
       wfRMFoilNegLength: [''],
       wfRMFoilNegQty: [''],
-
       wfRMPaperName: [''],
       wfRMPaperQty: [''],
       wfRMPinPosName: [''],
@@ -637,40 +632,21 @@ export class EditWorkflow3Page implements OnInit{
       wfRMPlasticSerial: [''],
       wfRMShellSerial: [''],
       wfRMCoverSerial: [''],
-
       wfOrderTotalGoodQty: [''],
       wfSalesOrderId: [''],
       wfRMFoilPosQty: [''],
       wfRMCoverCheck: [''],
       wfRMWindingTime: [''],
-      wfRMCoverWeek: [''],
       wfRMWindingDeg: [''],
-
-      // dry input
-      wfDryStartTime: [''],
-      wfDryFinishTime: [''],
       wfDryWindingDeg: [''],
-      wfStaffDryName: [''],
-
-      // wet Input
       wfWetEmptyAir: [''],
       wfWetAir: [''],
-      wfWetStartTime: [''],
-      wfWetFinishTime: [''],
-      wfStaffWetName: [''],
-
-      // Wash Input
       wfWashWindingDeg: [''],
-      wfWashStartTime: [''],
-      wfWashFinishTime: [''],
       wfWashDryWindingDeg: [''],
       wfWashDryTime: [''],
-      wfStaffWashName: [''],
       wfQCCheck: [''],
       wfRandomCheckInfo: [''],
       wfSpecNote: [''],
-
-      // aging input details
       wfAgeDetailAG1: [''],
       wfAgeDetailAG2: [''],
       wfAgeDetailAG3: [''],
@@ -681,8 +657,7 @@ export class EditWorkflow3Page implements OnInit{
       wfAgeDetailLC: [''],
       wfAgeDetailCAP: [''],
       wfAgeDetailDF: [''],
-
-      // Operational Input
+      wfAgeDetailStaffConfirm: [''],
       wfOptInputDate: [this.appDate],
       wfOptInputEndDate: [this.appDate],
       wfOptWashMachine: [''],
@@ -691,8 +666,6 @@ export class EditWorkflow3Page implements OnInit{
       wfOptBadQtyItem: [''],
       wfOptBadQty: [''],
       wfOptGoodQty: [''],
-
-      // Good / Bad Qty Input
       wfBadItem1: [''],
       wfBadQty1: [''],
       wfBadItem2: [''],
@@ -706,8 +679,6 @@ export class EditWorkflow3Page implements OnInit{
       wfBadItem6: [''],
       wfBadQty6: [''],
       wfBadItemTotal: [''],
-
-      // Ageing Part1
       wfAgeDegSet: [''],
       wfAgeDegAct: [''],
       wfAgeVoltAct: [''],
@@ -716,17 +687,12 @@ export class EditWorkflow3Page implements OnInit{
       wfAgeTimeSet: [''],
       wfAgeTimeAct: [''],
       wfAgeNote: [''],
-
-      // Additional volt for Ageing
       wfAutoAgeVoltAct1: [''],
       wfAutoAgeVoltAct2: [''],
       wfAutoAgeVoltAct3: [''],
       wfAutoAgeVoltAct4: [''],
-
-      //Staff Input section
       wfStaffOptId: [''],
       wfStaffOptName: [''],
-      wfStaffOptNameID: [''],
       wfStaffOptShift: [''],
       wfOptQtyChecked: [''],
       wfStaffRepairName: [''],
@@ -736,17 +702,10 @@ export class EditWorkflow3Page implements OnInit{
       wfStaffXrayName: [''],
       wfStaffQCId: [''],
       wfStaffQCName: [''],
-      wfStageStatus: [''],
-      wfStaffQCSummary: [''],
-      wfStaffQCPreRandomCheck: [''],
-      wfStaffRandomPickName: [''],
       wfQCPass: [''],
-      wfQCPassCode: [''],
       wfQCSignOff: [''],
       wfQCInputNote: [''],
       wfOrderSupNote: [''],
-
-      // Raw Material
       wfNakedProductSerial: [''],
       wfRMUpBeltSerial: [''],
       wfRMDownBeltSerial: [''],
@@ -754,22 +713,16 @@ export class EditWorkflow3Page implements OnInit{
       wfRMCricleSerial: [''],
       wfRMPrintName: [''],
       wfRMPrintSerial: [''],
-      wfRMPrintNameText: [''],
       wfFinalCheckInfo: [''],
       wfElecPass: [''],
       wfLookPass: [''],
-      wfStaffTitle: [''],
-
-      // Status update part of the data
       wfOptStartQty: [''],
       wfBadTotal: [''],
       wfGoodTotal: [''],
-
       wfFormStatus: [''],
       wfProcessStatus: [''],
       created: [''],
       appUpload: [''],
-
       wfFormExcept: [''],
       wfReadOnly: [''],
       wfProcessNew: [''],

@@ -26,7 +26,7 @@
                                        type={{wfInput.type}}
                                        formControlName={{wfInput.model}}
                                        no-padding class="gridborder"
-                                       (change)="this.resetForm(this.wfInputForm, wfInput.model)"
+                                       (change)="this.resetForm(this.wfInputForm, wfInput.model);"
                                        required></ion-input>
 
                             <button *ngIf="wfInput.scan" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)" item-end ion-button class="barcodeButton" type="button">

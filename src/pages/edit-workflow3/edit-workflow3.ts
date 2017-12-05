@@ -46,7 +46,7 @@ export class EditWorkflow3Page implements OnInit{
   wfStaffTechIdTmp: any;
   wfStaffOptShiftTmp: any;
   wfQCSignOffTmp: any;
-  wfOrderTotalGoodQtyTmp: any;
+  wfGoodTotalTmp: any;
 
   codeDataSet: any;
 
@@ -95,7 +95,7 @@ export class EditWorkflow3Page implements OnInit{
 
       {method: "input", model: "wfOrderDeliveryDate", title: "交期", type: "text", size: 10, disabled:true, highlight: false},
       {method: "input", model: "wfOrderEstFinishDate", title: "完工日期", type: "text", size: 10, disabled:true, highlight: false},
-      {method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 8, highlight: false},
+      {method: "input", model: "wfGoodTotal", title: "良品數總和", type: "number", size: 8, highlight: false},
 
       {method: "break", size: "88", visibility: "hidden"},
       
@@ -188,7 +188,7 @@ export class EditWorkflow3Page implements OnInit{
       {method: 'inputs', options: [
         {title: "清机确认", model: "wfOptWashMachine", type: "text", inputType: 1, scan: false, size: 8}, 
         {title: "总投入数", method: "input", model: "wfOptStartQty", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
-        {title: "良品數", method: "input", model: "wfGoodTotal", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
+        {title: "良品數", method: "input", model: "wfOptGoodQty", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
         {title: "抽检数量", model: "wfRandomCheckInfo", type: "number", icon: 'construct', inputType: 9, scan: false, size: 8},
       ]},
 
@@ -296,20 +296,24 @@ export class EditWorkflow3Page implements OnInit{
       } else {
         // Preload the data for form
         if (storageData['wfProcessNew']) {
+          console.log("New process is triggered");
           form.controls['wfGoodTotal'].setValue(0);
           form.controls['wfBadTotal'].setValue(0);
           form.controls['wfOptStartQty'].setValue(storageData['wfGoodTotal']);
           form.controls['wfProcessNew'].setValue(false);
         } else {
+          console.log("Continue next process");
           form.controls['wfGoodTotal'].setValue(storageData['wfGoodTotal']);
           form.controls['wfBadTotal'].setValue(storageData['wfBadTotal']);
           form.controls['wfOptStartQty'].setValue(storageData['wfOptStartQty']);
         }
 
+        console.log("Before loading the form " + JSON.stringify(form.value));
+
         for (let key in storageData) {
-          console.log("Loading " + key + " Storage: " + storageData[key]);
+          // console.log("Loading " + key + " Storage: " + storageData[key]);
           if(key in form.controls){
-            console.log("Loading " + key + " in Form: " + storageData[key]);
+            // console.log("Loading " + key + " in Form: " + storageData[key]);
             try {
               switch (key) {
                 case 'wfStaffTechId':
@@ -329,29 +333,6 @@ export class EditWorkflow3Page implements OnInit{
 
                 case 'wfOptInputDate':
                   form.controls[key].setValue(this.appDate);
-                  break;
-
-                case 'wfGoodTotal':
-                  if (form.value.wfProcessStatus) {
-                    form.controls[key].setValue(0);
-                    form.controls['wfOptStartQty'].setValue(storageData[key]);
-                  } else {
-                    form.controls[key].setValue(storageData[key]);
-                  }
-                  break;
-
-                case 'wfBadTotal':
-                  if (form.value.wfProcessStatus) {
-                    form.controls[key].setValue(0);
-                  }
-                  break;
-
-                case 'wfOptStartQty':
-                  if (form.value.wfProcessStatus) {
-                    break;
-                  } else {
-                    form.controls[key].setValue(storageData['wfGoodTotal']);
-                  }
                   break;
 
                 case 'wfGoodTotal':
@@ -470,7 +451,7 @@ export class EditWorkflow3Page implements OnInit{
           dataMachineXTmp = JSON.parse(dataMachineXTmp);
           //alert(dataMachineXTmp[machineId]['staffName']);
           this.wfInputForm.patchValue({ wfStaffOptShift: dataMachineXTmp[machineId]['shift'], wfStaffOptId: dataMachineXTmp[machineId]['staffName'], 
-          wfOrderTotalGoodQty: this.wfOrderTotalGoodQtyTmp, wfStaffTechId: dataMachineXTmp[machineId]['techName'], wfStaffXrayId: dataMachineXTmp[machineId]['xrayName'],});
+          wfGoodTotal: this.wfGoodTotalTmp, wfStaffTechId: dataMachineXTmp[machineId]['techName'], wfStaffXrayId: dataMachineXTmp[machineId]['xrayName'],});
           
         } else {
           let alert = this.alertCtrl.create({
@@ -485,14 +466,14 @@ export class EditWorkflow3Page implements OnInit{
     }
     
 
-    this.wfOrderTotalGoodQtyTmp = parseFloat(this.wfInputForm.value.wfOrderTotalGoodQty)  + parseFloat(this.wfInputForm.value.wfOptGoodQty);
+    this.wfGoodTotalTmp = parseFloat(this.wfInputForm.value.wfGoodTotal)  + parseFloat(this.wfInputForm.value.wfOptGoodQty);
     
     //alert(StaffArr.wfStaffTechId + ' staff 2: ' + StaffArr.wfStaffOptShift  + ' staff 3: ' + StaffArr.wfQCSignOff );
   }
 
   updateTotalGoodQty(wfOptGoodQtyValue: any) {
-    var goodQtyTmp = this.wfNavParams.wfOrderTotalGoodQty + wfOptGoodQtyValue;
-    this.wfInputForm.patchValue({ wfOrderTotalGoodQty: goodQtyTmp, });
+    var goodQtyTmp = this.wfNavParams.wfGoodTotal + wfOptGoodQtyValue;
+    this.wfInputForm.patchValue({ wfGoodTotal: goodQtyTmp, });
   }
 
   showWfOpsInputsAlert(wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
@@ -632,7 +613,6 @@ export class EditWorkflow3Page implements OnInit{
       wfRMPlasticSerial: [''],
       wfRMShellSerial: [''],
       wfRMCoverSerial: [''],
-      wfOrderTotalGoodQty: [''],
       wfSalesOrderId: [''],
       wfRMFoilPosQty: [''],
       wfRMCoverCheck: [''],

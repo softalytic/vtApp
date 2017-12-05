@@ -207,13 +207,15 @@ export class WorkflowService {
                     buttons: [{
                       text: '    確定    ',
                       handler: () => {
-                        console.log('Final confirmation of mark completion is clicked');
-                        console.log("uploading form" + JSON.stringify(form.value));
-      
-                        form.value.wfFormStatus = true;
-                        form.value.wfLastCompletedWf = form.value.wfProcess;
 
-                        this.formSubmission(form,images,navCtrl);
+                        if (this.finalValidation(form)){
+                          console.log('Final confirmation of mark completion is clicked');
+                          console.log("uploading form" + JSON.stringify(form.value));
+
+                          form.value.wfFormStatus = true;
+                          form.value.wfLastCompletedWf = form.value.wfProcess;
+                          this.formSubmission(form,images,navCtrl);
+                        }
                       }
                     },{
                       text: '    取消    ',
@@ -619,5 +621,125 @@ export class WorkflowService {
         console.log(response.json()[0]);
         return response.json();
       });
+  }
+
+  finalValidation(form:any) {
+    var except = form.value.wfFormExcept;
+    console.log('wfFormExcept is ' + except);
+    if (except) {
+      return true;
+    } else {
+      var startQty = this.toInt(form.value.wfOptStartQty);
+      var goodQty = this.toInt(form.value.wfOptGoodQty);
+      var badQty = this.toInt(form.value.wfOptBadQty);
+      var batchQty = (this.toInt(form.value.wfOrderBatchQty)) * 1000;
+
+      var wtForm = form.value.wfForm;
+      var ProcessCount = this.toInt(form.value.wfProcess);
+
+      //良品数上下限
+      var QC_UPPER = 1.2;
+      var QC_LOWER = 0.8;
+
+      //vairance (flexible quantity - inputQty)
+      var OtherLimit = 3000;
+
+      //not exceeding 10k of batch qty
+      //flexible_quantity - Finished_Product = 10000;
+      var finishProdLimit = 10000;
+
+      //  sub process card
+      //rule 5 cannot exceed batch quantity
+      if (badQty > batchQty) {
+        alert('不良品不得超过批次量');
+        return false;
+      }
+
+      switch (wtForm) {
+        // specific process cards
+        // CASE 1 (finished product process card )
+
+        case '1':
+          if (ProcessCount>1) {
+            if (Math.abs(goodQty - startQty) <= OtherLimit) {
+              console.log('goodQty' + goodQty);
+              console.log('startQty' + startQty);
+              console.log('batchQty' + batchQty);
+              // rule 2 cant be below batch quantity
+              if (goodQty < batchQty) {
+                alert('良品数不得小于批次量');
+                return false;
+              }
+
+              //rule 1 cannot exceed 10k of batch quantity
+              else if ((goodQty - batchQty) > (finishProdLimit)) {
+                alert('良品不得超過批次量一万以上');
+                return false;
+              }
+            }
+            // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
+            else if (goodQty < (QC_LOWER * startQty)) {
+              alert('良品数下限不得低于投入数百分之八十');
+              return false;
+            }
+          } else {
+            if (goodQty < batchQty) {
+              alert('良品数不得小于批次量');
+              return false;
+            }
+
+            //rule 1 cannot exceed 10k of batch quantity
+            else if ((goodQty - batchQty) > (finishProdLimit)) {
+              alert('良品不得超過批次量一万以上');
+              return false;
+            }
+          }
+
+        // CASE 2 (naked product)
+        // rule 3 within 3k variance
+        case '2':
+          if (ProcessCount>1) {
+            if (Math.abs(goodQty - startQty) <= OtherLimit) {
+              return true;
+            }
+            // rule 4 cant not exceed 20% of good quantity from last process
+            else if (goodQty > (QC_UPPER * startQty)) {
+              alert('良品数上限不得超过投入数百分之二十');
+              return false;
+            }
+            // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
+            else if (goodQty < (QC_LOWER * startQty)) {
+              alert('良品数下限不得低于投入数百分之八十');
+              return false;
+            }
+          } else {
+            return true;
+          }
+
+        // CASE 3 (插件 embedded)
+        //same logic as naked product
+        case '3':
+          if (ProcessCount>1) {
+            if (Math.abs(goodQty - startQty) <= OtherLimit) {
+              return true;
+            }
+            // rule 4 cant not exceed 20% of good quantity from last process
+            else if (goodQty > (QC_UPPER * startQty)) {
+              alert('良品数上限不得超过投入数百分之二十');
+              return false;
+            }
+            // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
+            else if (goodQty < (QC_LOWER * startQty)) {
+              alert('良品数下限不得低于投入数百分之八十');
+              return false;
+            }
+          } else {
+            return true;
+          }
+        default:
+          return true;
+      }
+
+    }
   }
 }

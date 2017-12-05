@@ -50,9 +50,9 @@ export class WorkflowPage implements OnInit {
   testRadioOpen = false;
 
   dataWfProcess = {
-    "1":{"wfForm": "裸品流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗","5":"自動老化","6":"手工老化","7":"串排","8":"测试分选","9":"外观"}},
-    "2":{"wfForm": "成品流程卡", "Process":{"1":"打印","2":"测试上带","3":"贴片外观","4":"终检"}},
-    "3":{"wfForm": "电容器流程卡", "Process":{"1":"素子钉卷","2":"烘干","3":"含浸","4":"組立","5":"清洗","6":"套管","7":"老化","8":"手工分选","9":"外观全检","10":"编带剪切"}} /* ,"11":"包装" */
+    "1":{"wfFormName": "裸品流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗","5":"自動老化","6":"手工老化","7":"串排","8":"测试分选","9":"外观"}},
+    "2":{"wfFormName": "成品流程卡", "Process":{"1":"打印","2":"测试上带","3":"贴片外观","4":"终检"}},
+    "3":{"wfFormName": "电容器流程卡", "Process":{"1":"素子钉卷","2":"烘干","3":"含浸","4":"組立","5":"清洗","6":"套管","7":"老化","8":"手工分选","9":"外观全检","10":"编带剪切"}} /* ,"11":"包装" */
   };
 
   dataMachine = {
@@ -91,11 +91,9 @@ export class WorkflowPage implements OnInit {
 
 
       //{title: "总量(预设)", method: 'input', type: 'number', model: 'wfOrderTotalQty', scan: false, size: 10},
-
       // Prompt Screen alert to pick the workflow batch id
       // {title: "批次号", method: 'input', type: 'text', model: 'wfOrderBatchId', scan: false, size: 20},
       // {title: "总量(批次)", method: 'input', type: 'number', model: 'wfOrderBatchQty', scan: false, size: 10},
-
       {method: "break", size: 20},
 
       // Expand as buttons
@@ -151,7 +149,7 @@ export class WorkflowPage implements OnInit {
     //    alert the users
     // else
     //    submission the form
-    
+
     console.log("onAddWF is triggered!");
 
     let form = this.wfInputForm;
@@ -173,9 +171,9 @@ export class WorkflowPage implements OnInit {
       }
       this.wfSvc.warningAlert('請提供或更正下列资料：', formMsgAlert + '<br><br>然後按 \" 確定\”', '继續');
 
-    } 
+    }
     else {
-      
+
       this.dataSubmission(form);
 
     }
@@ -187,7 +185,6 @@ export class WorkflowPage implements OnInit {
   setFormValue(model: string, value: any){
     // This function is being called from the html for form value setting
     // Do not delete
-
     let form = this.wfInputForm;
 
     form.controls[model].setValue(value);
@@ -198,7 +195,6 @@ export class WorkflowPage implements OnInit {
     // This function is temp for onAddWf testing data pre-filled
     // It is used to submit the data into storage and call workflowStateChange
     // QRCode service is being used
-
     this.QRCode.qrCodePopulate(data,form);
     this.storage.set(form.value.wfFormId, form.value);
     this.workflowStateChange();
@@ -210,14 +206,17 @@ export class WorkflowPage implements OnInit {
     //   1. Check Server with wfSvc, if this record exist on server for latest update
     //   2. Check if local storage has the record
     //   3. Else it is a new record on the app
-
     this.wfSvc.query(form.value, form.value.wfForm).subscribe( (serverData) => {
 
       if(serverData[0] == "" || serverData[0] == [] || serverData[0] == null){
         this.wfSvc.erpQuery(form.value).subscribe( (serverData) => {
 
           if(serverData[0] == "" || serverData[0] == [] || serverData[0] == null){
-            alert("查无此单号")
+            alert("查无此单号");
+            if (!this.wfLoad){
+              this.workflowStateChange();
+            }
+
           } else {
             // alert(JSON.stringify(serverData[0]));
             console.log("Response from ERP server: " + JSON.stringify(serverData[0]));
@@ -227,7 +226,6 @@ export class WorkflowPage implements OnInit {
             // 3. Which user can then decide what is the phase of next step
             if (!this.loadDataToForm(form, serverData[0])){return;}
             // this.populateDataToForm(form, serverData[0]);
-
             // This function is for automatic workflow state change base on previous business rule
             // As the current app has lift up the limitation and let user choose the workflow,
             // then you can either comment out most of the code within this function
@@ -248,7 +246,6 @@ export class WorkflowPage implements OnInit {
         // 3. Which user can then decide what is the phase of next step
         if (!this.loadDataToForm(form, serverData[0])){return;};
         // this.populateDataToForm(form, serverData[0]);
-
         // This function is for automatic workflow state change base on previous business rule
         // As the current app has lift up the limitation and let user choose the workflow,
         // then you can either comment out most of the code within this function
@@ -260,7 +257,6 @@ export class WorkflowPage implements OnInit {
       }
 
       // this.workflowStateChange();
-
 
     },(err)=>{
       // If there is any error or unsuccessful connection
@@ -279,14 +275,12 @@ export class WorkflowPage implements OnInit {
         //    proceed to load data to form
         // Else
         //    treat it as new record
-
         console.log("storage data "+ JSON.stringify(storageData));
 
 
         if(storageData){
           console.log("Data Submission Result found:" + form.value.wfFormId);
           // this.populateDataToForm(form, storageData);
-
           // This code below replace the upper function,
           // this is to assume the latest input from user is always correct
           // Only will override if there is no input at all
@@ -314,7 +308,6 @@ export class WorkflowPage implements OnInit {
       });
 
       // this.workflowStateChange();
-
     });
   }
 
@@ -329,7 +322,6 @@ export class WorkflowPage implements OnInit {
     //    Increment index position and return the result to form
     // 6. Save into storage
     // 7. Push to next Nav page
-
     // Follow up issue:
     // Since the user can individually select the workflow as they desire.
     // There is no need to automatically set the workflow status.
@@ -349,14 +341,14 @@ export class WorkflowPage implements OnInit {
       console.log('form.value.wfFormStatus ' + form.value.wfFormStatus);
       console.log('form.value.wfProcessStatus ' + form.value.wfProcessStatus);
 
-      form.value.wfForm = wfStorage[form.value.wfForm].wfForm;
+      form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
 
       console.log("Saving the form into storage");
       this.storage.set(form.value.wfFormId, form.value);
       console.log("This is the form after the state change " + JSON.stringify(form.value));
 
       // The following part will trigger the next stage wfPage
-      console.log("Will enter " + form.value.wfForm + " edit page now");
+      console.log("Will enter " + form.value.wfFormName + " edit page now");
       console.log("流程卡 " + form.value.wfFormId);
 
       switch (form.value.wfForm.toString()) {
@@ -404,7 +396,6 @@ export class WorkflowPage implements OnInit {
     // Note: The sequence is important, must first execute all the form.control filling
     //       Then proceed to fill the non form control fields.
     //       Otherwise, the form control will clear all the inputs
-
     console.log("Loading data to form, data are " + JSON.stringify(data));
 
     // First check if the user has selected the right wfForm
@@ -412,8 +403,7 @@ export class WorkflowPage implements OnInit {
 
       // If the last process has been completed and then current chosen step is higher than received data wfProcess
       // Then reset the process status
-
-      if(this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfLastCompletedWf']) && data['wfFormStatus']){
+      if( !("wfProcess" in data) || (this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfLastCompletedWf']) && data['wfFormStatus'] ) ){
         // When selected process is ahead of last completed wf
         console.log("New Workflow is triggered");
         this.fillData(form,data);
@@ -465,7 +455,6 @@ export class WorkflowPage implements OnInit {
         try {
           // This use form control for the value setting
           // form.controls[key].setValue(data[key]);
-
           if (form.controls[key].value == null || form.controls[key].value == "" ) {
             // console.log("populate form model " + key);
             form.controls[key].setValue(data[key]);
@@ -478,7 +467,6 @@ export class WorkflowPage implements OnInit {
           // eval('console.log("Retrying force input " + form.value.'+ key + ')');
           // eval('console.log(form.value.' + key + ');');
           // eval('form.value.' + key + '= "' + data[key] + '"; ');
-
         }
       } else {
         console.log("Key: " + key + " is not in the formGroup, please check!")

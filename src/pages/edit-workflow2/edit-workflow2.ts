@@ -33,7 +33,6 @@ export class EditWorkflow2Page implements OnInit{
   wfStaffTechIdTmp: any;
   wfStaffOptShiftTmp: any;
   wfQCSignOffTmp: any;
-  wfOrderTotalGoodQtyTmp: any;
 
   // For calculating the time value
   tzoffset: number = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
@@ -56,7 +55,6 @@ export class EditWorkflow2Page implements OnInit{
       {method: "input", model: "wfOrderId", title: "工单号", type: "text", size: 12, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "input", model: "wfOptMachineId", title: "台机号", type: "text", size: 7, scan: false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 12, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      // {method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 6, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
       {method: "break", size: "135", visibility: "hidden"},
       {method: "input", model: "wfPriorWfFormId", title: "裸品卡号", type: "text", size: 12, scan: true, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
@@ -87,15 +85,6 @@ export class EditWorkflow2Page implements OnInit{
 
       {method: "input", model: "wfOrderSupNote", title: "异常记录", type: "textarea", size: 24, highlight: false, process: {1: false, 2: false, 3: false, 4:true}},
 
-      // {title: "客户代码", method: "input", model: "wfClientId", type: "text", scan: false, size: 15},
-      // {title: "销售订单号", method: "input", model: "wfSalesOrderId", type: "text", scan: false, size: 15},
-      // {title: "台机号", method: "input", model: "wfOptMachineId", type: "text", scan: false, size: 9},
-
-      // {model: "wfOrderQty", title: "总量(批次)", type: "text", highlight: false},
-
-      // {method: "break", size: 10},
-
-      // {method: "input", model: "wfOrderTotalGoodQty", title: "良品數總和", type: "number", size: 5, highlight: false},
 
     ];
 
@@ -135,7 +124,7 @@ export class EditWorkflow2Page implements OnInit{
     ];
 
     this.wfPplInputs = [
-      {title: "作业員ID", method: "input", model: "wfStaffOptNameID", type: "text", icon: 'person', scan: 3, wfPplI: 1,size: 20, process: {1: true, 2: true, 3: true, 4:false}},
+      {title: "作业員ID", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: 3, wfPplI: 1,size: 20, process: {1: true, 2: true, 3: true, 4:false}},
       {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: 0,size: 20, process: {1: true, 2: true, 3: true, 4:false}},
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, size: 5, process: {1: true, 2: true, 3: true, 4:false}},
       {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: 1, size: 20, process: {1: true, 2: true, 3: true, 4:false}},
@@ -242,14 +231,6 @@ export class EditWorkflow2Page implements OnInit{
                 case 'wfBadTotal':
                   if (form.value.wfProcessStatus) {
                     form.controls[key].setValue(0);
-                  }
-                  break;
-
-                case 'wfOptStartQty':
-                  if (form.value.wfProcessStatus) {
-                    break;
-                  } else {
-                    form.controls[key].setValue(storageData['wfGoodTotal']);
                   }
                   break;
 
@@ -477,7 +458,6 @@ export class EditWorkflow2Page implements OnInit{
       wfRMPlasticSerial: [''],
       wfRMShellSerial: [''],
       wfRMCoverSerial: [''],
-      wfOrderTotalGoodQty: [''],
       wfSalesOrderId: [''],
       wfRMFoilPosQty: [''],
       wfRMCoverCheck: [''],

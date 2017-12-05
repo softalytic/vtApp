@@ -34,7 +34,7 @@ export class EditWorkflow1Page implements OnInit{
   wfStaffTechIdTmp: any;
   wfStaffOptShiftTmp: any;
   wfQCSignOffTmp: any;
-  wfOrderTotalGoodQtyTmp: any;
+  wfGoodTotalTmp: any;
 
   codeDataSet: any;
 
@@ -166,7 +166,7 @@ export class EditWorkflow1Page implements OnInit{
     ];
     
     this.wfPplInputs = [
-      {title: "作业員ID", method: "input", model: "wfStaffOptNameID", type: "text", icon: 'person', scan: true, wfPplI: 1, size: 7},
+      {title: "作业員ID", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: true, wfPplI: 1, size: 7},
       {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: false, wfPplI: 2, size: 6},
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 3},
       {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 3, size: 7},
@@ -369,7 +369,7 @@ export class EditWorkflow1Page implements OnInit{
           dataMachineXTmp = JSON.parse(dataMachineXTmp);
           //alert(dataMachineXTmp[machineId]['staffName']);
           this.wfInputForm.patchValue({ wfStaffOptShift: dataMachineXTmp[machineId]['shift'], wfStaffOptId: dataMachineXTmp[machineId]['staffName'], 
-          wfOrderTotalGoodQty: this.wfOrderTotalGoodQtyTmp, wfStaffTechId: dataMachineXTmp[machineId]['techName'], wfStaffXrayId: dataMachineXTmp[machineId]['xrayName'],});
+          wfGoodTotal: this.wfGoodTotalTmp, wfStaffTechId: dataMachineXTmp[machineId]['techName'], wfStaffXrayId: dataMachineXTmp[machineId]['xrayName'],});
           
         } else {
           let alert = this.alertCtrl.create({
@@ -384,13 +384,13 @@ export class EditWorkflow1Page implements OnInit{
     }
     
 
-    this.wfOrderTotalGoodQtyTmp = parseFloat(this.wfInputForm.value.wfOrderTotalGoodQty)  + parseFloat(this.wfInputForm.value.wfOptGoodQty);
+    this.wfGoodTotalTmp = parseFloat(this.wfInputForm.value.wfGoodTotal)  + parseFloat(this.wfInputForm.value.wfOptGoodQty);
 
   }
 
   updateTotalGoodQty(wfOptGoodQtyValue: any) {
-    var goodQtyTmp = this.wfNavParams.wfOrderTotalGoodQty + wfOptGoodQtyValue;
-    this.wfInputForm.patchValue({ wfOrderTotalGoodQty: goodQtyTmp, });
+    var goodQtyTmp = this.wfNavParams.wfGoodTotal + wfOptGoodQtyValue;
+    this.wfInputForm.patchValue({ wfGoodTotal: goodQtyTmp, });
   }
 
   showWfOpsInputsAlert(wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
@@ -530,7 +530,6 @@ export class EditWorkflow1Page implements OnInit{
       wfRMPlasticSerial: [''],
       wfRMShellSerial: [''],
       wfRMCoverSerial: [''],
-      wfOrderTotalGoodQty: [''],
       wfSalesOrderId: [''],
       wfRMFoilPosQty: [''],
       wfRMCoverCheck: [''],

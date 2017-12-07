@@ -403,7 +403,12 @@ export class WorkflowPage implements OnInit {
 
       // If the last process has been completed and then current chosen step is higher than received data wfProcess
       // Then reset the process status
-      if( !("wfProcess" in data) || (this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfLastCompletedWf']) && data['wfFormStatus'] ) ){
+      if(form.value.wfReadOnly) {
+        this.fillData(form,data);
+        form.controls["wfReadOnly"].setValue(true);
+        form.controls["wfErrorMsg"].setValue('只供浏览');
+
+      } else if( !("wfProcess" in data) || (this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfLastCompletedWf']) && data['wfFormStatus'] ) ){
         // When selected process is ahead of last completed wf
         console.log("New Workflow is triggered");
         this.fillData(form,data);

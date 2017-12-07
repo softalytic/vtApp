@@ -651,15 +651,37 @@ export class WorkflowService {
       //  sub process card
       //rule 5 cannot exceed batch quantity
       if (badQty > batchQty) {
+        console.log('batchQty' + batchQty);
+        console.log('badqty'+ badQty);
         alert('不良品不得超过批次量');
         return false;
       }
 
       switch (wtForm) {
         // specific process cards
-        // CASE 1 (finished product process card )
+        // CASE 1 (naked process card )
 
         case '1':
+          if (ProcessCount>1) {
+            if (Math.abs(goodQty - startQty) <= OtherLimit) {
+              return true;
+            }
+            // rule 4 cant not exceed 20% of good quantity from last process
+            else if (goodQty > (QC_UPPER * startQty)) {
+              alert('良品数上限不得超过投入数百分之二十');
+              return false;
+            }
+            // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
+            else if (goodQty < (QC_LOWER * startQty)) {
+              alert('良品数下限不得低于投入数百分之八十');
+              return false;
+            }
+          } else {
+            return true;
+          }
+
+        // CASE 2 (finished product)
+        case '2':
           if (ProcessCount>1) {
             if (Math.abs(goodQty - startQty) <= OtherLimit) {
               console.log('goodQty' + goodQty);
@@ -693,27 +715,6 @@ export class WorkflowService {
               alert('良品不得超過批次量一万以上');
               return false;
             }
-          }
-
-        // CASE 2 (naked product)
-        // rule 3 within 3k variance
-        case '2':
-          if (ProcessCount>1) {
-            if (Math.abs(goodQty - startQty) <= OtherLimit) {
-              return true;
-            }
-            // rule 4 cant not exceed 20% of good quantity from last process
-            else if (goodQty > (QC_UPPER * startQty)) {
-              alert('良品数上限不得超过投入数百分之二十');
-              return false;
-            }
-            // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
-            else if (goodQty < (QC_LOWER * startQty)) {
-              alert('良品数下限不得低于投入数百分之八十');
-              return false;
-            }
-          } else {
-            return true;
           }
 
         // CASE 3 (插件 embedded)

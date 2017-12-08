@@ -579,6 +579,7 @@ export class WorkflowService {
       text = "0"
     }
 
+    // change to float because of the batch number could be decimal
     return parseFloat(text);
   };
 

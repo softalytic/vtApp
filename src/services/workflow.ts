@@ -579,7 +579,7 @@ export class WorkflowService {
       text = "0"
     }
 
-    return parseInt(text);
+    return parseFloat(text);
   };
 
   runningTotal(form:any){

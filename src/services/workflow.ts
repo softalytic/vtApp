@@ -465,12 +465,12 @@ export class WorkflowService {
       buttons: [buttons]
     });
     alert.present();
-  }
+  };
 
   cancelBtn(navCtrl: any) {
     this.storage.clear();
     navCtrl.setRoot(WorkflowPage);
-  }
+  };
 
   setBadQty(wfForm: any) {
     let form = wfForm;
@@ -478,7 +478,7 @@ export class WorkflowService {
     if(form.value.wfProcessName ){
 
     }
-  }
+  };
 
   formSubmission(form: any, images: any, navCtrl: any) {
     // This function manage all the form submission in each of the wfForm and connect with the server call
@@ -550,7 +550,7 @@ export class WorkflowService {
         }
         
       );
-  }
+  };
 
   networkError(form:any, navCtrl: any){
     let alert = this.alertCtrl.create({
@@ -588,7 +588,7 @@ export class WorkflowService {
     form.value.wfOptBadQtyItem = ( this.toInt(form.value.wfBadItem1) + this.toInt(form.value.wfBadItem2) + this.toInt(form.value.wfBadItem3) + this.toInt(form.value.wfBadItem4) + this.toInt(form.value.wfBadItem5) + this.toInt(form.value.wfBadItem6));
     form.value.wfBadTotal = ( this.toInt(form.value.wfOptBadQty) + this.toInt(form.value.wfOptBadQtyItem) + form.value.wfBadTotal );
 
-  }
+  };
 
   erpQuery(form: any){
     // This function simply query the wfFormId to the url based on the wfForm number
@@ -622,7 +622,7 @@ export class WorkflowService {
         console.log(response.json()[0]);
         return response.json();
       });
-  }
+  };
 
   finalValidation(form:any) {
     var except = form.value.wfFormExcept;
@@ -743,5 +743,5 @@ export class WorkflowService {
       }
 
     }
-  }
+  };
 }

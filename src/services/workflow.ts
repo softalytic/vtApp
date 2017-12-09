@@ -609,16 +609,46 @@ export class WorkflowService {
 
     console.log("Loading from ERP");
     console.log("Printing request to server : " + JSON.stringify(form));
-    console.log("Begin to load data from server");
-    console.log("Printing request to server : " + JSON.stringify(form));
 
     let queryUrl = this.baseUrl + "erp/query/";
-    console.log("Requesting url: " + queryUrl);
+    console.log("Requesting ERP url: " + queryUrl);
 
     return this.http.post(queryUrl, form, this.httpOptions)
       .timeout(1000)
       .map((response: Response) => {
-        console.log("Responding from Server");
+        console.log("Responding from ERP Server");
+        console.log(response.json()[0]);
+        return response.json();
+      });
+  };
+
+  erpQueryExcept(form: any){
+    // This function simply query the wfFormId to the url based on the wfForm number
+    // 2 inputs for this function,
+    //    1. the form itself
+    //    2. the wfForm number
+    //
+    // Note:
+    //    1. This is a promise call function which means that
+    //       it will need to be executed with .subscribe in the call function's main body
+    //    2. The reason why wfForm is separated from extracting from the form because
+    //       I want it to be explicitly filled and make sure it has a value before calling
+    //
+    // Further work:
+    //    Right now the query if through submission of entire form,
+    //    can rework the query only on the wfFormId instead.
+    //    Original design concept is to let server side decide which field to be looked up
+
+    console.log("Checking from ERP Exceptional");
+    console.log("Printing ERP Exc request to server : " + JSON.stringify(form));
+
+    let queryUrl = this.baseUrl + "erp/query/exc/";
+    console.log("Requesting ERP Exc url: " + queryUrl);
+
+    return this.http.post(queryUrl, form, this.httpOptions)
+      .timeout(1000)
+      .map((response: Response) => {
+        console.log("Responding from ERP Exc Server");
         console.log(response.json()[0]);
         return response.json();
       });

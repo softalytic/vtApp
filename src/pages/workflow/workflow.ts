@@ -206,6 +206,13 @@ export class WorkflowPage implements OnInit {
     //   1. Check Server with wfSvc, if this record exist on server for latest update
     //   2. Check if local storage has the record
     //   3. Else it is a new record on the app
+
+    // Check Abnormal Status
+
+
+
+
+
     this.wfSvc.query(form.value, form.value.wfForm).subscribe( (serverData) => {
 
       if(serverData[0] == "" || serverData[0] == [] || serverData[0] == null){
@@ -213,6 +220,7 @@ export class WorkflowPage implements OnInit {
 
           if(serverData[0] == "" || serverData[0] == [] || serverData[0] == null){
             alert("查无此单号");
+            this.wfSvc.warningAlert("嚫!","查无此单号","知道了!");
             if (!this.wfLoad){
               this.workflowStateChange();
             }
@@ -265,7 +273,8 @@ export class WorkflowPage implements OnInit {
       console.log(err);
       console.log("Trying to load data from storage");
 
-      alert("嚫,网路不给力");
+      this.wfSvc.warningAlert("嚫!","网路不给力","知道了!");
+      // alert("嚫,网路不给力");
       console.log(err);
       console.log("Trying to load data from storage");
 
@@ -500,6 +509,15 @@ export class WorkflowPage implements OnInit {
     form.controls["wfOptStartTime"].setValue('');
     form.controls["wfOptFinishTime"].setValue('');
   }
+
+  warningAlert(titleTxt: any, subTitleTxt: any, buttons: any) {
+    let alert = this.alertCtrl.create({
+      title: titleTxt,
+      subTitle: subTitleTxt,
+      buttons: [buttons]
+    });
+    alert.present();
+  };
 
   private formInit() {
     this.wfInputForm = this.formBuilder.group({

@@ -273,8 +273,8 @@ export class WorkflowPage implements OnInit {
       console.log(err);
       console.log("Trying to load data from storage");
 
-      this.wfSvc.warningAlert("嚫!","网路不给力","知道了!");
-      // alert("嚫,网路不给力");
+      // this.warningAlert("嚫!","网路不给力","知道了!");
+      alert("嚫,网路不给力");
       console.log(err);
       console.log("Trying to load data from storage");
 

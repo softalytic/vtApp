@@ -96,6 +96,41 @@ export class WorkflowService {
       });
   }
 
+  staffPull(){
+    // This function pull all the staff data from the server and load into local storage
+
+    console.log("Pulling staff data");
+
+    let queryUrl = this.baseUrl + "erp/query/staff/";
+    console.log("Requesting url: " + queryUrl);
+
+    return this.http.post(queryUrl, '', this.httpOptions)
+      .timeout(1000)
+      .map((response: Response) => {
+        console.log("Responding from Server");
+        console.log(response.json()[0]);
+        return response.json()[0];
+      });
+  }
+
+  staffCheck(staffData: any){
+    // This function check the dttm from the server and decide if a full refresh is needed
+
+    console.log("Checking staff data from server");
+    console.log("Printing request to server : " + JSON.stringify(staffData));
+
+    let queryUrl = this.baseUrl + "erp/query/staff/dttm/";
+    console.log("Requesting url: " + queryUrl);
+
+    return this.http.post(queryUrl, staffData, this.httpOptions)
+      .timeout(1000)
+      .map((response: Response) => {
+        console.log("Responding from Server");
+        console.log(response.json()[0]);
+        return response.json();
+      });
+  }
+
   uploadImage(wfInputForm: any, wfForm: number, image: any, wfImgNum: number, wfImgTotal: number) {
     // This function formulate a packet with some parts of the form value and images array
     // to the url based on the wfForm number

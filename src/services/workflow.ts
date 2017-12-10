@@ -509,6 +509,8 @@ export class WorkflowService {
 
     this.runningTotal(form);
 
+    this.dateValidation(form);
+
     this.storage.set(form.value.wfFormId, form.value);
 
     this.upload(form.value,form.value.wfForm)
@@ -544,6 +546,7 @@ export class WorkflowService {
           navCtrl.setRoot(WorkflowPage);
         },
         error => {
+          // On error, prompt network msg and can save locally
           console.log(error);
           this.networkError(form, navCtrl);
           
@@ -774,4 +777,24 @@ export class WorkflowService {
 
     }
   };
+
+  dateValidation(form:any){
+    // Assume each shift is finished within 24 hours
+    // If the finish time is bigger than start time, then
+    //    It assume it has finished in the next day
+
+    console.log("In the dateValidation");
+    console.log('inputdate' + form.value.wfOptInputDate);
+    let dateObj = new Date(form.value.wfOptInputDate);
+    let numberOfDaysToAdd = 1;
+
+    if (form.value.wfOptStartTime > form.value.wfOptFinishTime) {
+      dateObj.setDate(dateObj.getDate() + numberOfDaysToAdd);
+      console.log("Time has been checked, increase date by 1")
+    }
+
+    form.controls["wfOptInputEndDate"].setValue(dateObj);
+    console.log("end date is: " + form.controls["wfOptInputEndDate"].value);
+
+  }
 }

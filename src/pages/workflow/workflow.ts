@@ -208,11 +208,40 @@ export class WorkflowPage implements OnInit {
     //   3. Else it is a new record on the app
 
     // Check Abnormal Status
+    if (form.value.wfFormExcept) {
+      this.wfSvc.erpQueryExcept(form.value).subscribe( (serverData) => {
+        if(serverData[0] == "" || serverData[0] == [] || serverData[0] == null){
+          alert("ERP Except 查无此单号");
+        } else {
+          // alert(JSON.stringify(serverData[0].wfFormId));
+          if(form.value.wfFormId == serverData[0].wfFormId) {
+            console.log(serverData[0].wfFormId + " confirmed as exceptional case");
+            form.value.wfFormExcept = true;
+            if (!this.loadDataToForm(form, serverData[0])){return;}
+            this.serverQuery(form);
+
+          }
+        }
+      },(err)=>{
+        // If there is any error or unsuccessful connection
+        // Then throw alert to user about the network error
+        // Assume no offline mode for exceptional handling
+        alert("嚫,网路不给力");
+        console.log(err);
+
+      })
+
+    } else {
+
+      // Execute the Server Query directly
+      this.serverQuery(form);
+
+    }
 
 
+  }
 
-
-
+  serverQuery(form:any){
     this.wfSvc.query(form.value, form.value.wfForm).subscribe( (serverData) => {
 
       if(serverData[0] == "" || serverData[0] == [] || serverData[0] == null){
@@ -220,7 +249,7 @@ export class WorkflowPage implements OnInit {
 
           if(serverData[0] == "" || serverData[0] == [] || serverData[0] == null){
             alert("查无此单号");
-            this.wfSvc.warningAlert("嚫!","查无此单号","知道了!");
+            // this.wfSvc.warningAlert("嚫!","查无此单号","知道了!");
             if (!this.wfLoad){
               this.workflowStateChange();
             }
@@ -295,7 +324,7 @@ export class WorkflowPage implements OnInit {
           // Only will override if there is no input at all
           if (!this.loadDataToForm(form, storageData)){
             return;
-          };
+          }
 
         }
 
@@ -438,8 +467,12 @@ export class WorkflowPage implements OnInit {
       } else if (this.wfSvc.toInt(form.value.wfProcess) <= this.wfSvc.toInt(data['wfLastCompletedWf'])) {
         console.log("提示: 这工序巳经完成");
         alert("提示: 这工序巳经完成");
-        this.fillData(form,data);
-        form.controls["wfErrorMsg"].setValue('这工序巳经完成');
+        // Wilfred has requested not to continue the workflow,
+        // Although this is not the original client request,
+        // I just comment them out for now for the stake of mark complete
+        return;
+        // this.fillData(form,data);
+        // form.controls["wfErrorMsg"].setValue('这工序巳经完成');
 
       } else {
         console.log("Continue to fill data from last workflow");

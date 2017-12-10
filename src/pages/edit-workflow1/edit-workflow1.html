@@ -11,8 +11,10 @@
                     <u>{{wfInputForm.value.wfOptMachineId}}</u>
                     <span *ngIf="wfInputForm.value.wfFormSplit != 0"
                           class="processBGColor">分单:&nbsp;{{wfInputForm.value.wfFormSplit}}</span>
+                    <span *ngIf="wfInputForm.value.wfFormExcept == true"
+                          class="processBGColor">&nbsp;&nbsp;異常!&nbsp;</span>
                     <span *ngIf="wfInputForm.value.wfErrorMsg != ' ' && wfInputForm.value.wfErrorMsg != ''"
-                          class="alertColor">注意:&nbsp;{{wfInputForm.value.wfErrorMsg}}</span>
+                          class="processColor">&nbsp;&nbsp;注意:&nbsp;{{wfInputForm.value.wfErrorMsg}}</span>
                 </b>
             </ion-title>
         </div>

@@ -476,6 +476,95 @@ export class WorkflowService {
     form.controls['wfStaffQCName'].setValue('品检員A');
   }
 
+  populateStaffData(form:any, staffTable:any, machineTable:any, model: string){
+    // First determine if the input is ID or name,
+    // Name: Lookup Name
+    // ID: Lookup Id
+    console.log("Staff update is triggered");
+
+    let input = form.controls[model].value;
+    // let name = parseInt(input.substr(input.length-1)) >= 0;
+
+    switch (model){
+      case "wfStaffOptName":
+        for (let key in staffTable) {
+          if (staffTable[key].wfStaffOptId == input || staffTable[key].wfStaffOptName == input ){
+            form.controls["wfStaffTechId"].setValue(staffTable[key].wfStaffTechId);
+            form.controls["wfStaffLeadName"].setValue(staffTable[key].wfStaffLeadName);
+            form.controls["wfStaffLeadId"].setValue(staffTable[key].wfStaffLeadId);
+            form.controls["wfStaffOptId"].setValue(staffTable[key].wfStaffOptId);
+            form.controls["wfStaffOptName"].setValue(staffTable[key].wfStaffOptName);
+            form.controls["wfStaffOptShift"].setValue(staffTable[key].wfStaffOptShift);
+            form.controls["wfStaffQCId"].setValue(staffTable[key].wfStaffQCId);
+            form.controls["wfStaffQCName"].setValue(staffTable[key].wfStaffQCName);
+            form.controls["wfStaffTechName"].setValue(staffTable[key].wfStaffTechName);
+            form.controls["wfStaffXrayId"].setValue(staffTable[key].wfStaffXrayId);
+            form.controls["wfStaffXrayName"].setValue(staffTable[key].wfStaffXrayName);
+
+            return;
+          }
+
+        }
+        alert("嚫，查无此人!?");
+        break;
+
+      case "wfStaffLeadName":
+        for (let key in staffTable) {
+          if (staffTable[key].wfStaffLeadId == input  || staffTable[key].wfStaffLeadName == input){
+            form.controls["wfStaffLeadName"].setValue(staffTable[key].wfStaffLeadName);
+            form.controls["wfStaffLeadId"].setValue(staffTable[key].wfStaffLeadId);
+
+            return;
+          }
+        }
+
+        alert("嚫，查无此人!?");
+        break;
+
+      case "wfStaffQCName":
+        for (let key in staffTable) {
+          if (staffTable[key].wfStaffQCId == input  || staffTable[key].wfStaffQCName == input){
+            form.controls["wfStaffQCId"].setValue(staffTable[key].wfStaffQCId);
+            form.controls["wfStaffQCName"].setValue(staffTable[key].wfStaffQCName);
+
+            return;
+          }
+        }
+        alert("嚫，查无此人!?");
+        break;
+
+      case "wfStaffTechName":
+        for (let key in staffTable) {
+          if (staffTable[key].wfStaffTechId == input  || staffTable[key].wfStaffTechName == input){
+            form.controls["wfStaffTechId"].setValue(staffTable[key].wfStaffTechId);
+            form.controls["wfStaffTechName"].setValue(staffTable[key].wfStaffTechName);
+
+            return;
+          }
+        }
+        alert("嚫，查无此人!?");
+        break;
+
+      case "wfStaffXrayName":
+        for (let key in staffTable) {
+          if (staffTable[key].wfStaffXrayId == input  || staffTable[key].wfStaffXrayName == input){
+            form.controls["wfStaffXrayId"].setValue(staffTable[key].wfStaffXrayId);
+            form.controls["wfStaffXrayName"].setValue(staffTable[key].wfStaffXrayName);
+
+            return;
+          }
+        }
+        alert("嚫，查无此人!?");
+        break;
+
+      default:
+        console.log("Failed to lookup the staff record " + model);
+        alert("嚫，查无此人!?");
+        break;
+    }
+
+  };
+
   updateTextChg2(wfInputForm: any) {
     let form = wfInputForm;
     form.controls['wfStaffOptName'].setValue('作业員A');
@@ -831,5 +920,98 @@ export class WorkflowService {
     form.controls["wfOptInputEndDate"].setValue(dateObj);
     console.log("end date is: " + form.controls["wfOptInputEndDate"].value);
 
+  };
+
+  staffData(){
+    console.log("Checking staff data");
+    if (this.loadStaffDateFromStorage()){
+      console.log("current staff data is up-to-date");
+
+    } else {
+      console.log("staff data need to be updated");
+      this.getStaffTable();
+
+    }
+
+    // return this.loadStaffDataFromStorage();
+
   }
+
+  loadStaffDateFromStorage(){
+    this.storage.get("staffDate").then((storageData) => {
+      console.log("staffDate from storage is " + JSON.stringify(storageData));
+
+      this.sendStaffDate2Server(storageData).subscribe((data) => {
+        console.log("Staff date from Server " + data);
+        console.log("Staff date from storage" + storageData);
+        console.log(data === storageData);
+        return data === storageData;
+      }, error => {
+          console.log("staffDate" + error);
+          // this.networkError(navCtrl);
+        });
+    });
+  };
+
+  sendStaffDate2Server(staffStorage: any){
+    console.log("Begin to check with Server on Staff Date");
+    console.log("Printing request to server : " + staffStorage);
+
+    // let httpHeaders = new Headers({ 'Content-type':'text/html;' });
+    // let httpOptions = new RequestOptions({ headers:httpHeaders });
+
+    if(staffStorage == null || staffStorage == ""){
+      staffStorage = this.appDate
+    }
+
+    let queryUrl = this.baseUrl + "erp/query/staff/dttm/";
+    let packet = '{"dttm":"' + staffStorage +'"}';
+    // let packet = staffStorage;
+    console.log("staffDate request to server is " + packet);
+    console.log("Requesting url: " + queryUrl);
+
+    return this.http.post(queryUrl, packet, this.httpOptions)
+      .timeout(1000)
+      .map((response: Response) => {
+        // console.log("staffDate from Server is " + response);
+        return response.text();
+      });
+  }
+
+  pullStaffDataFromServer(){
+    console.log("Begin to pull staff Data from server");
+
+    let queryUrl = this.baseUrl + "erp/query/staff/";
+    console.log("Requesting url: " + queryUrl);
+
+    return this.http.post(queryUrl, "", this.httpOptions)
+      .timeout(1000)
+      .map((response: Response) => {
+        // console.log("Responding from Server of staff Data " + JSON.stringify(response.json()[0]));
+        return response.json()[0];
+      });
+  }
+
+  getStaffTable(){
+    console.log("getting staff table from server");
+
+    this.pullStaffDataFromServer().subscribe((data) => {
+      let staffDate = data.dttm;
+      let staffTable = JSON.parse(data.staff);
+      let machineTable = JSON.parse(data.machine);
+
+      console.log("staffDate is " + staffDate);
+      // console.log("staffTable is " + JSON.stringify(staffTable));
+      // console.log("machineTable is " + JSON.stringify(machineTable));
+
+      this.storage.set("staffDate", staffDate);
+      this.storage.set("staffTable",staffTable);
+      this.storage.set("machineTable",machineTable);
+
+    }, error => {
+      console.log("staffData" + error);
+      // this.networkError(navCtrl);
+    });
+  }
+
 }

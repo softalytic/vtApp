@@ -35,6 +35,10 @@ export class EditWorkflow3Page implements OnInit{
 
   images = [];
 
+  staffTable: any;
+  machineTable: any;
+
+
   wfInputForm: FormGroup;
 
   pushPage: any;
@@ -240,11 +244,11 @@ export class EditWorkflow3Page implements OnInit{
     this.wfAgeingSeqDisplay = 0;
     
     this.wfPplInputs = [
-      {title: "作业員ID", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: true, wfPplI: 1, size: 7},
-      {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: false, wfPplI: 2, size: 7},
+      // {title: "作业員ID", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: true, wfPplI: 1, size: 7},
+      {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: true, wfPplI: 1, size: 7},
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 4},
       {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 6, size: 7},
-      {title: "班长硧认", method: "input", model: "wfOptQtyChecked", type: "text", icon: 'construct', scan: true, wfPplI: 3, size: 7},
+      {title: "班长硧认", method: "input", model: "wfStaffLeadName", type: "text", icon: 'construct', scan: true, wfPplI: 3, size: 7},
       {title: "維修員", method: "input", model: "wfStaffRepairName", type: "text", icon: 'construct', scan: true, wfPplI: 4, size: 7},
       {title: "终检", method: "buttons", model: "wfQCPass", icon: "md-checkmark-circle-outline",buttons: [
         {label: "通过", value: 1, icon: 'checkmark'},
@@ -280,6 +284,23 @@ export class EditWorkflow3Page implements OnInit{
 
     this.formInit();
     let form = this.wfInputForm;
+
+    this.wfSvc.staffData();
+
+    this.storage.get("staffTable").then((storageData) => {
+      // console.log("staffTable from storage is " + JSON.stringify(storageData));
+      this.staffTable = storageData;
+      console.log(this.staffTable);
+
+    });
+
+    this.storage.get("machineTable").then((storageData) => {
+      // console.log("machineTable from storage is " + JSON.stringify(storageData));
+      this.machineTable = storageData;
+      console.log(this.machineTable);
+
+    });
+
 
     console.log("The Nav Params bought to this page is " + this.wfNavParams);
 
@@ -674,7 +695,8 @@ export class EditWorkflow3Page implements OnInit{
       wfStaffOptId: [''],
       wfStaffOptName: [''],
       wfStaffOptShift: [''],
-      wfOptQtyChecked: [''],
+      wfStaffLeadName: [''],
+      wfStaffLeadId: [''],
       wfStaffRepairName: [''],
       wfStaffTechId: [''],
       wfStaffTechName: [''],

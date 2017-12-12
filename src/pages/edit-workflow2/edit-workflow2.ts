@@ -29,6 +29,10 @@ export class EditWorkflow2Page implements OnInit{
 
   wfPass: boolean;
 
+  staffTable: any;
+  machineTable: any;
+
+
   //testing storage for qc part
   wfStaffTechIdTmp: any;
   wfStaffOptShiftTmp: any;
@@ -124,8 +128,8 @@ export class EditWorkflow2Page implements OnInit{
     ];
 
     this.wfPplInputs = [
-      {title: "作业員ID", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: 3, wfPplI: 1,size: 20, process: {1: true, 2: true, 3: true, 4:false}},
-      {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: 0,size: 20, process: {1: true, 2: true, 3: true, 4:false}},
+      // {title: "作业員ID", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: 3, wfPplI: 1,size: 20, process: {1: true, 2: true, 3: true, 4:false}},
+      {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: 1,size: 20, process: {1: true, 2: true, 3: true, 4:false}},
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, size: 5, process: {1: true, 2: true, 3: true, 4:false}},
       {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: 1, size: 20, process: {1: true, 2: true, 3: true, 4:false}},
       // {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: 3, size: 20},
@@ -169,6 +173,24 @@ export class EditWorkflow2Page implements OnInit{
 
     this.formInit();
     let form = this.wfInputForm;
+
+
+    this.wfSvc.staffData();
+
+    this.storage.get("staffTable").then((storageData) => {
+      // console.log("staffTable from storage is " + JSON.stringify(storageData));
+      this.staffTable = storageData;
+      // console.log(this.staffTable);
+
+    });
+
+    this.storage.get("machineTable").then((storageData) => {
+      // console.log("machineTable from storage is " + JSON.stringify(storageData));
+      this.machineTable = storageData;
+      // console.log(this.machineTable);
+
+    });
+
 
     console.log("The Nav Params bought to this page is" + this.wfNavParams);
 
@@ -519,7 +541,8 @@ export class EditWorkflow2Page implements OnInit{
       wfStaffOptId: [''],
       wfStaffOptName: [''],
       wfStaffOptShift: [''],
-      wfOptQtyChecked: [''],
+      wfStaffLeadName: [''],
+      wfStaffLeadId: [''],
       wfStaffRepairName: [''],
       wfStaffTechId: [''],
       wfStaffTechName: [''],

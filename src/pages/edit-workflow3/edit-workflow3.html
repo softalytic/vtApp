@@ -402,8 +402,13 @@
                                 </div>
                                 <div (click)="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">
                                     <ion-row>
-                                        <ion-input (change)="this.wfSvc.updateTextChg3(this.wfInputForm);" *ngIf="wfInput.wfPplI == 1" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+                                        <ion-input (change)="this.wfSvc.populateStaffData(this.wfInputForm,this.staffTable,this.machineTable, wfInput.model);"
+                                                   *ngIf="wfInput.wfPplI == 1" formControlName={{wfInput.model}}
+                                                   type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}}
+                                                   [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+
                                         <ion-input *ngIf="wfInput.wfPplI == 2"
+                                                   (change)="this.wfSvc.populateStaffData(this.wfInputForm,this.staffTable,this.machineTable, wfInput.model);"
                                                    formControlName={{wfInput.model}}
                                                    type={{wfInput.type}}
                                                    value={{wfInputForm.controls[wfInput.model].value}}
@@ -411,6 +416,7 @@
                                                    class="gridborder"></ion-input>
 
                                         <ion-input *ngIf="wfInput.wfPplI == 3"
+                                                   (change)="this.wfSvc.populateStaffData(this.wfInputForm,this.staffTable,this.machineTable, wfInput.model);"
                                                    formControlName={{wfInput.model}}
                                                    type={{wfInput.type}}
                                                    value={{wfInputForm.controls[wfInput.model].value}}

@@ -215,11 +215,11 @@
                                                    formControlName={{wfInput.model}}
                                                    type={{wfInput.type}}
                                                    value={{wfInputForm.controls[wfInput.model].value}}
+                                                   (change)="this.wfSvc.populateStaffData(this.wfInputForm,this.staffTable,this.machineTable, wfInput.model);"
                                                    [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
 
                                         <ion-input *ngIf="wfInput.wfPplI == 1"
-
-                                                   (change)="this.wfSvc.updateTextChg2(this.wfInputForm);"
+                                                   (change)="this.wfSvc.populateStaffData(this.wfInputForm,this.staffTable,this.machineTable, wfInput.model);"
                                                    value={{wfInputForm.controls[wfInput.model].value}}
                                                    class="gridborder"></ion-input>
 

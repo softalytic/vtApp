@@ -481,16 +481,49 @@
                                 </div>
                                 <div>
                                     <ion-row>
-                                        <ion-input (change)="this.wfSvc.updateTextChg(this.wfInputForm);" *ngIf="wfInput.wfPplI == 1" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
-                                        <ion-input *ngIf="wfInput.wfPplI == 2" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+                                        <ion-input *ngIf="wfInput.wfPplI == 1"
+                                                   (change)="this.wfSvc.populateStaffData(this.wfInputForm,this.staffTable,this.machineTable, wfInput.model);"
+                                                   formControlName={{wfInput.model}}
+                                                   type={{wfInput.type}}
+                                                   value={{wfInputForm.controls[wfInput.model].value}}
+                                                   [ngStyle]="{'width.em':wfInput.size}"
+                                                   class="gridborder"></ion-input>
 
-                                        <ion-input *ngIf="wfInput.wfPplI == 3" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+                                        <ion-input *ngIf="wfInput.wfPplI == 2"
+                                                   (change)="this.wfSvc.populateStaffData(this.wfInputForm,this.staffTable,this.machineTable, wfInput.model);"
+                                                   formControlName={{wfInput.model}}
+                                                   type={{wfInput.type}}
+                                                   value={{wfInputForm.controls[wfInput.model].value}}
+                                                   [ngStyle]="{'width.em':wfInput.size}"
+                                                   class="gridborder"></ion-input>
 
-                                        <ion-input *ngIf="wfInput.wfPplI == 4" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+                                        <ion-input *ngIf="wfInput.wfPplI == 3"
+                                                   (change)="this.wfSvc.populateStaffData(this.wfInputForm,this.staffTable,this.machineTable, wfInput.model);"
+                                                   formControlName={{wfInput.model}}
+                                                   type={{wfInput.type}}
+                                                   value={{wfInputForm.controls[wfInput.model].value}}
+                                                   [ngStyle]="{'width.em':wfInput.size}"
+                                                   class="gridborder"></ion-input>
 
-                                        <ion-input style="display: inline-block;" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" *ngIf="wfInput.wfPplI == 5" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}}
-                                                   [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
-                                        <button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)">
+                                        <ion-input *ngIf="wfInput.wfPplI == 4"
+                                                   (change)="this.wfSvc.populateStaffData(this.wfInputForm,this.staffTable,this.machineTable, wfInput.model);"
+                                                   formControlName={{wfInput.model}}
+                                                   type={{wfInput.type}}
+                                                   value={{wfInputForm.controls[wfInput.model].value}}
+                                                   [ngStyle]="{'width.em':wfInput.size}"
+                                                   class="gridborder"></ion-input>
+
+                                        <ion-input style="display: inline-block;"
+                                                   [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')"
+                                                   *ngIf="wfInput.wfPplI == 5"
+                                                   formControlName={{wfInput.model}}
+                                                   type={{wfInput.type}}
+                                                   value={{wfInputForm.controls[wfInput.model].value}}
+                                                   [ngStyle]="{'width.em':wfInput.size}"
+                                                   class="gridborder"></ion-input>
+
+                                        <button *ngIf="wfInput.scan"
+                                                item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)">
                                             <ion-icon md="md-barcode"></ion-icon>
                                         </button>
                                     </ion-row>

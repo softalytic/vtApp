@@ -49,48 +49,64 @@ export class QRCodeService {
         // Note: If this assumption is invalid, please use the backup code
         form.controls[model].setValue(data);
 
-        // Backup code
-        // eval('form.value.' + model + '= "' + data + '"; ');
+      } else if (barcodeData.format == "QR_CODE") {
+        console.log("This is QR code" + barcodeData.text);
 
-        /*
+        this.qrCodePopulate(barcodeData.text, form);
 
-        if (model == "wfFormId") {
-          console.log("Execute ERP query process");
-          //alert("Execute ERP query process");
-          //alert(JSON.stringify(form.value));
-          // Further work need to be done on the Server Query
-          // Decision to make: Pulling all Server records vs Single Query record
-          // Ivan to decide
+      } else {
+        // Throw alert and feel free to change it with formal alert controller
+        // So the title and buttons are in chinese
+        alert('嚫，请确定你所扫描的条码是正确的');
 
-          this.wfSvc.erpQuery(form.value).subscribe( (serverData) => {
-            console.log("Response from server: " + JSON.stringify(serverData[0]));
-            //alert("Response from server: " + JSON.stringify(serverData[0]));
-            // this.populateDataToForm(form, serverData[0]);
+      }
+    }, (err) => {
+      // An error occurred
+      console.log("The barcode scanning has error" + err);
 
-            // The codes below replace the upper function, with below assumption
-            // 1. All the input on the screen assume to be latest and correct before user proceed to next stage
-            // 2. Through the barcode scan, which all the data will be called from the server
-            // 3. Which user can then decide what is the phase of next step
+    });
+  }
 
-            this.populateDataToForm(form, serverData[0]);
+  staffScanBarcode(form: any, staffTable:any, machineTable:any, model: string){
+    // This function will call the BarcodeScanner's scan function
+    // 2 inputs for this function,
+    //    1. specific data model of the form
+    //    2. the form itself
+    //
+    // It will first scan the barcode and determine
+    // If the dataType is barcode then
+    //    fill the form data model with the scanned value
+    //    Note: further work if the model is wfFormId
+    //          as the change of solution from QR code to Barcode,
+    //          once they have scanned the barcode with model of wfFormId
+    //          then query the server for the order detail
+    //
+    // Else if dataType is QRcode then
+    //    populate the QRcode data onto the form
+    //
+    // Else
+    //    throw alert to user
 
-          },(err)=>{
-            // If there is any error or unsuccessful connection
-            // Then throw alert to user about the network error
-            alert("嚫,网路不给力");
-            console.log(err);
-            console.log("Trying to load data from storage");
 
-          });
-        }
+    console.log("scanning Barcode for model" + model);
 
-        */
+    this.QR.scan().then((barcodeData) => {
 
+      if ( barcodeData.format && barcodeData.format != "QR_CODE" ) {
+        console.log("This is barcode" + barcodeData.text);
+
+        let data = barcodeData.text;
+
+        // Assign value via form control
+        // Assume Barcode scan is executed before any non form controls items being added
+        // Note: If this assumption is invalid, please use the backup code
+        this.wfSvc.populateStaffData(form, staffTable, machineTable, model);
 
       } else if (barcodeData.format == "QR_CODE") {
         console.log("This is QR code" + barcodeData.text);
 
         this.qrCodePopulate(barcodeData.text, form);
+        this.wfSvc.populateStaffData(form, staffTable, machineTable, model);
 
       } else {
         // Throw alert and feel free to change it with formal alert controller

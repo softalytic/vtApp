@@ -211,20 +211,55 @@ export class EditWorkflow1Page implements OnInit{
     this.formInit();
     let form = this.wfInputForm;
 
-    this.wfSvc.staffData();
+    this.storage.get("staffDate").then((storageData) => {
+      console.log("staffDate from storage is " + JSON.stringify(storageData));
 
-    this.storage.get("staffTable").then((storageData) => {
-      // console.log("staffTable from storage is " + JSON.stringify(storageData));
-      this.staffTable = storageData;
-      // console.log(this.staffTable);
+      this.wfSvc.sendStaffDate2Server().subscribe((data) => {
+        console.log("Staff date from Server " + data['dttm']);
+        console.log("Staff date from storage" + storageData);
+        console.log("Need to update the staff table? " + data['dttm'] === storageData);
 
-    });
+        if(data === storageData){
+          this.storage.get("staffTable").then((storageData) => {
+            // console.log("staffTable from storage is " + JSON.stringify(storageData));
+            this.staffTable = storageData;
+            // console.log(this.staffTable);
 
-    this.storage.get("machineTable").then((storageData) => {
-      // console.log("machineTable from storage is " + JSON.stringify(storageData));
-      this.machineTable = storageData;
-      // console.log(this.machineTable);
+          });
 
+          this.storage.get("machineTable").then((storageData) => {
+            // console.log("machineTable from storage is " + JSON.stringify(storageData));
+            this.machineTable = storageData;
+            // console.log(this.machineTable);
+
+          });
+        } else {
+          this.wfSvc.pullStaffDataFromServer().subscribe((data) => {
+            let staffDate = data.dttm;
+            let staff = JSON.parse(data.staff);
+            let machine = JSON.parse(data.machine);
+
+            console.log("staffDate is " + staffDate);
+            // console.log("staffTable is " + JSON.stringify(staffTable));
+            // console.log("machineTable is " + JSON.stringify(machineTable));
+
+            this.storage.set("staffDate", staffDate);
+            this.storage.set("staffTable",staff);
+            this.storage.set("machineTable",machine);
+
+            this.staffTable = staff;
+            this.machineTable = machine;
+
+          }, error => {
+            console.log("staffData" + error);
+            // this.networkError(navCtrl);
+          });
+
+        }
+      }, error => {
+        console.log("staffDate" + error);
+        // this.networkError(navCtrl);
+      });
     });
 
     console.log("The Nav Params bought to this page is " + this.wfNavParams);

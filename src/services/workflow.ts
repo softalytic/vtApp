@@ -483,6 +483,9 @@ export class WorkflowService {
     console.log("Staff update is triggered");
 
     let input = form.controls[model].value;
+    input = input.toUpperCase();
+    // form.controls["wfStaffOptName"].setValue(input);
+    // alert(input);
     // let name = parseInt(input.substr(input.length-1)) >= 0;
 
     switch (model){
@@ -500,6 +503,10 @@ export class WorkflowService {
             form.controls["wfStaffTechName"].setValue(staffTable[key].wfStaffTechName);
             form.controls["wfStaffXrayId"].setValue(staffTable[key].wfStaffXrayId);
             form.controls["wfStaffXrayName"].setValue(staffTable[key].wfStaffXrayName);
+
+            if (form.controls["wfStaffTechId"].value == "" || form.controls["wfStaffTechName"].value == "" || form.controls["wfStaffTechName"] == "machine"){
+              this.staffMachinePair(form,machineTable);
+            }
 
             return;
           }
@@ -562,6 +569,33 @@ export class WorkflowService {
         alert("嚫，查无此人!?");
         break;
     }
+
+  };
+
+  staffMachinePair(form:any, machineTable:any){
+    // First determine if the input is ID or name,
+    // Name: Lookup Name
+    // ID: Lookup Id
+    console.log("Staff Machine pair is triggered");
+    console.log(machineTable);
+
+    let machineId = form.controls["wfOptMachineId"].value;
+    let staffShift = form.controls["wfStaffOptShift"].value;
+    console.log("machineId for input" + machineId);
+    console.log("staffShift for input " + staffShift);
+
+    for (let key in machineTable) {
+      if (machineTable[key].wfOptMachineId == machineId &&  machineTable[key].wfStaffOptShift == staffShift){
+        form.controls["wfStaffTechId"].setValue(machineTable[key].wfStaffTechId);
+        form.controls["wfStaffTechName"].setValue(machineTable[key].wfStaffTechName);
+
+        return;
+      }
+
+    }
+
+    // Default cmd if no result is found!
+    alert("嚫，查无此人!?");
 
   };
 
@@ -922,56 +956,25 @@ export class WorkflowService {
 
   };
 
-  staffData(){
-    console.log("Checking staff data");
-    if (this.loadStaffDateFromStorage()){
-      console.log("current staff data is up-to-date");
-
-    } else {
-      console.log("staff data need to be updated");
-      this.getStaffTable();
-
-    }
-
-    // return this.loadStaffDataFromStorage();
-
-  }
-
-  loadStaffDateFromStorage(){
-    this.storage.get("staffDate").then((storageData) => {
-      console.log("staffDate from storage is " + JSON.stringify(storageData));
-
-      this.sendStaffDate2Server(storageData).subscribe((data) => {
-        console.log("Staff date from Server " + data);
-        console.log("Staff date from storage" + storageData);
-        console.log(data === storageData);
-        return data === storageData;
-      }, error => {
-          console.log("staffDate" + error);
-          // this.networkError(navCtrl);
-        });
-    });
-  };
-
-  sendStaffDate2Server(staffStorage: any){
+  sendStaffDate2Server(){
     console.log("Begin to check with Server on Staff Date");
-    console.log("Printing request to server : " + staffStorage);
+    // console.log("Printing request to server : " + staffStorage);
 
     // let httpHeaders = new Headers({ 'Content-type':'text/html;' });
     // let httpOptions = new RequestOptions({ headers:httpHeaders });
 
-    if(staffStorage == null || staffStorage == ""){
-      staffStorage = this.appDate
-    }
+    // if(staffStorage == null || staffStorage == ""){
+    //   staffStorage = this.appDate
+    // }
 
     let queryUrl = this.baseUrl + "erp/query/staff/dttm/";
-    let packet = '{"dttm":"' + staffStorage +'"}';
+    // let packet = '{"dttm":"' + staffStorage +'"}';
     // let packet = staffStorage;
-    console.log("staffDate request to server is " + packet);
+    // console.log("staffDate request to server is " + packet);
     console.log("Requesting url: " + queryUrl);
 
-    return this.http.post(queryUrl, packet, this.httpOptions)
-      .timeout(1000)
+    return this.http.post(queryUrl, "", this.httpOptions)
+      .timeout(3000)
       .map((response: Response) => {
         // console.log("staffDate from Server is " + response);
         return response.text();
@@ -985,33 +988,12 @@ export class WorkflowService {
     console.log("Requesting url: " + queryUrl);
 
     return this.http.post(queryUrl, "", this.httpOptions)
-      .timeout(1000)
+      .timeout(3000)
       .map((response: Response) => {
         // console.log("Responding from Server of staff Data " + JSON.stringify(response.json()[0]));
         return response.json()[0];
       });
   }
 
-  getStaffTable(){
-    console.log("getting staff table from server");
-
-    this.pullStaffDataFromServer().subscribe((data) => {
-      let staffDate = data.dttm;
-      let staffTable = JSON.parse(data.staff);
-      let machineTable = JSON.parse(data.machine);
-
-      console.log("staffDate is " + staffDate);
-      // console.log("staffTable is " + JSON.stringify(staffTable));
-      // console.log("machineTable is " + JSON.stringify(machineTable));
-
-      this.storage.set("staffDate", staffDate);
-      this.storage.set("staffTable",staffTable);
-      this.storage.set("machineTable",machineTable);
-
-    }, error => {
-      console.log("staffData" + error);
-      // this.networkError(navCtrl);
-    });
-  }
 
 }

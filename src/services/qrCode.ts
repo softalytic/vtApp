@@ -100,6 +100,7 @@ export class QRCodeService {
         // Assign value via form control
         // Assume Barcode scan is executed before any non form controls items being added
         // Note: If this assumption is invalid, please use the backup code
+        form.controls[model].setValue(data);
         this.wfSvc.populateStaffData(form, staffTable, machineTable, model);
 
       } else if (barcodeData.format == "QR_CODE") {

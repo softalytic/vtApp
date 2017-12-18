@@ -116,7 +116,7 @@
 
                                         <ion-input *ngIf="wfInput.wfOpslI != 1 && wfInput.wfOpslI != 2" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
 
-                                        <button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)">
+                                        <button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
                                             扫一扫
                                         </button>
                                     </ion-row>
@@ -165,7 +165,7 @@
                                             <ion-input *ngIf="option.type != 'date' && option.wfBadQty == '1' && (wfInputForm.value.wfProcess != '5' && wfInputForm.value.wfProcess != '6' && wfInputForm.value.wfProcess != '8')" formControlName={{option.model}} type={{option.type}} [ngStyle]="{'width.em':option.size}"
                                                        class="gridborder"></ion-input>
 
-                                            <button *ngIf="option.scan" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)">
+                                            <button *ngIf="option.scan" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
                                                 扫一扫
                                             </button>
                                         </ion-row>
@@ -523,14 +523,17 @@
                                                    class="gridborder"></ion-input>
 
                                         <button *ngIf="wfInput.scan"
-                                                item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)">
+                                                item-end ion-button
+                                                class="barcodeButton"
+                                                type="button"
+                                                (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
                                             <ion-icon md="md-barcode"></ion-icon>
                                         </button>
                                     </ion-row>
                                 </div>
                                 <!--
                                 <div on-mouseover="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">
-                                    <button [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" *ngIf="wfInput.scan == 3" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfInput.model, this.wfInputForm)">
+                                    <button [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" *ngIf="wfInput.scan == 3" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
                                     扫一扫
                                 </button>
                                 </div>
@@ -562,7 +565,10 @@
                                 <ion-input formControlName={{wfInput.model}} hidden></ion-input>
 
                                 <ion-buttons>
-                                    <button *ngFor="let button of wfInput.buttons" ion-button round outline type="button" style="width: auto;" (click)="this.wfSvc.showGoodBadQtyInputsAlert(this.wfInputForm); updateForm(wfInput.model,button.value);" [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}">
+                                    <button *ngFor="let button of wfInput.buttons"
+                                            ion-button round outline type="button" style="width: auto;"
+                                            (click)="this.wfSvc.showGoodBadQtyInputsAlert(this.wfInputForm); updateForm(wfInput.model,button.value);"
+                                            [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}">
                                     <ion-icon name="{{button.icon}}"></ion-icon>
                                     &nbsp; {{button.label}}
                                   </button>
@@ -576,12 +582,26 @@
                         </ion-col>
 
                         <ion-row>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <button type="button"
                                     [disabled]="this.wfInputForm.value.wfReadOnly"
-                                    ion-button (click)="this.wfSvc.showWfOpsFinalInputsAlert(wfInputForm.value.wfOrderTotalQty, wfInputForm.value.wfOrderTotalGoodQty, wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty,this.wfInputForm,this.navCtrl,this.images, '裸品流程卡')"
-                                    style="width: 80px;">
+                                    ion-button (click)="this.wfSvc.wfFormSubmission(this.wfInputForm,this.navCtrl,this.images,false)"
+                                    style="width: 80px; height: 50px; background: yellowgreen;">
                                 上存
+                            </button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button"
+                                    [disabled]="this.wfInputForm.value.wfReadOnly"
+                                    ion-button (click)="this.wfSvc.wfFormSubmission(this.wfInputForm,this.navCtrl,this.images, true)"
+                                    style="width: 200px; height: 50px; background: green;">
+                                上存 + 完成工序
+                            </button>
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button" ion-button
+                                    style="width: 80px; height: 50px; background-color: #8c8c8c;"
+                                    (click)="this.wfSvc.cancelBtn(this.navCtrl)">
+                                取消
                             </button>
 
                         </ion-row>
@@ -594,9 +614,7 @@
                         </ion-row>
                         <ion-row>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <button type="button" ion-button (click)="this.wfSvc.cancelBtn(this.navCtrl)">
-                                取消
-                            </button>
+
 
                         </ion-row>
                     </ion-row>

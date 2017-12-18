@@ -42,6 +42,15 @@ $colors: (
 );
 
 
+$alert-min-width: 50%;
+$alert-min-height: 500px;
+$alert-button-font-size: 30px;
+$alert-md-message-font-size: 25px;
+$alert-md-title-font-size: 50px;
+$alert-md-message-font-size: 30px;
+$alert-md-button-padding: 50px;
+$alert-md-button-margin: 20px;
+
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here

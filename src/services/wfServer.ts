@@ -204,7 +204,7 @@ export class WorkflowService {
       .timeout(1000)
       .map((response: Response) => {
         console.log("Responding from Server" + response);
-        return response.text();
+        return response.json();
       });
   }
 
@@ -515,35 +515,7 @@ export class WorkflowService {
 
   }
 
-  wfFormSubmission(wfInputForm: any, navCtrl: any, images: any, finalSubmission: boolean) {
-    // This function manage all the form submission in each of the wfForm and connect with the server call
-    // 7 inputs for this function,
-    //    1. wfOrderTotalQty,
-    //    2. wfOrderTotalGoodQty,
-    //    3. wfOptBadQtyValue,
-    //    4. wfOptGoodQtyValue,
-    //    5. wfInputForm,
-    //    6. navCtrl,
-    //    7. images
-    //
-    // This function will create an alert with 2 options:
-    //    1. Upload
-    //    2. Upload and mark process completion
-    // Both function set the wfProcessStatus and then execute formSubmission
-    //
-    // Note:
-    //    1. The navCtrl from each form must be passed into this function
-    //    2. The alertCtrl for the form submission is handled here
-    //    3. Further logic and subscribe function call is handled within here
-    //
-    // Further work:
-    //    1. Error handling on the Server connection is not being handled here
-    //    2. Prelim assumption is that any request has failed to send to server
-    //       will be stored locally and show a counter in the main page
-    //       with a button to send all the pending data
-
-
-    let form = wfInputForm;
+  wfFormSubmission(form: any, navCtrl: any, images: any, finalSubmission: boolean) {
 
     //form.controls['wfStaffOptName'].setValue('作业員A');
 
@@ -656,16 +628,16 @@ export class WorkflowService {
         message: qtyCheckMsg,
         buttons: [
           {
-            text: '    取消    ',
-            handler: () => {
-              console.log('Disagree clicked');
-            }
-          },
-          {
             text: '    继續    ',
             handler: () => {
               console.log('Agree clicked');
               this.wfFormUpload(form, navCtrl, images, finalSubmission);
+            }
+          },
+          {
+            text: '    取消    ',
+            handler: () => {
+              console.log('Disagree clicked');
             }
           }
         ]
@@ -936,10 +908,12 @@ export class WorkflowService {
             console.log("uploading images to server");
 
             this.uploadImage(form, images).subscribe((data) => {
-              // alert(data);
+              alert(data);
               // need to add loading screen for image upload
               navCtrl.setRoot(WorkflowPage);
 
+            }, error => {
+              alert("img upload has been failed" + error)
             })
 
 

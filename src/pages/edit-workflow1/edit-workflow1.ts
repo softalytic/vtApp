@@ -211,6 +211,7 @@ export class EditWorkflow1Page implements OnInit{
     this.formInit();
     let form = this.wfInputForm;
 
+    // This is the Staff Data Handling
     this.storage.get("staffDate").then((storageData) => {
       console.log("staffDate from storage is " + JSON.stringify(storageData));
 
@@ -288,6 +289,14 @@ export class EditWorkflow1Page implements OnInit{
           // console.log("Loading " + key + " Storage:" + storageData[key]);
           form.controls[key].setValue(storageData[key]);
         }
+
+        this.wfSvc.pullImage(form).subscribe((imgs) => {
+          console.log("Pulling images for revew");
+          this.images = imgs;
+
+        }, error => {
+          console.log("pullImages: Has error" + error);
+        })
 
       } else {
         // Preload the data for form

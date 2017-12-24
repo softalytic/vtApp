@@ -13,7 +13,7 @@ import { EditWorkflow1Page } from "../pages/edit-workflow1/edit-workflow1";
 import { EditWorkflow2Page } from "../pages/edit-workflow2/edit-workflow2";
 import { EditWorkflow3Page } from "../pages/edit-workflow3/edit-workflow3";
 import { Camera } from "@ionic-native/camera";
-import { WorkflowService } from "../services/workflow";
+import { WorkflowService } from "../services/wfServer";
 import { HttpModule } from "@angular/http";
 import { QRCodeService } from "../services/qrCode";
 import { PhotoService } from "../services/photo";

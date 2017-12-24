@@ -1,7 +1,7 @@
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { Storage } from '@ionic/storage';
 import { Injectable } from "@angular/core";
-import { WorkflowService } from "./workflow";
+import { WorkflowService } from "./wfServer";
 
 @Injectable()
 export class QRCodeService {

@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { NgForm, FormGroup, FormBuilder } from "@angular/forms";
-import { WorkflowService } from "../../services/workflow";
+import { WorkflowService } from "../../services/wfServer";
 import { QRCodeService } from "../../services/qrCode";
 
 import { EditWorkflow1Page } from "../edit-workflow1/edit-workflow1";

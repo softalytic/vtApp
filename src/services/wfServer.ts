@@ -161,9 +161,22 @@ export class WorkflowService {
       'wfProcess': form.value.wfProcess,
       'wfProcessName': form.value.wfProcessName,
       'wfFormName': form.value.wfFormName,
+      'wfForm': form.value.wfForm,
       'wfFormId': form.value.wfFormId,
+      'wfFormSplit': form.value.wfFormSplit,
       'wfOrderFormId': form.value.wfOrderFormId,
       'wfOrderId': form.value.wfOrderId,
+      'wfStaffOptId': form.value.wfStaffOptId,
+      'wfStaffOptName': form.value.wfStaffOptName,
+      'wfStaffOptShift': form.value.wfStaffOptShift,
+      'wfStaffLeadId': form.value.wfStaffLeadId,
+      'wfStaffLeadName': form.value.wfStaffLeadName,
+      'wfStaffTechId': form.value.wfStaffTechId,
+      'wfStaffTechName': form.value.wfStaffTechName,
+      'wfStaffXrayId': form.value.wfStaffXrayId,
+      'wfStaffXrayName': form.value.wfStaffXrayName,
+      'wfStaffQCId': form.value.wfStaffQCId,
+      'wfStaffQCName': form.value.wfStaffQCName,
       'wfImg': image,
     };
 
@@ -187,7 +200,7 @@ export class WorkflowService {
     // Do not print the packet below in the console as it will slow the performance due to it's size
     // Any change of the field name in the form need to be updated manually here
 
-    return this.http.post(queryUrl, form.value.wfFormId, this.httpOptions)
+    return this.http.post(queryUrl, form.value, this.httpOptions)
       .timeout(1000)
       .map((response: Response) => {
         console.log("Responding from Server" + response);

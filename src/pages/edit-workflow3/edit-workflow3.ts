@@ -191,7 +191,7 @@ export class EditWorkflow3Page implements OnInit{
 
       {method: 'inputs', options: [
         {title: "清机确认", model: "wfOptWashMachine", type: "text", inputType: 1, scan: false, size: 8}, 
-        {title: "总投入数", method: "input", model: "wfOptStartQty", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
+        // {title: "总投入数", method: "input", model: "wfOptStartQty", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
         {title: "良品數", method: "input", model: "wfOptGoodQty", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
         {title: "抽检数量", model: "wfRandomCheckInfo", type: "number", icon: 'construct', inputType: 9, scan: false, size: 8},
       ]},
@@ -249,7 +249,7 @@ export class EditWorkflow3Page implements OnInit{
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 4},
       {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 6, size: 7},
       {title: "班长硧认", method: "input", model: "wfStaffLeadName", type: "text", icon: 'construct', scan: true, wfPplI: 3, size: 7},
-      {title: "維修員", method: "input", model: "wfStaffRepairName", type: "text", icon: 'construct', scan: true, wfPplI: 4, size: 7},
+      {title: "維修員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 4, size: 7},
       {title: "终检", method: "buttons", model: "wfQCPass", icon: "md-checkmark-circle-outline",buttons: [
         {label: "通过", value: 1, icon: 'checkmark'},
         {label: "失败", value: 2, icon: 'close'}
@@ -293,7 +293,7 @@ export class EditWorkflow3Page implements OnInit{
         console.log("Staff date from storage" + storageData);
         console.log(data['dttm'] === storageData);
 
-        if(data === storageData){
+        if(data === storageData || data == "" || data == null){
           this.storage.get("staffTable").then((storageData) => {
             // console.log("staffTable from storage is " + JSON.stringify(storageData));
             this.staffTable = storageData;
@@ -332,6 +332,19 @@ export class EditWorkflow3Page implements OnInit{
         }
       }, error => {
         console.log("staffDate" + error);
+        this.storage.get("staffTable").then((storageData) => {
+          // console.log("staffTable from storage is " + JSON.stringify(storageData));
+          this.staffTable = storageData;
+          // console.log(this.staffTable);
+
+        });
+
+        this.storage.get("machineTable").then((storageData) => {
+          // console.log("machineTable from storage is " + JSON.stringify(storageData));
+          this.machineTable = storageData;
+          // console.log(this.machineTable);
+
+        });
         // this.networkError(navCtrl);
       });
     });
@@ -354,7 +367,12 @@ export class EditWorkflow3Page implements OnInit{
           console.log("New process is triggered");
           form.controls['wfGoodTotal'].setValue(0);
           form.controls['wfBadTotal'].setValue(0);
-          form.controls['wfOptStartQty'].setValue(storageData['wfGoodTotal']);
+          if( this.wfSvc.toInt(storageData['wfGoodTotal']) == 0){
+            form.controls['wfOptStartQty'].setValue(storageData['wfOptStartQty']);
+          } else {
+            form.controls['wfOptStartQty'].setValue(storageData['wfGoodTotal']);
+          }
+
           form.controls['wfProcessNew'].setValue(false);
         } else {
           console.log("Continue next process");
@@ -394,6 +412,18 @@ export class EditWorkflow3Page implements OnInit{
                 case 'wfBadTotal':
                 case 'wfOptStartQty':
                 case 'wfProcessNew':
+                case 'wfStaffOptId':
+                case 'wfStaffOptName':
+                case 'wfStaffOptShift':
+                case 'wfStaffLeadName':
+                case 'wfStaffLeadId':
+                case 'wfStaffTechId':
+                case 'wfStaffTechName':
+                case 'wfStaffXrayId':
+                case 'wfStaffXrayName':
+                case 'wfStaffXrayName':
+                case 'wfStaffQCId':
+                case 'wfStaffQCName':
                   break;
 
 
@@ -731,7 +761,6 @@ export class EditWorkflow3Page implements OnInit{
       wfStaffOptShift: [''],
       wfStaffLeadName: [''],
       wfStaffLeadId: [''],
-      wfStaffRepairName: [''],
       wfStaffTechId: [''],
       wfStaffTechName: [''],
       wfStaffXrayId: [''],

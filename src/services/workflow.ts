@@ -131,7 +131,7 @@ export class WorkflowService {
       });
   }
 
-  uploadImage(wfInputForm: any, wfForm: number, image: any, wfImgNum: number, wfImgTotal: number) {
+  uploadImage(form: any,image: any) {
     // This function formulate a packet with some parts of the form value and images array
     // to the url based on the wfForm number
     // 5 inputs for this function,
@@ -149,7 +149,6 @@ export class WorkflowService {
     //    3. This function only trigger single image upload, so the for loop of call is assumed
     //       to be handled by the main function call
 
-    let form = wfInputForm;
     let queryUrl = this.baseUrl + "form/image/submit/";
     console.log("Requesting url: " + queryUrl);
     console.log("Begin to upload image onto server!");
@@ -162,21 +161,17 @@ export class WorkflowService {
       'wfProcess': form.value.wfProcess,
       'wfProcessName': form.value.wfProcessName,
       'wfFormName': form.value.wfFormName,
-
       'wfFormId': form.value.wfFormId,
       'wfOrderFormId': form.value.wfOrderFormId,
       'wfOrderId': form.value.wfOrderId,
-
-      'wfImgTotal': wfImgTotal,
-      'wfImgNum': wfImgNum,
       'wfImg': image,
     };
 
     return this.http.post(queryUrl, packet, this.httpOptions)
-      .timeout(5000)
+      .timeout(1000)
       .map((response: Response) => {
         console.log("Responding from Server" + response);
-        return response.json();
+        return response.text();
       });
   }
 
@@ -215,30 +210,30 @@ export class WorkflowService {
     let alert = this.alertCtrl.create({
       
             //title: wfPName + ' (' + form.value.wfFormId + ')',
-            subTitle:  wfPName + ' (' + form.value.wfFormId + ')' + '<br><br>工序 = ' + form.value.wfProcessName,
+            subTitle:  wfPName + ' (' + form.value.wfFormId + ')' + '<br>工序 = ' + form.value.wfProcessName,
             buttons: [{
               text: '上存',
               handler: () => {
                 console.log('上存 is clicked');
                 console.log("uploading form" + JSON.stringify(form.value));
-      
+
                 form.value.wfProcessStatus = true;
 
                 this.formSubmission(form,images,navCtrl);
-      
+
               }
             },
               {
                 text: '上存 + 完成工序',
                 handler: () => {
                   console.log('上存 + 完成工序 is clicked');
-      
+
                   let alertCtrl = this.alertCtrl.create({
                     // subTitle: 'Please select 终检!' + dataXYZ.wfProcess + ' ' + dataXYZ.wfProcessName + ' ' + form.value.wfFormId + ' ' + JSON.stringify(resultStorageItemX),
                     // comment above for faster process
                     //title: '嚫,完成终检!' + form.value.wfProcess + ' ' + form.value.wfProcessName + ' ' + form.value.wfFormId,
                     //title: '上存及完成工序',
-                    subTitle: '上存及完成工序<br><br>注意: 按"確定"後其他人員將不能再输入同一流程卡，同一工序资料',
+                    subTitle: '上存及完成工序<br>注意: 按"確定"後其他人員將不能再输入同一流程卡，同一工序资料',
                     buttons: [{
                       text: '    確定    ',
                       handler: () => {
@@ -260,9 +255,9 @@ export class WorkflowService {
                       }
                     }]
                   });
-      
+
                   alertCtrl.present();
-      
+
                 }
               }, {
                 text: '    取消    ',
@@ -272,108 +267,108 @@ export class WorkflowService {
                 }
               }]
           });
-    
+
     let missingFeildAlert = true;
     let missingFeildMsg = '';
 
     if(form.value.wfForm == '1') {
       if(typeof form.value.wfOptStartTime === 'undefined' || isNaN(form.value.wfOptStartTime)) {
-        missingFeildMsg += '<br><br>1. 正確开始时间值必须为 0000 - 2359 之間!';
+        missingFeildMsg += '<br>1. 正確开始时间值必须为 0000 - 2359 之間!';
         form.controls['wfOptStartTime'].setValue(this.toInt(form.value.wfOptStartTime));
       } else {
         let starTimeX = form.value.wfOptStartTime;
         let firstStarTimeX = starTimeX[0]+starTimeX[1];
         let secStarTimeX = starTimeX[2]+starTimeX[3];
         if(starTimeX.length < 4 || starTimeX.length > 4 || this.toInt(firstStarTimeX) < 0 || this.toInt(firstStarTimeX) > 23 || this.toInt(secStarTimeX) < 0 || this.toInt(secStarTimeX) > 59) {
-          missingFeildMsg += '<br><br>1. 正確开始时间值必须为 0000 - 2359 之間!';
+          missingFeildMsg += '<br>1. 正確开始时间值必须为 0000 - 2359 之間!';
           form.controls['wfOptStartTime'].setValue(this.toInt(starTimeX));
         }
       }
-      
+
       if(typeof form.value.wfOptFinishTime === 'undefined' || isNaN(form.value.wfOptFinishTime)) {
-        missingFeildMsg += '<br><br>2. 完成时间值必须为 0000 - 2359 之間!';
+        missingFeildMsg += '<br>2. 完成时间值必须为 0000 - 2359 之間!';
         form.controls['wfOptFinishTime'].setValue(this.toInt(form.value.wfOptFinishTime));
       } else {
         let endTimeX = form.value.wfOptFinishTime;
         let firstEndTimeX = endTimeX[0]+endTimeX[1];
         let secEndTimeX = endTimeX[2]+endTimeX[3];
         if(typeof endTimeX === 'undefined'  || endTimeX.length < 4 || endTimeX.length > 4 || this.toInt(firstEndTimeX) < 0 || this.toInt(firstEndTimeX) > 23 || this.toInt(secEndTimeX) < 0 || this.toInt(secEndTimeX) > 59) {
-          missingFeildMsg += '<br><br>2. 完成时间值必须为 0000 - 2359 之間!';
+          missingFeildMsg += '<br>2. 完成时间值必须为 0000 - 2359 之間!';
           form.controls['wfOptFinishTime'].setValue(endTimeX);
         }
       }
-      
+
       if(form.value.wfOptBadQty < 0) {
-        missingFeildMsg += '<br><br>3. 不良数不能小於零!';
-      } 
+        missingFeildMsg += '<br>3. 不良数不能小於零!';
+      }
       if(form.value.wfOptGoodQty < 0) {
-        missingFeildMsg += '<br><br>4. 良品数必須为正数!';
+        missingFeildMsg += '<br>4. 良品数必須为正数!';
       }
       if(typeof form.value.wfStaffOptName === 'undefined') {
-        missingFeildMsg += '<br><br>5. 輸入作业員!';
+        missingFeildMsg += '<br>5. 輸入作业員!';
       }
-      
-      
+
+
     } else if(form.value.wfForm == '2') {
 
       if(form.value.wfOptBadQty < 0) {
-        missingFeildMsg += '<br><br>3. 不良数不能小於零';
-      } 
+        missingFeildMsg += '<br>3. 不良数不能小於零';
+      }
       if(form.value.wfOptGoodQty < 0) {
-        missingFeildMsg += '<br><br>4. 良品数必須为正数!';
+        missingFeildMsg += '<br>4. 良品数必須为正数!';
       }
       if(typeof form.value.wfStaffOptName === 'undefined' && form.value.wfProcess != 4) {
-        missingFeildMsg += '<br><br>5. 輸入作业員!';
+        missingFeildMsg += '<br>5. 輸入作业員!';
 
       }
-      
+
     } else if(form.value.wfForm == '3' && form.value.wfProcess != '9') {
         if(typeof form.value.wfOptStartTime === 'undefined' || isNaN(form.value.wfOptStartTime)) {
-          missingFeildMsg += '<br><br>1. 正確开始时间值必须为 0000 - 2359 之間!';
+          missingFeildMsg += '<br>1. 正確开始时间值必须为 0000 - 2359 之間!';
           form.controls['wfOptStartTime'].setValue(this.toInt(form.value.wfOptStartTime));
         } else {
           let starTimeX = form.value.wfOptStartTime;
           let firstStarTimeX = starTimeX[0]+starTimeX[1];
           let secStarTimeX = starTimeX[2]+starTimeX[3];
           if(starTimeX.length < 4 || starTimeX.length > 4 || this.toInt(firstStarTimeX) < 0 || this.toInt(firstStarTimeX) > 23 || this.toInt(secStarTimeX) < 0 || this.toInt(secStarTimeX) > 59) {
-            missingFeildMsg += '<br><br>1. 正確开始时间值必须为 0000 - 2359 之間!';
+            missingFeildMsg += '<br>1. 正確开始时间值必须为 0000 - 2359 之間!';
             form.controls['wfOptStartTime'].setValue(this.toInt(starTimeX));
           }
         }
-        
+
         if(typeof form.value.wfOptFinishTime === 'undefined' || isNaN(form.value.wfOptFinishTime)) {
-          missingFeildMsg += '<br><br>2. 正確完成时间值必须为 0000 - 2359 之間!';
+          missingFeildMsg += '<br>2. 正確完成时间值必须为 0000 - 2359 之間!';
           form.controls['wfOptFinishTime'].setValue(this.toInt(form.value.wfOptFinishTime));
         } else {
           let endTimeX = form.value.wfOptFinishTime;
           let firstEndTimeX = endTimeX[0]+endTimeX[1];
           let secEndTimeX = endTimeX[2]+endTimeX[3];
           if(typeof endTimeX === 'undefined'  || endTimeX.length < 4 || endTimeX.length > 4 || this.toInt(firstEndTimeX) < 0 || this.toInt(firstEndTimeX) > 23 || this.toInt(secEndTimeX) < 0 || this.toInt(secEndTimeX) > 59) {
-            missingFeildMsg += '<br><br>2. 正確完成时间值必须为 0000 - 2359 之間!';
+            missingFeildMsg += '<br>2. 正確完成时间值必须为 0000 - 2359 之間!';
             form.controls['wfOptFinishTime'].setValue(endTimeX);
           }
         }
 
       if(form.value.wfOptBadQty < 0) {
-        missingFeildMsg += '<br><br>3. 不良数不能小於零!';
+        missingFeildMsg += '<br>3. 不良数不能小於零!';
 
-      } 
+      }
       if(form.value.wfOptGoodQty < 0) {
-        missingFeildMsg += '<br><br>4. 良品数必須为正数!';
+        missingFeildMsg += '<br>4. 良品数必須为正数!';
 
       }
       if ( typeof form.value.wfStaffOptName === 'undefined' ) {
-        missingFeildMsg += '<br><br>5. 輸入作业員!';
+        missingFeildMsg += '<br>5. 輸入作业員!';
 
       }
-    } 
+    }
 
-    if(missingFeildMsg != '') { 
-      missingFeildAlert = false; 
+    if(missingFeildMsg != '') {
+      missingFeildAlert = false;
       this.warningAlert('請提供或更正下列资料：', missingFeildMsg, '继續');
 
     }
-    
+
     //this.warningAlert('Q', form.value.wfForm + ' ' + form.value.wfProcess, '继續');
     if(missingFeildAlert) {
       if((form.value.wfForm == '1' && (form.value.wfProcess == '5' || form.value.wfProcess == '6' || form.value.wfProcess == '8')) || (form.value.wfForm == '3' && (form.value.wfProcess == '7' || form.value.wfProcess == '8')))
@@ -384,24 +379,24 @@ export class WorkflowService {
         totalBadQtyX += this.toInt(form.value.wfBadQty4);
         totalBadQtyX += this.toInt(form.value.wfBadQty5);
         totalBadQtyX += this.toInt(form.value.wfBadQty6);
-  
+
         form.controls['wfOptBadQty'].setValue(totalBadQtyX);
       }
 
       let updatedGoodQty = this.toInt(form.value.wfOptGoodQty) / 1000;
       let qtyCheckMsg = '不良数總和: ' + this.toInt(form.value.wfOptBadQty);
-  
-      qtyCheckMsg += '<br><br>良品数: ' + this.toInt(form.value.wfOptGoodQty) + ' (' + updatedGoodQty + 'K)';
-      
+
+      qtyCheckMsg += '<br>良品数: ' + this.toInt(form.value.wfOptGoodQty) + ' (' + updatedGoodQty + 'K)';
+
       if(this.toInt(form.value.wfOptBadQty) > this.toInt(form.value.wfOptGoodQty)) {
-        qtyCheckMsg += '<br><br>不良数 ('+form.value.wfOptBadQty+') 大於 良品数 ('+form.value.wfOptGoodQty+')！';
+        qtyCheckMsg += '<br>不良数 ('+form.value.wfOptBadQty+') 大於 良品数 ('+form.value.wfOptGoodQty+')！';
       }
-  
+
       if(this.toInt(form.value.wfOptGoodQty) > this.toInt(form.value.wfOrderBatchQty) * 1000) {
-        qtyCheckMsg += '<br><br>良品数 ('+form.value.wfOptGoodQty+') 大於 批次量 ('+ form.value.wfOrderBatchQty * 1000 +')！';
+        qtyCheckMsg += '<br>良品数 ('+form.value.wfOptGoodQty+') 大於 批次量 ('+ form.value.wfOrderBatchQty * 1000 +')！';
       }
-  
-      qtyCheckMsg += '<br><br>如需修改，請按 “取消” 再重新輸入。';
+
+      qtyCheckMsg += '<br>如需修改，請按 “取消” 再重新輸入。';
 
       let qtyConfirm = this.alertCtrl.create({
         title: '',
@@ -435,7 +430,7 @@ export class WorkflowService {
 
   wfFormUpload(form: any, navCtrl: any, images: any, finalSubmission: boolean){
 
-    console.log('上存 + 完成工序 is clicked');
+    console.log('wfFormUpload is clicked');
 
     let mainTitleMsg: string;
     let msg: string;
@@ -459,18 +454,17 @@ export class WorkflowService {
             console.log('上存 + 完成工序 is clicked');
             if (this.finalValidation(form)){
               console.log('Final confirmation of mark completion is clicked');
+              form.controls['wfFormStatus'].setValue(true);
+              form.controls['wfLastCompletedWf'].setValue(form.value.wfProcess);
               console.log("uploading form" + JSON.stringify(form.value));
-
-              form.value.wfFormStatus = true;
-              form.value.wfLastCompletedWf = form.value.wfProcess;
               this.formSubmission(form,images,navCtrl);
 
             }
 
           } else {
             console.log('上存 is clicked');
+            form.controls['wfProcessStatus'].setValue(true);
             console.log("uploading form" + JSON.stringify(form.value));
-            form.value.wfProcessStatus = true;
             this.formSubmission(form,images,navCtrl);
 
           }
@@ -526,66 +520,66 @@ export class WorkflowService {
     if(form.value.wfForm == '1') {
 
       if(! this.checkInputAsTime(form.value.wfOptStartTime)) {
-        missingFeildMsg += '<br><br>1. 正確开始时间值必须为 0000 - 2359 之間!';
+        missingFeildMsg += '<br>1. 正確开始时间值必须为 0000 - 2359 之間!';
         form.controls['wfOptStartTime'].setValue(this.toInt(form.value.wfOptStartTime));
 
       }
 
       if(! this.checkInputAsTime(form.value.wfOptFinishTime)){
-        missingFeildMsg += '<br><br>2. 完成时间值必须为 0000 - 2359 之間!';
+        missingFeildMsg += '<br>2. 完成时间值必须为 0000 - 2359 之間!';
         form.controls['wfOptFinishTime'].setValue(this.toInt(form.value.wfOptFinishTime));
 
       }
 
       if(form.value.wfOptBadQty < 0) {
-        missingFeildMsg += '<br><br>3. 不良数不能小於零!';
+        missingFeildMsg += '<br>3. 不良数不能小於零!';
       }
       if(form.value.wfOptGoodQty < 0) {
-        missingFeildMsg += '<br><br>4. 良品数必須为正数!';
+        missingFeildMsg += '<br>4. 良品数必須为正数!';
       }
       if(typeof form.value.wfStaffOptName === 'undefined') {
-        missingFeildMsg += '<br><br>5. 輸入作业員!';
+        missingFeildMsg += '<br>5. 輸入作业員!';
       }
 
 
     } else if(form.value.wfForm == '2') {
 
       if(form.value.wfOptBadQty < 0) {
-        missingFeildMsg += '<br><br>3. 不良数不能小於零';
+        missingFeildMsg += '<br>3. 不良数不能小於零';
       }
       if(form.value.wfOptGoodQty < 0) {
-        missingFeildMsg += '<br><br>4. 良品数必須为正数!';
+        missingFeildMsg += '<br>4. 良品数必須为正数!';
       }
       if(typeof form.value.wfStaffOptName === 'undefined' && form.value.wfProcess != 4) {
-        missingFeildMsg += '<br><br>5. 輸入作业員!';
+        missingFeildMsg += '<br>5. 輸入作业員!';
 
       }
 
     } else if(form.value.wfForm == '3' && form.value.wfProcess != '9') {
       if(! this.checkInputAsTime(form.value.wfOptStartTime)) {
-        missingFeildMsg += '<br><br>1. 正確开始时间值必须为 0000 - 2359 之間!';
+        missingFeildMsg += '<br>1. 正確开始时间值必须为 0000 - 2359 之間!';
         form.controls['wfOptStartTime'].setValue(this.toInt(form.value.wfOptStartTime));
 
       }
 
       if(! this.checkInputAsTime(form.value.wfOptFinishTime)){
-        missingFeildMsg += '<br><br>2. 完成时间值必须为 0000 - 2359 之間!';
+        missingFeildMsg += '<br>2. 完成时间值必须为 0000 - 2359 之間!';
         form.controls['wfOptFinishTime'].setValue(this.toInt(form.value.wfOptFinishTime));
 
       }
 
       if(form.value.wfOptBadQty < 0) {
-        missingFeildMsg += '<br><br>3. 不良数不能小於零!';
+        missingFeildMsg += '<br>3. 不良数不能小於零!';
 
       }
 
       if(form.value.wfOptGoodQty < 0) {
-        missingFeildMsg += '<br><br>4. 良品数必須为正数!';
+        missingFeildMsg += '<br>4. 良品数必須为正数!';
 
       }
 
       if ( typeof form.value.wfStaffOptName === 'undefined' ) {
-        missingFeildMsg += '<br><br>5. 輸入作业員!';
+        missingFeildMsg += '<br>5. 輸入作业員!';
 
       }
     }
@@ -610,19 +604,19 @@ export class WorkflowService {
       }
 
       let updatedGoodQty = this.toInt(form.value.wfOptGoodQty) / 1000;
-      let qtyCheckMsg = '不良数總和: ' + this.toInt(form.value.wfOptBadQty);
+      let qtyCheckMsg = '<br>不良数總和: ' + this.toInt(form.value.wfOptBadQty);
 
-      qtyCheckMsg += '<br><br>良品数: ' + this.toInt(form.value.wfOptGoodQty) + ' (' + updatedGoodQty + 'K)';
+      qtyCheckMsg += '<br>良品数: ' + this.toInt(form.value.wfOptGoodQty) + ' (' + updatedGoodQty + 'K)';
 
       if(this.toInt(form.value.wfOptBadQty) > this.toInt(form.value.wfOptGoodQty)) {
-        qtyCheckMsg += '<br><br>不良数 ('+form.value.wfOptBadQty+') 大於 良品数 ('+form.value.wfOptGoodQty+')！';
+        qtyCheckMsg += '<br>不良数 ('+form.value.wfOptBadQty+') 大於 良品数 ('+form.value.wfOptGoodQty+')！';
       }
 
       if(this.toInt(form.value.wfOptGoodQty) > this.toInt(form.value.wfOrderBatchQty) * 1000) {
-        qtyCheckMsg += '<br><br>良品数 ('+form.value.wfOptGoodQty+') 大於 批次量 ('+ form.value.wfOrderBatchQty * 1000 +')！';
+        qtyCheckMsg += '<br>良品数 ('+form.value.wfOptGoodQty+') 大於 批次量 ('+ form.value.wfOrderBatchQty * 1000 +')！';
       }
 
-      qtyCheckMsg += '<br><br>如需修改，請按 “取消” 再重新輸入。';
+      qtyCheckMsg += '<br>如需修改，請按 “取消” 再重新輸入。';
 
       let qtyConfirm = this.alertCtrl.create({
         title: '',
@@ -845,37 +839,10 @@ export class WorkflowService {
 
   };
 
-  /*
-  updateTextChg(wfInputForm: any) {
-    let form = wfInputForm;
-    form.controls['wfStaffOptName'].setValue('作业員A');
-    form.controls['wfStaffOptShift'].setValue('A');
-    form.controls['wfStaffTechName'].setValue('技術員A');
-    form.controls['wfStaffQCName'].setValue('品检員A');
-  }
-
-  updateTextChg2(wfInputForm: any) {
-    let form = wfInputForm;
-    form.controls['wfStaffOptName'].setValue('作业員A');
-    form.controls['wfStaffTechName'].setValue('技術員A');
-    form.controls['wfStaffQCName'].setValue('品检員A');
-  }
-
-  updateTextChg3(wfInputForm: any) {
-    let form = wfInputForm;
-    form.controls['wfStaffOptName'].setValue('作业員A');
-    form.controls['wfStaffOptShift'].setValue('A');
-    form.controls['wfStaffTechName'].setValue('技術員A');
-    form.controls['wfOptQtyChecked'].setValue(8);
-    form.controls['wfStaffRepairName'].setValue('維修員A');
-    form.controls['wfStaffQCName'].setValue('品检員A');
-  }
-  */
-
-  warningAlert(titleTxt: any, subTitleTxt: any, buttons: any) {
+  warningAlert(titleTxt: any, msgTxt: any, buttons: any) {
     let alert = this.alertCtrl.create({
       title: titleTxt,
-      subTitle: subTitleTxt,
+      message: msgTxt,
       buttons: [buttons]
     });
     alert.present();
@@ -934,30 +901,24 @@ export class WorkflowService {
 
           if (images.length > 0){
             console.log("uploading images to server");
-            let imgTotal = images.length;
 
-            for (let i = 0; i < imgTotal; i++) {
-              this.uploadImage(form,1,images[i],i,imgTotal)
-                .subscribe((data)=> {
-                    console.log("Successfully uploading to server");
-                    console.log("Upload img reply from server" + JSON.stringify(data));
+            this.uploadImage(form, images).subscribe((data) => {
+              // alert(data);
+              // need to add loading screen for image upload
+              navCtrl.setRoot(WorkflowPage);
 
-                  },
-                  error => {
-                    console.log(error);
-                    // this.networkError(navCtrl);
-                  }
-                );
-            }
+            })
+
+
+          } else {
+            // Below code can be comment out that depends on the Error handling
+            // Return back to main page
+            // BUG: Calling navCtrl.pop outside of the image upload will have issue that
+            //      it is executed before images upload finish
+            // navCtrl.pop();
+            // this.storage.clear();
+            navCtrl.setRoot(WorkflowPage);
           }
-
-          // Below code can be comment out that depends on the Error handling
-          // Return back to main page
-          // BUG: Calling navCtrl.pop outside of the image upload will have issue that
-          //      it is executed before images upload finish
-          // navCtrl.pop();
-          // this.storage.clear();
-          navCtrl.setRoot(WorkflowPage);
         },
         error => {
           // On error, prompt network msg and can save locally
@@ -992,7 +953,7 @@ export class WorkflowService {
   };
 
   toInt(text: string){
-    if (text == "" || text == null) {
+    if (text == "" || text == null ) {
       text = "0"
     }
 
@@ -1001,9 +962,15 @@ export class WorkflowService {
   };
 
   runningTotal(form:any){
-    form.value.wfGoodTotal = ( this.toInt(form.value.wfOptGoodQty) + this.toInt(form.value.wfGoodTotal));
-    form.value.wfOptBadQtyItem = ( this.toInt(form.value.wfBadItem1) + this.toInt(form.value.wfBadItem2) + this.toInt(form.value.wfBadItem3) + this.toInt(form.value.wfBadItem4) + this.toInt(form.value.wfBadItem5) + this.toInt(form.value.wfBadItem6));
+    console.log("In the running total");
+    form.controls["wfGoodTotal"].setValue(( this.toInt(form.value.wfOptGoodQty) + this.toInt(form.value.wfGoodTotal)));
+    console.log("GoodQtyRunning Total" + form.value.wfGoodTotal);
+
+    form.controls["wfOptBadQtyItem"].setValue(this.toInt(form.value.wfBadItem1) + this.toInt(form.value.wfBadItem2) + this.toInt(form.value.wfBadItem3) + this.toInt(form.value.wfBadItem4) + this.toInt(form.value.wfBadItem5) + this.toInt(form.value.wfBadItem6));
+    console.log("BadQtySubTotal" + form.value.wfOptBadQtyItem);
+
     form.value.wfBadTotal = ( this.toInt(form.value.wfOptBadQty) + this.toInt(form.value.wfOptBadQtyItem) + form.value.wfBadTotal );
+    console.log("BadQtyRunning Total" + form.value.wfBadTotal);
 
   };
 
@@ -1057,16 +1024,16 @@ export class WorkflowService {
     //    Original design concept is to let server side decide which field to be looked up
 
     console.log("Checking from ERP Exceptional");
-    console.log("Printing ERP Exc request to server : " + JSON.stringify(form));
+    console.log("Printing ERP Exc request to server : " + JSON.stringify(form.value));
 
     let queryUrl = this.baseUrl + "erp/query/exc/";
     console.log("Requesting ERP Exc url: " + queryUrl);
 
-    return this.http.post(queryUrl, form, this.httpOptions)
+    return this.http.post(queryUrl, form.value, this.httpOptions)
       .timeout(1000)
       .map((response: Response) => {
         console.log("Responding from ERP Exc Server");
-        console.log(response.json()[0]);
+        // console.log(response.json());
         return response.json();
       });
   };
@@ -1077,24 +1044,31 @@ export class WorkflowService {
     if (except) {
       return true;
     } else {
-      var startQty = this.toInt(form.value.wfOptStartQty);
-      var goodQty = this.toInt(form.value.wfOptGoodQty);
-      var badQty = this.toInt(form.value.wfOptBadQty);
-      var batchQty = (this.toInt(form.value.wfOrderBatchQty)) * 1000;
+      let startQty = this.toInt(form.value.wfOptStartQty);
+      let goodQty: number;
 
-      var wtForm = form.value.wfForm;
-      var ProcessCount = this.toInt(form.value.wfProcess);
+      if(this.toInt(form.value.wfOptGoodQty) == 0) {
+        goodQty = startQty
+      } else {
+        goodQty = this.toInt(form.value.wfOptGoodQty);
+      }
+
+      let badQty = this.toInt(form.value.wfOptBadQty);
+      let batchQty = (this.toInt(form.value.wfOrderBatchQty)) * 1000;
+
+      let wtForm = form.value.wfForm;
+      let ProcessCount = this.toInt(form.value.wfProcess);
 
       //良品数上下限
-      var QC_UPPER = 1.2;
-      var QC_LOWER = 0.8;
+      let QC_UPPER = 1.2;
+      let QC_LOWER = 0.8;
 
       //vairance (flexible quantity - inputQty)
-      var OtherLimit = 3000;
+      let OtherLimit = 3000;
 
       //not exceeding 10k of batch qty
       //flexible_quantity - Finished_Product = 10000;
-      var finishProdLimit = 10000;
+      let finishProdLimit = 10000;
 
       //  sub process card
       //rule 5 cannot exceed batch quantity
@@ -1127,6 +1101,7 @@ export class WorkflowService {
           } else {
             return true;
           }
+          break;
 
         // CASE 2 (finished product)
         case '2':
@@ -1164,6 +1139,7 @@ export class WorkflowService {
               return false;
             }
           }
+          break;
 
         // CASE 3 (插件 embedded)
         //same logic as naked product
@@ -1185,6 +1161,8 @@ export class WorkflowService {
           } else {
             return true;
           }
+          break;
+
         default:
           return true;
       }

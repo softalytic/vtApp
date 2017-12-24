@@ -182,7 +182,7 @@ export class EditWorkflow2Page implements OnInit{
         console.log("Staff date from storage" + storageData);
         console.log(data['dttm'] === storageData);
 
-        if(data === storageData){
+        if(data === storageData || data == "" || data == null){
           this.storage.get("staffTable").then((storageData) => {
             // console.log("staffTable from storage is " + JSON.stringify(storageData));
             this.staffTable = storageData;
@@ -221,6 +221,19 @@ export class EditWorkflow2Page implements OnInit{
         }
       }, error => {
         console.log("staffDate" + error);
+        this.storage.get("staffTable").then((storageData) => {
+          // console.log("staffTable from storage is " + JSON.stringify(storageData));
+          this.staffTable = storageData;
+          // console.log(this.staffTable);
+
+        });
+
+        this.storage.get("machineTable").then((storageData) => {
+          // console.log("machineTable from storage is " + JSON.stringify(storageData));
+          this.machineTable = storageData;
+          // console.log(this.machineTable);
+
+        });
         // this.networkError(navCtrl);
       });
     });
@@ -293,6 +306,18 @@ export class EditWorkflow2Page implements OnInit{
                 case 'wfBadTotal':
                 case 'wfOptStartQty':
                 case 'wfProcessNew':
+                case 'wfStaffOptId':
+                case 'wfStaffOptName':
+                case 'wfStaffOptShift':
+                case 'wfStaffLeadName':
+                case 'wfStaffLeadId':
+                case 'wfStaffTechId':
+                case 'wfStaffTechName':
+                case 'wfStaffXrayId':
+                case 'wfStaffXrayName':
+                case 'wfStaffXrayName':
+                case 'wfStaffQCId':
+                case 'wfStaffQCName':
                   break;
 
 
@@ -576,7 +601,6 @@ export class EditWorkflow2Page implements OnInit{
       wfStaffOptShift: [''],
       wfStaffLeadName: [''],
       wfStaffLeadId: [''],
-      wfStaffRepairName: [''],
       wfStaffTechId: [''],
       wfStaffTechName: [''],
       wfStaffXrayId: [''],

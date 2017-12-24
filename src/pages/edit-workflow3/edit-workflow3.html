@@ -400,7 +400,8 @@
                                 <div class="inputLabel">
                                     {{wfInput.title}}
                                 </div>
-                                <div (click)="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">
+                                <!--<div (click)="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">-->
+                                <div>
                                     <ion-row>
                                         <ion-input (change)="this.wfSvc.populateStaffData(this.wfInputForm,this.staffTable,this.machineTable, wfInput.model);"
                                                    *ngIf="wfInput.wfPplI == 1" formControlName={{wfInput.model}}
@@ -505,19 +506,6 @@
 
                         </ion-col>
 
-                        <div>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button type="button"
-                                    [disabled]="this.wfInputForm.value.wfReadOnly"
-                                    ion-button
-                                    style="width: 80px;"
-                                    (click)="this.wfSvc.wfFormSubmission(this.wfInputForm,this.navCtrl,this.images,false)">
-
-                              上存
-                          </button>
-
-                        </div>
-
                         <ion-row class="row" justify-content-center="" wrap="">
                             <!---->
 
@@ -525,9 +513,26 @@
                             <ion-col class="ageingSubPart subBreak col" no-padding="" style="width: 88em; visibility: hidden;"></ion-col>
 
                         </ion-row>
-                        <ion-row>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <button type="button" ion-button (click)="this.wfSvc.cancelBtn(this.navCtrl)">
+                        <ion-row align-items-center>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button"
+                                    [disabled]="this.wfInputForm.value.wfReadOnly"
+                                    ion-button (click)="this.wfSvc.wfFormSubmission(this.wfInputForm,this.navCtrl,this.images,false)"
+                                    style="width: 80px; height: 50px; background: yellowgreen;">
+                                上存
+                            </button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button"
+                                    [disabled]="this.wfInputForm.value.wfReadOnly"
+                                    ion-button (click)="this.wfSvc.wfFormSubmission(this.wfInputForm,this.navCtrl,this.images, true)"
+                                    style="width: 200px; height: 50px; background: green;">
+                                上存 + 完成工序
+                            </button>
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button" ion-button
+                                    style="width: 80px; height: 50px; background-color: #8c8c8c;"
+                                    (click)="this.wfSvc.cancelBtn(this.navCtrl)">
                                 取消
                             </button>
 

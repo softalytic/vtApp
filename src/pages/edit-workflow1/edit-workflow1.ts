@@ -219,7 +219,7 @@ export class EditWorkflow1Page implements OnInit{
         console.log("Staff date from storage" + storageData);
         console.log("Need to update the staff table? " + data['dttm'] === storageData);
 
-        if(data === storageData){
+        if(data === storageData || data == "" || data == null || typeof data == 'undefined' ){
           this.storage.get("staffTable").then((storageData) => {
             // console.log("staffTable from storage is " + JSON.stringify(storageData));
             this.staffTable = storageData;
@@ -233,6 +233,7 @@ export class EditWorkflow1Page implements OnInit{
             // console.log(this.machineTable);
 
           });
+
         } else {
           this.wfSvc.pullStaffDataFromServer().subscribe((data) => {
             let staffDate = data.dttm;
@@ -259,6 +260,20 @@ export class EditWorkflow1Page implements OnInit{
       }, error => {
         console.log("staffDate" + error);
         // this.networkError(navCtrl);
+        this.storage.get("staffTable").then((storageData) => {
+          // console.log("staffTable from storage is " + JSON.stringify(storageData));
+          this.staffTable = storageData;
+          // console.log(this.staffTable);
+
+        });
+
+        this.storage.get("machineTable").then((storageData) => {
+          // console.log("machineTable from storage is " + JSON.stringify(storageData));
+          this.machineTable = storageData;
+          // console.log(this.machineTable);
+
+        });
+
       });
     });
 
@@ -286,6 +301,8 @@ export class EditWorkflow1Page implements OnInit{
           form.controls['wfBadTotal'].setValue(storageData['wfBadTotal']);
           form.controls['wfOptStartQty'].setValue(storageData['wfOptStartQty']);
         }
+
+
 
 
         for (let key in form.value) {
@@ -317,6 +334,18 @@ export class EditWorkflow1Page implements OnInit{
                 case 'wfBadTotal':
                 case 'wfOptStartQty':
                 case 'wfProcessNew':
+                case 'wfStaffOptId':
+                case 'wfStaffOptName':
+                case 'wfStaffOptShift':
+                case 'wfStaffLeadName':
+                case 'wfStaffLeadId':
+                case 'wfStaffTechId':
+                case 'wfStaffTechName':
+                case 'wfStaffXrayId':
+                case 'wfStaffXrayName':
+                case 'wfStaffXrayName':
+                case 'wfStaffQCId':
+                case 'wfStaffQCName':
                   break;
 
                 default:
@@ -647,7 +676,6 @@ export class EditWorkflow1Page implements OnInit{
       wfStaffOptShift: [''],
       wfStaffLeadName: [''],
       wfStaffLeadId: [''],
-      wfStaffRepairName: [''],
       wfStaffTechId: [''],
       wfStaffTechName: [''],
       wfStaffXrayId: [''],

@@ -279,28 +279,39 @@
                                 </ion-col>
                             </ion-row>
                         </div>
-
-
-                    </ion-row>
-
-                    <ion-row justify-content-end>
-                        <!--[disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1) && (wfInputForm.value.wfProcess == '1' || wfInputForm.value.wfProcess == '2')"-->
-                        <button type="button" ion-button (click)="this.wfSvc.cancelBtn(this.navCtrl)">
-                            取消
-                        </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <button ion-button type="button" (click)="this.photoSvc.shoot(this.images, this.wfInputForm)">
                             <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
                             &nbsp; 拍照
-                        </button> &nbsp;&nbsp;&nbsp;&nbsp;
-                        <button (click)="this.wfSvc.wfFormSubmission(this.wfInputForm,this.navCtrl,this.images,false)"
-                                type="button"
-                                [disabled]="this.wfInputForm.value.wfReadOnly"
-                                style="width: 80px;" ion-button>
-                            <ion-icon ios="ios-cloud-upload-outline" md="ios-cloud-upload-outline">
-                                &nbsp; 上存
-                            </ion-icon>
                         </button>
+                        <ion-col>
+                            <ion-row align-items-center>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="button"
+                                        [disabled]="this.wfInputForm.value.wfReadOnly"
+                                        ion-button (click)="this.wfSvc.wfFormSubmission(this.wfInputForm,this.navCtrl,this.images,false)"
+                                        style="width: 80px; height: 50px; background: yellowgreen;">
+                                    上存
+                                </button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="button"
+                                        [disabled]="this.wfInputForm.value.wfReadOnly"
+                                        ion-button (click)="this.wfSvc.wfFormSubmission(this.wfInputForm,this.navCtrl,this.images, true)"
+                                        style="width: 200px; height: 50px; background: green;">
+                                    上存 + 完成工序
+                                </button>
+
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="button" ion-button
+                                        style="width: 80px; height: 50px; background-color: #8c8c8c;"
+                                        (click)="this.wfSvc.cancelBtn(this.navCtrl)">
+                                    取消
+                                </button>
+
+                            </ion-row>
+                        </ion-col>
                     </ion-row>
+
+
 
                 </ion-col>
 

@@ -209,9 +209,9 @@ export class WorkflowPage implements OnInit {
 
     // Check Abnormal Status
     if (form.value.wfFormExcept) {
-      this.wfSvc.erpQueryExcept(form.value).subscribe( (serverData) => {
+      this.wfSvc.erpQueryExcept(form).subscribe( (serverData) => {
         if(serverData[0] == "" || serverData[0] == [] || serverData[0] == null){
-          alert("ERP Except 查无此单号");
+          alert("查无此异常单号记录");
         } else {
           // alert(JSON.stringify(serverData[0].wfFormId));
           if(form.value.wfFormId == serverData[0].wfFormId) {
@@ -281,7 +281,7 @@ export class WorkflowPage implements OnInit {
         // 1. All the input on the screen assume to be latest and correct before user proceed to next stage
         // 2. Through the barcode scan, which all the data will be called from the server
         // 3. Which user can then decide what is the phase of next step
-        if (!this.loadDataToForm(form, serverData[0])){return;};
+        if (!this.loadDataToForm(form, serverData[0])){return;}
         // this.populateDataToForm(form, serverData[0]);
         // This function is for automatic workflow state change base on previous business rule
         // As the current app has lift up the limitation and let user choose the workflow,
@@ -442,6 +442,7 @@ export class WorkflowPage implements OnInit {
       // If the last process has been completed and then current chosen step is higher than received data wfProcess
       // Then reset the process status
       if(form.value.wfReadOnly) {
+        console.log("wfReadOnly has been selected");
         this.fillData(form,data);
         form.controls["wfReadOnly"].setValue(true);
         form.controls["wfErrorMsg"].setValue('只供浏览');
@@ -694,7 +695,6 @@ export class WorkflowPage implements OnInit {
       wfStaffOptShift: [''],
       wfStaffLeadName: [''],
       wfStaffLeadId: [''],
-      wfStaffRepairName: [''],
       wfStaffTechId: [''],
       wfStaffTechName: [''],
       wfStaffXrayId: [''],

@@ -40,7 +40,7 @@ export class PhotoService {
 
       // Set the camera options
       const camOpt: CameraOptions = {
-        quality: 50,
+        quality: 10,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE,
@@ -59,8 +59,8 @@ export class PhotoService {
 
         // Store the img into storage with wfFormIdimg as the key
         this.storage.set(form.value.wfFormId + 'img', images);
-        console.log("from items " + form.value.wfFormId + 'img');
-        alert("from items " + form.value.wfFormId + 'img');
+        console.log(images.length() + " # of images stored")
+        // alert("from items " + form.value.wfFormId + 'img');
         //alert()
       }, (err) => {
         console.log("Got and error on taking photo of " + form.value.wfFormId + " : " +err);

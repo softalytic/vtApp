@@ -175,6 +175,26 @@ export class WorkflowService {
       });
   }
 
+  pullImage(form: any) {
+    // Pull images from the Server
+    console.log("Pulling images from Server");
+    let queryUrl = this.baseUrl + "form/image/query/";
+    console.log("pullImages: Requesting url: " + queryUrl);
+    console.log("Begin to pull images from server!");
+    console.log("pullImages: Printing wfInputForm :" + JSON.stringify(form.value));
+    console.log("pullImages: Constructing packet to server!");
+
+    // Do not print the packet below in the console as it will slow the performance due to it's size
+    // Any change of the field name in the form need to be updated manually here
+
+    return this.http.post(queryUrl, form.value.wfFormId, this.httpOptions)
+      .timeout(1000)
+      .map((response: Response) => {
+        console.log("Responding from Server" + response);
+        return response.text();
+      });
+  }
+
   showWfOpsFinalInputsAlert(wfInputForm: any, navCtrl: any, images: any, wfPName: any) {
     // This function manage all the form submission in each of the wfForm and connect with the server call
     // 7 inputs for this function,

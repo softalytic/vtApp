@@ -292,7 +292,9 @@ export class EditWorkflow1Page implements OnInit{
 
         this.wfSvc.pullImage(form).subscribe((imgs) => {
           console.log("Pulling images for revew");
-          this.images = imgs;
+          // console.log("images");
+          this.images = imgs[0].wfImg;
+          // console.log(this.images);
 
         }, error => {
           console.log("pullImages: Has error" + error);

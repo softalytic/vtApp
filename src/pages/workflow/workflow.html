@@ -101,6 +101,17 @@
                         浏览
                     </button>
                 </ion-row>
+
+                <ion-row *ngIf="this.storageData.length > 0">
+                    <ion-col col-3 style="margin-top: 55px;">
+                        没有成功上存的 {{this.storageData.length}} 个记录
+                    </ion-col>
+                    <ion-col>
+                        <button style="width: 10%; margin: 0 auto; margin-top:50px !important; " ion-button (click)="this.wfSvc.batchUploadForm(this.storageData)">
+                            一次上存
+                        </button>
+                    </ion-col>
+                </ion-row>
             </ion-grid>
         </div>
 

@@ -61,6 +61,8 @@ export class WorkflowPage implements OnInit {
     "AC003":{"wfStaffOptId":"S0003","wfStaffOptName":"員工03","wfStaffTechId":"T0003","wfStaffTechName":"技術員工03","wfStaffXrayId":"X0003","wfStaffXrayName":"Xray員工03","wfStaffOptShift":"A"}
   };
 
+  storageData = [];
+
   constructor(private storage: Storage,
               private QRCode: QRCodeService,
               private wfSvc: WorkflowService,
@@ -118,7 +120,22 @@ export class WorkflowPage implements OnInit {
 
     this.wfLoad = false;
 
-    this.wfInputForm.controls["wfFormExcept"].setValue(false)
+    this.wfInputForm.controls["wfFormExcept"].setValue(false);
+
+    this.storage.get("pending").then((data) => {
+      if (typeof data == 'undefined'  || data == "" || data == null){
+        this.storageData = [1,2,3];
+
+      } else {
+        this.storageData = data;
+
+      }
+
+    }, error => {
+      console.log("No Pending data is found" + error);
+      this.storageData = [];
+    })
+
   };
 
   resetForm(form:any, model:string){

@@ -181,7 +181,7 @@ export class WorkflowService {
     };
 
     return this.http.post(queryUrl, packet, this.httpOptions)
-      .timeout(1000)
+      .timeout(3000)
       .map((response: Response) => {
         console.log("Responding from Server" + response);
         return response.text();
@@ -908,7 +908,7 @@ export class WorkflowService {
             console.log("uploading images to server");
 
             this.uploadImage(form, images).subscribe((data) => {
-              alert(data);
+              // alert(data);
               // need to add loading screen for image upload
               navCtrl.setRoot(WorkflowPage);
 
@@ -1234,6 +1234,10 @@ export class WorkflowService {
         // console.log("Responding from Server of staff Data " + JSON.stringify(response.json()[0]));
         return response.json()[0];
       });
+  }
+
+  batchUploadForm(data: any){
+
   }
 
 

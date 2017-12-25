@@ -623,7 +623,7 @@
 
 
                 <ion-col>
-                    <ion-row *ngFor="let image of images; let iX =index">
+                    <ion-row *ngFor="let image of this.images; let iX =index">
                         <!-- <div style="background-image:url('{{image}}'); background-repeat:no-repeat; background-size:contain; "></div> -->
                         <img src="{{image}}" class="img">
                         <!-- <ion-img src="{{image}}"></ion-img> -->
@@ -631,7 +631,6 @@
                             <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon></button>
                     </ion-row>
                 </ion-col>
-
             </ion-row>
         </ion-grid>
     </form>

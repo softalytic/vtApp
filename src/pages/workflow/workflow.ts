@@ -31,7 +31,7 @@ export class WorkflowPage implements OnInit {
   // For Dev model
   wfDev = true;
 
-  wfForms = [1,2,3];
+  wfForms = [];
   wfProcesses = [];
   wfMachineProcess = [];
   wfStages = [];
@@ -122,14 +122,17 @@ export class WorkflowPage implements OnInit {
 
     this.wfInputForm.controls["wfFormExcept"].setValue(false);
 
-    this.storage.get("pending").then((data) => {
+    this.storage.get("backupForm").then((data) => {
+      console.log("loading backupForm");
       if (typeof data == 'undefined'  || data == "" || data == null){
-        this.storageData = [1,2,3];
+        this.storageData = [];
 
       } else {
         this.storageData = data;
 
       }
+
+      console.log(this.storageData);
 
     }, error => {
       console.log("No Pending data is found" + error);
@@ -259,7 +262,8 @@ export class WorkflowPage implements OnInit {
   }
 
   serverQuery(form:any){
-    this.wfSvc.query(form.value, form.value.wfForm).subscribe( (serverData) => {
+    console.log("serverQuery is being called");
+    this.wfSvc.query(form.value).subscribe( (serverData) => {
 
       if(serverData[0] == "" || serverData[0] == [] || serverData[0] == null){
         this.wfSvc.erpQuery(form.value).subscribe( (serverData) => {
@@ -325,44 +329,66 @@ export class WorkflowPage implements OnInit {
       console.log("Trying to load data from storage");
 
       // Proceed to checking with storage, in event of offline mode
-      this.storage.get(form.value.wfFormId).then(storageData => {
-        // If there is record from the storage,
-        //    proceed to load data to form
-        // Else
-        //    treat it as new record
-        console.log("storage data "+ JSON.stringify(storageData));
+      // this.storage.get(form.value.wfFormId).then(storageData => {
+      //   // If there is record from the storage,
+      //   //    proceed to load data to form
+      //   // Else
+      //   //    treat it as new record
+      //   console.log("storage data "+ JSON.stringify(storageData));
+      //
+      //
+      //   if(storageData){
+      //     console.log("Data Submission Result found:" + form.value.wfFormId);
+      //     // this.populateDataToForm(form, storageData);
+      //     // This code below replace the upper function,
+      //     // this is to assume the latest input from user is always correct
+      //     // Only will override if there is no input at all
+      //     if (!this.loadDataToForm(form, storageData)){
+      //       return;
+      //     }
+      //
+      //   }
+      //
+      //   // Execute workflowStateChange for New Form or continue existing form
+      //   // This function is for automatic workflow state change base on previous business rule
+      //   // As the current app has lift up the limitation and let user choose the workflow,
+      //   // then you can either comment out most of the code within this function
+      //   // or simply re-write the nav push in a separate function
+      //   if (!this.wfLoad){
+      //     this.workflowStateChange();
+      //   }
+      //
+      // }, err => {
+      //   console.log("cant find record");
+      //   if (!this.wfLoad){
+      //     this.workflowStateChange();
+      //   }
+      //
+      // });
 
-
-        if(storageData){
-          console.log("Data Submission Result found:" + form.value.wfFormId);
-          // this.populateDataToForm(form, storageData);
-          // This code below replace the upper function,
-          // this is to assume the latest input from user is always correct
-          // Only will override if there is no input at all
-          if (!this.loadDataToForm(form, storageData)){
+      for (let key in this.storageData ) {
+        let data = JSON.parse(this.storageData[key]);
+        if(form.value.wfFormId == data.wfFormId){
+          if (!this.loadDataToForm(form, data)){
             return;
           }
 
+          // Execute workflowStateChange for New Form or continue existing form
+          // This function is for automatic workflow state change base on previous business rule
+          // As the current app has lift up the limitation and let user choose the workflow,
+          // then you can either comment out most of the code within this function
+          // or simply re-write the nav push in a separate function
+          if (!this.wfLoad){
+            this.workflowStateChange();
+          }
         }
+      };
 
-        // Execute workflowStateChange for New Form or continue existing form
-        // This function is for automatic workflow state change base on previous business rule
-        // As the current app has lift up the limitation and let user choose the workflow,
-        // then you can either comment out most of the code within this function
-        // or simply re-write the nav push in a separate function
-        if (!this.wfLoad){
-          this.workflowStateChange();
-        }
+      console.log("cant find record");
+      if (!this.wfLoad){
+        this.workflowStateChange();
+      }
 
-      }, err => {
-        console.log("cant find record");
-        if (!this.wfLoad){
-          this.workflowStateChange();
-        }
-
-      });
-
-      // this.workflowStateChange();
     });
   }
 
@@ -398,9 +424,8 @@ export class WorkflowPage implements OnInit {
 
       form.value.wfFormName = wfStorage[form.value.wfForm].wfFormName;
 
-      console.log("Saving the form into storage");
-      this.storage.set(form.value.wfFormId, form.value);
-      console.log("This is the form after the state change " + JSON.stringify(form.value));
+      // console.log("Saving the form into storage");
+      // this.storage.set(form.value.wfFormId, form.value);
 
       // The following part will trigger the next stage wfPage
       console.log("Will enter " + form.value.wfFormName + " edit page now");
@@ -408,15 +433,15 @@ export class WorkflowPage implements OnInit {
 
       switch (form.value.wfForm.toString()) {
         case '1':
-          this.navCtrl.push(EditWorkflow1Page, form.value.wfFormId);
+          this.navCtrl.push(EditWorkflow1Page, form.value);
           break;
 
         case '2':
-          this.navCtrl.push(EditWorkflow2Page, form.value.wfFormId);
+          this.navCtrl.push(EditWorkflow2Page, form.value);
           break;
 
         case '3':
-          this.navCtrl.push(EditWorkflow3Page, form.value.wfFormId);
+          this.navCtrl.push(EditWorkflow3Page, form.value);
           break;
 
         default:
@@ -569,6 +594,27 @@ export class WorkflowPage implements OnInit {
     });
     alert.present();
   };
+
+  batchUploadForm(){
+    console.log("Calling batch upload");
+    let data = this.storageData;
+
+    for (let key in data ){
+      console.log("Uploading data " + key);
+      // Reconstruct the data format into the formGroup alike
+      let packet = '{"value":'+data[key]+'}';
+      let form = JSON.parse(packet);
+
+      this.wfSvc.upload(form).subscribe( (response) => {
+        console.log("batchUploadForm: Successfully uploading to server");
+        console.log("batchUploadForm: Upload Reply from server" + JSON.stringify(response));
+
+      }, error => {
+        console.log("An error has occured in batch upload" + error)
+
+      })
+    }
+  }
 
   private formInit() {
     this.wfInputForm = this.formBuilder.group({

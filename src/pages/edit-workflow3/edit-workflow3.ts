@@ -281,19 +281,21 @@ export class EditWorkflow3Page implements OnInit{
 
   ngOnInit() {
     console.log("Initialise the page 裸品流程卡");
+    console.log("The Nav Params bought to this page is " + this.wfNavParams);
 
     this.formInit();
     let form = this.wfInputForm;
 
+    console.log("loading staff data");
     this.storage.get("staffDate").then((storageData) => {
       console.log("staffDate from storage is " + JSON.stringify(storageData));
 
       this.wfSvc.sendStaffDate2Server().subscribe((data) => {
         console.log("Staff date from Server " + data['dttm']);
         console.log("Staff date from storage" + storageData);
-        console.log(data['dttm'] === storageData);
+        console.log("Need to update the staff table? " + data['dttm'] === storageData);
 
-        if(data === storageData || data == "" || data == null){
+        if(data === storageData || data == "" || data == null || typeof data == 'undefined' ){
           this.storage.get("staffTable").then((storageData) => {
             // console.log("staffTable from storage is " + JSON.stringify(storageData));
             this.staffTable = storageData;
@@ -307,6 +309,7 @@ export class EditWorkflow3Page implements OnInit{
             // console.log(this.machineTable);
 
           });
+
         } else {
           this.wfSvc.pullStaffDataFromServer().subscribe((data) => {
             let staffDate = data.dttm;
@@ -332,6 +335,7 @@ export class EditWorkflow3Page implements OnInit{
         }
       }, error => {
         console.log("staffDate" + error);
+        // this.networkError(navCtrl);
         this.storage.get("staffTable").then((storageData) => {
           // console.log("staffTable from storage is " + JSON.stringify(storageData));
           this.staffTable = storageData;
@@ -345,13 +349,11 @@ export class EditWorkflow3Page implements OnInit{
           // console.log(this.machineTable);
 
         });
-        // this.networkError(navCtrl);
+
       });
     });
 
-    console.log("The Nav Params bought to this page is " + this.wfNavParams);
-
-    console.log("loading from storage");
+    console.log("loading form data from storage");
     this.storage.get(this.wfNavParams).then((storageData) => {
       console.log("Storage Data:" + JSON.stringify(storageData));
 
@@ -360,6 +362,16 @@ export class EditWorkflow3Page implements OnInit{
           // console.log("Loading " + key + " Storage:" + storageData[key]);
           form.controls[key].setValue(storageData[key]);
         }
+
+        this.wfSvc.pullImage(form).subscribe((imgs) => {
+          console.log("Pulling images for review");
+          // console.log("images");
+          this.images = imgs[0].wfImg;
+          // console.log(this.images);
+
+        }, error => {
+          console.log("pullImages: Has error" + error);
+        })
 
       } else {
         // Preload the data for form
@@ -483,12 +495,6 @@ export class EditWorkflow3Page implements OnInit{
   }
 
   onSubmit(){
-    let form = this.wfInputForm;
-    let storageData: any;
-    //alert(" < " + form.value + " > !");
-
-    console.log(this.wfInputForm);
-
 
   }
 

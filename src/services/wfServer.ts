@@ -35,7 +35,7 @@ export class WorkflowService {
               private storage: Storage,
               private alertCtrl: AlertController){}
 
-  upload(wfInputForm: any, wfForm: number){
+  upload(form: any){
     // This function simply submit the form as packet to the url based on the wfForm number
     // 2 inputs for this function,
     //    1. the form itself
@@ -48,14 +48,14 @@ export class WorkflowService {
     //       I want it to be explicitly filled and make sure it has a value before calling
 
     console.log("Begin to upload onto server");
-    console.log("Printing packet to server : " + JSON.stringify(wfInputForm));
+    console.log("Printing packet to server : " + JSON.stringify(form));
 
     // Dynamic url base on the wfForm number
     let queryUrl = this.baseUrl + "form/submit/";
     console.log("Requesting url: " + queryUrl);
 
     // Return the http post
-    return this.http.post(queryUrl, wfInputForm, this.httpOptions)
+    return this.http.post(queryUrl, form, this.httpOptions)
       .timeout(1000)
       .map((response: Response) => {
         console.log("Response from Server");
@@ -64,7 +64,7 @@ export class WorkflowService {
       });
   }
 
-  query(wfInputForm: any, wfForm: number){
+  query(wfInputForm: any){
     // This function simply query the wfFormId to the url based on the wfForm number
     // 2 inputs for this function,
     //    1. the form itself
@@ -485,14 +485,10 @@ export class WorkflowService {
 
           if(finalSubmission){
             console.log('上存 + 完成工序 is clicked');
-            if (this.finalValidation(form)){
-              console.log('Final confirmation of mark completion is clicked');
-              form.controls['wfFormStatus'].setValue(true);
-              form.controls['wfLastCompletedWf'].setValue(form.value.wfProcess);
-              console.log("uploading form" + JSON.stringify(form.value));
-              this.formSubmission(form,images,navCtrl);
-
-            }
+            form.controls['wfFormStatus'].setValue(true);
+            form.controls['wfLastCompletedWf'].setValue(form.value.wfProcess);
+            console.log("uploading form" + JSON.stringify(form.value));
+            this.formSubmission(form,images,navCtrl);
 
           } else {
             console.log('上存 is clicked');
@@ -516,8 +512,6 @@ export class WorkflowService {
   }
 
   wfFormSubmission(form: any, navCtrl: any, images: any, finalSubmission: boolean) {
-
-    //form.controls['wfStaffOptName'].setValue('作业員A');
 
     let missingFeildAlert = true;
     let missingFeildMsg = '';
@@ -646,7 +640,17 @@ export class WorkflowService {
       if(form.value.wfForm == '3' && (form.value.wfProcess == '9' || form.value.wfProcess == '2')) {
         this.wfFormUpload(form, navCtrl, images, finalSubmission);
       } else {
-        qtyConfirm.present();
+
+        if(finalSubmission){
+          if(this.finalValidation(form)){
+            qtyConfirm.present();
+          }
+
+        } else {
+          qtyConfirm.present();
+
+        }
+
       }
     }
 
@@ -899,7 +903,7 @@ export class WorkflowService {
 
     this.storage.set(form.value.wfFormId, form.value);
 
-    this.upload(form.value,form.value.wfForm)
+    this.upload(form.value)
       .subscribe((data)=> {
           console.log("Successfully uploading to server");
           console.log("Upload wfInput reply from server" + JSON.stringify(data));
@@ -918,10 +922,6 @@ export class WorkflowService {
 
 
           } else {
-            // Below code can be comment out that depends on the Error handling
-            // Return back to main page
-            // BUG: Calling navCtrl.pop outside of the image upload will have issue that
-            //      it is executed before images upload finish
             // navCtrl.pop();
             // this.storage.clear();
             navCtrl.setRoot(WorkflowPage);
@@ -951,8 +951,22 @@ export class WorkflowService {
         handler: () => {
           console.log('先储档,稍后再试');
           // console.log('saving into storage now ' + JSON.stringify(form.value));
-          this.storage.set(form.value.wfFormId, form.value);
-          navCtrl.setRoot(WorkflowPage);
+          this.storage.get("backupForm").then((data) => {
+
+            if(typeof data == 'undefined' || data == "" || data == null) {
+              data = [];
+            }
+
+            console.log(form);
+            data.push(JSON.stringify(form.value));
+
+            this.storage.set("backupForm", data);
+            navCtrl.setRoot(WorkflowPage);
+
+          }, error => {
+            console.log("networkError: An Error has been occured" + error)
+          });
+
         }
       }]
     });
@@ -1046,25 +1060,41 @@ export class WorkflowService {
   };
 
   finalValidation(form:any) {
-    var except = form.value.wfFormExcept;
-    console.log('wfFormExcept is ' + except);
-    if (except) {
-      return true;
+    console.log("Calling Final Validation");
+
+    // Defined the exceptional variable
+    let except: boolean;
+
+    // Check if exceptional is true, or set it to false
+    if(form.value.wfFormExcept) {
+      except = form.value.wfFormExcept;
     } else {
-      let startQty = this.toInt(form.value.wfOptStartQty);
+      form.value.wfFormExcept = false;
+      except = form.value.wfFormExcept;
+    }
+
+    console.log('finalValidation: wfFormExcept is ' + except);
+
+    if (except) {
+      console.log("finalValidation: Skipping the validation because abnormal checked");
+      return true;
+
+    } else {
+      console.log("finaValidation: Checking the rules");
+      let startQty = this.toInt( form.value.wfOptStartQty );
       let goodQty: number;
 
-      if(this.toInt(form.value.wfOptGoodQty) == 0) {
+      if ( this.toInt( form.value.wfOptGoodQty ) == 0 ) {
         goodQty = startQty
       } else {
-        goodQty = this.toInt(form.value.wfOptGoodQty);
+        goodQty = this.toInt( form.value.wfOptGoodQty );
       }
 
-      let badQty = this.toInt(form.value.wfOptBadQty);
-      let batchQty = (this.toInt(form.value.wfOrderBatchQty)) * 1000;
+      let badQty = this.toInt( form.value.wfOptBadQty );
+      let batchQty = (this.toInt( form.value.wfOrderBatchQty )) * 1000;
 
       let wtForm = form.value.wfForm;
-      let ProcessCount = this.toInt(form.value.wfProcess);
+      let ProcessCount = this.toInt( form.value.wfProcess );
 
       //良品数上下限
       let QC_UPPER = 1.2;
@@ -1077,32 +1107,32 @@ export class WorkflowService {
       //flexible_quantity - Finished_Product = 10000;
       let finishProdLimit = 10000;
 
+      console.log("finalValidation: startQty: " + startQty + " goodQty: " + goodQty + " badQty: " + badQty + " batchQty: " + batchQty + " ProcessCount: " + ProcessCount );
       //  sub process card
       //rule 5 cannot exceed batch quantity
-      if (badQty > batchQty) {
-        console.log('batchQty' + batchQty);
-        console.log('badqty'+ badQty);
-        alert('不良品不得超过批次量');
+      if ( badQty > batchQty ) {
+        console.log( 'batchQty' + batchQty );
+        console.log( 'badqty' + badQty );
+        alert( '不良品不得超过批次量' );
         return false;
       }
 
-      switch (wtForm) {
-        // specific process cards
-        // CASE 1 (naked process card )
+      switch ( wtForm ) {
 
         case '1':
-          if (ProcessCount>1) {
-            if (Math.abs(goodQty - startQty) <= OtherLimit) {
+          console.log("finalValidation: Checking Form 1");
+          if ( ProcessCount > 1 ) {
+            if ( Math.abs( goodQty - startQty ) <= OtherLimit ) {
               return true;
             }
             // rule 4 cant not exceed 20% of good quantity from last process
-            else if (goodQty > (QC_UPPER * startQty)) {
-              alert('良品数上限不得超过投入数百分之二十');
+            else if ( goodQty > (QC_UPPER * startQty) ) {
+              alert( '良品数上限不得超过投入数百分之二十' );
               return false;
             }
             // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
-            else if (goodQty < (QC_LOWER * startQty)) {
-              alert('良品数下限不得低于投入数百分之八十');
+            else if ( goodQty < (QC_LOWER * startQty) ) {
+              alert( '良品数下限不得低于投入数百分之八十' );
               return false;
             }
           } else {
@@ -1112,37 +1142,38 @@ export class WorkflowService {
 
         // CASE 2 (finished product)
         case '2':
-          if (ProcessCount>1) {
-            if (Math.abs(goodQty - startQty) <= OtherLimit) {
-              console.log('goodQty' + goodQty);
-              console.log('startQty' + startQty);
-              console.log('batchQty' + batchQty);
+          console.log("finalValidation: Checking Form 2");
+          if ( ProcessCount > 1 ) {
+            if ( Math.abs( goodQty - startQty ) <= OtherLimit ) {
+              console.log( 'goodQty' + goodQty );
+              console.log( 'startQty' + startQty );
+              console.log( 'batchQty' + batchQty );
               // rule 2 cant be below batch quantity
-              if (goodQty < batchQty) {
-                alert('良品数不得小于批次量');
+              if ( goodQty < batchQty ) {
+                alert( '良品数不得小于批次量' );
                 return false;
               }
 
               //rule 1 cannot exceed 10k of batch quantity
-              else if ((goodQty - batchQty) > (finishProdLimit)) {
-                alert('良品不得超過批次量一万以上');
+              else if ( (goodQty - batchQty) > (finishProdLimit) ) {
+                alert( '良品不得超過批次量一万以上' );
                 return false;
               }
             }
             // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
-            else if (goodQty < (QC_LOWER * startQty)) {
-              alert('良品数下限不得低于投入数百分之八十');
+            else if ( goodQty < (QC_LOWER * startQty) ) {
+              alert( '良品数下限不得低于投入数百分之八十' );
               return false;
             }
           } else {
-            if (goodQty < batchQty) {
-              alert('良品数不得小于批次量');
+            if ( goodQty < batchQty ) {
+              alert( '良品数不得小于批次量' );
               return false;
             }
 
             //rule 1 cannot exceed 10k of batch quantity
-            else if ((goodQty - batchQty) > (finishProdLimit)) {
-              alert('良品不得超過批次量一万以上');
+            else if ( (goodQty - batchQty) > (finishProdLimit) ) {
+              alert( '良品不得超過批次量一万以上' );
               return false;
             }
           }
@@ -1151,18 +1182,19 @@ export class WorkflowService {
         // CASE 3 (插件 embedded)
         //same logic as naked product
         case '3':
-          if (ProcessCount>1) {
-            if (Math.abs(goodQty - startQty) <= OtherLimit) {
+          console.log("finalValidation: Checking Form 3");
+          if ( ProcessCount > 1 ) {
+            if ( Math.abs( goodQty - startQty ) <= OtherLimit ) {
               return true;
             }
             // rule 4 cant not exceed 20% of good quantity from last process
-            else if (goodQty > (QC_UPPER * startQty)) {
-              alert('良品数上限不得超过投入数百分之二十');
+            else if ( goodQty > (QC_UPPER * startQty) ) {
+              alert( '良品数上限不得超过投入数百分之二十' );
               return false;
             }
             // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
-            else if (goodQty < (QC_LOWER * startQty)) {
-              alert('良品数下限不得低于投入数百分之八十');
+            else if ( goodQty < (QC_LOWER * startQty) ) {
+              alert( '良品数下限不得低于投入数百分之八十' );
               return false;
             }
           } else {
@@ -1175,6 +1207,7 @@ export class WorkflowService {
       }
 
     }
+
   };
 
   dateValidation(form:any){
@@ -1235,10 +1268,5 @@ export class WorkflowService {
         return response.json()[0];
       });
   }
-
-  batchUploadForm(data: any){
-
-  }
-
 
 }

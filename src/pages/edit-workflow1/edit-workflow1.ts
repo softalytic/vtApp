@@ -207,11 +207,13 @@ export class EditWorkflow1Page implements OnInit{
 
   ngOnInit() {
     console.log("Initialise the page 裸品流程卡");
+    console.log("The Nav Params bought to this page is " + this.wfNavParams);
 
     this.formInit();
     let form = this.wfInputForm;
 
     // This is the Staff Data Handling
+    console.log("loading staff data");
     this.storage.get("staffDate").then((storageData) => {
       console.log("staffDate from storage is " + JSON.stringify(storageData));
 
@@ -278,114 +280,114 @@ export class EditWorkflow1Page implements OnInit{
       });
     });
 
-    console.log("The Nav Params bought to this page is " + this.wfNavParams);
+    console.log("loading form data from storage");
+    this.populateNavParam();
+  }
 
-    console.log("loading from storage");
-    this.storage.get(this.wfNavParams).then((storageData) => {
-      console.log("Storage Data:" + JSON.stringify(storageData));
+  populateNavParam(){
+    console.log("navParams Data:" + JSON.stringify(this.navParams));
 
-      if (storageData['wfReadOnly']) {
-        for (let key in form.controls) {
-          // console.log("Loading " + key + " Storage:" + storageData[key]);
-          form.controls[key].setValue(storageData[key]);
-        }
+    let storageData = this.navParams.data;
+    let form = this.wfInputForm;
 
-        this.wfSvc.pullImage(form).subscribe((imgs) => {
-          console.log("Pulling images for revew");
-          // console.log("images");
-          this.images = imgs[0].wfImg;
-          // console.log(this.images);
+    if (storageData['wfReadOnly']) {
+      for (let key in form.controls) {
+        // console.log("Loading " + key + " Storage:" + storageData[key]);
+        form.controls[key].setValue(storageData[key]);
+      }
 
-        }, error => {
-          console.log("pullImages: Has error" + error);
-        })
+      this.wfSvc.pullImage(form).subscribe((imgs) => {
+        console.log("Pulling images for review");
+        // console.log("images");
+        this.images = imgs[0].wfImg;
+        // console.log(this.images);
 
+      }, error => {
+        console.log("pullImages: Has error" + error);
+      })
+
+    } else {
+      // Preload the data for form
+      if (storageData['wfProcessNew']) {
+        form.controls['wfGoodTotal'].setValue(0);
+        form.controls['wfBadTotal'].setValue(0);
+        form.controls['wfOptStartQty'].setValue(storageData['wfGoodTotal']);
+        form.controls['wfProcessNew'].setValue(false);
       } else {
-        // Preload the data for form
-        if (storageData['wfProcessNew']) {
-          form.controls['wfGoodTotal'].setValue(0);
-          form.controls['wfBadTotal'].setValue(0);
-          form.controls['wfOptStartQty'].setValue(storageData['wfGoodTotal']);
-          form.controls['wfProcessNew'].setValue(false);
-        } else {
-          form.controls['wfGoodTotal'].setValue(storageData['wfGoodTotal']);
-          form.controls['wfBadTotal'].setValue(storageData['wfBadTotal']);
-          form.controls['wfOptStartQty'].setValue(storageData['wfOptStartQty']);
-        }
-
-
-
-
-        for (let key in form.value) {
-          // console.log("Loading " + key + " Storage:" + storageData[key]);
-
-          if(key in storageData){
-            try {
-              switch (key) {
-                case 'wfStaffTechId':
-                  this.wfStaffTechIdTmp = storageData[key];
-                  form.controls[key].setValue('');
-                  break;
-
-                case 'wfStaffOptShift':
-                  this.wfStaffOptShiftTmp = storageData[key];
-                  form.controls[key].setValue('');
-                  break;
-
-                case 'wfQCSignOff':
-                  this.wfQCSignOffTmp = storageData[key];
-                  form.controls[key].setValue('');
-                  break;
-
-                case 'wfOptInputDate':
-                  form.controls[key].setValue(this.appDate);
-                  break;
-
-                case 'wfGoodTotal':
-                case 'wfBadTotal':
-                case 'wfOptStartQty':
-                case 'wfProcessNew':
-                case 'wfStaffOptId':
-                case 'wfStaffOptName':
-                case 'wfStaffOptShift':
-                case 'wfStaffLeadName':
-                case 'wfStaffLeadId':
-                case 'wfStaffTechId':
-                case 'wfStaffTechName':
-                case 'wfStaffXrayId':
-                case 'wfStaffXrayName':
-                case 'wfStaffXrayName':
-                case 'wfStaffQCId':
-                case 'wfStaffQCName':
-                  break;
-
-                default:
-                  form.controls[key].setValue(storageData[key]);
-              }
-
-            } catch (err) {
-              // console.log("Got an error from formInit populating from storage: "  + err);
-            }
-          }
-
-        }
-
-        if(form.value.wfProcessStatus) {
-          form.controls['wfBadItem1'].setValue('开路');
-          form.controls['wfBadItem2'].setValue('短路');
-          form.controls['wfBadItem3'].setValue('高容');
-          form.controls['wfBadItem4'].setValue('低容');
-          form.controls['wfBadItem5'].setValue('损耗');
-          form.controls['wfBadItem6'].setValue('漏电');
-          form.controls['wfBadItemTotal'].setValue('不良数總和');
-        }
+        form.controls['wfGoodTotal'].setValue(storageData['wfGoodTotal']);
+        form.controls['wfBadTotal'].setValue(storageData['wfBadTotal']);
+        form.controls['wfOptStartQty'].setValue(storageData['wfOptStartQty']);
       }
 
 
 
-      console.log("Populated form now is: " + JSON.stringify(this.wfInputForm.value));
 
-    });
+      for (let key in form.value) {
+        // console.log("Loading " + key + " Storage:" + storageData[key]);
+
+        if(key in storageData){
+          try {
+            switch (key) {
+              case 'wfStaffTechId':
+                this.wfStaffTechIdTmp = storageData[key];
+                form.controls[key].setValue('');
+                break;
+
+              case 'wfStaffOptShift':
+                this.wfStaffOptShiftTmp = storageData[key];
+                form.controls[key].setValue('');
+                break;
+
+              case 'wfQCSignOff':
+                this.wfQCSignOffTmp = storageData[key];
+                form.controls[key].setValue('');
+                break;
+
+              case 'wfOptInputDate':
+                form.controls[key].setValue(this.appDate);
+                break;
+
+              case 'wfGoodTotal':
+              case 'wfBadTotal':
+              case 'wfOptStartQty':
+              case 'wfProcessNew':
+              case 'wfStaffOptId':
+              case 'wfStaffOptName':
+              case 'wfStaffOptShift':
+              case 'wfStaffLeadName':
+              case 'wfStaffLeadId':
+              case 'wfStaffTechId':
+              case 'wfStaffTechName':
+              case 'wfStaffXrayId':
+              case 'wfStaffXrayName':
+              case 'wfStaffXrayName':
+              case 'wfStaffQCId':
+              case 'wfStaffQCName':
+                break;
+
+              default:
+                form.controls[key].setValue(storageData[key]);
+            }
+
+          } catch (err) {
+            // console.log("Got an error from formInit populating from storage: "  + err);
+          }
+        }
+
+      }
+
+      if(form.value.wfProcessStatus) {
+        form.controls['wfBadItem1'].setValue('开路');
+        form.controls['wfBadItem2'].setValue('短路');
+        form.controls['wfBadItem3'].setValue('高容');
+        form.controls['wfBadItem4'].setValue('低容');
+        form.controls['wfBadItem5'].setValue('损耗');
+        form.controls['wfBadItem6'].setValue('漏电');
+        form.controls['wfBadItemTotal'].setValue('不良数總和');
+      }
+    }
+
+    console.log("Populated form now is: " + JSON.stringify(form.value));
 
   }
 
@@ -411,11 +413,6 @@ export class EditWorkflow1Page implements OnInit{
   }
 
   onSubmit(){
-    let form = this.wfInputForm;
-    let storageData: any;
-    //alert(" < " + form.value + " > !");
-
-    console.log(this.wfInputForm);
 
   }
 

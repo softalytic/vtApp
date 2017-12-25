@@ -107,7 +107,10 @@
                         没有成功上存的 {{this.storageData.length}} 个记录
                     </ion-col>
                     <ion-col>
-                        <button style="width: 10%; margin: 0 auto; margin-top:50px !important; " ion-button (click)="this.wfSvc.batchUploadForm(this.storageData)">
+                        <button style="width: 10%; margin: 0 auto; margin-top:50px !important; "
+                                ion-button
+                                type="button"
+                                (click)="this.batchUploadForm()">
                             一次上存
                         </button>
                     </ion-col>

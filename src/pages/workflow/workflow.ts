@@ -579,26 +579,33 @@ export class WorkflowPage implements OnInit {
 
   batchUploadForm(){
     console.log("Calling batch upload");
-    let data = this.storageData;
 
-    for (let key in data ){
-      console.log("Uploading data " + key);
-      // Reconstruct the data format into the formGroup alike
-      // let packet = '{"value":'+data[key]+'}';
-      let packet = data[key];
-      let form = JSON.parse(packet);
-
-      console.log(form);
-
+    for (let i = 0; i < this.storageData.length; i++){
+      let form = JSON.parse(this.storageData[0]);
       this.wfSvc.upload(form).subscribe( (response) => {
         console.log("batchUploadForm: Successfully uploading to server");
         console.log("batchUploadForm: Upload Reply from server" + JSON.stringify(response));
 
+        if(response.wfFormId == form.wfFormId && response.wfProcess == form.wfProcess && response.wfProcessStatus == form.wfProcessStatus && response.wfFormStatus == form.wfFormStatus){
+          // Remove the item from the array
+          console.log("batchUploadForm: Successful upload and removing item ");
+          this.storageData.splice(0, 1);
+          console.log("this.storageData" + JSON.stringify(this.storageData));
+          this.storage.set("backupForm", this.storageData)
+        }
+
+        if(this.storageData.length == 0 ){
+          alert("All pending data have been uploaded");
+
+        }
+
+
       }, error => {
         console.log("An error has occured in batch upload" + error)
 
-      })
+      });
     }
+
   }
 
   private formInit() {

@@ -243,119 +243,139 @@ export class EditWorkflow2Page implements OnInit{
     });
 
     console.log("loading form data from storage");
-    this.storage.get(this.wfNavParams).then((storageData) => {
-      console.log("Storage Data:" + JSON.stringify(storageData));
+    this.populateNavParam();
 
-      if (storageData['wfReadOnly']) {
-        for (let key in form.controls) {
-          // console.log("Loading " + key + " Storage:" + storageData[key]);
-          form.controls[key].setValue(storageData[key]);
-        }
+  }
 
-        this.wfSvc.pullImage(form).subscribe((imgs) => {
-          console.log("Pulling images for review");
-          // console.log("images");
-          this.images = imgs[0].wfImg;
-          // console.log(this.images);
+  populateNavParam(){
+    console.log("navParams Data:" + JSON.stringify(this.navParams));
 
-        }, error => {
-          console.log("pullImages: Has error" + error);
-        })
+    let storageData = this.navParams.data;
+    let form = this.wfInputForm;
 
-      } else {
-        // Preload the data for form
-        if (storageData['wfProcessNew']) {
-          form.controls['wfGoodTotal'].setValue(0);
-          form.controls['wfBadTotal'].setValue(0);
-          form.controls['wfOptStartQty'].setValue(storageData['wfGoodTotal']);
-          form.controls['wfProcessNew'].setValue(false);
-        } else {
-          form.controls['wfGoodTotal'].setValue(storageData['wfGoodTotal']);
-          form.controls['wfBadTotal'].setValue(storageData['wfBadTotal']);
-          form.controls['wfOptStartQty'].setValue(storageData['wfOptStartQty']);
-        }
-
-        for (let key in form.value) {
-          // console.log("Loading " + key + " Storage:" + storageData[key]);
-          if(key in storageData){
-            try {
-              switch (key) {
-                case 'wfStaffTechId':
-                  this.wfStaffTechIdTmp = storageData[key];
-                  form.controls[key].setValue('');
-                  break;
-
-                case 'wfStaffOptShift':
-                  this.wfStaffOptShiftTmp = storageData[key];
-                  form.controls[key].setValue('');
-                  break;
-
-                case 'wfQCSignOff':
-                  this.wfQCSignOffTmp = storageData[key];
-                  form.controls[key].setValue('');
-                  break;
-
-                case 'wfOptInputDate':
-                  form.controls[key].setValue(this.appDate);
-                  break;
-
-                case 'wfGoodTotal':
-                  if (form.value.wfProcessStatus) {
-                    form.controls[key].setValue(0);
-                    form.controls['wfOptStartQty'].setValue(storageData[key]);
-                  } else {
-                    form.controls[key].setValue(storageData[key]);
-                  }
-                  break;
-
-                case 'wfBadTotal':
-                  if (form.value.wfProcessStatus) {
-                    form.controls[key].setValue(0);
-                  }
-                  break;
-
-                case 'wfGoodTotal':
-                case 'wfBadTotal':
-                case 'wfOptStartQty':
-                case 'wfProcessNew':
-                case 'wfStaffOptId':
-                case 'wfStaffOptName':
-                case 'wfStaffOptShift':
-                case 'wfStaffLeadName':
-                case 'wfStaffLeadId':
-                case 'wfStaffTechId':
-                case 'wfStaffTechName':
-                case 'wfStaffXrayId':
-                case 'wfStaffXrayName':
-                case 'wfStaffXrayName':
-                case 'wfStaffQCId':
-                case 'wfStaffQCName':
-                  break;
-
-
-                default:
-                  form.controls[key].setValue(storageData[key]);
-              }
-
-            } catch (err) {
-              console.log("Got an error from formInit populating from storage: "  + err);
-
-            }
-          }
-
-        }
-
-        if (form.value.wfProcess == "4") {
-          // Default to pass per user request
-          form.controls['wfElecPass'].setValue(1);
-          form.controls['wfLookPass'].setValue(1);
-
-        }
+    if (storageData['wfReadOnly']) {
+      for (let key in form.controls) {
+        // console.log("Loading " + key + " Storage:" + storageData[key]);
+        form.controls[key].setValue(storageData[key]);
       }
 
-      console.log("Populated form now is: " + JSON.stringify(this.wfInputForm.value));
+      this.wfSvc.pullImage(form).subscribe((imgs) => {
+        console.log("Pulling images for review");
+        // console.log("images");
+        if (imgs != "" && imgs != null && typeof imgs != 'undefined'){
+          this.images = imgs[0].wfImg;
+        }
+        // console.log(this.images);
 
-    });
+      }, error => {
+        console.log("pullImages: Has error" + error);
+      })
+
+    } else {
+      // Preload the data for form
+      if (storageData['wfProcessNew']) {
+        form.controls['wfGoodTotal'].setValue(0);
+        form.controls['wfBadTotal'].setValue(0);
+        form.controls['wfOptStartQty'].setValue(storageData['wfGoodTotal']);
+        form.controls['wfProcessNew'].setValue(false);
+      } else {
+        form.controls['wfGoodTotal'].setValue(storageData['wfGoodTotal']);
+        form.controls['wfBadTotal'].setValue(storageData['wfBadTotal']);
+        form.controls['wfOptStartQty'].setValue(storageData['wfOptStartQty']);
+      }
+
+      for (let key in form.value) {
+        // console.log("Loading " + key + " Storage:" + storageData[key]);
+        if(key in storageData){
+          try {
+            switch (key) {
+              case 'wfStaffTechId':
+                this.wfStaffTechIdTmp = storageData[key];
+                form.controls[key].setValue('');
+                break;
+
+              case 'wfStaffOptShift':
+                this.wfStaffOptShiftTmp = storageData[key];
+                form.controls[key].setValue('');
+                break;
+
+              case 'wfQCSignOff':
+                this.wfQCSignOffTmp = storageData[key];
+                form.controls[key].setValue('');
+                break;
+
+              case 'wfOptInputDate':
+                form.controls[key].setValue(this.appDate);
+                break;
+
+              case 'wfGoodTotal':
+                if (form.value.wfProcessStatus) {
+                  form.controls[key].setValue(0);
+                  form.controls['wfOptStartQty'].setValue(storageData[key]);
+                } else {
+                  form.controls[key].setValue(storageData[key]);
+                }
+                break;
+
+              case 'wfBadTotal':
+                if (form.value.wfProcessStatus) {
+                  form.controls[key].setValue(0);
+                }
+                break;
+
+              case 'wfGoodTotal':
+              case 'wfBadTotal':
+              case 'wfOptStartQty':
+              case 'wfProcessNew':
+              case 'wfStaffOptId':
+              case 'wfStaffOptName':
+              case 'wfStaffOptShift':
+              case 'wfStaffLeadName':
+              case 'wfStaffLeadId':
+              case 'wfStaffTechId':
+              case 'wfStaffTechName':
+              case 'wfStaffXrayId':
+              case 'wfStaffXrayName':
+              case 'wfStaffXrayName':
+              case 'wfStaffQCId':
+              case 'wfStaffQCName':
+              case 'wfBadItem1':
+              case 'wfBadQty1':
+              case 'wfBadItem2':
+              case 'wfBadQty2':
+              case 'wfBadItem3':
+              case 'wfBadQty3':
+              case 'wfBadItem4':
+              case 'wfBadQty4':
+              case 'wfBadItem5':
+              case 'wfBadQty5':
+              case 'wfBadItem6':
+              case 'wfBadQty6':
+              case 'wfBadItemTotal':
+                break;
+
+
+              default:
+                form.controls[key].setValue(storageData[key]);
+            }
+
+          } catch (err) {
+            console.log("Got an error from formInit populating from storage: "  + err);
+
+          }
+        }
+
+      }
+
+      if (form.value.wfProcess == "4") {
+        // Default to pass per user request
+        form.controls['wfElecPass'].setValue(1);
+        form.controls['wfLookPass'].setValue(1);
+
+      }
+    }
+
+    console.log("Populated form now is: " + JSON.stringify(this.wfInputForm.value));
 
   }
 

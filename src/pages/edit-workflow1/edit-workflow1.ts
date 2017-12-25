@@ -299,7 +299,9 @@ export class EditWorkflow1Page implements OnInit{
       this.wfSvc.pullImage(form).subscribe((imgs) => {
         console.log("Pulling images for review");
         // console.log("images");
-        this.images = imgs[0].wfImg;
+        if (imgs != "" && imgs != null && typeof imgs != 'undefined'){
+          this.images = imgs[0].wfImg;
+        }
         // console.log(this.images);
 
       }, error => {
@@ -318,9 +320,6 @@ export class EditWorkflow1Page implements OnInit{
         form.controls['wfBadTotal'].setValue(storageData['wfBadTotal']);
         form.controls['wfOptStartQty'].setValue(storageData['wfOptStartQty']);
       }
-
-
-
 
       for (let key in form.value) {
         // console.log("Loading " + key + " Storage:" + storageData[key]);
@@ -363,6 +362,19 @@ export class EditWorkflow1Page implements OnInit{
               case 'wfStaffXrayName':
               case 'wfStaffQCId':
               case 'wfStaffQCName':
+              case 'wfBadItem1':
+              case 'wfBadQty1':
+              case 'wfBadItem2':
+              case 'wfBadQty2':
+              case 'wfBadItem3':
+              case 'wfBadQty3':
+              case 'wfBadItem4':
+              case 'wfBadQty4':
+              case 'wfBadItem5':
+              case 'wfBadQty5':
+              case 'wfBadItem6':
+              case 'wfBadQty6':
+              case 'wfBadItemTotal':
                 break;
 
               default:

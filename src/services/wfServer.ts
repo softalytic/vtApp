@@ -858,7 +858,7 @@ export class WorkflowService {
   };
 
   cancelBtn(navCtrl: any) {
-    this.storage.clear();
+    // this.storage.clear();
     navCtrl.setRoot(WorkflowPage);
   };
 

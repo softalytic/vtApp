@@ -366,23 +366,44 @@ export class WorkflowPage implements OnInit {
       //
       // });
 
+      let tmpData: any;
+
       for (let key in this.storageData ) {
         let data = JSON.parse(this.storageData[key]);
-        if(form.value.wfFormId == data.wfFormId){
-          if (!this.loadDataToForm(form, data)){
-            return;
-          }
 
-          // Execute workflowStateChange for New Form or continue existing form
-          // This function is for automatic workflow state change base on previous business rule
-          // As the current app has lift up the limitation and let user choose the workflow,
-          // then you can either comment out most of the code within this function
-          // or simply re-write the nav push in a separate function
-          if (!this.wfLoad){
-            this.workflowStateChange();
+        if(form.value.wfFormId == data.wfFormId){
+
+          if(tmpData == "" || tmpData == null || typeof tmpData == 'undefined'){
+            // Initially assign value
+            tmpData = data;
+          } else if (this.wfSvc.toInt(data.wfProcess) > this.wfSvc.toInt(tmpData.wfProcess)) {
+            // If the new data is more advance than tmpData
+            tmpData = data;
+          } else if (this.wfSvc.toInt(data.wfProcess) == this.wfSvc.toInt(tmpData.wfProcess)) {
+            // If both process are equal
+            if(tmpData.wfFormStatus) {
+              // First assign if the wfFormStatus is completed
+              tmpData = data;
+            } else if (tmpData.wfProcessStatus) {
+              // 2nd assign if wfProcessStatus is completed
+              tmpData = data;
+            }
           }
         }
       };
+
+      if (!this.loadDataToForm(form, tmpData)){
+        return;
+      }
+
+      // Execute workflowStateChange for New Form or continue existing form
+      // This function is for automatic workflow state change base on previous business rule
+      // As the current app has lift up the limitation and let user choose the workflow,
+      // then you can either comment out most of the code within this function
+      // or simply re-write the nav push in a separate function
+      if (!this.wfLoad){
+        this.workflowStateChange();
+      }
 
       console.log("cant find record");
       if (!this.wfLoad){

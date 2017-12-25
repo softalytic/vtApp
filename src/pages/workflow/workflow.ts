@@ -328,44 +328,6 @@ export class WorkflowPage implements OnInit {
       console.log(err);
       console.log("Trying to load data from storage");
 
-      // Proceed to checking with storage, in event of offline mode
-      // this.storage.get(form.value.wfFormId).then(storageData => {
-      //   // If there is record from the storage,
-      //   //    proceed to load data to form
-      //   // Else
-      //   //    treat it as new record
-      //   console.log("storage data "+ JSON.stringify(storageData));
-      //
-      //
-      //   if(storageData){
-      //     console.log("Data Submission Result found:" + form.value.wfFormId);
-      //     // this.populateDataToForm(form, storageData);
-      //     // This code below replace the upper function,
-      //     // this is to assume the latest input from user is always correct
-      //     // Only will override if there is no input at all
-      //     if (!this.loadDataToForm(form, storageData)){
-      //       return;
-      //     }
-      //
-      //   }
-      //
-      //   // Execute workflowStateChange for New Form or continue existing form
-      //   // This function is for automatic workflow state change base on previous business rule
-      //   // As the current app has lift up the limitation and let user choose the workflow,
-      //   // then you can either comment out most of the code within this function
-      //   // or simply re-write the nav push in a separate function
-      //   if (!this.wfLoad){
-      //     this.workflowStateChange();
-      //   }
-      //
-      // }, err => {
-      //   console.log("cant find record");
-      //   if (!this.wfLoad){
-      //     this.workflowStateChange();
-      //   }
-      //
-      // });
-
       let tmpData: any;
 
       for (let key in this.storageData ) {
@@ -392,20 +354,19 @@ export class WorkflowPage implements OnInit {
         }
       };
 
-      if (!this.loadDataToForm(form, tmpData)){
-        return;
+      if (tmpData == "" || tmpData == null || typeof tmpData == 'undefined') {
+        console.log("cant find record");
+
+      } else {
+        if (!this.loadDataToForm(form, tmpData)){
+          // This func try to populate the data, if process is marked complete then
+          // It will return and do nothing
+          return;
+        }
+
       }
 
-      // Execute workflowStateChange for New Form or continue existing form
-      // This function is for automatic workflow state change base on previous business rule
-      // As the current app has lift up the limitation and let user choose the workflow,
-      // then you can either comment out most of the code within this function
-      // or simply re-write the nav push in a separate function
-      if (!this.wfLoad){
-        this.workflowStateChange();
-      }
-
-      console.log("cant find record");
+      // Execute the nav for next steps
       if (!this.wfLoad){
         this.workflowStateChange();
       }
@@ -534,7 +495,7 @@ export class WorkflowPage implements OnInit {
         // Wilfred has requested not to continue the workflow,
         // Although this is not the original client request,
         // I just comment them out for now for the stake of mark complete
-        return;
+        return false;
         // this.fillData(form,data);
         // form.controls["wfErrorMsg"].setValue('这工序巳经完成');
 
@@ -623,8 +584,11 @@ export class WorkflowPage implements OnInit {
     for (let key in data ){
       console.log("Uploading data " + key);
       // Reconstruct the data format into the formGroup alike
-      let packet = '{"value":'+data[key]+'}';
+      // let packet = '{"value":'+data[key]+'}';
+      let packet = data[key];
       let form = JSON.parse(packet);
+
+      console.log(form);
 
       this.wfSvc.upload(form).subscribe( (response) => {
         console.log("batchUploadForm: Successfully uploading to server");

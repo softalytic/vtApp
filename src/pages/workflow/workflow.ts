@@ -333,7 +333,8 @@ export class WorkflowPage implements OnInit {
       for (let key in this.storageData ) {
         let data = JSON.parse(this.storageData[key]);
 
-        if(form.value.wfFormId == data.wfFormId){
+        if(form.value.wfFormId == data.wfFormId && form.value.wfFormSplit == data.wfFormSplit){
+          // Lookup of same wfForm ID + split ID
 
           if(tmpData == "" || tmpData == null || typeof tmpData == 'undefined'){
             // Initially assign value

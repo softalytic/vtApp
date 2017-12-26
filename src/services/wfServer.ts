@@ -914,10 +914,47 @@ export class WorkflowService {
             this.uploadImage(form, images).subscribe((data) => {
               // alert(data);
               // need to add loading screen for image upload
+              this.storage.remove(form.value.wfFormId + 'img');
               navCtrl.setRoot(WorkflowPage);
 
             }, error => {
-              alert("img upload has been failed" + error)
+              alert("图片上存错误!先存储在本地,稍后再上传! " + error);
+              let packet = {
+                'wfProcess': form.value.wfProcess,
+                'wfProcessName': form.value.wfProcessName,
+                'wfFormName': form.value.wfFormName,
+                'wfForm': form.value.wfForm,
+                'wfFormId': form.value.wfFormId,
+                'wfFormSplit': form.value.wfFormSplit,
+                'wfOrderFormId': form.value.wfOrderFormId,
+                'wfOrderId': form.value.wfOrderId,
+                'wfStaffOptId': form.value.wfStaffOptId,
+                'wfStaffOptName': form.value.wfStaffOptName,
+                'wfStaffOptShift': form.value.wfStaffOptShift,
+                'wfStaffLeadId': form.value.wfStaffLeadId,
+                'wfStaffLeadName': form.value.wfStaffLeadName,
+                'wfStaffTechId': form.value.wfStaffTechId,
+                'wfStaffTechName': form.value.wfStaffTechName,
+                'wfStaffXrayId': form.value.wfStaffXrayId,
+                'wfStaffXrayName': form.value.wfStaffXrayName,
+                'wfStaffQCId': form.value.wfStaffQCId,
+                'wfStaffQCName': form.value.wfStaffQCName,
+                'wfImg': images,
+              };
+
+              // Stored locally in the backup
+              this.storage.get("backupForm").then((data) => {
+                if(typeof data == 'undefined' || data == "" || data == null) {
+                  // If the storage is empty, then initate an empty array
+                  data = [];
+                }
+                data.push(JSON.stringify(packet));
+                this.storage.set("backupForm", data);
+
+              }, error => {
+                alert("本地存储错误 " + error);
+              });
+
             })
 
 
@@ -954,6 +991,7 @@ export class WorkflowService {
           this.storage.get("backupForm").then((data) => {
 
             if(typeof data == 'undefined' || data == "" || data == null) {
+              // If the storage is empty, then initate an empty array
               data = [];
             }
 
@@ -964,7 +1002,7 @@ export class WorkflowService {
             navCtrl.setRoot(WorkflowPage);
 
           }, error => {
-            console.log("networkError: An Error has been occured" + error)
+            console.log("本地存储错误 " + error);
           });
 
         }
@@ -1166,6 +1204,8 @@ export class WorkflowService {
               alert( '良品数下限不得低于投入数百分之八十' );
               return false;
 
+            } else {
+              return true;
             }
           } else if ( goodQty < batchQty ) {
             alert( '良品数不得小于批次量' );

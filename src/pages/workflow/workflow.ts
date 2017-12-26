@@ -580,30 +580,85 @@ export class WorkflowPage implements OnInit {
   batchUploadForm(){
     console.log("Calling batch upload");
 
+    // Using for loop here instead of the for key loop because the index changed after the key is being removed
+    // So instead of using key, we should take the first element of the array and loop over the length of the array over time
     for (let i = 0; i < this.storageData.length; i++){
       let form = JSON.parse(this.storageData[0]);
-      this.wfSvc.upload(form).subscribe( (response) => {
-        console.log("batchUploadForm: Successfully uploading to server");
-        console.log("batchUploadForm: Upload Reply from server" + JSON.stringify(response));
 
-        if(response.wfFormId == form.wfFormId && response.wfProcess == form.wfProcess && response.wfProcessStatus == form.wfProcessStatus && response.wfFormStatus == form.wfFormStatus){
-          // Remove the item from the array
-          console.log("batchUploadForm: Successful upload and removing item ");
-          this.storageData.splice(0, 1);
-          console.log("this.storageData" + JSON.stringify(this.storageData));
-          this.storage.set("backupForm", this.storageData)
+      // Check if images are available for upload
+      console.log("batchUploadForm: Checking images " + form.wfFormId);
+      this.storage.get(form.wfFormId + "img").then((img) => {
+        if (img != "" && img != null && typeof img != 'undefined'){
+          if (img.length > 0){
+            console.log("uploading images to server");
+
+            this.wfSvc.uploadImage(form, img).subscribe((data) => {
+              console.log("batchUploadForm: Reply from img server " + data);
+              // Batch Upload the form
+              this.wfSvc.upload(form).subscribe( (response) => {
+                console.log("batchUploadForm: Successfully uploading to server");
+                console.log("batchUploadForm: Upload Reply from server" + JSON.stringify(response));
+
+                // If response matches, then proceed to next process
+                if(response.wfFormId == form.wfFormId && response.wfProcess == form.wfProcess &&
+                  response.wfProcessStatus == form.wfProcessStatus && response.wfFormStatus == form.wfFormStatus){
+                  // Remove the item from the array
+                  console.log("batchUploadForm: Successful upload and removing item ");
+                  this.storageData.splice(0, 1);
+                  console.log("this.storageData" + JSON.stringify(this.storageData));
+                  this.storage.set("backupForm", this.storageData)
+                }
+
+                if(this.storageData.length == 0 ){
+                  alert("所有资料已上存");
+
+                }
+
+
+              }, error => {
+                console.log("An error has occured in batch upload" + error);
+                return alert("资料上存错误" + error);
+
+              });
+
+            }, error => {
+              return alert("img upload has been failed" + error)
+            })
+          }
+        } else {
+          // Batch Upload the form
+          this.wfSvc.upload(form).subscribe( (response) => {
+            console.log("batchUploadForm: Successfully uploading to server");
+            console.log("batchUploadForm: Upload Reply from server" + JSON.stringify(response));
+
+            // If response matches, then proceed to next process
+            if(response.wfFormId == form.wfFormId && response.wfProcess == form.wfProcess &&
+              response.wfProcessStatus == form.wfProcessStatus && response.wfFormStatus == form.wfFormStatus){
+              // Remove the item from the array
+              console.log("batchUploadForm: Successful upload and removing item ");
+              this.storageData.splice(0, 1);
+              console.log("this.storageData" + JSON.stringify(this.storageData));
+              this.storage.set("backupForm", this.storageData)
+            }
+
+            if(this.storageData.length == 0 ){
+              alert("所有资料已上存");
+
+            }
+
+
+          }, error => {
+            console.log("An error has occured in batch upload" + error);
+            return alert("资料上存错误" + error);
+
+          });
         }
-
-        if(this.storageData.length == 0 ){
-          alert("All pending data have been uploaded");
-
-        }
-
 
       }, error => {
-        console.log("An error has occured in batch upload" + error)
-
+        console.log("batchUploadForm: Img Storage Error " + error);
+        return alert("资料上存错误" + error)
       });
+
     }
 
   }

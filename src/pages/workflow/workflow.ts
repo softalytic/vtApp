@@ -335,21 +335,22 @@ export class WorkflowPage implements OnInit {
 
         if(form.value.wfFormId == data.wfFormId && form.value.wfFormSplit == data.wfFormSplit){
           // Lookup of same wfForm ID + split ID
-
-          if(tmpData == "" || tmpData == null || typeof tmpData == 'undefined'){
-            // Initially assign value
-            tmpData = data;
-          } else if (this.wfSvc.toInt(data.wfProcess) > this.wfSvc.toInt(tmpData.wfProcess)) {
-            // If the new data is more advance than tmpData
-            tmpData = data;
-          } else if (this.wfSvc.toInt(data.wfProcess) == this.wfSvc.toInt(tmpData.wfProcess)) {
-            // If both process are equal
-            if(tmpData.wfFormStatus) {
-              // First assign if the wfFormStatus is completed
+          if(typeof data["wfImg"] == 'undefined'){
+            if(tmpData == "" || tmpData == null || typeof tmpData == 'undefined'){
+              // Initially assign value
               tmpData = data;
-            } else if (tmpData.wfProcessStatus) {
-              // 2nd assign if wfProcessStatus is completed
+            } else if (this.wfSvc.toInt(data.wfProcess) > this.wfSvc.toInt(tmpData.wfProcess)) {
+              // If the new data is more advance than tmpData
               tmpData = data;
+            } else if (this.wfSvc.toInt(data.wfProcess) == this.wfSvc.toInt(tmpData.wfProcess)) {
+              // If both process are equal
+              if(tmpData.wfFormStatus) {
+                // First assign if the wfFormStatus is completed
+                tmpData = data;
+              } else if (tmpData.wfProcessStatus) {
+                // 2nd assign if wfProcessStatus is completed
+                tmpData = data;
+              }
             }
           }
         }

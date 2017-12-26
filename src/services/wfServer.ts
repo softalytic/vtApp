@@ -160,10 +160,12 @@ export class WorkflowService {
     let packet = {
       'wfProcess': form.value.wfProcess,
       'wfProcessName': form.value.wfProcessName,
+      'wfProcessStatus': form.value.wfProcessStatus,
       'wfFormName': form.value.wfFormName,
       'wfForm': form.value.wfForm,
       'wfFormId': form.value.wfFormId,
       'wfFormSplit': form.value.wfFormSplit,
+      'wfFormStatus': form.value.wfFormStatus,
       'wfOrderFormId': form.value.wfOrderFormId,
       'wfOrderId': form.value.wfOrderId,
       'wfStaffOptId': form.value.wfStaffOptId,
@@ -922,10 +924,12 @@ export class WorkflowService {
               let packet = {
                 'wfProcess': form.value.wfProcess,
                 'wfProcessName': form.value.wfProcessName,
+                'wfProcessStatus': form.value.wfProcessStatus,
                 'wfFormName': form.value.wfFormName,
                 'wfForm': form.value.wfForm,
                 'wfFormId': form.value.wfFormId,
                 'wfFormSplit': form.value.wfFormSplit,
+                'wfFormStatus': form.value.wfFormStatus,
                 'wfOrderFormId': form.value.wfOrderFormId,
                 'wfOrderId': form.value.wfOrderId,
                 'wfStaffOptId': form.value.wfStaffOptId,
@@ -1022,7 +1026,7 @@ export class WorkflowService {
 
   runningTotal(form:any){
     console.log("In the running total");
-    form.controls["wfGoodTotal"].setValue(( this.toInt(form.value.wfOptGoodQty) + this.toInt(form.value.wfGoodTotal)));
+    form.controls["wfGoodTotal"].setValue(( this.toInt(form.value.wfOptGoodQty) ));
     console.log("GoodQtyRunning Total" + form.value.wfGoodTotal);
 
     form.controls["wfOptBadQtyItem"].setValue(this.toInt(form.value.wfBadItem1) + this.toInt(form.value.wfBadItem2) + this.toInt(form.value.wfBadItem3) + this.toInt(form.value.wfBadItem4) + this.toInt(form.value.wfBadItem5) + this.toInt(form.value.wfBadItem6));
@@ -1204,8 +1208,6 @@ export class WorkflowService {
               alert( '良品数下限不得低于投入数百分之八十' );
               return false;
 
-            } else {
-              return true;
             }
           } else if ( goodQty < batchQty ) {
             alert( '良品数不得小于批次量' );
@@ -1215,12 +1217,9 @@ export class WorkflowService {
             //rule 1 cannot exceed 10k of batch quantity
             alert( '良品不得超過批次量一万以上' );
             return false;
-
-          } else {
-            return true;
-
           }
-          break;
+
+          return true;
 
         // CASE 3 (插件 embedded)
         //same logic as naked product

@@ -1107,7 +1107,9 @@ export class WorkflowService {
       //flexible_quantity - Finished_Product = 10000;
       let finishProdLimit = 10000;
 
-      console.log("finalValidation: startQty: " + startQty + " goodQty: " + goodQty + " badQty: " + badQty + " batchQty: " + batchQty + " ProcessCount: " + ProcessCount );
+      console.log("finalValidation: startQty: " + startQty +
+        " goodQty: " + goodQty + " badQty: " + badQty +
+        " batchQty: " + batchQty + " ProcessCount: " + ProcessCount );
       //  sub process card
       //rule 5 cannot exceed batch quantity
       if ( badQty > batchQty ) {
@@ -1123,15 +1125,16 @@ export class WorkflowService {
           console.log("finalValidation: Checking Form 1");
           if ( ProcessCount > 1 ) {
             if ( Math.abs( goodQty - startQty ) <= OtherLimit ) {
+              // for the variance within the limit, no actions
               return true;
-            }
-            // rule 4 cant not exceed 20% of good quantity from last process
-            else if ( goodQty > (QC_UPPER * startQty) ) {
+
+            } else if ( goodQty > (QC_UPPER * startQty) ) {
+              // rule 4 cant not exceed 20% of good quantity from last process
               alert( '良品数上限不得超过投入数百分之二十' );
               return false;
-            }
-            // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
-            else if ( goodQty < (QC_LOWER * startQty) ) {
+
+            } else if ( goodQty < (QC_LOWER * startQty) ) {
+              // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
               alert( '良品数下限不得低于投入数百分之八十' );
               return false;
             }
@@ -1145,37 +1148,37 @@ export class WorkflowService {
           console.log("finalValidation: Checking Form 2");
           if ( ProcessCount > 1 ) {
             if ( Math.abs( goodQty - startQty ) <= OtherLimit ) {
-              console.log( 'goodQty' + goodQty );
-              console.log( 'startQty' + startQty );
-              console.log( 'batchQty' + batchQty );
-              // rule 2 cant be below batch quantity
+              // for the variance within the limit, no actions
+
               if ( goodQty < batchQty ) {
+                // rule 2 cant be below batch quantity
                 alert( '良品数不得小于批次量' );
                 return false;
-              }
 
-              //rule 1 cannot exceed 10k of batch quantity
-              else if ( (goodQty - batchQty) > (finishProdLimit) ) {
+              } else if ( (goodQty - batchQty) > (finishProdLimit) ) {
+                //rule 1 cannot exceed 10k of batch quantity
                 alert( '良品不得超過批次量一万以上' );
                 return false;
+
               }
-            }
-            // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
-            else if ( goodQty < (QC_LOWER * startQty) ) {
+            } else if ( goodQty < (QC_LOWER * startQty) ) {
+              // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
               alert( '良品数下限不得低于投入数百分之八十' );
               return false;
-            }
-          } else {
-            if ( goodQty < batchQty ) {
-              alert( '良品数不得小于批次量' );
-              return false;
-            }
 
-            //rule 1 cannot exceed 10k of batch quantity
-            else if ( (goodQty - batchQty) > (finishProdLimit) ) {
-              alert( '良品不得超過批次量一万以上' );
-              return false;
             }
+          } else if ( goodQty < batchQty ) {
+            alert( '良品数不得小于批次量' );
+            return false;
+
+          } else if ( (goodQty - batchQty) > (finishProdLimit) ) {
+            //rule 1 cannot exceed 10k of batch quantity
+            alert( '良品不得超過批次量一万以上' );
+            return false;
+
+          } else {
+            return true;
+
           }
           break;
 

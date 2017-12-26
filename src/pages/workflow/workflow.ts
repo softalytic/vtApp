@@ -584,6 +584,8 @@ export class WorkflowPage implements OnInit {
   batchUploadForm(){
     console.log("Calling batch upload");
 
+    let uploadProcessStatus = false;
+
     // Using for loop here instead of the for key loop because the index changed after the key is being removed
     // So instead of using key, we should take the first element of the array and loop over the length of the array over time
     for (let i = 0; i < this.storageData.length; i++){
@@ -606,7 +608,8 @@ export class WorkflowPage implements OnInit {
             this.storage.set("backupForm", this.storageData);
           }
 
-          if(this.storageData.length == 0 ){
+          if(this.storageData.length == 0 && !uploadProcessStatus){
+            uploadProcessStatus = true;
             return alert("所有资料已上存");
           }
 
@@ -624,7 +627,8 @@ export class WorkflowPage implements OnInit {
           console.log("this.storageData" + JSON.stringify(this.storageData));
           this.storage.set("backupForm", this.storageData);
 
-          if(this.storageData.length == 0 ){
+          if(this.storageData.length == 0 && !uploadProcessStatus){
+            uploadProcessStatus = true;
             return alert("所有资料已上存");
           }
         }, error => {
@@ -671,7 +675,7 @@ export class WorkflowPage implements OnInit {
               });
 
             }, error => {
-              return alert("img upload has been failed" + error)
+              return alert("img upload has been failed" + error);
             })
           }
         } else {
@@ -705,7 +709,7 @@ export class WorkflowPage implements OnInit {
 
       }, error => {
         console.log("batchUploadForm: Img Storage Error " + error);
-        return alert("资料上存错误" + error)
+        return alert("资料上存错误" + error);
       });
 
     }

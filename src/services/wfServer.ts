@@ -190,6 +190,20 @@ export class WorkflowService {
       });
   }
 
+  batchUploadImages(form: any) {
+    console.log("In the batchUploadImages");
+    let queryUrl = this.baseUrl + "form/image/submit/";
+    console.log("Requesting url: " + queryUrl);
+    console.log("Begin to upload image onto server!");
+
+    return this.http.post(queryUrl, form, this.httpOptions)
+      .timeout(3000)
+      .map((response: Response) => {
+        console.log("Responding from Server" + response);
+        return response.text();
+      });
+  }
+
   pullImage(form: any) {
     // Pull images from the Server
     console.log("Pulling images from Server");
@@ -903,7 +917,7 @@ export class WorkflowService {
 
     this.dateValidation(form);
 
-    this.storage.set(form.value.wfFormId, form.value);
+    // this.storage.set(form.value.wfFormId, form.value);
 
     this.upload(form.value)
       .subscribe((data)=> {
@@ -916,7 +930,7 @@ export class WorkflowService {
             this.uploadImage(form, images).subscribe((data) => {
               // alert(data);
               // need to add loading screen for image upload
-              this.storage.remove(form.value.wfFormId + 'img');
+              // this.storage.remove(form.value.wfFormId + 'img');
               navCtrl.setRoot(WorkflowPage);
 
             }, error => {
@@ -971,14 +985,14 @@ export class WorkflowService {
         error => {
           // On error, prompt network msg and can save locally
           console.log(error);
-          this.networkError(form, navCtrl);
+          this.networkError(form, navCtrl, images);
           
         }
         
       );
   };
 
-  networkError(form:any, navCtrl: any){
+  networkError(form:any, navCtrl: any, images: any){
     let alert = this.alertCtrl.create({
       title: '注意!',
       message: '嚫!网路不给力,请再试一次!',
@@ -993,14 +1007,43 @@ export class WorkflowService {
           console.log('先储档,稍后再试');
           // console.log('saving into storage now ' + JSON.stringify(form.value));
           this.storage.get("backupForm").then((data) => {
+            console.log("Loading local backup");
 
             if(typeof data == 'undefined' || data == "" || data == null) {
               // If the storage is empty, then initate an empty array
+              console.log("Local backup is empty and initializing a new one");
               data = [];
             }
 
-            console.log(form);
             data.push(JSON.stringify(form.value));
+
+            if(images.length > 0 ){
+              let packet = {
+                'wfProcess': form.value.wfProcess,
+                'wfProcessName': form.value.wfProcessName,
+                'wfProcessStatus': form.value.wfProcessStatus,
+                'wfFormName': form.value.wfFormName,
+                'wfForm': form.value.wfForm,
+                'wfFormId': form.value.wfFormId,
+                'wfFormSplit': form.value.wfFormSplit,
+                'wfFormStatus': form.value.wfFormStatus,
+                'wfOrderFormId': form.value.wfOrderFormId,
+                'wfOrderId': form.value.wfOrderId,
+                'wfStaffOptId': form.value.wfStaffOptId,
+                'wfStaffOptName': form.value.wfStaffOptName,
+                'wfStaffOptShift': form.value.wfStaffOptShift,
+                'wfStaffLeadId': form.value.wfStaffLeadId,
+                'wfStaffLeadName': form.value.wfStaffLeadName,
+                'wfStaffTechId': form.value.wfStaffTechId,
+                'wfStaffTechName': form.value.wfStaffTechName,
+                'wfStaffXrayId': form.value.wfStaffXrayId,
+                'wfStaffXrayName': form.value.wfStaffXrayName,
+                'wfStaffQCId': form.value.wfStaffQCId,
+                'wfStaffQCName': form.value.wfStaffQCName,
+                'wfImg': images,
+              };
+              data.push(JSON.stringify(packet));
+            }
 
             this.storage.set("backupForm", data);
             navCtrl.setRoot(WorkflowPage);

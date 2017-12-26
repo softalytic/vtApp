@@ -336,6 +336,8 @@ export class WorkflowPage implements OnInit {
         if(form.value.wfFormId == data.wfFormId && form.value.wfFormSplit == data.wfFormSplit){
           // Lookup of same wfForm ID + split ID
           if(typeof data["wfImg"] == 'undefined'){
+            // Make sure it isnt images
+
             if(tmpData == "" || tmpData == null || typeof tmpData == 'undefined'){
               // Initially assign value
               tmpData = data;
@@ -587,8 +589,53 @@ export class WorkflowPage implements OnInit {
     for (let i = 0; i < this.storageData.length; i++){
       let form = JSON.parse(this.storageData[0]);
 
+      console.log("Begin batchUploadForm sequence " + i);
+      if (typeof form["wfImg"] == 'undefined'){
+        // This backup copy isnt image
+        this.wfSvc.upload(form).subscribe( (response) => {
+          console.log("batchUploadForm: Successfully uploading to server");
+          console.log("batchUploadForm: Upload Reply from server" + JSON.stringify(response));
+
+          // If response matches, then proceed to next process
+          if(response.wfFormId == form.wfFormId && response.wfProcess == form.wfProcess &&
+            response.wfProcessStatus == form.wfProcessStatus && response.wfFormStatus == form.wfFormStatus){
+            // Remove the item from the array
+            console.log("batchUploadForm: Successful upload and removing item ");
+            this.storageData.splice(0, 1);
+            console.log("this.storageData" + JSON.stringify(this.storageData));
+            this.storage.set("backupForm", this.storageData);
+          }
+
+          if(this.storageData.length == 0 ){
+            return alert("所有资料已上存");
+          }
+
+
+        }, error => {
+          console.log("An error has occured in batch upload" + error);
+          return alert("资料上存错误" + error);
+
+        });
+      } else {
+      //  Upload the image
+        this.wfSvc.batchUploadImages(form).subscribe( (response) => {
+          console.log("batchUploadForm: Successful upload and removing item ");
+          this.storageData.splice(0, 1);
+          console.log("this.storageData" + JSON.stringify(this.storageData));
+          this.storage.set("backupForm", this.storageData);
+
+          if(this.storageData.length == 0 ){
+            return alert("所有资料已上存");
+          }
+        }, error => {
+          console.log("An error has occured in batch upload" + error);
+          return alert("资料上存错误" + error);
+        } )
+      }
+
       // Check if images are available for upload
       console.log("batchUploadForm: Checking images " + form.wfFormId);
+
       this.storage.get(form.wfFormId + "img").then((img) => {
         if (img != "" && img != null && typeof img != 'undefined'){
           if (img.length > 0){

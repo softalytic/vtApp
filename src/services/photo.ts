@@ -58,7 +58,7 @@ export class PhotoService {
         images.push(imgUrl);
 
         // Store the img into storage with wfFormIdimg as the key
-        this.storage.set(form.value.wfFormId + 'img', images);
+        // this.storage.set(form.value.wfFormId + 'img', images);
         console.log(images.length() + " # of images stored")
         // alert("from items " + form.value.wfFormId + 'img');
         //alert()

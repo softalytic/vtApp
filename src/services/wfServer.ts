@@ -995,7 +995,7 @@ export class WorkflowService {
   networkError(form:any, navCtrl: any, images: any){
     let alert = this.alertCtrl.create({
       title: '注意!',
-      message: '嚫!网路不给力,请再试一次!',
+      message: '亲!网路不给力,请再试一次!',
       buttons: [{
         text: '    重试    ',
         role: 'cancel',

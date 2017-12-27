@@ -652,6 +652,29 @@ export class WorkflowPage implements OnInit {
 
   }
 
+  storageClear(){
+    let NavAlert = this.alertCtrl.create({
+      title: "确定清除本地存储",
+      buttons: [
+        {
+          text: '    确定    ',
+          handler: () => {
+            console.log('Clearing local storage');
+            this.storage.clear();
+            this.ngOnInit();
+          }
+        },
+        {
+          text: '    取消    ',
+          handler: () => {
+            console.log('Cancel clearing local storage');
+          }
+        }
+      ]
+    });
+    NavAlert.present();
+  }
+
   private formInit() {
     this.wfInputForm = this.formBuilder.group({
       wfProcess: [''],

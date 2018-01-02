@@ -224,6 +224,73 @@ export class WorkflowService {
       });
   }
 
+  storageBatchUpload(form:any) {
+
+    console.log("storageBatchUpload is being called " + JSON.stringify(form.value));
+
+    this.batchUpload(form,false).subscribe( () => {
+      console.log('all requests finished');
+    }, err => {
+      alert("Network error " + err);
+    });
+
+  }
+
+  batchUpload(queryArr, previousObservable){
+
+    console.log("batchUpload wfServer is called");
+
+    if (queryArr.length) {
+      let payload = JSON.parse(queryArr[0]);
+      let queryUrl: string;
+      let timeOut: number;
+
+      queryArr.splice(0,1);
+      console.log('queryArr = '+queryArr.length);
+
+      // console.log("payload" + JSON.stringify(payload));
+
+      if(typeof payload['wfImg'] == 'undefined'){
+        queryUrl = this.baseUrl + "form/submit/";
+        timeOut = 1000;
+
+      } else {
+        queryUrl = this.baseUrl + "form/image/submit/";
+        timeOut = 10000;
+
+      }
+
+      console.log("Requesting url: " + queryUrl);
+      console.log("Timeout " + timeOut);
+
+      let observable = null;
+      if (previousObservable) {
+        observable = previousObservable.flatMap(() => {
+          return this.http.post(queryUrl, payload,this.httpOptions)
+            .timeout(timeOut)
+            .map((res:Response) => res.json())
+            .do((res) => {
+              console.log('request finished' + JSON.stringify(res.wfFormId));
+            });
+        });
+
+      } else {
+        observable = this.http.post(queryUrl, payload, this.httpOptions)
+          .timeout(timeOut)
+          .map((res:Response) => res.json())
+          .do((res ) => {
+            console.log('request finished' + JSON.stringify(res.wfFormId));
+          });
+
+      }
+      return this.batchUpload(queryArr, observable);
+
+    } else {
+      return previousObservable;
+
+    }
+  }
+
   showWfOpsFinalInputsAlert(wfInputForm: any, navCtrl: any, images: any, wfPName: any) {
     // This function manage all the form submission in each of the wfForm and connect with the server call
     // 7 inputs for this function,
@@ -496,7 +563,7 @@ export class WorkflowService {
       title: mainTitleMsg,
       message: msg,
       buttons: [{
-        text: '    確定    ',
+        text: '    确定    ',
         handler: () => {
 
           if(finalSubmission){
@@ -535,32 +602,32 @@ export class WorkflowService {
     if(form.value.wfForm == '1') {
 
       if(! this.checkInputAsTime(form.value.wfOptStartTime)) {
-        missingFeildMsg += '<br>1. 正確开始时间值必须为 0000 - 2359 之間!';
+        missingFeildMsg += '<br>1. 正确开始时间值必须为 0000 - 2359 之间!';
         form.controls['wfOptStartTime'].setValue(this.toInt(form.value.wfOptStartTime));
 
       }
 
       if(! this.checkInputAsTime(form.value.wfOptFinishTime)){
-        missingFeildMsg += '<br>2. 完成时间值必须为 0000 - 2359 之間!';
+        missingFeildMsg += '<br>2. 完成时间值必须为 0000 - 2359 之间!';
         form.controls['wfOptFinishTime'].setValue(this.toInt(form.value.wfOptFinishTime));
 
       }
 
       if(form.value.wfOptBadQty < 0) {
-        missingFeildMsg += '<br>3. 不良数不能小於零!';
+        missingFeildMsg += '<br>3. 不良数不能小于零!';
       }
       if(form.value.wfOptGoodQty < 0) {
         missingFeildMsg += '<br>4. 良品数必須为正数!';
       }
       if(typeof form.value.wfStaffOptName === 'undefined') {
-        missingFeildMsg += '<br>5. 輸入作业員!';
+        missingFeildMsg += '<br>5. 输入作业員!';
       }
 
 
     } else if(form.value.wfForm == '2') {
 
       if(form.value.wfOptBadQty < 0) {
-        missingFeildMsg += '<br>3. 不良数不能小於零';
+        missingFeildMsg += '<br>3. 不良数不能小于零';
       }
       if(form.value.wfOptGoodQty < 0) {
         missingFeildMsg += '<br>4. 良品数必須为正数!';
@@ -572,7 +639,7 @@ export class WorkflowService {
 
     } else if(form.value.wfForm == '3' && form.value.wfProcess != '9') {
       if(! this.checkInputAsTime(form.value.wfOptStartTime)) {
-        missingFeildMsg += '<br>1. 正確开始时间值必须为 0000 - 2359 之間!';
+        missingFeildMsg += '<br>1. 正确开始时间值必须为 0000 - 2359 之間!';
         form.controls['wfOptStartTime'].setValue(this.toInt(form.value.wfOptStartTime));
 
       }
@@ -584,7 +651,7 @@ export class WorkflowService {
       }
 
       if(form.value.wfOptBadQty < 0) {
-        missingFeildMsg += '<br>3. 不良数不能小於零!';
+        missingFeildMsg += '<br>3. 不良数不能小于零!';
 
       }
 
@@ -601,7 +668,7 @@ export class WorkflowService {
 
     if(missingFeildMsg != '') {
       missingFeildAlert = false;
-      this.warningAlert('請提供或更正下列资料：', missingFeildMsg, '继續');
+      this.warningAlert('请提供或更正下列资料：', missingFeildMsg, '继续');
 
     }
 
@@ -619,26 +686,26 @@ export class WorkflowService {
       }
 
       let updatedGoodQty = this.toInt(form.value.wfOptGoodQty) / 1000;
-      let qtyCheckMsg = '<br>不良数總和: ' + this.toInt(form.value.wfOptBadQty);
+      let qtyCheckMsg = '<br>不良数总和: ' + this.toInt(form.value.wfOptBadQty);
 
       qtyCheckMsg += '<br>良品数: ' + this.toInt(form.value.wfOptGoodQty) + ' (' + updatedGoodQty + 'K)';
 
       if(this.toInt(form.value.wfOptBadQty) > this.toInt(form.value.wfOptGoodQty)) {
-        qtyCheckMsg += '<br>不良数 ('+form.value.wfOptBadQty+') 大於 良品数 ('+form.value.wfOptGoodQty+')！';
+        qtyCheckMsg += '<br>不良数 ('+form.value.wfOptBadQty+') 大于 良品数 ('+form.value.wfOptGoodQty+')！';
       }
 
       if(this.toInt(form.value.wfOptGoodQty) > this.toInt(form.value.wfOrderBatchQty) * 1000) {
-        qtyCheckMsg += '<br>良品数 ('+form.value.wfOptGoodQty+') 大於 批次量 ('+ form.value.wfOrderBatchQty * 1000 +')！';
+        qtyCheckMsg += '<br>良品数 ('+form.value.wfOptGoodQty+') 大于 批次量 ('+ form.value.wfOrderBatchQty * 1000 +')！';
       }
 
-      qtyCheckMsg += '<br>如需修改，請按 “取消” 再重新輸入。';
+      qtyCheckMsg += '<br>如需修改，请按 “取消” 再重新輸入。';
 
       let qtyConfirm = this.alertCtrl.create({
         title: '',
         message: qtyCheckMsg,
         buttons: [
           {
-            text: '    继續    ',
+            text: '    继续    ',
             handler: () => {
               console.log('Agree clicked');
               this.wfFormUpload(form, navCtrl, images, finalSubmission);
@@ -708,7 +775,7 @@ export class WorkflowService {
 
   showEndDateErrorAlert(endDate: any) {
     console.log(this.appDate);
-    this.warningAlert('', this.appDate+' - '+endDate+' ', '继續');
+    this.warningAlert('', this.appDate+' - '+endDate+' ', '继续');
   }
 
   showGoodBadQtyInputsAlert(wfInputForm: any) {
@@ -720,9 +787,9 @@ export class WorkflowService {
     let wfOrderBatchQtyValue = form.value.wfOrderBatchQty;
     
     if(wfOptGoodQtyValue === '') {
-      this.warningAlert('', '請輸入良品数', '继續');
+      this.warningAlert('', '请輸入良品数', '继续');
     } else if(wfOptBadQtyValue === '') {
-      this.warningAlert('', '請輸入不良数', '继續');
+      this.warningAlert('', '请輸入不良数', '继续');
     }
     wfOptBadQtyValue = this.toInt(wfOptBadQtyValue);
     wfOptGoodQtyValue = this.toInt(wfOptGoodQtyValue);
@@ -734,9 +801,9 @@ export class WorkflowService {
     if(wfOptBadQtyValue <= 0 ) {
       this.warningAlert('', '請輸入不良数('+wfOptBadQtyValue+')', '继續');
     } else */ if(wfOptBadQtyValue > wfOptGoodQtyValue) {
-      this.warningAlert('', '不良数('+wfOptBadQtyValue+')大於良品数('+wfOptGoodQtyValue+')', '继續');
+      this.warningAlert('', '不良数('+wfOptBadQtyValue+')大于良品数('+wfOptGoodQtyValue+')', '继续');
     } else if(wfOptGoodQtyValue > wfOrderBatchQtyValue * 1000) {
-      this.warningAlert('', '良品数('+wfOptGoodQtyValue+')大於批次量('+wfOrderBatchQtyValue * 1000+')', '继續');
+      this.warningAlert('', '良品数('+wfOptGoodQtyValue+')大于批次量('+wfOrderBatchQtyValue * 1000+')', '继续');
     } 
     
   }
@@ -777,7 +844,7 @@ export class WorkflowService {
           }
 
         }
-        alert("嚫，查无此人!?");
+        alert("亲，查无此人!?");
         break;
 
       case "wfStaffLeadName":
@@ -790,7 +857,7 @@ export class WorkflowService {
           }
         }
 
-        alert("嚫，查无此人!?");
+        alert("亲，查无此人!?");
         break;
 
       case "wfStaffQCName":
@@ -802,7 +869,7 @@ export class WorkflowService {
             return;
           }
         }
-        alert("嚫，查无此人!?");
+        alert("亲，查无此人!?");
         break;
 
       case "wfStaffTechName":
@@ -814,7 +881,7 @@ export class WorkflowService {
             return;
           }
         }
-        alert("嚫，查无此人!?");
+        alert("亲，查无此人!?");
         break;
 
       case "wfStaffXrayName":
@@ -826,12 +893,12 @@ export class WorkflowService {
             return;
           }
         }
-        alert("嚫，查无此人!?");
+        alert("亲，查无此人!?");
         break;
 
       default:
         console.log("Failed to lookup the staff record " + model);
-        alert("嚫，查无此人!?");
+        alert("亲，查无此人!?");
         break;
     }
 
@@ -860,7 +927,7 @@ export class WorkflowService {
     }
 
     // Default cmd if no result is found!
-    alert("嚫，查无此人!?");
+    alert("亲，查无此人!?");
 
   };
 
@@ -1180,6 +1247,7 @@ export class WorkflowService {
 
       let wtForm = form.value.wfForm;
       let ProcessCount = this.toInt( form.value.wfProcess );
+      let RunningTotal = this.toInt(form.value.wfGoodTotal);
 
       //良品数上下限
       let QC_UPPER = 1.2;
@@ -1191,10 +1259,14 @@ export class WorkflowService {
       //not exceeding 10k of batch qty
       //flexible_quantity - Finished_Product = 10000;
       let finishProdLimit = 10000;
+      // ComparingTotal is a combination of goodQty and Running total so
+      //running total is used to comparing instead of just GoodQty alone
+      let ComparingTotal = RunningTotal + goodQty;
 
       console.log("finalValidation: startQty: " + startQty +
         " goodQty: " + goodQty + " badQty: " + badQty +
-        " batchQty: " + batchQty + " ProcessCount: " + ProcessCount );
+        " batchQty: " + batchQty + " ProcessCount: " + ProcessCount + "RunningTotal:" + RunningTotal+
+      "ComparingTotal:"+ComparingTotal);
       //  sub process card
       //rule 5 cannot exceed batch quantity
       if ( badQty > batchQty ) {
@@ -1209,16 +1281,16 @@ export class WorkflowService {
         case '1':
           console.log("finalValidation: Checking Form 1");
           if ( ProcessCount > 1 ) {
-            if ( Math.abs( goodQty - startQty ) <= OtherLimit ) {
+            if ( Math.abs( ComparingTotal - startQty ) <= OtherLimit ) {
               // for the variance within the limit, no actions
               return true;
 
-            } else if ( goodQty > (QC_UPPER * startQty) ) {
+            } else if ( ComparingTotal > (QC_UPPER * startQty) ) {
               // rule 4 cant not exceed 20% of good quantity from last process
               alert( '良品数上限不得超过投入数百分之二十' );
               return false;
 
-            } else if ( goodQty < (QC_LOWER * startQty) ) {
+            } else if ( ComparingTotal < (QC_LOWER * startQty) ) {
               // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
               alert( '良品数下限不得低于投入数百分之八十' );
               return false;
@@ -1232,31 +1304,31 @@ export class WorkflowService {
         case '2':
           console.log("finalValidation: Checking Form 2");
           if ( ProcessCount > 1 ) {
-            if ( Math.abs( goodQty - startQty ) <= OtherLimit ) {
+            if ( Math.abs( ComparingTotal - startQty ) <= OtherLimit ) {
               // for the variance within the limit, no actions
 
-              if ( goodQty < batchQty ) {
+              if ( ComparingTotal < batchQty ) {
                 // rule 2 cant be below batch quantity
                 alert( '良品数不得小于批次量' );
                 return false;
 
-              } else if ( (goodQty - batchQty) > (finishProdLimit) ) {
+              } else if ( (ComparingTotal - batchQty) > (finishProdLimit) ) {
                 //rule 1 cannot exceed 10k of batch quantity
                 alert( '良品不得超過批次量一万以上' );
                 return false;
 
               }
-            } else if ( goodQty < (QC_LOWER * startQty) ) {
+            } else if ( ComparingTotal < (QC_LOWER * startQty) ) {
               // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
               alert( '良品数下限不得低于投入数百分之八十' );
               return false;
 
             }
-          } else if ( goodQty < batchQty ) {
+          } else if ( ComparingTotal < batchQty ) {
             alert( '良品数不得小于批次量' );
             return false;
 
-          } else if ( (goodQty - batchQty) > (finishProdLimit) ) {
+          } else if ( (ComparingTotal - batchQty) > (finishProdLimit) ) {
             //rule 1 cannot exceed 10k of batch quantity
             alert( '良品不得超過批次量一万以上' );
             return false;
@@ -1269,16 +1341,16 @@ export class WorkflowService {
         case '3':
           console.log("finalValidation: Checking Form 3");
           if ( ProcessCount > 1 ) {
-            if ( Math.abs( goodQty - startQty ) <= OtherLimit ) {
+            if ( Math.abs( ComparingTotal - startQty ) <= OtherLimit ) {
               return true;
             }
             // rule 4 cant not exceed 20% of good quantity from last process
-            else if ( goodQty > (QC_UPPER * startQty) ) {
+            else if ( ComparingTotal > (QC_UPPER * startQty) ) {
               alert( '良品数上限不得超过投入数百分之二十' );
               return false;
             }
             // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
-            else if ( goodQty < (QC_LOWER * startQty) ) {
+            else if ( ComparingTotal < (QC_LOWER * startQty) ) {
               alert( '良品数下限不得低于投入数百分之八十' );
               return false;
             }

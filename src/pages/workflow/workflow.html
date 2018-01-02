@@ -110,7 +110,7 @@
                         <button style="width: 10%; margin: 0 auto; margin-top:50px !important; "
                                 ion-button
                                 type="button"
-                                (click)="this.batchUploadForm()">
+                                (click)="this.wfSvc.storageBatchUpload(this.storageData)">
                             一次上存
                         </button>
                     </ion-col>

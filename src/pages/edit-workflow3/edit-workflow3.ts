@@ -99,7 +99,7 @@ export class EditWorkflow3Page implements OnInit{
 
       {method: "input", model: "wfOrderDeliveryDate", title: "交期", type: "text", size: 10, disabled:true, highlight: false},
       {method: "input", model: "wfOrderEstFinishDate", title: "完工日期", type: "text", size: 10, disabled:true, highlight: false},
-      {method: "input", model: "wfGoodTotal", title: "良品數總和", type: "number", size: 8, highlight: false},
+      {method: "input", model: "wfGoodTotal", title: "良品数总和", type: "number", size: 8, highlight: false},
 
       {method: "break", size: "88", visibility: "hidden"},
       
@@ -212,7 +212,7 @@ export class EditWorkflow3Page implements OnInit{
         {title: "备注", model: "wfSpecNote", type: "textarea", inputType: 9, size: 40},
       ]},
 
-      {method: "table", size: 8, headers: [{title: "不良數种类"},{title: "数量"}],rows: [
+      {method: "table", size: 8, headers: [{title: "不良数种类"},{title: "数量"}],rows: [
         {title: "1", cols: [
           {model: "wfBadItem1", type: "text", size:"6", disabled: false},
           {model: "wfBadQty1", type: "number", size:"6", disabled: false},
@@ -245,16 +245,16 @@ export class EditWorkflow3Page implements OnInit{
     
     this.wfPplInputs = [
       // {title: "作业員ID", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: true, wfPplI: 1, size: 7},
-      {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: true, wfPplI: 1, size: 7},
+      {title: "作业员", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: true, wfPplI: 1, size: 7},
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 4},
-      {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 6, size: 7},
-      {title: "班长硧认", method: "input", model: "wfStaffLeadName", type: "text", icon: 'construct', scan: true, wfPplI: 3, size: 7},
-      {title: "維修員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 4, size: 7},
+      {title: "技术员", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 6, size: 7},
+      {title: "班长确认", method: "input", model: "wfStaffLeadName", type: "text", icon: 'construct', scan: true, wfPplI: 3, size: 7},
+      {title: "維修员", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 4, size: 7},
       {title: "终检", method: "buttons", model: "wfQCPass", icon: "md-checkmark-circle-outline",buttons: [
         {label: "通过", value: 1, icon: 'checkmark'},
         {label: "失败", value: 2, icon: 'close'}
       ]},
-      {title: "品检員", method: "input", model: "wfStaffQCName", type: "text", icon: 'search', scan: true, wfPplI: 5, size: 7},
+      {title: "品检员", method: "input", model: "wfStaffQCName", type: "text", icon: 'search', scan: true, wfPplI: 5, size: 7},
       {title: "品检备注", method: "textarea", model: "wfQCInputNote", type: "text", icon: 'chatbubbles', scan: false, size: 27},
     ];
   }
@@ -483,7 +483,7 @@ export class EditWorkflow3Page implements OnInit{
         form.controls['wfBadItem4'].setValue('低容');
         form.controls['wfBadItem5'].setValue('损耗');
         form.controls['wfBadItem6'].setValue('漏电');
-        form.controls['wfBadItemTotal'].setValue('不良数總和');
+        form.controls['wfBadItemTotal'].setValue('不良数总和');
 
       }
     }
@@ -535,7 +535,7 @@ export class EditWorkflow3Page implements OnInit{
     alertCtl.addButton('取消');
 
     alertCtl.addButton({
-      text: '確定',
+      text: '确定',
       handler: (data: any) => {
         // Once selected the subprocess, update the form and then submit the form to next process stage
         alert("上传成功");
@@ -612,11 +612,11 @@ export class EditWorkflow3Page implements OnInit{
 
   presentPrompt() {
     let alert = this.alertCtrl.create({
-      title: '嚫，请轻描淡写照片内容',
+      title: '亲，请轻描淡写照片内容',
       inputs: [
         {
           name: 'imgDes',
-          placeholder: '木有问题'
+          placeholder: '没有问题'
         }
       ],
       buttons: [

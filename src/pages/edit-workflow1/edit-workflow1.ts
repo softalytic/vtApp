@@ -74,7 +74,7 @@ export class EditWorkflow1Page implements OnInit{
 
       {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 12, highlight: false},
       {method: "input", model: "wfOrderBatchQty", title: "批次量", type: "number", size: 5, highlight: false},
-      {method: "input", model: "wfGoodTotal", title: "良品數總和", type: "number", size: 5, highlight: false},
+      {method: "input", model: "wfGoodTotal", title: "良品数总和", type: "number", size: 5, highlight: false},
       {method: "break", size: "88", visibility: "hidden"},
 
       {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 20, highlight: false},
@@ -115,7 +115,7 @@ export class EditWorkflow1Page implements OnInit{
         {title: "不良数", model: "wfOptBadQty", type: "number", wfBadQty: '1', scan: false, size: 8},
         {title: "良品数", model: "wfOptGoodQty", type: "number",  scan: false, size: 8}
       ]},
-      {method: "table", size: 8, headers: [{title: "不良數种类"},{title: "数量"}],rows: [
+      {method: "table", size: 8, headers: [{title: "不良数种类"},{title: "数量"}],rows: [
         {title: "1", cols: [
           {model: "wfBadItem1", type: "text", size:"6", disabled: false},
           {model: "wfBadQty1", type: "number", size:"6", disabled: false},
@@ -170,9 +170,9 @@ export class EditWorkflow1Page implements OnInit{
     
     this.wfPplInputs = [
       // {title: "作业員ID", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: true, wfPplI: 1, size: 7},
-      {title: "作业員", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: true, wfPplI: 2, size: 6},
+      {title: "作业员", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: true, wfPplI: 2, size: 6},
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 3},
-      {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 3, size: 7},
+      {title: "技术员", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 3, size: 7},
       {title: "X-RAY", method: "input", model: "wfStaffXrayName", type: "text", icon: 'construct', scan: true, wfPplI: 4, size: 7},
 
       {title: "终检", method: "buttons", model: "wfQCPass", icon: "md-checkmark-circle-outline",buttons: [
@@ -180,7 +180,7 @@ export class EditWorkflow1Page implements OnInit{
         {label: "失败", value: 2, icon: 'close'}
       ]},
 
-      {title: "品检員", method: "input", model: "wfStaffQCName", type: "text", icon: 'search', scan: 5, wfPplI: 5, size: 11},
+      {title: "品检员", method: "input", model: "wfStaffQCName", type: "text", icon: 'search', scan: 5, wfPplI: 5, size: 11},
       {title: "品检备注", method: "textarea", model: "wfQCInputNote", type: "text", icon: 'chatbubbles', scan: false, size: 27},
     ];
   }
@@ -395,7 +395,7 @@ export class EditWorkflow1Page implements OnInit{
         form.controls['wfBadItem4'].setValue('低容');
         form.controls['wfBadItem5'].setValue('损耗');
         form.controls['wfBadItem6'].setValue('漏电');
-        form.controls['wfBadItemTotal'].setValue('不良数總和');
+        form.controls['wfBadItemTotal'].setValue('不良数总和');
       }
     }
 

@@ -56,9 +56,9 @@ export class WorkflowPage implements OnInit {
   };
 
   dataMachine = {
-    "AA001":{"wfStaffOptId":"S0001","wfStaffOptName":"員工01","wfStaffTechId":"T0001","wfStaffTechName":"技術員工01","wfStaffXrayId":"X0001","wfStaffXrayName":"Xray員工01","wfStaffOptShift":"A"},
-    "AB002":{"wfStaffOptId":"S0002","wfStaffOptName":"員工02","wfStaffTechId":"T0002","wfStaffTechName":"技術員工01","wfStaffXrayId":"X0002","wfStaffXrayName":"Xray員工02","wfStaffOptShift":"B"},
-    "AC003":{"wfStaffOptId":"S0003","wfStaffOptName":"員工03","wfStaffTechId":"T0003","wfStaffTechName":"技術員工03","wfStaffXrayId":"X0003","wfStaffXrayName":"Xray員工03","wfStaffOptShift":"A"}
+    "AA001":{"wfStaffOptId":"S0001","wfStaffOptName":"员工01","wfStaffTechId":"T0001","wfStaffTechName":"技术员工01","wfStaffXrayId":"X0001","wfStaffXrayName":"Xray员工01","wfStaffOptShift":"A"},
+    "AB002":{"wfStaffOptId":"S0002","wfStaffOptName":"员工02","wfStaffTechId":"T0002","wfStaffTechName":"技术员工01","wfStaffXrayId":"X0002","wfStaffXrayName":"Xray员工02","wfStaffOptShift":"B"},
+    "AC003":{"wfStaffOptId":"S0003","wfStaffOptName":"员工03","wfStaffTechId":"T0003","wfStaffTechName":"技术员工03","wfStaffXrayId":"X0003","wfStaffXrayName":"Xray员工03","wfStaffOptShift":"A"}
   };
 
   storageData = [];
@@ -150,9 +150,9 @@ export class WorkflowPage implements OnInit {
       }
 
       // testing data
-      this.storageData.push(JSON.stringify(this.imgPacket));
       this.storageData.push('{"wfProcess":"2","wfProcessName":"烘干","wfForm":"3","wfFormId":"123","wfFormSplit":0,"wfOptMachineId":"321","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:24:47.676","wfOptInputEndDate":"2017-12-27T14:24:47.676Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":0,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"2","wfErrorMsg":""}');
       this.storageData.push('{"wfProcess":"1","wfProcessName":"素子钉卷","wfForm":"3","wfFormId":"ASD","wfFormSplit":0,"wfOptMachineId":"ASD","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:21:28.564","wfOptInputEndDate":"2017-12-27T14:21:28.564Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"12000","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":12000,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"1","wfErrorMsg":""}');
+      this.storageData.push(JSON.stringify(this.imgPacket));
 
       console.log(this.storageData);
 
@@ -200,18 +200,18 @@ export class WorkflowPage implements OnInit {
       //this.wfSvc.warningAlert(' name:' + form.value.wfForm + ' id: ' + form.value.wfFormId + ' ' + form.value.wfProcess + ' form id' + form.value.wfForm, '嚫，请选择工单', '继續');
       let formMsgAlert = '';
       if(form.value.wfFormId === "") {
-        formMsgAlert += '<br><br>1. 輸入流程卡号';
+        formMsgAlert += '<br><br>1. 输入流程卡号';
       }
       if(form.value.wfOptMachineId === "") {
         formMsgAlert += '<br><br>2. 輸入台机号';
       }
       if(form.value.wfForm === "") {
-        formMsgAlert += '<br><br>3. 選擇流程卡';
+        formMsgAlert += '<br><br>3. 选择流程卡';
       }
       if(form.value.wfProcess === "") {
-        formMsgAlert += '<br><br>4. 選擇工序';
+        formMsgAlert += '<br><br>4. 选择工序';
       }
-      this.wfSvc.warningAlert('請提供或更正下列资料：', formMsgAlert + '<br><br>然後按 \" 確定\”', '继續');
+      this.wfSvc.warningAlert('请提供或更正下列资料：', formMsgAlert + '<br><br>然後按 \" 確定\”', '继续');
 
     }
     else {
@@ -268,7 +268,7 @@ export class WorkflowPage implements OnInit {
         // If there is any error or unsuccessful connection
         // Then throw alert to user about the network error
         // Assume no offline mode for exceptional handling
-        alert("嚫,网路不给力");
+        alert("亲,网路不给力");
         console.log(err);
 
       })
@@ -346,7 +346,7 @@ export class WorkflowPage implements OnInit {
       console.log("Trying to load data from storage");
 
       // this.warningAlert("嚫!","网路不给力","知道了!");
-      alert("嚫,网路不给力");
+      alert("亲,网路不给力");
       console.log(err);
       console.log("Trying to load data from storage");
 
@@ -603,75 +603,55 @@ export class WorkflowPage implements OnInit {
     alert.present();
   };
 
-  batchUploadForm(): Promise<any> {
-    console.log("uploadDataArray is being called");
-    let promiseChain: Promise<any> = Promise.resolve();
-    let i = this.storageData.length; // Total iteration
-    let e = 0; // Each run
-    this.storageData.forEach((data,index) => {
-      promiseChain = promiseChain.then(
-        // () => this.wfSvc.upload(localDataObject)
-        () => {
-          let form = JSON.parse(data);
-          console.log("processing array index " + index);
-          return this.uploadForm(form,index,e,i);
-        }
-
-      );
-    });
-
-    return promiseChain;
-  }
-
-  uploadForm(form: any, index: any, each: number, iterate: number){
-    let e = each;
-    let i = iterate;
-
-    console.log("uploadForm is being called for " + index);
-    console.log(form);
-    if(typeof form['wfImg'] == 'undefined'){
-      console.log("it is a form " + index);
-      this.wfSvc.upload(form).subscribe(res => {
-        if(typeof res['wfFormId'] != 'undefined'){
-          if(form.wfFormId == res.wfFormId){
-            e = e + 1;
-            console.log(index + ": e is " + e + " out of " + i);
-            console.log("Res wfFormId: " + res.wfFormId);
-            this.storageData[index] = "";
-
-            if(e === i ){
-              this.storageCleanUp;
-            }
-
-          }
-
-        }
-      }, err => {
-        e = e + 1;
-        console.log(index + ": e is " + e + " out of " + i);
-        if(e === i ){
-          this.storageCleanUp();
-        }
-      })
-
-    } else {
-      console.log("it is a image " + index);
-      this.wfSvc.batchUploadImages(form).subscribe(res => {
-        e = e + 1;
-        console.log(index + ": e is " + e + " out of " + i);
-        this.storageData[index] = "";
-        if(e === i ){
-          this.storageCleanUp();
-        }
-      }, err => {
-        e = e + 1;
-        console.log(index + ": e is " + e + " out of " + i);
-        if(e === i ){
-          this.storageCleanUp();
-        }
-      });
-    }
-  }
+  // uploadForm(form: any, index: any, each: number, iterate: number){
+  //   let e = each;
+  //   let i = iterate;
+  //
+  //   console.log("uploadForm is being called for " + index);
+  //   console.log(form);
+  //   if(typeof form['wfImg'] == 'undefined'){
+  //     console.log("it is a form " + index);
+  //     this.wfSvc.upload(form).subscribe(res => {
+  //       if(typeof res['wfFormId'] != 'undefined'){
+  //         if(form.wfFormId == res.wfFormId){
+  //           e = e + 1;
+  //           console.log(index + ": e is " + e + " out of " + i);
+  //           console.log("Res wfFormId: " + res.wfFormId);
+  //           this.storageData[index] = "";
+  //
+  //           if(e === i ){
+  //             this.storageCleanUp;
+  //           }
+  //
+  //         }
+  //
+  //       }
+  //     }, err => {
+  //       e = e + 1;
+  //       console.log(index + ": e is " + e + " out of " + i);
+  //       if(e === i ){
+  //         this.storageCleanUp();
+  //       }
+  //     })
+  //
+  //   } else {
+  //     console.log("it is a image " + index);
+  //     this.wfSvc.batchUploadImages(form).subscribe(res => {
+  //       e = e + 1;
+  //       console.log(index + ": e is " + e + " out of " + i);
+  //       this.storageData[index] = "";
+  //       if(e === i ){
+  //         this.storageCleanUp();
+  //       }
+  //     }, err => {
+  //       e = e + 1;
+  //       console.log(index + ": e is " + e + " out of " + i);
+  //       if(e === i ){
+  //         this.storageCleanUp();
+  //       }
+  //     });
+  //   }
+  // }
 
   storageCleanUp(){
     for(let i=0;i<this.storageData.length;i++){
@@ -681,10 +661,6 @@ export class WorkflowPage implements OnInit {
     }
     this.storage.set("backupForm",this.storageData).then(() => alert("All data have been purged!"));
   }
-
-
-
-
 
   // uploadDataObject(localDataObject: any): Promise<any> {
   //   return this.wfSvc.upload(localDataObject).subscribe(() => {

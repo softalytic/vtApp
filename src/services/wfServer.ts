@@ -1,9 +1,12 @@
 import { Injectable} from "@angular/core";
 import 'rxjs/Rx';
+import 'rxjs/add/operator/catch'
 import { Headers, Http, RequestOptions, Response } from "@angular/http";
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { WorkflowPage } from "../pages/workflow/workflow";
+import { observable } from "rxjs/symbol/observable";
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class WorkflowService {
@@ -33,6 +36,7 @@ export class WorkflowService {
 
   constructor(private http: Http,
               private storage: Storage,
+              private loadingCtrl: LoadingController,
               private alertCtrl: AlertController){}
 
   upload(form: any){
@@ -224,35 +228,49 @@ export class WorkflowService {
       });
   }
 
-  storageBatchUpload(form:any) {
+  storageBatchUpload(form:any, loadingCtrl:any) {
 
-    console.log("storageBatchUpload is being called " + JSON.stringify(form.value));
+    if(form.length){
+      console.log("storageBatchUpload is being called " + JSON.stringify(form.value));
 
-    this.batchUpload(form,false).subscribe( () => {
-      console.log('all requests finished');
-    }, err => {
-      alert("Network error " + err);
-    });
+      let loading = this.loadingCtrl.create({
+        content: ''
+      });
 
+      loading.present();
+
+
+      this.batchUpload(form).subscribe( () => {
+        console.log('all requests finished');
+        loading.dismiss();
+        return this.storageBatchUpload(form,loadingCtrl);
+      }, err => {
+        loading.dismiss();
+        alert("Network Error" + err);
+
+      });
+    } else {
+      alert("batchUpload has completed, No more upload!!");
+    }
   }
 
-  batchUpload(queryArr, previousObservable){
+  batchUpload(storageData) {
 
-    console.log("batchUpload wfServer is called");
+    console.log( "batchUpload wfServer is called" );
 
-    if (queryArr.length) {
-      let payload = JSON.parse(queryArr[0]);
+    if ( storageData.length ) {
+      let payload = JSON.parse(storageData[0]);
       let queryUrl: string;
       let timeOut: number;
 
-      queryArr.splice(0,1);
-      console.log('queryArr = '+queryArr.length);
+
+      console.log( 'storageData = ' + storageData.length );
 
       // console.log("payload" + JSON.stringify(payload));
 
-      if(typeof payload['wfImg'] == 'undefined'){
+      if ( typeof payload[ 'wfImg' ] == 'undefined' ) {
         queryUrl = this.baseUrl + "form/submit/";
-        timeOut = 1000;
+        timeOut = 3000;
 
       } else {
         queryUrl = this.baseUrl + "form/image/submit/";
@@ -260,36 +278,87 @@ export class WorkflowService {
 
       }
 
-      console.log("Requesting url: " + queryUrl);
-      console.log("Timeout " + timeOut);
+      console.log("batchUploading requesting url: " + queryUrl );
+      console.log("batchUploading Timeout " + timeOut );
 
-      let observable = null;
-      if (previousObservable) {
-        observable = previousObservable.flatMap(() => {
-          return this.http.post(queryUrl, payload,this.httpOptions)
-            .timeout(timeOut)
-            .map((res:Response) => res.json())
-            .do((res) => {
-              console.log('request finished' + JSON.stringify(res.wfFormId));
-            });
-        });
-
-      } else {
-        observable = this.http.post(queryUrl, payload, this.httpOptions)
-          .timeout(timeOut)
-          .map((res:Response) => res.json())
-          .do((res ) => {
-            console.log('request finished' + JSON.stringify(res.wfFormId));
-          });
-
-      }
-      return this.batchUpload(queryArr, observable);
-
-    } else {
-      return previousObservable;
+      return this.http.post( queryUrl, payload, this.httpOptions )
+        .timeout( timeOut )
+        .map((res) => res.json() )
+        .do((res) => {
+          console.log('batchUpload request finished' + JSON.stringify( res.wfFormId ) );
+          console.log("Clearing the storage cache now");
+          storageData.splice( 0, 1 );
+        } );
 
     }
   }
+
+
+  // batchUpload(storageData, previousObservable){
+  //
+  //   console.log("batchUpload wfServer is called");
+  //   let _storageData = storageData;
+  //
+  //   console.log(previousObservable);
+  //
+  //
+  //   if (_storageData.length) {
+  //     let payload = JSON.parse(_storageData[0]);
+  //     let queryUrl: string;
+  //     let timeOut: number;
+  //
+  //     _storageData.splice(0,1);
+  //     console.log('_storageData = '+_storageData.length);
+  //
+  //     // console.log("payload" + JSON.stringify(payload));
+  //
+  //     if(typeof payload['wfImg'] == 'undefined'){
+  //       queryUrl = this.baseUrl + "form/submit/";
+  //       timeOut = 1000;
+  //
+  //     } else {
+  //       queryUrl = this.baseUrl + "form/image/submit/";
+  //       timeOut = 1000;
+  //
+  //     }
+  //
+  //     console.log("Requesting url: " + queryUrl);
+  //     console.log("Timeout " + timeOut);
+  //
+  //     let observable: any;
+  //     if (previousObservable) {
+  //       observable = previousObservable.flatMap(() => {
+  //         return this.http.post(queryUrl, payload, this.httpOptions)
+  //           .timeout(timeOut)
+  //           .map((res:Response) => res.json())
+  //           .do((res) => {
+  //             console.log('request finished' + JSON.stringify(res.wfFormId));
+  //             return this.batchUpload(_storageData, observable);
+  //           });
+  //       });
+  //
+  //     } else {
+  //       observable = this.http.post(queryUrl, payload, this.httpOptions)
+  //         .timeout(timeOut)
+  //         .map((res:Response) => res.json())
+  //         .do((res ) => {
+  //           console.log('request finished' + JSON.stringify(res.wfFormId));
+  //           // this.cleanDataFromStorage(storageData,payload);
+  //         });
+  //
+  //       return this.batchUpload(_storageData, observable);
+  //
+  //     }
+  //
+  //
+  //
+  //   } else {
+  //
+  //     console.log("returning previous observable state");
+  //     return previousObservable;
+  //
+  //   }
+  // }
 
   showWfOpsFinalInputsAlert(wfInputForm: any, navCtrl: any, images: any, wfPName: any) {
     // This function manage all the form submission in each of the wfForm and connect with the server call

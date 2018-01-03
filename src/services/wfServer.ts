@@ -234,7 +234,7 @@ export class WorkflowService {
       console.log("storageBatchUpload is being called " + JSON.stringify(form.value));
 
       let loading = this.loadingCtrl.create({
-        content: ''
+        content: 'uploading ' + form.length
       });
 
       loading.present();

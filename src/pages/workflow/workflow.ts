@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { NgForm, FormGroup, FormBuilder } from "@angular/forms";
 import { WorkflowService } from "../../services/wfServer";
 import { QRCodeService } from "../../services/qrCode";
@@ -85,6 +85,7 @@ export class WorkflowPage implements OnInit {
               private wfSvc: WorkflowService,
               private formBuilder: FormBuilder,
               private navCtrl: NavController,
+              private loadingCtrl: LoadingController,
               private alertCtrl: AlertController){
 
     storage.ready().then(() => { });
@@ -149,30 +150,6 @@ export class WorkflowPage implements OnInit {
 
       }
 
-      // testing data
-      this.storageData.push('{"wfProcess":"2","wfProcessName":"烘干","wfForm":"3","wfFormId":"123","wfFormSplit":0,"wfOptMachineId":"321","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:24:47.676","wfOptInputEndDate":"2017-12-27T14:24:47.676Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":0,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"2","wfErrorMsg":""}');
-      this.storageData.push(JSON.stringify(this.imgPacket));
-      this.storageData.push('{"wfProcess":"1","wfProcessName":"素子钉卷","wfForm":"3","wfFormId":"ASD","wfFormSplit":0,"wfOptMachineId":"ASD","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:21:28.564","wfOptInputEndDate":"2017-12-27T14:21:28.564Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"12000","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":12000,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"1","wfErrorMsg":""}');
-      this.storageData.push(JSON.stringify(this.imgPacket));
-      // this.storageData.push('{"wfProcess":"2","wfProcessName":"烘干","wfForm":"3","wfFormId":"123","wfFormSplit":0,"wfOptMachineId":"321","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:24:47.676","wfOptInputEndDate":"2017-12-27T14:24:47.676Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":0,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"2","wfErrorMsg":""}');
-      // this.storageData.push(JSON.stringify(this.imgPacket));
-      // this.storageData.push('{"wfProcess":"1","wfProcessName":"素子钉卷","wfForm":"3","wfFormId":"ASD","wfFormSplit":0,"wfOptMachineId":"ASD","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:21:28.564","wfOptInputEndDate":"2017-12-27T14:21:28.564Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"12000","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":12000,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"1","wfErrorMsg":""}');
-      // this.storageData.push('{"wfProcess":"2","wfProcessName":"烘干","wfForm":"3","wfFormId":"123","wfFormSplit":0,"wfOptMachineId":"321","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:24:47.676","wfOptInputEndDate":"2017-12-27T14:24:47.676Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":0,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"2","wfErrorMsg":""}');
-      // this.storageData.push(JSON.stringify(this.imgPacket));
-      // this.storageData.push('{"wfProcess":"1","wfProcessName":"素子钉卷","wfForm":"3","wfFormId":"ASD","wfFormSplit":0,"wfOptMachineId":"ASD","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:21:28.564","wfOptInputEndDate":"2017-12-27T14:21:28.564Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"12000","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":12000,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"1","wfErrorMsg":""}');
-      // this.storageData.push('{"wfProcess":"2","wfProcessName":"烘干","wfForm":"3","wfFormId":"123","wfFormSplit":0,"wfOptMachineId":"321","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:24:47.676","wfOptInputEndDate":"2017-12-27T14:24:47.676Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":0,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"2","wfErrorMsg":""}');
-      // this.storageData.push(JSON.stringify(this.imgPacket));
-      // this.storageData.push('{"wfProcess":"1","wfProcessName":"素子钉卷","wfForm":"3","wfFormId":"ASD","wfFormSplit":0,"wfOptMachineId":"ASD","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:21:28.564","wfOptInputEndDate":"2017-12-27T14:21:28.564Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"12000","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":12000,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"1","wfErrorMsg":""}');
-      // this.storageData.push('{"wfProcess":"2","wfProcessName":"烘干","wfForm":"3","wfFormId":"123","wfFormSplit":0,"wfOptMachineId":"321","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:24:47.676","wfOptInputEndDate":"2017-12-27T14:24:47.676Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":0,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"2","wfErrorMsg":""}');
-      // this.storageData.push(JSON.stringify(this.imgPacket));
-      // this.storageData.push('{"wfProcess":"1","wfProcessName":"素子钉卷","wfForm":"3","wfFormId":"ASD","wfFormSplit":0,"wfOptMachineId":"ASD","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:21:28.564","wfOptInputEndDate":"2017-12-27T14:21:28.564Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"12000","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":12000,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"1","wfErrorMsg":""}');
-      // this.storageData.push('{"wfProcess":"2","wfProcessName":"烘干","wfForm":"3","wfFormId":"123","wfFormSplit":0,"wfOptMachineId":"321","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:24:47.676","wfOptInputEndDate":"2017-12-27T14:24:47.676Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":0,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"2","wfErrorMsg":""}');
-      // this.storageData.push(JSON.stringify(this.imgPacket));
-      // this.storageData.push('{"wfProcess":"1","wfProcessName":"素子钉卷","wfForm":"3","wfFormId":"ASD","wfFormSplit":0,"wfOptMachineId":"ASD","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:21:28.564","wfOptInputEndDate":"2017-12-27T14:21:28.564Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"12000","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":12000,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"1","wfErrorMsg":""}');
-      // this.storageData.push('{"wfProcess":"2","wfProcessName":"烘干","wfForm":"3","wfFormId":"123","wfFormSplit":0,"wfOptMachineId":"321","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:24:47.676","wfOptInputEndDate":"2017-12-27T14:24:47.676Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":0,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"2","wfErrorMsg":""}');
-      // this.storageData.push(JSON.stringify(this.imgPacket));
-      // this.storageData.push('{"wfProcess":"1","wfProcessName":"素子钉卷","wfForm":"3","wfFormId":"ASD","wfFormSplit":0,"wfOptMachineId":"ASD","wfSpecCap":"","wfSpecDF":"","wfSpecLC":"","wfSpecZESR":"","wfAgeVoltSet":"","wfPriorWfFormId":"","wfNakedProductSpec":"","wfOrderId":"","wfOrderSeries":"","wfOrderBatchId":"","wfOrderRMId":"","wfOrderSpec":"","wfOrderDim":"","wfOrderBatchQty":"","wfOrderTotalQty":"","wfSalesOrderQty":"","wfClientId":"","wfOrderFormNote":"","wfOrderNote":"","wfOrderBOMNote":"","wfSalesOrderNote":"","wfOrderDate":"","wfOrderStartDate":"","wfOrderEstFinishDate":"","wfOrderDeliveryDate":"","wfOrderTK":"","wfRMFoilPosName":"","wfRMFoilPosLName":"","wfRMFoilPosCapFrom":"","wfRMFoilPosCapTo":"","wfRMFoilPosWidth":"","wfRMFoilPosLength":"","wfRMFoilNegName":"","wfRMFoilNegLName":"","wfRMFoilNegCapFrom":"","wfRMFoilNegCapTo":"","wfRMFoilNegWidth":"","wfRMFoilNegLength":"","wfRMFoilNegQty":"","wfRMPaperName":"","wfRMPaperQty":"","wfRMPinPosName":"","wfRMPinNegName":"","wfRMPinPosQty":"","wfRMPinNegQty":"","wfRMGlueName":"","wfRMSolName":"","wfRMSolQty":"","wfRMShellName":"","wfRMShellQty":"","wfRMPlasticName":"","wfRMPlasticQty":"","wfRMCoverName":"","wfRMCoverQty":"","wfRMUpBeltName":"","wfRMDownBeltName":"","wfRMBaseName":"","wfRMCircleName":"","wfRMFoilPosSerial":"","wfRMFoilNegSerial":"","wfRMFoilPosLSerial":"","wfRMFoilNegLSerial":"","wfRMPaperSerial":"","wfRMGlueSerial":"","wfRMSolSerial":"","wfRMPinPosSerial":"","wfRMPinNegSerial":"","wfRMPlasticSerial":"","wfRMShellSerial":"","wfRMCoverSerial":"","wfSalesOrderId":"","wfRMFoilPosQty":"","wfRMCoverCheck":"","wfRMWindingTime":"","wfRMWindingDeg":"","wfDryWindingDeg":"","wfWetEmptyAir":"","wfWetAir":"","wfWashWindingDeg":"","wfWashDryWindingDeg":"","wfWashDryTime":"","wfQCCheck":"","wfRandomCheckInfo":"","wfSpecNote":"","wfAgeDetailAG1":"","wfAgeDetailAG2":"","wfAgeDetailAG3":"","wfAgeDetailAG4":"","wfAgeDetailAG5":"","wfAgeDetailAG6":"","wfAgeDetailLCT":"","wfAgeDetailLC":"","wfAgeDetailCAP":"","wfAgeDetailDF":"","wfAgeDetailStaffConfirm":"","wfOptInputDate":"2017-12-27T22:21:28.564","wfOptInputEndDate":"2017-12-27T14:21:28.564Z","wfOptWashMachine":"","wfOptStartTime":"1234","wfOptFinishTime":"2345","wfOptBadQtyItem":0,"wfOptBadQty":"","wfOptGoodQty":"12000","wfBadItem1":"","wfBadQty1":"","wfBadItem2":"","wfBadQty2":"","wfBadItem3":"","wfBadQty3":"","wfBadItem4":"","wfBadQty4":"","wfBadItem5":"","wfBadQty5":"","wfBadItem6":"","wfBadQty6":"","wfBadItemTotal":"","wfAgeDegSet":"","wfAgeDegAct":"","wfAgeVoltAct":"","wfAgeCurrentSet":"","wfAgeCurrentAct":"","wfAgeTimeSet":"","wfAgeTimeAct":"","wfAgeNote":"","wfAutoAgeVoltAct1":"","wfAutoAgeVoltAct2":"","wfAutoAgeVoltAct3":"","wfAutoAgeVoltAct4":"","wfStaffOptId":"VO0830","wfStaffOptName":"陈培波","wfStaffOptShift":"B","wfStaffLeadName":"张翠蓉","wfStaffLeadId":"VF0021","wfStaffTechId":"VT0022","wfStaffTechName":"王永进","wfStaffXrayId":"不适用","wfStaffXrayName":"不适用","wfStaffQCId":"2VO0887","wfStaffQCName":"文江荣","wfQCPass":"","wfQCSignOff":"","wfQCInputNote":"","wfOrderSupNote":"","wfNakedProductSerial":"","wfRMUpBeltSerial":"","wfRMDownBeltSerial":"","wfRMBaseSerial":"","wfRMCricleSerial":"","wfRMPrintName":"","wfRMPrintSerial":"","wfFinalCheckInfo":"","wfElecPass":"","wfLookPass":"","wfOptStartQty":"","wfBadTotal":"","wfGoodTotal":12000,"wfFormStatus":true,"wfProcessStatus":"","created":"","appUpload":"","wfFormExcept":"","wfReadOnly":"","wfProcessNew":"","wfLastCompletedWf":"1","wfErrorMsg":""}');
-
       console.log(this.storageData);
 
     }, error => {
@@ -202,44 +179,56 @@ export class WorkflowPage implements OnInit {
     }
   }
 
-  onAddWf(){
-    // Main form submission function
-    // Form validation steps
-    // if the form.value.wfFormId is null or not being entered, then
-    //    current the alert is set to pre-fill the testing data
-    //    alert the users
-    // else
-    //    submission the form
+  formValidation(form:any){
+    console.log("formValidation is being called");
 
+    if (form.value.wfFormId === "" || form.value.wfForm === "" || form.value.wfProcess === "" || form.value.wfOptMachineId === "") {
+      //this.wfSvc.warningAlert(' name:' + form.value.wfForm + ' id: ' + form.value.wfFormId + ' ' + form.value.wfProcess + ' form id' + form.value.wfForm, '嚫，请选择工单', '继續');
+
+      let formMsgAlert = [];
+      if(form.value.wfFormId === "") {
+        formMsgAlert.push('输入流程卡号');
+      }
+      if(form.value.wfOptMachineId === "") {
+        formMsgAlert.push('輸入台机号');
+      }
+      if(form.value.wfForm === "") {
+        formMsgAlert.push('选择流程卡');
+      }
+      if(form.value.wfProcess === "") {
+        formMsgAlert.push('选择工序');
+      }
+
+      let formMsg = '';
+      if(formMsgAlert.length){
+        for(let key in formMsgAlert){
+          formMsg += '<br>' + (this.wfSvc.toInt(key) + 1) +'.  '+formMsgAlert[key]
+        }
+      }
+
+      this.wfSvc.warningAlert('请提供或更正下列资料：', formMsg + '<br><br>然後按 \" 確定\”', '继续');
+      return false;
+
+    } else {
+      return true;
+
+    }
+
+  }
+
+  onAddWf(){
     console.log("onAddWF is triggered!");
 
     let form = this.wfInputForm;
 
-    if (form.value.wfFormId === "" || form.value.wfForm === "" || form.value.wfProcess === "" || form.value.wfOptMachineId === "") {
-      //this.wfSvc.warningAlert(' name:' + form.value.wfForm + ' id: ' + form.value.wfFormId + ' ' + form.value.wfProcess + ' form id' + form.value.wfForm, '嚫，请选择工单', '继續');
-      let formMsgAlert = '';
-      if(form.value.wfFormId === "") {
-        formMsgAlert += '<br><br>1. 输入流程卡号';
-      }
-      if(form.value.wfOptMachineId === "") {
-        formMsgAlert += '<br><br>2. 輸入台机号';
-      }
-      if(form.value.wfForm === "") {
-        formMsgAlert += '<br><br>3. 选择流程卡';
-      }
-      if(form.value.wfProcess === "") {
-        formMsgAlert += '<br><br>4. 选择工序';
-      }
-      this.wfSvc.warningAlert('请提供或更正下列资料：', formMsgAlert + '<br><br>然後按 \" 確定\”', '继续');
-
-    }
-    else {
-
+    if (this.formValidation(form)){
+      console.log('form has been validated');
       this.dataSubmission(form);
 
-    }
+    } else {
+      console.log('form cannot be validated');
 
-    console.log('onAddWf has completed!');
+    }
 
   }
 
@@ -250,15 +239,6 @@ export class WorkflowPage implements OnInit {
 
     form.controls[model].setValue(value);
 
-  }
-
-  testDataPopulate(data:any, form:any) {
-    // This function is temp for onAddWf testing data pre-filled
-    // It is used to submit the data into storage and call workflowStateChange
-    // QRCode service is being used
-    this.QRCode.qrCodePopulate(data,form);
-    this.storage.set(form.value.wfFormId, form.value);
-    this.workflowStateChange();
   }
 
   dataSubmission(form: any) {
@@ -304,16 +284,45 @@ export class WorkflowPage implements OnInit {
 
   serverQuery(form:any){
     console.log("serverQuery is being called");
+
+    //Create loading screen
+    let wfSvcLoading = this.loadingCtrl.create({
+      content: "寻找上一个工序资料中。。。。"
+    });
+
+    // Loading screen will be there until loading.dismiss() is being called
+    // Currently default it will timeout differently base on the type of the upload
+    wfSvcLoading.present();
+
     this.wfSvc.query(form.value).subscribe( (serverData) => {
+      wfSvcLoading.dismiss();
 
       if(serverData[0] == "" || serverData[0] == [] || serverData[0] == null){
+
+        //Create loading screen
+        let erpLoading = this.loadingCtrl.create({
+          content: "寻找上ERP资料中。。。。"
+        });
+
+        // Loading screen will be there until loading.dismiss() is being called
+        // Currently default it will timeout differently base on the type of the upload
+        erpLoading.present();
+
         this.wfSvc.erpQuery(form.value).subscribe( (serverData) => {
+          erpLoading.dismiss();
 
           if(serverData[0] == "" || serverData[0] == [] || serverData[0] == null){
-            alert("查无此单号");
-            // this.wfSvc.warningAlert("嚫!","查无此单号","知道了!");
-            if (!this.wfLoad){
-              this.workflowStateChange();
+
+            if(form.value.wfReadOnly){
+              // If it is read only, then skip the remaining process
+              return
+
+            } else {
+              alert("ERP查无此单号,进入手工输入模式");
+              if (!this.wfLoad){
+                this.workflowStateChange();
+              }
+
             }
 
           } else {
@@ -334,6 +343,9 @@ export class WorkflowPage implements OnInit {
             }
 
           }
+        }, err => {
+          erpLoading.dismiss();
+
         });
 
       } else {
@@ -361,12 +373,10 @@ export class WorkflowPage implements OnInit {
       // If there is any error or unsuccessful connection
       // Then throw alert to user about the network error
       // alert("Running ERP data");
-      console.log(err);
-      console.log("Trying to load data from storage");
+      wfSvcLoading.dismiss();
 
       // this.warningAlert("嚫!","网路不给力","知道了!");
       alert("亲,网路不给力");
-      console.log(err);
       console.log("Trying to load data from storage");
 
       let tmpData: any;
@@ -622,25 +632,6 @@ export class WorkflowPage implements OnInit {
     alert.present();
   };
 
-  storageCleanUp(){
-    for(let i=0;i<this.storageData.length;i++){
-      if(this.storageData[0] == ""){
-        this.storageData.splice(0,1);
-      }
-    }
-    this.storage.set("backupForm",this.storageData).then(() => alert("All data have been purged!"));
-  }
-
-  // uploadDataObject(localDataObject: any): Promise<any> {
-  //   return this.wfSvc.upload(localDataObject).subscribe(() => {
-  //     console.log("Data record #" + localDataObject['id'] + ": Online record created");
-  //
-  //     return this.removeLocalData_Promise(localDataObject['id']).then(() => {
-  //       console.log("Data record #" + localDataObject['id'] + ": Local record removed");
-  //     });
-  //   });
-  // }
-
   storageClear(){
     let NavAlert = this.alertCtrl.create({
       title: "确定清除本地存储",
@@ -662,6 +653,44 @@ export class WorkflowPage implements OnInit {
       ]
     });
     NavAlert.present();
+  }
+
+  readOnly(){
+    console.log("readOnly has been selected");
+
+    let form = this.wfInputForm;
+    form.value.wfReadOnly = true;
+
+    if(this.formValidation(form)){
+      console.log("form has been validated");
+      let alertBox = this.alertCtrl.create({
+        title: "亲,你己选择了浏览模式!",
+        message: "请选择该流程卡的班别",
+        buttons: [
+          {
+            text: "A班",
+            handler: () => {
+              console.log("A班 has been selected");
+              form.value.wfStaffOptShift = "A";
+              this.onAddWf();
+            }
+          },
+          {
+            text: "B班",
+            handler: () => {
+              console.log("B班 has been selected");
+              form.value.wfStaffOptShift = "B";
+              this.onAddWf();
+            }
+          }
+        ]
+      });
+      alertBox.present();
+
+    } else {
+      console.log("form cannot be validated");
+
+    }
   }
 
   private formInit() {

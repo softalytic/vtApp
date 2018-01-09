@@ -117,43 +117,66 @@
 
                                         <ion-input *ngIf="wfInput.inputType == 7" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
 
-
                                         <ion-input *ngIf="wfInput.inputType == 7" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
 
-                                        <button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
+                                        <button *ngIf="wfInput.scan"
+                                                item-end ion-button
+                                                class="barcodeButton"
+                                                type="button"
+                                                (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
                                             扫一扫
                                         </button>
                                     </ion-row>
 
-                                    <ion-row *ngIf="wfInput.method == 'input' && wfInputForm.value.wfProcess == '9' && wfInput.title != '分單' " align-items-center justify-content-center>
+                                    <ion-row *ngIf="wfInput.method == 'input' && (wfInputForm.value.wfProcess == '9' || wfInputForm.value.wfProcess == '11') && wfInput.title != '分單' "
+                                             align-items-center justify-content-center>
 
-                                        <div *ngIf="wfInputForm.value.wfProcess == 9" style="margin-left: 5px;margin-right: 5px;">
+                                        <div *ngIf="wfInputForm.value.wfProcess == 9 || wfInputForm.value.wfProcess == 11"
+                                             style="margin-left: 5px;margin-right: 5px;">
                                             {{wfInput.title}}
                                         </div>
 
-                                        <ion-input *ngIf="wfInput.type != 'textarea'" type={{wfInput.type}} formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
+                                        <ion-input *ngIf="wfInput.type != 'textarea'"
+                                                   type={{wfInput.type}}
+                                                   formControlName={{wfInput.model}}
+                                                   [ngStyle]="{'width.em':wfInput.size}"
+                                                   class="gridborder"></ion-input>
 
-                                        <ion-textarea *ngIf="wfInput.type === 'textarea'" formControlName={{wfInput.model}} [ngStyle]="{'width.em':wfInput.size}" class="textarea gridborder"></ion-textarea>
+                                        <ion-textarea *ngIf="wfInput.type === 'textarea'"
+                                                      formControlName={{wfInput.model}}
+                                                      [ngStyle]="{'width.em':wfInput.size}"
+                                                      class="textarea gridborder"></ion-textarea>
 
-                                        <button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
+                                        <button *ngIf="wfInput.scan"
+                                                item-end
+                                                ion-button
+                                                class="barcodeButton"
+                                                type="button"
+                                                (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
                                             扫一扫
                                         </button>
                                     </ion-row>
 
-                                    <ion-row *ngIf="wfInput.method == 'buttons' && wfInputForm.value.wfProcess == '9'" justify-content-left align-items-center>
+                                    <ion-row *ngIf="wfInput.method == 'buttons' && (wfInputForm.value.wfProcess == '9' || wfInputForm.value.wfProcess == '11')"
+                                             justify-content-left
+                                             align-items-center>
                                         <div class="inputLabel">
                                             {{wfInput.title}}
                                         </div>
 
                                         <ion-buttons>
-                                            <button *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model, button.value)" [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}" ion-button round outline type="button" style="width: auto;">
+                                            <button *ngFor="let button of wfInput.buttons"
+                                                    (click)="updateForm(wfInput.model, button.value)"
+                                                    [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}"
+                                                    ion-button round outline
+                                                    type="button" style="width: auto;">
                                                 &nbsp; {{button.label}}
                                             </button>
                                         </ion-buttons>
                                     </ion-row>
 
 
-                                    <ion-col *ngIf="wfInput.method == 'inputs' && wfInputForm.value.wfProcess != '9' ">
+                                    <ion-col *ngIf="wfInput.method == 'inputs' && (wfInputForm.value.wfProcess != '9' && wfInputForm.value.wfProcess != '11')">
                                         <ion-row *ngIf="wfInput.header" align-items-center justify-content-center>
                                             <div style="width: 45px;"></div>
                                             <div style="text-align: center;">
@@ -392,10 +415,14 @@
                         </ion-col>
 
                         <!-- Input field form -->
-                        <ion-col *ngFor="let wfInput of wfPplInputs" col-auto align-items-left justify-content-center>
+                        <ion-col *ngFor="let wfInput of wfPplInputs"
+                                 col-auto align-items-left
+                                 justify-content-center>
 
                             <!-- Simple Input field -->
-                            <ion-row *ngIf="(wfInput.method == 'input') && (wfInput.wfPplI != 4) && (wfInput.wfPplI != 6)" align-items-center justify-content-center>
+                            <ion-row *ngIf="(wfInput.method == 'input') && (wfInput.wfPplI != 4) && (wfInput.wfPplI != 6)"
+                                     align-items-center
+                                     justify-content-center>
 
                                 <div class="inputLabel">
                                     {{wfInput.title}}
@@ -424,9 +451,18 @@
                                                    [ngStyle]="{'width.em':wfInput.size}"
                                                    class="gridborder"></ion-input>
 
-                                        <ion-input style="display: inline-block;" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" *ngIf="wfInput.wfPplI == 5" formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}}
-                                                   [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
-                                        <button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
+                                        <ion-input style="display: inline-block;" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')"
+                                                   *ngIf="wfInput.wfPplI == 5"
+                                                   formControlName={{wfInput.model}}
+                                                   type={{wfInput.type}}
+                                                   value={{wfInputForm.controls[wfInput.model].value}}
+                                                   [ngStyle]="{'width.em':wfInput.size}"
+                                                   class="gridborder"></ion-input>
+                                        <button *ngIf="wfInput.scan"
+                                                item-end ion-button
+                                                class="barcodeButton"
+                                                type="button"
+                                                (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
                                             <ion-icon md="md-barcode"></ion-icon>
                                         </button>
                                     </ion-row>
@@ -444,21 +480,21 @@
                             </ion-row>
 
                             <!-- Simple Input field -->
-                            <ion-row *ngIf="(wfInput.method == 'input') && (wfInput.wfPplI == 4) && (wfInputForm.value.wfProcess != '9')" align-items-center justify-content-center>
+                            <!--<ion-row *ngIf="(wfInput.method == 'input') && (wfInput.wfPplI == 4) && (wfInputForm.value.wfProcess != '9' && wfInputForm.value.wfProcess != '11')" align-items-center justify-content-center>-->
 
-                                <div class="inputLabel">
-                                    {{wfInput.title}}
-                                </div>
-                                <div (click)="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">
-                                    <ion-input formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>
-                                </div>
-                                <button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
-                                    <ion-icon md="md-barcode"></ion-icon>
-                                </button>
-                            </ion-row>
+                                <!--<div class="inputLabel">-->
+                                    <!--{{wfInput.title}}-->
+                                <!--</div>-->
+                                <!--<div (click)="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">-->
+                                    <!--<ion-input formControlName={{wfInput.model}} type={{wfInput.type}} value={{wfInputForm.controls[wfInput.model].value}} [ngStyle]="{'width.em':wfInput.size}" class="gridborder"></ion-input>-->
+                                <!--</div>-->
+                                <!--<button *ngIf="wfInput.scan" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">-->
+                                    <!--<ion-icon md="md-barcode"></ion-icon>-->
+                                <!--</button>-->
+                            <!--</ion-row>-->
 
                             <!-- Simple Input field -->
-                            <ion-row *ngIf="(wfInput.method == 'input') && (wfInput.wfPplI == 6) && (wfInputForm.value.wfProcess == '9')" align-items-center justify-content-center>
+                            <ion-row *ngIf="(wfInput.method == 'input') && (wfInput.wfPplI == 6) && (wfInputForm.value.wfProcess != '9' && wfInputForm.value.wfProcess != '11')" align-items-center justify-content-center>
 
                                 <div class="inputLabel">
                                     {{wfInput.title}}
@@ -485,7 +521,8 @@
                             </ion-row>
 
                             <!-- Select Buttons -->
-                            <ion-row *ngIf="wfInput.method == 'buttons' && (wfInputForm.value.wfProcess != '9')" align-items-center>
+                            <ion-row *ngIf="wfInput.method == 'buttons' && (wfInputForm.value.wfProcess != '9' && wfInputForm.value.wfProcess != '11')"
+                                     align-items-center>
                                 <div class="inputLabel">
                                     {{wfInput.title}}
                                 </div>
@@ -493,7 +530,9 @@
                                 <ion-input formControlName={{wfInput.model}} hidden></ion-input>
 
                                 <ion-buttons>
-                                    <button *ngFor="let button of wfInput.buttons" ion-button round outline type="button" style="width: auto;" (click)="updateForm(wfInput.model,button.value)" [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}">
+                                    <button *ngFor="let button of wfInput.buttons"
+                                            ion-button round outline type="button"
+                                            style="width: auto;" (click)="updateForm(wfInput.model,button.value)" [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}">
                                   <ion-icon name="{{button.icon}}"></ion-icon>
                                   &nbsp; {{button.label}}
                                 </button>

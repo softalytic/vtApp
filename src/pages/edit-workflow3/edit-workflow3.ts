@@ -249,7 +249,7 @@ export class EditWorkflow3Page implements OnInit{
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 4},
       {title: "技术员", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 6, size: 7},
       {title: "班长确认", method: "input", model: "wfStaffLeadName", type: "text", icon: 'construct', scan: true, wfPplI: 3, size: 7},
-      {title: "維修员", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 4, size: 7},
+      // {title: "維修员", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 4, size: 7},
       {title: "终检", method: "buttons", model: "wfQCPass", icon: "md-checkmark-circle-outline",buttons: [
         {label: "通过", value: 1, icon: 'checkmark'},
         {label: "失败", value: 2, icon: 'close'}
@@ -535,7 +535,7 @@ export class EditWorkflow3Page implements OnInit{
     alertCtl.addButton('取消');
 
     alertCtl.addButton({
-      text: '确定',
+      text: '確定',
       handler: (data: any) => {
         // Once selected the subprocess, update the form and then submit the form to next process stage
         alert("上传成功");
@@ -612,11 +612,11 @@ export class EditWorkflow3Page implements OnInit{
 
   presentPrompt() {
     let alert = this.alertCtrl.create({
-      title: '亲，请轻描淡写照片内容',
+      title: '嚫，请轻描淡写照片内容',
       inputs: [
         {
           name: 'imgDes',
-          placeholder: '没有问题'
+          placeholder: '木有问题'
         }
       ],
       buttons: [

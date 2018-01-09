@@ -1,16 +1,4 @@
 page-edit-workflow2 {
-    .dim {
-        background-color: #8c8c8c;
-        display: none;
-    }
-    .header {
-        margin-top: 10px !important;
-        margin-left: 1em !important;
-        margin-bottom: 5px;
-        font-size: 14px;
-        //position: relative;
-        align-items: left;
-    }
     .inputHeader {
         margin-top: 10px !important;
         margin-left: 1em !important;
@@ -19,92 +7,40 @@ page-edit-workflow2 {
         //position: relative;
         align-items: left;
     }
-    .prodLabel {
-        margin-right: 5px !important;
-        max-width: 45px !important;
-        min-width: 45px !important;
-        text-align: right !important;
+    .inputLabel.short {
+        min-width: 20px !important;
     }
-    ion-datetime {
-        padding: 8px !important;
+    .inputLabel {
+        font-size: 12.9px !important;
     }
-    .ageingSubPart {
-        //border: solid;
-        border-top: solid;
-        //border-right: solid;
-        //border-right-width: 1px;
-        border-top-width: 1px;
-        border-color: #8e9093;
-        margin-top: 1em;
-        padding-top: 1em;
+    .toolbar-title.toolbar-title-md {
+        font-size: 25px;
     }
-    .bread {
-        height: 5em;
+    ion-row.rowSpace.row {
+        margin: 6px 0;
     }
-    .note {
-        padding-left: 1em !important;
-        padding-right: 1em !important;
-        padding-bottom: 1em !important;
+    ion-row.sec.lessSpace.row {
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
-    .staff {
-        margin-right: 0px !important;
-        p {
-            margin-left: 0px !important;
-            max-width: 5em !important;
-        }
+    ion-navbar div img {
+        position: initial;
+        vertical-align: middle;
     }
-    .headbar {
-        p {
-            width: 60px !important;
-            margin-left: 20px !important;
-            align-items: left;
-            text-align: left;
-        }
+    .inputLabel.tableAgeRow {
+        min-width: 0px !important;
     }
-    .highlight {
-        background-color: orange;
-        color: #ffffff;
+    .tableAgeColDivTitle {
+        text-align: center;
     }
-    .sec {
-        ion-row {
-            p {
-                width: 60px !important;
-                margin-left: 25px !important;
-                align-items: left;
-                text-align: left;
-            }
-        }
+    .tableAgeDivColLabel {
+        min-width: 0px !important;
     }
-    ion-grid {
-        font-size: 10px !important;
-        h4 {
-            font-size: 14px;
-        }
-        ion-item {
-            font-size: 10px !important;
-        }
+    ion-col.materialLabel.col {
+        width: 14%;
     }
-    .barcodeButton {
-        font-size: 10px !important;
-        max-width: 60px;
-    }
-    p {
-        margin-top: 0;
-        margin-bottom: 0;
-        margin-right: 5px;
-        text-align: right !important;
-        width: auto;
-    }
-    ion-buttons {
-        button {
-            font-size: 10px !important;
-        }
-    }
-    .grid {
-        padding: 3px;
-    }
-    .col {
-        padding: 3px;
+    .noPaddingCol {
+        padding: 0px !important;
     }
     .subBreak {
         margin: 0px !important;
@@ -114,12 +50,6 @@ page-edit-workflow2 {
         background-color: #FF0;
         border-radius: 25px;
         padding: 5px;
-    }
-    .inputLabel {
-        font-size: 12.9px !important;
-    }
-    .noPaddingCol {
-        padding: 0px !important;
     }
 }
 

@@ -60,7 +60,7 @@ export class WorkflowService {
 
     // Return the http post
     return this.http.post(queryUrl, form, this.httpOptions)
-      .timeout(1000)
+      .timeout(4000)
       .map((response: Response) => {
         console.log("Response from Server");
         console.log(response.json());
@@ -99,7 +99,7 @@ export class WorkflowService {
     console.log("Requesting url: " + queryUrl);
 
     return this.http.post(queryUrl, form, this.httpOptions)
-      .timeout(1000)
+      .timeout(4000)
       .map((response: Response) => {
         console.log("Responding from Server");
         console.log(response);
@@ -116,7 +116,7 @@ export class WorkflowService {
     console.log("Requesting url: " + queryUrl);
 
     return this.http.post(queryUrl, '', this.httpOptions)
-      .timeout(1000)
+      .timeout(4000)
       .map((response: Response) => {
         console.log("Responding from Server");
         console.log(response.json()[0]);
@@ -134,7 +134,7 @@ export class WorkflowService {
     console.log("Requesting url: " + queryUrl);
 
     return this.http.post(queryUrl, staffData, this.httpOptions)
-      .timeout(1000)
+      .timeout(4000)
       .map((response: Response) => {
         console.log("Responding from Server");
         console.log(response.json()[0]);
@@ -228,7 +228,7 @@ export class WorkflowService {
     // Any change of the field name in the form need to be updated manually here
 
     return this.http.post(queryUrl, form.value, this.httpOptions)
-      .timeout(1000)
+      .timeout(4000)
       .map((response: Response) => {
         console.log("Responding from Server" + response);
         return response.json();
@@ -944,7 +944,7 @@ export class WorkflowService {
     console.log("Requesting ERP url: " + queryUrl);
 
     return this.http.post(queryUrl, form, this.httpOptions)
-      .timeout(1000)
+      .timeout(4000)
       .map((response: Response) => {
         console.log("Responding from ERP Server");
         console.log(response.json()[0]);
@@ -976,7 +976,7 @@ export class WorkflowService {
     console.log("Requesting ERP Exc url: " + queryUrl);
 
     return this.http.post(queryUrl, form.value, this.httpOptions)
-      .timeout(1000)
+      .timeout(4000)
       .map((response: Response) => {
         console.log("Responding from ERP Exc Server");
         // console.log(response.json());
@@ -1178,7 +1178,7 @@ export class WorkflowService {
     console.log("Requesting url: " + queryUrl);
 
     return this.http.post(queryUrl, "", this.httpOptions)
-      .timeout(3000)
+      .timeout(5000)
       .map((response: Response) => {
         // console.log("staffDate from Server is " + response);
         return response.text();
@@ -1192,7 +1192,7 @@ export class WorkflowService {
     console.log("Requesting url: " + queryUrl);
 
     return this.http.post(queryUrl, "", this.httpOptions)
-      .timeout(3000)
+      .timeout(5000)
       .map((response: Response) => {
         // console.log("Responding from Server of staff Data " + JSON.stringify(response.json()[0]));
         return response.json()[0];

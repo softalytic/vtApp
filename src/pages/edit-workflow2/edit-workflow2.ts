@@ -308,15 +308,6 @@ export class EditWorkflow2Page implements OnInit{
                 form.controls[key].setValue(this.appDate);
                 break;
 
-              case 'wfGoodTotal':
-                if (form.value.wfProcessStatus) {
-                  form.controls[key].setValue(0);
-                  form.controls['wfOptStartQty'].setValue(storageData[key]);
-                } else {
-                  form.controls[key].setValue(storageData[key]);
-                }
-                break;
-
               case 'wfBadTotal':
                 if (form.value.wfProcessStatus) {
                   form.controls[key].setValue(0);

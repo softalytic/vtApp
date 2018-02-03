@@ -372,8 +372,7 @@ export class WorkflowService {
 
     } else {
       console.log("The Form has passed the validation");
-      if((form.value.wfForm == '1' && (form.value.wfProcess == '5' || form.value.wfProcess == '6' || form.value.wfProcess == '8')) ||
-        (form.value.wfForm == '3' && (form.value.wfProcess == '7' || form.value.wfProcess == '8'))) {
+      if(this.toInt(form.controls['wfOptBadQty'].value) == 0) {
         let totalBadQtyX = this.toInt(form.value.wfBadQty1);
         totalBadQtyX += this.toInt(form.value.wfBadQty2);
         totalBadQtyX += this.toInt(form.value.wfBadQty3);

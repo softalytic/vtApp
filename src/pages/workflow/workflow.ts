@@ -532,9 +532,14 @@ export class WorkflowPage implements OnInit {
       // Then reset the process status
       if(form.value.wfReadOnly) {
         console.log("wfReadOnly has been selected");
-        this.fillData(form,data);
-        form.controls["wfReadOnly"].setValue(true);
-        form.controls["wfErrorMsg"].setValue('只供浏览');
+        if(form.value.wfProcess != data.wfProcess){
+          alert("查无此单号的工序");
+          return;
+        } else {
+          this.fillData(form,data);
+          form.controls["wfReadOnly"].setValue(true);
+          form.controls["wfErrorMsg"].setValue('只供浏览');
+        }
 
       } else if( !("wfProcess" in data) || (this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfLastCompletedWf']) && data['wfFormStatus'] ) ){
         // When selected process is ahead of last completed wf

@@ -388,12 +388,18 @@ export class WorkflowPage implements OnInit {
       for (let key in this.storageData ) {
         let data = JSON.parse(this.storageData[key]);
 
+
         if(form.value.wfFormId == data.wfFormId && form.value.wfFormSplit == data.wfFormSplit){
           // Lookup of same wfForm ID + split ID
           if(typeof data["wfImg"] == 'undefined'){
             // Make sure it isnt images
 
-            if(tmpData == "" || tmpData == null || typeof tmpData == 'undefined'){
+            if(this.wfSvc.toInt(data.wfProcess) == this.wfSvc.toInt(form.value.wfProcess) && form.value.wfStaffOptShift == data.wfStaffOptShift){
+              // In readOnly mode, the form value for certain fields will be assigned and if the condition match, break the loop;
+              console.log("data from storage" + key + JSON.stringify(data));
+              tmpData = data;
+              break;
+            } else if(tmpData == "" || tmpData == null || typeof tmpData == 'undefined'){
               // Initially assign value
               tmpData = data;
             } else if (this.wfSvc.toInt(data.wfProcess) > this.wfSvc.toInt(tmpData.wfProcess)) {

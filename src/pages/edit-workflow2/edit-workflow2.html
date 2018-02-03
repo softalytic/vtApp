@@ -139,7 +139,7 @@
                                     <!--</div>-->
 
                                     <ion-buttons>
-                                        <button *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model, button.value)" [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}" ion-button round outline type="button" style="width: auto;">
+                                        <button *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model, button.value)" [ngClass]="{'buttonsSelected': this.wfSvc.toInt(wfInputForm.controls[wfInput.model].value) === button.value}" ion-button round outline type="button" style="width: auto;">
                                             &nbsp; {{button.label}}
                                         </button>
                                     </ion-buttons>
@@ -265,7 +265,7 @@
 
 
                                         <ion-buttons>
-                                            <button ion-button round outline type="button" style="width: auto;" *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model,button.value)" [ngClass]="{'buttonsSelected': wfInputForm.controls[wfInput.model].value === button.value}">
+                                            <button ion-button round outline type="button" style="width: auto;" *ngFor="let button of wfInput.buttons" (click)="updateForm(wfInput.model,button.value)" [ngClass]="{'buttonsSelected': this.wfSvc.toInt(wfInputForm.controls[wfInput.model].value) === button.value}">
                                                 <ion-icon name="{{button.icon}}"></ion-icon>
                                                 &nbsp; {{button.label}}
                                             </button>

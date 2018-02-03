@@ -133,25 +133,29 @@ export class EditWorkflow2Page implements OnInit{
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, size: 5, process: {1: true, 2: true, 3: true, 4:false}},
       {title: "技術員", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: 1, size: 20, process: {1: true, 2: true, 3: true, 4:false}},
       // {title: "X-RAY确认", method: "input", model: "wfStaffXrayId", type: "text", icon: 'construct', scan: 3, size: 20},
-      
-      {title: "抽检", method: "buttons", model: "wfRandomCheckStatus", process: {1: false, 2: false, 3: false, 4:false},buttons: [
-        {label: "通过", value: 1, icon: 'checkmark'},
-        {label: "失败", value: 2, icon: 'close'}
-      ]},
+
+      // Backup code
+      // {title: "抽检", method: "buttons", model: "wfRandomCheckStatus", process: {1: false, 2: false, 3: false, 4:false},buttons: [
+      //   {label: "通过", value: 1, icon: 'checkmark'},
+      //   {label: "失败", value: 2, icon: 'close'}
+      // ]},
       
       {title: "电性", method: "buttons", model: "wfElecPass", process: {1: false, 2: false, 3: false, 4:true} ,buttons: [
         {label: "通过", value: 1, icon: 'checkmark'},
         {label: "失败", value: 2, icon: 'close'}
       ]},
+
       {method: "break", size: 15, process: {1: false, 2: false, 3: false, 4:true}},
       {title: "外观", method: "buttons", model: "wfLookPass", process: {1: false, 2: false, 3: false, 4:true},buttons: [
         {label: "通过", value: 1, icon: 'checkmark'},
         {label: "失败", value: 2, icon: 'close'}
       ]},
+
       {title: "终检", method: "buttons", model: "wfQCPass", icon: "md-checkmark-circle-outline", process: {1: true, 2: true, 3: false, 4:false} ,buttons: [
         {label: "通过", value: 1, icon: 'checkmark'},
         {label: "失败", value: 2, icon: 'close'}
       ]},
+
       {title: "品检員", method: "input", model: "wfStaffQCName", type: "text", icon: 'construct', scan: 3, size: 20, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "break", size: 15, process: {1: true, 2: true, 3: false, 4:true}},
       // {method: "break", size: 15, process: {1: false, 2: false, 3: true, 4:true}},
@@ -314,6 +318,8 @@ export class EditWorkflow2Page implements OnInit{
                 }
                 break;
 
+              case 'wfQCCheck':
+              case 'wfQCPass':
               case 'wfGoodTotal':
               case 'wfBadTotal':
               case 'wfOptStartQty':

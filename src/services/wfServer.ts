@@ -476,7 +476,7 @@ export class WorkflowService {
         alertMsg.push("輸入作业員!");
       }
 
-    } else if(form.value.wfForm == '3' && form.value.wfProcess != '9') {
+    } else if(form.value.wfForm == '3' && (form.value.wfProcess != '9' && form.value.wfProcess != '11')) {
       if(! this.checkInputAsTime(form.value.wfOptStartTime)) {
         alertMsg.push('正确开始时间值必须为 0000 - 2359 之间!');
         form.controls['wfOptStartTime'].setValue(this.toInt(form.value.wfOptStartTime));

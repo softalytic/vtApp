@@ -26,9 +26,11 @@
         <ion-grid>
             <!-- header bar -->
             <ion-row wrap class="main headbar">
-                <ion-col *ngFor="let wfOrderDetail of wfOrderDetails" [class.noPaddingCol]="wfOrderDetail.method === 'break' ">
+                <ion-col *ngFor="let wfOrderDetail of wfOrderDetails"
+                         [class.noPaddingCol]="wfOrderDetail.method === 'break' ">
                     <ion-row justify-content-center wrap align-items-center>
-                        <ion-col *ngIf="wfOrderDetail.method === 'label' && wfOrderDetail.process[wfInputForm.value.wfProcess]" justify-content-center wrap align-items-center class="inputLabel" no-padding col-auto>
+                        <ion-col *ngIf="wfOrderDetail.method === 'label' && wfOrderDetail.process[wfInputForm.value.wfProcess]"
+                                 justify-content-center wrap align-items-center class="inputLabel" no-padding col-auto>
                             <ion-row class="inputLabel" no-padding align-items-center>
                                 参数要求
                             </ion-row>
@@ -41,16 +43,32 @@
                                 <div class="inputLabel" no-padding>
                                     {{wfOrderDetail.title}}
                                 </div>
-                                <ion-input *ngIf="wfOrderDetail.type != 'textarea' && !wfOrderDetail.disabled" class="gridborder" type={{wfOrderDetail.type}} [ngStyle]="{'width.em':wfOrderDetail.size}" formControlName={{wfOrderDetail.model}}></ion-input>
-                                <ion-input *ngIf="wfOrderDetail.type != 'textarea' && wfOrderDetail.disabled" class="gridborder" disabled type={{wfOrderDetail.type}} [ngStyle]="{'width.em':wfOrderDetail.size}" formControlName={{wfOrderDetail.model}}></ion-input>
-                                <ion-textarea *ngIf="wfOrderDetail.type === 'textarea'" formControlName={{wfOrderDetail.model}} [ngStyle]="{'width.em':wfOrderDetail.size}" class="textarea gridborder"></ion-textarea>
+                                <ion-input *ngIf="wfOrderDetail.type != 'textarea' && !wfOrderDetail.disabled"
+                                           class="gridborder" type={{wfOrderDetail.type}}
+                                           [ngStyle]="{'width.em':wfOrderDetail.size}"
+                                           (change)="this.capInput(this.wfInputForm, wfOrderDetail.model);"
+                                           formControlName={{wfOrderDetail.model}}></ion-input>
+
+                                <ion-input *ngIf="wfOrderDetail.type != 'textarea' && wfOrderDetail.disabled"
+                                           class="gridborder" disabled type={{wfOrderDetail.type}}
+                                           [ngStyle]="{'width.em':wfOrderDetail.size}"
+                                           formControlName={{wfOrderDetail.model}}></ion-input>
+
+                                <ion-textarea *ngIf="wfOrderDetail.type === 'textarea'"
+                                              formControlName={{wfOrderDetail.model}}
+                                              [ngStyle]="{'width.em':wfOrderDetail.size}"
+                                              class="textarea gridborder"></ion-textarea>
+
                                 <button *ngIf="wfOrderDetail.scan" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfOrderDetail.model, this.wfInputForm)">
                                     扫一扫
                                 </button>
                             </ion-row>
                         </ion-col>
 
-                        <ion-col *ngIf="wfOrderDetail.method === 'break'" no-padding [ngStyle]="{'width.em':wfOrderDetail.size, 'visibility':wfOrderDetail.visibility }" class="ageingSubPart subBreak"></ion-col>
+                        <ion-col *ngIf="wfOrderDetail.method === 'break'"
+                                 no-padding
+                                 [ngStyle]="{'width.em':wfOrderDetail.size, 'visibility':wfOrderDetail.visibility }"
+                                 class="ageingSubPart subBreak"></ion-col>
 
                     </ion-row>
                 </ion-col>

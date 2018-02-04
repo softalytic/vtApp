@@ -428,6 +428,8 @@ export class EditWorkflow3Page implements OnInit{
                 form.controls[key].setValue(this.appDate);
                 break;
 
+              case 'wfRandomCheckInfo':
+              case 'wfOptWashMachine':
               case 'wfQCCheck':
               case 'wfQCPass':
               case 'wfGoodTotal':

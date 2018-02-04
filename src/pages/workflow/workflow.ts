@@ -262,7 +262,7 @@ export class WorkflowPage implements OnInit {
           if(form.value.wfFormId == serverData[0].wfFormId) {
             console.log(serverData[0].wfFormId + " confirmed as exceptional case");
             form.value.wfFormExcept = true;
-            if (!this.loadDataToForm(form, serverData[0])){return;}
+            this.fillData(form,serverData[0]);
             this.serverQuery(form);
 
           }
@@ -531,14 +531,14 @@ export class WorkflowPage implements OnInit {
       // If the last process has been completed and then current chosen step is higher than received data wfProcess
       // Then reset the process status
       if(form.value.wfReadOnly) {
-        console.log("wfReadOnly has been selected");
-        if(form.value.wfProcess != data.wfProcess){
-          alert("查无此单号的工序");
+        console.log( "wfReadOnly has been selected" );
+        if ( form.value.wfProcess != data.wfProcess ) {
+          alert( "查无此单号的工序" );
           return;
         } else {
-          this.fillData(form,data);
-          form.controls["wfReadOnly"].setValue(true);
-          form.controls["wfErrorMsg"].setValue('只供浏览');
+          this.fillData( form, data );
+          form.controls[ "wfReadOnly" ].setValue( true );
+          form.controls[ "wfErrorMsg" ].setValue( '只供浏览' );
         }
 
       } else if( !("wfProcess" in data) || (this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfLastCompletedWf']) && data['wfFormStatus'] ) ){

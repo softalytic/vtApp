@@ -318,6 +318,7 @@ export class EditWorkflow2Page implements OnInit{
                 }
                 break;
 
+              case 'wfRandomCheckInfo':
               case 'wfQCCheck':
               case 'wfQCPass':
               case 'wfGoodTotal':

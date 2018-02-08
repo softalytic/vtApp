@@ -1066,11 +1066,15 @@ export class WorkflowService {
               // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
               alert( '良品数下限不得低于投入数百分之八十' );
               return false;
+
+            } else {
+              console.log("exceed 3k threshold but within 20%");
+              return true;
             }
           } else {
             return true;
           }
-          break;
+          // break;
 
         // CASE 2 (finished product)
         case '2':
@@ -1125,11 +1129,14 @@ export class WorkflowService {
             else if ( ComparingTotal < (QC_LOWER * startQty) ) {
               alert( '良品数下限不得低于投入数百分之八十' );
               return false;
+            } else {
+              console.log("exceed 3k threshold but within 20%");
+              return true;
             }
           } else {
             return true;
           }
-          break;
+          // break;
 
         default:
           return true;

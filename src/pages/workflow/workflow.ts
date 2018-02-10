@@ -107,9 +107,9 @@ export class WorkflowPage implements OnInit {
       {title: "流程卡号", method: 'input', type: 'text', model: 'wfFormId', scan: true, size: 25},
       {title: "台机号", method: 'input', type: 'text', model: 'wfOptMachineId', scan: true, size: 25},
 
-      {method: "break", size: 20},
+      {method: "break", size: 10},
 
-      {title: "分单", method: 'select', type: 'text', model: 'wfFormSplit', scan: false, size: 5},
+      {title: "分单", method: 'select', type: 'text', model: 'wfFormSplit', scan: false, size: 6},
       {title: "", method: 'button', label: "異常", model: 'wfFormExcept', scan: false, size: 8},
       {method: "break", size: 20},
 

@@ -74,12 +74,12 @@ export class EditWorkflow2Page implements OnInit{
 
       {method: "break", size: "135", visibility: "hidden"},
 
-      {method: "input", model: "wfOrderFormNote", title: "流程卡备注", type: "textarea", size: 35, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 35, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 35, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderFormNote", title: "流程卡备注", type: "textarea", size: 25, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 25, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 25, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
       {method: "break", size: "135", visibility: "hidden"},
-      {method: "input", model: "wfGoodTotal", title: "良品數總和", type: "number", size: 5, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfGoodTotal", title: "良品數總和", type: "number", size: 12, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
       {method: "label",process: {1: true, 2: true, 3: true, 4:true}},
       {title: "CAP: μF", method: "input", model: "wfSpecCap", type: "text", scan: false, size: 12, disabled:false, process: {1: true, 2: true, 3: true, 4:true}},
@@ -118,7 +118,7 @@ export class EditWorkflow2Page implements OnInit{
       {title: "終检数量", method: "input", model: "wfFinalCheckInfo", type: "number", icon: 'construct', scan: 0, size: 6, process: {1: false, 2: false, 3: false, 4:true}},
 
       {method: "inputs", options: [
-        {title: "总投入数", model: "wfOptStartQty", type: "number", icon: 'ios-sad', scan: false, size: 6, process: {1: true, 2: true, 3:true, 4:true}},
+        {title: "总投入数", model: "wfOptStartQty", type: "number", icon: 'ios-sad', scan: false, size: 8, process: {1: true, 2: true, 3:true, 4:true}},
         {title: "不良数", model: "wfOptBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8, process: {1: true, 2: true, 3:true, 4:true}},
         {title: "良品数", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8, process: {1: true, 2:true, 3:true, 4:true}},
       ], process: {1: true, 2: true, 3: true, 4:true}},
@@ -159,7 +159,7 @@ export class EditWorkflow2Page implements OnInit{
       {title: "品检員", method: "input", model: "wfStaffQCName", type: "text", icon: 'construct', scan: 3, size: 20, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "break", size: 15, process: {1: true, 2: true, 3: false, 4:true}},
       // {method: "break", size: 15, process: {1: false, 2: false, 3: true, 4:true}},
-      {title: "备注", method: "input", model: "wfQCInputNote", type: "textarea", scan: false, size: 40, process: {1: true, 2: true, 3: true, 4:true}},
+      {title: "备注", method: "input", model: "wfQCInputNote", type: "textarea", scan: false, size: 30, process: {1: true, 2: true, 3: true, 4:true}},
       // {title: "品检备注", method: "textarea", model: "wfQCInputNote", type: "text", icon: 'chatbubbles', scan: false, size: 30},
       //{title: "品检員", method: "input", model: "wfQCSignOff", type: "text", process: {1: false, 2: false, 3: true, 4:true}, scan: 4, size: 20},
     ];

@@ -73,7 +73,7 @@ export class EditWorkflow1Page implements OnInit{
       {method: "break", size: "88", visibility: "hidden"},
 
       {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 12, highlight: false},
-      {method: "input", model: "wfOrderBatchQty", title: "批次量", type: "number", size: 5, highlight: false},
+      {method: "input", model: "wfOrderBatchQty", title: "批次量(千)", type: "number", size: 5, highlight: false},
       {method: "input", model: "wfGoodTotal", title: "良品数总和", type: "number", size: 5, highlight: false},
       {method: "break", size: "88", visibility: "hidden"},
 

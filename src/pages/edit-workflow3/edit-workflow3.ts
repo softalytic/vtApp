@@ -87,7 +87,7 @@ export class EditWorkflow3Page implements OnInit{
       // {method: "input", model: "wfSalesOrderId", title: "销售订单号", type: "text", size: 15, disabled:true, highlight: false},
       {method: "input", model: "wfClientId", title: "客户別", type: "text", size: 8, disabled:true, highlight: false},
       {method: "input", model: "wfOrderDate", title: "开单日期", type: "text", size: 10, disabled:true, highlight: false},
-      {method: "input", model: "wfOrderBatchQty", title: "批次量", type: "text", size: 5, disabled: false, highlight: false},
+      {method: "input", model: "wfOrderBatchQty", title: "批次量(千)", type: "text", size: 5, disabled: false, highlight: false},
 
       {method: "break", size: "88", visibility: "hidden"},
 

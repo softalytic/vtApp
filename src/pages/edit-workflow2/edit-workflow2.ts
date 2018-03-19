@@ -64,7 +64,7 @@ export class EditWorkflow2Page implements OnInit{
       {method: "input", model: "wfPriorWfFormId", title: "裸品卡号", type: "text", size: 12, scan: true, disabled: false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "input", model: "wfClientId", title: "客户代码", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "input", model: "wfSalesOrderId", title: "销售订单号", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
-      {method: "input", model: "wfOrderBatchQty", title: "批次量", type: "number", size: 9, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+      {method: "input", model: "wfOrderBatchQty", title: "批次量(千)", type: "number", size: 9, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
       {method: "break", size: "135", visibility: "hidden"},
       {method: "input", model: "wfOrderSeries", title: "系列", type: "text", size: 12, disabled:true, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},

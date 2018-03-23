@@ -85,8 +85,8 @@ export class EditWorkflow1Page implements OnInit{
     this.wfRMDetails = [
       {modelName: "wfRMFoilPosName", title: "正箔", type: "text", modelSerial: 'wfRMFoilPosSerial', highlight: false},
       {modelName: "wfRMFoilPosLName", title: "正箔 - L", type: "text", modelSerial: 'wfRMFoilPosLSerial', highlight: false},
-      {modelName: "wfRMFoilNegName", title: "負箔", type: "text", modelSerial: 'wfRMFoilNegSerial', highlight: false},
-      {modelName: "wfRMFoilNegLName", title: "負箔 - L", type: "text", modelSerial: 'wfRMFoilNegLSerial', highlight: false},
+      {modelName: "wfRMFoilNegName", title: "负箔", type: "text", modelSerial: 'wfRMFoilNegSerial', highlight: false},
+      {modelName: "wfRMFoilNegLName", title: "负箔 - L", type: "text", modelSerial: 'wfRMFoilNegLSerial', highlight: false},
       {modelName: "wfRMPaperName", title: "电解纸", type: "text", modelSerial: 'wfRMPaperSerial', highlight: false},
       {modelName: "wfRMGlueName", title: "胶水/带", type: "text", modelSerial: 'wfRMGlueSerial', highlight: false},
       {modelName: "wfRMSolName", title: "电解液", type: "text", modelSerial: 'wfRMSolSerial', highlight: false},
@@ -98,7 +98,7 @@ export class EditWorkflow1Page implements OnInit{
     ];
 
     this.wfOpsInputs = [
-      // {title: "分單", method: "input", model: "wfFormSplit", type: "text", icon: 'ios-copy-outline', scan: false, size: 6, wfOpslI: 2},
+      // {title: "分单", method: "input", model: "wfFormSplit", type: "text", icon: 'ios-copy-outline', scan: false, size: 6, wfOpslI: 2},
       // {method: "break", title: ""},
 
       {method: "inputs2", header: "素子烘烤", options: [
@@ -167,9 +167,9 @@ export class EditWorkflow1Page implements OnInit{
         {model: "wfAgeCurrentAct", type: "number", auto: false}
       ]},
     ];
-    
+
     this.wfPplInputs = [
-      // {title: "作业員ID", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: true, wfPplI: 1, size: 7},
+      // {title: "作业员ID", method: "input", model: "wfStaffOptId", type: "text", icon: 'person', scan: true, wfPplI: 1, size: 7},
       {title: "作业员", method: "input", model: "wfStaffOptName", type: "text", icon: 'person', scan: true, wfPplI: 2, size: 6},
       {title: "班别", method: "input", model: "wfStaffOptShift", type: "text", icon: 'briefcase', scan: false, wfPplI: 2, size: 3},
       {title: "技术员", method: "input", model: "wfStaffTechName", type: "text", icon: 'construct', scan: true, wfPplI: 3, size: 7},
@@ -189,15 +189,15 @@ export class EditWorkflow1Page implements OnInit{
 
   open() {
     if (!this.dataInicial) {
-        this.dataInicial = new Date().toJSON().split('T')[0];
-        setTimeout(() => {
-            this.datePicker.open();
-        }, 50)
-    } else {
+      this.dataInicial = new Date().toJSON().split('T')[0];
+      setTimeout(() => {
         this.datePicker.open();
+      }, 50)
+    } else {
+      this.datePicker.open();
     }
 
-}
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditWorkflowPage1');
@@ -448,7 +448,7 @@ export class EditWorkflow1Page implements OnInit{
     alertCtl.addButton('取消');
 
     alertCtl.addButton({
-      text: '確定',
+      text: '确定',
       handler: (data: any) => {
         // Once selected the subprocess, update the form and then submit the form to next process stage
         alert("上传成功");
@@ -469,13 +469,13 @@ export class EditWorkflow1Page implements OnInit{
       let machineId = this.wfInputForm.value.wfOptMachineId;
       this.storage.get('wfMachine').then((dataMachineXTmp) => {
         if(dataMachineXTmp) {
-          
+
           //alert(dataMachineXTmp);
           dataMachineXTmp = JSON.parse(dataMachineXTmp);
           //alert(dataMachineXTmp[machineId]['staffName']);
-          this.wfInputForm.patchValue({ wfStaffOptShift: dataMachineXTmp[machineId]['shift'], wfStaffOptId: dataMachineXTmp[machineId]['staffName'], 
-          wfGoodTotal: this.wfGoodTotalTmp, wfStaffTechId: dataMachineXTmp[machineId]['techName'], wfStaffXrayId: dataMachineXTmp[machineId]['xrayName'],});
-          
+          this.wfInputForm.patchValue({ wfStaffOptShift: dataMachineXTmp[machineId]['shift'], wfStaffOptId: dataMachineXTmp[machineId]['staffName'],
+            wfGoodTotal: this.wfGoodTotalTmp, wfStaffTechId: dataMachineXTmp[machineId]['techName'], wfStaffXrayId: dataMachineXTmp[machineId]['xrayName'],});
+
         } else {
           let alert = this.alertCtrl.create({
             title: '',
@@ -484,10 +484,10 @@ export class EditWorkflow1Page implements OnInit{
           });
           alert.present();
         }
-        
+
       });
     }
-    
+
 
     this.wfGoodTotalTmp = parseFloat(this.wfInputForm.value.wfGoodTotal)  + parseFloat(this.wfInputForm.value.wfOptGoodQty);
 
@@ -503,7 +503,7 @@ export class EditWorkflow1Page implements OnInit{
       let alert = this.alertCtrl.create({
         title: '',
         subTitle: '请确定内容: 日期，开始，完成，良品数，不良数 ',
-        buttons: ['確定']
+        buttons: ['确定']
       });
       alert.present();
 
@@ -735,3 +735,4 @@ export class EditWorkflow1Page implements OnInit{
   }
 
 }
+

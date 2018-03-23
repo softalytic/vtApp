@@ -396,7 +396,7 @@ export class WorkflowService {
         qtyCheckMsg += '<br>良品数 ('+form.value.wfOptGoodQty+') 大于 批次量 ('+ form.value.wfOrderBatchQty * 1000 +')！';
       }
 
-      qtyCheckMsg += '<br>如需修改，请按 “取消” 再重新輸入。';
+      qtyCheckMsg += '<br>如需修改，请按 “取消” 再重新输入。';
 
       let qtyConfirm = this.alertCtrl.create({
         title: '流程卡概括',
@@ -457,10 +457,10 @@ export class WorkflowService {
         alertMsg.push("不良数不能小于零!");
       }
       if(form.value.wfOptGoodQty < 0) {
-        alertMsg.push("良品数必須为正数!");
+        alertMsg.push("良品数必须为正数!");
       }
       if(typeof form.value.wfStaffOptName === 'undefined') {
-        alertMsg.push("输入作业員!");
+        alertMsg.push("输入作业员!");
       }
 
 
@@ -470,10 +470,10 @@ export class WorkflowService {
         alertMsg.push("不良数不能小于零");
       }
       if(form.value.wfOptGoodQty < 0) {
-        alertMsg.push("良品数必須为正数!");
+        alertMsg.push("良品数必须为正数!");
       }
       if(typeof form.value.wfStaffOptName === 'undefined' && form.value.wfProcess != 4) {
-        alertMsg.push("輸入作业員!");
+        alertMsg.push("输入作业员!");
       }
 
     } else if(form.value.wfForm == '3' && (form.value.wfProcess != '9' && form.value.wfProcess != '11')) {
@@ -484,7 +484,7 @@ export class WorkflowService {
       }
 
       if(! this.checkInputAsTime(form.value.wfOptFinishTime)){
-        alertMsg.push("完成时间值必须为 0000 - 2359 之間!");
+        alertMsg.push("完成时间值必须为 0000 - 2359 之间!");
         form.controls['wfOptFinishTime'].setValue(this.toInt(form.value.wfOptFinishTime));
 
       }
@@ -495,12 +495,12 @@ export class WorkflowService {
       }
 
       if(form.value.wfOptGoodQty < 0) {
-        alertMsg.push("良品数必須为正数!");
+        alertMsg.push("良品数必须为正数!");
 
       }
 
       if ( typeof form.value.wfStaffOptName === 'undefined' ) {
-        alertMsg.push("輸入作业員!");
+        alertMsg.push("输入作业员!");
       }
     }
     console.log(alertMsg);
@@ -547,32 +547,32 @@ export class WorkflowService {
 
   showGoodBadQtyInputsAlert(wfInputForm: any) {
 
-    let form = wfInputForm;   
-    
+    let form = wfInputForm;
+
     let wfOptBadQtyValue = form.value.wfOptBadQty;
     let wfOptGoodQtyValue = form.value.wfOptGoodQty;
     let wfOrderBatchQtyValue = form.value.wfOrderBatchQty;
-    
+
     if(wfOptGoodQtyValue === '') {
-      this.warningAlert('', '请輸入良品数', '继续');
+      this.warningAlert('', '请输入良品数', '继续');
     } else if(wfOptBadQtyValue === '') {
-      this.warningAlert('', '请輸入不良数', '继续');
+      this.warningAlert('', '请输入不良数', '继续');
     }
     wfOptBadQtyValue = this.toInt(wfOptBadQtyValue);
     wfOptGoodQtyValue = this.toInt(wfOptGoodQtyValue);
     wfOrderBatchQtyValue = this.toInt(wfOrderBatchQtyValue);
     /*
     if(wfOptGoodQtyValue <= 0) {
-      this.warningAlert('', '請輸入良品数('+wfOptGoodQtyValue+')', '继續');
-    } 
+      this.warningAlert('', '请输入良品数('+wfOptGoodQtyValue+')', '继续');
+    }
     if(wfOptBadQtyValue <= 0 ) {
-      this.warningAlert('', '請輸入不良数('+wfOptBadQtyValue+')', '继續');
+      this.warningAlert('', '请输入不良数('+wfOptBadQtyValue+')', '继续');
     } else */ if(wfOptBadQtyValue > wfOptGoodQtyValue) {
       this.warningAlert('', '不良数('+wfOptBadQtyValue+')大于良品数('+wfOptGoodQtyValue+')', '继续');
     } else if(wfOptGoodQtyValue > wfOrderBatchQtyValue * 1000) {
       this.warningAlert('', '良品数('+wfOptGoodQtyValue+')大于批次量('+wfOrderBatchQtyValue * 1000+')', '继续');
-    } 
-    
+    }
+
   }
 
   populateStaffData(form:any, staffTable:any, machineTable:any, model: string){
@@ -816,9 +816,9 @@ export class WorkflowService {
           console.log(error);
           loading.dismiss();
           this.networkError(form, navCtrl, images);
-          
+
         }
-        
+
       );
   };
 
@@ -826,7 +826,7 @@ export class WorkflowService {
     console.log("imgPacket is being called");
     let packet = {
       wfProcess: form.value.wfProcess,
-        wfProcessName: form.value.wfProcessName,
+      wfProcessName: form.value.wfProcessName,
       wfProcessStatus: form.value.wfProcessStatus,
       wfFormName: form.value.wfFormName,
       wfForm: form.value.wfForm,
@@ -1038,7 +1038,7 @@ export class WorkflowService {
       console.log("finalValidation: startQty: " + startQty +
         " goodQty: " + goodQty + " badQty: " + badQty +
         " batchQty: " + batchQty + " ProcessCount: " + ProcessCount + "RunningTotal:" + RunningTotal+
-      "ComparingTotal:"+ComparingTotal);
+        "ComparingTotal:"+ComparingTotal);
       //  sub process card
       //rule 5 cannot exceed batch quantity
       if ( badQty > batchQty ) {
@@ -1074,7 +1074,7 @@ export class WorkflowService {
           } else {
             return true;
           }
-          // break;
+        // break;
 
         // CASE 2 (finished product)
         case '2':
@@ -1090,7 +1090,7 @@ export class WorkflowService {
 
               } else if ( (ComparingTotal - batchQty) > (finishProdLimit) ) {
                 //rule 1 cannot exceed 10k of batch quantity
-                alert( '良品不得超過批次量一万以上' );
+                alert( '良品不得超过批次量一万以上' );
                 return false;
 
               }
@@ -1106,7 +1106,7 @@ export class WorkflowService {
 
           } else if ( (ComparingTotal - batchQty) > (finishProdLimit) ) {
             //rule 1 cannot exceed 10k of batch quantity
-            alert( '良品不得超過批次量一万以上' );
+            alert( '良品不得超过批次量一万以上' );
             return false;
           }
 
@@ -1136,7 +1136,7 @@ export class WorkflowService {
           } else {
             return true;
           }
-          // break;
+        // break;
 
         default:
           return true;
@@ -1206,3 +1206,4 @@ export class WorkflowService {
   }
 
 }
+

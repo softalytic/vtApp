@@ -71,7 +71,7 @@ export class PhotoService {
       // Error handling to alert the user
       let alert = this.alertCtrl.create({
         title: '注意!',
-        message: '嚫，最多只能拍5張美圖!',
+        message: '嚫，最多只能拍5张美图!',
         buttons: ['好的']
       });
       alert.present();
@@ -108,7 +108,7 @@ export class PhotoService {
           ]
         });
         alert.present();
-        
+
       } else {
         let alert = this.alertCtrl.create({
           title: '',
@@ -117,7 +117,8 @@ export class PhotoService {
         });
         alert.present();
       }
-      
+
     });
   }
 }
+

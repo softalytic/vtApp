@@ -82,7 +82,7 @@
                             <button *ngFor="let key of dataWfProcess[this.wfInputForm.value.wfForm].Process | keys"
                                     [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcess == key }"
                                     (click)="setFormValue('wfProcess',key); setFormValue('wfProcessName',dataWfProcess[this.wfInputForm.value.wfForm].Process[key]);"
-                                item-right ion-button outline type="button" round>
+                                    item-right ion-button outline type="button" round>
                                 {{dataWfProcess[this.wfInputForm.value.wfForm].Process[key]}}
                             </button>
                         </ion-row>
@@ -121,8 +121,8 @@
         <!-- Display the workflow process with img -->
 
         <!-- manual ageing will have an action sheet to prompt the sub process -->
-        <!-- 規格 Need attention highlight -->
-        <!-- 料號 = 產品編號 -->
+        <!-- 规格 Need attention highlight -->
+        <!-- 料号 = 产品编号 -->
 
     </form>
 </ion-content>

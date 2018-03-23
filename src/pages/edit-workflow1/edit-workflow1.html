@@ -12,7 +12,7 @@
                     <span *ngIf="wfInputForm.value.wfFormSplit != 0"
                           class="processBGColor">分单:&nbsp;{{wfInputForm.value.wfFormSplit}}</span>
                     <span *ngIf="wfInputForm.value.wfFormExcept == true"
-                          class="processBGColor">&nbsp;&nbsp;異常!&nbsp;</span>
+                          class="processBGColor">&nbsp;&nbsp;异常!&nbsp;</span>
                     <span *ngIf="wfInputForm.value.wfErrorMsg != ' ' && wfInputForm.value.wfErrorMsg != ''"
                           class="processColor">&nbsp;&nbsp;注意:&nbsp;{{wfInputForm.value.wfErrorMsg}}</span>
                 </b>
@@ -85,7 +85,7 @@
                             <ion-row>
                                 <h4 class="inputHeader" style="display: inline-block; margin: 0;">
                                     <!-- <ion-icon name="clipboard"></ion-icon> -->
-                                    &nbsp; 生產记录
+                                    &nbsp; 生产记录
                                 </h4>
                             </ion-row>
 
@@ -247,10 +247,10 @@
                         <ion-col col-12>
                             <div class="inputHeader" style="display: inline-block; margin: 0; font-size: 2rem !important;">
                                 <!-- <ion-icon name="md-color-wand"></ion-icon> -->
-                                &nbsp; 自動老化
+                                &nbsp; 自动老化
                             </div>
-                            <button *ngFor="let wfProcessName of ['自動老化']" style="visibility: hidden;" [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcessName == wfProcessName }" (click)="setFormValue('wfProcessName',wfProcessName);" item-right ion-button outline type="button"
-                                round>
+                            <button *ngFor="let wfProcessName of ['自动老化']" style="visibility: hidden;" [ngClass]="{'buttonsSelected': wfInputForm.value.wfProcessName == wfProcessName }" (click)="setFormValue('wfProcessName',wfProcessName);" item-right ion-button outline type="button"
+                                    round>
                                 <!--<ion-icon name="clipboard"></ion-icon>-->
                                 {{wfProcessName}}
                             </button>
@@ -291,7 +291,7 @@
                                                 <ion-input formControlName={{col.model}} type={{col.type}} class="gridborder"></ion-input>
                                             </div>
 
-                                            <div *ngIf="col.auto === true && this.wfInputForm.value.wfProcessName == '自動老化'" [ngStyle]="{'width.em':wfInput.size}">
+                                            <div *ngIf="col.auto === true && this.wfInputForm.value.wfProcessName == '自动老化'" [ngStyle]="{'width.em':wfInput.size}">
                                                 <ion-input formControlName={{col.model}} type={{col.type}} class="gridborder"></ion-input>
                                             </div>
                                         </div>
@@ -309,7 +309,7 @@
                                 </ion-col>
 
                                 <!-- Auto Ageing 2nd part -->
-                                <ion-row *ngIf="this.wfInputForm.value.wfProcessName == '自動老化xzvzvdsf'" class="ageingSubPart">
+                                <ion-row *ngIf="this.wfInputForm.value.wfProcessName == '自动老化xzvzvdsf'" class="ageingSubPart">
                                     <ion-col col-6>
                                         <ion-row wrap align-items-center>
                                             <ion-col *ngFor="let wfInput of wfAutoAgeingDetails" no-padding col-6>
@@ -357,13 +357,13 @@
                                 &nbsp; 手工老化
                             </div>
                             <!--<button *ngFor="let wfProcessName of ['手工老化']" -->
-                                    <!--style="visibility: hidden;" -->
-                                    <!--[ngClass]="{'buttonsSelected': wfInputForm.value.wfProcessName == wfProcessName }" -->
-                                    <!--(click)="setFormValue('wfProcessName',wfProcessName);" -->
-                                    <!--item-right ion-button outline -->
-                                    <!--type="button"-->
-                                <!--round>-->
-                                <!--{{wfProcessName}}-->
+                            <!--style="visibility: hidden;" -->
+                            <!--[ngClass]="{'buttonsSelected': wfInputForm.value.wfProcessName == wfProcessName }" -->
+                            <!--(click)="setFormValue('wfProcessName',wfProcessName);" -->
+                            <!--item-right ion-button outline -->
+                            <!--type="button"-->
+                            <!--round>-->
+                            <!--{{wfProcessName}}-->
                             <!--</button>-->
                         </ion-col>
 
@@ -402,7 +402,7 @@
                                                 <ion-input formControlName={{col.model}} type={{col.type}} class="gridborder"></ion-input>
                                             </div>
 
-                                            <div *ngIf="col.auto === true && this.wfInputForm.value.wfProcessName == '自動老化'" [ngStyle]="{'width.em':wfInput.size}">
+                                            <div *ngIf="col.auto === true && this.wfInputForm.value.wfProcessName == '自动老化'" [ngStyle]="{'width.em':wfInput.size}">
                                                 <ion-input formControlName={{col.model}} type={{col.type}} class="gridborder"></ion-input>
                                             </div>
                                         </div>
@@ -420,7 +420,7 @@
                                 </ion-col>
 
                                 <!-- Auto Ageing 2nd part -->
-                                <ion-row *ngIf="this.wfInputForm.value.wfProcessName == '自動老化'" class="ageingSubPart">
+                                <ion-row *ngIf="this.wfInputForm.value.wfProcessName == '自动老化'" class="ageingSubPart">
                                     <ion-col col-6>
                                         <ion-row wrap align-items-center>
                                             <ion-col *ngFor="let wfInput of wfAutoAgeingDetails" no-padding col-6>
@@ -569,9 +569,9 @@
                                             ion-button round outline type="button" style="width: auto;"
                                             (click)="this.wfSvc.showGoodBadQtyInputsAlert(this.wfInputForm); updateForm(wfInput.model,button.value);"
                                             [ngClass]="{'buttonsSelected': this.wfSvc.toInt(wfInputForm.controls[wfInput.model].value) === button.value}">
-                                    <ion-icon name="{{button.icon}}"></ion-icon>
-                                    &nbsp; {{button.label}}
-                                  </button>
+                                        <ion-icon name="{{button.icon}}"></ion-icon>
+                                        &nbsp; {{button.label}}
+                                    </button>
                                 </ion-buttons>
                             </ion-row>
 

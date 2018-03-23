@@ -50,13 +50,13 @@ export class WorkflowPage implements OnInit {
   testRadioOpen = false;
 
   dataWfProcess = {
-    // "1":{"wfFormName": "裸品流程卡", "Process":{"1":"釘卷","2":"含浸","3":"组立","4":"清洗","5":"自動老化","6":"手工老化","7":"串排","8":"测试分选","9":"外观"}},
+    // "1":{"wfFormName": "裸品流程卡", "Process":{"1":"钉卷","2":"含浸","3":"组立","4":"清洗","5":"自动老化","6":"手工老化","7":"串排","8":"测试分选","9":"外观"}},
     // "2":{"wfFormName": "成品流程卡", "Process":{"1":"打印","2":"测试上带","3":"贴片外观","4":"终检"}},
-    // "3":{"wfFormName": "电容器流程卡", "Process":{"1":"素子钉卷","2":"烘干","3":"含浸","4":"組立","5":"清洗","6":"套管","7":"老化","8":"手工分选","9":"外观全检","10":"编带剪切"}} /* ,"11":"包装" */
+    // "3":{"wfFormName": "电容器流程卡", "Process":{"1":"素子钉卷","2":"烘干","3":"含浸","4":"组立","5":"清洗","6":"套管","7":"老化","8":"手工分选","9":"外观全检","10":"编带剪切"}} /* ,"11":"包装" */
 
-    "1":{"wfFormName": "裸品流程卡", "Process":{"1":"釘卷","3":"组立","5":"自動老化","6":"手工老化","9":"选别外观"}},
+    "1":{"wfFormName": "裸品流程卡", "Process":{"1":"钉卷","3":"组立","5":"自动老化","6":"手工老化","9":"选别外观"}},
     "2":{"wfFormName": "成品流程卡", "Process":{"1":"打印","2":"测试上带","3":"成品外观"}},
-    "3":{"wfFormName": "电容器流程卡", "Process":{"1":"钉卷","4":"組立","6":"套管","7":"老化","9":"选别外观","10":"编带","11":"成品外观"}} /* ,"11":"包装" */
+    "3":{"wfFormName": "电容器流程卡", "Process":{"1":"钉卷","4":"组立","6":"套管","7":"老化","9":"选别外观","10":"编带","11":"成品外观"}} /* ,"11":"包装" */
   };
 
   dataMachine = {
@@ -100,7 +100,7 @@ export class WorkflowPage implements OnInit {
       {title: '组立', process: "3", show: true},
       {title: '清洗', process: "4", show: true},
       {title: '手工老化', process: '5a0', show: true},
-      {title: '自動老化', process: '5b0', show: true},
+      {title: '自动老化', process: '5b0', show: true},
     ];
 
     this.wfInputs = [
@@ -110,7 +110,7 @@ export class WorkflowPage implements OnInit {
       {method: "break", size: 10},
 
       {title: "分单", method: 'select', type: 'text', model: 'wfFormSplit', scan: false, size: 6},
-      {title: "", method: 'button', label: "異常", model: 'wfFormExcept', scan: false, size: 8},
+      {title: "", method: 'button', label: "异常", model: 'wfFormExcept', scan: false, size: 8},
       {method: "break", size: 20},
 
 
@@ -187,14 +187,14 @@ export class WorkflowPage implements OnInit {
     console.log("formValidation is being called");
 
     if (form.value.wfFormId === "" || form.value.wfForm === "" || form.value.wfProcess === "" || form.value.wfOptMachineId === "") {
-      //this.wfSvc.warningAlert(' name:' + form.value.wfForm + ' id: ' + form.value.wfFormId + ' ' + form.value.wfProcess + ' form id' + form.value.wfForm, '嚫，请选择工单', '继續');
+      //this.wfSvc.warningAlert(' name:' + form.value.wfForm + ' id: ' + form.value.wfFormId + ' ' + form.value.wfProcess + ' form id' + form.value.wfForm, '嚫，请选择工单', '继续');
 
       let formMsgAlert = [];
       if(form.value.wfFormId === "") {
         formMsgAlert.push('输入流程卡号');
       }
       if(form.value.wfOptMachineId === "") {
-        formMsgAlert.push('輸入台机号');
+        formMsgAlert.push('输入台机号');
       }
       if(form.value.wfForm === "") {
         formMsgAlert.push('选择流程卡');
@@ -210,7 +210,7 @@ export class WorkflowPage implements OnInit {
         }
       }
 
-      this.wfSvc.warningAlert('请提供或更正下列资料：', formMsg + '<br><br>然後按 \" 確定\”', '继续');
+      this.wfSvc.warningAlert('请提供或更正下列资料：', formMsg + '<br><br>然后按 \" 确定\”', '继续');
       return false;
 
     } else {

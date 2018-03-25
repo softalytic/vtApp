@@ -59,8 +59,12 @@
                                               [ngStyle]="{'width.em':wfOrderDetail.size}"
                                               class="textarea gridborder"></ion-textarea>
 
-                                <button *ngIf="wfOrderDetail.scan" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.scanBarcode(wfOrderDetail.model, this.wfInputForm)">
-                                    扫一扫
+                                <button *ngIf="wfOrderDetail.scan"
+                                        item-end
+                                        ion-button class="barcodeButton"
+                                        type="button"
+                                        (click)="this.QRCode.scanBarcode(wfOrderDetail.model, this.wfInputForm)">
+                                    <ion-icon md="md-barcode"></ion-icon>
                                 </button>
                             </ion-row>
                         </ion-col>

@@ -91,15 +91,15 @@ export class EditWorkflow3Page implements OnInit{
 
       {method: "break", size: "88", visibility: "hidden"},
 
-      {method: "input", model: "wfSalesOrderQty", title: "订单量", type: "text", size: 8, disabled:true, highlight: false},
+      {method: "input", model: "wfSalesOrderQty", title: "订单量(千)", type: "text", size: 8, disabled:true, highlight: false},
       {method: "input", model: "wfOrderStartDate", title: "开工日期", type: "text", size: 10, disabled:true, highlight: false},
-      {method: "input", model: "wfOrderTotalQty", title: "总批数", type: "number", size: 8, highlight: false},
+      {method: "input", model: "wfOrderTotalQty", title: "总批数(千)", type: "number", size: 8, highlight: false},
 
       {method: "break", size: "88", visibility: "hidden"},
 
       {method: "input", model: "wfOrderDeliveryDate", title: "交期", type: "text", size: 10, disabled:true, highlight: false},
       {method: "input", model: "wfOrderEstFinishDate", title: "完工日期", type: "text", size: 10, disabled:true, highlight: false},
-      {method: "input", model: "wfGoodTotal", title: "良品数总和", type: "number", size: 8, highlight: false},
+      {method: "input", model: "wfGoodTotal", title: "良品数总和(个)", type: "number", size: 8, highlight: false},
 
       {method: "break", size: "88", visibility: "hidden"},
 
@@ -111,7 +111,7 @@ export class EditWorkflow3Page implements OnInit{
       {method: "break", size: "88", visibility: "hidden"},
 
       // Note
-      {method: "input", model: "wfSalesOrderNote", title: "订单记录说明", type: "textarea", size: 25, highlight: false},
+      {method: "input", model: "wfSalesOrderId", title: "订单记录说明", type: "textarea", size: 25, highlight: false},
       {method: "input", model: "wfOrderNote", title: "工单备注", type: "textarea", size: 25, highlight: false},
       {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 25, highlight: false},
 
@@ -178,7 +178,7 @@ export class EditWorkflow3Page implements OnInit{
         {label: "全检", value: 1, icon: 'done-all'},
         {label: "抽检", value: 2, icon: 'checkmark'},
       ]},
-      {title: "抽检数量", method: "input", model: "wfRandomCheckInfo", type: "number", icon: 'construct', scan: 0, size: 6},
+      {title: "抽检数量(个)", method: "input", model: "wfRandomCheckInfo", type: "number", icon: 'construct', scan: 0, size: 6},
 
       {title: "备注", method: "input", model: "wfSpecNote", type: "textarea", scan: false, size: 40},
 
@@ -192,8 +192,8 @@ export class EditWorkflow3Page implements OnInit{
       {method: 'inputs', options: [
         {title: "清机确认", model: "wfOptWashMachine", type: "text", inputType: 1, scan: false, size: 8},
         // {title: "总投入数", method: "input", model: "wfOptStartQty", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
-        {title: "良品数", method: "input", model: "wfOptGoodQty", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
-        {title: "抽检数量", model: "wfRandomCheckInfo", type: "number", icon: 'construct', inputType: 9, scan: false, size: 8},
+        {title: "良品数(个)", method: "input", model: "wfOptGoodQty", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
+        {title: "抽检数量(个)", model: "wfRandomCheckInfo", type: "number", icon: 'construct', inputType: 9, scan: false, size: 8},
       ]},
 
       {method: 'inputs', options: [
@@ -212,7 +212,7 @@ export class EditWorkflow3Page implements OnInit{
         {title: "备注", model: "wfSpecNote", type: "textarea", inputType: 9, size: 40},
       ]},
 
-      {method: "table", size: 8, headers: [{title: "不良数种类"},{title: "数量"}],rows: [
+      {method: "table", size: 8, headers: [{title: "不良数种类"},{title: "数量(个)"}],rows: [
         {title: "1", cols: [
           {model: "wfBadItem1", type: "text", size:"6", disabled: false},
           {model: "wfBadQty1", type: "number", size:"6", disabled: false},
@@ -389,6 +389,7 @@ export class EditWorkflow3Page implements OnInit{
         console.log("New process is triggered");
         form.controls['wfGoodTotal'].setValue(0);
         form.controls['wfBadTotal'].setValue(0);
+
         if( this.wfSvc.toInt(storageData['wfGoodTotal']) == 0){
           form.controls['wfOptStartQty'].setValue(storageData['wfOptStartQty']);
         } else {
@@ -401,6 +402,15 @@ export class EditWorkflow3Page implements OnInit{
         form.controls['wfGoodTotal'].setValue(storageData['wfGoodTotal']);
         form.controls['wfBadTotal'].setValue(storageData['wfBadTotal']);
         form.controls['wfOptStartQty'].setValue(storageData['wfOptStartQty']);
+
+        form.controls['wfBadItem1'].setValue('开路');
+        form.controls['wfBadItem2'].setValue('短路');
+        form.controls['wfBadItem3'].setValue('高容');
+        form.controls['wfBadItem4'].setValue('低容');
+        form.controls['wfBadItem5'].setValue('损耗');
+        form.controls['wfBadItem6'].setValue('漏电');
+        form.controls['wfBadItemTotal'].setValue('不良数总和');
+
       }
 
       for (let key in storageData) {
@@ -479,17 +489,18 @@ export class EditWorkflow3Page implements OnInit{
       }
 
       //  initial the form for the bad Qty
-      if (form.value.wfProcess == "7" || form.value.wfProcess == "8") {
+      // if (form.value.wfProcess == "7" || form.value.wfProcess == "8") {
+      //
+      //   form.controls['wfBadItem1'].setValue('开路');
+      //   form.controls['wfBadItem2'].setValue('短路');
+      //   form.controls['wfBadItem3'].setValue('高容');
+      //   form.controls['wfBadItem4'].setValue('低容');
+      //   form.controls['wfBadItem5'].setValue('损耗');
+      //   form.controls['wfBadItem6'].setValue('漏电');
+      //   form.controls['wfBadItemTotal'].setValue('不良数总和');
+      //
+      // }
 
-        form.controls['wfBadItem1'].setValue('开路');
-        form.controls['wfBadItem2'].setValue('短路');
-        form.controls['wfBadItem3'].setValue('高容');
-        form.controls['wfBadItem4'].setValue('低容');
-        form.controls['wfBadItem5'].setValue('损耗');
-        form.controls['wfBadItem6'].setValue('漏电');
-        form.controls['wfBadItemTotal'].setValue('不良数总和');
-
-      }
     }
 
     console.log("Populated form now is: " + JSON.stringify(this.wfInputForm.value));

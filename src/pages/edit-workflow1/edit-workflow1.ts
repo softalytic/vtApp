@@ -74,7 +74,7 @@ export class EditWorkflow1Page implements OnInit{
 
       {method: "input", model: "wfOrderBatchId", title: "批次号", type: "text", size: 12, highlight: false},
       {method: "input", model: "wfOrderBatchQty", title: "批次量(千)", type: "number", size: 5, highlight: false},
-      {method: "input", model: "wfGoodTotal", title: "良品数总和", type: "number", size: 5, highlight: false},
+      {method: "input", model: "wfGoodTotal", title: "良品数总和(个)", type: "number", size: 5, highlight: false},
       {method: "break", size: "88", visibility: "hidden"},
 
       {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 20, highlight: false},
@@ -111,11 +111,11 @@ export class EditWorkflow1Page implements OnInit{
         {title: "完成时间", model: "wfOptFinishTime", type: "number", icon: "md-alarm", scan: false, size: 8}
       ]},
       {method: "inputs", options: [
-        {title: "总投入数", model: "wfOptStartQty", type: "number", scan: false, size: 8},
-        {title: "不良数", model: "wfOptBadQty", type: "number", wfBadQty: '1', scan: false, size: 8},
-        {title: "良品数", model: "wfOptGoodQty", type: "number",  scan: false, size: 8}
+        {title: "总投入数(个)", model: "wfOptStartQty", type: "number", scan: false, size: 8},
+        {title: "不良数(个)", model: "wfOptBadQty", type: "number", wfBadQty: '1', scan: false, size: 8},
+        {title: "良品数(个)", model: "wfOptGoodQty", type: "number",  scan: false, size: 8}
       ]},
-      {method: "table", size: 8, headers: [{title: "不良数种类"},{title: "数量"}],rows: [
+      {method: "table", size: 8, headers: [{title: "不良数种类"},{title: "数量(个)"}],rows: [
         {title: "1", cols: [
           {model: "wfBadItem1", type: "text", size:"6", disabled: false},
           {model: "wfBadQty1", type: "number", size:"6", disabled: false},
@@ -315,10 +315,19 @@ export class EditWorkflow1Page implements OnInit{
         form.controls['wfBadTotal'].setValue(0);
         form.controls['wfOptStartQty'].setValue(storageData['wfGoodTotal']);
         form.controls['wfProcessNew'].setValue(false);
+
       } else {
         form.controls['wfGoodTotal'].setValue(storageData['wfGoodTotal']);
         form.controls['wfBadTotal'].setValue(storageData['wfBadTotal']);
         form.controls['wfOptStartQty'].setValue(storageData['wfOptStartQty']);
+
+        form.controls['wfBadItem1'].setValue('开路');
+        form.controls['wfBadItem2'].setValue('短路');
+        form.controls['wfBadItem3'].setValue('高容');
+        form.controls['wfBadItem4'].setValue('低容');
+        form.controls['wfBadItem5'].setValue('损耗');
+        form.controls['wfBadItem6'].setValue('漏电');
+        form.controls['wfBadItemTotal'].setValue('不良数总和');
       }
 
       for (let key in form.value) {

@@ -40,7 +40,7 @@ export class PhotoService {
 
       // Set the camera options
       const camOpt: CameraOptions = {
-        quality: 10,
+        quality: 50,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE,
@@ -80,45 +80,73 @@ export class PhotoService {
 
   }
 
-  imgDelete(images:any, imgIndex: any, form: any) {
-    this.storage.get(form.value.wfFormId + 'img').then((imagesX) => {
-      if(imagesX) {
-        let alert = this.alertCtrl.create({
-          title: '删除照片',
-          subTitle: '',
-          buttons: [
-            {
-              text: '取消',
-              role: 'cancel',
-              handler: data => {
-                console.log('User has clicked Cancel on img delete');
-              }
-            },
-            {
-              text: '确定',
-              handler: data => {
-                //images = JSON.parse(images);
-                images.splice(imgIndex, 1);
-                //alert(JSON.stringify(images));
-                //this.storage.remove(form.value.wfFormId + 'img');
-                this.storage.set(form.value.wfFormId + 'img', images);
-                console.log("User has delete the img")
-              }
-            }
-          ]
-        });
-        alert.present();
+  // imgDelete(images:any, imgIndex: any, form: any) {
+  //   this.storage.get(form.value.wfFormId + 'img').then((imagesX) => {
+  //     if(imagesX) {
+  //       let alert = this.alertCtrl.create({
+  //         title: '删除照片',
+  //         subTitle: '',
+  //         buttons: [
+  //           {
+  //             text: '取消',
+  //             role: 'cancel',
+  //             handler: data => {
+  //               console.log('User has clicked Cancel on img delete');
+  //             }
+  //           },
+  //           {
+  //             text: '确定',
+  //             handler: data => {
+  //               //images = JSON.parse(images);
+  //               images.splice(imgIndex, 1);
+  //               //alert(JSON.stringify(images));
+  //               //this.storage.remove(form.value.wfFormId + 'img');
+  //               this.storage.set(form.value.wfFormId + 'img', images);
+  //               console.log("User has delete the img")
+  //             }
+  //           }
+  //         ]
+  //       });
+  //       alert.present();
+  //
+  //     } else {
+  //       let alert = this.alertCtrl.create({
+  //         title: '',
+  //         subTitle: '不存在。',
+  //         buttons: ['返回']
+  //       });
+  //       alert.present();
+  //     }
+  //
+  //   });
+  // }
 
-      } else {
-        let alert = this.alertCtrl.create({
-          title: '',
-          subTitle: '不存在。',
-          buttons: ['返回']
-        });
-        alert.present();
-      }
+  imgDelete(images:any, imgIndex: any) {
 
+    let alert = this.alertCtrl.create({
+      title: '删除照片',
+      subTitle: '',
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          handler: data => {
+            console.log('User has clicked Cancel on img delete');
+          }
+        },
+        {
+          text: '确定',
+          handler: data => {
+            //images = JSON.parse(images);
+            images.splice(imgIndex, 1);
+            //alert(JSON.stringify(images));
+            console.log("User has delete the img")
+          }
+        }
+      ]
     });
+    alert.present();
+
   }
 }
 

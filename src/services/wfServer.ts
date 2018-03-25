@@ -21,14 +21,11 @@ export class WorkflowService {
   private httpHeaders = new Headers({ 'Content-type':'application/json' });
   private httpOptions = new RequestOptions({ headers:this.httpHeaders });
 
-  // Comment out below url that is not applicable
-  // For Dev url
-  // private baseUrl = "http://localhost:3000/workflow/";
-  // private baseUrl = "http://192.168.31.170:3000/workflow/";
+  // URL for production
 
-  // For Test url
-  private baseUrl = "http://192.168.4.200:3000/workflow/";
-  // private baseUrl = "http://172.20.10.2:3000/workflow/";
+  // For URL for the server call
+  public baseUrl = "http://192.168.4.200:3000/workflow/";
+  // can be assigned in the workflow.ts
 
   // For calculating the time value
   tzoffset: number = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
@@ -1035,10 +1032,18 @@ export class WorkflowService {
       //running total is used to comparing instead of just GoodQty alone
       let ComparingTotal = RunningTotal + goodQty;
 
+      // Added new rules per the discussion 24 Mar 2018
+      // If the start qty is 0, then assign it with the order batch qty
+      if (startQty == 0){
+        startQty = batchQty
+      }
+
+
+
       console.log("finalValidation: startQty: " + startQty +
         " goodQty: " + goodQty + " badQty: " + badQty +
         " batchQty: " + batchQty + " ProcessCount: " + ProcessCount + "RunningTotal:" + RunningTotal+
-        "ComparingTotal:"+ComparingTotal);
+        " ComparingTotal:" + ComparingTotal);
       //  sub process card
       //rule 5 cannot exceed batch quantity
       if ( badQty > batchQty ) {
@@ -1052,7 +1057,7 @@ export class WorkflowService {
 
         case '1':
           console.log("finalValidation: Checking Form 1");
-          if ( ProcessCount > 1 ) {
+          if ( ProcessCount > 0 ) {
             if ( Math.abs( ComparingTotal - startQty ) <= OtherLimit ) {
               // for the variance within the limit, no actions
               return true;
@@ -1079,7 +1084,7 @@ export class WorkflowService {
         // CASE 2 (finished product)
         case '2':
           console.log("finalValidation: Checking Form 2");
-          if ( ProcessCount > 1 ) {
+          if ( ProcessCount > 0 ) {
             if ( Math.abs( ComparingTotal - startQty ) <= OtherLimit ) {
               // for the variance within the limit, no actions
 
@@ -1116,7 +1121,7 @@ export class WorkflowService {
         //same logic as naked product
         case '3':
           console.log("finalValidation: Checking Form 3");
-          if ( ProcessCount > 1 ) {
+          if ( ProcessCount > 0 ) {
             if ( Math.abs( ComparingTotal - startQty ) <= OtherLimit ) {
               return true;
             }

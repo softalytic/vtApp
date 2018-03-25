@@ -54,7 +54,7 @@ export class WorkflowPage implements OnInit {
     // "2":{"wfFormName": "成品流程卡", "Process":{"1":"打印","2":"测试上带","3":"贴片外观","4":"终检"}},
     // "3":{"wfFormName": "电容器流程卡", "Process":{"1":"素子钉卷","2":"烘干","3":"含浸","4":"组立","5":"清洗","6":"套管","7":"老化","8":"手工分选","9":"外观全检","10":"编带剪切"}} /* ,"11":"包装" */
 
-    "1":{"wfFormName": "裸品流程卡", "Process":{"1":"钉卷","3":"组立","5":"自动老化","6":"手工老化","9":"选别外观"}},
+    "1":{"wfFormName": "裸品流程卡", "Process":{"1":"钉卷","3":"组立","5":"自动老化","6":"手工老化","8":"选别外观"}},
     "2":{"wfFormName": "成品流程卡", "Process":{"1":"打印","2":"测试上带","3":"成品外观"}},
     "3":{"wfFormName": "电容器流程卡", "Process":{"1":"钉卷","4":"组立","6":"套管","7":"老化","9":"选别外观","10":"编带","11":"成品外观"}} /* ,"11":"包装" */
   };
@@ -390,21 +390,29 @@ export class WorkflowPage implements OnInit {
 
 
         if(form.value.wfFormId == data.wfFormId && form.value.wfFormSplit == data.wfFormSplit){
+          console.log("looping through wfFormId:" + data.wfFormId);
+          console.log("looping through wfProcess:" + data.wfProcess);
+          console.log("looping through wfProcessName:" + data.wfProcessName);
+          console.log("looping through wfFormStatus:" + data.wfFormStatus);
+          console.log("looping through wfProcessStatus:" + data.wfProcessStatus);
+          console.log("looping through wfLastCompletedWf:" + data.wfLastCompletedWf);
+
           // Lookup of same wfForm ID + split ID
           if(typeof data["wfImg"] == 'undefined'){
             // Make sure it isnt images
+            tmpData = data;
 
             if(this.wfSvc.toInt(data.wfProcess) == this.wfSvc.toInt(form.value.wfProcess) && form.value.wfStaffOptShift == data.wfStaffOptShift){
               // In readOnly mode, the form value for certain fields will be assigned and if the condition match, break the loop;
               console.log("data from storage" + key + JSON.stringify(data));
-              tmpData = data;
-              break;
+
             } else if(tmpData == "" || tmpData == null || typeof tmpData == 'undefined'){
               // Initially assign value
               tmpData = data;
             } else if (this.wfSvc.toInt(data.wfProcess) > this.wfSvc.toInt(tmpData.wfProcess)) {
               // If the new data is more advance than tmpData
               tmpData = data;
+
             } else if (this.wfSvc.toInt(data.wfProcess) == this.wfSvc.toInt(tmpData.wfProcess)) {
               // If both process are equal
               if(tmpData.wfFormStatus) {

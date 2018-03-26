@@ -24,7 +24,8 @@ export class WorkflowService {
   // URL for production
 
   // For URL for the server call
-  public baseUrl = "http://192.168.4.200:3000/workflow/";
+  // public baseUrl = "http://192.168.4.200:3000/workflow/";
+  public baseUrl = "http://localhost:3000/workflow/";
   // can be assigned in the workflow.ts
 
   // For calculating the time value
@@ -380,17 +381,19 @@ export class WorkflowService {
         form.controls['wfOptBadQty'].setValue(totalBadQtyX);
       }
 
-      let updatedGoodQty = this.toInt(form.value.wfOptGoodQty) / 1000;
+      // updatedGoodQty is same as totalGoodQty except it is in K
+      let updatedGoodQty = (this.toInt(form.value.wfOptGoodQty) + this.toInt(form.value.wfOptGoodQty2))/ 1000;
+      let totalGoodQty = this.toInt(form.value.wfOptGoodQty) + this.toInt(form.value.wfOptGoodQty2);
       let qtyCheckMsg = '<br>不良数总和: ' + this.toInt(form.value.wfOptBadQty);
 
-      qtyCheckMsg += '<br>良品数: ' + this.toInt(form.value.wfOptGoodQty) + ' (' + updatedGoodQty + 'K)';
+      qtyCheckMsg += '<br>良品数: ' + totalGoodQty + ' (' + updatedGoodQty + 'K)';
 
-      if(this.toInt(form.value.wfOptBadQty) > this.toInt(form.value.wfOptGoodQty)) {
-        qtyCheckMsg += '<br>不良数 ('+form.value.wfOptBadQty+') 大于 良品数 ('+form.value.wfOptGoodQty+')！';
+      if(this.toInt(form.value.wfOptBadQty) > totalGoodQty ) {
+        qtyCheckMsg += '<br>不良数 ('+form.value.wfOptBadQty+') 大于 良品数 (' + totalGoodQty + ')！';
       }
 
-      if(this.toInt(form.value.wfOptGoodQty) > this.toInt(form.value.wfOrderBatchQty) * 1000) {
-        qtyCheckMsg += '<br>良品数 ('+form.value.wfOptGoodQty+') 大于 批次量 ('+ form.value.wfOrderBatchQty * 1000 +')！';
+      if(totalGoodQty > this.toInt(form.value.wfOrderBatchQty) * 1000) {
+        qtyCheckMsg += '<br>良品数 ('+ totalGoodQty +') 大于 批次量 ('+ form.value.wfOrderBatchQty * 1000 +')！';
       }
 
       qtyCheckMsg += '<br>如需修改，请按 “取消” 再重新输入。';
@@ -542,35 +545,35 @@ export class WorkflowService {
     this.warningAlert('', this.appDate+' - '+endDate+' ', '继续');
   }
 
-  showGoodBadQtyInputsAlert(wfInputForm: any) {
-
-    let form = wfInputForm;
-
-    let wfOptBadQtyValue = form.value.wfOptBadQty;
-    let wfOptGoodQtyValue = form.value.wfOptGoodQty;
-    let wfOrderBatchQtyValue = form.value.wfOrderBatchQty;
-
-    if(wfOptGoodQtyValue === '') {
-      this.warningAlert('', '请输入良品数', '继续');
-    } else if(wfOptBadQtyValue === '') {
-      this.warningAlert('', '请输入不良数', '继续');
-    }
-    wfOptBadQtyValue = this.toInt(wfOptBadQtyValue);
-    wfOptGoodQtyValue = this.toInt(wfOptGoodQtyValue);
-    wfOrderBatchQtyValue = this.toInt(wfOrderBatchQtyValue);
-    /*
-    if(wfOptGoodQtyValue <= 0) {
-      this.warningAlert('', '请输入良品数('+wfOptGoodQtyValue+')', '继续');
-    }
-    if(wfOptBadQtyValue <= 0 ) {
-      this.warningAlert('', '请输入不良数('+wfOptBadQtyValue+')', '继续');
-    } else */ if(wfOptBadQtyValue > wfOptGoodQtyValue) {
-      this.warningAlert('', '不良数('+wfOptBadQtyValue+')大于良品数('+wfOptGoodQtyValue+')', '继续');
-    } else if(wfOptGoodQtyValue > wfOrderBatchQtyValue * 1000) {
-      this.warningAlert('', '良品数('+wfOptGoodQtyValue+')大于批次量('+wfOrderBatchQtyValue * 1000+')', '继续');
-    }
-
-  }
+  // showGoodBadQtyInputsAlert(wfInputForm: any) {
+  //
+  //   let form = wfInputForm;
+  //
+  //   let wfOptBadQtyValue = form.value.wfOptBadQty;
+  //   let wfOptGoodQtyValue = form.value.wfOptGoodQty;
+  //   let wfOrderBatchQtyValue = form.value.wfOrderBatchQty;
+  //
+  //   if(wfOptGoodQtyValue === '') {
+  //     this.warningAlert('', '请输入良品数', '继续');
+  //   } else if(wfOptBadQtyValue === '') {
+  //     this.warningAlert('', '请输入不良数', '继续');
+  //   }
+  //   wfOptBadQtyValue = this.toInt(wfOptBadQtyValue);
+  //   wfOptGoodQtyValue = this.toInt(wfOptGoodQtyValue);
+  //   wfOrderBatchQtyValue = this.toInt(wfOrderBatchQtyValue);
+  //   /*
+  //   if(wfOptGoodQtyValue <= 0) {
+  //     this.warningAlert('', '请输入良品数('+wfOptGoodQtyValue+')', '继续');
+  //   }
+  //   if(wfOptBadQtyValue <= 0 ) {
+  //     this.warningAlert('', '请输入不良数('+wfOptBadQtyValue+')', '继续');
+  //   } else */ if(wfOptBadQtyValue > wfOptGoodQtyValue) {
+  //     this.warningAlert('', '不良数('+wfOptBadQtyValue+')大于良品数('+wfOptGoodQtyValue+')', '继续');
+  //   } else if(wfOptGoodQtyValue > wfOrderBatchQtyValue * 1000) {
+  //     this.warningAlert('', '良品数('+wfOptGoodQtyValue+')大于批次量('+wfOrderBatchQtyValue * 1000+')', '继续');
+  //   }
+  //
+  // }
 
   populateStaffData(form:any, staffTable:any, machineTable:any, model: string){
     // First determine if the input is ID or name,
@@ -905,7 +908,7 @@ export class WorkflowService {
 
   runningTotal(form:any){
     console.log("In the running total");
-    form.controls["wfGoodTotal"].setValue((this.toInt(form.value.wfOptGoodQty) + this.toInt(form.value.wfGoodTotal)));
+    form.controls["wfGoodTotal"].setValue((this.toInt(form.value.wfOptGoodQty) + this.toInt(form.value.wfOptGoodQty2) + this.toInt(form.value.wfGoodTotal)));
     console.log("GoodQtyRunning Total" + form.value.wfGoodTotal);
 
     form.controls["wfOptBadQtyItem"].setValue(this.toInt(form.value.wfBadItem1) + this.toInt(form.value.wfBadItem2) + this.toInt(form.value.wfBadItem3) + this.toInt(form.value.wfBadItem4) + this.toInt(form.value.wfBadItem5) + this.toInt(form.value.wfBadItem6));
@@ -1008,7 +1011,7 @@ export class WorkflowService {
       if ( this.toInt( form.value.wfOptGoodQty ) == 0 ) {
         goodQty = startQty
       } else {
-        goodQty = this.toInt( form.value.wfOptGoodQty );
+        goodQty = (this.toInt(form.value.wfOptGoodQty) + this.toInt(form.value.wfOptGoodQty2));
       }
 
       let badQty = this.toInt( form.value.wfOptBadQty );

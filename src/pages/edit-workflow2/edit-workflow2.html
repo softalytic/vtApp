@@ -101,7 +101,7 @@
                             </div>
                         </ion-col>
                         <ion-col *ngIf="wfRMDetail.modelName != 'wfRMPrintName' && wfRMDetail.modelName != 'wfRMPrintNameText'" col-6>
-                            <ion-input class="gridborder" disabled value={{wfInputForm.controls[wfRMDetail.modelName].value}}></ion-input>
+                            <ion-input class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelName].value}}></ion-input>
                         </ion-col>
                         <ion-col *ngIf="wfRMDetail.modelName == 'wfRMPrintName'" col-6>
                             <ion-input class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelName].value}}></ion-input>
@@ -248,22 +248,24 @@
                                                    value={{wfInputForm.controls[wfInput.model].value}}
                                                    class="gridborder"></ion-input>
 
-                                        <div on-mouseover="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">
-                                            <button *ngIf="wfInput.scan == 1" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')"
+                                        <div>
+                                            <button *ngIf="wfInput.scan == 1"
                                                     item-end ion-button
                                                     class="barcodeButton" type="button"
                                                     (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
                                                 <ion-icon md="md-barcode"></ion-icon>
                                             </button>
-                                            <button *ngIf="wfInput.scan == 2" [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
+                                            <button *ngIf="wfInput.scan == 2"
+                                                    item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
                                                 <ion-icon md="md-barcode"></ion-icon>
                                             </button>
                                             <button *ngIf="wfInput.scan == 3" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
                                                 <ion-icon md="md-barcode"></ion-icon>
                                             </button>
                                         </div>
-                                        <div on-mouseover="showWfQCPassAlert(wfInputForm.value.wfQCPass)">
-                                            <button *ngIf="wfInput.scan == 4 && wfInput.process[wfInputForm.value.wfProcess]" [disabled]="!(wfInputForm.value.wfQCPass == 2 || wfInputForm.value.wfQCPass == 1)" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
+                                        <div>
+                                            <button *ngIf="wfInput.scan == 4 && wfInput.process[wfInputForm.value.wfProcess]"
+                                                    item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
                                                 <ion-icon md="md-barcode"></ion-icon>
                                             </button>
                                         </div>

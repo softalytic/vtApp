@@ -68,7 +68,9 @@
                             </div>
                         </ion-col>
                         <ion-col col-6>
-                            <ion-input class="gridborder" [disabled]="!((wfRMDetail.modelName == 'wfRMFoilPosLName' || wfRMDetail.modelName == 'wfRMFoilNegLName') && wfInputForm.value.wfProcess == '1')" value={{wfInputForm.controls[wfRMDetail.modelName].value}} formControlName={{wfRMDetail.modelName}}></ion-input>
+                            <ion-input class="gridborder"
+                                       value={{wfInputForm.controls[wfRMDetail.modelName].value}}
+                                       formControlName={{wfRMDetail.modelName}}></ion-input>
                         </ion-col>
                         <ion-col>
                             <ion-input class="gridborder" value={{wfInputForm.controls[wfRMDetail.modelSerial].value}} formControlName={{wfRMDetail.modelSerial}}></ion-input>
@@ -514,7 +516,6 @@
                                                    class="gridborder"></ion-input>
 
                                         <ion-input style="display: inline-block;"
-                                                   [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')"
                                                    *ngIf="wfInput.wfPplI == 5"
                                                    formControlName={{wfInput.model}}
                                                    type={{wfInput.type}}
@@ -531,15 +532,6 @@
                                         </button>
                                     </ion-row>
                                 </div>
-                                <!--
-                                <div on-mouseover="showWfOpsInputsAlert(wfInputForm.value.wfOptBadQty, wfInputForm.value.wfOptGoodQty)">
-                                    <button [disabled]="(wfInputForm.value.wfOptBadQty == '' || wfInputForm.value.wfOptGoodQty == '')" *ngIf="wfInput.scan == 3" item-end ion-button class="barcodeButton" type="button" (click)="this.QRCode.staffScanBarcode(this.wfInputForm,this.staffTable,this.machineTable,wfInput.model)">
-                                    扫一扫
-                                </button>
-                                </div>
-                                <div on-mouseover="showWfQCPassAlert(wfInputForm.value.wfQCPass)">
-                                </div>
-                                -->
                             </ion-row>
 
 
@@ -599,6 +591,7 @@
 
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <button type="button" ion-button
+                                    [disabled]="this.wfInputForm.value.wfReadOnly"
                                     style="width: 60px; height: 50px; background-color: #8c8c8c;"
                                     (click)="this.wfSvc.cancelBtn(this.navCtrl)">
                                 取消

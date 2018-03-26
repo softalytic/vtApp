@@ -79,14 +79,14 @@ export class EditWorkflow2Page implements OnInit{
       {method: "input", model: "wfOrderBOMNote", title: "BOM备注", type: "textarea", size: 25, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
 
       {method: "break", size: "135", visibility: "hidden"},
-      {method: "input", model: "wfGoodTotal", title: "良品数总和(个)", type: "number", size: 12, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
+
 
       {method: "label",process: {1: true, 2: true, 3: true, 4:true}},
       {title: "CAP: μF", method: "input", model: "wfSpecCap", type: "text", scan: false, size: 12, disabled:false, process: {1: true, 2: true, 3: true, 4:true}},
       {title: "DF: %", method: "input", model: "wfSpecDF", type: "text", scan: false, size: 12, disabled:false, process: {1: true, 2: true, 3: true, 4:true}},
       {title: "LC: μA", method: "input", model: "wfSpecLC", type: "text", scan: false, size: 12, disabled:false, process: {1: true, 2: true, 3: true, 4:true}},
       {title: "Z/ESR(Ω)", method: "input", model: "wfSpecZESR", type: "text", scan: false, size: 12, disabled:false, process: {1: true, 2: true, 3: true, 4:true}},
-
+      {method: "input", model: "wfGoodTotal", title: "良品数总和(个)", type: "number", size: 12, disabled:false, highlight: false, process: {1: true, 2: true, 3: true, 4:true}},
       {method: "input", model: "wfOrderSupNote", title: "异常记录", type: "textarea", size: 24, highlight: false, process: {1: false, 2: false, 3: false, 4:true}},
 
 
@@ -121,6 +121,7 @@ export class EditWorkflow2Page implements OnInit{
         {title: "总投入数", model: "wfOptStartQty", type: "number", icon: 'ios-sad', scan: false, size: 8, process: {1: true, 2: true, 3:true, 4:true}},
         {title: "不良数(个)", model: "wfOptBadQty", type: "number", icon: 'ios-sad', scan: false, size: 8, process: {1: true, 2: true, 3:true, 4:true}},
         {title: "良品数(个)", model: "wfOptGoodQty", type: "number", icon: 'happy', scan: false, size: 8, process: {1: true, 2:true, 3:true, 4:true}},
+        {title: "良品数2(个)", model: "wfOptGoodQty2", type: "number", icon: 'happy', scan: false, size: 8, process: {1: true, 2:true, 3:true, 4:true}},
       ], process: {1: true, 2: true, 3: true, 4:true}},
 
 
@@ -337,19 +338,19 @@ export class EditWorkflow2Page implements OnInit{
               case 'wfStaffXrayName':
               case 'wfStaffQCId':
               case 'wfStaffQCName':
-              case 'wfBadItem1':
+              // case 'wfBadItem1':
               case 'wfBadQty1':
-              case 'wfBadItem2':
+              // case 'wfBadItem2':
               case 'wfBadQty2':
-              case 'wfBadItem3':
+              // case 'wfBadItem3':
               case 'wfBadQty3':
-              case 'wfBadItem4':
+              // case 'wfBadItem4':
               case 'wfBadQty4':
-              case 'wfBadItem5':
+              // case 'wfBadItem5':
               case 'wfBadQty5':
-              case 'wfBadItem6':
+              // case 'wfBadItem6':
               case 'wfBadQty6':
-              case 'wfBadItemTotal':
+              // case 'wfBadItemTotal':
                 break;
 
 
@@ -385,10 +386,10 @@ export class EditWorkflow2Page implements OnInit{
 
   checkBeforeScan(form: NgForm) {
     if(form.value.wfOptBadQty === '') {
-      alert("请输入良品数!");
+      alert("请输入不良品数!");
       return false;
     } else if(form.value.wfOptGoodQty === '') {
-      alert("请输入不良品数!");
+      alert("请输入良品数!");
       return false;
     }
   }
@@ -442,30 +443,30 @@ export class EditWorkflow2Page implements OnInit{
       alert('next');
     }
   }
-
-  showWfOpsInputsAlert(wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
-    if(wfOptBadQtyValue == '' || wfOptGoodQtyValue == '') {
-      let alert = this.alertCtrl.create({
-        title: 'Please Check!',
-        subTitle: 'Please fill out the following: 日期，开始，完成，良品数，不良数 ',
-        buttons: ['OK']
-      });
-      alert.present();
-
-    }
-  }
-
-  showWfQCPassAlert(wfQCPassValue: any) {
-    if(!(wfQCPassValue == 2 || wfQCPassValue == 1)) {
-      let alert = this.alertCtrl.create({
-        title: 'Please Check!',
-        subTitle: 'Please select 终检!',
-        buttons: ['OK']
-      });
-      alert.present();
-
-    }
-  }
+  //
+  // showWfOpsInputsAlert(wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
+  //   if(wfOptBadQtyValue == '' || wfOptGoodQtyValue == '') {
+  //     let alert = this.alertCtrl.create({
+  //       title: 'Please Check!',
+  //       subTitle: 'Please fill out the following: 日期，开始，完成，良品数，不良数 ',
+  //       buttons: ['OK']
+  //     });
+  //     alert.present();
+  //
+  //   }
+  // }
+  //
+  // showWfQCPassAlert(wfQCPassValue: any) {
+  //   if(!(wfQCPassValue == 2 || wfQCPassValue == 1)) {
+  //     let alert = this.alertCtrl.create({
+  //       title: 'Please Check!',
+  //       subTitle: 'Please select 终检!',
+  //       buttons: ['OK']
+  //     });
+  //     alert.present();
+  //
+  //   }
+  // }
 
   private formInit() {
 
@@ -578,6 +579,7 @@ export class EditWorkflow2Page implements OnInit{
       wfOptBadQtyItem: [''],
       wfOptBadQty: [''],
       wfOptGoodQty: [''],
+      wfOptGoodQty2: [''],
       wfBadItem1: [''],
       wfBadQty1: [''],
       wfBadItem2: [''],

@@ -552,6 +552,7 @@ export class WorkflowPage implements OnInit {
       } else if( !("wfProcess" in data) || (this.wfSvc.toInt(form.value.wfProcess) > this.wfSvc.toInt(data['wfLastCompletedWf']) && data['wfFormStatus'] ) ){
         // When selected process is ahead of last completed wf
         console.log("New Workflow is triggered");
+        console.log(data);
         this.fillData(form,data);
         form.controls["wfProcessStatus"].setValue(false);
         form.controls["wfFormStatus"].setValue(false);
@@ -582,6 +583,7 @@ export class WorkflowPage implements OnInit {
         this.fillData(form,data);
         this.dttmReset(form);
         form.controls["wfOptGoodQty"].setValue(0);
+        form.controls["wfOptGoodQty2"].setValue(0);
         form.controls["wfOptBadQty"].setValue(0);
 
 
@@ -607,7 +609,9 @@ export class WorkflowPage implements OnInit {
           // form.controls[key].setValue(data[key]);
           if (form.controls[key].value == null || form.controls[key].value == "" ) {
             // console.log("populate form model " + key);
+            // console.log("populating key " + key + " " + data[key]);
             form.controls[key].setValue(data[key]);
+            // console.log(form.value);
 
           }
 
@@ -623,20 +627,25 @@ export class WorkflowPage implements OnInit {
 
       }
     }
+
+    console.log("after fillData");
+    console.log(data);
+    console.log(form.value);
   }
 
   qtyReset(form:any ){
     form.controls["wfOptGoodQty"].setValue(0);
+    form.controls["wfOptGoodQty2"].setValue(0);
     form.controls["wfOptBadQty"].setValue(0);
     // form.controls["wfGoodTotal"].setValue(0);
     // form.controls["wfBadTotal"].setValue(0);
     form.controls["wfOptBadQtyItem"].setValue(0);
-    form.controls["wfBadItem1"].setValue(0);
-    form.controls["wfBadItem2"].setValue(0);
-    form.controls["wfBadItem3"].setValue(0);
-    form.controls["wfBadItem4"].setValue(0);
-    form.controls["wfBadItem5"].setValue(0);
-    form.controls["wfBadItem6"].setValue(0);
+    // form.controls["wfBadItem1"].setValue(0);
+    // form.controls["wfBadItem2"].setValue(0);
+    // form.controls["wfBadItem3"].setValue(0);
+    // form.controls["wfBadItem4"].setValue(0);
+    // form.controls["wfBadItem5"].setValue(0);
+    // form.controls["wfBadItem6"].setValue(0);
   }
 
   dttmReset(form:any){
@@ -827,6 +836,7 @@ export class WorkflowPage implements OnInit {
       wfOptBadQtyItem: [''],
       wfOptBadQty: [''],
       wfOptGoodQty: [''],
+      wfOptGoodQty2: [''],
       wfBadItem1: [''],
       wfBadQty1: [''],
       wfBadItem2: [''],

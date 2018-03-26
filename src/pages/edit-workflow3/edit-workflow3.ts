@@ -193,6 +193,7 @@ export class EditWorkflow3Page implements OnInit{
         {title: "清机确认", model: "wfOptWashMachine", type: "text", inputType: 1, scan: false, size: 8},
         // {title: "总投入数", method: "input", model: "wfOptStartQty", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
         {title: "良品数(个)", method: "input", model: "wfOptGoodQty", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
+        {title: "良品数2(个)", method: "input", model: "wfOptGoodQty2", type: "number", icon: 'ios-sad', inputType: 1, scan: false, size: 6},
         {title: "抽检数量(个)", model: "wfRandomCheckInfo", type: "number", icon: 'construct', inputType: 9, scan: false, size: 8},
       ]},
 
@@ -458,19 +459,19 @@ export class EditWorkflow3Page implements OnInit{
               case 'wfStaffXrayName':
               case 'wfStaffQCId':
               case 'wfStaffQCName':
-              case 'wfBadItem1':
+              // case 'wfBadItem1':
               case 'wfBadQty1':
-              case 'wfBadItem2':
+              // case 'wfBadItem2':
               case 'wfBadQty2':
-              case 'wfBadItem3':
+              // case 'wfBadItem3':
               case 'wfBadQty3':
-              case 'wfBadItem4':
+              // case 'wfBadItem4':
               case 'wfBadQty4':
-              case 'wfBadItem5':
+              // case 'wfBadItem5':
               case 'wfBadQty5':
-              case 'wfBadItem6':
+              // case 'wfBadItem6':
               case 'wfBadQty6':
-              case 'wfBadItemTotal':
+              // case 'wfBadItemTotal':
                 break;
 
 
@@ -489,17 +490,17 @@ export class EditWorkflow3Page implements OnInit{
       }
 
       //  initial the form for the bad Qty
-      // if (form.value.wfProcess == "7" || form.value.wfProcess == "8") {
-      //
-      //   form.controls['wfBadItem1'].setValue('开路');
-      //   form.controls['wfBadItem2'].setValue('短路');
-      //   form.controls['wfBadItem3'].setValue('高容');
-      //   form.controls['wfBadItem4'].setValue('低容');
-      //   form.controls['wfBadItem5'].setValue('损耗');
-      //   form.controls['wfBadItem6'].setValue('漏电');
-      //   form.controls['wfBadItemTotal'].setValue('不良数总和');
-      //
-      // }
+      if (form.value.wfProcess == "1") {
+
+        form.controls['wfBadItem1'].setValue('开路');
+        form.controls['wfBadItem2'].setValue('短路');
+        form.controls['wfBadItem3'].setValue('高容');
+        form.controls['wfBadItem4'].setValue('低容');
+        form.controls['wfBadItem5'].setValue('损耗');
+        form.controls['wfBadItem6'].setValue('漏电');
+        form.controls['wfBadItemTotal'].setValue('不良数总和');
+
+      }
 
     }
 
@@ -509,7 +510,7 @@ export class EditWorkflow3Page implements OnInit{
 
   checkBeforeScan(form: NgForm) {
     if(form.value.wfOptBadQty === '') {
-      alert("请输入良品数!");
+      alert("请输入不良品数!");
       return false;
     } else if(form.value.wfOptGoodQty === '') {
       alert("请输入良品数!");
@@ -566,64 +567,52 @@ export class EditWorkflow3Page implements OnInit{
     }
   }
 
-  updateTextChg() {
-    if(this.wfInputForm.value.wfOptMachineId) {
-      let machineId = this.wfInputForm.value.wfOptMachineId;
-      this.storage.get('wfMachine').then((dataMachineXTmp) => {
-        if(dataMachineXTmp) {
+  // updateTextChg() {
+  //   if(this.wfInputForm.value.wfOptMachineId) {
+  //     let machineId = this.wfInputForm.value.wfOptMachineId;
+  //     this.storage.get('wfMachine').then((dataMachineXTmp) => {
+  //       if(dataMachineXTmp) {
+  //
+  //         //alert(dataMachineXTmp);
+  //         dataMachineXTmp = JSON.parse(dataMachineXTmp);
+  //         //alert(dataMachineXTmp[machineId]['staffName']);
+  //         this.wfInputForm.patchValue({ wfStaffOptShift: dataMachineXTmp[machineId]['shift'], wfStaffOptId: dataMachineXTmp[machineId]['staffName'],
+  //           wfGoodTotal: this.wfGoodTotalTmp, wfStaffTechId: dataMachineXTmp[machineId]['techName'], wfStaffXrayId: dataMachineXTmp[machineId]['xrayName'],});
+  //
+  //       } else {
+  //         let alert = this.alertCtrl.create({
+  //           title: '',
+  //           subTitle: '机台号不存在，请重新输入。',
+  //           buttons: ['返回']
+  //         });
+  //         alert.present();
+  //       }
+  //
+  //     });
+  //   }
+  //
+  //
+  //   this.wfGoodTotalTmp = parseFloat(this.wfInputForm.value.wfGoodTotal)  + parseFloat(this.wfInputForm.value.wfOptGoodQty);
+  //
+  //   //alert(StaffArr.wfStaffTechId + ' staff 2: ' + StaffArr.wfStaffOptShift  + ' staff 3: ' + StaffArr.wfQCSignOff );
+  // }
 
-          //alert(dataMachineXTmp);
-          dataMachineXTmp = JSON.parse(dataMachineXTmp);
-          //alert(dataMachineXTmp[machineId]['staffName']);
-          this.wfInputForm.patchValue({ wfStaffOptShift: dataMachineXTmp[machineId]['shift'], wfStaffOptId: dataMachineXTmp[machineId]['staffName'],
-            wfGoodTotal: this.wfGoodTotalTmp, wfStaffTechId: dataMachineXTmp[machineId]['techName'], wfStaffXrayId: dataMachineXTmp[machineId]['xrayName'],});
+  // updateTotalGoodQty(wfOptGoodQtyValue: any) {
+  //   var goodQtyTmp = this.wfNavParams.wfGoodTotal + wfOptGoodQtyValue;
+  //   this.wfInputForm.patchValue({ wfGoodTotal: goodQtyTmp, });
+  // }
 
-        } else {
-          let alert = this.alertCtrl.create({
-            title: '',
-            subTitle: '机台号不存在，请重新输入。',
-            buttons: ['返回']
-          });
-          alert.present();
-        }
-
-      });
-    }
-
-
-    this.wfGoodTotalTmp = parseFloat(this.wfInputForm.value.wfGoodTotal)  + parseFloat(this.wfInputForm.value.wfOptGoodQty);
-
-    //alert(StaffArr.wfStaffTechId + ' staff 2: ' + StaffArr.wfStaffOptShift  + ' staff 3: ' + StaffArr.wfQCSignOff );
-  }
-
-  updateTotalGoodQty(wfOptGoodQtyValue: any) {
-    var goodQtyTmp = this.wfNavParams.wfGoodTotal + wfOptGoodQtyValue;
-    this.wfInputForm.patchValue({ wfGoodTotal: goodQtyTmp, });
-  }
-
-  showWfOpsInputsAlert(wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
-    if(wfOptBadQtyValue == '' || wfOptGoodQtyValue == '') {
-      let alert = this.alertCtrl.create({
-        title: '',
-        subTitle: '请确定内容: 日期，开始，完成，良品数，不良数 ',
-        buttons: ['确定']
-      });
-      alert.present();
-
-    }
-  }
-
-  showWfQCPassAlert(wfQCPassValue: any) {
-    if(!(wfQCPassValue == 2 || wfQCPassValue == 1)) {
-      let alert = this.alertCtrl.create({
-        title: 'Please Check!',
-        subTitle: 'Please select 终检!',
-        buttons: ['OK']
-      });
-      alert.present();
-
-    }
-  }
+  // showWfOpsInputsAlert(wfOptBadQtyValue: any, wfOptGoodQtyValue: any) {
+  //   if(wfOptBadQtyValue == '' || wfOptGoodQtyValue == '') {
+  //     let alert = this.alertCtrl.create({
+  //       title: '',
+  //       subTitle: '请确定内容: 日期，开始，完成，良品数，不良数 ',
+  //       buttons: ['确定']
+  //     });
+  //     alert.present();
+  //
+  //   }
+  // }
 
   presentPrompt() {
     let alert = this.alertCtrl.create({
@@ -770,6 +759,7 @@ export class EditWorkflow3Page implements OnInit{
       wfOptBadQtyItem: [''],
       wfOptBadQty: [''],
       wfOptGoodQty: [''],
+      wfOptGoodQty2: [''],
       wfBadItem1: [''],
       wfBadQty1: [''],
       wfBadItem2: [''],

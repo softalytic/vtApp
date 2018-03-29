@@ -24,8 +24,8 @@ export class WorkflowService {
   // URL for production
 
   // For URL for the server call
-  public baseUrl = "http://192.168.4.200:3000/workflow/";
-  // public baseUrl = "http://localhost:3000/workflow/";
+  // public baseUrl = "http://192.168.4.200:3000/workflow/";
+  public baseUrl = "http://localhost:3000/workflow/";
   // can be assigned in the workflow.ts
 
   // For calculating the time value

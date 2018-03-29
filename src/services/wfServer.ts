@@ -24,13 +24,13 @@ export class WorkflowService {
   // URL for production
 
   // For URL for the server call
-  // public baseUrl = "http://192.168.4.200:3000/workflow/";
-  public baseUrl = "http://localhost:3000/workflow/";
+  public baseUrl = "http://192.168.4.200:3000/workflow/";
+  // public baseUrl = "http://localhost:3000/workflow/";
   // can be assigned in the workflow.ts
 
   // For calculating the time value
   tzoffset: number = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
-  appDate: String = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,-1);
+  appDate: String = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,10);
 
   constructor(private http: Http,
               private storage: Storage,
@@ -381,7 +381,7 @@ export class WorkflowService {
         form.controls['wfOptBadQty'].setValue(totalBadQtyX);
       }
 
-      // updatedGoodQty is same as totalGoodQty except it is in K
+      // updatedGoodQty is same as totalGoodQty except
       let updatedGoodQty = (this.toInt(form.value.wfOptGoodQty) + this.toInt(form.value.wfOptGoodQty2))/ 1000;
       let totalGoodQty = this.toInt(form.value.wfOptGoodQty) + this.toInt(form.value.wfOptGoodQty2);
       let qtyCheckMsg = '<br>不良数总和: ' + this.toInt(form.value.wfOptBadQty);
@@ -545,35 +545,35 @@ export class WorkflowService {
     this.warningAlert('', this.appDate+' - '+endDate+' ', '继续');
   }
 
-  // showGoodBadQtyInputsAlert(wfInputForm: any) {
-  //
-  //   let form = wfInputForm;
-  //
-  //   let wfOptBadQtyValue = form.value.wfOptBadQty;
-  //   let wfOptGoodQtyValue = form.value.wfOptGoodQty;
-  //   let wfOrderBatchQtyValue = form.value.wfOrderBatchQty;
-  //
-  //   if(wfOptGoodQtyValue === '') {
-  //     this.warningAlert('', '请输入良品数', '继续');
-  //   } else if(wfOptBadQtyValue === '') {
-  //     this.warningAlert('', '请输入不良数', '继续');
-  //   }
-  //   wfOptBadQtyValue = this.toInt(wfOptBadQtyValue);
-  //   wfOptGoodQtyValue = this.toInt(wfOptGoodQtyValue);
-  //   wfOrderBatchQtyValue = this.toInt(wfOrderBatchQtyValue);
-  //   /*
-  //   if(wfOptGoodQtyValue <= 0) {
-  //     this.warningAlert('', '请输入良品数('+wfOptGoodQtyValue+')', '继续');
-  //   }
-  //   if(wfOptBadQtyValue <= 0 ) {
-  //     this.warningAlert('', '请输入不良数('+wfOptBadQtyValue+')', '继续');
-  //   } else */ if(wfOptBadQtyValue > wfOptGoodQtyValue) {
-  //     this.warningAlert('', '不良数('+wfOptBadQtyValue+')大于良品数('+wfOptGoodQtyValue+')', '继续');
-  //   } else if(wfOptGoodQtyValue > wfOrderBatchQtyValue * 1000) {
-  //     this.warningAlert('', '良品数('+wfOptGoodQtyValue+')大于批次量('+wfOrderBatchQtyValue * 1000+')', '继续');
-  //   }
-  //
-  // }
+  showGoodBadQtyInputsAlert(wfInputForm: any) {
+
+    let form = wfInputForm;
+
+    let wfOptBadQtyValue = form.value.wfOptBadQty;
+    let wfOptGoodQtyValue = form.value.wfOptGoodQty;
+    let wfOrderBatchQtyValue = form.value.wfOrderBatchQty;
+
+    if(wfOptGoodQtyValue === '') {
+      this.warningAlert('', '请输入良品数', '继续');
+    } else if(wfOptBadQtyValue === '') {
+      this.warningAlert('', '请输入不良数', '继续');
+    }
+    wfOptBadQtyValue = this.toInt(wfOptBadQtyValue);
+    wfOptGoodQtyValue = this.toInt(wfOptGoodQtyValue);
+    wfOrderBatchQtyValue = this.toInt(wfOrderBatchQtyValue);
+    /*
+    if(wfOptGoodQtyValue <= 0) {
+      this.warningAlert('', '请输入良品数('+wfOptGoodQtyValue+')', '继续');
+    }
+    if(wfOptBadQtyValue <= 0 ) {
+      this.warningAlert('', '请输入不良数('+wfOptBadQtyValue+')', '继续');
+    } else */ if(wfOptBadQtyValue > wfOptGoodQtyValue) {
+      this.warningAlert('', '不良数('+wfOptBadQtyValue+')大于良品数('+wfOptGoodQtyValue+')', '继续');
+    } else if(wfOptGoodQtyValue > wfOrderBatchQtyValue * 1000) {
+      this.warningAlert('', '良品数('+wfOptGoodQtyValue+')大于批次量('+wfOrderBatchQtyValue * 1000+')', '继续');
+    }
+
+  }
 
   populateStaffData(form:any, staffTable:any, machineTable:any, model: string){
     // First determine if the input is ID or name,
@@ -1060,94 +1060,80 @@ export class WorkflowService {
 
         case '1':
           console.log("finalValidation: Checking Form 1");
-          if ( ProcessCount > 0 ) {
-            if ( Math.abs( ComparingTotal - startQty ) <= OtherLimit ) {
-              // for the variance within the limit, no actions
-              return true;
-
-            } else if ( ComparingTotal > (QC_UPPER * startQty) ) {
-              // rule 4 cant not exceed 20% of good quantity from last process
-              alert( '良品数上限不得超过投入数百分之二十' );
-              return false;
-
-            } else if ( ComparingTotal < (QC_LOWER * startQty) ) {
-              // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
-              alert( '良品数下限不得低于投入数百分之八十' );
-              return false;
-
-            } else {
-              console.log("exceed 3k threshold but within 20%");
-              return true;
-            }
-          } else {
+          if ( Math.abs( ComparingTotal - startQty ) <= OtherLimit ) {
+            // for the variance within the limit, no actions
             return true;
+
+          } else if ( ComparingTotal > (QC_UPPER * startQty) ) {
+            // rule 4 cant not exceed 20% of good quantity from last process
+            alert( '良品数上限不得超过投入数百分之二十' );
+            return false;
+
+          } else if ( ComparingTotal < (QC_LOWER * startQty) ) {
+            // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
+            alert( '良品数下限不得低于投入数百分之八十' );
+            return false;
+
           }
-        // break;
+
+          console.log("exceed 3k threshold but within 20%");
+          return true;
 
         // CASE 2 (finished product)
         case '2':
           console.log("finalValidation: Checking Form 2");
-          if ( ProcessCount > 0 ) {
-            if ( Math.abs( ComparingTotal - startQty ) <= OtherLimit ) {
-              // for the variance within the limit, no actions
+          if ( Math.abs( ComparingTotal - startQty ) <= OtherLimit ) {
+            // for the variance within the limit, no actions
 
-              if ( ComparingTotal < batchQty ) {
-                // rule 2 cant be below batch quantity
-                alert( '良品数不得小于批次量' );
-                return false;
+            if ( ComparingTotal < batchQty ) {
+              // rule 2 cant be below batch quantity
+              alert( '良品数不得小于批次量' );
+              return false;
 
-              } else if ( (ComparingTotal - batchQty) > (finishProdLimit) ) {
-                //rule 1 cannot exceed 10k of batch quantity
-                alert( '良品不得超过批次量一万以上' );
-                return false;
-
-              }
-            } else if ( ComparingTotal < (QC_LOWER * startQty) ) {
-              // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
-              alert( '良品数下限不得低于投入数百分之八十' );
+            } else if ( (ComparingTotal - batchQty) > (finishProdLimit) ) {
+              //rule 1 cannot exceed 10k of batch quantity
+              alert( '良品不得超过批次量一万以上' );
               return false;
 
             }
-          } else if ( ComparingTotal < batchQty ) {
-            alert( '良品数不得小于批次量' );
+
+            console.log("Good Qty exceed batch Qty but within 10k");
+            return true;
+
+          } else if ( ComparingTotal < (QC_LOWER * startQty) ) {
+            // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
+            alert( '良品数下限不得低于投入数百分之八十' );
             return false;
 
-          } else if ( (ComparingTotal - batchQty) > (finishProdLimit) ) {
-            //rule 1 cannot exceed 10k of batch quantity
-            alert( '良品不得超过批次量一万以上' );
-            return false;
           }
 
+          console.log("Greater than batch Qty but within 10k limit as well not lower than 90% of input qty");
           return true;
 
         // CASE 3 (插件 embedded)
         //same logic as naked product
         case '3':
           console.log("finalValidation: Checking Form 3");
-          if ( ProcessCount > 0 ) {
-            if ( Math.abs( ComparingTotal - startQty ) <= OtherLimit ) {
-              return true;
-            }
-            // rule 4 cant not exceed 20% of good quantity from last process
-            else if ( ComparingTotal > (QC_UPPER * startQty) ) {
-              alert( '良品数上限不得超过投入数百分之二十' );
-              return false;
-            }
-            // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
-            else if ( ComparingTotal < (QC_LOWER * startQty) ) {
-              alert( '良品数下限不得低于投入数百分之八十' );
-              return false;
-            } else {
-              console.log("exceed 3k threshold but within 20%");
-              return true;
-            }
-          } else {
+          if ( Math.abs( ComparingTotal - startQty ) <= OtherLimit ) {
             return true;
           }
-        // break;
+          // rule 4 cant not exceed 20% of good quantity from last process
+          else if ( ComparingTotal > (QC_UPPER * startQty) ) {
+            alert( '良品数上限不得超过投入数百分之二十' );
+            return false;
+          }
+          // rule number 7 good quantity exceeding 3k, cant allow it lower than 80% of good qty from last process
+          else if ( ComparingTotal < (QC_LOWER * startQty) ) {
+            alert( '良品数下限不得低于投入数百分之八十' );
+            return false;
+          }
+
+          console.log("exceed 3k threshold but within 20%");
+          return true;
 
         default:
-          return true;
+          alert("输入错误，请检查");
+          return false;
       }
 
     }
@@ -1161,15 +1147,16 @@ export class WorkflowService {
 
     console.log("In the dateValidation");
     console.log('inputdate' + form.value.wfOptInputDate);
-    let dateObj = new Date(form.value.wfOptInputDate);
-    let numberOfDaysToAdd = 1;
+    // let dateObj = new Date(form.value.wfOptInputDate);
+    // let numberOfDaysToAdd = 1;
+    //
+    // alert(dateObj);
+    // if (form.value.wfOptStartTime > form.value.wfOptFinishTime) {
+    //   dateObj.setDate(dateObj.getDate() + numberOfDaysToAdd);
+    //   console.log("Time has been checked, increase date by 1")
+    // }
 
-    if (form.value.wfOptStartTime > form.value.wfOptFinishTime) {
-      dateObj.setDate(dateObj.getDate() + numberOfDaysToAdd);
-      console.log("Time has been checked, increase date by 1")
-    }
-
-    form.controls["wfOptInputEndDate"].setValue(dateObj);
+    form.controls["wfOptInputEndDate"].setValue(form.value.wfOptInputDate);
     console.log("end date is: " + form.controls["wfOptInputEndDate"].value);
 
   };

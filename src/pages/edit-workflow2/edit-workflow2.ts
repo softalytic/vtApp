@@ -40,7 +40,7 @@ export class EditWorkflow2Page implements OnInit{
 
   // For calculating the time value
   tzoffset: number = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
-  appDate: String = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,-1);
+  appDate: String = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,10);
 
   constructor(public storage: Storage,
               private formBuilder: FormBuilder,

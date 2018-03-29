@@ -59,7 +59,7 @@ export class EditWorkflow3Page implements OnInit{
 
   // For calculating the time value
   tzoffset: number = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
-  appDate: String = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,-1);
+  appDate: String = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,10);
 
   constructor(private storage: Storage,
               private formBuilder: FormBuilder,
